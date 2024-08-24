@@ -50,6 +50,8 @@ export const useDrag = () => {
     if (window.innerWidth <= mobileSize) return;
 
     windowEl.current.setAttribute("data-moving", "true");
+    windowEl.current.style.transitionProperty = "none";
+
     handleMove(e);
   }, []);
 
@@ -57,6 +59,7 @@ export const useDrag = () => {
     if (!windowEl.current) return;
 
     windowEl.current?.removeAttribute("data-moving");
+    windowEl.current.style.transitionProperty = "initial";
     prevTouch.current = null;
   };
 
