@@ -6,6 +6,8 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
+import "virtual:svg-icons-register";
+
 import { ClerkProvider } from "@clerk/clerk-react";
 
 import AuthLayout from "@/layouts/AuthLayout";

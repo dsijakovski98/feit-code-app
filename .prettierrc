@@ -6,10 +6,11 @@
   "importOrder": [
     "^react",
     "<THIRD_PARTY_MODULES>",
-    "^@/layouts/(.*)$",
-    "^@/routes/(.*)$",
-    "^@/components/(.*)$",
-    "^@/",
+    "^@clerk",
+    "^@layouts/(.*)$",
+    "^@routes/(.*)$",
+    "^@components/(.*)$",
+    "^@",
     ".css$",
     "^[./]"
   ],
