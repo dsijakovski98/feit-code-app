@@ -1,12 +1,13 @@
-import Window from "@/components/ui/Window";
+import AuthPageWindow from "@/layouts/AuthPageWindow";
 
 const SignInPage = () => {
   return (
-    <main className="relative min-h-[100dvh] bg-dots bg-fixed pt-20">
-      <div className="flex justify-center">
-        <Window className="min-w-[900px] lg:w-[95%] lg:min-w-min">Sign in form here</Window>
-      </div>
-    </main>
+    <AuthPageWindow
+      title="Sign in"
+      heading={<h1 className="text-5xl font-semibold">Welcome back!</h1>}
+    >
+      Sign in form here
+    </AuthPageWindow>
   );
 };
 
