@@ -6,7 +6,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        kanit: ['"Kanit"', ...defaultTheme.fontFamily.serif],
+        sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
+        exo: ['"Exo 2"', ...defaultTheme.fontFamily.serif],
       },
     },
     screens: {
