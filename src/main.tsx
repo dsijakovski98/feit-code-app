@@ -9,14 +9,13 @@ import {
 import "virtual:svg-icons-register";
 
 import { ClerkProvider } from "@clerk/clerk-react";
+import { NextUIProvider } from "@nextui-org/react";
 
+import { ROUTES } from "@/constants/routes";
 import AuthLayout from "@/layouts/AuthLayout";
-
 import Dashboard from "@/routes/dashboard";
 import SignInPage from "@/routes/sign-in";
 import SignUpPage from "@/routes/sign-up";
-
-import { ROUTES } from "@/constants/routes";
 
 import "./styles.css";
 
@@ -57,8 +56,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ClerkProvider publishableKey={CLERK_KEY} afterSignOutUrl="/">
-      <RouterProvider router={router} />
-    </ClerkProvider>
+    <NextUIProvider>
+      <ClerkProvider publishableKey={CLERK_KEY} afterSignOutUrl="/">
+        <RouterProvider router={router} />
+      </ClerkProvider>
+    </NextUIProvider>
   </StrictMode>,
 );

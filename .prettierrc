@@ -6,7 +6,7 @@
   "importOrder": [
     "^react",
     "<THIRD_PARTY_MODULES>",
-    "^@clerk",
+    "^@(clerk|nextui)",
     "^@layouts/(.*)$",
     "^@routes/(.*)$",
     "^@components/(.*)$",

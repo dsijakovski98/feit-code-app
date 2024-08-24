@@ -1,6 +1,7 @@
 import path from "path";
 import { defineConfig } from "vite";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import vsharp from "vite-plugin-vsharp";
 import webFontDownload from "vite-plugin-webfont-dl";
 
 import react from "@vitejs/plugin-react-swc";
@@ -16,6 +17,7 @@ export default defineConfig({
       inject: "body-last",
       customDomId: "__svg__icons__dom__",
     }),
+    vsharp(),
   ],
   resolve: {
     alias: {
