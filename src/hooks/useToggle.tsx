@@ -11,4 +11,4 @@ export const useToggle = (initial: boolean = false) => {
   return { open, toggle, toggleOn, toggleOff, set: setState };
 };
 
-export type UseToggle = ReturnType<typeof useToggle>;
+export type Toggle = ReturnType<typeof useToggle>;
