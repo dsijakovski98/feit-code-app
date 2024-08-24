@@ -17,7 +17,7 @@ import Dashboard from "@/routes/dashboard";
 import SignInPage from "@/routes/sign-in";
 import SignUpPage from "@/routes/sign-up";
 
-import "./styles.css";
+import "@/styles/global.css";
 
 const CLERK_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 

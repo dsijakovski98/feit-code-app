@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  svg {
+    @apply h-full w-full;
+  }
+}
+
 @layer utilities {
   .debug {
-    @apply outline-blue-600 outline outline-1;
+    @apply outline outline-1 outline-blue-600;
   }
 
   .debug-full {
