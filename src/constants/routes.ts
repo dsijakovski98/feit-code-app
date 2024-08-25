@@ -6,10 +6,11 @@ export const ROUTES = {
 
   signIn: "/sign-in",
   signUp: "/sign-up",
+
+  ssoCallback: "/sso",
 } as const;
 
-export const PAGE_TITLES: Record<RecordValues<typeof ROUTES>, string> = {
-  "/": "",
+export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> = {
   "/dashboard": "Dashboard",
 
   "/sign-in": "Sign in",

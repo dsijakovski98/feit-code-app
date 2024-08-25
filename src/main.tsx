@@ -12,6 +12,7 @@ import AuthLayout from "@/layouts/AuthLayout";
 import Dashboard from "@/routes/dashboard";
 import SignInPage from "@/routes/sign-in";
 import SignUpPage from "@/routes/sign-up";
+import CallbackSSO from "@/routes/sso-callback";
 
 import PageWrapper from "@/components/PageWrapper";
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
           {
             path: ROUTES.signUp,
             element: <SignUpPage />,
+          },
+          {
+            path: ROUTES.ssoCallback,
+            element: <CallbackSSO />,
           },
         ],
       },
