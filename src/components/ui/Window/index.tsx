@@ -29,28 +29,28 @@ const Window = ({ title, className = "", children }: Props) => {
       <section
         ref={windowEl}
         className={clsx(
-          "opacity-100 absolute rounded-xl lg:static overflow-hidden bg-content1 transition-all duration-300 data-[moving]:opacity-80 shadow-lg group",
+          "group absolute overflow-hidden rounded-xl bg-content1 opacity-100 shadow-2xl transition-all duration-300 data-[moving]:opacity-80 data-[moving]:shadow-transparent lg:static",
           {
-            "!opacity-0 translate-y-4": !show.open,
-            "opacity-100 translate-y-0": show.open,
-            "!opacity-0 scale-0": minimized.open,
-            "!inset-0": fullScreen.open,
+            "translate-y-4 !opacity-0": !show.open,
+            "translate-y-0 opacity-100": show.open,
+            "scale-0 !opacity-0": minimized.open,
+            "!absolute !inset-0 !w-full !rounded-none": fullScreen.open,
           },
           className,
         )}
       >
-        <nav className="flex items-center p-3 py-2 justify-between bg-content2">
+        <nav className="flex items-center justify-between bg-gradient-to-t from-primary-50/80 from-20% to-primary-100/80 px-3 py-2 md:px-4 md:py-3">
           <div
             ref={trigger}
             className="grow cursor-grab group-data-[moving]:cursor-grabbing lg:cursor-default"
           >
-            <p className="font-semibold text-lg group-data-[moving]:select-none">{title}</p>
+            <p className="text-lg font-semibold group-data-[moving]:select-none">{title}</p>
           </div>
 
           <WindowControls show={show} minimized={minimized} fullScreen={fullScreen} />
         </nav>
 
-        <div className="px-3 py-4">
+        <div>
           <WindowContext.Provider value={{ fullScreen: fullScreen.open }}>
             {children}
           </WindowContext.Provider>

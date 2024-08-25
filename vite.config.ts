@@ -11,6 +11,7 @@ export default defineConfig({
     webFontDownload([
       "https://fonts.googleapis.com/css2?family=Exo+2:wght@100..900&display=swap",
       "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap",
+      "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap",
     ]),
     createSvgIconsPlugin({
       // Specify the icon folder to be cached

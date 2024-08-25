@@ -14,6 +14,7 @@ export default {
       fontFamily: {
         sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
         exo: ['"Exo 2"', ...defaultTheme.fontFamily.serif],
+        mono: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {
         dots: "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url('/images/bg-dots.webp')",
