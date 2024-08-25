@@ -1,4 +1,4 @@
-import { Fragment, PropsWithChildren, createContext } from "react";
+import { Fragment, PropsWithChildren, createContext, useEffect } from "react";
 
 import clsx from "clsx";
 import { ClassValue } from "clsx";
@@ -16,13 +16,23 @@ type Props = {
 
 export const WindowContext = createContext<{ fullScreen: boolean } | null>(null);
 
+const FULL_SCREEN_KEY = "fc-auth-fullscreen";
+
 const Window = ({ title, className = "", children }: Props) => {
   const { trigger, windowEl } = useDrag();
 
   const show = useToggle(true);
   const minimized = useToggle();
 
-  const fullScreen = useToggle();
+  const fullScreen = useToggle(!!localStorage.getItem(FULL_SCREEN_KEY));
+
+  useEffect(() => {
+    if (fullScreen.open) {
+      localStorage.setItem(FULL_SCREEN_KEY, "1");
+    } else {
+      localStorage.removeItem(FULL_SCREEN_KEY);
+    }
+  }, [fullScreen.open]);
 
   return (
     <Fragment>
