@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import clsx from "clsx";
 
 import { useSignUp } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
@@ -15,12 +16,13 @@ import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
 import { useToggle } from "@/hooks/useToggle";
+import { useWindowContext } from "@/hooks/useWindowContext";
 import { shortClerkErrorMessage } from "@/utils";
 import { SignUpSchema } from "@/utils/formSchemas/signUpSchema";
 
 const SignUpForm = () => {
+  const { fullScreen } = useWindowContext();
   const { signUp } = useSignUp();
-
   const verifyMode = useToggle();
 
   const {
@@ -93,9 +95,18 @@ const SignUpForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto w-[80%] space-y-3 pb-3 lg:w-[95%] lg:space-y-2 lg:pb-1"
+      className={clsx(
+        "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-3",
+        {
+          "w-[70%] !gap-4 pt-10": fullScreen,
+        },
+      )}
     >
-      <div className="mb-9 space-y-1 lg:space-y-0">
+      <div
+        className={clsx("mb-9 space-y-1 lg:space-y-0", {
+          "mb-36": fullScreen,
+        })}
+      >
         <Controller
           control={control}
           name="email"
@@ -103,7 +114,7 @@ const SignUpForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size="md"
+              size={fullScreen ? "lg" : "md"}
               label="Email"
               color="default"
               variant="underlined"
@@ -121,7 +132,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="md"
+                size={fullScreen ? "lg" : "md"}
                 label="Password"
                 type="password"
                 color="default"
@@ -139,7 +150,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="md"
+                size={fullScreen ? "lg" : "md"}
                 label="Confirm password"
                 type="password"
                 color="default"
@@ -154,13 +165,21 @@ const SignUpForm = () => {
 
       <div className="relative">
         {errors.root?.message && (
-          <p className="absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400">
+          <p
+            className={clsx(
+              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400",
+              {
+                "!-top-4 !text-lg": fullScreen,
+              },
+            )}
+          >
             {errors.root.message}
           </p>
         )}
 
         <Button
           fullWidth
+          size={fullScreen ? "lg" : "md"}
           type="submit"
           color="default"
           variant="solid"
