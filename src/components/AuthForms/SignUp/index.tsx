@@ -9,14 +9,14 @@ import { OAuthStrategy } from "@clerk/types";
 import { Spinner } from "@nextui-org/react";
 
 import Verify from "@/components/AuthForms/SignUp/Verify";
+import OAuthJoin from "@/components/OAuthJoin";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { AuthSchema } from "@/utils/formSchemas/authSchema";
+import { SignUpSchema } from "@/utils/formSchemas/signUpSchema";
 
 const SignUpForm = () => {
   const { signUp } = useSignUp();
@@ -30,8 +30,8 @@ const SignUpForm = () => {
     reset,
     clearErrors,
     formState: { isSubmitting, errors },
-  } = useForm<AuthSchema>({
-    resolver: valibotResolver(AuthSchema),
+  } = useForm<SignUpSchema>({
+    resolver: valibotResolver(SignUpSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -47,7 +47,7 @@ const SignUpForm = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<AuthSchema> = async ({ email, password, confirmPassword }) => {
+  const onSubmit: SubmitHandler<SignUpSchema> = async ({ email, password, confirmPassword }) => {
     if (!signUp) return;
 
     clearErrors("root");
@@ -93,7 +93,7 @@ const SignUpForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto w-[80%] space-y-3 pb-3 lg:w-full lg:space-y-2 lg:pb-1"
+      className="mx-auto w-[80%] space-y-3 pb-3 lg:w-[95%] lg:space-y-2 lg:pb-1"
     >
       <div className="mb-9 space-y-1 lg:space-y-0">
         <Controller
@@ -174,34 +174,9 @@ const SignUpForm = () => {
 
       <p className="text-center text-content1-foreground">or</p>
 
-      <div className="flex items-center justify-between gap-4 lg:justify-center">
-        <Button
-          fullWidth
-          size="lg"
-          color="default"
-          variant="bordered"
-          disabled={isSubmitting}
-          className="lg:px-3"
-          onClick={() => oAuthSignUp("oauth_google")}
-        >
-          <Icon name="google" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />
-          <span className="lg:text-sm">Join with Google</span>
-        </Button>
-        <Button
-          fullWidth
-          size="lg"
-          color="default"
-          variant="bordered"
-          disabled={isSubmitting}
-          className="lg:px-3"
-          onClick={() => oAuthSignUp("oauth_github")}
-        >
-          <Icon name="github" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />
-          <span className="lg:text-sm">Join with GitHub</span>
-        </Button>
-      </div>
+      <OAuthJoin isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
 
-      <p className="hidden pt-2 text-center lg:block">
+      <p className="hidden pt-2 text-center md:block">
         Already a member?{" "}
         <Link className="text-primary underline" to={ROUTES.signIn}>
           Sign in

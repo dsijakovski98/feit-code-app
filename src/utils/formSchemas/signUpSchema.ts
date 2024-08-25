@@ -1,6 +1,6 @@
 import { InferInput, email, minLength, nonEmpty, object, pipe, string, trim } from "valibot";
 
-export const AuthSchema = object({
+export const SignUpSchema = object({
   email: pipe(
     string(),
     trim(),
@@ -16,4 +16,4 @@ export const AuthSchema = object({
   confirmPassword: pipe(string(), trim(), nonEmpty("Field cannot be empty!")),
 });
 
-export type AuthSchema = InferInput<typeof AuthSchema>;
+export type SignUpSchema = InferInput<typeof SignUpSchema>;
