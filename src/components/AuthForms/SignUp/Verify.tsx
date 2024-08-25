@@ -52,6 +52,8 @@ const Verify = ({ verifyMode }: Props) => {
       }
     } catch (e) {
       // TODO: Sentry logging
+      console.log(e);
+
       if (isClerkAPIResponseError(e)) {
         setError("code", { message: shortClerkErrorMessage(e, { useLongMessage: true }) });
       } else {
@@ -65,7 +67,7 @@ const Verify = ({ verifyMode }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto w-[80%] space-y-4 pb-3 lg:w-full lg:pb-1"
+      className="mx-auto w-[80%] space-y-4 pb-3 lg:w-[95%] lg:pb-1"
     >
       <p className="text-center text-lg">Enter the 6 digit code you received on your email</p>
 
