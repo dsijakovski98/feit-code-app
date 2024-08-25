@@ -14,7 +14,7 @@ type Props = {
   className?: ClassValue;
 } & PropsWithChildren;
 
-const WindowContext = createContext<{ fullScreen: boolean } | null>(null);
+export const WindowContext = createContext<{ fullScreen: boolean } | null>(null);
 
 const Window = ({ title, className = "", children }: Props) => {
   const { trigger, windowEl } = useDrag();
@@ -50,7 +50,7 @@ const Window = ({ title, className = "", children }: Props) => {
           <WindowControls show={show} minimized={minimized} fullScreen={fullScreen} />
         </nav>
 
-        <div>
+        <div className="h-full">
           <WindowContext.Provider value={{ fullScreen: fullScreen.open }}>
             {children}
           </WindowContext.Provider>

@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import clsx from "clsx";
 
 import { useSignUp } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
@@ -12,6 +13,7 @@ import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
 import { Toggle } from "@/hooks/useToggle";
+import { useWindowContext } from "@/hooks/useWindowContext";
 import { shortClerkErrorMessage } from "@/utils";
 import { VerifyAuthSchema } from "@/utils/formSchemas/verifyAuthSchema";
 
@@ -20,8 +22,8 @@ type Props = {
 };
 
 const Verify = ({ verifyMode }: Props) => {
+  const { fullScreen } = useWindowContext();
   const { signUp, setActive } = useSignUp();
-
   const navigate = useNavigate();
 
   const {
@@ -67,11 +69,17 @@ const Verify = ({ verifyMode }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto w-[80%] space-y-4 pb-3 lg:w-[95%] lg:pb-1"
+      className={clsx("mx-auto flex h-full w-[90%] flex-col gap-4 pb-3 lg:w-[95%] lg:pb-1", {
+        "pt-36": fullScreen,
+      })}
     >
       <p className="text-center text-lg">Enter the 6 digit code you received on your email</p>
 
-      <div className="space-y-1.5">
+      <div
+        className={clsx("space-y-1.5", {
+          "space-y-3": fullScreen,
+        })}
+      >
         <Controller
           control={control}
           name="code"
@@ -88,9 +96,9 @@ const Verify = ({ verifyMode }: Props) => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
-                base: "h-[88px]",
                 input: "placeholder:font-light placeholder:text-slate-400",
                 label: "group-data-[filled-within='true']:-translate-y-2.5",
+                errorMessage: fullScreen ? "text-base" : "",
               }}
             />
           )}
@@ -100,6 +108,7 @@ const Verify = ({ verifyMode }: Props) => {
           <Button fullWidth size="lg" color="default" onClick={verifyMode.toggleOff}>
             Use different email
           </Button>
+
           <Button
             fullWidth
             size="lg"

@@ -29,7 +29,7 @@ const AuthPageWindow = ({ title, href, heading, children }: Props) => {
 
       <div className="mt-14 flex justify-center lg:mt-10">
         <Window title={title} className="min-w-[700px] lg:w-[90%] lg:min-w-min">
-          <div className="flex items-stretch">
+          <div className="flex h-full">
             <AuthSidebar activeLink={href} />
 
             <div className="grow px-3 py-4 lg:p-4">{children}</div>

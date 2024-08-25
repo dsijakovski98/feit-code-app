@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import clsx from "clsx";
 
 import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
@@ -13,12 +14,13 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
+import { useWindowContext } from "@/hooks/useWindowContext";
 import { shortClerkErrorMessage } from "@/utils";
 import { SignInSchema } from "@/utils/formSchemas/signInSchema";
 
 const SignInForm = () => {
+  const { fullScreen } = useWindowContext();
   const { signIn, setActive } = useSignIn();
-
   const navigate = useNavigate();
 
   const {
@@ -78,7 +80,12 @@ const SignInForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto w-[80%] space-y-3 pb-3 lg:w-[95%] lg:space-y-2 lg:pb-1"
+      className={clsx(
+        "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-1",
+        {
+          "w-[70%] !gap-4 pt-10": fullScreen,
+        },
+      )}
     >
       <div className="mb-9 space-y-1 lg:space-y-0">
         <Controller
@@ -88,7 +95,7 @@ const SignInForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size="md"
+              size={fullScreen ? "lg" : "md"}
               label="Email"
               color="default"
               variant="underlined"
@@ -105,7 +112,7 @@ const SignInForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size="md"
+              size={fullScreen ? "lg" : "md"}
               type="password"
               label="Password"
               color="default"
@@ -119,13 +126,21 @@ const SignInForm = () => {
 
       <div className="relative">
         {errors.root?.message && (
-          <p className="absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400">
+          <p
+            className={clsx(
+              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400",
+              {
+                "!-top-4 !text-lg": fullScreen,
+              },
+            )}
+          >
             {errors.root.message}
           </p>
         )}
 
         <Button
           fullWidth
+          size={fullScreen ? "lg" : "md"}
           type="submit"
           color="default"
           variant="solid"
