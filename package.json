@@ -1,15 +1,24 @@
 {
   "name": "feit-code-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "author": {
+    "name": "Daniel Shijakovski",
+    "email": "dshijakovski@yahoo.com",
+    "url": "https://www.linkedin.com/in/daniel-shijakovski-ba78001ba/"
+  },
   "scripts": {
     "dev": "vite --open --port 3001 --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "start": "vite preview",
     "lint": "eslint .",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*": "prettier --ignore-unknown --write src/"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.4.2",
@@ -40,6 +49,8 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
