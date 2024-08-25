@@ -1,9 +1,14 @@
+import AuthPageWindow from "@/layouts/AuthPageWindow";
+
+import SignInForm from "@/components/AuthForms/SignIn";
+
+import { ROUTES } from "@/constants/routes";
+
 const SignInPage = () => {
   return (
-    <main className="min-h-[100dvh] bg-dots bg-fixed">
-      <h1 className="text-4xl">Sign in page</h1>
-      <p className="text-lg font-sans">Please sign in</p>
-    </main>
+    <AuthPageWindow title="Sign in" href={ROUTES.signIn} heading="Welcome back!">
+      <SignInForm />
+    </AuthPageWindow>
   );
 };
 

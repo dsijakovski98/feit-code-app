@@ -14,6 +14,7 @@ export default {
       fontFamily: {
         sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
         exo: ['"Exo 2"', ...defaultTheme.fontFamily.serif],
+        mono: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {
         dots: "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url('/images/bg-dots.webp')",
@@ -111,16 +112,18 @@ export default {
             },
 
             danger: {
-              50: "#49000f",
-              100: "#7b001a",
-              200: "#ae0024",
-              300: "#e0002f",
-              400: "#e7395e",
-              500: "#ee738d",
-              600: "#f5acbb",
-              700: "#fce6ea",
+              50: "#ffe1e8",
+              100: "#ffb8c7",
+              200: "#ff8ea7",
+              300: "#ff6586",
+              400: "#ff3b66",
+              500: "#ff1245",
+              600: "#d20f39",
+              700: "#a60c2d",
+              800: "#790921",
+              900: "#4d0515",
               foreground: "#fff",
-              DEFAULT: "#e0002f",
+              DEFAULT: "#ff1245",
             },
 
             background: "#0c0c0e",
