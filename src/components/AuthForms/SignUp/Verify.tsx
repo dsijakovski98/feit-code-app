@@ -12,8 +12,9 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
+import { WindowContext } from "@/context/WindowContext";
+import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
-import { useWindowContext } from "@/hooks/useWindowContext";
 import { shortClerkErrorMessage } from "@/utils";
 import { VerifyAuthSchema } from "@/utils/formSchemas/verifyAuthSchema";
 
@@ -22,7 +23,7 @@ type Props = {
 };
 
 const Verify = ({ verifyMode }: Props) => {
-  const { fullScreen } = useWindowContext();
+  const { fullScreen } = useCtx(WindowContext);
   const { signUp, setActive } = useSignUp();
   const navigate = useNavigate();
 
@@ -48,7 +49,7 @@ const Verify = ({ verifyMode }: Props) => {
 
       if (completeSignUp.status == "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        navigate(ROUTES.dashboard);
+        navigate(ROUTES.welcome);
       } else {
         setError("code", { message: "Could not verify code!" });
       }

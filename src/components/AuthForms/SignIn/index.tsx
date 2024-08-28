@@ -14,12 +14,13 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
-import { useWindowContext } from "@/hooks/useWindowContext";
+import { WindowContext } from "@/context/WindowContext";
+import { useCtx } from "@/hooks/useCtx";
 import { shortClerkErrorMessage } from "@/utils";
 import { SignInSchema } from "@/utils/formSchemas/signInSchema";
 
 const SignInForm = () => {
-  const { fullScreen } = useWindowContext();
+  const { fullScreen } = useCtx(WindowContext);
   const { signIn, setActive } = useSignIn();
   const navigate = useNavigate();
 

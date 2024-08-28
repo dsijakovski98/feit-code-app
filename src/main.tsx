@@ -9,10 +9,11 @@ import { NextUIProvider } from "@nextui-org/react";
 
 import AuthLayout from "@/layouts/AuthLayout";
 
-import Dashboard from "@/routes/dashboard";
-import SignInPage from "@/routes/sign-in";
-import SignUpPage from "@/routes/sign-up";
-import CallbackSSO from "@/routes/sso-callback";
+import SignInPage from "@/pages/auth/sign-in";
+import SignUpPage from "@/pages/auth/sign-up";
+import CallbackSSO from "@/pages/auth/sso-callback";
+import Dashboard from "@/pages/dashboard";
+import WelcomePage from "@/pages/welcome";
 
 import PageWrapper from "@/components/PageWrapper";
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
           {
             path: ROUTES.dashboard,
             element: <Dashboard />,
+          },
+          {
+            path: ROUTES.welcome,
+            element: <WelcomePage />,
           },
         ],
       },

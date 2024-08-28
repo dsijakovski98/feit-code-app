@@ -3,6 +3,7 @@ import { RecordValues } from "@/types";
 export const ROUTES = {
   home: "/",
   dashboard: "/dashboard",
+  welcome: "/welcome",
 
   signIn: "/sign-in",
   signUp: "/sign-up",

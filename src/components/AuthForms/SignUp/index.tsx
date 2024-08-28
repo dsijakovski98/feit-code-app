@@ -15,13 +15,14 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
 import { ROUTES } from "@/constants/routes";
+import { WindowContext } from "@/context/WindowContext";
+import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { useWindowContext } from "@/hooks/useWindowContext";
 import { shortClerkErrorMessage } from "@/utils";
 import { SignUpSchema } from "@/utils/formSchemas/signUpSchema";
 
 const SignUpForm = () => {
-  const { fullScreen } = useWindowContext();
+  const { fullScreen } = useCtx(WindowContext);
   const { signUp } = useSignUp();
   const verifyMode = useToggle();
 

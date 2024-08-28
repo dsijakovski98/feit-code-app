@@ -1,4 +1,4 @@
-import { Fragment, PropsWithChildren, createContext, useEffect } from "react";
+import { Fragment, PropsWithChildren, useEffect } from "react";
 
 import clsx from "clsx";
 import { ClassValue } from "clsx";
@@ -6,6 +6,7 @@ import { ClassValue } from "clsx";
 import WindowBlank from "@/components/ui/Window/WindowBlank";
 import WindowControls from "@/components/ui/Window/WindowControls";
 
+import { WindowProvider } from "@/context/WindowContext";
 import { useDrag } from "@/hooks/useDrag";
 import { useToggle } from "@/hooks/useToggle";
 
@@ -13,8 +14,6 @@ type Props = {
   title: string;
   className?: ClassValue;
 } & PropsWithChildren;
-
-export const WindowContext = createContext<{ fullScreen: boolean } | null>(null);
 
 const FULL_SCREEN_KEY = "fc-auth-fullscreen";
 
@@ -61,9 +60,7 @@ const Window = ({ title, className = "", children }: Props) => {
         </nav>
 
         <div className="h-full">
-          <WindowContext.Provider value={{ fullScreen: fullScreen.open }}>
-            {children}
-          </WindowContext.Provider>
+          <WindowProvider fullScreen={fullScreen}>{children}</WindowProvider>
         </div>
       </section>
 
