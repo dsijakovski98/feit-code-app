@@ -23,12 +23,10 @@ const AuthSidebar = ({ activeLink }: Props) => {
             <Icon name="html" className="h-3.5 w-3.5" />
 
             <Link
-              className={clsx(
-                "font-light transition-colors focus-within:text-primary-600 hover:text-primary-600",
-                {
-                  "font-extrabold text-primary-700 underline": authLink === activeLink,
-                },
-              )}
+              className={clsx("font-light transition-colors", {
+                "focus-within:text-primary-700 hover:text-primary-700": authLink !== activeLink,
+                "!font-bold text-primary-500 underline": authLink === activeLink,
+              })}
               to={authLink}
             >
               {authLink.slice(1).toLowerCase()}.html

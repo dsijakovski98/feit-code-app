@@ -16,7 +16,7 @@ const AuthPageWindow = ({ title, href, heading, children }: Props) => {
   return (
     <main className="relative min-h-[100dvh] bg-dots bg-fixed pt-10 lg:pt-5">
       <div className="flex flex-col items-center px-[10px] text-center">
-        <Link to={ROUTES.home} className="flex items-center gap-2 text-2xl">
+        <Link to={ROUTES.home} className="font-quicksand flex items-center gap-2 text-2xl">
           <p>FEIT</p>
           <div className="flex w-fit max-w-20">
             <img src="/images/logo.svg" />
