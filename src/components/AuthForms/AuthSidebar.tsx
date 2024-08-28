@@ -24,9 +24,9 @@ const AuthSidebar = ({ activeLink }: Props) => {
 
             <Link
               className={clsx(
-                "transition-colors focus-within:text-primary-600 hover:text-primary-600",
+                "font-light transition-colors focus-within:text-primary-600 hover:text-primary-600",
                 {
-                  "font-bold text-primary-700 underline": authLink === activeLink,
+                  "font-extrabold text-primary-700 underline": authLink === activeLink,
                 },
               )}
               to={authLink}
