@@ -28,7 +28,7 @@ const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest },
     ref={ref}
     classNames={{
       ...rest.classNames,
-      errorMessage: clsx("text-sm text-danger-400", rest.classNames?.errorMessage || ""),
+      errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
     }}
   >
     {children}

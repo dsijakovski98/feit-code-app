@@ -110,6 +110,7 @@ const SignUpForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
+              autoFocus
               size="md"
               label="Email"
               color="default"
@@ -163,7 +164,7 @@ const SignUpForm = () => {
         {errors.root?.message && (
           <p
             className={clsx(
-              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400",
+              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-500",
               {
                 "!-top-4 !text-lg": fullScreen,
               },
@@ -189,7 +190,7 @@ const SignUpForm = () => {
 
       <p className="text-center text-content1-foreground">or</p>
 
-      <OAuthJoin isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
+      <OAuthJoin joinType="Join" isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
 
       <p className="hidden pt-2 text-center md:block">
         Already a member?{" "}

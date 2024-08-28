@@ -14,7 +14,7 @@ const AUTH_LINKS = [ROUTES.signIn, ROUTES.signUp];
 
 const AuthSidebar = ({ activeLink }: Props) => {
   return (
-    <div className="max-w-[180px] grow space-y-1.5 border-r border-r-content2 bg-background px-3 pb-5 pt-4 font-mono md:hidden">
+    <div className="space-y-1.5 border-r border-r-content2 bg-background px-3 pb-5 pt-4 font-mono md:hidden">
       <p className="font-bold">FEIT Code</p>
 
       <ul className="space-y-1 pl-4 text-sm">
