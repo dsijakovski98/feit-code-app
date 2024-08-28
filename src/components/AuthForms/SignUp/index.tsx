@@ -46,7 +46,7 @@ const SignUpForm = () => {
     return signUp?.authenticateWithRedirect({
       strategy,
       redirectUrl: ROUTES.ssoCallback,
-      redirectUrlComplete: ROUTES.dashboard,
+      redirectUrlComplete: ROUTES.welcome,
     });
   };
 

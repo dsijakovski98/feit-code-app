@@ -98,7 +98,7 @@ const Verify = ({ verifyMode }: Props) => {
               errorMessage={fieldState.error?.message}
               classNames={{
                 input: "placeholder:font-light placeholder:text-slate-400",
-                label: "group-data-[filled-within='true']:-translate-y-2.5",
+                label: "group-data-[filled-within='true']:-translate-y-3",
                 errorMessage: fullScreen ? "text-base" : "",
               }}
             />
