@@ -27,12 +27,14 @@ const AuthPageWindow = ({ title, href, heading, children }: Props) => {
         <h1 className="text-5xl font-semibold lg:text-4xl">{heading}</h1>
       </div>
 
-      <div className="mt-14 flex justify-center lg:mt-10">
+      <div className="mt-8 flex justify-center">
         <Window title={title} className="min-w-[700px] lg:w-[90%] lg:min-w-min">
           <div className="flex h-full">
             <AuthSidebar activeLink={href} />
 
-            <div className="grow px-3 py-4 lg:p-4">{children}</div>
+            <div className="grow bg-gradient-to-r from-background/90 to-primary-50/20 p-6 lg:p-4">
+              {children}
+            </div>
           </div>
         </Window>
       </div>

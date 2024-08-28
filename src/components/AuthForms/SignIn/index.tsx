@@ -87,7 +87,7 @@ const SignInForm = () => {
         },
       )}
     >
-      <div className="mb-9 space-y-1 lg:space-y-0">
+      <div className="mb-9">
         <Controller
           control={control}
           name="email"
@@ -95,7 +95,7 @@ const SignInForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size={fullScreen ? "lg" : "md"}
+              size="lg"
               label="Email"
               color="default"
               variant="underlined"
@@ -112,7 +112,7 @@ const SignInForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size={fullScreen ? "lg" : "md"}
+              size="lg"
               type="password"
               label="Password"
               color="default"

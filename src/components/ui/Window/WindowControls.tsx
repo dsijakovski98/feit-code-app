@@ -11,13 +11,14 @@ type Props = {
 
 const WindowControls = ({ show, minimized, fullScreen }: Props) => {
   return (
-    <ul className="flex items-center justify-end gap-3 md:gap-4 [&_button]:!min-w-0">
+    <ul className="flex translate-y-1 items-start justify-end gap-3 md:gap-4 [&_button]:!min-w-0">
       <li>
         <Button
           isIconOnly
-          variant="solid"
+          variant="light"
           radius="full"
-          className="h-5 w-5 p-1 md:h-6 md:w-6"
+          color="default"
+          className="h-6 w-6 p-px"
           onClick={minimized.toggleOn}
         >
           <Icon name="minus" />
@@ -27,10 +28,10 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
       <li>
         <Button
           isIconOnly
-          variant="solid"
+          variant="light"
           radius="full"
-          color="warning"
-          className="h-5 w-5 p-1 md:h-6 md:w-6"
+          color="default"
+          className="h-6 w-6 p-1"
           onClick={fullScreen.toggle}
         >
           {fullScreen.open ? <Icon name="off-screen" /> : <Icon name="full-screen" />}
@@ -40,10 +41,10 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
       <li>
         <Button
           isIconOnly
-          variant="solid"
+          variant="light"
           radius="full"
-          color="danger"
-          className="h-5 w-5 p-1 md:h-6 md:w-6"
+          color="default"
+          className="h-6 w-6 p-0.5"
           onClick={show.toggleOff}
         >
           <Icon name="close" />

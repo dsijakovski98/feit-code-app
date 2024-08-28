@@ -4,7 +4,7 @@ import { text, varchar } from "drizzle-orm/pg-core";
 export const PRIMARY_ID_LEN = 128;
 
 export const userId = (name: string = "user_id") => {
-  return text(name).notNull().primaryKey();
+  return text(name).primaryKey().notNull();
 };
 
 export const primaryId = (name: string = "id") => {
