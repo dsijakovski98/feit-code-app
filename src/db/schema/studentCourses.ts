@@ -1,23 +1,24 @@
-import { relations } from 'drizzle-orm'
-import { pgTable, primaryKey, text, varchar } from 'drizzle-orm/pg-core'
+import { relations } from "drizzle-orm";
+import { pgTable, primaryKey, text, varchar } from "drizzle-orm/pg-core";
 
-import courses from '@/db/schema/courses'
-import students from '@/db/schema/students'
+import courses from "@/db/schema/courses";
+import students from "@/db/schema/students";
 
 const studentCourses = pgTable(
-  'student_courses',
+  "student_courses",
   {
-    studentId: text('student_id')
+    studentId: text("student_id")
       .notNull()
       .references(() => students.id),
-    courseId: varchar('course_id')
+    courseId: varchar("course_id")
       .notNull()
       .references(() => courses.id),
+    // TODO: Look into adding more metadata (ex. grade)
   },
   (table) => ({
     pk: primaryKey({ columns: [table.studentId, table.courseId] }),
   }),
-)
+);
 
 export const studentCourseRelations = relations(studentCourses, ({ one }) => ({
   student: one(students, {
@@ -28,6 +29,6 @@ export const studentCourseRelations = relations(studentCourses, ({ one }) => ({
     fields: [studentCourses.courseId],
     references: [courses.id],
   }),
-}))
+}));
 
-export default studentCourses
+export default studentCourses;

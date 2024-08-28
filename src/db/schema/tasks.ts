@@ -1,28 +1,28 @@
-import { relations } from 'drizzle-orm'
-import { integer, pgTable, varchar } from 'drizzle-orm/pg-core'
+import { relations } from "drizzle-orm";
+import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
-import taskGrades from '@/db/schema/taskGrades'
-import tests from '@/db/schema/tests'
-import { primaryId } from '@/db/schema/utils'
+import exams from "@/db/schema/exams";
+import taskGrades from "@/db/schema/taskGrades";
+import { primaryId } from "@/db/schema/utils";
 
-const tasks = pgTable('tasks', {
+const tasks = pgTable("tasks", {
   id: primaryId(),
-  orderIndex: integer('order_index').unique().notNull(),
-  title: varchar('title', { length: 256 }).notNull(),
-  description: varchar('description', { length: 256 }),
-  points: integer('points'),
+  orderIndex: integer("order_index").unique().notNull(),
+  title: varchar("title", { length: 256 }).notNull(),
+  description: varchar("description", { length: 256 }),
+  points: integer("points"),
 
-  testId: varchar('test_id')
+  examId: varchar("exam_id")
     .notNull()
-    .references(() => tests.id),
-})
+    .references(() => exams.id),
+});
 
 export const taskRelations = relations(tasks, ({ one, many }) => ({
-  test: one(tests, {
-    fields: [tasks.testId],
-    references: [tests.id],
+  exam: one(exams, {
+    fields: [tasks.examId],
+    references: [exams.id],
   }),
   grades: many(taskGrades),
-}))
+}));
 
-export default tasks
+export default tasks;
