@@ -39,7 +39,7 @@ const Window = ({ title, className = "", children }: Props) => {
       <section
         ref={windowEl}
         className={clsx(
-          "group absolute overflow-hidden rounded-xl bg-content1 opacity-100 shadow-2xl transition-all duration-300 data-[moving]:opacity-80 data-[moving]:shadow-transparent lg:static",
+          "font-quicksand group absolute overflow-hidden rounded-xl border border-content1 bg-content1 opacity-100 shadow-2xl shadow-background transition-all duration-300 data-[moving]:opacity-80 data-[moving]:shadow-transparent lg:static",
           {
             "translate-y-4 !opacity-0": !show.open,
             "translate-y-0 opacity-100": show.open,
@@ -49,7 +49,7 @@ const Window = ({ title, className = "", children }: Props) => {
           className,
         )}
       >
-        <nav className="flex items-center justify-between bg-gradient-to-t from-primary-50/80 from-20% to-primary-100/80 px-3 py-2 md:px-4 md:py-3">
+        <nav className="flex items-center justify-between border-b border-b-content2 bg-gradient-to-r from-background from-20% to-primary-50/20 px-3 py-2 md:px-4 md:py-3">
           <div
             ref={trigger}
             className="grow cursor-grab group-data-[moving]:cursor-grabbing lg:cursor-default"

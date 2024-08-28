@@ -87,7 +87,7 @@ const SignInForm = () => {
         },
       )}
     >
-      <div className="mb-9 space-y-1 lg:space-y-0">
+      <div className="mb-9">
         <Controller
           control={control}
           name="email"
@@ -95,7 +95,8 @@ const SignInForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size={fullScreen ? "lg" : "md"}
+              autoFocus
+              size="lg"
               label="Email"
               color="default"
               variant="underlined"
@@ -112,7 +113,7 @@ const SignInForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size={fullScreen ? "lg" : "md"}
+              size="lg"
               type="password"
               label="Password"
               color="default"
@@ -128,7 +129,7 @@ const SignInForm = () => {
         {errors.root?.message && (
           <p
             className={clsx(
-              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400",
+              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-500",
               {
                 "!-top-4 !text-lg": fullScreen,
               },
@@ -154,7 +155,7 @@ const SignInForm = () => {
 
       <p className="text-center text-content1-foreground">or</p>
 
-      <OAuthJoin isSubmitting={isSubmitting} oAuthJoin={oAuthSignIn} />
+      <OAuthJoin joinType="Sign in" isSubmitting={isSubmitting} oAuthJoin={oAuthSignIn} />
 
       <p className="hidden pt-2 text-center md:block">
         Not a member?{" "}

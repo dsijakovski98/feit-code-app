@@ -12,8 +12,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
-        exo: ['"Exo 2"', ...defaultTheme.fontFamily.serif],
+        quicksand: ['"Quicksand"', ...defaultTheme.fontFamily.serif],
+        sans: ['"Raleway"', ...defaultTheme.fontFamily.sans],
         mono: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {

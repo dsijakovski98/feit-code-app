@@ -96,17 +96,13 @@ const SignUpForm = () => {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(
-        "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-3",
+        "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-0",
         {
           "w-[70%] !gap-4 pt-10": fullScreen,
         },
       )}
     >
-      <div
-        className={clsx("mb-9 space-y-1 lg:space-y-0", {
-          "mb-36": fullScreen,
-        })}
-      >
+      <div className={clsx("mb-10 lg:mb-8", { "mb-36": fullScreen })}>
         <Controller
           control={control}
           name="email"
@@ -114,7 +110,8 @@ const SignUpForm = () => {
           render={({ field, fieldState }) => (
             <Input
               {...field}
-              size={fullScreen ? "lg" : "md"}
+              autoFocus
+              size="md"
               label="Email"
               color="default"
               variant="underlined"
@@ -124,7 +121,7 @@ const SignUpForm = () => {
           )}
         />
 
-        <div className="flex items-center justify-between gap-10 lg:block">
+        <div className="flex items-center justify-between gap-8 lg:block">
           <Controller
             control={control}
             name="password"
@@ -132,7 +129,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size={fullScreen ? "lg" : "md"}
+                size="md"
                 label="Password"
                 type="password"
                 color="default"
@@ -150,7 +147,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size={fullScreen ? "lg" : "md"}
+                size="md"
                 label="Confirm password"
                 type="password"
                 color="default"
@@ -167,7 +164,7 @@ const SignUpForm = () => {
         {errors.root?.message && (
           <p
             className={clsx(
-              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-400",
+              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-500",
               {
                 "!-top-4 !text-lg": fullScreen,
               },
@@ -179,7 +176,7 @@ const SignUpForm = () => {
 
         <Button
           fullWidth
-          size={fullScreen ? "lg" : "md"}
+          size="md"
           type="submit"
           color="default"
           variant="solid"
@@ -193,7 +190,7 @@ const SignUpForm = () => {
 
       <p className="text-center text-content1-foreground">or</p>
 
-      <OAuthJoin isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
+      <OAuthJoin joinType="Join" isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
 
       <p className="hidden pt-2 text-center md:block">
         Already a member?{" "}
