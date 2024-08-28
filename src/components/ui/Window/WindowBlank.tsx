@@ -1,3 +1,5 @@
+import { ElementRef, useLayoutEffect, useMemo, useReducer, useRef } from "react";
+
 import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
@@ -16,26 +18,39 @@ const WindowBlank = ({ show, minimized }: Props) => {
     minimized.toggleOff();
   };
 
+  const signInBtn = useRef<ElementRef<"button">>(null);
+
+  const shouldShow = useMemo(() => !show.open || minimized.open, [show.open, minimized.open]);
+
+  useLayoutEffect(() => {
+    if (!signInBtn.current) return;
+
+    if (!shouldShow) return;
+
+    signInBtn.current.focus();
+  }, [shouldShow]);
+
   return (
-    (!show.open || minimized.open) && (
+    shouldShow && (
       <section
         className={clsx(
-          "absolute animate-appearance-in [animation-delay:300ms] inset-5 grid place-items-center",
+          "absolute inset-5 grid animate-appearance-in place-items-center [animation-delay:300ms]",
         )}
       >
         <div className="text-center">
-          <h2 className="text-4xl mb-2">
+          <h2 className="mb-2 text-4xl">
             {!show.open ? "Welp...That was fun I guess" : "Wow, you made it disappear!"}
           </h2>
-          <p className="font-sans text-lg font-light mb-8">
+          <p className="mb-8 font-sans text-lg font-light">
             {!show.open ? "Let's get you back on track" : "Okay let's sign you in now"}
           </p>
 
           <Button
+            ref={signInBtn}
             color="default"
             variant="flat"
+            onPress={bringBack}
             startContent={<Icon name="login" className="w-4" />}
-            onClick={bringBack}
           >
             Sign in
           </Button>

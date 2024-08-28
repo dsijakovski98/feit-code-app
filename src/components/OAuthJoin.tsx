@@ -18,8 +18,8 @@ const OAuthJoin = ({ isSubmitting, oAuthJoin, joinType }: Props) => {
         color="default"
         variant="bordered"
         disabled={isSubmitting}
-        className="lg:px-3"
-        onClick={() => oAuthJoin("oauth_google")}
+        className="font-semibold lg:px-3"
+        onPress={() => oAuthJoin("oauth_google")}
       >
         <Icon name="google" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />
         <span className="lg:text-sm">{joinType} with Google</span>
@@ -30,8 +30,8 @@ const OAuthJoin = ({ isSubmitting, oAuthJoin, joinType }: Props) => {
         color="default"
         variant="bordered"
         disabled={isSubmitting}
-        className="lg:px-3"
-        onClick={() => oAuthJoin("oauth_github")}
+        className="font-semibold lg:px-3"
+        onPress={() => oAuthJoin("oauth_github")}
       >
         <Icon name="github" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />
         <span className="lg:text-sm">{joinType} with GitHub</span>

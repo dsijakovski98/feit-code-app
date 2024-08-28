@@ -19,7 +19,7 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
           radius="full"
           color="default"
           className="h-6 w-6 p-px"
-          onClick={minimized.toggleOn}
+          onPress={minimized.toggleOn}
         >
           <Icon name="minus" />
         </Button>
@@ -32,7 +32,7 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
           radius="full"
           color="default"
           className="h-6 w-6 p-1"
-          onClick={fullScreen.toggle}
+          onPress={fullScreen.toggle}
         >
           {fullScreen.open ? <Icon name="off-screen" /> : <Icon name="full-screen" />}
         </Button>
@@ -45,7 +45,7 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
           radius="full"
           color="default"
           className="h-6 w-6 p-0.5"
-          onClick={show.toggleOff}
+          onPress={show.toggleOff}
         >
           <Icon name="close" />
         </Button>

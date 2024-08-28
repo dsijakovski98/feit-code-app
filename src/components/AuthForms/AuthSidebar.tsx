@@ -14,14 +14,12 @@ const AUTH_LINKS = [ROUTES.signIn, ROUTES.signUp];
 
 const AuthSidebar = ({ activeLink }: Props) => {
   return (
-    <div className="space-y-1.5 border-r border-r-content2 bg-background px-3 pb-5 pt-4 font-mono md:hidden">
+    <div className="space-y-2 border-r border-r-content2 bg-background px-3 pb-5 pt-4 font-mono md:hidden">
       <p className="font-bold">FEIT Code</p>
 
-      <ul className="space-y-1 pl-4 text-sm">
+      <ul className="space-y-2 pl-4 text-sm">
         {AUTH_LINKS.map((authLink) => (
           <li key={authLink} className="flex items-center gap-2">
-            <Icon name="html" className="h-3.5 w-3.5" />
-
             <Link
               className={clsx("font-light transition-colors", {
                 "focus-within:text-primary-700 hover:text-primary-700": authLink !== activeLink,
@@ -29,6 +27,7 @@ const AuthSidebar = ({ activeLink }: Props) => {
               })}
               to={authLink}
             >
+              <Icon name="html" className="mr-2 inline-block h-3.5 w-3.5" />
               {authLink.slice(1).toLowerCase()}.html
             </Link>
           </li>

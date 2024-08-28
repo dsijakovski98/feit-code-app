@@ -105,7 +105,7 @@ const Verify = ({ verifyMode }: Props) => {
         />
 
         <div className="flex justify-between gap-4">
-          <Button fullWidth size="lg" color="default" onClick={verifyMode.toggleOff}>
+          <Button fullWidth size="lg" color="default" onPress={verifyMode.toggleOff}>
             Use different email
           </Button>
 

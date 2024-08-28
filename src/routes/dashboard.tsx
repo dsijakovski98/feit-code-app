@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <Button onClick={() => signOut({ redirectUrl: ROUTES.signIn })}>Sign Out</Button>
+      <Button onPress={() => signOut({ redirectUrl: ROUTES.signIn })}>Sign Out</Button>
     </div>
   );
 };
