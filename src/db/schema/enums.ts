@@ -1,6 +1,16 @@
 import { pgEnum } from "drizzle-orm/pg-core";
 
-export const teacherType = pgEnum("teacher_type", ["professor", "assistant"]);
+import { TEACHER_TYPE } from "@/constants/professors";
+import { MAJOR_TYPE } from "@/constants/students";
+
+export const moduleType = pgEnum("module_type", [
+  MAJOR_TYPE.KTI,
+  MAJOR_TYPE.KSIAR,
+  MAJOR_TYPE.KHIE,
+  MAJOR_TYPE.TKII,
+]);
+
+export const teacherType = pgEnum("teacher_type", [TEACHER_TYPE.teacher, TEACHER_TYPE.assistant]);
 
 export const programmingLanguage = pgEnum("programming_language", [
   "JavaScript",

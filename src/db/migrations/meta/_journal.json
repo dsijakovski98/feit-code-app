@@ -8,6 +8,27 @@
       "when": 1724860184534,
       "tag": "0000_fast_white_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1724966823608,
+      "tag": "0001_great_mulholland_black",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724967171509,
+      "tag": "0002_exotic_rocket_racer",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1724967196234,
+      "tag": "0003_ordinary_mikhail_rasputin",
+      "breakpoints": true
     }
   ]
 }
