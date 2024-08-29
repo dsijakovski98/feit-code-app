@@ -22,7 +22,9 @@ const GradientText = ({
     <Element
       className={clsx(
         "bg-clip-text text-transparent",
-        variant === "primary" ? "bg-gradient-to-br" : "bg-gradient-to-tr",
+        variant === "primary"
+          ? "bg-gradient-to-br from-primary-700 to-secondary-300"
+          : "bg-gradient-to-tr from-secondary-200 to-secondary-400",
         className,
       )}
     >
