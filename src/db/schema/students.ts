@@ -5,6 +5,7 @@ import studentCourses from "@/db/schema/studentCourses";
 import taskGrades from "@/db/schema/taskGrades";
 import { userId } from "@/db/schema/utils";
 
+// TODO: Add 'bio', 'major' columns
 const students = pgTable("students", {
   id: userId(),
   firstName: varchar("first_name", { length: 100 }).notNull(),

@@ -5,18 +5,28 @@ import { motion } from "framer-motion";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 
 import OnboardingStep from "@/components/Onboarding/OnboardingStep";
+import ProfessorOnboarding from "@/components/Onboarding/Professor";
+import StudentOnboarding from "@/components/Onboarding/Student";
 import UserTypeSelector from "@/components/Onboarding/UserTypeSelect";
 import GradientText from "@/components/ui/GradientText";
 
+import { OnboardingContext } from "@/context/OnboardingContext";
+import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
+import { USER_TYPES } from "@/types";
 
 const Onboarding = () => {
+  const {
+    step,
+    userState: [userType],
+  } = useCtx(OnboardingContext);
+
   const { open, toggleOn } = useToggle();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       toggleOn();
-    }, 800);
+    }, 500);
 
     return () => {
       clearTimeout(timeout);
@@ -41,7 +51,7 @@ const Onboarding = () => {
         hideCloseButton
         classNames={{
           base: "min-w-[900px] lg:min-w-[90%] bg-transparent",
-          header: "bg-background",
+          header: "bg-background p-5",
           backdrop: "bg-primary-50/20",
         }}
       >
@@ -54,8 +64,13 @@ const Onboarding = () => {
             layout
             className="bg-gradient-to-br from-background to-background/60"
           >
-            <OnboardingStep step={0}>
+            <OnboardingStep active={step === 0}>
               <UserTypeSelector />
+            </OnboardingStep>
+
+            <OnboardingStep active={step > 0}>
+              {/* TODO: Opportunity for Suspense */}
+              {userType === USER_TYPES.student ? <StudentOnboarding /> : <ProfessorOnboarding />}
             </OnboardingStep>
           </ModalBody>
         </ModalContent>

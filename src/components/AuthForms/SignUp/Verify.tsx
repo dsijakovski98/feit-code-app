@@ -16,7 +16,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { VerifyAuthSchema } from "@/utils/formSchemas/verifyAuthSchema";
+import { VerifyAuthSchema } from "@/utils/formSchemas/auth/verifyAuthSchema";
 
 type Props = {
   verifyMode: Toggle;

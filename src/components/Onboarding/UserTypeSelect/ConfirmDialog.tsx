@@ -1,11 +1,6 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-} from "@nextui-org/react";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
+
+import Button from "@/components/ui/Button";
 
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -30,21 +25,24 @@ const ConfirmDialog = ({ dialog }: Props) => {
     <Modal
       isOpen={dialog.open}
       onOpenChange={dialog.toggle}
-      placement="center"
-      backdrop="transparent"
       hideCloseButton
+      placement="center"
+      backdrop="opaque"
+      classNames={{
+        backdrop: "bg-background/50",
+      }}
     >
       <ModalContent>
         {(onClose) => (
           <>
             <ModalHeader className="text-2xl">Better safe than sorry</ModalHeader>
-            <ModalBody>Are you sure you are a {userType}?</ModalBody>
+            <ModalBody>Are you sure you are a {userType}? You cannot change this later.</ModalBody>
 
             <ModalFooter>
-              <Button onPress={onClose}>Go back</Button>
-              <Button onPress={confirmChoice} color="primary">
-                Continue
+              <Button color="default" variant="bordered" onPress={onClose}>
+                Go back
               </Button>
+              <Button onPress={confirmChoice}>Continue</Button>
             </ModalFooter>
           </>
         )}

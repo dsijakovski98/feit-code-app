@@ -19,7 +19,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { SignUpSchema } from "@/utils/formSchemas/signUpSchema";
+import { SignUpSchema } from "@/utils/formSchemas/auth/signUpSchema";
 
 const SignUpForm = () => {
   const { fullScreen } = useCtx(WindowContext);

@@ -17,7 +17,7 @@ import { ROUTES } from "@/constants/routes";
 import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { shortClerkErrorMessage } from "@/utils";
-import { SignInSchema } from "@/utils/formSchemas/signInSchema";
+import { SignInSchema } from "@/utils/formSchemas/auth/signInSchema";
 
 const SignInForm = () => {
   const { fullScreen } = useCtx(WindowContext);

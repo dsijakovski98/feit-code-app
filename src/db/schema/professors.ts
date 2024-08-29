@@ -5,6 +5,7 @@ import courses from "@/db/schema/courses";
 import { teacherType } from "@/db/schema/enums";
 import { userId } from "@/db/schema/utils";
 
+// TODO: Add 'department' column
 const professors = pgTable("professors", {
   id: userId(),
   firstName: varchar("first_name", { length: 100 }).notNull(),
