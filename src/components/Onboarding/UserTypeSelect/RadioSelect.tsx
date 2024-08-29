@@ -10,7 +10,7 @@ const RadioSelect = ({ children, ...props }: Props) => {
       {...props}
       classNames={{
         base: clsx(
-          "inline-flex max-w-full basis-full bg-content1 hover:bg-content2 items-center justify-between",
+          "inline-flex max-w-full basis-full md:m-0 bg-content1 hover:bg-content2 items-center justify-between",
           "flex-row-reverse cursor-pointer rounded-lg gap-4 p-4 border-2 border-transparent",
           "data-[selected=true]:border-primary",
         ),

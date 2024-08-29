@@ -1,12 +1,9 @@
-import { useEffect } from "react";
-
-import { motion } from "framer-motion";
+import { Suspense, lazy, useEffect } from "react";
 
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+import { Spinner } from "@nextui-org/react";
 
 import OnboardingStep from "@/components/Onboarding/OnboardingStep";
-import ProfessorOnboarding from "@/components/Onboarding/Professor";
-import StudentOnboarding from "@/components/Onboarding/Student";
 import UserTypeSelector from "@/components/Onboarding/UserTypeSelect";
 import GradientText from "@/components/ui/GradientText";
 
@@ -14,6 +11,9 @@ import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPES } from "@/types";
+
+const ProfessorOnboarding = lazy(() => import("@/components/Onboarding/Professor"));
+const StudentOnboarding = lazy(() => import("@/components/Onboarding/Student"));
 
 const Onboarding = () => {
   const {
@@ -50,7 +50,7 @@ const Onboarding = () => {
         placement="center"
         hideCloseButton
         classNames={{
-          base: "min-w-[900px] lg:min-w-[90%] bg-transparent",
+          base: "min-w-[720px] lg:min-w-[90%] bg-transparent",
           header: "bg-background p-5",
           backdrop: "bg-primary-50/20",
         }}
@@ -59,18 +59,16 @@ const Onboarding = () => {
           <ModalHeader className="flex-col">
             <h2>Welcome aboard!</h2>
           </ModalHeader>
-          <ModalBody
-            as={motion.div}
-            layout
-            className="bg-gradient-to-br from-background to-background/60"
-          >
+
+          <ModalBody className="bg-gradient-to-br from-background to-background/60">
             <OnboardingStep active={step === 0}>
               <UserTypeSelector />
             </OnboardingStep>
 
             <OnboardingStep active={step > 0}>
-              {/* TODO: Opportunity for Suspense */}
-              {userType === USER_TYPES.student ? <StudentOnboarding /> : <ProfessorOnboarding />}
+              <Suspense fallback={<Spinner className="mx-auto w-full" />}>
+                {userType === USER_TYPES.student ? <StudentOnboarding /> : <ProfessorOnboarding />}
+              </Suspense>
             </OnboardingStep>
           </ModalBody>
         </ModalContent>

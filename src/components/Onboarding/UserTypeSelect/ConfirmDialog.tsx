@@ -36,6 +36,7 @@ const ConfirmDialog = ({ dialog }: Props) => {
         {(onClose) => (
           <>
             <ModalHeader className="text-2xl">Better safe than sorry</ModalHeader>
+
             <ModalBody>Are you sure you are a {userType}? You cannot change this later.</ModalBody>
 
             <ModalFooter>

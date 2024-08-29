@@ -1,24 +1,28 @@
-import {
-  InferInput,
-  enum as enum_,
-  maxValue,
-  minValue,
-  nonEmpty,
-  number,
-  object,
-  pipe,
-  string,
-  trim,
-} from "valibot";
+import { InferInput, enum as enum_, nonEmpty, object, pipe, regex, string, trim } from "valibot";
 
 import { MAJOR_TYPE } from "@/constants/students";
 
-export const StudentOnboardingSchema = object({
+export const StudentOnboardingBasicInfoSchema = object({
   fullName: pipe(string(), trim(), nonEmpty("Field is required")),
   bio: pipe(string(), trim()),
-  indexNumber: pipe(number(), minValue(1)),
-  indexYear: pipe(number(), minValue(1990), maxValue(new Date().getFullYear())),
-  major: pipe(enum_(MAJOR_TYPE), nonEmpty()),
 });
 
-export type StudentOnboardingSchema = InferInput<typeof StudentOnboardingSchema>;
+export type StudentOnboardingBasicInfoSchema = InferInput<typeof StudentOnboardingBasicInfoSchema>;
+
+export const StudentOnboardingMajorSchema = object({
+  indexNumber: pipe(
+    string(),
+    trim(),
+    nonEmpty("Field is required!"),
+    regex(/^\d+$/, "Field must be numeric!"),
+  ),
+  indexYear: pipe(
+    string(),
+    trim(),
+    nonEmpty("Field is required!"),
+    regex(/^\d+$/, "Field must be numeric!"),
+  ),
+  major: pipe(enum_(MAJOR_TYPE), nonEmpty("Field is required!")),
+});
+
+export type StudentOnboardingMajorSchema = InferInput<typeof StudentOnboardingMajorSchema>;

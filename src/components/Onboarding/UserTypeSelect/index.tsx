@@ -27,7 +27,7 @@ const UserTypeSelector = () => {
   return (
     <Fragment>
       <div className="space-y-8 py-10">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-8 md:items-start">
           <p className="text-2xl font-light">
             First thing's first, what type of FEIT Coder are you?
           </p>
@@ -50,7 +50,7 @@ const UserTypeSelector = () => {
           onValueChange={handleChange}
           description="You will NOT be able to change this at a later time"
           classNames={{
-            wrapper: "grid grid-cols-2 justify-between",
+            wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4  w-full",
             description: "text-sm text-gray-400 font-medium mt-2",
           }}
         >
@@ -62,7 +62,7 @@ const UserTypeSelector = () => {
           </RadioSelect>
           <RadioSelect
             value={USER_TYPES.professor}
-            description="Create and manage programming courses, coding exams and receive insights"
+            description="Create and manage courses, coding exams and receive insights"
           >
             I'm a Professor
           </RadioSelect>
