@@ -53,6 +53,7 @@ const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest },
             radius="full"
             disableRipple
             disableAnimation
+            tabIndex={-1} // Better UX when tabbing across inputs in a form
             onPress={visible.toggle}
             className={clsx("p-1.5 [&_svg]:brightness-50", {
               "opacity-100": visible.open,
