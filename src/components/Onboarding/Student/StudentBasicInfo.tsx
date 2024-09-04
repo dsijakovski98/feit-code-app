@@ -4,6 +4,7 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import { Textarea } from "@nextui-org/react";
 
+import { StudentOnboardingContext } from "@/components/Onboarding/Student";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
@@ -12,10 +13,8 @@ import { useCtx } from "@/hooks/useCtx";
 import { StudentOnboardingBasicInfoSchema } from "@/utils/formSchemas/onboarding/studentOnboarding";
 
 const StudentBasicInfo = () => {
-  const {
-    studentState: [form, setStudentForm],
-    nextStep,
-  } = useCtx(OnboardingContext);
+  const { nextStep } = useCtx(OnboardingContext);
+  const [form, setForm] = useCtx(StudentOnboardingContext);
 
   const { control, handleSubmit } = useForm<StudentOnboardingBasicInfoSchema>({
     resolver: valibotResolver(StudentOnboardingBasicInfoSchema),
@@ -25,16 +24,16 @@ const StudentBasicInfo = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<StudentOnboardingBasicInfoSchema> = ({ fullName, bio }) => {
-    console.log({ fullName, bio });
-
-    setStudentForm((prev) => ({ ...prev, fullName, bio }));
+  const onSubmit: SubmitHandler<StudentOnboardingBasicInfoSchema> = (basicInfo) => {
+    setForm((prev) => ({ ...prev, ...basicInfo }));
     nextStep();
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-12 px-14 py-8">
-      <div>
+    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8">
+      <h3 className="text-xl font-semibold">Let's get to know you better</h3>
+
+      <div className="!mb-10">
         <Controller
           control={control}
           name="fullName"
@@ -68,7 +67,7 @@ const StudentBasicInfo = () => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
-                label: "text-base",
+                label: "text-base font-semibold",
               }}
             />
           )}

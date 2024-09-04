@@ -103,7 +103,7 @@ const SignUpForm = () => {
         },
       )}
     >
-      <div className={clsx("mb-10 lg:mb-8", { "mb-36": fullScreen })}>
+      <div className={clsx("mb-10 lg:mb-2", { "mb-36": fullScreen })}>
         <Controller
           control={control}
           name="email"
@@ -112,7 +112,7 @@ const SignUpForm = () => {
             <Input
               {...field}
               autoFocus
-              size="md"
+              size="lg"
               label="Email"
               color="default"
               variant="underlined"
@@ -130,7 +130,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="md"
+                size="lg"
                 label="Password"
                 type="password"
                 color="default"
@@ -148,7 +148,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="md"
+                size="lg"
                 label="Confirm password"
                 type="password"
                 color="default"

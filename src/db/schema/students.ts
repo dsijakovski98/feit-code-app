@@ -12,6 +12,7 @@ const students = pgTable("students", {
   firstName: varchar("first_name", { length: 100 }).notNull(),
   lastName: varchar("last_name", { length: 100 }).notNull(),
   email: varchar("email", { length: 256 }).notNull().unique(),
+  avatarUrl: varchar("avatar_url", { length: 256 }),
   indexNumber: integer("idx_number").notNull(),
   indexYear: integer("idx_year").notNull(),
   major: moduleType("major").notNull(),

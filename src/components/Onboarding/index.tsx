@@ -26,7 +26,7 @@ const Onboarding = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       toggleOn();
-    }, 500);
+    }, 200);
 
     return () => {
       clearTimeout(timeout);

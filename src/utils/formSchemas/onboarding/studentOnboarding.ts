@@ -14,13 +14,13 @@ export const StudentOnboardingMajorSchema = object({
     string(),
     trim(),
     nonEmpty("Field is required!"),
-    regex(/^\d+$/, "Field must be numeric!"),
+    regex(/^\d+$/, "Number must be a positive integer!"),
   ),
   indexYear: pipe(
     string(),
     trim(),
     nonEmpty("Field is required!"),
-    regex(/^\d+$/, "Field must be numeric!"),
+    regex(/^\d+$/, "Year must be a positive integer!"),
   ),
   major: pipe(enum_(MAJOR_TYPE), nonEmpty("Field is required!")),
 });

@@ -26,7 +26,7 @@ const Button = forwardRef<ElementRef<typeof Btn>, Props>(({ children, ...rest },
     {...rest}
     ref={ref}
     className={clsx(
-      "font-semibold disabled:!bg-gray-600 disabled:text-gray-400 disabled:shadow-none",
+      "font-semibold disabled:!pointer-events-none disabled:shadow-none disabled:brightness-75",
       rest.className,
     )}
   >
