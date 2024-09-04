@@ -30,7 +30,6 @@ const SignUpForm = () => {
     handleSubmit,
     control,
     setError,
-    reset,
     clearErrors,
     formState: { isSubmitting, errors },
   } = useForm<SignUpSchema>({
@@ -72,7 +71,6 @@ const SignUpForm = () => {
       });
 
       verifyMode.toggleOn();
-      reset({ email: "", password: "", confirmPassword: "" });
     } catch (e) {
       // TODO: Sentry logging
       console.log(e);
