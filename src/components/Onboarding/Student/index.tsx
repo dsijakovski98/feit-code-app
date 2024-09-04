@@ -17,6 +17,7 @@ import {
 export type StudentForm = StudentOnboardingBasicInfoSchema & StudentOnboardingMajorSchema;
 
 export const StudentOnboardingContext = createContext<UseState<StudentForm> | null>(null);
+StudentOnboardingContext.displayName = "StudentOnboardingContext";
 
 const StudentOnboarding = () => {
   const { step } = useCtx(OnboardingContext);

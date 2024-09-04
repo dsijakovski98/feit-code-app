@@ -25,12 +25,33 @@ const iconStyles = [
   "pixel-art-neutral",
   "big-ears-neutral",
   "adventurer-neutral",
+  "avataaars",
+  "avataaars-neutral",
+  "adventurer",
+  "adventurer-neutral",
+  "thumbs",
+  "shapes",
+  "rings",
+  "miniavs",
+  "notionists",
+  "notionists-neutral",
+  "lorelei",
+  "lorelei-neutral",
+  "micah",
+  "icons",
+  "identicon",
+  "fun-emoji",
+  "bottts",
+  "bottts-neutral",
+  "big-smile",
 ];
 
 const getRandomAvatar = () => {
   const style = iconStyles[Math.floor(Math.random() * iconStyles.length)];
   return `https://api.dicebear.com/9.x/${style}/svg`;
 };
+
+const getRandomSeed = () => Math.floor(Math.random() * 20);
 
 const StudentConfirm = () => {
   const { user } = useUser();
@@ -42,16 +63,23 @@ const StudentConfirm = () => {
   const { fullName, bio, indexNumber, indexYear, major } = form;
   const firstName = useMemo(() => fullName.split(" ")[0], [fullName]);
 
-  const [avatarUrl, setAvatarUrl] = useState(getRandomAvatar());
+  const [baseAvatarUrl, setBaseAvatarUrl] = useState(getRandomAvatar());
+  const [avatarSeed, setAvatarSeed] = useState(getRandomSeed());
+
+  const avatarUrl = useMemo(
+    () => `${baseAvatarUrl}?seed=${avatarSeed}`,
+    [baseAvatarUrl, avatarSeed],
+  );
 
   const getNewStyle = () => {
     let newAvatar = "";
     while (true) {
       newAvatar = getRandomAvatar();
-      if (newAvatar !== avatarUrl) break;
+      if (newAvatar !== baseAvatarUrl) break;
     }
 
-    setAvatarUrl(newAvatar);
+    setBaseAvatarUrl(newAvatar);
+    setAvatarSeed(getRandomSeed());
   };
 
   const { mutate, isPending } = useMutation({
@@ -59,6 +87,7 @@ const StudentConfirm = () => {
     onSuccess: (success) => {
       if (!success) return;
 
+      user?.setProfileImage({ file: avatarUrl });
       Cookies.set(getOnboardingKey(user!.id), "1", { expires: Infinity });
 
       toast.success(`Welcome ${firstName}!`);
@@ -72,7 +101,7 @@ const StudentConfirm = () => {
   const handleCreateUser = () => {
     if (!user) return;
 
-    mutate({ id: user.id, avatarUrl, email: user.primaryEmailAddress!.emailAddress, ...form });
+    mutate({ user, avatarUrl, ...form });
   };
 
   if (!user) return null;

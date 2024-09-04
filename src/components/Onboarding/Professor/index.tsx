@@ -14,6 +14,7 @@ import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/profes
 type ProfessorOnboardingContext = ReturnType<typeof useForm<ProfessorOnboardingSchema>>;
 
 const ProfessorOnboardingContext = createContext<ProfessorOnboardingContext | null>(null);
+ProfessorOnboardingContext.displayName = "ProfessorOnboardingContext";
 
 const ProfessorOnboarding = () => {
   const { step } = useCtx(OnboardingContext);
