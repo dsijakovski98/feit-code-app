@@ -1,38 +1,39 @@
-import { createContext } from "react";
-import { useForm } from "react-hook-form";
-
-import { valibotResolver } from "@hookform/resolvers/valibot";
+import { createContext, useState } from "react";
 
 import OnboardingStep from "@/components/Onboarding/OnboardingStep";
+import ProfessorBasicInfo from "@/components/Onboarding/Professor/ProfessorBasicInfo";
+import ProfessorConfirm from "@/components/Onboarding/Professor/ProfessorConfirm";
 
 import { TEACHER_TYPE } from "@/constants/professors";
 import { MAJOR_TYPE } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
+import { UseState } from "@/types";
 import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
 
-type ProfessorOnboardingContext = ReturnType<typeof useForm<ProfessorOnboardingSchema>>;
+export type ProfessorForm = ProfessorOnboardingSchema;
 
-const ProfessorOnboardingContext = createContext<ProfessorOnboardingContext | null>(null);
+export const ProfessorOnboardingContext = createContext<UseState<ProfessorForm> | null>(null);
 ProfessorOnboardingContext.displayName = "ProfessorOnboardingContext";
 
 const ProfessorOnboarding = () => {
   const { step } = useCtx(OnboardingContext);
 
-  const form = useForm<ProfessorOnboardingSchema>({
-    resolver: valibotResolver(ProfessorOnboardingSchema),
-    defaultValues: {
-      fullName: "",
-      type: TEACHER_TYPE.teacher,
-      department: MAJOR_TYPE.KTI,
-    },
+  const formState = useState<ProfessorForm>({
+    fullName: "",
+    department: MAJOR_TYPE.KTI,
+    type: TEACHER_TYPE.teacher,
   });
 
   return (
-    <ProfessorOnboardingContext.Provider value={form}>
-      <OnboardingStep active={step === 1}>Step 1</OnboardingStep>
+    <ProfessorOnboardingContext.Provider value={formState}>
+      <OnboardingStep active={step === 1}>
+        <ProfessorBasicInfo />
+      </OnboardingStep>
 
-      <OnboardingStep active={step === 2}>Step 2</OnboardingStep>
+      <OnboardingStep active={step === 2}>
+        <ProfessorConfirm />
+      </OnboardingStep>
     </ProfessorOnboardingContext.Provider>
   );
 };

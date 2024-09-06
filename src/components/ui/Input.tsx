@@ -36,7 +36,7 @@ const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest },
       ref={ref}
       classNames={{
         ...rest.classNames,
-        label: clsx("!font-semibold", rest.classNames?.label || ""),
+        label: clsx("!font-semibold !text-current", rest.classNames?.label || ""),
         errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
         input: clsx(
           "placeholder:font-light placeholder:text-gray-400/80",

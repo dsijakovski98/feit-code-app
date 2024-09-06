@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -8,54 +8,34 @@ import Cookies from "js-cookie";
 import { useUser } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/react";
 
-import { StudentOnboardingContext } from "@/components/Onboarding/Student";
+import { ProfessorOnboardingContext } from "@/components/Onboarding/Professor";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 
-import { createNewStudent } from "@/actions/users";
+import { createNewProfessor } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { getOnboardingKey } from "@/utils";
 import { diceBear } from "@/utils/services/diceBear";
 
-const StudentConfirm = () => {
+const ProfessorConfirm = () => {
   const { user } = useUser();
   const navigate = useNavigate();
 
   const { prevStep } = useCtx(OnboardingContext);
-  const [form] = useCtx(StudentOnboardingContext);
+  const [form] = useCtx(ProfessorOnboardingContext);
 
-  const { fullName, bio, indexNumber, indexYear, major } = form;
-  const firstName = useMemo(() => fullName.split(" ")[0], [fullName]);
-
-  const [baseAvatarUrl, setBaseAvatarUrl] = useState(diceBear.getRandomAvatar());
-  const [avatarSeed, setAvatarSeed] = useState(diceBear.getRandomSeed());
-
-  const avatarUrl = useMemo(
-    () => `${baseAvatarUrl}?seed=${avatarSeed}`,
-    [baseAvatarUrl, avatarSeed],
-  );
-
-  const getNewStyle = () => {
-    let newAvatar = "";
-    while (true) {
-      newAvatar = diceBear.getRandomAvatar();
-      if (newAvatar !== baseAvatarUrl) break;
-    }
-
-    setBaseAvatarUrl(newAvatar);
-    setAvatarSeed(diceBear.getRandomSeed());
-  };
+  const { fullName, type, department } = form;
+  const lastName = useMemo(() => fullName.split(" ").slice(1).join(" "), [fullName]);
+  const avatarUrl = useMemo(() => diceBear.getInitialsAvatar(fullName), [fullName]);
 
   const { mutate, isPending } = useMutation({
-    mutationFn: createNewStudent,
+    mutationFn: createNewProfessor,
     onSuccess: (success) => {
       if (!success) return;
 
       Cookies.set(getOnboardingKey(user!.id), "1", { expires: Infinity });
-
-      toast.success(`Welcome ${firstName}!`);
+      toast.success(`Welcome, Professor ${lastName}!`);
       navigate(ROUTES.dashboard);
     },
     onError: (error) => {
@@ -75,7 +55,7 @@ const StudentConfirm = () => {
     <div className="space-y-10 py-8">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-semibold">Nice to meet you, {firstName}!</h3>
+          <h3 className="text-xl font-semibold">Good to see you, Professor {lastName}</h3>
           <p className="text-gray-300">
             Please confirm your details. You can always change them later.
           </p>
@@ -84,32 +64,19 @@ const StudentConfirm = () => {
         {isPending && <Spinner size="lg" color="current" />}
       </div>
 
-      <div className="flex items-end gap-6">
-        <div className="relative">
-          <img
-            width={90}
-            height={90}
-            alt="Avatar"
-            src={avatarUrl}
-            className="overflow-hidden rounded-full bg-primary"
-          />
+      <div className="flex items-center gap-6">
+        <img
+          width={90}
+          height={90}
+          alt="Avatar"
+          src={avatarUrl}
+          className="overflow-hidden rounded-full bg-primary"
+        />
 
-          <Button
-            isIconOnly
-            color="default"
-            size="sm"
-            className="absolute bottom-0 right-0 grid place-items-center rounded-full p-1 pt-1.5"
-            onPress={getNewStyle}
-          >
-            <Icon name="restart" />
-          </Button>
-        </div>
-
-        <div>
+        <div className="space-y-1">
           <p className="text-xl font-semibold">{fullName}</p>
-          <p className="text-gray-300">{bio}</p>
-          <p className="mt-2">
-            Index {indexNumber}/{indexYear} @ {major}
+          <p className="text-gray-300">
+            {type} @ {department}
           </p>
         </div>
       </div>
@@ -134,4 +101,4 @@ const StudentConfirm = () => {
   );
 };
 
-export default StudentConfirm;
+export default ProfessorConfirm;

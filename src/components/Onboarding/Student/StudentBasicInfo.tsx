@@ -33,7 +33,7 @@ const StudentBasicInfo = () => {
     <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8">
       <h3 className="text-xl font-semibold">Let's get to know you better</h3>
 
-      <div className="!mb-10">
+      <div className="pb-10">
         <Controller
           control={control}
           name="fullName"

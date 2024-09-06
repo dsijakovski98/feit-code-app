@@ -2,44 +2,41 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@nextui-org/react";
 
-import { StudentOnboardingContext } from "@/components/Onboarding/Student";
+import { ProfessorForm, ProfessorOnboardingContext } from "@/components/Onboarding/Professor";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
+import { TEACHER_TYPE } from "@/constants/professors";
 import { MAJORS } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { StudentOnboardingMajorSchema } from "@/utils/formSchemas/onboarding/studentOnboarding";
+import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
 
-const StudentMajor = () => {
-  const { prevStep, nextStep } = useCtx(OnboardingContext);
-  const [form, setForm] = useCtx(StudentOnboardingContext);
+const ProfessorBasicInfo = () => {
+  const { nextStep } = useCtx(OnboardingContext);
+  const [form, setForm] = useCtx(ProfessorOnboardingContext);
 
-  const { control, handleSubmit } = useForm<StudentOnboardingMajorSchema>({
-    resolver: valibotResolver(StudentOnboardingMajorSchema),
-    defaultValues: {
-      indexNumber: form.indexNumber,
-      indexYear: form.indexYear,
-      major: form.major,
-    },
+  const { control, handleSubmit } = useForm<ProfessorForm>({
+    resolver: valibotResolver(ProfessorOnboardingSchema),
+    defaultValues: { ...form },
   });
 
-  const onSubmit: SubmitHandler<StudentOnboardingMajorSchema> = (majorData) => {
-    setForm((prev) => ({ ...prev, ...majorData }));
+  const onSubmit: SubmitHandler<ProfessorForm> = (formData) => {
+    setForm(formData);
     nextStep();
   };
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8">
-      <h3 className="text-xl font-semibold">What do you study?</h3>
+      <h3 className="text-xl font-semibold">Tell us more about yourself</h3>
 
-      <div className="!mb-10">
+      <div className="pb-10">
         <div className="flex gap-8">
           <Controller
             control={control}
-            name="indexNumber"
+            name="fullName"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
@@ -47,10 +44,8 @@ const StudentMajor = () => {
                 size="lg"
                 color="default"
                 variant="underlined"
-                inputMode="numeric"
-                label="Index number"
-                placeholder="ex. 203"
-                pattern="[0-9]+"
+                label="Full Name"
+                placeholder="Your first and last name"
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
               />
@@ -59,26 +54,31 @@ const StudentMajor = () => {
 
           <Controller
             control={control}
-            name="indexYear"
+            name="type"
             render={({ field, fieldState }) => (
-              <Input
+              <Select
                 {...field}
                 size="lg"
+                label="Type"
                 color="default"
                 variant="underlined"
-                inputMode="numeric"
-                label="Index year"
-                placeholder="ex. 2017"
+                defaultSelectedKeys={[form.type]}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
-              />
+              >
+                {Object.values(TEACHER_TYPE).map((label) => (
+                  <SelectItem key={label} textValue={label}>
+                    <p className="text-base font-medium">{label}</p>
+                  </SelectItem>
+                ))}
+              </Select>
             )}
           />
         </div>
 
         <Controller
           control={control}
-          name="major"
+          name="department"
           render={({ field, fieldState }) => (
             <Select
               {...field}
@@ -86,7 +86,7 @@ const StudentMajor = () => {
               label="Major"
               color="default"
               variant="underlined"
-              defaultSelectedKeys={[form.major]}
+              defaultSelectedKeys={[form.department]}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
             >
@@ -101,17 +101,11 @@ const StudentMajor = () => {
         />
       </div>
 
-      <div className="flex gap-4">
-        <Button fullWidth color="default" variant="bordered" size="lg" onPress={prevStep}>
-          Go back
-        </Button>
-
-        <Button fullWidth type="submit" size="lg">
-          Continue
-        </Button>
-      </div>
+      <Button fullWidth type="submit" size="lg">
+        Continue
+      </Button>
     </form>
   );
 };
 
-export default StudentMajor;
+export default ProfessorBasicInfo;
