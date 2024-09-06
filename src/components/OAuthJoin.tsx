@@ -22,7 +22,7 @@ const OAuthJoin = ({ isSubmitting, oAuthJoin, joinType }: Props) => {
         onPress={() => oAuthJoin("oauth_google")}
       >
         <Icon name="google" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />
-        <span className="lg:text-sm">{joinType} with Google</span>
+        <span className="lg:text-sm sm:hidden">{joinType} with Google</span>
       </Button>
       <Button
         fullWidth
@@ -34,7 +34,7 @@ const OAuthJoin = ({ isSubmitting, oAuthJoin, joinType }: Props) => {
         onPress={() => oAuthJoin("oauth_github")}
       >
         <Icon name="github" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />
-        <span className="lg:text-sm">{joinType} with GitHub</span>
+        <span className="lg:text-sm sm:hidden">{joinType} with GitHub</span>
       </Button>
     </div>
   );

@@ -5,6 +5,11 @@ import clsx from "clsx";
 import { Input as NextUiInput } from "@nextui-org/input";
 import { extendVariants } from "@nextui-org/react";
 
+import Button from "@/components/ui/Button";
+import Icon from "@/components/ui/Icon";
+
+import { useToggle } from "@/hooks/useToggle";
+
 const Inpt = extendVariants(NextUiInput, {
   variants: {
     size: {
@@ -22,16 +27,48 @@ const Inpt = extendVariants(NextUiInput, {
 
 type Props = ComponentProps<typeof Inpt> & PropsWithChildren;
 
-const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest }, ref) => (
-  <Inpt
-    {...rest}
-    ref={ref}
-    classNames={{
-      ...rest.classNames,
-      errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
-    }}
-  >
-    {children}
-  </Inpt>
-));
+const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest }, ref) => {
+  const visible = useToggle();
+
+  return (
+    <Inpt
+      {...rest}
+      ref={ref}
+      classNames={{
+        ...rest.classNames,
+        label: clsx("!font-semibold !text-current", rest.classNames?.label || ""),
+        errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
+        input: clsx(
+          "placeholder:font-light placeholder:text-gray-400/80",
+          rest.classNames?.input || "",
+        ),
+      }}
+      endContent={
+        rest.type === "password" ? (
+          <Button
+            isIconOnly
+            color="default"
+            size="sm"
+            variant="light"
+            radius="full"
+            disableRipple
+            disableAnimation
+            tabIndex={-1} // Better UX when tabbing across inputs in a form
+            onPress={visible.toggle}
+            className={clsx("p-1.5 [&_svg]:brightness-50", {
+              "opacity-100": visible.open,
+            })}
+          >
+            {visible.open ? <Icon name="eye-off" /> : <Icon name="eye" />}
+          </Button>
+        ) : (
+          (rest.endContent ?? null)
+        )
+      }
+      type={rest.type === "password" ? (visible.open ? "text" : "password") : rest.type}
+    >
+      {children}
+    </Inpt>
+  );
+});
 export default Input;

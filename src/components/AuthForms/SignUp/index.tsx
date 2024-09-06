@@ -19,7 +19,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { SignUpSchema } from "@/utils/formSchemas/signUpSchema";
+import { SignUpSchema } from "@/utils/formSchemas/auth/signUpSchema";
 
 const SignUpForm = () => {
   const { fullScreen } = useCtx(WindowContext);
@@ -30,7 +30,6 @@ const SignUpForm = () => {
     handleSubmit,
     control,
     setError,
-    reset,
     clearErrors,
     formState: { isSubmitting, errors },
   } = useForm<SignUpSchema>({
@@ -46,7 +45,7 @@ const SignUpForm = () => {
     return signUp?.authenticateWithRedirect({
       strategy,
       redirectUrl: ROUTES.ssoCallback,
-      redirectUrlComplete: ROUTES.dashboard,
+      redirectUrlComplete: ROUTES.welcome,
     });
   };
 
@@ -72,7 +71,6 @@ const SignUpForm = () => {
       });
 
       verifyMode.toggleOn();
-      reset({ email: "", password: "", confirmPassword: "" });
     } catch (e) {
       // TODO: Sentry logging
       console.log(e);
@@ -103,7 +101,7 @@ const SignUpForm = () => {
         },
       )}
     >
-      <div className={clsx("mb-10 lg:mb-8", { "mb-36": fullScreen })}>
+      <div className={clsx("mb-10 lg:mb-2", { "mb-36": fullScreen })}>
         <Controller
           control={control}
           name="email"
@@ -112,7 +110,7 @@ const SignUpForm = () => {
             <Input
               {...field}
               autoFocus
-              size="md"
+              size="lg"
               label="Email"
               color="default"
               variant="underlined"
@@ -130,7 +128,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="md"
+                size="lg"
                 label="Password"
                 type="password"
                 color="default"
@@ -148,7 +146,7 @@ const SignUpForm = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="md"
+                size="lg"
                 label="Confirm password"
                 type="password"
                 color="default"

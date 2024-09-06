@@ -1,5 +1,7 @@
 import { type ComponentProps, ElementRef, type PropsWithChildren, forwardRef } from "react";
 
+import clsx from "clsx";
+
 import { Button as NextUiButton } from "@nextui-org/button";
 import { extendVariants } from "@nextui-org/react";
 
@@ -20,7 +22,14 @@ const Btn = extendVariants(NextUiButton, {
 type Props = ComponentProps<typeof Btn> & PropsWithChildren;
 
 const Button = forwardRef<ElementRef<typeof Btn>, Props>(({ children, ...rest }, ref) => (
-  <Btn {...rest} ref={ref}>
+  <Btn
+    {...rest}
+    ref={ref}
+    className={clsx(
+      "font-semibold disabled:!pointer-events-none disabled:shadow-none disabled:brightness-75",
+      rest.className,
+    )}
+  >
     <span className="sr-only">{children}</span>
     {children}
   </Btn>

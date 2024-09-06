@@ -9,3 +9,8 @@ export const shortClerkErrorMessage = (
   // Return only the first sentence
   return message.split(".")[0].trim() + "!";
 };
+
+const ONBOARDING_KEY = "fc-onboarding";
+export const getOnboardingKey = (userId: string) => {
+  return `${ONBOARDING_KEY}_${userId}`;
+};

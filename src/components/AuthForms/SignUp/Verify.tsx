@@ -16,7 +16,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { VerifyAuthSchema } from "@/utils/formSchemas/verifyAuthSchema";
+import { VerifyAuthSchema } from "@/utils/formSchemas/auth/verifyAuthSchema";
 
 type Props = {
   verifyMode: Toggle;
@@ -98,7 +98,7 @@ const Verify = ({ verifyMode }: Props) => {
               errorMessage={fieldState.error?.message}
               classNames={{
                 input: "placeholder:font-light placeholder:text-slate-400",
-                label: "group-data-[filled-within='true']:-translate-y-2.5",
+                label: "group-data-[filled-within='true']:-translate-y-[15px]",
                 errorMessage: fullScreen ? "text-base" : "",
               }}
             />

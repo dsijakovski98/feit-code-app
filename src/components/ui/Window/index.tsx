@@ -60,7 +60,7 @@ const Window = ({ title, className = "", children }: Props) => {
         </nav>
 
         <div className="h-full">
-          <WindowProvider fullScreen={fullScreen}>{children}</WindowProvider>
+          <WindowProvider fullScreen={fullScreen.open}>{children}</WindowProvider>
         </div>
       </section>
 
