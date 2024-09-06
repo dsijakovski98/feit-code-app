@@ -88,7 +88,7 @@ const SignInForm = () => {
         },
       )}
     >
-      <div className="mb-9">
+      <div className="mb-10">
         <Controller
           control={control}
           name="email"
