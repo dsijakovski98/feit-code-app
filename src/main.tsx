@@ -12,6 +12,7 @@ import { NextUIProvider } from "@nextui-org/react";
 
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";
+import OnboardingLayout from "@/layouts/OnboardingLayout";
 
 import SignInPage from "@/pages/auth/sign-in";
 import SignUpPage from "@/pages/auth/sign-up";
@@ -39,24 +40,36 @@ const router = createBrowserRouter([
         element: <AuthLayout mode="protect" />,
         children: [
           {
-            path: ROUTES.home,
-            element: <Navigate to="/dashboard" />,
-          },
-          {
-            path: ROUTES.welcome,
-            element: <WelcomePage />,
-          },
-          {
-            element: <MainLayout />,
+            element: <OnboardingLayout mode="onboard" />,
             children: [
               {
-                path: ROUTES.dashboard,
-                element: <Dashboard />,
+                element: <MainLayout />,
+                children: [
+                  {
+                    path: ROUTES.home,
+                    element: <Navigate to="/dashboard" />,
+                  },
+                  {
+                    path: ROUTES.dashboard,
+                    element: <Dashboard />,
+                  },
+                  // TODO: Add other main layout routes
+                ],
+              },
+            ],
+          },
+          {
+            element: <OnboardingLayout mode="welcome" />,
+            children: [
+              {
+                path: ROUTES.welcome,
+                element: <WelcomePage />,
               },
             ],
           },
         ],
       },
+
       {
         element: <AuthLayout mode="auth-pages" />,
         children: [
