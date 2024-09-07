@@ -83,6 +83,10 @@ const SignUpForm = () => {
     }
   };
 
+  const handleChange = () => {
+    clearErrors("root");
+  };
+
   if (!signUp) {
     return null;
   }
@@ -93,6 +97,7 @@ const SignUpForm = () => {
 
   return (
     <form
+      onChange={handleChange}
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(
         "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-0",

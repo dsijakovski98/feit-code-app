@@ -3,8 +3,9 @@ import { createRoot } from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "virtual:svg-icons-register";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { ClerkProvider } from "@clerk/clerk-react";
 import { NextUIProvider } from "@nextui-org/react";

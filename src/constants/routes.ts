@@ -17,3 +17,12 @@ export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> =
   "/sign-in": "Sign in",
   "/sign-up": "Sign up",
 };
+
+const websiteBaseUrl = import.meta.env.VITE_WEBSITE_URL;
+
+export const HREF = {
+  feitCode: {
+    website: websiteBaseUrl,
+    contactUs: `${websiteBaseUrl}/contact`,
+  },
+};

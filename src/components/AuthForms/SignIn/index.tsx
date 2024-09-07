@@ -42,7 +42,7 @@ const SignInForm = () => {
     return signIn?.authenticateWithRedirect({
       strategy,
       redirectUrl: ROUTES.ssoCallback,
-      redirectUrlComplete: ROUTES.dashboard,
+      redirectUrlComplete: ROUTES.welcome,
     });
   };
 
@@ -59,7 +59,7 @@ const SignInForm = () => {
 
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
-        navigate(ROUTES.dashboard);
+        navigate(ROUTES.welcome);
       } else {
         setError("root", { message: "Could not verify code!" });
       }
@@ -68,7 +68,6 @@ const SignInForm = () => {
       console.log({ e });
 
       if (isClerkAPIResponseError(e)) {
-        console.log(e.toString());
         setError("root", { message: shortClerkErrorMessage(e) });
       } else {
         setError("root", { message: "Something unexpected happened!" });
@@ -76,10 +75,15 @@ const SignInForm = () => {
     }
   };
 
+  const handleChange = () => {
+    clearErrors("root");
+  };
+
   if (!signIn) return null;
 
   return (
     <form
+      onChange={handleChange}
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(
         "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-3",

@@ -8,7 +8,7 @@ const Dashboard = () => {
   const { signOut } = useAuth();
 
   return (
-    <div>
+    <div className="debug h-full px-6">
       <h1>Dashboard</h1>
       <Button onPress={() => signOut({ redirectUrl: ROUTES.signIn })}>Sign Out</Button>
     </div>

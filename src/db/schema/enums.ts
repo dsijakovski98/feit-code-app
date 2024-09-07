@@ -3,6 +3,8 @@ import { pgEnum } from "drizzle-orm/pg-core";
 import { TEACHER_TYPE } from "@/constants/professors";
 import { MAJOR_TYPE } from "@/constants/students";
 
+export const userType = pgEnum("user_type", ["Student", "Professor"]);
+
 export const moduleType = pgEnum("module_type", [
   MAJOR_TYPE.KTI,
   MAJOR_TYPE.KSIAR,

@@ -3,6 +3,7 @@
   "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   "importOrder": [
     "^react",
+    "^virtual",
     "<THIRD_PARTY_MODULES>",
     "^@(clerk|nextui)",
     "^@/layouts/(.*)$",
