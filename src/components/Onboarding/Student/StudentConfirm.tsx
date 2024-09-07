@@ -52,7 +52,6 @@ const StudentConfirm = () => {
     onSuccess: (success) => {
       if (!success) return;
 
-      user!.publicMetadata.onboardingComplete = true;
       toast.success(`Welcome ${firstName}!`);
       navigate(ROUTES.dashboard);
     },

@@ -21,17 +21,20 @@ export const createNewStudent = async ({
   const [firstName, ...lastName] = fullName.split(" ");
 
   try {
-    await db.insert(students).values({
-      id: user.id,
-      email: user.primaryEmailAddress!.emailAddress,
-      firstName,
-      lastName: lastName.join(" "),
-      bio,
-      avatarUrl,
-      indexNumber: Number(indexNumber),
-      indexYear: Number(indexYear),
-      major,
-    });
+    await Promise.all([
+      db.insert(students).values({
+        id: user.id,
+        email: user.primaryEmailAddress!.emailAddress,
+        firstName,
+        lastName: lastName.join(" "),
+        bio,
+        avatarUrl,
+        indexNumber: Number(indexNumber),
+        indexYear: Number(indexYear),
+        major,
+      }),
+      user.update({ unsafeMetadata: { onboardingComplete: true } }),
+    ]);
   } catch (e) {
     // TODO: Sentry logging
     console.log({ e });
@@ -52,15 +55,18 @@ export const createNewProfessor = async ({
   const [firstName, ...lastName] = fullName.split(" ");
 
   try {
-    await db.insert(professors).values({
-      id: user.id,
-      email: user.primaryEmailAddress!.emailAddress,
-      firstName,
-      lastName: lastName.join(" "),
-      avatarUrl,
-      department,
-      type,
-    });
+    await Promise.all([
+      db.insert(professors).values({
+        id: user.id,
+        email: user.primaryEmailAddress!.emailAddress,
+        firstName,
+        lastName: lastName.join(" "),
+        avatarUrl,
+        department,
+        type,
+      }),
+      user.update({ unsafeMetadata: { onboardingComplete: true } }),
+    ]);
   } catch (e) {
     // TODO: Sentry logging
     console.log({ e });

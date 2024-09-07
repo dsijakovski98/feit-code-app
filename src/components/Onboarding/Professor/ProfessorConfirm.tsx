@@ -10,11 +10,12 @@ import { Spinner } from "@nextui-org/react";
 import { ProfessorOnboardingContext } from "@/components/Onboarding/Professor";
 import Button from "@/components/ui/Button";
 
+import { diceBear } from "@/services/diceBear";
+
 import { createNewProfessor } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { diceBear } from "@/services/diceBear";
 
 const ProfessorConfirm = () => {
   const { user } = useUser();
@@ -33,7 +34,6 @@ const ProfessorConfirm = () => {
     onSuccess: (success) => {
       if (!success) return;
 
-      user!.publicMetadata.onboardingComplete = true;
       toast.success(`Welcome, Professor ${lastName}!`);
       navigate(ROUTES.dashboard);
     },
