@@ -10,6 +10,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import { NextUIProvider } from "@nextui-org/react";
 
 import AuthLayout from "@/layouts/AuthLayout";
+import MainLayout from "@/layouts/MainLayout";
 
 import SignInPage from "@/pages/auth/sign-in";
 import SignUpPage from "@/pages/auth/sign-up";
@@ -41,12 +42,17 @@ const router = createBrowserRouter([
             element: <Navigate to="/dashboard" />,
           },
           {
-            path: ROUTES.dashboard,
-            element: <Dashboard />,
-          },
-          {
             path: ROUTES.welcome,
             element: <WelcomePage />,
+          },
+          {
+            element: <MainLayout />,
+            children: [
+              {
+                path: ROUTES.dashboard,
+                element: <Dashboard />,
+              },
+            ],
           },
         ],
       },
