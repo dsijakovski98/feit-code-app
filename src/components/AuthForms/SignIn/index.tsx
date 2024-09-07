@@ -68,7 +68,6 @@ const SignInForm = () => {
       console.log({ e });
 
       if (isClerkAPIResponseError(e)) {
-        console.log(e.toString());
         setError("root", { message: shortClerkErrorMessage(e) });
       } else {
         setError("root", { message: "Something unexpected happened!" });

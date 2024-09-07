@@ -8,6 +8,7 @@
     "^@/layouts/(.*)$",
     "^@/pages/(.*)$",
     "^@/components/(.*)$",
+    "^@/services/(.*)$",
     "^@/styles/(.*)$",
     "^@/"
   ],
