@@ -20,4 +20,8 @@
   .debug-full > * {
     @apply debug;
   }
+
+  .debug-inner > * {
+    @apply debug;
+  }
 }

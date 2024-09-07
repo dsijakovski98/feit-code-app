@@ -20,7 +20,7 @@ const AuthLayout = ({ mode }: Props) => {
   }
 
   if (mode === "auth-pages" && userId) {
-    return <Navigate to={ROUTES.signIn} />;
+    return <Navigate to={ROUTES.dashboard} />;
   }
 
   return <Outlet />;
