@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 
 import { useUser } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/react";
@@ -15,11 +14,11 @@ import { createNewProfessor } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { getOnboardingKey } from "@/utils";
-import { diceBear } from "@/utils/services/diceBear";
+import { diceBear } from "@/services/diceBear";
 
 const ProfessorConfirm = () => {
   const { user } = useUser();
+
   const navigate = useNavigate();
 
   const { prevStep } = useCtx(OnboardingContext);
@@ -34,7 +33,7 @@ const ProfessorConfirm = () => {
     onSuccess: (success) => {
       if (!success) return;
 
-      Cookies.set(getOnboardingKey(user!.id), "1", { expires: Infinity });
+      user!.publicMetadata.onboardingComplete = true;
       toast.success(`Welcome, Professor ${lastName}!`);
       navigate(ROUTES.dashboard);
     },

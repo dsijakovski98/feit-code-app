@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 
 import { useUser } from "@clerk/clerk-react";
 import { Spinner } from "@nextui-org/react";
@@ -12,12 +11,12 @@ import { StudentOnboardingContext } from "@/components/Onboarding/Student";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
+import { diceBear } from "@/services/diceBear";
+
 import { createNewStudent } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { getOnboardingKey } from "@/utils";
-import { diceBear } from "@/utils/services/diceBear";
 
 const StudentConfirm = () => {
   const { user } = useUser();
@@ -53,8 +52,7 @@ const StudentConfirm = () => {
     onSuccess: (success) => {
       if (!success) return;
 
-      Cookies.set(getOnboardingKey(user!.id), "1", { expires: Infinity });
-
+      user!.publicMetadata.onboardingComplete = true;
       toast.success(`Welcome ${firstName}!`);
       navigate(ROUTES.dashboard);
     },

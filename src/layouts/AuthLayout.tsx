@@ -1,11 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import Cookies from "js-cookie";
-
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-react";
 
 import { ROUTES } from "@/constants/routes";
-import { getOnboardingKey } from "@/utils";
 
 type Props = {
   mode: "protect" | "auth-pages";
@@ -13,26 +10,35 @@ type Props = {
 
 const AuthLayout = ({ mode }: Props) => {
   const { isLoaded, userId } = useAuth();
+  const { user } = useUser();
 
   if (!isLoaded) {
     return null;
   }
 
-  if (!userId && mode === "protect") {
-    return <Navigate to={ROUTES.signIn} />;
-  }
+  if (mode === "protect") {
+    if (!userId) {
+      return <Navigate to={ROUTES.signIn} />;
+    }
 
-  if (userId && mode === "auth-pages") {
-    const onboardingDone = !!Cookies.get(getOnboardingKey(userId!));
+    const onboardingComplete = !!user?.publicMetadata.onboardingComplete;
 
-    if (!onboardingDone) {
+    if (!onboardingComplete) {
       return <Navigate to={ROUTES.welcome} />;
     }
 
-    return <Navigate to={ROUTES.dashboard} />;
+    return <Outlet />;
   }
 
-  return <Outlet />;
+  if (mode === "auth-pages") {
+    if (userId) {
+      return <Navigate to={ROUTES.signIn} />;
+    }
+
+    return <Outlet />;
+  }
+
+  throw new Error(`Invalid route state ${userId} ${mode}`);
 };
 
 export default AuthLayout;
