@@ -249,7 +249,7 @@ export default {
               700: "#a60c2d",
               800: "#790921",
               900: "#4d0515",
-              foreground: "#000",
+              foreground: "#fff",
               DEFAULT: "#ff1245",
             },
             background: "#ffffff",

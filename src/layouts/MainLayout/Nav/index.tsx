@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@nextui-org/divider";
 
+import NotificationsMenu from "@/layouts/MainLayout/Nav/NotificationsMenu";
 import UserAvatar from "@/layouts/MainLayout/Nav/UserAvatar";
 
-import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 
 import { useFCUser } from "@/hooks/useFCUser";
@@ -33,10 +32,7 @@ const Nav = () => {
           <div className="space-x-2">
             <ThemeSwitcher />
 
-            {/* TODO: Notifications system */}
-            <Button isIconOnly radius="full" variant="light" color="default" className="p-1">
-              <Icon name="bell" />
-            </Button>
+            <NotificationsMenu />
           </div>
 
           <Divider orientation="vertical" className="debug mr-2 block !h-10 w-px self-stretch" />

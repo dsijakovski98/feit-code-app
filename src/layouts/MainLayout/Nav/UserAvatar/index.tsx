@@ -29,6 +29,7 @@ const UserAvatar = () => {
       <DropdownTrigger className="cursor-pointer">
         <Avatar isBordered color="primary" src={avatarUrl || ""} />
       </DropdownTrigger>
+
       <DropdownMenu disabledKeys={["title"]}>
         <DropdownItem
           key="title"
