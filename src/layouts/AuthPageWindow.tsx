@@ -14,7 +14,7 @@ type Props = {
 
 const AuthPageWindow = ({ title, href, heading, children }: Props) => {
   return (
-    <main className="relative min-h-[100dvh] bg-dots bg-fixed pt-10 lg:pt-5">
+    <main className="bg-dots-light dark:!bg-dots-dark relative min-h-[100dvh] bg-fixed pt-10 lg:pt-5">
       <div className="flex flex-col items-center px-[10px] text-center">
         <Link to={ROUTES.home} className="flex items-center gap-2 font-quicksand text-2xl">
           <p>FEIT</p>

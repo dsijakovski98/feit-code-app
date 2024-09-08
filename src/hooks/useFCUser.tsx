@@ -12,6 +12,7 @@ const userColumns = {
   id: true,
   avatarUrl: true,
   email: true,
+  firstName: true,
 } as const;
 
 export const useFCUser = () => {

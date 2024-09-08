@@ -9,6 +9,10 @@ export const ROUTES = {
   signUp: "/sign-up",
 
   ssoCallback: "/sso",
+
+  profile: "/profile",
+  courses: "/dashboard/courses",
+  exams: "/dashboard/exams",
 } as const;
 
 export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> = {

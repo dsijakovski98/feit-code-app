@@ -11,7 +11,7 @@ export const DashboardWindow = ({ className = "", children }: Props) => {
   return (
     <section
       className={clsx(
-        "rounded-xl border border-content1 bg-gradient-to-br from-background to-background/20 p-4 shadow-xl backdrop-blur-[6px]",
+        "rounded-xl border border-content4 bg-gradient-to-br from-background to-background/20 p-4 shadow-xl backdrop-blur-[6px]",
         className,
       )}
     >

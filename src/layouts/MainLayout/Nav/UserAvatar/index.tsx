@@ -27,15 +27,12 @@ const UserAvatar = () => {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger className="cursor-pointer">
-        <Avatar
-          isBordered
-          classNames={{ base: "!ring-slate-300 w-12 h-12" }}
-          src={avatarUrl || ""}
-        />
+        <Avatar isBordered color="primary" src={avatarUrl || ""} />
       </DropdownTrigger>
       <DropdownMenu disabledKeys={["title"]}>
         <DropdownItem
           key="title"
+          textValue="Title"
           className="mb-1 opacity-100 *:text-sm [&_span]:flex [&_span]:items-center [&_span]:gap-2"
         >
           <AuthStrategyIcon />
@@ -45,20 +42,30 @@ const UserAvatar = () => {
           </p>
         </DropdownItem>
 
-        <DropdownItem key="profile">
+        <DropdownItem key="profile" textValue="Profile">
           <p className="text-sm font-semibold">Profile</p>
-          <p className="text-xs text-slate-300">Edit your profile settings</p>
+          <p className="text-xs text-content4-foreground">Edit your profile settings</p>
         </DropdownItem>
 
         <DropdownSection>
-          <DropdownItem key="help" as="a" href={HREF.feitCode.contactUs} target="_blank">
+          <DropdownItem
+            as="a"
+            key="help"
+            textValue="Help & Feedback"
+            href={HREF.feitCode.contactUs}
+            target="_blank"
+          >
             <p className="text-sm font-semibold">Help & Feedback</p>
-            <p className="text-xs text-slate-300">Report an issue</p>
+            <p className="text-xs text-content4-foreground">Report an issue</p>
           </DropdownItem>
 
-          <DropdownItem key="log-out" onClick={() => signOut({ redirectUrl: ROUTES.signIn })}>
+          <DropdownItem
+            key="log-out"
+            textValue="Log out"
+            onClick={() => signOut({ redirectUrl: ROUTES.signIn })}
+          >
             <p className="text-sm font-semibold">Log out</p>
-            <p className="text-xs text-slate-300">Take a break</p>
+            <p className="text-xs text-content4-foreground">Take a break</p>
           </DropdownItem>
         </DropdownSection>
       </DropdownMenu>

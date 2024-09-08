@@ -186,7 +186,7 @@ const SignUpForm = () => {
           variant="solid"
           disabled={isSubmitting}
           startContent={isSubmitting && <Spinner color="default" size="sm" />}
-          className="bg-slate-300 text-base !font-semibold text-content1 disabled:bg-slate-500"
+          className="bg-primary text-base !font-semibold text-primary-foreground disabled:bg-slate-400"
         >
           Sign up
         </Button>
