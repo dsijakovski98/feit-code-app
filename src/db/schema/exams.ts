@@ -8,10 +8,12 @@ import { primaryId } from "@/db/schema/utils";
 
 const exams = pgTable("exams", {
   id: primaryId(),
+  // TODO: Name
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
   duration: timestamp("duration", { mode: "string" }).notNull(),
   points: integer("points").notNull(),
   language: programmingLanguage("programming_language").notNull(),
+  // TODO: Status - new | ongoing | completed
 
   courseId: varchar("course_id")
     .notNull()

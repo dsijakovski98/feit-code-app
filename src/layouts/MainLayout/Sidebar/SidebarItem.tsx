@@ -42,7 +42,7 @@ const SidebarItem = (props: Props) => {
         )}
       >
         <div className="h-7 w-7 overflow-hidden rounded-full">{icon}</div>
-        <p className="max-w-[7ch] text-center text-sm">{label}</p>
+        <p className="max-w-[7ch] text-center text-sm font-semibold">{label}</p>
       </Link>
     </li>
   );

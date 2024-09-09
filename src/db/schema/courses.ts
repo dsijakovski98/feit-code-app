@@ -11,7 +11,9 @@ const courses = pgTable("courses", {
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }),
 
-  // TODO: Add category (ex. 'javascript' | 'web-dev' etc.)
+  // TODO: Category (ex. 'javascript' | 'web-dev' etc.)
+  // TODO: Academic year
+  // TODO: Archived status
 
   professorId: text("professor_id")
     .notNull()
