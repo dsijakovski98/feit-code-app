@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, primaryKey, text, varchar } from "drizzle-orm/pg-core";
+import { numeric, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import courses from "@/db/schema/courses";
 import students from "@/db/schema/students";
@@ -13,7 +13,9 @@ const studentCourses = pgTable(
     courseId: varchar("course_id")
       .notNull()
       .references(() => courses.id),
-    // TODO: Look into adding more metadata (ex. grade)
+
+    grade: numeric("grade", { precision: 2 }),
+    joinedAt: timestamp("joined_at", { mode: "string" }).notNull().defaultNow(),
   },
   (table) => ({
     pk: primaryKey({ columns: [table.studentId, table.courseId] }),

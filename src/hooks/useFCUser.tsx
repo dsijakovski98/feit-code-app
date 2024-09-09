@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useUser } from "@clerk/clerk-react";
 
 import { db } from "@/db";
-import { USER_TYPES } from "@/types";
+import { USER_TYPE } from "@/types";
 
 const userColumns = {
   id: true,
@@ -29,14 +29,14 @@ export const useFCUser = () => {
         columns: userColumns,
       });
 
-      if (studentAttempt) return { fcUser: studentAttempt, type: USER_TYPES.student };
+      if (studentAttempt) return { fcUser: studentAttempt, type: USER_TYPE.student };
 
       const professorAttempt = await db.query.professors.findFirst({
         where: (professors, { eq }) => eq(professors.id, user.id),
         columns: userColumns,
       });
 
-      if (professorAttempt) return { fcUser: professorAttempt, type: USER_TYPES.professor };
+      if (professorAttempt) return { fcUser: professorAttempt, type: USER_TYPE.professor };
 
       throw new Error("User not found!");
     },

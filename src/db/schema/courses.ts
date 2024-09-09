@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import exams from "@/db/schema/exams";
 import professors from "@/db/schema/professors";
@@ -10,10 +10,10 @@ const courses = pgTable("courses", {
   id: primaryId(),
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }),
-
-  // TODO: Category (ex. 'javascript' | 'web-dev' etc.)
-  // TODO: Academic year
-  // TODO: Archived status
+  academicYear: varchar("academic_year", { length: 128 }).notNull(),
+  updatedAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+  category: varchar("category", { length: 256 }),
+  archived: boolean("archived").default(false),
 
   professorId: text("professor_id")
     .notNull()

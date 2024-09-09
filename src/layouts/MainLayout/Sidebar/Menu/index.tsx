@@ -5,7 +5,7 @@ import SidebarMenuSkeleton from "@/layouts/MainLayout/Sidebar/Menu/Skeleton";
 import StudentMenu from "@/layouts/MainLayout/Sidebar/Menu/StudentMenu";
 
 import { useFCUser } from "@/hooks/useFCUser";
-import { USER_TYPES } from "@/types";
+import { USER_TYPE } from "@/types";
 
 const SidebarMenu = () => {
   const { userData } = useFCUser();
@@ -16,7 +16,7 @@ const SidebarMenu = () => {
 
   return (
     <Suspense fallback={null}>
-      {userData.type === USER_TYPES.student ? <StudentMenu /> : <ProfessorMenu />}
+      {userData.type === USER_TYPE.student ? <StudentMenu /> : <ProfessorMenu />}
     </Suspense>
   );
 };

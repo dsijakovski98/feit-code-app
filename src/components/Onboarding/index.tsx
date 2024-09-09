@@ -10,7 +10,7 @@ import GradientText from "@/components/ui/GradientText";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { USER_TYPES } from "@/types";
+import { USER_TYPE } from "@/types";
 
 const ProfessorOnboarding = lazy(() => import("@/components/Onboarding/Professor"));
 const StudentOnboarding = lazy(() => import("@/components/Onboarding/Student"));
@@ -34,7 +34,7 @@ const Onboarding = () => {
   }, [toggleOn]);
 
   return (
-    <main className="grid min-h-dvh place-items-center bg-dots">
+    <main className="bg-dots grid min-h-dvh place-items-center">
       <div className="flex flex-col items-center">
         <div className="flex w-fit max-w-40 drop-shadow-[0px_0px_4px_theme(colors.primary)]">
           <img src="/images/logo.svg" />
@@ -67,7 +67,7 @@ const Onboarding = () => {
 
             <OnboardingStep active={step > 0}>
               <Suspense fallback={<Spinner className="mx-auto w-full" />}>
-                {userType === USER_TYPES.student ? <StudentOnboarding /> : <ProfessorOnboarding />}
+                {userType === USER_TYPE.student ? <StudentOnboarding /> : <ProfessorOnboarding />}
               </Suspense>
             </OnboardingStep>
           </ModalBody>

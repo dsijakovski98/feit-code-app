@@ -43,6 +43,13 @@
       "when": 1725665935505,
       "tag": "0005_shallow_frog_thor",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1725919600268,
+      "tag": "0006_clammy_zombie",
+      "breakpoints": true
     }
   ]
 }
