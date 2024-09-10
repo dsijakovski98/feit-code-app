@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { useAuth } from "@clerk/clerk-react";
 import { Avatar } from "@nextui-org/avatar";
 import {
@@ -11,12 +13,15 @@ import {
 import AuthStrategyIcon from "@/layouts/MainLayout/Nav/UserAvatar/AuthStrategyIcon";
 import UserAvatarSkeleton from "@/layouts/MainLayout/Nav/UserAvatar/Skeleton";
 
-import { HREF, ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/routes";
 import { useFCUser } from "@/hooks/useFCUser";
+import { getHelpFeedbackUrl } from "@/utils";
 
 const UserAvatar = () => {
   const { userData } = useFCUser();
   const { signOut } = useAuth();
+
+  const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   if (!userData) return <UserAvatarSkeleton />;
 
@@ -53,7 +58,7 @@ const UserAvatar = () => {
             as="a"
             key="help"
             textValue="Help & Feedback"
-            href={HREF.feitCode.contactUs}
+            href={helpFeedbackUrl}
             target="_blank"
           >
             <p className="text-sm font-semibold">Help & Feedback</p>

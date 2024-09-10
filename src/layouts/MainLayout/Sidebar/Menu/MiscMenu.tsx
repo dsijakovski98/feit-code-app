@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { useAuth } from "@clerk/clerk-react";
 import { Button } from "@nextui-org/react";
 
@@ -5,15 +7,20 @@ import SidebarItem from "@/layouts/MainLayout/Sidebar/SidebarItem";
 
 import Icon from "@/components/ui/Icon";
 
-import { HREF, ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/routes";
+import { useFCUser } from "@/hooks/useFCUser";
+import { getHelpFeedbackUrl } from "@/utils";
 
 const MiscMenu = () => {
+  const { userData } = useFCUser();
   const { signOut } = useAuth();
+
+  const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   return (
     <ul className="mt-auto space-y-9">
       <SidebarItem
-        href={HREF.feitCode.contactUs}
+        href={helpFeedbackUrl}
         target="_blank"
         label="Help & Feedback"
         icon={<Icon name="help" />}

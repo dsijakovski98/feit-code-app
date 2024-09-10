@@ -1,3 +1,6 @@
+import { HREF } from "@/constants/routes";
+import { UseFCUser } from "@/hooks/useFCUser";
+
 export const shortClerkErrorMessage = (
   e: { errors: Array<{ message: string; longMessage?: string }> },
   config?: { useLongMessage?: boolean },
@@ -35,4 +38,19 @@ export const getTimeGreeting = () => {
   }
 
   return "Almost bedtime";
+};
+
+export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
+  if (!userData) return "";
+
+  const {
+    fcUser: { firstName, lastName, email },
+  } = userData;
+
+  const baseUrl = new URL(HREF.feitCode.contactUs);
+  baseUrl.searchParams.append("name", `${firstName} ${lastName}`);
+  baseUrl.searchParams.append("email", email);
+  baseUrl.searchParams.append("type", "report-issue");
+
+  return baseUrl.href;
 };
