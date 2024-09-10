@@ -19,6 +19,8 @@ const MiscMenu = () => {
 
   return (
     <ul className="mt-auto space-y-9">
+      <SidebarItem href={ROUTES.profile} label="Profile" icon={<Icon name="profile" />} />
+
       <SidebarItem
         href={helpFeedbackUrl}
         target="_blank"

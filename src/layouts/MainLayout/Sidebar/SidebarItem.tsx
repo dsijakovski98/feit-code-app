@@ -1,5 +1,5 @@
-import { ComponentProps, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { ComponentProps, ReactNode, useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { ClassValue } from "clsx";
 import clsx from "clsx";
@@ -25,6 +25,9 @@ type Props =
     };
 
 const SidebarItem = (props: Props) => {
+  const { pathname } = useLocation();
+  const active = useMemo(() => props.href === pathname, [props.href, pathname]);
+
   if (props.isSkeleton) {
     return <Skeleton as="li" className="h-12 w-12 rounded-full" />;
   }
@@ -32,17 +35,20 @@ const SidebarItem = (props: Props) => {
   const { href, icon, label, target, className = "" } = props;
 
   return (
-    <li>
+    <li className="mx-auto min-w-fit max-w-[8ch]">
       <Link
         to={href!}
         target={target}
         className={clsx(
-          "group flex flex-col items-center gap-1 *:transition-colors hover:text-primary focus:text-primary",
+          "group flex w-full flex-col items-center gap-1 *:transition-colors hover:text-primary focus:text-primary",
+          {
+            "text-primary-500": active,
+          },
           className,
         )}
       >
         <div className="h-7 w-7 overflow-hidden rounded-full">{icon}</div>
-        <p className="max-w-[7ch] text-center text-sm font-semibold">{label}</p>
+        <p className="w-full text-center text-sm font-semibold">{label}</p>
       </Link>
     </li>
   );
