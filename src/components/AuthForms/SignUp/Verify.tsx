@@ -98,7 +98,7 @@ const Verify = ({ verifyMode }: Props) => {
               errorMessage={fieldState.error?.message}
               classNames={{
                 input: "placeholder:font-light placeholder:text-slate-400",
-                label: "group-data-[filled-within='true']:-translate-y-[15px]",
+                label: "group-data-[filled-within='true']:!-translate-y-[12px]",
                 errorMessage: fullScreen ? "text-base" : "",
               }}
             />
@@ -118,7 +118,7 @@ const Verify = ({ verifyMode }: Props) => {
             variant="solid"
             disabled={isSubmitting}
             startContent={isSubmitting && <Spinner color="default" size="sm" />}
-            className="bg-slate-300 text-content1 disabled:bg-slate-500"
+            className="bg-primary text-primary-foreground disabled:bg-slate-500"
           >
             Verify
           </Button>

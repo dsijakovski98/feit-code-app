@@ -1,16 +1,25 @@
-import { useAuth } from "@clerk/clerk-react";
+import { Suspense, lazy } from "react";
 
-import Button from "@/components/ui/Button";
+import DashboardSkeleton from "@/components/Dashboards/Skeleton";
 
-import { ROUTES } from "@/constants/routes";
+import { useFCUser } from "@/hooks/useFCUser";
+import { USER_TYPE } from "@/types";
+
+const ProfessorDashboard = lazy(() => import("@/components/Dashboards/ProfessorDashboard"));
+const StudentDashboard = lazy(() => import("@/components/Dashboards/StudentDashboard"));
 
 const Dashboard = () => {
-  const { signOut } = useAuth();
+  const { userData } = useFCUser();
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <Button onPress={() => signOut({ redirectUrl: ROUTES.signIn })}>Sign Out</Button>
+    <div className="h-full px-8 pb-8">
+      {userData ? (
+        <Suspense fallback={null}>
+          {userData.type === USER_TYPE.student ? <StudentDashboard /> : <ProfessorDashboard />}
+        </Suspense>
+      ) : (
+        <DashboardSkeleton />
+      )}
     </div>
   );
 };

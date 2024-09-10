@@ -9,6 +9,10 @@ export const ROUTES = {
   signUp: "/sign-up",
 
   ssoCallback: "/sso",
+
+  profile: "/profile",
+  courses: "/dashboard/courses",
+  exams: "/dashboard/exams",
 } as const;
 
 export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> = {
@@ -16,4 +20,13 @@ export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> =
 
   "/sign-in": "Sign in",
   "/sign-up": "Sign up",
+};
+
+const websiteBaseUrl = import.meta.env.VITE_WEBSITE_URL;
+
+export const HREF = {
+  feitCode: {
+    website: websiteBaseUrl,
+    contactUs: `${websiteBaseUrl}/contact`,
+  },
 };

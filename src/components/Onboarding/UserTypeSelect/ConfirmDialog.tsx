@@ -1,3 +1,5 @@
+import { Fragment } from "react/jsx-runtime";
+
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
@@ -34,7 +36,7 @@ const ConfirmDialog = ({ dialog }: Props) => {
     >
       <ModalContent>
         {(onClose) => (
-          <>
+          <Fragment>
             <ModalHeader className="text-2xl">Better safe than sorry</ModalHeader>
 
             <ModalBody>Are you sure you are a {userType}? You cannot change this later.</ModalBody>
@@ -45,7 +47,7 @@ const ConfirmDialog = ({ dialog }: Props) => {
               </Button>
               <Button onPress={confirmChoice}>Continue</Button>
             </ModalFooter>
-          </>
+          </Fragment>
         )}
       </ModalContent>
     </Modal>

@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 
 import { type Toggle } from "@/hooks/useToggle";
 
@@ -12,6 +13,10 @@ type Props = {
 const WindowControls = ({ show, minimized, fullScreen }: Props) => {
   return (
     <ul className="flex translate-y-1 items-start justify-end gap-3 md:gap-4 [&_button]:!min-w-0">
+      <li className="*:-translate-y-0.5">
+        <ThemeSwitcher size="sm" />
+      </li>
+
       <li>
         <Button
           isIconOnly

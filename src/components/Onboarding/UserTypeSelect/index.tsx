@@ -11,7 +11,7 @@ import Button from "@/components/ui/Button";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { USER_TYPES, UserType } from "@/types";
+import { USER_TYPE, UserType } from "@/types";
 
 const UserTypeSelector = () => {
   const {
@@ -55,13 +55,13 @@ const UserTypeSelector = () => {
           }}
         >
           <RadioSelect
-            value={USER_TYPES.student}
+            value={USER_TYPE.student}
             description="Take coding exams, get fast results and keep track of your grades"
           >
             I'm a Student
           </RadioSelect>
           <RadioSelect
-            value={USER_TYPES.professor}
+            value={USER_TYPE.professor}
             description="Create and manage courses, coding exams and receive insights"
           >
             I'm a Professor
