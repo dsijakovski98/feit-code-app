@@ -17,7 +17,7 @@ const Nav = () => {
   const timeGreeting = useMemo(() => getTimeGreeting(), []);
 
   return (
-    <header className="bg-gradient-to-r from-transparent to-primary/80 p-8 pb-40 font-quicksand">
+    <header className="bg-gradient-to-r from-transparent to-primary-200/80 p-8 pb-32 font-quicksand dark:to-primary/80">
       <nav className="flex items-center justify-between">
         <div>
           {userData && (

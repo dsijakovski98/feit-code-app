@@ -1,5 +1,5 @@
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Fragment } from "react/jsx-runtime";
 
 import SidebarMenu from "@/layouts/MainLayout/Sidebar/Menu";
 import MiscMenu from "@/layouts/MainLayout/Sidebar/Menu/MiscMenu";

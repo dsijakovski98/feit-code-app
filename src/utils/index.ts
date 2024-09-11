@@ -54,3 +54,23 @@ export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
 
   return baseUrl.href;
 };
+
+export const getSchoolYear = () => {
+  const today = new Date();
+
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1; // +1 because months are 0-indexed
+
+  let startYear = 0;
+  let endYear = 0;
+
+  if (currentMonth <= 9) {
+    startYear = currentYear - 1;
+    endYear = currentYear;
+  } else {
+    startYear = currentYear;
+    endYear = currentYear + 1;
+  }
+
+  return `${startYear}/${endYear.toString().slice(-2)}`;
+};
