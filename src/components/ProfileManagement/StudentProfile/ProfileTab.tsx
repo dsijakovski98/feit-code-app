@@ -5,8 +5,8 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 
+import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 
 import { MAJORS } from "@/constants/students";
@@ -39,38 +39,15 @@ const ProfileTab = ({ student }: Props) => {
 
   const onSubmit: SubmitHandler<StudentProfileSchema> = async (userData) => {
     console.log(userData);
+    // TODO: Add image to Firebase storage
+    // TODO: Update user info in DB
+    // TODO: Error handling
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="px-7">
-      <div className="space-y-3">
-        {/* TODO: Implement avatar handling */}
-        <div className="flex items-center gap-4">
-          <img
-            alt="Avatar"
-            src={avatarUrl ?? ""}
-            className="max-h-[84px] max-w-[84px] shrink-0 overflow-hidden rounded-full bg-primary"
-          />
-
-          <div className="space-y-2">
-            <p className="font-semibold">Avatar</p>
-            <div className="flex items-center gap-2">
-              <Button size="sm" variant="ghost" color="default" className="text-xs">
-                Upload
-              </Button>
-
-              <Button
-                isIconOnly
-                variant="light"
-                radius="full"
-                color="danger"
-                className="p-1.5 text-xs"
-              >
-                <Icon name="trash" />
-              </Button>
-            </div>
-          </div>
-        </div>
+      <div className="space-y-0.5">
+        <AvatarUpload avatarUrl={avatarUrl} />
 
         <Controller
           control={control}
@@ -79,6 +56,7 @@ const ProfileTab = ({ student }: Props) => {
             <Input
               {...field}
               autoFocus
+              size="lg"
               variant="underlined"
               label="Full Name"
               placeholder="Your first and last name"
@@ -95,7 +73,8 @@ const ProfileTab = ({ student }: Props) => {
           render={({ field, fieldState }) => (
             <Textarea
               {...field}
-              minRows={3}
+              minRows={2}
+              size="lg"
               color="default"
               variant="underlined"
               label="Bio (optional)"
@@ -117,7 +96,7 @@ const ProfileTab = ({ student }: Props) => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                autoFocus
+                size="lg"
                 color="default"
                 variant="underlined"
                 inputMode="numeric"
@@ -137,6 +116,7 @@ const ProfileTab = ({ student }: Props) => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
+                size="lg"
                 color="default"
                 variant="underlined"
                 inputMode="numeric"
@@ -176,7 +156,7 @@ const ProfileTab = ({ student }: Props) => {
         />
       </div>
 
-      <div className="mt-10">
+      <div className="mt-7 translate-y-2">
         <Button
           fullWidth
           size="lg"
