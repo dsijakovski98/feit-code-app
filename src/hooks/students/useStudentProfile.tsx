@@ -1,27 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
+
+import { getAvatarUrl } from "@/services/avatars";
 
 import { db } from "@/db";
 
 export const useStudentProfile = () => {
-  const { user } = useUser();
+  const { userId } = useAuth();
 
   const { data, isLoading, error } = useQuery({
-    enabled: !!user?.id,
-    queryKey: [{ name: "student-profile", id: user?.id }],
+    queryKey: [{ name: "student-profile", userId }],
     queryFn: async () => {
-      if (!user?.id) return null;
+      if (!userId) return null;
 
       const student = await db.query.students.findFirst({
-        where: (users, { eq }) => eq(users.id, user.id),
+        where: (users, { eq }) => eq(users.id, userId),
       });
 
       if (!student) {
         throw new Error("Student not found!");
       }
 
-      return student;
+      const avatarUrl = await getAvatarUrl(userId);
+
+      return { ...student, avatarUrl };
     },
   });
 

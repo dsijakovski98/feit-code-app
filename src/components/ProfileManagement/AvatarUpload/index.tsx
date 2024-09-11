@@ -1,4 +1,4 @@
-import { ChangeEvent, ElementRef, KeyboardEvent, useRef, useState } from "react";
+import { ChangeEvent, ElementRef, KeyboardEvent, useRef } from "react";
 
 import clsx from "clsx";
 import { ClassValue } from "clsx";
@@ -7,14 +7,16 @@ import AvatarPreview from "@/components/ProfileManagement/AvatarUpload/AvatarPre
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
+import { UseState } from "@/types";
+
 type Props = {
   email: string;
-  avatarUrl: string | null;
+  avatarState: UseState<string>;
   className?: ClassValue;
 };
 
-const AvatarUpload = ({ email, avatarUrl, className = "" }: Props) => {
-  const [avatar, setAvatar] = useState(avatarUrl ?? "");
+const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
+  const [avatar, setAvatar] = avatarState;
   const inputRef = useRef<ElementRef<"input">>(null);
   const imgRef = useRef<ElementRef<"img">>(null);
 
@@ -35,7 +37,9 @@ const AvatarUpload = ({ email, avatarUrl, className = "" }: Props) => {
 
     if (!files) return;
 
-    const newAvatar = URL.createObjectURL(files[0]);
+    const [file] = files;
+
+    const newAvatar = URL.createObjectURL(file);
     setAvatar(newAvatar);
   };
 

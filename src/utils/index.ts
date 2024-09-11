@@ -1,6 +1,12 @@
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
+export const splitFullName = (fullName: string) => {
+  const [firstName, ...lastName] = fullName.split(" ");
+
+  return { firstName, lastName: lastName.join(" ") };
+};
+
 export const shortClerkErrorMessage = (
   e: { errors: Array<{ message: string; longMessage?: string }> },
   config?: { useLongMessage?: boolean },
@@ -44,7 +50,7 @@ export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
   if (!userData) return "";
 
   const {
-    fcUser: { firstName, lastName, email },
+    user: { firstName, lastName, email },
   } = userData;
 
   const baseUrl = new URL(HREF.feitCode.contactUs);

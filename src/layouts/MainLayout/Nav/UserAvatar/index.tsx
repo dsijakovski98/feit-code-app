@@ -26,7 +26,7 @@ const UserAvatar = () => {
   if (!userData) return <UserAvatarSkeleton />;
 
   const {
-    fcUser: { avatarUrl, email },
+    user: { avatarUrl, email },
   } = userData;
 
   return (

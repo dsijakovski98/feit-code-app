@@ -22,7 +22,7 @@ const Nav = () => {
         <div>
           {userData && (
             <h1 className="text-2xl font-semibold">
-              {timeGreeting}, {userData.fcUser.firstName}
+              {timeGreeting}, {userData.user.firstName}
             </h1>
           )}
           <time>{timestamp}</time>

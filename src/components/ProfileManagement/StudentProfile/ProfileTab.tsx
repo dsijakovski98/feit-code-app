@@ -1,14 +1,18 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useQueryClient } from "@tanstack/react-query";
 
+import { useAuth } from "@clerk/clerk-react";
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 
 import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
+import { updateStudent } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
 import { UseStudentProfile } from "@/hooks/students/useStudentProfile";
 import { StudentProfileSchema } from "@/utils/formSchemas/profile/studentProfile";
@@ -18,22 +22,20 @@ type Props = {
 };
 
 const ProfileTab = ({ student }: Props) => {
-  const {
-    firstName,
-    lastName,
-    bio = "",
-    avatarUrl,
-    indexNumber,
-    indexYear,
-    major,
-    email,
-  } = student;
+  const { firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
+
+  const { userId } = useAuth();
+  const queryClient = useQueryClient();
 
   const fullName = useMemo(() => `${firstName} ${lastName}`, [firstName, lastName]);
+
+  const avatarState = useState(student.avatarUrl ?? "");
+  const [avatarUrl] = avatarState;
 
   const {
     handleSubmit,
     control,
+    setError,
     formState: { isSubmitting },
   } = useForm<StudentProfileSchema>({
     resolver: valibotResolver(StudentProfileSchema),
@@ -46,17 +48,30 @@ const ProfileTab = ({ student }: Props) => {
     },
   });
 
-  const onSubmit: SubmitHandler<StudentProfileSchema> = async (userData) => {
-    console.log(userData);
-    // TODO: Add image to Firebase storage
-    // TODO: Update user info in DB
-    // TODO: Error handling
+  const onSubmit: SubmitHandler<StudentProfileSchema> = async (formData) => {
+    if (!userId) return;
+
+    try {
+      await updateStudent({ ...formData, avatarUrl, userId });
+
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: [{ name: "student-profile", userId }] }),
+        queryClient.invalidateQueries({ queryKey: [{ name: "user", userId }] }),
+      ]);
+    } catch (error) {
+      if (error instanceof Error) {
+        const { message } = error;
+
+        setError("root", { message });
+        toast.error(message);
+      }
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3">
-        <AvatarUpload avatarUrl={avatarUrl} email={email} />
+        <AvatarUpload avatarState={avatarState} email={email} />
 
         <Controller
           control={control}

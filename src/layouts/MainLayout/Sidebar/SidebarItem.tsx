@@ -40,9 +40,9 @@ const SidebarItem = (props: Props) => {
         to={href!}
         target={target}
         className={clsx(
-          "group flex w-full flex-col items-center gap-1 *:transition-colors hover:text-primary focus:text-primary",
+          "group flex w-full flex-col items-center gap-1 *:transition-colors visited:text-current target:text-danger hover:text-primary",
           {
-            "text-primary-500": active,
+            "!text-primary-500": active,
           },
           className,
         )}
