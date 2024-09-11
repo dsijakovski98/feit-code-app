@@ -18,7 +18,16 @@ type Props = {
 };
 
 const ProfileTab = ({ student }: Props) => {
-  const { firstName, lastName, bio = "", avatarUrl, indexNumber, indexYear, major } = student;
+  const {
+    firstName,
+    lastName,
+    bio = "",
+    avatarUrl,
+    indexNumber,
+    indexYear,
+    major,
+    email,
+  } = student;
 
   const fullName = useMemo(() => `${firstName} ${lastName}`, [firstName, lastName]);
 
@@ -45,9 +54,9 @@ const ProfileTab = ({ student }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="px-7">
-      <div className="space-y-0.5">
-        <AvatarUpload avatarUrl={avatarUrl} />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="space-y-3">
+        <AvatarUpload avatarUrl={avatarUrl} email={email} />
 
         <Controller
           control={control}

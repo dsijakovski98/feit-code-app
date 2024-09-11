@@ -17,7 +17,7 @@ const Nav = () => {
   const timeGreeting = useMemo(() => getTimeGreeting(), []);
 
   return (
-    <header className="bg-gradient-to-r from-transparent to-primary-200/80 p-8 pb-32 font-quicksand dark:to-primary/80">
+    <header className="bg-gradient-to-b from-primary-200 to-transparent px-8 pb-52 pt-4 font-quicksand dark:from-primary/50">
       <nav className="flex items-center justify-between">
         <div>
           {userData && (
@@ -35,7 +35,7 @@ const Nav = () => {
             <NotificationsMenu />
           </div>
 
-          <Divider orientation="vertical" className="debug mr-2 block !h-10 w-px self-stretch" />
+          <Divider orientation="vertical" className="mr-2 block !h-10 w-px self-stretch" />
 
           <UserAvatar />
         </div>

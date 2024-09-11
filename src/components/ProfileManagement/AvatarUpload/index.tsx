@@ -8,11 +8,12 @@ import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 type Props = {
+  email: string;
   avatarUrl: string | null;
   className?: ClassValue;
 };
 
-const AvatarUpload = ({ avatarUrl, className = "" }: Props) => {
+const AvatarUpload = ({ email, avatarUrl, className = "" }: Props) => {
   const [avatar, setAvatar] = useState(avatarUrl ?? "");
   const inputRef = useRef<ElementRef<"input">>(null);
   const imgRef = useRef<ElementRef<"img">>(null);
@@ -39,52 +40,59 @@ const AvatarUpload = ({ avatarUrl, className = "" }: Props) => {
   };
 
   return (
-    <div className={clsx("flex items-center gap-4", className)}>
-      <AvatarPreview avatar={avatar} ref={imgRef} />
-      <div className="space-y-1">
-        <p className="font-semibold">Avatar</p>
-        <div className="flex items-center gap-2">
-          <Button
-            color="default"
-            variant="ghost"
-            size="sm"
-            tabIndex={-1}
-            className="min-w-max px-0 focus-within:outline focus-within:outline-primary"
-          >
-            <label
-              role="button"
-              tabIndex={0}
-              onKeyDown={handleInputButton}
-              htmlFor="upload-avatar"
-              className="grid h-full cursor-pointer place-items-center px-3 text-xs !outline-none"
-            >
-              Upload
-            </label>
-          </Button>
-          <input
-            ref={inputRef}
-            id="upload-avatar"
-            type="file"
-            aria-hidden="false"
-            tabIndex={-1}
-            className="sr-only appearance-none"
-            accept="image/*"
-            onChange={handleAvatarChange}
-          />
+    <section className="flex items-end justify-between">
+      <div className={clsx("flex items-end gap-4", className)}>
+        <AvatarPreview avatar={avatar} ref={imgRef} />
 
-          <Button
-            isIconOnly
-            variant="light"
-            radius="full"
-            color="danger"
-            className="p-1.5 text-xs"
-            onPress={clearAvatar}
-          >
-            <Icon name="trash" />
-          </Button>
+        <div className="space-y-1">
+          <p className="font-semibold">Avatar</p>
+          <div className="flex items-center gap-2">
+            <Button
+              color="default"
+              variant="ghost"
+              size="sm"
+              tabIndex={-1}
+              className="min-w-max px-0 focus-within:outline focus-within:outline-primary"
+            >
+              <label
+                role="button"
+                tabIndex={0}
+                onKeyDown={handleInputButton}
+                htmlFor="upload-avatar"
+                className="grid h-full cursor-pointer place-items-center px-3 text-xs !outline-none"
+              >
+                Upload
+              </label>
+            </Button>
+            <input
+              ref={inputRef}
+              id="upload-avatar"
+              type="file"
+              aria-hidden="false"
+              tabIndex={-1}
+              className="sr-only appearance-none"
+              accept="image/*"
+              onChange={handleAvatarChange}
+            />
+
+            <Button
+              isIconOnly
+              variant="light"
+              radius="full"
+              color="danger"
+              className="p-1.5 text-xs"
+              onPress={clearAvatar}
+            >
+              <Icon name="trash" />
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+
+      <p className="text-end">
+        Signed in as <span className="block font-semibold">{email}</span>
+      </p>
+    </section>
   );
 };
 

@@ -32,7 +32,7 @@ const UserAvatar = () => {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger className="cursor-pointer">
-        <Avatar isBordered color="primary" src={avatarUrl || ""} />
+        <Avatar isBordered src={avatarUrl || ""} className="ring-foreground" />
       </DropdownTrigger>
 
       <DropdownMenu disabledKeys={["title"]}>

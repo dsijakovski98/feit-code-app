@@ -15,7 +15,7 @@ const AvatarPreview = forwardRef<HTMLImageElement, Props>(({ avatar }, ref) => {
   const previewToggle = useToggle();
 
   if (!avatar) {
-    return <Avatar className="h-[90px] w-[90px]" />;
+    return <Avatar className="h-[100px] w-[100px]" />;
   }
 
   return (
@@ -25,7 +25,7 @@ const AvatarPreview = forwardRef<HTMLImageElement, Props>(({ avatar }, ref) => {
         radius="full"
         color="default"
         variant="bordered"
-        className="h-[90px] w-[90px] bg-transparent"
+        className="h-[100px] w-[100px] bg-transparent"
         onPress={previewToggle.toggleOn}
       >
         <img ref={ref} alt="Avatar" src={avatar} className="h-full w-full object-cover" />

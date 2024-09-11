@@ -14,11 +14,9 @@ const Dashboard = () => {
   if (!userData) return <DashboardSkeleton />;
 
   return (
-    <div className="h-full pb-8 pt-4">
-      <Suspense fallback={null}>
-        {userData.type === USER_TYPE.student ? <StudentDashboard /> : <ProfessorDashboard />}
-      </Suspense>
-    </div>
+    <Suspense fallback={null}>
+      {userData.type === USER_TYPE.student ? <StudentDashboard /> : <ProfessorDashboard />}
+    </Suspense>
   );
 };
 

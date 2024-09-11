@@ -14,7 +14,7 @@ const MainLayout = () => {
         <Nav />
       </div>
 
-      <main className="col-start-2 row-span-2 row-start-2 h-full px-8">
+      <main className="col-start-2 row-span-2 row-start-2 h-full -translate-y-6 px-8">
         <Outlet />
       </main>
     </div>

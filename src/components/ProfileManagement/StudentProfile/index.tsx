@@ -9,27 +9,25 @@ const StudentProfile = () => {
   const { student } = useStudentProfile();
 
   return (
-    <section className="mx-auto max-w-[64ch]">
-      <Tabs
-        fullWidth
-        size="lg"
-        variant="underlined"
-        aria-label="Profile tabs"
-        destroyInactiveTabPanel={false}
-        classNames={{
-          tabContent: "text-foreground group-data-[selected]:font-semibold",
-          panel: "pt-4",
-        }}
-      >
-        <Tab key="profile" title="Profile">
-          {student && <ProfileTab student={student} />}
-        </Tab>
+    <Tabs
+      fullWidth
+      size="lg"
+      variant="underlined"
+      aria-label="Profile tabs"
+      destroyInactiveTabPanel={false}
+      classNames={{
+        tabContent: "text-foreground group-data-[selected]:font-semibold",
+        panel: "pt-6 px-9",
+      }}
+    >
+      <Tab key="profile" title="Profile">
+        {student && <ProfileTab student={student} />}
+      </Tab>
 
-        <Tab key="privacy" title="Privacy Settings">
-          <PrivacySettings />
-        </Tab>
-      </Tabs>
-    </section>
+      <Tab key="privacy" title="Privacy Settings">
+        <PrivacySettings />
+      </Tab>
+    </Tabs>
   );
 };
 
