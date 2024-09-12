@@ -1,3 +1,5 @@
+import { UserResource } from "@clerk/types";
+
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
@@ -79,4 +81,16 @@ export const getSchoolYear = () => {
   }
 
   return `${startYear}/${endYear.toString().slice(-2)}`;
+};
+
+export const getAuthStrategy = (user?: UserResource | null) => {
+  if (user?.primaryEmailAddress?.verification.strategy?.includes("google")) {
+    return "Google";
+  }
+
+  if (user?.primaryEmailAddress?.verification.strategy?.includes("github")) {
+    return "GitHub";
+  }
+
+  return null;
 };
