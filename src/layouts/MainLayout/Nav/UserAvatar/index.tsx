@@ -66,11 +66,11 @@ const UserAvatar = () => {
           </DropdownItem>
 
           <DropdownItem
-            key="log-out"
-            textValue="Log out"
+            key="sign-out"
+            textValue="Sign out"
             onClick={() => signOut({ redirectUrl: ROUTES.signIn })}
           >
-            <p className="text-sm font-semibold">Log out</p>
+            <p className="text-sm font-semibold">Sign out</p>
             <p className="text-xs text-content4-foreground">Take a break</p>
           </DropdownItem>
         </DropdownSection>

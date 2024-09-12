@@ -41,7 +41,7 @@ const MiscMenu = () => {
           <div className="!h-12 !w-12 overflow-hidden rounded-full">
             <Icon name="logout" className="!-scale-x-[1]" />
           </div>
-          <p className="max-w-[7ch] text-center font-quicksand text-sm font-semibold">Log out</p>
+          <p className="max-w-[7ch] text-center font-quicksand text-sm font-semibold">Sign out</p>
         </Button>
       </li>
     </ul>
