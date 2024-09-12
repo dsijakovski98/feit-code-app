@@ -1,6 +1,6 @@
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import PrivacySettings from "@/components/ProfileManagement/PrivacySettings";
+import SecuritySettings from "@/components/ProfileManagement/Security";
 import ProfileTab from "@/components/ProfileManagement/StudentProfile/ProfileTab";
 
 import { useStudentProfile } from "@/hooks/students/useStudentProfile";
@@ -24,8 +24,8 @@ const StudentProfile = () => {
         {student && <ProfileTab student={student} />}
       </Tab>
 
-      <Tab key="privacy" title="Privacy Settings">
-        <PrivacySettings />
+      <Tab key="security" title="Security">
+        <SecuritySettings />
       </Tab>
     </Tabs>
   );

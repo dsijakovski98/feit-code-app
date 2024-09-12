@@ -1,4 +1,5 @@
 import { eq } from "drizzle-orm";
+import { deleteObject, ref } from "firebase/storage";
 
 import { UserResource } from "@clerk/types";
 
@@ -8,8 +9,10 @@ import { ProfessorForm } from "@/components/Onboarding/Professor";
 import { StudentForm } from "@/components/Onboarding/Student";
 
 import { updateAvatar, uploadAvatar } from "@/services/avatars";
+import { fbStorage } from "@/services/firebase";
 
 import { db } from "@/db";
+import { USER_TYPE, UserType } from "@/types";
 import { splitFullName } from "@/utils";
 
 type UserData = { user: UserResource; avatarUrl: string };
@@ -113,6 +116,32 @@ export const createNewProfessor = async ({
     // TODO: Sentry logging
     console.log({ e });
     throw new Error("Failed to add professor!");
+  }
+
+  return true;
+};
+
+export const resetPassword = async () => {
+  return true;
+};
+
+type DeleteProfileConfig = { user: UserResource; type: UserType };
+export const deleteProfile = async ({ user, type }: DeleteProfileConfig) => {
+  const userId = user.id;
+  const table = type === USER_TYPE.student ? students : professors;
+  const avatarRef = ref(fbStorage, `avatars/${userId}`);
+
+  try {
+    await Promise.all([
+      user.delete(),
+      db.delete(table).where(eq(table.id, user.id)),
+      deleteObject(avatarRef).catch(null),
+    ]);
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to delete user!");
   }
 
   return true;
