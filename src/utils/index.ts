@@ -41,11 +41,13 @@ export const getTimeGreeting = () => {
     return "Good morning";
   } else if (currentHour >= 12 && currentHour < 18) {
     return "Good afternoon";
-  } else if (currentHour >= 18 && currentHour < 22) {
+  } else if (currentHour >= 18 && currentHour < 21) {
     return "Good evening";
+  } else if (currentHour >= 21 && currentHour < 24) {
+    return "Almost bedtime";
   }
 
-  return "Almost bedtime";
+  return "Late night coding";
 };
 
 export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
