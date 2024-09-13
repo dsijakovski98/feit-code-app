@@ -6,8 +6,11 @@ import { ROUTES } from "@/constants/routes";
 const CallbackSSO = () => {
   return (
     <AuthenticateWithRedirectCallback
+      continueSignUpUrl={ROUTES.signIn}
       signInForceRedirectUrl={ROUTES.welcome}
       signUpForceRedirectUrl={ROUTES.welcome}
+      signInUrl={ROUTES.signIn}
+      signUpUrl={ROUTES.signUp}
     />
   );
 };
