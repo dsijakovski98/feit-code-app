@@ -34,20 +34,20 @@ export const getDaytime = () => {
   return `${day}, ${date.join(" ")}`;
 };
 
-export const getTimeGreeting = () => {
+export const getTimeGreeting = (name: string) => {
   const currentHour = new Date().getHours();
 
   if (currentHour >= 6 && currentHour < 12) {
-    return "Good morning";
+    return `Good morning ${name}`;
   } else if (currentHour >= 12 && currentHour < 18) {
-    return "Good afternoon";
+    return `Good afternoon ${name}`;
   } else if (currentHour >= 18 && currentHour < 21) {
-    return "Good evening";
+    return `Good evening ${name}`;
   } else if (currentHour >= 21 && currentHour < 24) {
-    return "Almost bedtime";
+    return `Almost bedtime ${name}`;
   }
 
-  return "Late night coding";
+  return `Code never sleeps ${name}`;
 };
 
 export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {

@@ -14,17 +14,16 @@ const Nav = () => {
   const { userData } = useFCUser();
 
   const timestamp = useMemo(() => getDaytime(), []);
-  const timeGreeting = useMemo(() => getTimeGreeting(), []);
+  const timeGreeting = useMemo(
+    () => getTimeGreeting(userData?.user.firstName ?? ""),
+    [userData?.user.firstName],
+  );
 
   return (
-    <header className="bg-gradient-to-b from-primary-200 to-transparent px-8 pb-52 pt-4 font-quicksand dark:from-primary/50">
+    <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-primary-50/70">
       <nav className="flex items-center justify-between">
         <div>
-          {userData && (
-            <h1 className="text-2xl font-semibold">
-              {timeGreeting}, {userData.user.firstName}
-            </h1>
-          )}
+          <h1 className="text-2xl font-semibold">{timeGreeting}</h1>
           <time>{timestamp}</time>
         </div>
 

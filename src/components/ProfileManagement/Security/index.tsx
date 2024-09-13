@@ -12,8 +12,8 @@ const SecuritySettings = () => {
   const authStrategy = useMemo(() => getAuthStrategy(user), [user]);
 
   return (
-    <section className="space-y-12 px-8 pt-8">
-      <div className="flex items-center justify-between gap-8">
+    <section className="space-y-16 pt-8">
+      <div className="flex items-start justify-between gap-8">
         <div className="relative shrink-0">
           <h3 className="text-lg font-semibold">Password</h3>
           <p className="font-light">Reset your password, obtain new credentials.</p>
@@ -28,7 +28,7 @@ const SecuritySettings = () => {
         <ResetPassword />
       </div>
 
-      <div className="flex items-center justify-between gap-8">
+      <div className="flex items-start justify-between gap-8">
         <div>
           <h3 className="text-lg font-semibold">Delete Profile</h3>
           <p className="font-light">Permanently delete your profile from the face of the planet.</p>

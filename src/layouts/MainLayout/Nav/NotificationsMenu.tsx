@@ -14,7 +14,7 @@ const NotificationsMenu = () => {
         isDot
         isInvisible={NOTIFICATIONS === 0}
         variant="solid"
-        className="aspect-square -translate-x-[5px] translate-y-1 scale-80 border-[1.5px] border-transparent bg-warning-200 dark:bg-warning"
+        className="aspect-square -translate-x-[5px] translate-y-1 scale-80 border-[1.5px] border-transparent bg-danger dark:bg-warning-600"
       >
         <DropdownTrigger>
           <Button

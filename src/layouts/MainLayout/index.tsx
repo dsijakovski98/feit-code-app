@@ -5,16 +5,16 @@ import Sidebar from "@/layouts/MainLayout/Sidebar";
 
 const MainLayout = () => {
   return (
-    <div className="grid min-h-dvh grid-cols-[auto_1fr] grid-rows-[auto_auto_1fr]">
+    <div className="grid min-h-dvh grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
       <div className="row-span-3">
         <Sidebar />
       </div>
 
-      <div className="col-start-2 row-start-1 row-end-3">
+      <div className="col-start-2 row-span-1 row-start-1">
         <Nav />
       </div>
 
-      <main className="col-start-2 row-span-2 row-start-2 h-full -translate-y-6 px-8">
+      <main className="col-start-2 row-start-2 h-full">
         <Outlet />
       </main>
     </div>
