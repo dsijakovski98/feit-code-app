@@ -43,12 +43,7 @@ const DeleteProfile = () => {
 
   return (
     <Fragment>
-      <Button
-        color="danger"
-        variant="solid"
-        className="w-[140px] text-sm font-semibold"
-        onPress={dialog.toggleOn}
-      >
+      <Button color="danger" className="w-[140px] text-sm font-semibold" onPress={dialog.toggleOn}>
         Delete Profile
       </Button>
 

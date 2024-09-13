@@ -91,21 +91,14 @@ const ResetPassword = () => {
 
   return (
     <Fragment>
-      <div className="relative overflow-visible">
-        <Button
-          color="warning"
-          variant="solid"
-          className="w-[140px] text-sm font-semibold"
-          disabled={!!authStrategy}
-          onPress={dialog.toggleOn}
-        >
-          Reset password
-        </Button>
-
-        <p className="absolute right-0 w-max translate-y-1 text-xs font-medium text-warning-600 dark:text-warning">
-          <span className="font-bold">{authStrategy}</span> login: Cannot reset password
-        </p>
-      </div>
+      <Button
+        color="warning"
+        className="w-[140px] text-sm font-semibold"
+        disabled={!!authStrategy}
+        onPress={dialog.toggleOn}
+      >
+        Reset password
+      </Button>
 
       <Modal
         isOpen={dialog.open}
