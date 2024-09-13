@@ -19,6 +19,7 @@ import SignInPage from "@/pages/auth/sign-in";
 import SignUpPage from "@/pages/auth/sign-up";
 import CallbackSSO from "@/pages/auth/sso-callback";
 import Dashboard from "@/pages/dashboard";
+import ProfilePage from "@/pages/dashboard/profile";
 import WelcomePage from "@/pages/welcome";
 
 import PageWrapper from "@/components/PageWrapper";
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
                   {
                     path: ROUTES.dashboard,
                     element: <Dashboard />,
+                  },
+                  {
+                    path: ROUTES.profile,
+                    element: <ProfilePage />,
                   },
                   // TODO: Add other main layout routes
                 ],
@@ -92,7 +97,9 @@ const router = createBrowserRouter([
   },
 ]);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: Infinity } },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

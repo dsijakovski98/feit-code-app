@@ -40,15 +40,32 @@ const SidebarItem = (props: Props) => {
         to={href!}
         target={target}
         className={clsx(
-          "group flex w-full flex-col items-center gap-1 *:transition-colors hover:text-primary focus:text-primary",
-          {
-            "text-primary-500": active,
-          },
+          "group grid aspect-square w-full place-items-center text-primary-foreground",
           className,
         )}
       >
-        <div className="h-7 w-7 overflow-hidden rounded-full">{icon}</div>
-        <p className="w-full text-center text-sm font-semibold">{label}</p>
+        <div className="grid place-items-center">
+          <div
+            className={clsx(
+              "h-7 w-7 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500",
+              {
+                "!text-black dark:!text-primary-500": active,
+              },
+            )}
+          >
+            {icon}
+          </div>
+          <p
+            className={clsx(
+              "group-visited:debug w-full text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500",
+              {
+                "!text-black dark:!text-primary-500": active,
+              },
+            )}
+          >
+            {label}
+          </p>
+        </div>
       </Link>
     </li>
   );

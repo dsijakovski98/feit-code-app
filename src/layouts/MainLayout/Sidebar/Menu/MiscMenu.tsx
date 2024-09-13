@@ -18,7 +18,7 @@ const MiscMenu = () => {
   const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   return (
-    <ul className="mt-auto space-y-9">
+    <ul className="mt-auto space-y-2">
       <SidebarItem href={ROUTES.profile} label="Profile" icon={<Icon name="profile" />} />
 
       <SidebarItem
@@ -30,18 +30,19 @@ const MiscMenu = () => {
 
       <li>
         <Button
-          radius="full"
           variant="light"
           color="default"
           disableRipple
           disableAnimation
           onPress={() => signOut({ redirectUrl: ROUTES.signIn })}
-          className="group flex h-14 w-14 flex-col items-center gap-1 !bg-transparent *:transition-colors hover:text-danger focus:text-danger"
+          className="group mt-5 flex h-14 w-14 flex-col items-center gap-1 !bg-transparent focus:!outline-background dark:focus:!outline-foreground"
         >
-          <div className="!h-12 !w-12 overflow-hidden rounded-full">
+          <div className="!h-12 !w-12 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
             <Icon name="logout" className="!-scale-x-[1]" />
           </div>
-          <p className="max-w-[7ch] text-center font-quicksand text-sm font-semibold">Log out</p>
+          <p className="max-w-[7ch] text-center font-quicksand text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
+            Sign out
+          </p>
         </Button>
       </li>
     </ul>

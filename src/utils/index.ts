@@ -1,5 +1,13 @@
+import { UserResource } from "@clerk/types";
+
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
+
+export const splitFullName = (fullName: string) => {
+  const [firstName, ...lastName] = fullName.split(" ");
+
+  return { firstName, lastName: lastName.join(" ") };
+};
 
 export const shortClerkErrorMessage = (
   e: { errors: Array<{ message: string; longMessage?: string }> },
@@ -26,25 +34,27 @@ export const getDaytime = () => {
   return `${day}, ${date.join(" ")}`;
 };
 
-export const getTimeGreeting = () => {
+export const getTimeGreeting = (name: string) => {
   const currentHour = new Date().getHours();
 
   if (currentHour >= 6 && currentHour < 12) {
-    return "Good morning";
+    return `Good morning ${name}`;
   } else if (currentHour >= 12 && currentHour < 18) {
-    return "Good afternoon";
-  } else if (currentHour >= 18 && currentHour < 22) {
-    return "Good evening";
+    return `Good afternoon ${name}`;
+  } else if (currentHour >= 18 && currentHour < 21) {
+    return `Good evening ${name}`;
+  } else if (currentHour >= 21 && currentHour < 24) {
+    return `Almost bedtime ${name}`;
   }
 
-  return "Almost bedtime";
+  return `Code never sleeps ${name}`;
 };
 
 export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
   if (!userData) return "";
 
   const {
-    fcUser: { firstName, lastName, email },
+    user: { firstName, lastName, email },
   } = userData;
 
   const baseUrl = new URL(HREF.feitCode.contactUs);
@@ -53,4 +63,36 @@ export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
   baseUrl.searchParams.append("type", "report-issue");
 
   return baseUrl.href;
+};
+
+export const getSchoolYear = () => {
+  const today = new Date();
+
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth() + 1; // +1 because months are 0-indexed
+
+  let startYear = 0;
+  let endYear = 0;
+
+  if (currentMonth <= 9) {
+    startYear = currentYear - 1;
+    endYear = currentYear;
+  } else {
+    startYear = currentYear;
+    endYear = currentYear + 1;
+  }
+
+  return `${startYear}/${endYear.toString().slice(-2)}`;
+};
+
+export const getAuthStrategy = (user?: UserResource | null) => {
+  if (user?.primaryEmailAddress?.verification.strategy?.includes("google")) {
+    return "Google";
+  }
+
+  if (user?.primaryEmailAddress?.verification.strategy?.includes("github")) {
+    return "GitHub";
+  }
+
+  return null;
 };

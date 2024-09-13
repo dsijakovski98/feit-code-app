@@ -26,13 +26,13 @@ const UserAvatar = () => {
   if (!userData) return <UserAvatarSkeleton />;
 
   const {
-    fcUser: { avatarUrl, email },
+    user: { avatarUrl, email },
   } = userData;
 
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger className="cursor-pointer">
-        <Avatar isBordered color="primary" src={avatarUrl || ""} />
+        <Avatar isBordered src={avatarUrl || ""} className="ring-foreground" />
       </DropdownTrigger>
 
       <DropdownMenu disabledKeys={["title"]}>
@@ -66,11 +66,11 @@ const UserAvatar = () => {
           </DropdownItem>
 
           <DropdownItem
-            key="log-out"
-            textValue="Log out"
+            key="sign-out"
+            textValue="Sign out"
             onClick={() => signOut({ redirectUrl: ROUTES.signIn })}
           >
-            <p className="text-sm font-semibold">Log out</p>
+            <p className="text-sm font-semibold">Sign out</p>
             <p className="text-xs text-content4-foreground">Take a break</p>
           </DropdownItem>
         </DropdownSection>

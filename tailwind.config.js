@@ -194,7 +194,7 @@ export default {
               800: "#221b74",
               900: "#161149",
               foreground: "#fff",
-              DEFAULT: "#4839f4",
+              DEFAULT: "#685cf6",
             },
             secondary: {
               50: "#f7dffd",

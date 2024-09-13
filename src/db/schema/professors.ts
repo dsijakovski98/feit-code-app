@@ -10,7 +10,6 @@ const professors = pgTable("professors", {
   firstName: varchar("first_name", { length: 100 }).notNull(),
   lastName: varchar("last_name", { length: 100 }).notNull(),
   email: varchar("email", { length: 256 }).notNull().unique(),
-  avatarUrl: varchar("avatar_url", { length: 256 }),
   department: moduleType("department").notNull(),
   type: teacherType("type").notNull(),
 });

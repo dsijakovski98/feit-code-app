@@ -3,41 +3,48 @@ import toast from "react-hot-toast";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { useUser } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
+
+import { getAvatarUrl } from "@/services/avatars";
 
 import { db } from "@/db";
 import { USER_TYPE } from "@/types";
 
 const userColumns = {
   id: true,
-  avatarUrl: true,
   email: true,
   firstName: true,
   lastName: true,
 } as const;
 
 export const useFCUser = () => {
-  const { user } = useUser();
+  const { userId } = useAuth();
 
   const { data, isLoading, error } = useQuery({
-    enabled: !!user?.id,
-    queryKey: [{ name: "user", id: user?.id }],
+    enabled: !!userId,
+    queryKey: [{ name: "user", userId }],
     queryFn: async () => {
-      if (!user?.id) return null;
+      if (!userId) return null;
+
+      const avatarUrl = await getAvatarUrl(userId);
 
       const studentAttempt = await db.query.students.findFirst({
-        where: (users, { eq }) => eq(users.id, user.id),
+        where: (users, { eq }) => eq(users.id, userId),
         columns: userColumns,
       });
 
-      if (studentAttempt) return { fcUser: studentAttempt, type: USER_TYPE.student };
+      if (studentAttempt) {
+        return { user: { ...studentAttempt, avatarUrl }, type: USER_TYPE.student };
+      }
 
       const professorAttempt = await db.query.professors.findFirst({
-        where: (professors, { eq }) => eq(professors.id, user.id),
+        where: (professors, { eq }) => eq(professors.id, userId),
         columns: userColumns,
       });
 
-      if (professorAttempt) return { fcUser: professorAttempt, type: USER_TYPE.professor };
+      if (professorAttempt) {
+        return { user: { ...professorAttempt, avatarUrl }, type: USER_TYPE.professor };
+      }
 
       throw new Error("User not found!");
     },

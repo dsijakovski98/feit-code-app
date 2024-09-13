@@ -1,8 +1,15 @@
+import { ClassValue } from "clsx";
+import clsx from "clsx";
+
 import { useUser } from "@clerk/clerk-react";
 
 import Icon from "@/components/ui/Icon";
 
-const AuthStrategyIcon = () => {
+type Props = {
+  className?: ClassValue;
+};
+
+const AuthStrategyIcon = ({ className = "" }: Props) => {
   const { user } = useUser();
 
   if (!user) return null;
@@ -10,11 +17,11 @@ const AuthStrategyIcon = () => {
   if (!user.primaryEmailAddress) return null;
 
   if (user.primaryEmailAddress.verification.strategy?.includes("google")) {
-    return <Icon name="google" className="h-8 w-8" />;
+    return <Icon name="google" className={clsx("h-8 w-8", className)} />;
   }
 
   if (user.primaryEmailAddress.verification.strategy?.includes("github")) {
-    return <Icon name="github" className="h-8 w-8" />;
+    return <Icon name="github" className={clsx("h-8 w-8", className)} />;
   }
 
   return null;

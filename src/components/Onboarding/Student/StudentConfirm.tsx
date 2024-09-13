@@ -60,7 +60,7 @@ const StudentConfirm = () => {
     },
   });
 
-  const handleCreateUser = () => {
+  const handleCreateUser = async () => {
     if (!user) return;
 
     mutate({ user, avatarUrl, ...form });

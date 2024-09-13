@@ -11,15 +11,13 @@ const StudentDashboard = lazy(() => import("@/components/Dashboards/StudentDashb
 const Dashboard = () => {
   const { userData } = useFCUser();
 
+  if (!userData) return <DashboardSkeleton />;
+
   return (
-    <div className="h-full px-8 pb-8">
-      {userData ? (
-        <Suspense fallback={null}>
-          {userData.type === USER_TYPE.student ? <StudentDashboard /> : <ProfessorDashboard />}
-        </Suspense>
-      ) : (
-        <DashboardSkeleton />
-      )}
+    <div className="h-full bg-content2 p-8 dark:bg-primary-50/70">
+      <Suspense fallback={null}>
+        {userData.type === USER_TYPE.student ? <StudentDashboard /> : <ProfessorDashboard />}
+      </Suspense>
     </div>
   );
 };
