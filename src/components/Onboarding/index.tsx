@@ -34,7 +34,7 @@ const Onboarding = () => {
   }, [toggleOn]);
 
   return (
-    <main className="bg-dots grid min-h-dvh place-items-center">
+    <main className="grid min-h-dvh place-items-center bg-dots-light dark:bg-dots-dark">
       <div className="flex flex-col items-center">
         <div className="flex w-fit max-w-40 drop-shadow-[0px_0px_4px_theme(colors.primary)]">
           <img src="/images/logo.svg" />
