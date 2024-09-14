@@ -1,5 +1,7 @@
 import AuthPageWindow from "@/layouts/AuthPageWindow";
 
+import ForgotPasswordForm from "@/components/AuthForms/SignIn/ForgotPassword";
+
 import { ROUTES } from "@/constants/routes";
 
 const ForgotPassword = () => {
@@ -9,8 +11,7 @@ const ForgotPassword = () => {
       href={ROUTES.forgotPassword}
       heading="Don't worry, it happens"
     >
-      Form here
-      {/* <SignInForm /> */}
+      <ForgotPasswordForm />
     </AuthPageWindow>
   );
 };

@@ -1,10 +1,11 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import clsx from "clsx";
 
-import { useSignUp } from "@clerk/clerk-react";
+import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
 import { Spinner } from "@nextui-org/react";
 
@@ -16,15 +17,15 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { VerifyAuthSchema } from "@/utils/formSchemas/auth/verifyAuthSchema";
+import { VerifyPasswordSchema } from "@/utils/formSchemas/auth/forgotPasswordSchema";
 
 type Props = {
-  verifyMode: Toggle;
+  verifyToggle: Toggle;
 };
 
-const VerifySignUp = ({ verifyMode }: Props) => {
+const VerifyPassword = ({ verifyToggle }: Props) => {
   const { fullScreen } = useCtx(WindowContext);
-  const { signUp, setActive } = useSignUp();
+  const { signIn, setActive } = useSignIn();
   const navigate = useNavigate();
 
   const {
@@ -32,24 +33,29 @@ const VerifySignUp = ({ verifyMode }: Props) => {
     control,
     setError,
     formState: { isSubmitting },
-  } = useForm<VerifyAuthSchema>({
-    resolver: valibotResolver(VerifyAuthSchema),
+  } = useForm<VerifyPasswordSchema>({
+    resolver: valibotResolver(VerifyPasswordSchema),
     defaultValues: {
       code: "",
+      password: "",
     },
   });
 
-  const onSubmit: SubmitHandler<VerifyAuthSchema> = async ({ code }) => {
-    if (!signUp) return;
+  const onSubmit: SubmitHandler<VerifyPasswordSchema> = async ({ code, password }) => {
+    if (!signIn) return;
 
     try {
-      const completeSignUp = await signUp.attemptEmailAddressVerification({
+      const completeReset = await signIn.attemptFirstFactor({
+        strategy: "reset_password_email_code",
         code,
+        password,
       });
 
-      if (completeSignUp.status == "complete") {
-        await setActive({ session: completeSignUp.createdSessionId });
-        navigate(ROUTES.welcome);
+      if (completeReset.status === "complete") {
+        await setActive({ session: completeReset.createdSessionId });
+        navigate(ROUTES.dashboard);
+
+        toast.success("Password reset!");
       } else {
         setError("code", { message: "Could not verify code!" });
       }
@@ -68,11 +74,16 @@ const VerifySignUp = ({ verifyMode }: Props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={clsx("mx-auto flex h-full w-[90%] flex-col gap-4 pb-3 lg:w-[95%] lg:pb-1", {
-        "pt-36": fullScreen,
+      className={clsx("mx-auto flex h-full w-[90%] flex-col gap-6 pb-3 lg:w-[95%] lg:pb-1", {
+        "pt-2": fullScreen,
       })}
     >
-      <p className="text-center text-lg">Enter the 6 digit code you received on your email</p>
+      <div>
+        <p className="text-center text-lg">Enter the 6 digit code you received on your email</p>
+        <p className="text-center text-sm font-medium text-foreground-300">
+          Make sure to check your Spam folder just in case
+        </p>
+      </div>
 
       <div
         className={clsx("space-y-1.5", {
@@ -103,8 +114,26 @@ const VerifySignUp = ({ verifyMode }: Props) => {
           )}
         />
 
+        <Controller
+          control={control}
+          name="password"
+          disabled={isSubmitting}
+          render={({ field, fieldState }) => (
+            <Input
+              {...field}
+              size="lg"
+              label="New password"
+              type="password"
+              color="default"
+              variant="underlined"
+              isInvalid={fieldState.invalid}
+              errorMessage={fieldState.error?.message}
+            />
+          )}
+        />
+
         <div className="flex justify-between gap-4">
-          <Button fullWidth size="lg" color="default" onPress={verifyMode.toggleOff}>
+          <Button fullWidth size="lg" color="default" onPress={verifyToggle.toggleOff}>
             Use different email
           </Button>
 
@@ -118,7 +147,7 @@ const VerifySignUp = ({ verifyMode }: Props) => {
             startContent={isSubmitting && <Spinner color="default" size="sm" />}
             className="bg-primary text-primary-foreground disabled:bg-slate-500"
           >
-            Verify
+            Reset Password
           </Button>
         </div>
       </div>
@@ -126,4 +155,4 @@ const VerifySignUp = ({ verifyMode }: Props) => {
   );
 };
 
-export default VerifySignUp;
+export default VerifyPassword;
