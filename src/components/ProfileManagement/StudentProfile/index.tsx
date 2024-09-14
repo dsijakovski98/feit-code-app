@@ -1,35 +1,13 @@
-import { Tab, Tabs } from "@nextui-org/tabs";
+import StudentProfileForm from "@/components/ProfileManagement/StudentProfile/ProfileForm";
+import StudentProfileSkeleton from "@/components/ProfileManagement/StudentProfile/Skeleton";
 
-import SecuritySettings from "@/components/ProfileManagement/Security";
-import ProfileTab from "@/components/ProfileManagement/StudentProfile/ProfileTab";
-import ProfileTabSkeleton from "@/components/ProfileManagement/StudentProfile/ProfileTab/Skeleton";
-
-import { useStudentProfile } from "@/hooks/students/useStudentProfile";
+import { useProfile } from "@/hooks/useProfile";
+import { USER_TYPE } from "@/types";
 
 const StudentProfile = () => {
-  const { student } = useStudentProfile();
+  const { profile } = useProfile(USER_TYPE.student);
 
-  return (
-    <Tabs
-      fullWidth
-      size="lg"
-      variant="underlined"
-      aria-label="Profile tabs"
-      destroyInactiveTabPanel={false}
-      classNames={{
-        tabContent: "text-foreground group-data-[selected]:font-semibold",
-        panel: "pt-6 px-10",
-      }}
-    >
-      <Tab key="profile" title="Profile">
-        {student ? <ProfileTab student={student} /> : <ProfileTabSkeleton />}
-      </Tab>
-
-      <Tab key="security" title="Security">
-        <SecuritySettings />
-      </Tab>
-    </Tabs>
-  );
+  return profile ? <StudentProfileForm student={profile} /> : <StudentProfileSkeleton />;
 };
 
 export default StudentProfile;

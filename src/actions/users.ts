@@ -83,10 +83,8 @@ export const updateStudent = async ({
   } catch (e) {
     // TODO: Sentry logging
     console.log({ e });
-    throw new Error("Failed to update student!");
+    throw new Error("An error happened while updating your profile!");
   }
-
-  return true;
 };
 
 type ProfessorData = ProfessorForm & UserData;
@@ -119,6 +117,37 @@ export const createNewProfessor = async ({
   }
 
   return true;
+};
+
+type UpdateProfessorData = Omit<ProfessorData, "user"> & { userId: string };
+export const updateProfessor = async ({
+  userId,
+  fullName,
+  department,
+  type,
+  avatarUrl,
+}: UpdateProfessorData) => {
+  const { firstName, lastName } = splitFullName(fullName);
+
+  try {
+    await Promise.all([
+      db
+        .update(professors)
+        .set({
+          firstName,
+          lastName,
+          department,
+          type,
+        })
+        .where(eq(professors.id, userId)),
+      updateAvatar(userId, avatarUrl),
+    ]);
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("An error happened while updating your profile!");
+  }
 };
 
 export const resetPassword = async () => {

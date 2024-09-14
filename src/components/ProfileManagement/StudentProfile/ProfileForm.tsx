@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useAuth } from "@clerk/clerk-react";
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 
 import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
@@ -14,17 +13,17 @@ import Input from "@/components/ui/Input";
 
 import { updateStudent } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
-import { UseStudentProfile } from "@/hooks/students/useStudentProfile";
+import { UserProfile } from "@/hooks/useProfile";
+import { USER_TYPE } from "@/types";
 import { StudentProfileSchema } from "@/utils/formSchemas/profile/studentProfile";
 
 type Props = {
-  student: NonNullable<UseStudentProfile["student"]>;
+  student: UserProfile<"Student">;
 };
 
-const ProfileTab = ({ student }: Props) => {
-  const { firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
+const StudentProfileForm = ({ student }: Props) => {
+  const { id: userId, firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
 
-  const { userId } = useAuth();
   const queryClient = useQueryClient();
 
   const fullName = useMemo(() => `${firstName} ${lastName}`, [firstName, lastName]);
@@ -44,20 +43,22 @@ const ProfileTab = ({ student }: Props) => {
       bio: bio ?? "",
       indexNumber: indexNumber.toString(),
       indexYear: indexYear.toString(),
-      major: major,
+      major,
     },
   });
 
   const onSubmit: SubmitHandler<StudentProfileSchema> = async (formData) => {
-    if (!userId) return;
-
     try {
       await updateStudent({ ...formData, avatarUrl, userId });
 
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: [{ name: "student-profile", userId }] }),
+        queryClient.invalidateQueries({
+          queryKey: [{ name: "profile", type: USER_TYPE.student, userId }],
+        }),
         queryClient.invalidateQueries({ queryKey: [{ name: "user", userId }] }),
       ]);
+
+      toast.success("Profile updated!");
     } catch (error) {
       if (error instanceof Error) {
         const { message } = error;
@@ -195,4 +196,4 @@ const ProfileTab = ({ student }: Props) => {
   );
 };
 
-export default ProfileTab;
+export default StudentProfileForm;
