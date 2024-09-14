@@ -115,7 +115,6 @@ const UserTypeSelector = () => {
           )}
         </AnimatePresence>
       </motion.div>
-      {/* <ConfirmDialog dialog={confirmDialog} /> */}
     </Fragment>
   );
 };
