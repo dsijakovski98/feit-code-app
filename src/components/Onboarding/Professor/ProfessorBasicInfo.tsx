@@ -8,10 +8,10 @@ import { ProfessorForm, ProfessorOnboardingContext } from "@/components/Onboardi
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
-import { TEACHER_TYPE } from "@/constants/professors";
 import { MAJORS } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
+import { TEACHER_TYPE } from "@/types";
 import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
 
 const ProfessorBasicInfo = () => {

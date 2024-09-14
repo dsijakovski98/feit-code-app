@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { RadioGroup } from "@nextui-org/radio";
 
-import ConfirmDialog from "@/components/Onboarding/UserTypeSelect/ConfirmDialog";
 import RadioSelect from "@/components/Onboarding/UserTypeSelect/RadioSelect";
 import Button from "@/components/ui/Button";
 
@@ -15,6 +15,7 @@ import { USER_TYPE, UserType } from "@/types";
 
 const UserTypeSelector = () => {
   const {
+    nextStep,
     userState: [userType, setUserType],
   } = useCtx(OnboardingContext);
 
@@ -24,51 +25,97 @@ const UserTypeSelector = () => {
     setUserType(val as UserType);
   };
 
+  const confirmChoice = () => {
+    nextStep();
+    confirmDialog.toggleOff();
+  };
+
   return (
     <Fragment>
-      <div className="space-y-8 py-10">
-        <div className="flex items-center justify-between gap-8 md:items-start">
-          <p className="text-2xl font-light">
-            First thing's first, what type of FEIT Coder are you?
-          </p>
+      <motion.div layout className="py-10">
+        <AnimatePresence>
+          {confirmDialog.open && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="space-y-8"
+            >
+              <div className="space-y-6">
+                <p className="text-xl font-light">
+                  Are you sure you are a {userType}?{" "}
+                  <b className="font-semibold">You cannot change this later.</b>
+                </p>
 
-          <Button
-            disabled={!userType}
-            tabIndex={userType ? 0 : -1}
-            color="primary"
-            className={clsx("font-semibold opacity-100 transition-opacity", {
-              "pointer-events-none opacity-0": !userType,
-            })}
-            onPress={confirmDialog.toggleOn}
-          >
-            Continue
-          </Button>
-        </div>
+                <div className="flex justify-between gap-4 *:basis-full">
+                  <Button
+                    size="lg"
+                    color="default"
+                    variant="bordered"
+                    onPress={confirmDialog.toggleOff}
+                  >
+                    Go back
+                  </Button>
+                  <Button size="lg" onPress={confirmChoice}>
+                    Continue
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <RadioGroup
-          value={userType}
-          onValueChange={handleChange}
-          description="You will NOT be able to change this at a later time"
-          classNames={{
-            wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4  w-full",
-            description: "text-sm text-gray-400 font-medium mt-2",
-          }}
-        >
-          <RadioSelect
-            value={USER_TYPE.student}
-            description="Take coding exams, get fast results and keep track of your grades"
-          >
-            I'm a Student
-          </RadioSelect>
-          <RadioSelect
-            value={USER_TYPE.professor}
-            description="Create and manage courses, coding exams and receive insights"
-          >
-            I'm a Professor
-          </RadioSelect>
-        </RadioGroup>
-      </div>
-      <ConfirmDialog dialog={confirmDialog} />
+        <AnimatePresence>
+          {!confirmDialog.open && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="space-y-8"
+            >
+              <div className="flex items-center justify-between gap-8 md:items-start">
+                <p className="text-2xl font-light">
+                  First thing's first, what type of FEIT Coder are you?
+                </p>
+
+                <Button
+                  disabled={!userType}
+                  tabIndex={userType ? 0 : -1}
+                  color="primary"
+                  className={clsx("font-semibold opacity-100 transition-opacity", {
+                    "pointer-events-none opacity-0": !userType,
+                  })}
+                  onPress={confirmDialog.toggleOn}
+                >
+                  Continue
+                </Button>
+              </div>
+              <RadioGroup
+                value={userType}
+                onValueChange={handleChange}
+                description="You will not be able to change this later"
+                classNames={{
+                  wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4  w-full",
+                  description: "text-sm text-gray-400 font-medium mt-2",
+                }}
+              >
+                <RadioSelect
+                  value={USER_TYPE.student}
+                  description="Take coding exams, get fast results and keep track of your grades"
+                >
+                  I'm a Student
+                </RadioSelect>
+                <RadioSelect
+                  value={USER_TYPE.professor}
+                  description="Create and manage courses, coding exams and receive insights"
+                >
+                  I'm a Professor
+                </RadioSelect>
+              </RadioGroup>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
     </Fragment>
   );
 };

@@ -4,11 +4,10 @@ import OnboardingStep from "@/components/Onboarding/OnboardingStep";
 import ProfessorBasicInfo from "@/components/Onboarding/Professor/ProfessorBasicInfo";
 import ProfessorConfirm from "@/components/Onboarding/Professor/ProfessorConfirm";
 
-import { TEACHER_TYPE } from "@/constants/professors";
 import { MAJOR_TYPE } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { UseState } from "@/types";
+import { TEACHER_TYPE, UseState } from "@/types";
 import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
 
 export type ProfessorForm = ProfessorOnboardingSchema;
