@@ -21,14 +21,14 @@ const Nav = () => {
   );
 
   return (
-    <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-primary-50/70 lg:py-3">
+    <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-primary-50/70 lg:bg-primary lg:py-2.5">
       <nav className="flex items-center justify-between">
         <div className="lg:hidden">
           <h1 className="text-2xl font-semibold">{timeGreeting}</h1>
           <time>{timestamp}</time>
         </div>
 
-        <LogoFC className="hidden brightness-75 lg:flex" />
+        <LogoFC className="hidden lg:flex" />
 
         <div className="flex items-center gap-4">
           <div className="space-x-2">
@@ -37,7 +37,10 @@ const Nav = () => {
             <NotificationsMenu />
           </div>
 
-          <Divider orientation="vertical" className="mr-2 block !h-10 w-px self-stretch" />
+          <Divider
+            orientation="vertical"
+            className="mr-2 block !h-10 w-px self-stretch dark:bg-foreground lg:bg-background"
+          />
 
           <UserAvatar />
         </div>

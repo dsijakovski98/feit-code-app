@@ -6,7 +6,6 @@ import { Tab, Tabs } from "@nextui-org/tabs";
 import SecuritySettings from "@/components/ProfileManagement/Security";
 
 import { useFCUser } from "@/hooks/useFCUser";
-import { useResponsive } from "@/hooks/useResponsive";
 import { USER_TYPE } from "@/types";
 
 const ProfessorProfile = lazy(() => import("@/components/ProfileManagement/ProfessorProfile"));
@@ -14,21 +13,20 @@ const StudentProfile = lazy(() => import("@/components/ProfileManagement/Student
 
 const ProfilePage = () => {
   const { userData } = useFCUser();
-  const { isMobile } = useResponsive();
 
   return (
-    <section className="overflow-y-scroll bg-primary-50/20 pt-4">
-      <div className="mx-auto max-w-[75ch] md:max-w-full">
+    <section className="h-full overflow-y-scroll bg-primary-50/20 pt-4 lg:pt-2">
+      <div className="mx-auto h-full max-w-[75ch] md:max-w-full">
         {userData ? (
           <Tabs
             fullWidth
-            size={isMobile ? "md" : "lg"}
+            size="lg"
             variant="underlined"
             aria-label="Profile tabs"
             destroyInactiveTabPanel={false}
             classNames={{
               tabContent: "text-foreground group-data-[selected]:font-semibold",
-              panel: "pt-6 px-10 md:px-8",
+              panel: "pt-6 px-10 md:px-6 lg:py-4",
             }}
           >
             <Tab key="profile" title="Profile">

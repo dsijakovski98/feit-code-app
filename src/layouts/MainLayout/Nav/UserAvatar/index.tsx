@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "@clerk/clerk-react";
 import { Avatar } from "@nextui-org/avatar";
@@ -34,7 +34,7 @@ const UserAvatar = () => {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger className="cursor-pointer">
-        <Avatar isBordered src={avatarUrl || ""} className="ring-foreground" />
+        <Avatar isBordered src={avatarUrl || ""} className="ring-foreground lg:ring-foreground" />
       </DropdownTrigger>
 
       <DropdownMenu disabledKeys={["title"]} closeOnSelect>
@@ -56,15 +56,11 @@ const UserAvatar = () => {
         </DropdownItem>
 
         <DropdownSection>
-          <DropdownItem
-            as="a"
-            key="help"
-            textValue="Help & Feedback"
-            href={helpFeedbackUrl}
-            target="_blank"
-          >
-            <p className="text-sm font-semibold">Help & Feedback</p>
-            <p className="text-xs text-content4-foreground">Report an issue</p>
+          <DropdownItem key="help" textValue="Help & Feedback">
+            <Link to={helpFeedbackUrl} target="_blank">
+              <p className="text-sm font-semibold">Help & Feedback</p>
+              <p className="text-xs text-content4-foreground">Report an issue</p>
+            </Link>
           </DropdownItem>
 
           <DropdownItem

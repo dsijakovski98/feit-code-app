@@ -73,7 +73,7 @@ const StudentProfileForm = ({ student }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-3">
+      <div className="space-y-3 lg:space-y-2">
         <AvatarUpload avatarState={avatarState} email={email} />
 
         <Controller
@@ -116,7 +116,7 @@ const StudentProfileForm = ({ student }: Props) => {
           )}
         />
 
-        <div className="flex gap-8">
+        <div className="flex gap-8 lg:flex-col lg:gap-0">
           <Controller
             control={control}
             name="indexNumber"
@@ -183,7 +183,7 @@ const StudentProfileForm = ({ student }: Props) => {
         />
       </div>
 
-      <div className="mt-7 translate-y-2">
+      <div className="mt-7 translate-y-2 lg:mt-5 lg:translate-y-0.5">
         <Button
           fullWidth
           size={isMobile ? "md" : "lg"}

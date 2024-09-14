@@ -45,11 +45,16 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
 
   return (
     <section className="flex items-end justify-between">
-      <div className={clsx("flex items-end gap-4", className)}>
+      <div
+        className={clsx(
+          "flex items-end gap-4 lg:w-full lg:items-center lg:justify-center",
+          className,
+        )}
+      >
         <AvatarPreview avatar={avatar} ref={imgRef} />
 
         <div className="space-y-1">
-          <p className="font-semibold">Avatar</p>
+          <p className="font-semibold">Update Avatar</p>
           <div className="flex items-center gap-2">
             <Button
               color="default"
@@ -93,7 +98,7 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
         </div>
       </div>
 
-      <p className="text-end">
+      <p className="text-end lg:hidden">
         Signed in as <span className="block font-semibold">{email}</span>
       </p>
     </section>
