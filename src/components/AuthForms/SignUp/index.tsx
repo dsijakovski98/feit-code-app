@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Fragment } from "react/jsx-runtime";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { useSignUp } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
@@ -25,6 +28,18 @@ const SignUpForm = () => {
   const { fullScreen } = useCtx(WindowContext);
   const { signUp } = useSignUp();
   const verifyMode = useToggle();
+
+  const [initialHeight, setInitialHeight] = useState<0 | "auto">("auto");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setInitialHeight(0);
+    }, 100);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  });
 
   const {
     handleSubmit,
@@ -87,122 +102,135 @@ const SignUpForm = () => {
     clearErrors("root");
   };
 
-  if (!signUp) {
-    return null;
-  }
-
-  if (verifyMode.open) {
-    return <Verify verifyMode={verifyMode} />;
-  }
-
   return (
-    <form
-      onChange={handleChange}
-      onSubmit={handleSubmit(onSubmit)}
-      className={clsx(
-        "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-0",
-        {
-          "w-[70%] !gap-4 pt-10": fullScreen,
-        },
-      )}
-    >
-      <div className={clsx("mb-10 lg:mb-2", { "mb-36": fullScreen })}>
-        <Controller
-          control={control}
-          name="email"
-          disabled={isSubmitting}
-          render={({ field, fieldState }) => (
-            <Input
-              {...field}
-              autoFocus
-              size="lg"
-              label="Email"
-              color="default"
-              variant="underlined"
-              isInvalid={fieldState.invalid}
-              errorMessage={fieldState.error?.message}
-            />
-          )}
-        />
+    <Fragment>
+      <AnimatePresence>
+        {verifyMode.open && (
+          <motion.div
+            initial={{ opacity: 0, height: "0" }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+          >
+            <Verify verifyMode={verifyMode} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        <div className="flex items-center justify-between gap-8 lg:block">
-          <Controller
-            control={control}
-            name="password"
-            disabled={isSubmitting}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                size="lg"
-                label="Password"
-                type="password"
-                color="default"
-                variant="underlined"
-                isInvalid={fieldState.invalid}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="confirmPassword"
-            disabled={isSubmitting}
-            render={({ field, fieldState }) => (
-              <Input
-                {...field}
-                size="lg"
-                label="Confirm password"
-                type="password"
-                color="default"
-                variant="underlined"
-                isInvalid={fieldState.invalid}
-                errorMessage={fieldState.error?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
-
-      <div className="relative">
-        {errors.root?.message && (
-          <p
+      <AnimatePresence>
+        {!verifyMode.open && (
+          <motion.form
+            initial={{ opacity: 0, height: initialHeight }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            onChange={handleChange}
+            onSubmit={handleSubmit(onSubmit)}
             className={clsx(
-              "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-500",
+              "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-0",
               {
-                "!-top-4 !text-lg": fullScreen,
+                "w-[70%] !gap-4 pt-10": fullScreen,
               },
             )}
           >
-            {errors.root.message}
-          </p>
+            <div className={clsx("mb-10 lg:mb-2", { "mb-36": fullScreen })}>
+              <Controller
+                control={control}
+                name="email"
+                disabled={isSubmitting}
+                render={({ field, fieldState }) => (
+                  <Input
+                    {...field}
+                    autoFocus
+                    size="lg"
+                    label="Email"
+                    color="default"
+                    variant="underlined"
+                    isInvalid={fieldState.invalid}
+                    errorMessage={fieldState.error?.message}
+                  />
+                )}
+              />
+
+              <div className="flex items-center justify-between gap-8 lg:block">
+                <Controller
+                  control={control}
+                  name="password"
+                  disabled={isSubmitting}
+                  render={({ field, fieldState }) => (
+                    <Input
+                      {...field}
+                      size="lg"
+                      label="Password"
+                      type="password"
+                      color="default"
+                      variant="underlined"
+                      isInvalid={fieldState.invalid}
+                      errorMessage={fieldState.error?.message}
+                    />
+                  )}
+                />
+
+                <Controller
+                  control={control}
+                  name="confirmPassword"
+                  disabled={isSubmitting}
+                  render={({ field, fieldState }) => (
+                    <Input
+                      {...field}
+                      size="lg"
+                      label="Confirm password"
+                      type="password"
+                      color="default"
+                      variant="underlined"
+                      isInvalid={fieldState.invalid}
+                      errorMessage={fieldState.error?.message}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+
+            <div className="relative">
+              {errors.root?.message && (
+                <p
+                  className={clsx(
+                    "absolute -top-2 w-full -translate-y-full text-center text-sm font-medium leading-[1.1] text-danger-500",
+                    {
+                      "!-top-4 !text-lg": fullScreen,
+                    },
+                  )}
+                >
+                  {errors.root.message}
+                </p>
+              )}
+
+              <Button
+                fullWidth
+                size="md"
+                type="submit"
+                color="default"
+                variant="solid"
+                disabled={isSubmitting}
+                startContent={isSubmitting && <Spinner color="default" size="sm" />}
+                className="bg-primary text-base !font-semibold text-primary-foreground disabled:bg-slate-400"
+              >
+                Sign up
+              </Button>
+            </div>
+
+            <p className="text-center text-content1-foreground">or</p>
+
+            <OAuthJoin joinType="Join" isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
+
+            <p className="hidden pt-2 text-center md:block">
+              Already a member?{" "}
+              <Link className="text-primary underline" to={ROUTES.signIn}>
+                Sign in
+              </Link>
+            </p>
+          </motion.form>
         )}
-
-        <Button
-          fullWidth
-          size="md"
-          type="submit"
-          color="default"
-          variant="solid"
-          disabled={isSubmitting}
-          startContent={isSubmitting && <Spinner color="default" size="sm" />}
-          className="bg-primary text-base !font-semibold text-primary-foreground disabled:bg-slate-400"
-        >
-          Sign up
-        </Button>
-      </div>
-
-      <p className="text-center text-content1-foreground">or</p>
-
-      <OAuthJoin joinType="Join" isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
-
-      <p className="hidden pt-2 text-center md:block">
-        Already a member?{" "}
-        <Link className="text-primary underline" to={ROUTES.signIn}>
-          Sign in
-        </Link>
-      </p>
-    </form>
+      </AnimatePresence>
+    </Fragment>
   );
 };
 

@@ -14,7 +14,7 @@ type Props = {
 
 const AuthPageWindow = ({ title, href, heading, children }: Props) => {
   return (
-    <main className="bg-dots-light dark:!bg-dots-dark relative min-h-[100dvh] bg-fixed pt-10 lg:pt-5">
+    <main className="relative min-h-[100dvh] bg-dots-light bg-fixed pt-10 dark:!bg-dots-dark lg:pt-5">
       <div className="flex flex-col items-center px-[10px] text-center">
         <Link to={ROUTES.home} className="flex items-center gap-2 font-quicksand text-2xl">
           <p>FEIT</p>
@@ -28,8 +28,8 @@ const AuthPageWindow = ({ title, href, heading, children }: Props) => {
       </div>
 
       <div className="mt-8 flex justify-center lg:mt-3">
-        <Window title={title} className="w-[740px] lg:w-[90%] lg:min-w-[350px]">
-          <div className="grid h-full grid-cols-[1fr_3fr] md:block">
+        <Window title={title} className="w-[870px] lg:w-[90%] lg:min-w-[350px]">
+          <div className="grid h-full grid-cols-[1.15fr_3fr] lg:grid-cols-[1.5fr_3fr] md:block">
             <AuthSidebar activeLink={href} />
 
             <div className="bg-gradient-to-r from-background/90 to-primary-50/20 p-6 lg:p-4">

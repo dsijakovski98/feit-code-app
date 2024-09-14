@@ -79,8 +79,6 @@ const SignInForm = () => {
     clearErrors("root");
   };
 
-  if (!signIn) return null;
-
   return (
     <form
       onChange={handleChange}
@@ -111,23 +109,31 @@ const SignInForm = () => {
           )}
         />
 
-        <Controller
-          control={control}
-          name="password"
-          disabled={isSubmitting}
-          render={({ field, fieldState }) => (
-            <Input
-              {...field}
-              size="lg"
-              type="password"
-              label="Password"
-              color="default"
-              variant="underlined"
-              isInvalid={fieldState.invalid}
-              errorMessage={fieldState.error?.message}
-            />
-          )}
-        />
+        <div>
+          <Controller
+            control={control}
+            name="password"
+            disabled={isSubmitting}
+            render={({ field, fieldState }) => (
+              <Input
+                {...field}
+                size="lg"
+                type="password"
+                label="Password"
+                color="default"
+                variant="underlined"
+                isInvalid={fieldState.invalid}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
+          />
+          <Link
+            to={ROUTES.forgotPassword}
+            className="font-medium transition-colors hover:text-primary focus:text-primary"
+          >
+            Forgot password?
+          </Link>
+        </div>
       </div>
 
       <div className="relative">
