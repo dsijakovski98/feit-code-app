@@ -13,12 +13,12 @@ import Input from "@/components/ui/Input";
 
 import { updateProfessor } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
-import { UseProfessorProfile } from "@/hooks/professors/useProfessorProfile";
-import { TEACHER_TYPE } from "@/types";
+import { UserProfile } from "@/hooks/useProfile";
+import { TEACHER_TYPE, USER_TYPE } from "@/types";
 import { ProfessorProfileSchema } from "@/utils/formSchemas/profile/professorProfile";
 
 type Props = {
-  professor: NonNullable<UseProfessorProfile["professor"]>;
+  professor: UserProfile<"Professor">;
 };
 
 const ProfessorProfileForm = ({ professor }: Props) => {
@@ -50,9 +50,13 @@ const ProfessorProfileForm = ({ professor }: Props) => {
       await updateProfessor({ ...formData, avatarUrl, userId });
 
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: [{ name: "professor-profile", userId }] }),
+        queryClient.invalidateQueries({
+          queryKey: [{ name: "profile", type: USER_TYPE.professor, userId }],
+        }),
         queryClient.invalidateQueries({ queryKey: [{ name: "user", userId }] }),
       ]);
+
+      toast.success("Profile updated!");
     } catch (error) {
       if (error instanceof Error) {
         const { message } = error;

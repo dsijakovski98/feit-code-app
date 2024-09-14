@@ -13,11 +13,12 @@ import Input from "@/components/ui/Input";
 
 import { updateStudent } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
-import { UseStudentProfile } from "@/hooks/students/useStudentProfile";
+import { UserProfile } from "@/hooks/useProfile";
+import { USER_TYPE } from "@/types";
 import { StudentProfileSchema } from "@/utils/formSchemas/profile/studentProfile";
 
 type Props = {
-  student: NonNullable<UseStudentProfile["student"]>;
+  student: UserProfile<"Student">;
 };
 
 const StudentProfileForm = ({ student }: Props) => {
@@ -51,9 +52,13 @@ const StudentProfileForm = ({ student }: Props) => {
       await updateStudent({ ...formData, avatarUrl, userId });
 
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: [{ name: "student-profile", userId }] }),
+        queryClient.invalidateQueries({
+          queryKey: [{ name: "profile", type: USER_TYPE.student, userId }],
+        }),
         queryClient.invalidateQueries({ queryKey: [{ name: "user", userId }] }),
       ]);
+
+      toast.success("Profile updated!");
     } catch (error) {
       if (error instanceof Error) {
         const { message } = error;

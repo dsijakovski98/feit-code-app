@@ -1,12 +1,13 @@
 import ProfessorProfileForm from "@/components/ProfileManagement/ProfessorProfile/ProfileForm";
 import ProfessorProfileSkeleton from "@/components/ProfileManagement/ProfessorProfile/Skeleton";
 
-import { useProfessorProfile } from "@/hooks/professors/useProfessorProfile";
+import { useProfile } from "@/hooks/useProfile";
+import { USER_TYPE } from "@/types";
 
 const ProfessorProfile = () => {
-  const { professor } = useProfessorProfile();
+  const { profile } = useProfile(USER_TYPE.professor);
 
-  return professor ? <ProfessorProfileForm professor={professor} /> : <ProfessorProfileSkeleton />;
+  return profile ? <ProfessorProfileForm professor={profile} /> : <ProfessorProfileSkeleton />;
 };
 
 export default ProfessorProfile;
