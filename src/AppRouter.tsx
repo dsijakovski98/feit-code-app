@@ -10,10 +10,9 @@ import PageWrapper from "@/components/PageWrapper";
 
 import { ROUTES } from "@/constants/routes";
 
-const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password"));
-
 const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
+const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password"));
 const CallbackSSO = lazy(() => import("@/pages/auth/sso-callback"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
