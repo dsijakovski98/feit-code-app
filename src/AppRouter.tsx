@@ -12,6 +12,7 @@ import { ROUTES } from "@/constants/routes";
 
 const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
+const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password"));
 const CallbackSSO = lazy(() => import("@/pages/auth/sso-callback"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
@@ -46,6 +47,7 @@ const AppRouter = () => {
             >
               <Route path={ROUTES.signIn} element={<SignInPage />} />
               <Route path={ROUTES.signUp} element={<SignUpPage />} />
+              <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
               <Route path={ROUTES.ssoCallback} element={<CallbackSSO />} />
             </Route>
           </Route>

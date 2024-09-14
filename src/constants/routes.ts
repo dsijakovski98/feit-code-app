@@ -7,6 +7,7 @@ export const ROUTES = {
 
   signIn: "/sign-in",
   signUp: "/sign-up",
+  forgotPassword: "/forgot-password",
 
   ssoCallback: "/sso",
 
@@ -21,6 +22,7 @@ export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> =
 
   "/sign-in": "Sign in",
   "/sign-up": "Sign up",
+  "/forgot-password": "Forgot password",
 
   "/profile": "Profile",
   "/dashboard/courses": "Courses",
