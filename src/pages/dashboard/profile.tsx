@@ -15,8 +15,8 @@ const ProfilePage = () => {
   const { userData } = useFCUser();
 
   return (
-    <section className="h-full bg-primary-50/20 pt-4">
-      <div className="mx-auto h-full max-w-[75ch] lg:max-w-[90%]">
+    <section className="h-full overflow-y-scroll bg-primary-50/20 pt-4 lg:pt-2">
+      <div className="mx-auto h-full max-w-[75ch] md:max-w-full">
         {userData ? (
           <Tabs
             fullWidth
@@ -26,7 +26,7 @@ const ProfilePage = () => {
             destroyInactiveTabPanel={false}
             classNames={{
               tabContent: "text-foreground group-data-[selected]:font-semibold",
-              panel: "pt-6 px-10",
+              panel: "pt-6 px-10 md:px-6 lg:py-4",
             }}
           >
             <Tab key="profile" title="Profile">

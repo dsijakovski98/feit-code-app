@@ -22,7 +22,7 @@ const ThemeSwitcher = ({ size = "md" }: Props) => {
       radius="full"
       variant="light"
       color="default"
-      className="p-1.5"
+      className="p-1.5 lg:text-background lg:dark:text-foreground"
     >
       <Icon name={theme === "dark" ? "moon" : "sun"} />
     </Button>

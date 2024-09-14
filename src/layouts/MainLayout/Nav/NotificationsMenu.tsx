@@ -22,7 +22,7 @@ const NotificationsMenu = () => {
             radius="full"
             variant="light"
             color="default"
-            className="!bg-transparent p-1.5"
+            className="!bg-transparent p-1.5 lg:text-background lg:dark:text-foreground"
           >
             <Icon name="bell" />
           </Button>

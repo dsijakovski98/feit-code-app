@@ -14,6 +14,7 @@ import Input from "@/components/ui/Input";
 import { updateStudent } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
 import { UserProfile } from "@/hooks/useProfile";
+import { useResponsive } from "@/hooks/useResponsive";
 import { USER_TYPE } from "@/types";
 import { StudentProfileSchema } from "@/utils/formSchemas/profile/studentProfile";
 
@@ -24,6 +25,7 @@ type Props = {
 const StudentProfileForm = ({ student }: Props) => {
   const { id: userId, firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
 
+  const { isMobile } = useResponsive();
   const queryClient = useQueryClient();
 
   const fullName = useMemo(() => `${firstName} ${lastName}`, [firstName, lastName]);
@@ -71,7 +73,7 @@ const StudentProfileForm = ({ student }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-3">
+      <div className="space-y-3 lg:space-y-2">
         <AvatarUpload avatarState={avatarState} email={email} />
 
         <Controller
@@ -81,7 +83,7 @@ const StudentProfileForm = ({ student }: Props) => {
             <Input
               {...field}
               autoFocus
-              size="lg"
+              size={isMobile ? "md" : "lg"}
               variant="underlined"
               label="Full Name"
               placeholder="Your first and last name"
@@ -99,7 +101,7 @@ const StudentProfileForm = ({ student }: Props) => {
             <Textarea
               {...field}
               minRows={2}
-              size="lg"
+              size={isMobile ? "md" : "lg"}
               color="default"
               variant="underlined"
               label="Bio (optional)"
@@ -114,14 +116,14 @@ const StudentProfileForm = ({ student }: Props) => {
           )}
         />
 
-        <div className="flex gap-8">
+        <div className="flex gap-8 lg:flex-col lg:gap-0">
           <Controller
             control={control}
             name="indexNumber"
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="lg"
+                size={isMobile ? "md" : "lg"}
                 color="default"
                 variant="underlined"
                 inputMode="numeric"
@@ -141,7 +143,7 @@ const StudentProfileForm = ({ student }: Props) => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                size="lg"
+                size={isMobile ? "md" : "lg"}
                 color="default"
                 variant="underlined"
                 inputMode="numeric"
@@ -161,7 +163,7 @@ const StudentProfileForm = ({ student }: Props) => {
           render={({ field, fieldState }) => (
             <Select
               {...field}
-              size="lg"
+              size={isMobile ? "md" : "lg"}
               label="Major"
               color="default"
               variant="underlined"
@@ -181,10 +183,10 @@ const StudentProfileForm = ({ student }: Props) => {
         />
       </div>
 
-      <div className="mt-7 translate-y-2">
+      <div className="mt-7 translate-y-2 lg:mt-5 lg:translate-y-0.5">
         <Button
           fullWidth
-          size="lg"
+          size={isMobile ? "md" : "lg"}
           type="submit"
           isDisabled={isSubmitting}
           isLoading={isSubmitting}

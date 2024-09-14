@@ -12,15 +12,15 @@ const MainLayout = () => {
         <Sidebar />
       </div>
 
-      <div className="col-start-2 row-span-1 row-start-1">
+      <div className="sticky top-0 col-start-2 row-span-1 row-start-1">
         <Nav />
       </div>
 
-      <main className="col-start-2 row-start-2 h-[calc(100dvh-90px)] overflow-y-auto overflow-x-clip">
-        <Suspense fallback={<PageFallback />}>
+      <Suspense fallback={<PageFallback />}>
+        <main className="col-start-2 row-start-2 overflow-y-scroll lg:h-[calc(100dvh-55px-80px)]">
           <Outlet />
-        </Suspense>
-      </main>
+        </main>
+      </Suspense>
     </div>
   );
 };

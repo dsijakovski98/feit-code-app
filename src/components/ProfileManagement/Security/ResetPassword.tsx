@@ -92,8 +92,9 @@ const ResetPassword = () => {
   return (
     <Fragment>
       <Button
-        color="warning"
-        className="w-[140px] text-sm font-semibold"
+        variant="ghost"
+        color="default"
+        className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
         disabled={!!authStrategy}
         onPress={dialog.toggleOn}
       >

@@ -90,7 +90,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
           )}
         />
 
-        <div className="flex gap-8">
+        <div className="flex gap-8 lg:flex-col lg:gap-0">
           <Controller
             control={control}
             name="department"
