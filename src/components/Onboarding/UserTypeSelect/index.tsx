@@ -42,8 +42,9 @@ const UserTypeSelector = () => {
               className="space-y-8"
             >
               <div className="space-y-6">
-                <p className="text-2xl font-light">
-                  Are you sure you are a {userType}? You cannot change this later.
+                <p className="text-xl font-light">
+                  Are you sure you are a {userType}?{" "}
+                  <b className="font-semibold">You cannot change this later.</b>
                 </p>
 
                 <div className="flex justify-between gap-4 *:basis-full">
@@ -92,7 +93,7 @@ const UserTypeSelector = () => {
               <RadioGroup
                 value={userType}
                 onValueChange={handleChange}
-                description="You will NOT be able to change this at a later time"
+                description="You will not be able to change this later"
                 classNames={{
                   wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4  w-full",
                   description: "text-sm text-gray-400 font-medium mt-2",
