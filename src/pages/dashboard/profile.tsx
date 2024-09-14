@@ -13,7 +13,7 @@ const ProfilePage = () => {
 
   return (
     <section className="h-full bg-primary-50/20 pt-4">
-      <div className="mx-auto max-w-[75ch] lg:max-w-[90%]">
+      <div className="mx-auto h-full max-w-[75ch] lg:max-w-[90%]">
         {userData ? (
           <Tabs
             fullWidth
@@ -35,7 +35,7 @@ const ProfilePage = () => {
             </Tab>
           </Tabs>
         ) : (
-          <div className="grid h-full w-full place-items-center">
+          <div className="grid h-full place-items-center">
             <Spinner size="lg" className="scale-[2]" />
           </div>
         )}

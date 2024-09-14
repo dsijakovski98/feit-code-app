@@ -57,7 +57,7 @@ const SidebarItem = (props: Props) => {
           </div>
           <p
             className={clsx(
-              "group-visited:debug w-full text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500",
+              "w-full text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500",
               {
                 "!text-black dark:!text-primary-500": active,
               },
