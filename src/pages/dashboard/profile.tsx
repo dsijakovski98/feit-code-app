@@ -1,12 +1,15 @@
+import { Suspense, lazy } from "react";
+
 import { Spinner } from "@nextui-org/react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import ProfessorProfile from "@/components/ProfileManagement/ProfessorProfile";
 import SecuritySettings from "@/components/ProfileManagement/Security";
-import StudentProfile from "@/components/ProfileManagement/StudentProfile";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
+
+const ProfessorProfile = lazy(() => import("@/components/ProfileManagement/ProfessorProfile"));
+const StudentProfile = lazy(() => import("@/components/ProfileManagement/StudentProfile"));
 
 const ProfilePage = () => {
   const { userData } = useFCUser();
@@ -27,7 +30,9 @@ const ProfilePage = () => {
             }}
           >
             <Tab key="profile" title="Profile">
-              {userData.type === USER_TYPE.student ? <StudentProfile /> : <ProfessorProfile />}
+              <Suspense fallback={null}>
+                {userData.type === USER_TYPE.student ? <StudentProfile /> : <ProfessorProfile />}
+              </Suspense>
             </Tab>
 
             <Tab key="security" title="Security">
