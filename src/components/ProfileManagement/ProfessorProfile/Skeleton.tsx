@@ -1,9 +1,9 @@
 import { Avatar, Skeleton } from "@nextui-org/react";
 
-const ProfileTabSkeleton = () => {
+const ProfessorProfileSkeleton = () => {
   return (
-    <div className="h-full space-y-12">
-      <div className="mb-16 flex items-end justify-between">
+    <div className="h-full space-y-10">
+      <div className="mb-2 flex items-end justify-between">
         <div>
           <Avatar className="h-[100px] w-[100px] animate-pulse" />
         </div>
@@ -16,16 +16,12 @@ const ProfileTabSkeleton = () => {
 
       <Skeleton className="block h-16 rounded-lg" />
 
-      <Skeleton className="block h-16 rounded-lg" />
-
       <div className="flex justify-between gap-6">
         <Skeleton className="block h-16 w-full rounded-lg" />
         <Skeleton className="block h-16 w-full rounded-lg" />
       </div>
-
-      <Skeleton className="block h-16 rounded-lg" />
     </div>
   );
 };
 
-export default ProfileTabSkeleton;
+export default ProfessorProfileSkeleton;

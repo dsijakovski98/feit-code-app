@@ -15,7 +15,7 @@ export const useStudentProfile = () => {
       if (!userId) return null;
 
       const student = await db.query.students.findFirst({
-        where: (users, { eq }) => eq(users.id, userId),
+        where: (students, { eq }) => eq(students.id, userId),
       });
 
       if (!student) {

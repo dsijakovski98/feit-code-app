@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useAuth } from "@clerk/clerk-react";
 import { Select, SelectItem, Textarea } from "@nextui-org/react";
 
 import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
@@ -21,10 +20,9 @@ type Props = {
   student: NonNullable<UseStudentProfile["student"]>;
 };
 
-const ProfileTab = ({ student }: Props) => {
-  const { firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
+const StudentProfileForm = ({ student }: Props) => {
+  const { id: userId, firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
 
-  const { userId } = useAuth();
   const queryClient = useQueryClient();
 
   const fullName = useMemo(() => `${firstName} ${lastName}`, [firstName, lastName]);
@@ -44,13 +42,11 @@ const ProfileTab = ({ student }: Props) => {
       bio: bio ?? "",
       indexNumber: indexNumber.toString(),
       indexYear: indexYear.toString(),
-      major: major,
+      major,
     },
   });
 
   const onSubmit: SubmitHandler<StudentProfileSchema> = async (formData) => {
-    if (!userId) return;
-
     try {
       await updateStudent({ ...formData, avatarUrl, userId });
 
@@ -195,4 +191,4 @@ const ProfileTab = ({ student }: Props) => {
   );
 };
 
-export default ProfileTab;
+export default StudentProfileForm;
