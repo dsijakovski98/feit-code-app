@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "@clerk/clerk-react";
 import { Avatar } from "@nextui-org/avatar";
@@ -20,6 +21,7 @@ import { getHelpFeedbackUrl } from "@/utils";
 const UserAvatar = () => {
   const { userData } = useFCUser();
   const { signOut } = useAuth();
+  const navigate = useNavigate();
 
   const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
@@ -35,7 +37,7 @@ const UserAvatar = () => {
         <Avatar isBordered src={avatarUrl || ""} className="ring-foreground" />
       </DropdownTrigger>
 
-      <DropdownMenu disabledKeys={["title"]}>
+      <DropdownMenu disabledKeys={["title"]} closeOnSelect>
         <DropdownItem
           key="title"
           textValue="Title"
@@ -48,7 +50,7 @@ const UserAvatar = () => {
           </p>
         </DropdownItem>
 
-        <DropdownItem key="profile" textValue="Profile">
+        <DropdownItem key="profile" onClick={() => navigate(ROUTES.profile)} textValue="Profile">
           <p className="text-sm font-semibold">Profile</p>
           <p className="text-xs text-content4-foreground">Edit your profile settings</p>
         </DropdownItem>
