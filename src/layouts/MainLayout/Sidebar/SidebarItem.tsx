@@ -35,14 +35,11 @@ const SidebarItem = (props: Props) => {
   const { href, icon, label, target, className = "" } = props;
 
   return (
-    <li className="mx-auto min-w-fit max-w-[8ch]">
+    <li className="mx-auto min-w-fit max-w-[8ch] lg:mx-[initial] lg:w-[8ch]">
       <Link
         to={href!}
         target={target}
-        className={clsx(
-          "group grid aspect-square w-full place-items-center text-primary-foreground",
-          className,
-        )}
+        className={clsx("group grid w-full place-items-center text-primary-foreground", className)}
       >
         <div className="grid place-items-center">
           <div

@@ -1,20 +1,13 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
 
+import LogoFC from "@/layouts/MainLayout/LogoFC";
 import SidebarMenu from "@/layouts/MainLayout/Sidebar/Menu";
 import MiscMenu from "@/layouts/MainLayout/Sidebar/Menu/MiscMenu";
 
-import { ROUTES } from "@/constants/routes";
-
 const Sidebar = () => {
   return (
-    <nav className="sticky top-0 flex h-dvh flex-col items-center gap-8 bg-primary-400 px-3 pb-8 pt-4 font-quicksand dark:bg-primary-50/20">
-      <Link
-        to={ROUTES.dashboard}
-        className="flex w-fit max-w-14 brightness-200 transition-[filter] hover:brightness-150 dark:brightness-100 dark:hover:drop-shadow-[0px_0px_8px_theme(colors.primary)]"
-      >
-        <img src="/images/logo.svg" />
-      </Link>
+    <nav className="sticky top-0 flex h-dvh flex-col items-center gap-8 bg-primary-400 px-3 pb-8 pt-4 font-quicksand dark:bg-primary-50/20 lg:absolute lg:inset-x-0 lg:bottom-0 lg:top-[unset] lg:z-10 lg:h-auto lg:flex-row lg:items-center lg:py-4 lg:dark:bg-[#131037]">
+      <LogoFC className="brightness-200 lg:hidden" />
 
       <Fragment>
         <SidebarMenu />

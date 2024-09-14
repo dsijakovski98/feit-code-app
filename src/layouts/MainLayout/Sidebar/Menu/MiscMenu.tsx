@@ -18,7 +18,7 @@ const MiscMenu = () => {
   const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   return (
-    <ul className="mt-auto space-y-2">
+    <ul className="mt-auto space-y-6 lg:hidden">
       <SidebarItem href={ROUTES.profile} label="Profile" icon={<Icon name="profile" />} />
 
       <SidebarItem
@@ -35,7 +35,7 @@ const MiscMenu = () => {
           disableRipple
           disableAnimation
           onPress={() => signOut({ redirectUrl: ROUTES.signIn })}
-          className="group mt-5 flex h-14 w-14 flex-col items-center gap-1 !bg-transparent data-[focus-visible]:!outline-background data-[focus]:outline-transparent dark:data-[focus-visible]:!outline-foreground"
+          className="group flex h-14 w-14 flex-col items-center gap-1 !bg-transparent data-[focus-visible]:!outline-background data-[focus]:outline-transparent dark:data-[focus-visible]:!outline-foreground"
         >
           <div className="!h-12 !w-12 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
             <Icon name="logout" className="!-scale-x-[1]" />
