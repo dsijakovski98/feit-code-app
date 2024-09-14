@@ -16,11 +16,11 @@ const MainLayout = () => {
         <Nav />
       </div>
 
-      <main className="col-start-2 row-start-2 h-[calc(100dvh-90px)] overflow-y-auto overflow-x-clip">
-        <Suspense fallback={<PageFallback />}>
+      <Suspense fallback={<PageFallback />}>
+        <main className="col-start-2 row-start-2 h-[calc(100dvh-70px-80px)] overflow-y-scroll lg:pb-4">
           <Outlet />
-        </Suspense>
-      </main>
+        </main>
+      </Suspense>
     </div>
   );
 };

@@ -29,7 +29,7 @@ const SidebarItem = (props: Props) => {
   const active = useMemo(() => props.href === pathname, [props.href, pathname]);
 
   if (props.isSkeleton) {
-    return <Skeleton as="li" className="h-12 w-12 rounded-full" />;
+    return <Skeleton as="li" className="h-12 w-12 rounded-full lg:h-11 lg:w-11" />;
   }
 
   const { href, icon, label, target, className = "" } = props;
@@ -44,7 +44,7 @@ const SidebarItem = (props: Props) => {
         <div className="grid place-items-center">
           <div
             className={clsx(
-              "h-7 w-7 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500",
+              "h-7 w-7 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500 lg:h-6 lg:w-6",
               {
                 "!text-black dark:!text-primary-500": active,
               },
