@@ -38,7 +38,7 @@ const Window = ({ title, className = "", children }: Props) => {
       <section
         ref={windowEl}
         className={clsx(
-          "font-quicksand group absolute overflow-hidden rounded-xl border border-content1 bg-content1 opacity-100 shadow-2xl shadow-background transition-all duration-300 data-[moving]:opacity-80 data-[moving]:shadow-transparent lg:static",
+          "group absolute overflow-hidden rounded-xl border border-content2 bg-content1 font-quicksand opacity-100 shadow-lg transition-all duration-300 data-[moving]:opacity-50 data-[moving]:shadow-transparent dark:border-content1 dark:shadow-xl dark:shadow-background dark:data-[moving]:opacity-80 lg:static",
           {
             "translate-y-4 !opacity-0": !show.open,
             "translate-y-0 opacity-100": show.open,

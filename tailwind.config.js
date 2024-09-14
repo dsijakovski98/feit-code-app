@@ -18,7 +18,7 @@ export default {
       },
       backgroundImage: {
         "dots-light":
-          "radial-gradient(circle, rgba(255, 255, 255, 0), rgba(35, 80, 255, 0.15)), url('/images/bg-dots-light.webp')",
+          "radial-gradient(circle, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3)), url('/images/bg-dots-light.webp')",
         "dots-dark":
           "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url('/images/bg-dots-dark.webp')",
       },
