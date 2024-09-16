@@ -65,7 +65,7 @@ export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
   return baseUrl.href;
 };
 
-export const getSchoolYear = () => {
+export const getAcademicYear = () => {
   const today = new Date();
 
   const currentYear = today.getFullYear();

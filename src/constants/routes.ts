@@ -11,8 +11,8 @@ export const ROUTES = {
   ssoCallback: "/sso",
 
   profile: "/profile",
-  courses: "/dashboard/courses",
-  exams: "/dashboard/exams",
+  courses: "/courses",
+  exams: "/exams",
 } as const;
 
 export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> = {
@@ -23,8 +23,8 @@ export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> =
   "/sign-up": "Sign up",
 
   "/profile": "Profile",
-  "/dashboard/courses": "Courses",
-  "/dashboard/exams": "Exams",
+  "/courses": "Courses",
+  "/exams": "Exams",
 };
 
 const websiteBaseUrl = import.meta.env.VITE_WEBSITE_URL;

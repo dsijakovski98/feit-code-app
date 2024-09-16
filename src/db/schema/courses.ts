@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import { boolean, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
+import courseCategories from "@/db/schema/courseCategories";
 import exams from "@/db/schema/exams";
 import professors from "@/db/schema/professors";
 import studentCourses from "@/db/schema/studentCourses";
@@ -11,8 +12,7 @@ const courses = pgTable("courses", {
   name: varchar("name", { length: 256 }).notNull(),
   description: varchar("description", { length: 2048 }),
   academicYear: varchar("academic_year", { length: 128 }).notNull(),
-  updatedAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-  category: varchar("category", { length: 256 }),
+  updatedAt: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
   archived: boolean("archived").default(false),
 
   professorId: text("professor_id")
@@ -34,6 +34,7 @@ export const courseRelations = relations(courses, ({ one, many }) => ({
   }),
   exams: many(exams),
   students: many(studentCourses),
+  categories: many(courseCategories),
 }));
 
 export default courses;

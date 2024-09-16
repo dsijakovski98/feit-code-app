@@ -26,7 +26,11 @@ type Props =
 
 const SidebarItem = (props: Props) => {
   const { pathname } = useLocation();
-  const active = useMemo(() => props.href === pathname, [props.href, pathname]);
+
+  const active = useMemo(
+    () => props.href === pathname || pathname.endsWith(props.href ?? ""),
+    [props.href, pathname],
+  );
 
   if (props.isSkeleton) {
     return <Skeleton as="li" className="h-12 w-12 rounded-full lg:h-11 lg:w-11" />;

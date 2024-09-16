@@ -73,7 +73,7 @@ const SignUpForm = () => {
       verifyMode.toggleOn();
     } catch (e) {
       // TODO: Sentry logging
-      console.log(e);
+      console.log({ e });
 
       if (isClerkAPIResponseError(e)) {
         setError("root", { message: shortClerkErrorMessage(e) });

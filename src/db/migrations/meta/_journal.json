@@ -5,57 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724860184534,
-      "tag": "0000_fast_white_tiger",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1724966823608,
-      "tag": "0001_great_mulholland_black",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1724967171509,
-      "tag": "0002_exotic_rocket_racer",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1724967196234,
-      "tag": "0003_ordinary_mikhail_rasputin",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1725392554652,
-      "tag": "0004_lying_umar",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1725665935505,
-      "tag": "0005_shallow_frog_thor",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1725919600268,
-      "tag": "0006_clammy_zombie",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1726090935826,
-      "tag": "0007_natural_freak",
+      "when": 1726410066629,
+      "tag": "0000_wet_vanisher",
       "breakpoints": true
     }
   ]

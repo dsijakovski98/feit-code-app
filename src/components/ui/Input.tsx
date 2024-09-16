@@ -16,7 +16,7 @@ const Inpt = extendVariants(NextUiInput, {
       md: {
         base: "h-[70px]",
         inputWrapper: "h-[46px]",
-        label: "group-data-[filled-within='true']:-translate-y-2",
+        label: "group-data-[filled-within='true']:-translate-y-2 lg:text-base",
       },
       lg: {
         base: "h-[88px]",
@@ -39,7 +39,7 @@ const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest },
         label: clsx("!font-semibold !text-current", rest.classNames?.label || ""),
         errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
         input: clsx(
-          "placeholder:font-light placeholder:text-gray-400/80",
+          "placeholder:font-light placeholder:text-foreground-200",
           rest.classNames?.input || "",
         ),
       }}

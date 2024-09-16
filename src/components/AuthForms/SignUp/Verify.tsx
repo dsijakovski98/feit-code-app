@@ -55,7 +55,7 @@ const Verify = ({ verifyMode }: Props) => {
       }
     } catch (e) {
       // TODO: Sentry logging
-      console.log(e);
+      console.log({ e });
 
       if (isClerkAPIResponseError(e)) {
         setError("code", { message: shortClerkErrorMessage(e, { useLongMessage: true }) });

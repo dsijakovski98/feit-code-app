@@ -6,6 +6,18 @@
   svg {
     @apply h-full w-full;
   }
+
+  label[data-slot="label"] {
+    @apply overflow-visible;
+  }
+
+  span[data-slot="value"] {
+    @apply overflow-visible !text-foreground-200;
+  }
+
+  textarea::placeholder {
+    @apply !text-foreground-200;
+  }
 }
 
 @layer utilities {

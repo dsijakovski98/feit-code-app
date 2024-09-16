@@ -1,9 +1,88 @@
 {
-  "id": "e5d96b74-1428-435d-8511-80cd2e751535",
+  "id": "fc6b0cd9-9459-44b8-8164-12d17d5ea973",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.categories": {
+      "name": "categories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(128)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "categories_id_unique": {
+          "name": "categories_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      }
+    },
+    "public.course_categories": {
+      "name": "course_categories",
+      "schema": "",
+      "columns": {
+        "course_id": {
+          "name": "course_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "course_categories_course_id_courses_id_fk": {
+          "name": "course_categories_course_id_courses_id_fk",
+          "tableFrom": "course_categories",
+          "tableTo": "courses",
+          "columnsFrom": [
+            "course_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "course_categories_category_id_categories_id_fk": {
+          "name": "course_categories_category_id_categories_id_fk",
+          "tableFrom": "course_categories",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.courses": {
       "name": "courses",
       "schema": "",
@@ -25,6 +104,26 @@
           "type": "varchar(2048)",
           "primaryKey": false,
           "notNull": false
+        },
+        "academic_year": {
+          "name": "academic_year",
+          "type": "varchar(128)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "archived": {
+          "name": "archived",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
         },
         "professor_id": {
           "name": "professor_id",
@@ -89,6 +188,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -114,6 +219,14 @@
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "exam_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'New'"
         },
         "course_id": {
           "name": "course_id",
@@ -177,12 +290,19 @@
           "primaryKey": false,
           "notNull": true
         },
+        "department": {
+          "name": "department",
+          "type": "module_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
         "type": {
           "name": "type",
           "type": "teacher_type",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -213,6 +333,19 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
+        },
+        "grade": {
+          "name": "grade",
+          "type": "numeric(2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "joined_at": {
+          "name": "joined_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -265,6 +398,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "bio": {
+          "name": "bio",
+          "type": "varchar(512)",
+          "primaryKey": false,
+          "notNull": false
+        },
         "first_name": {
           "name": "first_name",
           "type": "varchar(100)",
@@ -292,6 +431,13 @@
         "idx_year": {
           "name": "idx_year",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "major": {
+          "name": "major",
+          "type": "module_type",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         }
@@ -479,15 +625,34 @@
     }
   },
   "enums": {
+    "public.exam_status": {
+      "name": "exam_status",
+      "schema": "public",
+      "values": [
+        "New",
+        "Ongoing",
+        "Completed"
+      ]
+    },
+    "public.module_type": {
+      "name": "module_type",
+      "schema": "public",
+      "values": [
+        "KTI",
+        "KSIAR",
+        "KHIE",
+        "TKII"
+      ]
+    },
     "public.programming_language": {
       "name": "programming_language",
       "schema": "public",
       "values": [
         "JavaScript",
-        "C",
-        "Bash",
         "TypeScript",
+        "C",
         "C++",
+        "Bash",
         "Go",
         "Python",
         "Rust",
@@ -498,17 +663,25 @@
       "name": "task_status",
       "schema": "public",
       "values": [
-        "submitted",
-        "in-progress",
-        "graded"
+        "Submitted",
+        "In Progress",
+        "Graded"
       ]
     },
     "public.teacher_type": {
       "name": "teacher_type",
       "schema": "public",
       "values": [
-        "professor",
-        "assistant"
+        "Course Professor",
+        "Teaching Assistant"
+      ]
+    },
+    "public.user_type": {
+      "name": "user_type",
+      "schema": "public",
+      "values": [
+        "Student",
+        "Professor"
       ]
     }
   },

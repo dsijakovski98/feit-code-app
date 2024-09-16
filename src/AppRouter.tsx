@@ -13,9 +13,11 @@ import { ROUTES } from "@/constants/routes";
 const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
 const CallbackSSO = lazy(() => import("@/pages/auth/sso-callback"));
+const WelcomePage = lazy(() => import("@/pages/welcome"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
-const WelcomePage = lazy(() => import("@/pages/welcome"));
+const CoursesPage = lazy(() => import("@/pages/dashboard/courses"));
+const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
 
 const AppRouter = () => {
   return (
@@ -26,7 +28,20 @@ const AppRouter = () => {
             <Route element={<OnboardingLayout mode="onboard" />}>
               <Route element={<MainLayout />}>
                 <Route path={ROUTES.home} element={<Navigate to={ROUTES.dashboard} />} />
-                <Route path={ROUTES.dashboard} element={<Dashboard />} />
+                <Route
+                  path={ROUTES.courses}
+                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} />}
+                />
+
+                <Route path={ROUTES.dashboard}>
+                  <Route index element={<Dashboard />} />
+
+                  <Route path="courses">
+                    <Route index element={<CoursesPage />} />
+                    <Route path="new" element={<NewCoursePage />} />
+                  </Route>
+                </Route>
+
                 <Route path={ROUTES.profile} element={<ProfilePage />} />
               </Route>
             </Route>

@@ -30,7 +30,7 @@ const Nav = () => {
 
         <LogoFC className="hidden lg:flex" />
 
-        <div className="flex items-center gap-4">
+        <div className="flex -translate-x-0.5 items-center gap-4">
           <div className="space-x-2">
             <ThemeSwitcher />
 

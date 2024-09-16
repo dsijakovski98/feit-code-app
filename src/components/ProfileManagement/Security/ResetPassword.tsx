@@ -77,12 +77,12 @@ const ResetPassword = () => {
         toast.success("Password reset!");
         dialog.toggleOff();
       }
-    } catch (error) {
+    } catch (e) {
       // TODO: Sentry logging
-      console.log({ error });
+      console.log({ e });
 
-      if (isClerkAPIResponseError(error)) {
-        setError("root", { message: shortClerkErrorMessage(error) });
+      if (isClerkAPIResponseError(e)) {
+        setError("root", { message: shortClerkErrorMessage(e) });
       } else {
         setError("root", { message: "Something unexpected happened!" });
       }

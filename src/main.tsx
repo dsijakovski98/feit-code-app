@@ -10,9 +10,12 @@ import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { NextUIProvider } from "@nextui-org/react";
 
+import Icon from "@/components/ui/Icon";
+
 import "@/styles/global.css";
 
 import AppRouter from "@/AppRouter";
+import { ResponsiveProvider } from "@/context/ResponsiveContext";
 
 const CLERK_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -21,7 +24,7 @@ if (!CLERK_KEY) {
 }
 
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: Infinity } },
+  defaultOptions: { queries: { staleTime: Infinity, retry: 1 } },
 });
 
 createRoot(document.getElementById("root")!).render(
@@ -30,13 +33,18 @@ createRoot(document.getElementById("root")!).render(
       <NextUIProvider>
         <ThemeProvider attribute="class" defaultTheme="dark" themes={["dark", "light"]}>
           <ClerkProvider publishableKey={CLERK_KEY} afterSignOutUrl="/">
-            <AppRouter />
-            <Toaster
-              toastOptions={{
-                position: "bottom-right",
-                className: "bg-background text-foreground",
-              }}
-            />
+            <ResponsiveProvider>
+              <AppRouter />
+              <Toaster
+                toastOptions={{
+                  position: "bottom-right",
+                  className: "bg-background text-foreground",
+                  blank: {
+                    icon: <Icon name="info" className="h-5 w-5" />,
+                  },
+                }}
+              />
+            </ResponsiveProvider>
           </ClerkProvider>
         </ThemeProvider>
       </NextUIProvider>
