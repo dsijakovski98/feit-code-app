@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Spinner } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
+import FloatButton from "@/components/ui/FloatButton";
 import Icon from "@/components/ui/Icon";
 
 import { useProfessorCourses } from "@/hooks/professor/useProfessorCourses";
@@ -54,6 +55,13 @@ const ProfessorCourses = ({ user }: Props) => {
         <section className="px-8">
           <h2 className="text-lg font-bold uppercase text-foreground-300/80">Stats</h2>
         </section>
+      )}
+
+      {courses?.length && (
+        // @ts-expect-error NextUI not passing through 'as' props
+        <FloatButton as={Link} to="new" icon="add">
+          New Course
+        </FloatButton>
       )}
     </div>
   );
