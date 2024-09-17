@@ -33,7 +33,7 @@ const UserAvatar = () => {
 
   return (
     <Dropdown placement="bottom-end">
-      <DropdownTrigger className="cursor-pointer">
+      <DropdownTrigger className="cursor-pointer focus:ring-primary" tabIndex={0}>
         <Avatar isBordered src={avatarUrl || ""} className="ring-foreground lg:ring-foreground" />
       </DropdownTrigger>
 
