@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { InferSelectModel } from "drizzle-orm";
 
 import { professors } from "@/db/schema";
 
@@ -7,7 +8,7 @@ import { getAvatar } from "@/services/avatars";
 import { db } from "@/db";
 import { QueryColumns, TEACHER_TYPE } from "@/types";
 
-export const useAssistants = (columns?: QueryColumns<typeof professors.$inferSelect>) => {
+export const useAssistants = (columns?: QueryColumns<InferSelectModel<typeof professors>>) => {
   const { data, isLoading, error } = useQuery({
     queryKey: [{ name: "assistants" }],
     queryFn: async () => {

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import { Spinner } from "@nextui-org/react";
 
+import CoursesList from "@/components/Courses/CoursesList";
+import CourseCard from "@/components/Courses/ProfessorCourses/CourseCard";
 import Button from "@/components/ui/Button";
 import FloatButton from "@/components/ui/FloatButton";
 import Icon from "@/components/ui/Icon";
@@ -14,22 +16,25 @@ type Props = {
 };
 
 const ProfessorCourses = ({ user }: Props) => {
-  const { courses } = useProfessorCourses(user.id);
+  const coursesQuery = useProfessorCourses(user.id);
+  const { data } = coursesQuery;
 
   return (
-    <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-8 py-6">
+    <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-8 bg-content2 py-6 dark:bg-primary-50/70 lg:!bg-transparent">
       <section>
-        <h2 className="pl-8 text-lg font-bold uppercase text-foreground/90">
-          {user.firstName}'s Courses
-        </h2>
+        <div className="debug flex justify-between">
+          <h2 className="pl-8 text-lg font-bold uppercase text-foreground/90">
+            {user.firstName}'s Courses
+          </h2>
+        </div>
 
-        {!courses && (
+        {!data && (
           <div className="w-full py-8 text-center">
             <Spinner size="lg" />
           </div>
         )}
 
-        {courses?.length === 0 && (
+        {data?.pages.length === 0 && (
           <div className="grid place-items-center gap-4 p-8 text-center">
             <p className="font-semibold text-foreground-200">
               You are not teaching any courses yet. Let's change that.
@@ -47,17 +52,23 @@ const ProfessorCourses = ({ user }: Props) => {
           </div>
         )}
 
-        {/* TODO: Implement courses list */}
-        {!!courses?.length && <ul className="debug flex overflow-x-scroll">Courses list here</ul>}
+        {!!data?.pages.length && (
+          <div className="mt-2 overflow-x-clip">
+            <CoursesList
+              coursesQuery={coursesQuery}
+              renderCourse={(course) => <CourseCard course={course} />}
+            />
+          </div>
+        )}
       </section>
 
-      {!!courses?.length && (
+      {!!data?.pages.length && (
         <section className="px-8">
           <h2 className="text-lg font-bold uppercase text-foreground-300/80">Stats</h2>
         </section>
       )}
 
-      {courses?.length && (
+      {data?.pages.length && (
         // @ts-expect-error NextUI not passing through 'as' props
         <FloatButton as={Link} to="new" icon="add">
           New Course

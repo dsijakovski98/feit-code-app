@@ -208,7 +208,7 @@ export default {
               800: "#5c0071",
               900: "#3a0047",
               foreground: "#fff",
-              DEFAULT: "#c200ee",
+              DEFAULT: "#cd2df1",
             },
             success: {
               50: "#e2f8ec",
