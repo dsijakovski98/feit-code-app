@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/react";
+import { ButtonGroup, Spinner } from "@nextui-org/react";
 
 import CoursesList from "@/components/Courses/CoursesList";
 import CourseCard from "@/components/Courses/ProfessorCourses/CourseCard";
@@ -16,16 +17,33 @@ type Props = {
 };
 
 const ProfessorCourses = ({ user }: Props) => {
-  const coursesQuery = useProfessorCourses(user.id);
+  const [courseYearFilter, setCourseYearFilter] = useState<"all" | "current">("all");
+
+  const coursesQuery = useProfessorCourses(user.id, courseYearFilter);
   const { data } = coursesQuery;
 
   return (
     <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-8 bg-content2 py-6 dark:bg-primary-50/70 lg:!bg-transparent">
       <section>
-        <div className="debug flex justify-between">
-          <h2 className="pl-8 text-lg font-bold uppercase text-foreground/90">
+        <div className="flex justify-between px-8">
+          <h2 className="text-lg font-bold uppercase text-foreground/90">
             {user.firstName}'s Courses
           </h2>
+
+          <ButtonGroup size="sm" className="*:text-xs">
+            <Button
+              color={courseYearFilter === "all" ? "primary" : "default"}
+              onPress={() => setCourseYearFilter("all")}
+            >
+              All courses
+            </Button>
+            <Button
+              color={courseYearFilter === "current" ? "primary" : "default"}
+              onPress={() => setCourseYearFilter("current")}
+            >
+              This year
+            </Button>
+          </ButtonGroup>
         </div>
 
         {!data && (
