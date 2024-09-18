@@ -14,7 +14,9 @@ export const useProfessorCourses = (userId: string, yearFilter: "all" | "current
     queryKey: [{ name: "courses", type: USER_TYPE.professor, userId, yearFilter }],
     queryFn: async ({ pageParam = 0 }) => {
       const coursesData = await db.query.courses.findMany({
-        with: { students: { columns: { studentId: true } }, exams: { columns: { id: true } } },
+        with: {
+          categories: { with: { category: true }, columns: { courseId: false } },
+        },
         where: (courses, { eq }) => {
           return yearFilter === "current"
             ? eq(courses.academicYear, currentAcademicYear)

@@ -16,7 +16,7 @@ const NewCoursePage = () => {
         to={ROUTES.courses}
         className="flex w-fit items-center gap-1 text-lg font-bold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:text-base"
       >
-        <Icon name="back" className="h-6 w-6 lg:h-5 lg:w-5" />
+        <Icon name="left" className="h-6 w-6 lg:h-5 lg:w-5" />
         {isMobile && "Back to"} Courses
       </Link>
 

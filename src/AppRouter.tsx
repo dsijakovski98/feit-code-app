@@ -17,6 +17,7 @@ const WelcomePage = lazy(() => import("@/pages/welcome"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
 const CoursesPage = lazy(() => import("@/pages/dashboard/courses"));
+const CourseDetails = lazy(() => import("@/pages/dashboard/courses/details"));
 const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
 
 const AppRouter = () => {
@@ -39,6 +40,7 @@ const AppRouter = () => {
                   <Route path="courses">
                     <Route index element={<CoursesPage />} />
                     <Route path="new" element={<NewCoursePage />} />
+                    <Route path=":id" element={<CourseDetails />} />
                   </Route>
                 </Route>
 

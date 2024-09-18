@@ -17,13 +17,13 @@ type Props = {
 };
 
 const ProfessorCourses = ({ user }: Props) => {
-  const [courseYearFilter, setCourseYearFilter] = useState<"all" | "current">("all");
+  const [courseYearFilter, setCourseYearFilter] = useState<"all" | "current">("current");
 
   const coursesQuery = useProfessorCourses(user.id, courseYearFilter);
   const { data } = coursesQuery;
 
   return (
-    <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-8 bg-content2 py-6 dark:bg-primary-50/70 lg:!bg-transparent">
+    <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 bg-content2 py-6 dark:bg-primary-50/70 lg:!bg-transparent">
       <section>
         <div className="flex justify-between px-8">
           <h2 className="text-lg font-bold uppercase text-foreground/90">
@@ -82,7 +82,7 @@ const ProfessorCourses = ({ user }: Props) => {
 
       {!!data?.pages.length && (
         <section className="px-8">
-          <h2 className="text-lg font-bold uppercase text-foreground-300/80">Stats</h2>
+          <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>
         </section>
       )}
 

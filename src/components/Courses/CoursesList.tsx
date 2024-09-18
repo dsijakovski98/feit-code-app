@@ -45,12 +45,12 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
   return (
     <Swiper
       grabCursor={!isFetching}
-      spaceBetween={40}
+      spaceBetween={30}
       slidesPerView="auto"
       navigation={{ hideOnClick: true, enabled: !isFetching }}
       pagination={{ dynamicBullets: true, clickable: true }}
       modules={[A11y, Pagination, Navigation]}
-      className="!px-8 !py-2 !pb-10"
+      className="!px-8 !py-2 !pb-8"
     >
       {data.pages.flatMap((page) =>
         page.map((item) => (
