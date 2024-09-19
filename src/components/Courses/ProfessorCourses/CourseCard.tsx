@@ -1,11 +1,14 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
+import clsx from "clsx";
+
 import { Chip } from "@nextui-org/react";
 
 import Icon from "@/components/ui/Icon";
 
 import { ProfessorCourseType } from "@/hooks/professor/useProfessorCourses";
+import { getContrastText } from "@/utils";
 
 type Props = {
   course: ProfessorCourseType;
@@ -27,22 +30,37 @@ const CourseCard = ({ course }: Props) => {
 
   // TODO: Maybe add quick actions (Edit, Delete) for professors only
   return (
-    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-md bg-background px-4 py-6 font-quicksand shadow-md">
-      <div className="flex h-full max-w-[30ch] flex-col justify-between space-y-6 overflow-hidden">
+    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-md border border-content3 p-6 font-quicksand shadow-md dark:border-transparent dark:bg-primary-50">
+      <div
+        className={clsx(
+          "flex h-full max-w-[36ch] flex-col justify-between space-y-5 overflow-hidden",
+          {
+            "!justify-start": archived,
+          },
+        )}
+      >
         <div>
-          <span className="text-sm font-semibold text-primary">{academicYear}</span>
+          <span className="text-sm font-semibold text-primary">Course of {academicYear}</span>
           <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold">{name}</h3>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           <p className="truncate pb-1 text-medium text-foreground-400">{description}</p>
 
-          <ul className="flex flex-wrap items-center gap-2">
-            {categoriesSlice.map(({ label }) => (
+          <ul className="flex min-h-[25px] flex-wrap items-center gap-1.5">
+            {categoriesSlice.map(({ label, color }) => (
               <li key={label}>
                 <Chip
                   size="sm"
-                  className="text-xs"
+                  className="text-xs opacity-90"
+                  style={
+                    color
+                      ? {
+                          backgroundColor: color,
+                          color: getContrastText(color),
+                        }
+                      : {}
+                  }
                   classNames={{
                     content: "font-semibold",
                   }}
@@ -57,6 +75,7 @@ const CourseCard = ({ course }: Props) => {
                 <Chip
                   size="sm"
                   className="text-xs"
+                  color="primary"
                   classNames={{
                     content: "font-semibold",
                   }}
@@ -71,7 +90,7 @@ const CourseCard = ({ course }: Props) => {
         {!archived && (
           <Link
             to={id}
-            className="group mt-auto flex items-center justify-between gap-0.5 p-2 pb-0 pl-0 font-medium"
+            className="group mt-auto flex items-center justify-between gap-0.5 p-2.5 pb-0 pl-0 font-semibold"
           >
             Details{" "}
             <Icon

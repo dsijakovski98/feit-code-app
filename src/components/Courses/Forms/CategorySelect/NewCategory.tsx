@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { InferInput, nonEmpty, object, pipe, string, trim } from "valibot";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
-import { Spinner } from "@nextui-org/react";
+import { Spinner, Tooltip } from "@nextui-org/react";
 
 import { categories } from "@/db/schema";
 
@@ -20,6 +20,7 @@ import { Toggle } from "@/hooks/useToggle";
 
 const NewCategorySchema = object({
   label: pipe(string(), trim(), nonEmpty("Field is required!")),
+  color: pipe(string(), trim()),
 });
 type NewCategorySchema = InferInput<typeof NewCategorySchema>;
 
@@ -41,10 +42,11 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
     resolver: valibotResolver(NewCategorySchema),
     defaultValues: {
       label: "",
+      color: "#000000",
     },
   });
 
-  const onSubmit: SubmitHandler<NewCategorySchema> = async ({ label }) => {
+  const onSubmit: SubmitHandler<NewCategorySchema> = async ({ label, color }) => {
     try {
       const existingCategory = await db.query.categories.findFirst({
         where: (categories, { ilike }) => ilike(categories.label, `%${label}%`),
@@ -59,7 +61,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
         return;
       }
 
-      await db.insert(categories).values({ label });
+      await db.insert(categories).values({ label, color });
       await queryClient.invalidateQueries({ queryKey: [{ name: "categories" }] });
 
       toast.success(`${label} category created!`);
@@ -105,6 +107,20 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
           onSubmit={handleChildFormSubmit}
           className="flex items-end gap-4 p-1.5"
         >
+          <Controller
+            control={control}
+            name="color"
+            render={({ field }) => (
+              <Tooltip content={field.value}>
+                <input
+                  {...field}
+                  type="color"
+                  className="-mx-2 h-9 w-9 cursor-pointer transition-[transform] hover:scale-110 focus:scale-110"
+                />
+              </Tooltip>
+            )}
+          />
+
           <Controller
             control={control}
             name="label"

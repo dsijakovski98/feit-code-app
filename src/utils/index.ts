@@ -42,6 +42,25 @@ export function getRelativeTimeString(date: Date | number, lang = navigator.lang
   return rtf.format(Math.floor(deltaSeconds / divisor), units[unitIndex]);
 }
 
+// https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/
+export const getContrastText = function (hexColor: string) {
+  // If a leading # is provided, remove it
+  if (hexColor.slice(0, 1) === "#") {
+    hexColor = hexColor.slice(1);
+  }
+
+  // Convert to RGB value
+  const r = parseInt(hexColor.slice(0, 2), 16);
+  const g = parseInt(hexColor.slice(2, 4), 16);
+  const b = parseInt(hexColor.slice(4, 6), 16);
+
+  // Get YIQ ratio
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
+  // Check contrast
+  return yiq >= 128 ? "#000" : "#fff";
+};
+
 export const splitFullName = (fullName: string) => {
   const [firstName, ...lastName] = fullName.split(" ");
 

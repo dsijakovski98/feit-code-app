@@ -15,6 +15,13 @@
       "when": 1726734962834,
       "tag": "0001_medical_dazzler",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1726755681660,
+      "tag": "0002_dry_namorita",
+      "breakpoints": true
     }
   ]
 }

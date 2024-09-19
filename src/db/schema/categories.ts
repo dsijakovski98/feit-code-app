@@ -7,6 +7,7 @@ import { primaryId } from "@/db/schema/utils";
 const categories = pgTable("categories", {
   id: primaryId(),
   label: varchar("label", { length: 256 }).notNull(),
+  color: varchar("color", { length: 256 }),
 });
 
 export const categoryRelations = relations(categories, ({ many }) => ({

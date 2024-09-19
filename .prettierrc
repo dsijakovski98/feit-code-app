@@ -13,7 +13,8 @@
     "^@/components/(.*)$",
     "^@/services/(.*)$",
     "^@/styles/(.*)$",
-    "^@/"
+    "^@/",
+    "^./"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true

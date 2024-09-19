@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import { A11y, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import "./styles.css";
+
 type Props<T extends { id: string }> = {
   coursesQuery: UseInfiniteQueryResult<InfiniteData<T[]>>;
   renderCourse: (course: T) => ReactNode;
@@ -50,7 +52,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       navigation={{ hideOnClick: true, enabled: !isFetching }}
       pagination={{ dynamicBullets: true, clickable: true }}
       modules={[A11y, Pagination, Navigation]}
-      className="!px-8 !py-2 !pb-8"
+      className="swiper-courses !px-8 !pb-10 !pt-1"
     >
       {data.pages.flatMap((page) =>
         page.map((item) => (
