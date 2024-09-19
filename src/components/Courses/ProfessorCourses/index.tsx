@@ -25,7 +25,7 @@ const ProfessorCourses = ({ user }: Props) => {
   return (
     <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] bg-content2 py-4 dark:bg-primary-50/70 lg:!bg-transparent">
       <section>
-        <div className="flex justify-between px-8">
+        <div className="flex items-end justify-between px-8 lg:px-5">
           <h2 className="text-lg font-bold uppercase text-foreground/90">
             {user.firstName}'s Courses
           </h2>
@@ -87,8 +87,13 @@ const ProfessorCourses = ({ user }: Props) => {
       )}
 
       {data?.pages.length && (
-        // @ts-expect-error NextUI not passing through 'as' props
-        <FloatButton as={Link} to="new" icon="add">
+        <FloatButton
+          as={Link}
+          // @ts-expect-error NextUI not passing through 'as' props
+          to="new"
+          icon="add"
+          containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
+        >
           New Course
         </FloatButton>
       )}

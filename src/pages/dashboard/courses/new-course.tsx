@@ -11,7 +11,7 @@ const NewCoursePage = () => {
   const { isMobile } = useCtx(ResponsiveContext);
 
   return (
-    <section className="grid h-full grid-rows-[auto_1fr] gap-4 px-8 py-6 lg:gap-8">
+    <section className="grid h-auto grid-rows-[auto_1fr] gap-4 px-8 py-6 lg:block lg:space-y-5">
       <Link
         to={ROUTES.courses}
         className="flex w-fit items-center gap-1 text-lg font-bold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:text-base"
@@ -20,7 +20,7 @@ const NewCoursePage = () => {
         {isMobile && "Back to"} Courses
       </Link>
 
-      <div className="mx-auto h-full w-[75ch] lg:w-full lg:translate-y-0">
+      <div className="mx-auto w-[75ch] lg:w-full lg:translate-y-0">
         <NewCourseForm />
       </div>
     </section>

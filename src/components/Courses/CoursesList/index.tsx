@@ -49,10 +49,11 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       grabCursor={!isFetching}
       spaceBetween={30}
       slidesPerView="auto"
+      centerInsufficientSlides
       navigation={{ hideOnClick: true, enabled: !isFetching }}
       pagination={{ dynamicBullets: true, clickable: true }}
       modules={[A11y, Pagination, Navigation]}
-      className="swiper-courses !px-8 !pb-10 !pt-1"
+      className="swiper-courses !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
     >
       {data.pages.flatMap((page) =>
         page.map((item) => (

@@ -152,7 +152,7 @@ const NewCourseForm = () => {
         fullWidth
         size={isMobile ? "md" : "lg"}
         type="submit"
-        className="!mt-14"
+        className="!mt-10"
         isLoading={isSubmitting}
         isDisabled={isSubmitting}
       >

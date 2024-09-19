@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .general {
+    @apply grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-x-12 gap-y-8;
+
+    grid-template-areas:
+      "details exam"
+      "stats stats";
+  }
+}

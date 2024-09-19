@@ -28,12 +28,11 @@ const CourseCard = ({ course }: Props) => {
     [categories.length],
   );
 
-  // TODO: Maybe add quick actions (Edit, Delete) for professors only
   return (
-    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-md border border-content3 p-6 font-quicksand shadow-md dark:border-transparent dark:bg-primary-50">
+    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-md border border-content3 p-6 font-quicksand shadow-md dark:border-transparent dark:bg-primary-50 lg:p-4">
       <div
         className={clsx(
-          "flex h-full max-w-[36ch] flex-col justify-between space-y-5 overflow-hidden",
+          "flex h-full w-[36ch] flex-col justify-between space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-2",
           {
             "!justify-start": archived,
           },
@@ -41,18 +40,22 @@ const CourseCard = ({ course }: Props) => {
       >
         <div>
           <span className="text-sm font-semibold text-primary">Course of {academicYear}</span>
-          <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold">{name}</h3>
+          <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">
+            {name}
+          </h3>
         </div>
 
         <div className="space-y-2">
-          <p className="truncate pb-1 text-medium text-foreground-400">{description}</p>
+          <p className="truncate pb-1 text-medium text-foreground-400 lg:text-base">
+            {description}
+          </p>
 
-          <ul className="flex min-h-[25px] flex-wrap items-center gap-1.5">
+          <ul className="flex min-h-[25px] flex-wrap items-center gap-1.5 lg:hidden">
             {categoriesSlice.map(({ label, color }) => (
               <li key={label}>
                 <Chip
                   size="sm"
-                  className="text-xs opacity-90"
+                  className="text-xs opacity-90 lg:text-[11px]"
                   style={
                     color
                       ? {
@@ -74,7 +77,7 @@ const CourseCard = ({ course }: Props) => {
               <li>
                 <Chip
                   size="sm"
-                  className="text-xs"
+                  className="text-xs lg:text-[11px]"
                   color="primary"
                   classNames={{
                     content: "font-semibold",
@@ -90,12 +93,12 @@ const CourseCard = ({ course }: Props) => {
         {!archived && (
           <Link
             to={id}
-            className="group mt-auto flex items-center justify-between gap-0.5 p-2.5 pb-0 pl-0 font-semibold"
+            className="group mt-auto flex w-fit items-center justify-between gap-2 p-2.5 pb-0 pl-0 font-semibold lg:gap-1"
           >
             Details{" "}
             <Icon
               name="right"
-              className="h-5 w-5 -translate-x-2 translate-y-px opacity-0 transition-[opacity_transform] group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100"
+              className="h-5 w-5 -translate-x-2 translate-y-px scale-90 opacity-0 transition-[opacity_transform] group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100 lg:translate-x-0 lg:opacity-100"
             />
           </Link>
         )}
