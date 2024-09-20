@@ -3,10 +3,10 @@ import { Controller, UseFormReturn } from "react-hook-form";
 
 import clsx from "clsx";
 
-import { Chip } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
 
 import NewCategory from "@/components/Courses/Forms/CategorySelect/NewCategory";
+import CategoryChip from "@/components/ui/CategoryChip";
 
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCourseCategories } from "@/hooks/course/useCourseCategories";
@@ -68,9 +68,14 @@ const CategorySelect = ({ form }: Props) => {
               return (
                 <div className="flex flex-wrap gap-2">
                   {items.map((item) => (
-                    <Chip key={item.key} color="secondary" size="sm" className="text-xs">
-                      {item["aria-label"]}
-                    </Chip>
+                    <CategoryChip
+                      size="sm"
+                      category={{
+                        id: item.textValue ?? "",
+                        label: item["aria-label"] ?? "",
+                        color: item.props?.children[0].props.style.backgroundColor,
+                      }}
+                    />
                   ))}
                 </div>
               );
@@ -81,8 +86,21 @@ const CategorySelect = ({ form }: Props) => {
               value: "py-1 min-h-8",
             }}
           >
-            {(categories ?? []).map(({ id, label }) => (
-              <SelectItem key={id} textValue={id} aria-label={label}>
+            {(categories ?? []).map(({ id, label, color }) => (
+              <SelectItem
+                key={id}
+                textValue={id}
+                aria-label={label}
+                classNames={{ title: "flex items-center gap-2" }}
+              >
+                <div
+                  className={clsx("h-4 w-4 rounded-full", {
+                    "bg-default": !color,
+                  })}
+                  style={{
+                    backgroundColor: color ?? "",
+                  }}
+                />
                 <p className="text-base font-medium">{label}</p>
               </SelectItem>
             ))}

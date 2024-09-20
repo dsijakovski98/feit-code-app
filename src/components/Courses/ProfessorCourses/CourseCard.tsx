@@ -5,10 +5,10 @@ import clsx from "clsx";
 
 import { Chip } from "@nextui-org/react";
 
+import CategoryChip from "@/components/ui/CategoryChip";
 import Icon from "@/components/ui/Icon";
 
 import { ProfessorCourseType } from "@/hooks/professor/useProfessorCourses";
-import { getContrastText } from "@/utils";
 
 type Props = {
   course: ProfessorCourseType;
@@ -51,25 +51,9 @@ const CourseCard = ({ course }: Props) => {
           </p>
 
           <ul className="flex min-h-[25px] flex-wrap items-center gap-1.5 lg:hidden">
-            {categoriesSlice.map(({ label, color }) => (
-              <li key={label}>
-                <Chip
-                  size="sm"
-                  className="text-xs opacity-90 lg:text-[11px]"
-                  style={
-                    color
-                      ? {
-                          backgroundColor: color,
-                          color: getContrastText(color),
-                        }
-                      : {}
-                  }
-                  classNames={{
-                    content: "font-semibold",
-                  }}
-                >
-                  {label}
-                </Chip>
+            {categoriesSlice.map((category) => (
+              <li key={category.label}>
+                <CategoryChip category={category} />
               </li>
             ))}
 

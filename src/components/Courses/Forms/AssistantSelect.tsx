@@ -58,7 +58,9 @@ const AssistantSelect = ({ form }: Props) => {
           isInvalid={fieldState.invalid}
           errorMessage={fieldState.error?.message}
           isDisabled={isLoading || isSubmitting || assistants?.length === 0}
-          renderValue={(items) => <p className="font-medium">{items[0]["aria-label"]}</p>}
+          renderValue={(items) => (
+            <p className="font-semibold text-foreground">{items[0]["aria-label"]}</p>
+          )}
           classNames={{
             label: "font-semibold text-lg lg:text-base !text-foreground",
           }}

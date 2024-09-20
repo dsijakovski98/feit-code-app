@@ -30,7 +30,7 @@ const ProfessorCourses = ({ user }: Props) => {
             {user.firstName}'s Courses
           </h2>
 
-          <ButtonGroup size="sm" className="*:text-xs">
+          <ButtonGroup size="sm" className="*:text-sm">
             <Button
               color={courseYearFilter === "all" ? "primary" : "default"}
               onPress={() => setCourseYearFilter("all")}
