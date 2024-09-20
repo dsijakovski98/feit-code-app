@@ -11,7 +11,7 @@ import { archiveCourseToggle } from "@/actions/courses";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { TEACHER_TYPE } from "@/types";
+import { USER_TYPE } from "@/types";
 
 const ArchiveCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
@@ -29,7 +29,7 @@ const ArchiveCourse = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }] }),
         queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: TEACHER_TYPE.professor, userId }],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, userId }],
         }),
       ]);
 
@@ -45,7 +45,7 @@ const ArchiveCourse = () => {
         color="default"
         className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
         onPress={dialog.toggleOn}
-        // TODO: Disabled based on conditions
+        // TODO: Disabled based on permissions
       >
         Archive
       </Button>

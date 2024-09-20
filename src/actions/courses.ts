@@ -15,7 +15,20 @@ export const archiveCourseToggle = async ({ courseId, archived }: ArchiveOptions
     // TODO: Sentry logging
     console.log({ e });
 
-    throw new Error("Failed to archive course!");
+    throw new Error(`Failed to ${archived ? "archive" : "activate"} course!`);
+  }
+
+  return true;
+};
+
+export const deleteCourse = async (courseId: string) => {
+  try {
+    await db.delete(courses).where(eq(courses.id, courseId));
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to delete course!");
   }
 
   return true;
