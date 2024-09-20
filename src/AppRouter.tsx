@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 
 import AuthLayout from "@/layouts/AuthLayout";
+import CourseDetailsLayout from "@/layouts/DetailsLayout/CourseDetailsLayout";
 import MainLayout from "@/layouts/MainLayout";
 import OnboardingLayout from "@/layouts/OnboardingLayout";
 import PageFallback from "@/layouts/PageFallback";
@@ -14,9 +15,12 @@ const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
 const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password"));
 const CallbackSSO = lazy(() => import("@/pages/auth/sso-callback"));
+const WelcomePage = lazy(() => import("@/pages/welcome"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
-const WelcomePage = lazy(() => import("@/pages/welcome"));
+const CoursesPage = lazy(() => import("@/pages/dashboard/courses"));
+const CourseDetailsPage = lazy(() => import("@/pages/dashboard/courses/details"));
+const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
 
 const AppRouter = () => {
   return (
@@ -27,7 +31,26 @@ const AppRouter = () => {
             <Route element={<OnboardingLayout mode="onboard" />}>
               <Route element={<MainLayout />}>
                 <Route path={ROUTES.home} element={<Navigate to={ROUTES.dashboard} />} />
-                <Route path={ROUTES.dashboard} element={<Dashboard />} />
+
+                <Route
+                  path={ROUTES.courses}
+                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} />}
+                />
+
+                <Route path={ROUTES.dashboard}>
+                  <Route index element={<Dashboard />} />
+
+                  <Route path="courses">
+                    <Route index element={<CoursesPage />} />
+
+                    <Route path="new" element={<NewCoursePage />} />
+
+                    <Route path=":id" element={<CourseDetailsLayout />}>
+                      <Route index element={<CourseDetailsPage />} />
+                    </Route>
+                  </Route>
+                </Route>
+
                 <Route path={ROUTES.profile} element={<ProfilePage />} />
               </Route>
             </Route>

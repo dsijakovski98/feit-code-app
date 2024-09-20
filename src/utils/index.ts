@@ -3,6 +3,68 @@ import { UserResource } from "@clerk/types";
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
+/**
+ * Convert a date to a relative time string, such as
+ * "a minute ago", "in 2 hours", "yesterday", "3 months ago", etc.
+ * using Intl.RelativeTimeFormat
+ */
+// https://www.builder.io/blog/relative-time
+export function getRelativeTimeString(date: Date | number, lang = navigator.language): string {
+  if (date instanceof Date) {
+    // Convert to CEST timezone
+    date.setHours(date.getHours() + 2);
+  }
+  // Allow dates or times to be passed
+  const timeMs = typeof date === "number" ? date : date.getTime();
+
+  // Get the amount of seconds between the given date and now
+  const deltaSeconds = Math.round((timeMs - Date.now()) / 1000);
+
+  // Array representing one minute, hour, day, week, month, etc in seconds
+  const cutoffs = [60, 3600, 86400, 86400 * 7, 86400 * 30, 86400 * 365, Infinity];
+
+  // Array equivalent to the above but in the string representation of the units
+  const units: Intl.RelativeTimeFormatUnit[] = [
+    "second",
+    "minute",
+    "hour",
+    "day",
+    "week",
+    "month",
+    "year",
+  ];
+
+  // Grab the ideal cutoff unit
+  const unitIndex = cutoffs.findIndex((cutoff) => cutoff > Math.abs(deltaSeconds));
+
+  // Get the divisor to divide from the seconds. E.g. if our unit is "day" our divisor
+  // is one day in seconds, so we can divide our seconds by this to get the # of days
+  const divisor = unitIndex ? cutoffs[unitIndex - 1] : 1;
+
+  // Intl.RelativeTimeFormat do its magic
+  const rtf = new Intl.RelativeTimeFormat(lang, { numeric: "auto" });
+  return rtf.format(Math.floor(deltaSeconds / divisor), units[unitIndex]);
+}
+
+// https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/
+export const getContrastText = function (hexColor: string) {
+  // If a leading # is provided, remove it
+  if (hexColor.slice(0, 1) === "#") {
+    hexColor = hexColor.slice(1);
+  }
+
+  // Convert to RGB value
+  const r = parseInt(hexColor.slice(0, 2), 16);
+  const g = parseInt(hexColor.slice(2, 4), 16);
+  const b = parseInt(hexColor.slice(4, 6), 16);
+
+  // Get YIQ ratio
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+
+  // Check contrast
+  return yiq >= 128 ? "#000" : "#fff";
+};
+
 export const splitFullName = (fullName: string) => {
   const [firstName, ...lastName] = fullName.split(" ");
 
@@ -65,7 +127,7 @@ export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
   return baseUrl.href;
 };
 
-export const getSchoolYear = () => {
+export const getAcademicYear = () => {
   const today = new Date();
 
   const currentYear = today.getFullYear();

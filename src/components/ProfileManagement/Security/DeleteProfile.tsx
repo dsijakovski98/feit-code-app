@@ -88,7 +88,6 @@ const DeleteProfile = () => {
                 <Button
                   fullWidth
                   color="danger"
-                  isDisabled={isPending}
                   isLoading={isPending}
                   onPress={handleDeleteProfile}
                 >

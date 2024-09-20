@@ -21,7 +21,7 @@ const Nav = () => {
   );
 
   return (
-    <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-primary-50/70 lg:bg-primary lg:py-2.5">
+    <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-[#131038] lg:bg-primary lg:px-5 lg:py-2.5">
       <nav className="flex items-center justify-between">
         <div className="lg:hidden">
           <h1 className="text-2xl font-semibold">{timeGreeting}</h1>
@@ -30,7 +30,7 @@ const Nav = () => {
 
         <LogoFC className="hidden lg:flex" />
 
-        <div className="flex items-center gap-4">
+        <div className="flex -translate-x-0.5 items-center gap-4">
           <div className="space-x-2">
             <ThemeSwitcher />
 

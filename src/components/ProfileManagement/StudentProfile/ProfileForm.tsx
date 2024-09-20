@@ -13,8 +13,9 @@ import Input from "@/components/ui/Input";
 
 import { updateStudent } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
+import { useCtx } from "@/hooks/useCtx";
 import { UserProfile } from "@/hooks/useProfile";
-import { useResponsive } from "@/hooks/useResponsive";
 import { USER_TYPE } from "@/types";
 import { StudentProfileSchema } from "@/utils/formSchemas/profile/studentProfile";
 
@@ -25,7 +26,7 @@ type Props = {
 const StudentProfileForm = ({ student }: Props) => {
   const { id: userId, firstName, lastName, bio, indexNumber, indexYear, major, email } = student;
 
-  const { isMobile } = useResponsive();
+  const { isMobile } = useCtx(ResponsiveContext);
   const queryClient = useQueryClient();
 
   const fullName = useMemo(() => `${firstName} ${lastName}`, [firstName, lastName]);
@@ -110,7 +111,7 @@ const StudentProfileForm = ({ student }: Props) => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
-                label: "text-base font-semibold",
+                label: "text-base font-semibold !text-foreground",
               }}
             />
           )}
@@ -184,13 +185,7 @@ const StudentProfileForm = ({ student }: Props) => {
       </div>
 
       <div className="mt-7 translate-y-2 lg:mt-5 lg:translate-y-0.5">
-        <Button
-          fullWidth
-          size={isMobile ? "md" : "lg"}
-          type="submit"
-          isDisabled={isSubmitting}
-          isLoading={isSubmitting}
-        >
+        <Button fullWidth type="submit" size={isMobile ? "md" : "lg"} isLoading={isSubmitting}>
           Update
         </Button>
       </div>

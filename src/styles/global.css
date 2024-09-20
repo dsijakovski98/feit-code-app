@@ -6,6 +6,29 @@
   svg {
     @apply h-full w-full;
   }
+
+  label[data-slot="label"] {
+    @apply overflow-visible;
+  }
+
+  span[data-slot="value"] {
+    @apply overflow-visible !text-foreground-200;
+  }
+
+  textarea::placeholder {
+    @apply !text-foreground-200;
+  }
+
+  input[type="color"] {
+    @apply aspect-square appearance-none bg-transparent;
+  }
+
+  input[type="color"]::-webkit-color-swatch {
+    @apply aspect-square rounded-full border-none;
+  }
+  input[type="color"]::-moz-color-swatch {
+    @apply rounded-full border-none;
+  }
 }
 
 @layer utilities {

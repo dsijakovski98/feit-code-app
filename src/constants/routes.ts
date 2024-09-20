@@ -1,5 +1,3 @@
-import { RecordValues } from "@/types";
-
 export const ROUTES = {
   home: "/",
   dashboard: "/dashboard",
@@ -12,11 +10,11 @@ export const ROUTES = {
   ssoCallback: "/sso",
 
   profile: "/profile",
-  courses: "/dashboard/courses",
-  exams: "/dashboard/exams",
+  courses: "/courses",
+  exams: "/exams",
 } as const;
 
-export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> = {
+export const PAGE_TITLES = {
   "/dashboard": "Dashboard",
   "/welcome": "Onboarding",
 
@@ -27,7 +25,7 @@ export const PAGE_TITLES: Partial<Record<RecordValues<typeof ROUTES>, string>> =
   "/profile": "Profile",
   "/dashboard/courses": "Courses",
   "/dashboard/exams": "Exams",
-};
+} as const;
 
 const websiteBaseUrl = import.meta.env.VITE_WEBSITE_URL;
 

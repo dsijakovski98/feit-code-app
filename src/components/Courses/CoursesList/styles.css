@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .swiper-courses :is(.swiper-button-next, .swiper-button-prev) {
+    @apply -translate-y-3 !scale-80 lg:hidden;
+  }
+
+  .swiper-courses .swiper-button-prev {
+    @apply left-2.5;
+  }
+
+  .swiper-courses .swiper-button-next {
+    @apply right-2.5;
+  }
+}

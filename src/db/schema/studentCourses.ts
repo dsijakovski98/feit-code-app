@@ -9,10 +9,10 @@ const studentCourses = pgTable(
   {
     studentId: text("student_id")
       .notNull()
-      .references(() => students.id),
+      .references(() => students.id, { onDelete: "cascade" }),
     courseId: varchar("course_id")
       .notNull()
-      .references(() => courses.id),
+      .references(() => courses.id, { onDelete: "cascade" }),
 
     grade: numeric("grade", { precision: 2 }),
     joinedAt: timestamp("joined_at", { mode: "string" }).notNull().defaultNow(),

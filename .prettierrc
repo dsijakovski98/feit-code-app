@@ -6,13 +6,15 @@
     "^virtual",
     "<THIRD_PARTY_MODULES>",
     "^@(clerk|nextui)",
+    "^swiper",
     "^@/db/(.*)$",
     "^@/layouts/(.*)$",
     "^@/pages/(.*)$",
     "^@/components/(.*)$",
     "^@/services/(.*)$",
     "^@/styles/(.*)$",
-    "^@/"
+    "^@/",
+    "^./"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true

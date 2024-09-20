@@ -34,7 +34,7 @@ const getRandomAvatar = () => {
 };
 
 const getInitialsAvatar = (fullName: string) => {
-  return `${DICE_BEAR_URL}/initials/svg?seed=${fullName}`;
+  return `${DICE_BEAR_URL}/initials/svg?seed=${encodeURI(fullName)}`;
 };
 
 const RANDOM_SEED = 120;

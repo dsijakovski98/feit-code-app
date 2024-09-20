@@ -15,8 +15,8 @@ const ProfilePage = () => {
   const { userData } = useFCUser();
 
   return (
-    <section className="h-full overflow-y-scroll bg-primary-50/20 pt-4 lg:pt-2">
-      <div className="mx-auto h-full max-w-[75ch] md:max-w-full">
+    <section className="h-full overflow-y-scroll bg-primary-50/20 py-4 lg:pt-2">
+      <div className="mx-auto h-full max-w-[85ch] md:max-w-full">
         {userData ? (
           <Tabs
             fullWidth

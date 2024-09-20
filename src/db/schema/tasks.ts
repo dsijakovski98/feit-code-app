@@ -14,7 +14,7 @@ const tasks = pgTable("tasks", {
 
   examId: varchar("exam_id")
     .notNull()
-    .references(() => exams.id),
+    .references(() => exams.id, { onDelete: "cascade" }),
 });
 
 export const taskRelations = relations(tasks, ({ one, many }) => ({

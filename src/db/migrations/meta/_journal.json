@@ -5,57 +5,43 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724860184534,
-      "tag": "0000_fast_white_tiger",
+      "when": 1726410066629,
+      "tag": "0000_wet_vanisher",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1724966823608,
-      "tag": "0001_great_mulholland_black",
+      "when": 1726734962834,
+      "tag": "0001_medical_dazzler",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1724967171509,
-      "tag": "0002_exotic_rocket_racer",
+      "when": 1726755681660,
+      "tag": "0002_dry_namorita",
       "breakpoints": true
     },
     {
       "idx": 3,
       "version": "7",
-      "when": 1724967196234,
-      "tag": "0003_ordinary_mikhail_rasputin",
+      "when": 1726857520650,
+      "tag": "0003_zippy_marten_broadcloak",
       "breakpoints": true
     },
     {
       "idx": 4,
       "version": "7",
-      "when": 1725392554652,
-      "tag": "0004_lying_umar",
+      "when": 1726857827055,
+      "tag": "0004_talented_kate_bishop",
       "breakpoints": true
     },
     {
       "idx": 5,
       "version": "7",
-      "when": 1725665935505,
-      "tag": "0005_shallow_frog_thor",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1725919600268,
-      "tag": "0006_clammy_zombie",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1726090935826,
-      "tag": "0007_natural_freak",
+      "when": 1726864723142,
+      "tag": "0005_condemned_ricochet",
       "breakpoints": true
     }
   ]

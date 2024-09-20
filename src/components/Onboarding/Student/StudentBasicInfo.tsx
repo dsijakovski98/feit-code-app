@@ -67,7 +67,7 @@ const StudentBasicInfo = () => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
-                label: "text-base font-semibold",
+                label: "text-base font-semibold !text-foreground",
               }}
             />
           )}

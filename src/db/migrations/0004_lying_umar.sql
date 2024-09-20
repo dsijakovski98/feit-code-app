@@ -1,1 +1,0 @@
-ALTER TABLE "students" ADD COLUMN "avatar_url" varchar(256);

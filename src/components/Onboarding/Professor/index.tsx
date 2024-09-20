@@ -21,7 +21,7 @@ const ProfessorOnboarding = () => {
   const formState = useState<ProfessorForm>({
     fullName: "",
     department: MAJOR_TYPE.KTI,
-    type: TEACHER_TYPE.teacher,
+    type: TEACHER_TYPE.professor,
   });
 
   return (

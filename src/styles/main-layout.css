@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .main-layout {
+    @apply z-0 grid min-h-dvh grid-cols-[auto_1fr] grid-rows-[auto_1fr];
+
+    grid-template-areas:
+      "sidebar nav"
+      "sidebar main";
+  }
+
+  @screen lg {
+    .main-layout {
+      @apply grid-cols-1 grid-rows-[auto_1fr_auto];
+
+      grid-template-areas: "nav" "main" "sidebar";
+    }
+  }
+}
