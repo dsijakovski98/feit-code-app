@@ -45,6 +45,7 @@ const NewCourseForm = () => {
   const {
     control,
     setError,
+    clearErrors,
     handleSubmit,
     formState: { isSubmitting },
   } = form;
@@ -56,6 +57,8 @@ const NewCourseForm = () => {
     assistantId,
   }) => {
     if (!userId) return;
+
+    clearErrors("root");
 
     try {
       const [{ courseId }] = await db

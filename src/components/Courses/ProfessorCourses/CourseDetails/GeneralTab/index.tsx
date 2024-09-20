@@ -25,7 +25,7 @@ const GeneralTab = () => {
         <div className="space-y-4">
           <h5 className="text-xl font-semibold">Taught by</h5>
 
-          <div className="flex w-fit gap-8 lg:w-full lg:flex-wrap lg:justify-between">
+          <div className="flex w-fit items-end gap-8 lg:w-full lg:flex-wrap lg:justify-between">
             <User
               name={
                 <a href={`mailto: ${professor.email}`} className="text-base font-semibold">

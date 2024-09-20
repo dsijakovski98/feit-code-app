@@ -36,6 +36,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
     reset,
     control,
     setError,
+    clearErrors,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<NewCategorySchema>({
@@ -47,6 +48,8 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
   });
 
   const onSubmit: SubmitHandler<NewCategorySchema> = async ({ label, color }) => {
+    clearErrors("label");
+
     try {
       const existingCategory = await db.query.categories.findFirst({
         where: (categories, { ilike }) => ilike(categories.label, `%${label}%`),
