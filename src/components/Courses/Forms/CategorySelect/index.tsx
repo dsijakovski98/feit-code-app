@@ -12,13 +12,14 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCourseCategories } from "@/hooks/course/useCourseCategories";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { NewCourseSchema } from "@/utils/formSchemas/courses/newCourseSchema";
+import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
 
 type Props = {
-  form: UseFormReturn<NewCourseSchema>;
+  form: UseFormReturn<CourseSchema>;
+  defaultValue?: string[];
 };
 
-const CategorySelect = ({ form }: Props) => {
+const CategorySelect = ({ form, defaultValue }: Props) => {
   const {
     control,
     setError,
@@ -63,21 +64,24 @@ const CategorySelect = ({ form }: Props) => {
             description={description}
             isLoading={isLoading}
             isInvalid={fieldState.invalid}
+            defaultSelectedKeys={defaultValue ?? []}
             isDisabled={isLoading || isSubmitting || categories?.length === 0}
             renderValue={(items) => {
               return (
-                <div className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2">
                   {items.map((item) => (
-                    <CategoryChip
-                      size="sm"
-                      category={{
-                        id: item.textValue ?? "",
-                        label: item["aria-label"] ?? "",
-                        color: item.props?.children[0].props.style.backgroundColor,
-                      }}
-                    />
+                    <li key={item.key}>
+                      <CategoryChip
+                        size="sm"
+                        category={{
+                          id: item.textValue ?? "",
+                          label: item["aria-label"] ?? "",
+                          color: item.props?.children[0].props.style.backgroundColor,
+                        }}
+                      />
+                    </li>
                   ))}
-                </div>
+                </ul>
               );
             }}
             classNames={{

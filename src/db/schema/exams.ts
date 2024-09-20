@@ -19,7 +19,7 @@ const exams = pgTable("exams", {
 
   courseId: varchar("course_id")
     .notNull()
-    .references(() => courses.id),
+    .references(() => courses.id, { onDelete: "cascade" }),
 });
 
 export const examRelations = relations(exams, ({ one, many }) => ({

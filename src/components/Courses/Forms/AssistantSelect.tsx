@@ -5,13 +5,14 @@ import { Avatar } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
 
 import { useAssistants } from "@/hooks/useAssistants";
-import { NewCourseSchema } from "@/utils/formSchemas/courses/newCourseSchema";
+import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
 
 type Props = {
-  form: UseFormReturn<NewCourseSchema>;
+  form: UseFormReturn<CourseSchema>;
+  defaultValue?: string;
 };
 
-const AssistantSelect = ({ form }: Props) => {
+const AssistantSelect = ({ form, defaultValue }: Props) => {
   const {
     control,
     setError,
@@ -57,6 +58,7 @@ const AssistantSelect = ({ form }: Props) => {
           isLoading={isLoading}
           isInvalid={fieldState.invalid}
           errorMessage={fieldState.error?.message}
+          defaultSelectedKeys={defaultValue ? [defaultValue] : undefined}
           isDisabled={isLoading || isSubmitting || assistants?.length === 0}
           renderValue={(items) => (
             <p className="font-semibold text-foreground">{items[0]["aria-label"]}</p>
@@ -70,11 +72,11 @@ const AssistantSelect = ({ form }: Props) => {
 
             return (
               <SelectItem key={id} textValue={id} aria-label={fullName}>
-                <div className="flex items-start gap-2">
+                <div className="flex items-center gap-2">
                   <Avatar src={avatarUrl ?? ""} />
                   <div>
                     <p className="text-sm font-medium">{fullName}</p>
-                    <p className="text-xs font-light">{email}</p>
+                    <p>{email}</p>
                   </div>
                 </div>
               </SelectItem>

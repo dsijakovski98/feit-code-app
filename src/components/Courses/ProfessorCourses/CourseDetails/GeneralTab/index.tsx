@@ -32,7 +32,7 @@ const GeneralTab = () => {
                   {professor.firstName} {professor.lastName}
                 </a>
               }
-              description={<p className="text-base">{TEACHER_TYPE.teacher}</p>}
+              description={<p className="text-base">{TEACHER_TYPE.professor}</p>}
               avatarProps={{
                 size: "lg",
                 showFallback: true,
@@ -63,7 +63,7 @@ const GeneralTab = () => {
         </div>
       </div>
 
-      <div className="[grid-area:exam]">Latest exam here lorem100</div>
+      <div className="[grid-area:exam]">Latest exam here</div>
 
       <div className="[grid-area:stats]">Stats here</div>
     </div>

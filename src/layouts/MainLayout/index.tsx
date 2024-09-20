@@ -14,11 +14,11 @@ const MainLayout = () => {
         <Sidebar />
       </div>
 
-      <div className="sticky top-0 [grid-area:nav]">
+      <div className="sticky top-0 z-10 [grid-area:nav]">
         <Nav />
       </div>
 
-      <main className="grid grid-cols-1 grid-rows-1 [grid-area:main] lg:block lg:h-[calc(100dvh-70px-66px)] lg:overflow-y-scroll">
+      <main className="z-0 grid grid-cols-1 grid-rows-1 [grid-area:main] lg:block lg:h-[calc(100dvh-70px-66px)] lg:overflow-y-scroll">
         <Suspense fallback={<PageFallback />}>
           <Outlet />
         </Suspense>

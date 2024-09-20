@@ -20,6 +20,7 @@ const Inpt = extendVariants(NextUiInput, {
       },
       lg: {
         base: "h-[88px]",
+        label: "text-lg",
       },
     },
   },

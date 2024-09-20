@@ -1,10 +1,10 @@
 import { InferInput, nonEmpty, object, pipe, string, trim } from "valibot";
 
-export const NewCourseSchema = object({
+export const CourseSchema = object({
   name: pipe(string(), trim(), nonEmpty("Field is required!")),
   description: pipe(string(), trim()),
   categories: pipe(string(), trim()),
   assistantId: pipe(string(), trim()),
 });
 
-export type NewCourseSchema = InferInput<typeof NewCourseSchema>;
+export type CourseSchema = InferInput<typeof CourseSchema>;

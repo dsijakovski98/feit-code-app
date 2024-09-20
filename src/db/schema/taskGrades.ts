@@ -17,10 +17,10 @@ const taskGrades = pgTable("task_grades", {
 
   studentId: text("student_id")
     .notNull()
-    .references(() => students.id),
+    .references(() => students.id, { onDelete: "cascade" }),
   taskId: varchar("task_id")
     .notNull()
-    .references(() => tasks.id),
+    .references(() => tasks.id, { onDelete: "cascade" }),
 });
 
 export const taskGradeRelations = relations(taskGrades, ({ one }) => ({

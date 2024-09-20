@@ -29,7 +29,7 @@ const CourseCard = ({ course }: Props) => {
   );
 
   return (
-    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-md border border-content3 p-6 font-quicksand shadow-md dark:border-transparent dark:bg-primary-50 lg:p-4">
+    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-md border border-content3 bg-content1 p-6 font-quicksand shadow-md dark:border-transparent dark:bg-primary-50 lg:p-4">
       <div
         className={clsx(
           "flex h-full w-[36ch] flex-col justify-between space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-2",

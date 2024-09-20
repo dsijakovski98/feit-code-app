@@ -13,7 +13,7 @@ export const USER_TYPE = {
 export type UserType = RecordValues<typeof USER_TYPE>;
 
 export const TEACHER_TYPE = {
-  teacher: "Course Professor",
+  professor: "Course Professor",
   assistant: "Teaching Assistant",
 } as const;
 export type TeacherType = RecordValues<typeof TEACHER_TYPE>;

@@ -13,7 +13,7 @@ export const moduleType = pgEnum("module_type", [
   MAJOR_TYPE.TKII,
 ]);
 
-export const teacherType = pgEnum("teacher_type", [TEACHER_TYPE.teacher, TEACHER_TYPE.assistant]);
+export const teacherType = pgEnum("teacher_type", [TEACHER_TYPE.professor, TEACHER_TYPE.assistant]);
 
 export const programmingLanguage = pgEnum("programming_language", [
   PROGRAMMING_LANGUAGE.javascript,
