@@ -18,8 +18,9 @@ const SettingsTab = lazy(
 );
 
 const CourseDetailsTabs = () => {
-  const { hash, pathname } = useLocation();
   const { courseDetails } = useCtx(CourseDetailsContext);
+
+  const { hash, pathname } = useLocation();
 
   const invalidRoute = useMemo(() => {
     const keys = ["general", "students"];
@@ -36,8 +37,8 @@ const CourseDetailsTabs = () => {
   }
 
   return (
-    <section className="h-full overflow-y-scroll bg-primary-50/20 p-4">
-      <div className="mx-auto h-full max-w-[120ch] md:max-w-full">
+    <section className="h-full bg-primary-50/20 p-4">
+      <div className="mx-auto max-w-[130ch] md:max-w-full">
         <Tabs
           fullWidth
           size="lg"
@@ -48,7 +49,7 @@ const CourseDetailsTabs = () => {
           defaultSelectedKey="#general"
           classNames={{
             tabContent: "text-foreground group-data-[selected]:font-semibold",
-            panel: "pt-5 px-11 md:px-6",
+            panel: "pt-4 px-10 md:px-6",
           }}
         >
           <Tab key="#general" title="General" href="#general">

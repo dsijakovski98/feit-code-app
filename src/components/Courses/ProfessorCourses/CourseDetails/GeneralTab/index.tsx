@@ -1,5 +1,7 @@
 import { User } from "@nextui-org/react";
 
+import CategoryChip from "@/components/ui/CategoryChip";
+
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
@@ -9,7 +11,7 @@ import "./styles.css";
 
 const GeneralTab = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, description, professor, assistant } = courseDetails;
+  const { name, description, professor, assistant, categories } = courseDetails;
 
   const [professorAvatar] = useAvatar(courseDetails?.professorId);
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
@@ -17,15 +19,27 @@ const GeneralTab = () => {
   return (
     <div className="general lg:block lg:space-y-8">
       <div className="space-y-6 [grid-area:details]">
-        <div className="space-y-1">
+        <div>
           <h4 className="text-2xl font-semibold">{name}</h4>
           <p className="text-lg">{description}</p>
         </div>
 
-        <div className="space-y-4">
-          <h5 className="text-xl font-semibold">Taught by</h5>
+        <div className="space-y-2">
+          <h5 className="text-lg font-semibold">Categories</h5>
 
-          <div className="flex w-fit items-end gap-8 lg:w-full lg:flex-wrap lg:justify-between">
+          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
+            {categories.map(({ category, categoryId }) => (
+              <li key={categoryId}>
+                <CategoryChip category={category} />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-2">
+          <h5 className="text-lg font-semibold">Taught by</h5>
+
+          <div className="flex w-fit items-end gap-16 lg:w-full lg:flex-wrap lg:justify-between">
             <User
               name={
                 <a href={`mailto: ${professor.email}`} className="text-base font-semibold">
