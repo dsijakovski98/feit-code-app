@@ -43,6 +43,13 @@
       "when": 1726864723142,
       "tag": "0005_condemned_ricochet",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1726873793389,
+      "tag": "0006_tired_starfox",
+      "breakpoints": true
     }
   ]
 }
