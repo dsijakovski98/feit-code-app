@@ -158,7 +158,6 @@ const EditCourseForm = () => {
         type="submit"
         className="!mt-10"
         isLoading={isSubmitting}
-        isDisabled={isSubmitting}
       >
         Confirm
       </Button>

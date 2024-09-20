@@ -74,22 +74,25 @@ const CourseCard = ({ course }: Props) => {
           </ul>
         </div>
 
-        {!archived && (
-          <Link
-            to={id}
-            className="group mt-auto flex w-fit items-center justify-between gap-2 p-2.5 pb-0 pl-0 font-semibold lg:gap-1"
-          >
-            Details{" "}
-            <Icon
-              name="right"
-              className="h-5 w-5 -translate-x-2 translate-y-px scale-90 opacity-0 transition-[opacity_transform] group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100 lg:translate-x-0 lg:opacity-100"
-            />
-          </Link>
-        )}
+        <Link
+          to={id}
+          className={clsx(
+            "group mt-auto flex w-fit items-center justify-between gap-2 p-2.5 pb-0 pl-0 font-semibold lg:gap-1",
+            {
+              "pb-2.5": archived,
+            },
+          )}
+        >
+          Details{" "}
+          <Icon
+            name="right"
+            className="h-5 w-5 -translate-x-2 translate-y-px scale-90 opacity-0 transition-[opacity_transform] group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100 lg:translate-x-0 lg:opacity-100"
+          />
+        </Link>
       </div>
 
       {archived && (
-        <div className="absolute inset-0 bg-foreground-200/20 backdrop-grayscale">
+        <div className="pointer-events-none absolute inset-0 bg-foreground-200/20">
           <p className="text-centers absolute inset-x-0 bottom-0 z-10 bg-foreground-200 py-1 text-center text-xs font-bold uppercase text-white dark:bg-foreground-100">
             Archived
           </p>

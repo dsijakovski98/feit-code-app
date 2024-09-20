@@ -236,7 +236,7 @@ export default {
               800: "#744e11",
               900: "#4a320b",
               foreground: "#000",
-              DEFAULT: "#f5a524",
+              DEFAULT: "#f7b54a",
             },
             danger: {
               50: "#ffe1e8",

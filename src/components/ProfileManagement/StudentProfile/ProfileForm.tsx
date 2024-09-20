@@ -185,13 +185,7 @@ const StudentProfileForm = ({ student }: Props) => {
       </div>
 
       <div className="mt-7 translate-y-2 lg:mt-5 lg:translate-y-0.5">
-        <Button
-          fullWidth
-          size={isMobile ? "md" : "lg"}
-          type="submit"
-          isDisabled={isSubmitting}
-          isLoading={isSubmitting}
-        >
+        <Button fullWidth type="submit" size={isMobile ? "md" : "lg"} isLoading={isSubmitting}>
           Update
         </Button>
       </div>

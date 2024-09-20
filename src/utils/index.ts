@@ -10,6 +10,10 @@ import { UseFCUser } from "@/hooks/useFCUser";
  */
 // https://www.builder.io/blog/relative-time
 export function getRelativeTimeString(date: Date | number, lang = navigator.language): string {
+  if (date instanceof Date) {
+    // Convert to CEST timezone
+    date.setHours(date.getHours() + 2);
+  }
   // Allow dates or times to be passed
   const timeMs = typeof date === "number" ? date : date.getTime();
 

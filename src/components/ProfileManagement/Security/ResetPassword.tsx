@@ -221,7 +221,6 @@ const ResetPassword = () => {
                   type="submit"
                   form="reset-pwd"
                   color="primary"
-                  isDisabled={isSubmitting}
                   isLoading={isSubmitting}
                   onPress={resetPassword}
                 >
