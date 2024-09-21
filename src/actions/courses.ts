@@ -1,8 +1,25 @@
 import { eq } from "drizzle-orm";
 
-import { courses } from "@/db/schema";
+import { courses, studentCourses } from "@/db/schema";
 
 import { db } from "@/db";
+
+type JoinOptions = {
+  courseId: string;
+  studentId: string;
+};
+export const joinCourse = async ({ courseId, studentId }: JoinOptions) => {
+  try {
+    await db.insert(studentCourses).values({ courseId, studentId });
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to join course!");
+  }
+
+  return true;
+};
 
 type ArchiveOptions = {
   courseId: string;

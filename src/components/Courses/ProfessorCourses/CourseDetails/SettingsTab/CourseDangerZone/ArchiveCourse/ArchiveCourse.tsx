@@ -15,7 +15,7 @@ import { USER_TYPE } from "@/types";
 
 const ArchiveCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, id: courseId, professorId: userId } = courseDetails;
+  const { name, id: courseId, professorId } = courseDetails;
 
   const queryClient = useQueryClient();
 
@@ -29,7 +29,7 @@ const ArchiveCourse = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }] }),
         queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: USER_TYPE.professor, userId }],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
         }),
       ]);
 

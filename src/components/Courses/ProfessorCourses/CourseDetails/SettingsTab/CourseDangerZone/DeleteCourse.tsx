@@ -17,7 +17,7 @@ import { USER_TYPE } from "@/types";
 
 const DeleteCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, id: courseId, professorId: userId } = courseDetails;
+  const { name, id: courseId, professorId } = courseDetails;
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -30,7 +30,7 @@ const DeleteCourse = () => {
       if (!success) return;
 
       await queryClient.invalidateQueries({
-        queryKey: [{ name: "courses", type: USER_TYPE.professor, userId }],
+        queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
       });
 
       toast(`${name} course deleted!`);
