@@ -111,7 +111,7 @@ const ResetPassword = () => {
           backdrop: "bg-background/50",
         }}
       >
-        <ModalContent>
+        <ModalContent className="max-w-[560px]">
           {(onClose) => (
             <Fragment>
               <ModalHeader className="text-2xl">Password reset</ModalHeader>
@@ -121,7 +121,7 @@ const ResetPassword = () => {
                   id="reset-pwd"
                   noValidate
                   onSubmit={handleSubmit(onSubmit)}
-                  className="space-y-4 pb-8"
+                  className="space-y-2 px-2 pb-8"
                 >
                   <Controller
                     control={control}
@@ -205,9 +205,10 @@ const ResetPassword = () => {
                 )}
               </ModalBody>
 
-              <ModalFooter>
+              <ModalFooter className="px-6">
                 <Button
                   fullWidth
+                  size="lg"
                   color="default"
                   variant="bordered"
                   isDisabled={isSubmitting}
@@ -218,6 +219,7 @@ const ResetPassword = () => {
 
                 <Button
                   fullWidth
+                  size="lg"
                   type="submit"
                   form="reset-pwd"
                   color="primary"

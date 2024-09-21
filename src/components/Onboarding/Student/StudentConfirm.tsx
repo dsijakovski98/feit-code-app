@@ -73,7 +73,7 @@ const StudentConfirm = () => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-xl font-semibold">Nice to meet you, {firstName}!</h3>
-          <p className="text-gray-300">
+          <p className="text-foreground-300">
             Please confirm your details. You can always change them later.
           </p>
         </div>
@@ -104,7 +104,7 @@ const StudentConfirm = () => {
 
         <div>
           <p className="text-xl font-semibold">{fullName}</p>
-          <p className="text-gray-300">{bio}</p>
+          <p className="text-foreground-300">{bio}</p>
           <p className="mt-2">
             Index {indexNumber}/{indexYear} @ {major}
           </p>

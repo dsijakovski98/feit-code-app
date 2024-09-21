@@ -68,8 +68,8 @@ const ArchiveCourse = () => {
               <ModalBody className="relative">
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-medium text-warning">archive this course?</span> It will be
-                  marked as inactive.
+                  <span className="font-semibold text-warning">archive this course?</span> It will
+                  be marked as inactive.
                 </p>
               </ModalBody>
 

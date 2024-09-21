@@ -31,7 +31,7 @@ const CategoryChip = ({ category, size = "xs" }: Props) => {
           : {}
       }
       classNames={{
-        content: "font-semibold",
+        content: "font-medium",
       }}
     >
       {label}

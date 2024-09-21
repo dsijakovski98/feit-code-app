@@ -68,7 +68,7 @@ const ActivateCourse = () => {
               <ModalBody className="relative">
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-medium text-success">activate this course?</span>
+                  <span className="font-semibold text-success">activate this course?</span>
                 </p>
               </ModalBody>
 

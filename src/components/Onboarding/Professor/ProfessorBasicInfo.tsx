@@ -65,6 +65,10 @@ const ProfessorBasicInfo = () => {
                 defaultSelectedKeys={[form.type]}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
+                classNames={{
+                  label: "font-semibold !text-foreground text-lg",
+                  value: "font-medium",
+                }}
               >
                 {Object.values(TEACHER_TYPE).map((label) => (
                   <SelectItem key={label} textValue={label}>
@@ -89,11 +93,15 @@ const ProfessorBasicInfo = () => {
               defaultSelectedKeys={[form.department]}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
+              classNames={{
+                label: "font-semibold !text-foreground text-lg",
+                value: "font-medium",
+              }}
             >
               {MAJORS.map(({ label, description }) => (
                 <SelectItem key={label} textValue={label}>
-                  <p className="text-base font-medium">{label}</p>
-                  <p className="text-sm text-gray-400">{description}</p>
+                  <p className="text-base font-semibold">{label}</p>
+                  <p className="text-sm text-foreground-400">{description}</p>
                 </SelectItem>
               ))}
             </Select>

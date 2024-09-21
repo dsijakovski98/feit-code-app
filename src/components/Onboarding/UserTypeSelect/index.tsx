@@ -42,7 +42,7 @@ const UserTypeSelector = () => {
               className="space-y-8"
             >
               <div className="space-y-6">
-                <p className="text-xl font-light">
+                <p className="text-xl">
                   Are you sure you are a {userType}?{" "}
                   <b className="font-semibold">You cannot change this later.</b>
                 </p>
@@ -71,10 +71,10 @@ const UserTypeSelector = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="space-y-8"
+              className="space-y-10"
             >
-              <div className="flex items-center justify-between gap-8 md:items-start">
-                <p className="text-2xl font-light">
+              <div className="flex items-start justify-between gap-8 md:items-start">
+                <p className="text-pretty text-[22px] font-semibold">
                   First thing's first, what type of FEIT Coder are you?
                 </p>
 
@@ -95,8 +95,8 @@ const UserTypeSelector = () => {
                 onValueChange={handleChange}
                 description="You will not be able to change this later"
                 classNames={{
-                  wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4  w-full",
-                  description: "text-sm text-gray-400 font-medium mt-2",
+                  wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4 w-full",
+                  description: "text-sm text-foreground-300 font-semibold mt-2",
                 }}
               >
                 <RadioSelect

@@ -95,7 +95,6 @@ const VerifySignUp = ({ verifyMode }: Props) => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
-                input: "placeholder:font-light placeholder:text-slate-400",
                 label: "group-data-[filled-within='true']:!-translate-y-[12px]",
                 errorMessage: fullScreen ? "text-base" : "",
               }}

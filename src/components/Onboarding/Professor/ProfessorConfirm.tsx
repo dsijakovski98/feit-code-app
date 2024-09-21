@@ -55,7 +55,7 @@ const ProfessorConfirm = () => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-xl font-semibold">Good to see you, Professor {lastName}</h3>
-          <p className="text-gray-300">
+          <p className="text-foreground-300">
             Please confirm your details. You can always change them later.
           </p>
         </div>
@@ -72,9 +72,9 @@ const ProfessorConfirm = () => {
           className="overflow-hidden rounded-full bg-primary"
         />
 
-        <div className="space-y-1">
+        <div>
           <p className="text-xl font-semibold">{fullName}</p>
-          <p className="text-gray-300">
+          <p className="text-foreground-300">
             {type} @ {department}
           </p>
         </div>
