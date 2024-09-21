@@ -105,11 +105,15 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 defaultSelectedKeys={[professor.department]}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
+                classNames={{
+                  label: "text-lg font-semibold !text-foreground",
+                  value: "font-medium",
+                }}
               >
                 {MAJORS.map(({ label, description }) => (
                   <SelectItem key={label} textValue={label}>
                     <p className="text-base font-medium">{label}</p>
-                    <p className="text-sm text-gray-400">{description}</p>
+                    <p className="text-sm text-foreground-300">{description}</p>
                   </SelectItem>
                 ))}
               </Select>
@@ -129,6 +133,10 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 defaultSelectedKeys={[professor.type]}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
+                classNames={{
+                  label: "text-lg font-semibold !text-foreground",
+                  value: "font-medium",
+                }}
               >
                 {Object.values(TEACHER_TYPE).map((label) => (
                   <SelectItem key={label} textValue={label}>

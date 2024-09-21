@@ -12,11 +12,15 @@
   }
 
   span[data-slot="value"] {
-    @apply overflow-visible !text-foreground-200;
+    @apply overflow-visible text-foreground;
+  }
+
+  textarea {
+    @apply !font-medium;
   }
 
   textarea::placeholder {
-    @apply !text-foreground-200;
+    @apply !font-light !text-foreground-300;
   }
 
   input[type="color"] {

@@ -172,11 +172,14 @@ const StudentProfileForm = ({ student }: Props) => {
               defaultSelectedKeys={[student.major]}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
+              classNames={{
+                label: "text-lg font-semibold !text-foreground",
+              }}
             >
               {MAJORS.map(({ label, description }) => (
                 <SelectItem key={label} textValue={label}>
-                  <p className="text-base font-medium">{label}</p>
-                  <p className="text-sm text-gray-400">{description}</p>
+                  <p className="text-base font-semibold">{label}</p>
+                  <p className="text-sm text-foreground-400">{description}</p>
                 </SelectItem>
               ))}
             </Select>

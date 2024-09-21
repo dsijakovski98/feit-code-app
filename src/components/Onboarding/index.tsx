@@ -6,6 +6,7 @@ import { Spinner } from "@nextui-org/react";
 import OnboardingStep from "@/components/Onboarding/OnboardingStep";
 import UserTypeSelector from "@/components/Onboarding/UserTypeSelect";
 import GradientText from "@/components/ui/GradientText";
+import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -56,8 +57,9 @@ const Onboarding = () => {
         }}
       >
         <ModalContent>
-          <ModalHeader className="flex-col">
+          <ModalHeader className="items-center justify-between">
             <h2>Welcome aboard!</h2>
+            <ThemeSwitcher />
           </ModalHeader>
 
           <ModalBody className="bg-gradient-to-br from-background to-background/60">

@@ -68,7 +68,7 @@ const DeleteCourse = () => {
               <ModalBody className="relative">
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-medium text-danger">delete this course?</span> You cannot
+                  <span className="font-semibold text-danger">delete this course?</span> You cannot
                   undo this later.
                 </p>
               </ModalBody>

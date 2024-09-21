@@ -89,11 +89,12 @@ const StudentMajor = () => {
               defaultSelectedKeys={[form.major]}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
+              classNames={{ label: "font-semibold !text-foreground text-lg" }}
             >
               {MAJORS.map(({ label, description }) => (
                 <SelectItem key={label} textValue={label}>
-                  <p className="text-base font-medium">{label}</p>
-                  <p className="text-sm text-gray-400">{description}</p>
+                  <p className="text-base font-semibold">{label}</p>
+                  <p className="text-sm text-foreground-400">{description}</p>
                 </SelectItem>
               ))}
             </Select>

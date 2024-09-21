@@ -69,7 +69,7 @@ const DeleteProfile = () => {
               <ModalBody>
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-medium text-danger">delete your profile?</span> No going
+                  <span className="font-semibold text-danger">delete your profile?</span> No going
                   back after that.
                 </p>
               </ModalBody>
