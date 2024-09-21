@@ -8,16 +8,23 @@ import { useCtx } from "@/hooks/useCtx";
 import { TEACHER_TYPE } from "@/types";
 
 const GeneralTab = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/GeneralTab"),
+  () =>
+    import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/GeneralTab"),
 );
 const StudentsTab = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab"),
+  () =>
+    import(
+      "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab"
+    ),
 );
 const SettingsTab = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab"),
+  () =>
+    import(
+      "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab"
+    ),
 );
 
-const CourseDetailsTabs = () => {
+const ProfessorCourseDetails = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
 
   const { hash, pathname } = useLocation();
@@ -76,4 +83,4 @@ const CourseDetailsTabs = () => {
   );
 };
 
-export default CourseDetailsTabs;
+export default ProfessorCourseDetails;

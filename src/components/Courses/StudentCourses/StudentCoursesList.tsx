@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Spinner } from "@nextui-org/react";
 
 import CoursesList from "@/components/Courses/CoursesList";
+import StudentCourseCard from "@/components/Courses/StudentCourses/StudentCourseCard";
 
 import { useStudentCourses } from "@/hooks/student/useStudentCourses";
 
@@ -38,10 +39,9 @@ const StudentCoursesList = ({ studentId }: Props) => {
 
       {!!data?.pages[0].length && (
         <div className="mt-2 overflow-x-clip">
-          {/* TODO: Student courses list */}
           <CoursesList
             coursesQuery={coursesQuery}
-            renderCourse={({ course }) => <p>{course.name}</p>}
+            renderCourse={(courseData) => <StudentCourseCard courseData={courseData} />}
           />
         </div>
       )}

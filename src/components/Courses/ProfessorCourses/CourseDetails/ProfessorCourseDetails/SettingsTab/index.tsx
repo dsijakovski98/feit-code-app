@@ -1,7 +1,7 @@
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
-import CourseDangerZone from "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/CourseDangerZone";
-import EditCourseForm from "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/EditCourseForm";
+import CourseDangerZone from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/CourseDangerZone";
+import EditCourseForm from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/EditCourseForm";
 import Icon from "@/components/ui/Icon";
 
 const SettingsTab = () => {

@@ -111,7 +111,7 @@ export const getTimeGreeting = (name: string) => {
     return `Almost bedtime ${name}`;
   }
 
-  return `Code never sleeps ${name}`;
+  return `${name}'s late night coding`;
 };
 
 export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {

@@ -9,12 +9,10 @@ type Props = {
 
 const StudentCourses = ({ user }: Props) => {
   return (
-    <div className="grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] bg-content2 py-4 dark:bg-primary-50/70 lg:!bg-transparent">
+    <div className="grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] gap-8 bg-content2 py-4 dark:bg-primary-50/70 lg:gap-4 lg:!bg-transparent">
       <section>
         <div className="px-8 lg:px-5">
-          <h2 className="text-lg font-bold uppercase text-foreground/90">
-            {user.firstName}'s Courses
-          </h2>
+          <h2 className="text-lg font-bold uppercase text-foreground/90">My Courses</h2>
         </div>
 
         <StudentCoursesList studentId={user.id} />

@@ -36,7 +36,6 @@ const ActiveCoursesList = () => {
 
       {!!data?.pages[0].length && (
         <div className="mt-2 overflow-x-clip">
-          {/* TODO: Student courses list */}
           <CoursesList
             coursesQuery={coursesQuery}
             renderCourse={(course) => <CourseCard course={course} mode={USER_TYPE.student} />}
