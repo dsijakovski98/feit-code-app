@@ -32,7 +32,7 @@ const StudentCoursesList = ({ studentId }: Props) => {
       {data?.pages[0].length === 0 && (
         <div className="grid place-items-center p-8 text-center">
           <p className="font-semibold text-foreground-300">
-            You are not enrolled in any courses yet. Find one below.
+            You are not enrolled in any courses yet. Search "All Courses" and get started.
           </p>
         </div>
       )}
