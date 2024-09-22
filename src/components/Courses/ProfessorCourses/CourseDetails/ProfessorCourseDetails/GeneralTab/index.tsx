@@ -1,12 +1,13 @@
-import { Chip, User } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
+import { User } from "@nextui-org/user";
 
 import CategoryChip from "@/components/ui/CategoryChip";
+import Timestamp from "@/components/ui/Timestamp";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { TEACHER_TYPE } from "@/types";
-import { getRelativeTimeString } from "@/utils";
 
 import "./styles.css";
 
@@ -37,7 +38,7 @@ const GeneralTab = () => {
           </h4>
           <p className="mb-1 text-lg font-medium">{description}</p>
           <p className="text-base text-foreground-300">
-            Updated {getRelativeTimeString(new Date(updatedAt))}
+            Updated <Timestamp>{updatedAt}</Timestamp>
           </p>
         </div>
 

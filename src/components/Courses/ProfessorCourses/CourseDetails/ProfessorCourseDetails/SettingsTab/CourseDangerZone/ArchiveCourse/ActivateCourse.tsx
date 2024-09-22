@@ -13,9 +13,9 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPE } from "@/types";
 
-const ArchiveCourse = () => {
+const ActivateCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, id: courseId, professorId: userId } = courseDetails;
+  const { name, id: courseId, professorId } = courseDetails;
 
   const queryClient = useQueryClient();
 
@@ -29,11 +29,11 @@ const ArchiveCourse = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }] }),
         queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: USER_TYPE.professor, userId }],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
         }),
       ]);
 
-      toast(`${name} course archived!`);
+      toast.success(`${name} course activated!`);
     },
     onError: (error) => toast.error(error.message),
   });
@@ -41,13 +41,13 @@ const ArchiveCourse = () => {
   return (
     <Fragment>
       <Button
-        variant="ghost"
+        variant="solid"
         color="default"
-        className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
+        className="w-[140px] bg-success py-[22px] text-sm font-semibold dark:border-success-300 dark:text-success-foreground lg:w-full"
         onPress={dialog.toggleOn}
         // TODO: Disabled based on permissions
       >
-        Archive
+        Activate
       </Button>
 
       <Modal
@@ -63,13 +63,12 @@ const ArchiveCourse = () => {
         <ModalContent>
           {(onClose) => (
             <Fragment>
-              <ModalHeader className="text-2xl">Archive Course</ModalHeader>
+              <ModalHeader className="text-2xl">Activate Course</ModalHeader>
 
               <ModalBody className="relative">
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-semibold text-warning">archive this course?</span> It will
-                  be marked as inactive.
+                  <span className="font-semibold text-success">activate this course?</span>
                 </p>
               </ModalBody>
 
@@ -87,9 +86,9 @@ const ArchiveCourse = () => {
                 <Button
                   fullWidth
                   type="submit"
-                  color="warning"
+                  color="success"
                   isLoading={isPending}
-                  onPress={() => mutate({ courseId, archived: true })}
+                  onPress={() => mutate({ courseId, archived: false })}
                 >
                   Archive
                 </Button>
@@ -102,4 +101,4 @@ const ArchiveCourse = () => {
   );
 };
 
-export default ArchiveCourse;
+export default ActivateCourse;

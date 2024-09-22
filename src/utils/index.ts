@@ -37,6 +37,8 @@ export function getRelativeTimeString(date: Date | number, lang = navigator.lang
   // Grab the ideal cutoff unit
   const unitIndex = cutoffs.findIndex((cutoff) => cutoff > Math.abs(deltaSeconds));
 
+  if (unitIndex === 0) return "just now";
+
   // Get the divisor to divide from the seconds. E.g. if our unit is "day" our divisor
   // is one day in seconds, so we can divide our seconds by this to get the # of days
   const divisor = unitIndex ? cutoffs[unitIndex - 1] : 1;
@@ -84,7 +86,7 @@ export const shortClerkErrorMessage = (
 };
 
 export const getDaytime = () => {
-  const [day, ...date] = new Intl.DateTimeFormat(undefined, {
+  const [day, ...date] = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "numeric",
     month: "short",
@@ -93,7 +95,7 @@ export const getDaytime = () => {
     .format(Date.now())
     .split(" ");
 
-  return `${day}, ${date.join(" ")}`;
+  return `${day} ${date.join(" ")}`;
 };
 
 export const getTimeGreeting = (name: string) => {
@@ -109,7 +111,7 @@ export const getTimeGreeting = (name: string) => {
     return `Almost bedtime ${name}`;
   }
 
-  return `Code never sleeps ${name}`;
+  return `${name}'s late night coding`;
 };
 
 export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {

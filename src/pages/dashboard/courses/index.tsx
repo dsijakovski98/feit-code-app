@@ -1,10 +1,12 @@
-import { Spinner } from "@nextui-org/react";
+import { Suspense, lazy } from "react";
 
-import ProfessorCourses from "@/components/Courses/ProfessorCourses";
-import StudentCourses from "@/components/Courses/StudentCourses";
+import { Spinner } from "@nextui-org/react";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
+
+const ProfessorCourses = lazy(() => import("@/components/Courses/ProfessorCourses"));
+const StudentCourses = lazy(() => import("@/components/Courses/StudentCourses"));
 
 const CoursesPage = () => {
   const { userData } = useFCUser();
@@ -20,7 +22,15 @@ const CoursesPage = () => {
 
   const { type, user } = userData;
 
-  return type === USER_TYPE.student ? <StudentCourses /> : <ProfessorCourses user={user} />;
+  return (
+    <Suspense fallback={null}>
+      {type === USER_TYPE.student ? (
+        <StudentCourses user={user} />
+      ) : (
+        <ProfessorCourses user={user} />
+      )}
+    </Suspense>
+  );
 };
 
 export default CoursesPage;

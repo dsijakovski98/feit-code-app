@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -7,33 +8,33 @@ import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextu
 
 import Button from "@/components/ui/Button";
 
-import { archiveCourseToggle } from "@/actions/courses";
+import { deleteCourse } from "@/actions/courses";
+import { ROUTES } from "@/constants/routes";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPE } from "@/types";
 
-const ActivateCourse = () => {
+const DeleteCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, id: courseId, professorId: userId } = courseDetails;
+  const { name, id: courseId, professorId } = courseDetails;
 
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const dialog = useToggle();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: archiveCourseToggle,
+    mutationFn: deleteCourse,
     onSuccess: async (success) => {
       if (!success) return;
 
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }] }),
-        queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: USER_TYPE.professor, userId }],
-        }),
-      ]);
+      await queryClient.invalidateQueries({
+        queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
+      });
 
-      toast.success(`${name} course activated!`);
+      toast(`${name} course deleted!`);
+      navigate(ROUTES.courses);
     },
     onError: (error) => toast.error(error.message),
   });
@@ -41,13 +42,12 @@ const ActivateCourse = () => {
   return (
     <Fragment>
       <Button
-        variant="solid"
-        color="default"
-        className="w-[140px] bg-success py-[22px] text-sm font-semibold dark:border-success-300 dark:text-success-foreground lg:w-full"
+        color="danger"
+        className="w-[140px] py-[22px] text-sm font-semibold lg:w-full"
         onPress={dialog.toggleOn}
         // TODO: Disabled based on permissions
       >
-        Activate
+        Delete Course
       </Button>
 
       <Modal
@@ -63,12 +63,13 @@ const ActivateCourse = () => {
         <ModalContent>
           {(onClose) => (
             <Fragment>
-              <ModalHeader className="text-2xl">Activate Course</ModalHeader>
+              <ModalHeader className="text-2xl">Delete Course</ModalHeader>
 
               <ModalBody className="relative">
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-semibold text-success">activate this course?</span>
+                  <span className="font-semibold text-danger">delete this course?</span> You cannot
+                  undo this later.
                 </p>
               </ModalBody>
 
@@ -86,11 +87,11 @@ const ActivateCourse = () => {
                 <Button
                   fullWidth
                   type="submit"
-                  color="success"
+                  color="danger"
                   isLoading={isPending}
-                  onPress={() => mutate({ courseId, archived: false })}
+                  onPress={() => mutate(courseId)}
                 >
-                  Archive
+                  Delete
                 </Button>
               </ModalFooter>
             </Fragment>
@@ -101,4 +102,4 @@ const ActivateCourse = () => {
   );
 };
 
-export default ActivateCourse;
+export default DeleteCourse;

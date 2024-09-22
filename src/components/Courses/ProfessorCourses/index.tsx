@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 
 import { ButtonGroup, Spinner } from "@nextui-org/react";
 
+import CourseCard from "@/components/Courses/CourseCard";
 import CoursesList from "@/components/Courses/CoursesList";
-import CourseCard from "@/components/Courses/ProfessorCourses/CourseCard";
 import Button from "@/components/ui/Button";
 import FloatButton from "@/components/ui/FloatButton";
 import Icon from "@/components/ui/Icon";
 
 import { useProfessorCourses } from "@/hooks/professor/useProfessorCourses";
 import { FCUser } from "@/hooks/useFCUser";
+import { USER_TYPE } from "@/types";
 
 type Props = {
   user: NonNullable<FCUser>["user"];
@@ -52,9 +53,9 @@ const ProfessorCourses = ({ user }: Props) => {
           </div>
         )}
 
-        {data?.pages.length === 0 && (
+        {data?.pages[0].length === 0 && (
           <div className="grid place-items-center gap-4 p-8 text-center">
-            <p className="font-semibold text-foreground-200">
+            <p className="font-semibold text-foreground-300">
               You are not teaching any courses yet. Let's change that.
             </p>
 
@@ -74,7 +75,7 @@ const ProfessorCourses = ({ user }: Props) => {
           <div className="mt-2 overflow-x-clip">
             <CoursesList
               coursesQuery={coursesQuery}
-              renderCourse={(course) => <CourseCard course={course} />}
+              renderCourse={(course) => <CourseCard course={course} mode={USER_TYPE.professor} />}
             />
           </div>
         )}

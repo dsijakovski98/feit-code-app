@@ -1,17 +1,16 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { db } from "@/db";
-import { USER_TYPE } from "@/types";
 import { getAcademicYear } from "@/utils";
 
 const COURSES_PER_PAGE = 5;
 const currentAcademicYear = getAcademicYear();
 
-export const useProfessorCourses = (professorId: string, yearFilter: "all" | "current") => {
+export const useActiveCourses = () => {
   return useInfiniteQuery({
     initialPageParam: 0,
 
-    queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId, yearFilter }],
+    queryKey: [{ name: "courses", type: "active" }],
     queryFn: async ({ pageParam = 0 }) => {
       const coursesData = await db.query.courses.findMany({
         with: {
@@ -19,11 +18,7 @@ export const useProfessorCourses = (professorId: string, yearFilter: "all" | "cu
           categories: { with: { category: true }, columns: { courseId: false } },
         },
         where: (courses, { eq, and }) => {
-          const professorFilter = eq(courses.professorId, professorId);
-
-          if (yearFilter === "all") return professorFilter;
-
-          return and(professorFilter, eq(courses.academicYear, currentAcademicYear));
+          return and(eq(courses.archived, false), eq(courses.academicYear, currentAcademicYear));
         },
         orderBy: (courses, { desc }) => desc(courses.updatedAt),
         limit: COURSES_PER_PAGE,

@@ -10,4 +10,8 @@
       "details exam"
       "stats stats";
   }
+
+  .general > * {
+    @apply rounded-lg border border-content2 bg-background px-6 py-5 shadow-md dark:border-transparent dark:bg-primary-50/70 dark:shadow-none;
+  }
 }

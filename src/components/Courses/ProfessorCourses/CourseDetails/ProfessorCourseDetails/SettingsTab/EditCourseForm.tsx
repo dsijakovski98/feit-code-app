@@ -80,12 +80,12 @@ const EditCourseForm = () => {
           .values(categoryIds.map((categoryId) => ({ categoryId, courseId })));
       }
 
+      const { professorId } = courseDetails;
+
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }], exact: true }),
         queryClient.invalidateQueries({
-          queryKey: [
-            { name: "courses", type: USER_TYPE.professor, userId: courseDetails.professorId },
-          ],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
         }),
       ]);
 

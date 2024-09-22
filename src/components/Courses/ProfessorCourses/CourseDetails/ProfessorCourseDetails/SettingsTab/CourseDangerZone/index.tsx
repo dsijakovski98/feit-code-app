@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 
-import DeleteCourse from "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/CourseDangerZone/DeleteCourse";
+import DeleteCourse from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/CourseDangerZone/DeleteCourse";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -8,14 +8,14 @@ import { useCtx } from "@/hooks/useCtx";
 const ActivateCourse = lazy(
   () =>
     import(
-      "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/CourseDangerZone/ArchiveCourse/ActivateCourse"
+      "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/CourseDangerZone/ArchiveCourse/ActivateCourse"
     ),
 );
 
 const ArchiveCourse = lazy(
   () =>
     import(
-      "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/CourseDangerZone/ArchiveCourse/ArchiveCourse"
+      "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/CourseDangerZone/ArchiveCourse/ArchiveCourse"
     ),
 );
 
