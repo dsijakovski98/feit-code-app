@@ -105,11 +105,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="border border-content1 bg-background">
-        <form
-          id="add-label-form"
-          onSubmit={handleChildFormSubmit}
-          className="flex items-end gap-4 p-1.5"
-        >
+        <form id="add-label-form" onSubmit={handleChildFormSubmit} className="flex items-end gap-4 p-1.5">
           <Controller
             control={control}
             name="color"

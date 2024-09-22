@@ -101,12 +101,9 @@ const ForgotPasswordForm = () => {
             exit={{ opacity: 0, height: 0 }}
             onChange={handleChange}
             onSubmit={handleSubmit(onSubmit)}
-            className={clsx(
-              "mx-auto flex h-full w-[90%] flex-col gap-12 pb-3 lg:w-[95%] lg:gap-2 lg:pb-3",
-              {
-                "w-[70%] !gap-16 pt-2": fullScreen,
-              },
-            )}
+            className={clsx("mx-auto flex h-full w-[90%] flex-col gap-12 pb-3 lg:w-[95%] lg:gap-2 lg:pb-3", {
+              "w-[70%] !gap-16 pt-2": fullScreen,
+            })}
           >
             <div className="relative">
               <Controller

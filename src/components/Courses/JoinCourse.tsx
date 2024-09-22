@@ -92,13 +92,7 @@ const JoinCourse = () => {
               </ModalBody>
 
               <ModalFooter>
-                <Button
-                  fullWidth
-                  color="default"
-                  variant="bordered"
-                  isDisabled={isPending}
-                  onPress={onClose}
-                >
+                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
                   Go back
                 </Button>
 

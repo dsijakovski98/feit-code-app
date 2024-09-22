@@ -18,13 +18,9 @@ const StudentCourseCard = ({ courseData }: Props) => {
     <div className="flex h-full justify-between gap-2 overflow-hidden rounded-md border border-content3 bg-content1 font-sans shadow-md dark:border-transparent dark:bg-primary-50">
       <div className="flex h-full w-[32ch] flex-col justify-between space-y-5 overflow-hidden p-6 lg:space-y-2 lg:p-4">
         <div>
-          <span className="text-sm font-semibold text-primary dark:text-primary-700">
-            {academicYear}
-          </span>
+          <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
 
-          <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">
-            {name}
-          </h3>
+          <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">{name}</h3>
         </div>
 
         <p>

@@ -21,13 +21,9 @@ const CourseCard = (props: CourseCardContext) => {
           )}
         >
           <div>
-            <span className="text-sm font-semibold text-primary dark:text-primary-700">
-              {academicYear}
-            </span>
+            <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
 
-            <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">
-              {name}
-            </h3>
+            <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">{name}</h3>
           </div>
 
           <CourseDescription />

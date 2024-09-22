@@ -119,12 +119,9 @@ const SignUpForm = () => {
             exit={{ opacity: 0, height: 0 }}
             onChange={handleChange}
             onSubmit={handleSubmit(onSubmit)}
-            className={clsx(
-              "mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-0",
-              {
-                "w-[70%] !gap-4 pt-10": fullScreen,
-              },
-            )}
+            className={clsx("mx-auto flex h-full w-[90%] flex-col gap-3 pb-3 lg:w-[95%] lg:gap-2 lg:pb-0", {
+              "w-[70%] !gap-4 pt-10": fullScreen,
+            })}
           >
             <div className={clsx("mb-10 lg:mb-2", { "mb-36": fullScreen })}>
               <Controller

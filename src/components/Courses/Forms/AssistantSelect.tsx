@@ -60,9 +60,7 @@ const AssistantSelect = ({ form, defaultValue }: Props) => {
           errorMessage={fieldState.error?.message}
           defaultSelectedKeys={defaultValue ? [defaultValue] : undefined}
           isDisabled={isLoading || isSubmitting || assistants?.length === 0}
-          renderValue={(items) => (
-            <p className="font-medium text-foreground">{items[0]["aria-label"]}</p>
-          )}
+          renderValue={(items) => <p className="font-medium text-foreground">{items[0]["aria-label"]}</p>}
           classNames={{
             label: "font-semibold text-lg lg:text-base !text-foreground",
           }}

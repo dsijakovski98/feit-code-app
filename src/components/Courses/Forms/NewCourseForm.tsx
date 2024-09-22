@@ -50,12 +50,7 @@ const NewCourseForm = () => {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit: SubmitHandler<CourseSchema> = async ({
-    name,
-    description,
-    categories,
-    assistantId,
-  }) => {
+  const onSubmit: SubmitHandler<CourseSchema> = async ({ name, description, categories, assistantId }) => {
     if (!userId) return;
 
     clearErrors("root");
@@ -75,9 +70,7 @@ const NewCourseForm = () => {
       if (categories.length > 0) {
         const categoryIds = categories.split(",");
 
-        await db
-          .insert(courseCategories)
-          .values(categoryIds.map((categoryId) => ({ categoryId, courseId })));
+        await db.insert(courseCategories).values(categoryIds.map((categoryId) => ({ categoryId, courseId })));
       }
 
       await queryClient.invalidateQueries({ queryKey: [{ name: "courses" }] });
@@ -99,8 +92,8 @@ const NewCourseForm = () => {
       <div>
         <h2 className="text-2xl font-semibold lg:text-xl">Create a new course</h2>
         <p className="text-foreground-300 lg:text-sm">
-          You will be teaching this course for the{" "}
-          <span className="font-semibold">{academicYear}</span> semester
+          You will be teaching this course for the <span className="font-semibold">{academicYear}</span>{" "}
+          semester
         </p>
       </div>
 

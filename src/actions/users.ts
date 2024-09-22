@@ -88,13 +88,7 @@ export const updateStudent = async ({
 };
 
 type ProfessorData = ProfessorForm & UserData;
-export const createNewProfessor = async ({
-  user,
-  fullName,
-  department,
-  type,
-  avatarUrl,
-}: ProfessorData) => {
+export const createNewProfessor = async ({ user, fullName, department, type, avatarUrl }: ProfessorData) => {
   const { firstName, lastName } = splitFullName(fullName);
 
   try {

@@ -7,8 +7,7 @@ import { ROUTES } from "@/constants/routes";
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE, UserType } from "@/types";
 
-const menuLabel = (type: UserType, label: string) =>
-  type === USER_TYPE.student ? label : `My ${label}`;
+const menuLabel = (type: UserType, label: string) => (type === USER_TYPE.student ? label : `My ${label}`);
 
 const SidebarMenu = () => {
   const { userData } = useFCUser();

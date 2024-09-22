@@ -10,10 +10,7 @@ type Props = {
 export const DashboardWindow = ({ className = "", children }: Props) => {
   return (
     <section
-      className={clsx(
-        "rounded-xl border border-background/50 bg-background p-4 shadow-md",
-        className,
-      )}
+      className={clsx("rounded-xl border border-background/50 bg-background p-4 shadow-md", className)}
     >
       {children}
     </section>

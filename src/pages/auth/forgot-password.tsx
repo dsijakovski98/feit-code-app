@@ -6,11 +6,7 @@ import { ROUTES } from "@/constants/routes";
 
 const ForgotPassword = () => {
   return (
-    <AuthPageWindow
-      title="Forgot password"
-      href={ROUTES.forgotPassword}
-      heading="Don't worry, it happens"
-    >
+    <AuthPageWindow title="Forgot password" href={ROUTES.forgotPassword} heading="Don't worry, it happens">
       <ForgotPasswordForm />
     </AuthPageWindow>
   );

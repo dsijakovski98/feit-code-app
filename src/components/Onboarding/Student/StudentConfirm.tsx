@@ -31,10 +31,7 @@ const StudentConfirm = () => {
   const [baseAvatarUrl, setBaseAvatarUrl] = useState(diceBear.getRandomAvatar());
   const [avatarSeed, setAvatarSeed] = useState(diceBear.getRandomSeed());
 
-  const avatarUrl = useMemo(
-    () => `${baseAvatarUrl}?seed=${avatarSeed}`,
-    [baseAvatarUrl, avatarSeed],
-  );
+  const avatarUrl = useMemo(() => `${baseAvatarUrl}?seed=${avatarSeed}`, [baseAvatarUrl, avatarSeed]);
 
   const getNewStyle = () => {
     let newAvatar = "";

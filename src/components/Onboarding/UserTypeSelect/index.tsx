@@ -48,12 +48,7 @@ const UserTypeSelector = () => {
                 </p>
 
                 <div className="flex justify-between gap-4 *:basis-full">
-                  <Button
-                    size="lg"
-                    color="default"
-                    variant="bordered"
-                    onPress={confirmDialog.toggleOff}
-                  >
+                  <Button size="lg" color="default" variant="bordered" onPress={confirmDialog.toggleOff}>
                     Go back
                   </Button>
                   <Button size="lg" onPress={confirmChoice}>

@@ -1,12 +1,7 @@
 import { InferInput, email, minLength, nonEmpty, object, pipe, string, trim } from "valibot";
 
 export const ForgotPasswordSchema = object({
-  email: pipe(
-    string(),
-    trim(),
-    nonEmpty("Email cannot be empty!"),
-    email("Please enter a valid email!"),
-  ),
+  email: pipe(string(), trim(), nonEmpty("Email cannot be empty!"), email("Please enter a valid email!")),
 });
 
 export type ForgotPasswordSchema = InferInput<typeof ForgotPasswordSchema>;

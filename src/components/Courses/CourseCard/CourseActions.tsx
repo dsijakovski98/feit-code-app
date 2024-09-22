@@ -20,10 +20,7 @@ const CourseActions = () => {
         "pb-2.5": archived,
       })}
     >
-      <Link
-        to={id}
-        className="group flex w-fit items-center justify-between gap-2 font-semibold lg:gap-1"
-      >
+      <Link to={id} className="group flex w-fit items-center justify-between gap-2 font-semibold lg:gap-1">
         Details{" "}
         <Icon
           name="right"

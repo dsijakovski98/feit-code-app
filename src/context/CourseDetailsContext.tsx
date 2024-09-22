@@ -12,11 +12,7 @@ CourseDetailsContext.displayName = "CourseDetailsContext";
 type Props = CourseDetailsContext & PropsWithChildren;
 
 const CourseDetailsProvider = ({ courseDetails, children }: Props) => {
-  return (
-    <CourseDetailsContext.Provider value={{ courseDetails }}>
-      {children}
-    </CourseDetailsContext.Provider>
-  );
+  return <CourseDetailsContext.Provider value={{ courseDetails }}>{children}</CourseDetailsContext.Provider>;
 };
 
 export default CourseDetailsProvider;

@@ -3,13 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "@clerk/clerk-react";
 import { Avatar } from "@nextui-org/avatar";
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownSection,
-  DropdownTrigger,
-} from "@nextui-org/dropdown";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
 
 import AuthStrategyIcon from "@/layouts/MainLayout/Nav/UserAvatar/AuthStrategyIcon";
 import UserAvatarSkeleton from "@/layouts/MainLayout/Nav/UserAvatar/Skeleton";

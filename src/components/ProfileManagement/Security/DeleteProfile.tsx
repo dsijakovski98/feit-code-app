@@ -69,28 +69,17 @@ const DeleteProfile = () => {
               <ModalBody>
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-semibold text-danger">delete your profile?</span> No going
-                  back after that.
+                  <span className="font-semibold text-danger">delete your profile?</span> No going back after
+                  that.
                 </p>
               </ModalBody>
 
               <ModalFooter>
-                <Button
-                  fullWidth
-                  color="default"
-                  variant="bordered"
-                  isDisabled={isPending}
-                  onPress={onClose}
-                >
+                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
                   Go back
                 </Button>
 
-                <Button
-                  fullWidth
-                  color="danger"
-                  isLoading={isPending}
-                  onPress={handleDeleteProfile}
-                >
+                <Button fullWidth color="danger" isLoading={isPending} onPress={handleDeleteProfile}>
                   Yes, Bye
                 </Button>
               </ModalFooter>

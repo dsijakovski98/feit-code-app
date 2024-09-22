@@ -24,15 +24,7 @@ export function getRelativeTimeString(date: Date | number, lang = navigator.lang
   const cutoffs = [60, 3600, 86400, 86400 * 7, 86400 * 30, 86400 * 365, Infinity];
 
   // Array equivalent to the above but in the string representation of the units
-  const units: Intl.RelativeTimeFormatUnit[] = [
-    "second",
-    "minute",
-    "hour",
-    "day",
-    "week",
-    "month",
-    "year",
-  ];
+  const units: Intl.RelativeTimeFormatUnit[] = ["second", "minute", "hour", "day", "week", "month", "year"];
 
   // Grab the ideal cutoff unit
   const unitIndex = cutoffs.findIndex((cutoff) => cutoff > Math.abs(deltaSeconds));

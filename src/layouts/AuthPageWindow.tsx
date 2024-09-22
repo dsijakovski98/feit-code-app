@@ -32,9 +32,7 @@ const AuthPageWindow = ({ title, href, heading, children }: Props) => {
           <div className="grid h-full grid-cols-[1.15fr_3fr] lg:grid-cols-[1.5fr_3fr] md:block">
             <AuthSidebar activeLink={href} />
 
-            <div className="bg-gradient-to-r from-background/90 to-primary-50/20 p-6 lg:p-4">
-              {children}
-            </div>
+            <div className="bg-gradient-to-r from-background/90 to-primary-50/20 p-6 lg:p-4">{children}</div>
           </div>
         </Window>
       </div>

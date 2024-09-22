@@ -45,12 +45,7 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
 
   return (
     <section className="flex items-end justify-between">
-      <div
-        className={clsx(
-          "flex items-end gap-4 lg:w-full lg:items-center lg:justify-center",
-          className,
-        )}
-      >
+      <div className={clsx("flex items-end gap-4 lg:w-full lg:items-center lg:justify-center", className)}>
         <AvatarPreview avatar={avatar} ref={imgRef} />
 
         <div className="space-y-1">

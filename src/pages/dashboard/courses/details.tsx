@@ -59,11 +59,7 @@ const CourseDetailsPage = () => {
   return (
     <CourseDetailsProvider courseDetails={data}>
       <Suspense fallback={null}>
-        {userData.type === USER_TYPE.student ? (
-          <StudentCourseDetails />
-        ) : (
-          <ProfessorCourseDetails />
-        )}
+        {userData.type === USER_TYPE.student ? <StudentCourseDetails /> : <ProfessorCourseDetails />}
       </Suspense>
     </CourseDetailsProvider>
   );

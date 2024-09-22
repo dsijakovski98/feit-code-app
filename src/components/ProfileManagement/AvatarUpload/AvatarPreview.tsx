@@ -44,11 +44,7 @@ const AvatarPreview = forwardRef<HTMLImageElement, Props>(({ avatar }, ref) => {
         }}
       >
         <ModalContent>
-          <img
-            src={avatar}
-            alt="Avatar preview"
-            className="w-full overflow-hidden rounded-lg object-cover"
-          />
+          <img src={avatar} alt="Avatar preview" className="w-full overflow-hidden rounded-lg object-cover" />
         </ModalContent>
       </Modal>
     </Fragment>

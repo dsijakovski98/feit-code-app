@@ -5,16 +5,10 @@ type Props = {
   name: string;
   prefix?: string;
   color?: string;
-  className?: ClassValue
+  className?: ClassValue;
 };
 
-const Icon = ({
-  name,
-  prefix = "icon",
-  color = "currentColor",
-  className = '',
-  ...props
-}: Props ) => {
+const Icon = ({ name, prefix = "icon", color = "currentColor", className = "", ...props }: Props) => {
   const symbolId = `#${prefix}-${name}`;
 
   return (
