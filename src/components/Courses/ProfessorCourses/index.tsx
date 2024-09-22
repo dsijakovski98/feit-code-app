@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ButtonGroup, Spinner } from "@nextui-org/react";
@@ -11,6 +10,7 @@ import Icon from "@/components/ui/Icon";
 
 import { useProfessorCourses } from "@/hooks/professor/useProfessorCourses";
 import { FCUser } from "@/hooks/useFCUser";
+import { useFilter } from "@/hooks/useFilter";
 import { USER_TYPE } from "@/types";
 
 type Props = {
@@ -18,7 +18,10 @@ type Props = {
 };
 
 const ProfessorCourses = ({ user }: Props) => {
-  const [courseYearFilter, setCourseYearFilter] = useState<"all" | "current">("current");
+  const [courseYearFilter, setCourseYearFilter] = useFilter<"all" | "current">({
+    name: "year",
+    defaultValue: "current",
+  });
 
   const coursesQuery = useProfessorCourses(user.id, courseYearFilter);
   const { data } = coursesQuery;
@@ -33,16 +36,16 @@ const ProfessorCourses = ({ user }: Props) => {
 
           <ButtonGroup size="sm" className="*:text-sm">
             <Button
-              color={courseYearFilter === "all" ? "primary" : "default"}
-              onPress={() => setCourseYearFilter("all")}
-            >
-              All courses
-            </Button>
-            <Button
               color={courseYearFilter === "current" ? "primary" : "default"}
               onPress={() => setCourseYearFilter("current")}
             >
               This year
+            </Button>
+            <Button
+              color={courseYearFilter === "all" ? "primary" : "default"}
+              onPress={() => setCourseYearFilter("all")}
+            >
+              All courses
             </Button>
           </ButtonGroup>
         </div>
