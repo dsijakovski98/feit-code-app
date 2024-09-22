@@ -7,6 +7,7 @@ import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextu
 import { Skeleton } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
+import Timestamp from "@/components/ui/Timestamp";
 
 import { joinCourse } from "@/actions/courses";
 import { CourseCardContext } from "@/context/CourseCardContext";
@@ -15,7 +16,6 @@ import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPE } from "@/types";
-import { getRelativeTimeString } from "@/utils";
 
 const JoinCourse = () => {
   const { course } = useCtx(CourseCardContext);
@@ -58,8 +58,7 @@ const JoinCourse = () => {
   if (joinedCourse) {
     return (
       <p>
-        Joined{" "}
-        <b className="font-semibold">{getRelativeTimeString(new Date(joinedCourse.joinedAt))}</b>
+        Joined <Timestamp>{joinedCourse.joinedAt}</Timestamp>
       </p>
     );
   }

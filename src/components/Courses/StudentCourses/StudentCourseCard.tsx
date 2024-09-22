@@ -1,11 +1,10 @@
-import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import Timestamp from "@/components/ui/Timestamp";
 
 import { StudentCourseType } from "@/hooks/student/useStudentCourses";
-import { getRelativeTimeString } from "@/utils";
 
 type Props = {
   courseData: StudentCourseType;
@@ -14,8 +13,6 @@ type Props = {
 const StudentCourseCard = ({ courseData }: Props) => {
   const { course, joinedAt } = courseData;
   const { id, academicYear, name } = course;
-
-  const joinedTime = useMemo(() => getRelativeTimeString(new Date(joinedAt)), [joinedAt]);
 
   return (
     <div className="flex h-full justify-between gap-2 overflow-hidden rounded-md border border-content3 bg-content1 font-quicksand shadow-md dark:border-transparent dark:bg-primary-50">
@@ -31,7 +28,7 @@ const StudentCourseCard = ({ courseData }: Props) => {
         </div>
 
         <p>
-          Joined <b className="font-semibold">{joinedTime}</b>
+          Joined <Timestamp>{joinedAt}</Timestamp>
         </p>
       </div>
 

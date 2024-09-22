@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
 import { Divider } from "@nextui-org/divider";
+import { Skeleton } from "@nextui-org/react";
 
 import LogoFC from "@/layouts/MainLayout/LogoFC";
 import NotificationsMenu from "@/layouts/MainLayout/Nav/NotificationsMenu";
@@ -16,7 +17,7 @@ const Nav = () => {
 
   const timestamp = useMemo(() => getDaytime(), []);
   const timeGreeting = useMemo(
-    () => getTimeGreeting(userData?.user.firstName ?? ""),
+    () => (userData?.user.firstName ? getTimeGreeting(userData?.user.firstName) : ""),
     [userData?.user.firstName],
   );
 
@@ -24,7 +25,9 @@ const Nav = () => {
     <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-[#131038] lg:bg-primary lg:px-5 lg:py-2.5">
       <nav className="flex items-center justify-between">
         <div className="lg:hidden">
-          <h1 className="text-2xl font-semibold">{timeGreeting}</h1>
+          <Skeleton isLoaded={!!timeGreeting} className="min-h-8 rounded-lg">
+            <h1 className="text-2xl font-semibold">{timeGreeting}</h1>
+          </Skeleton>
           <time>{timestamp}</time>
         </div>
 

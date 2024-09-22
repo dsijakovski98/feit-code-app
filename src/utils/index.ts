@@ -86,7 +86,7 @@ export const shortClerkErrorMessage = (
 };
 
 export const getDaytime = () => {
-  const [day, ...date] = new Intl.DateTimeFormat(undefined, {
+  const [day, ...date] = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "numeric",
     month: "short",
@@ -95,7 +95,7 @@ export const getDaytime = () => {
     .format(Date.now())
     .split(" ");
 
-  return `${day}, ${date.join(" ")}`;
+  return `${day} ${date.join(" ")}`;
 };
 
 export const getTimeGreeting = (name: string) => {

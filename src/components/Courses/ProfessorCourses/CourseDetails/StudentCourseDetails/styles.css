@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 @layer utilities {
-  .general {
-    @apply grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-6;
+  .details {
+    @apply grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] gap-x-8 gap-y-6;
 
     grid-template-areas:
-      "details exam"
+      "details actions"
       "stats stats";
   }
 
-  .general > * {
+  .details > * {
     @apply rounded-lg border border-content2 bg-background px-6 py-5 shadow-md dark:border-transparent dark:bg-primary-50/70 dark:shadow-none;
   }
 }
