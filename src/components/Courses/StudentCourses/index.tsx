@@ -1,10 +1,11 @@
-import { Suspense, lazy, useMemo, useState } from "react";
+import { Suspense, lazy, useMemo } from "react";
 
 import { ButtonGroup } from "@nextui-org/button";
 
 import Button from "@/components/ui/Button";
 
 import { FCUser } from "@/hooks/useFCUser";
+import { useFilter } from "@/hooks/useFilter";
 
 const ActiveCoursesList = lazy(
   () => import("@/components/Courses/StudentCourses/ActiveCoursesList"),
@@ -18,7 +19,10 @@ type Props = {
 };
 
 const StudentCourses = ({ user }: Props) => {
-  const [coursesFilter, setCoursesFilter] = useState<"own" | "all">("own");
+  const [coursesFilter, setCoursesFilter] = useFilter<"own" | "all">({
+    name: "q",
+    defaultValue: "own",
+  });
 
   const coursesTitle = useMemo(
     () => (coursesFilter === "own" ? "My Courses" : "All Courses"),
