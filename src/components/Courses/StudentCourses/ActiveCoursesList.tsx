@@ -21,9 +21,7 @@ const ActiveCoursesList = () => {
       )}
 
       {error && (
-        <div className="w-full py-8 text-center font-semibold text-danger">
-          Error: {error.message}
-        </div>
+        <div className="w-full py-8 text-center font-semibold text-danger">Error: {error.message}</div>
       )}
 
       {data?.pages[0].length === 0 && (

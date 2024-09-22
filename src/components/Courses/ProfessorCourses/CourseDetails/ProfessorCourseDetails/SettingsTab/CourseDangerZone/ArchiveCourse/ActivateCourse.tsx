@@ -29,7 +29,7 @@ const ActivateCourse = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }] }),
         queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, id: professorId }],
         }),
       ]);
 
@@ -45,7 +45,6 @@ const ActivateCourse = () => {
         color="default"
         className="w-[140px] bg-success py-[22px] text-sm font-semibold dark:border-success-300 dark:text-success-foreground lg:w-full"
         onPress={dialog.toggleOn}
-        // TODO: Disabled based on permissions
       >
         Activate
       </Button>
@@ -73,13 +72,7 @@ const ActivateCourse = () => {
               </ModalBody>
 
               <ModalFooter>
-                <Button
-                  fullWidth
-                  color="default"
-                  variant="bordered"
-                  isDisabled={isPending}
-                  onPress={onClose}
-                >
+                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
                   Go back
                 </Button>
 

@@ -8,7 +8,7 @@ import { useAuth } from "@clerk/clerk-react";
 import { getAvatarUrl } from "@/services/avatars";
 
 import { db } from "@/db";
-import { USER_TYPE } from "@/types";
+import { TeacherType, USER_TYPE } from "@/types";
 
 const userColumns = {
   id: true,
@@ -39,7 +39,7 @@ export const useFCUser = () => {
 
       const professorAttempt = await db.query.professors.findFirst({
         where: (professors, { eq }) => eq(professors.id, userId),
-        columns: userColumns,
+        columns: { ...userColumns, type: true },
       });
 
       if (professorAttempt) {
@@ -61,3 +61,8 @@ export const useFCUser = () => {
 
 export type UseFCUser = ReturnType<typeof useFCUser>;
 export type FCUser = UseFCUser["userData"];
+
+export type FCStudent = NonNullable<FCUser>["user"];
+export type FCProfessor = NonNullable<FCUser>["user"] & {
+  type: TeacherType;
+};

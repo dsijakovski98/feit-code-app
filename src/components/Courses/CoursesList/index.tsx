@@ -8,6 +8,8 @@ import "swiper/css/pagination";
 import { A11y, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { COURSES_PER_PAGE } from "@/constants/queries";
+
 import "./styles.css";
 
 type Props<T extends { id: string }> = {
@@ -49,7 +51,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       grabCursor={!isFetching}
       spaceBetween={30}
       slidesPerView="auto"
-      centerInsufficientSlides
+      centerInsufficientSlides={data.pages[0].length > COURSES_PER_PAGE - 1}
       navigation={{ hideOnClick: true, enabled: !isFetching }}
       pagination={{ dynamicBullets: true }}
       modules={[A11y, Pagination, Navigation]}

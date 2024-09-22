@@ -7,12 +7,8 @@ import Button from "@/components/ui/Button";
 import { FCUser } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
 
-const ActiveCoursesList = lazy(
-  () => import("@/components/Courses/StudentCourses/ActiveCoursesList"),
-);
-const StudentCoursesList = lazy(
-  () => import("@/components/Courses/StudentCourses/StudentCoursesList"),
-);
+const ActiveCoursesList = lazy(() => import("@/components/Courses/StudentCourses/ActiveCoursesList"));
+const StudentCoursesList = lazy(() => import("@/components/Courses/StudentCourses/StudentCoursesList"));
 
 type Props = {
   user: NonNullable<FCUser>["user"];

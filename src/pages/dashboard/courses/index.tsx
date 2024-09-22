@@ -13,21 +13,18 @@ const CoursesPage = () => {
 
   if (!userData) {
     return (
-      // TODO: Skeleton UI
       <div className="grid h-full place-items-center">
         <Spinner size="lg" className="scale-150" />
       </div>
     );
   }
 
-  const { type, user } = userData;
-
   return (
     <Suspense fallback={null}>
-      {type === USER_TYPE.student ? (
-        <StudentCourses user={user} />
+      {userData.type === USER_TYPE.student ? (
+        <StudentCourses user={userData.user} />
       ) : (
-        <ProfessorCourses user={user} />
+        <ProfessorCourses user={userData.user} />
       )}
     </Suspense>
   );

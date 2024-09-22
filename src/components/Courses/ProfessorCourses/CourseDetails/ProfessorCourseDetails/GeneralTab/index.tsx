@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { Chip } from "@nextui-org/chip";
 import { User } from "@nextui-org/user";
 
@@ -7,21 +9,37 @@ import Timestamp from "@/components/ui/Timestamp";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
+import { useFCUser } from "@/hooks/useFCUser";
 import { TEACHER_TYPE } from "@/types";
 
 import "./styles.css";
 
 const GeneralTab = () => {
+  const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, description, professor, assistant, categories, archived, updatedAt } =
-    courseDetails;
+  const { name, description, professor, assistant, categories, archived, updatedAt } = courseDetails;
 
   const [professorAvatar] = useAvatar(courseDetails?.professorId);
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
 
+  const userFullName = useMemo(
+    () => `${userData?.user.firstName} ${userData?.user.lastName}`,
+    [userData?.user.firstName, userData?.user.lastName],
+  );
+  const professorFullName = useMemo(
+    () => `${professor.firstName} ${professor.lastName}`,
+    [professor.firstName, professor.lastName],
+  );
+  const assistantFullName = useMemo(
+    () => `${assistant?.firstName} ${assistant?.lastName}`,
+    [assistant?.firstName, assistant?.lastName],
+  );
+
+  if (!userData) return null;
+
   return (
-    <div className="general lg:block lg:space-y-8">
-      <div className="max-w-[55ch] space-y-10 [grid-area:details]">
+    <div className="general lg:block lg:space-y-6">
+      <div className="max-w-[55ch] space-y-10 [grid-area:details] lg:max-w-full">
         <div>
           <h2 className="text-2xl font-semibold">
             {name}{" "}
@@ -55,7 +73,7 @@ const GeneralTab = () => {
             <User
               name={
                 <a href={`mailto: ${professor.email}`} className="text-base font-semibold">
-                  {professor.firstName} {professor.lastName}
+                  {userFullName === professorFullName ? "You" : professorFullName}
                 </a>
               }
               description={<p className="text-base">{TEACHER_TYPE.professor}</p>}
@@ -70,7 +88,7 @@ const GeneralTab = () => {
               <User
                 name={
                   <a href={`mailto:${assistant.email}`} className="text-base font-semibold">
-                    {assistant.firstName} {assistant.lastName}
+                    {userFullName === assistantFullName ? "You" : assistantFullName}
                   </a>
                 }
                 description={<p className="text-base">{TEACHER_TYPE.assistant}</p>}
@@ -81,9 +99,7 @@ const GeneralTab = () => {
                 }}
               />
             ) : (
-              <p className="font-semibold text-foreground-300">
-                There is no assistant for this course yet.
-              </p>
+              <p className="font-semibold text-foreground-300">There is no assistant for this course yet.</p>
             )}
           </div>
         </div>

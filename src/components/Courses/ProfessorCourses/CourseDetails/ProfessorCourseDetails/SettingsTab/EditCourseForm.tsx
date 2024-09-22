@@ -51,12 +51,7 @@ const EditCourseForm = () => {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit: SubmitHandler<CourseSchema> = async ({
-    name,
-    description,
-    categories,
-    assistantId,
-  }) => {
+  const onSubmit: SubmitHandler<CourseSchema> = async ({ name, description, categories, assistantId }) => {
     clearErrors("root");
 
     try {
@@ -75,9 +70,7 @@ const EditCourseForm = () => {
       if (categories.length > 0) {
         const categoryIds = categories.split(",");
 
-        await db
-          .insert(courseCategories)
-          .values(categoryIds.map((categoryId) => ({ categoryId, courseId })));
+        await db.insert(courseCategories).values(categoryIds.map((categoryId) => ({ categoryId, courseId })));
       }
 
       const { professorId } = courseDetails;
@@ -85,7 +78,7 @@ const EditCourseForm = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }], exact: true }),
         queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, id: professorId }],
         }),
       ]);
 

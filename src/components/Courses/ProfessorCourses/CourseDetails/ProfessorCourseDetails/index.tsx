@@ -3,41 +3,37 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { useCtx } from "@/hooks/useCtx";
-import { TEACHER_TYPE } from "@/types";
+import { useFCUser } from "@/hooks/useFCUser";
+import { TEACHER_TYPE, USER_TYPE } from "@/types";
 
 const GeneralTab = lazy(
-  () =>
-    import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/GeneralTab"),
+  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/GeneralTab"),
 );
 const StudentsTab = lazy(
-  () =>
-    import(
-      "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab"
-    ),
+  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab"),
 );
 const SettingsTab = lazy(
-  () =>
-    import(
-      "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab"
-    ),
+  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab"),
 );
 
 const ProfessorCourseDetails = () => {
-  const { courseDetails } = useCtx(CourseDetailsContext);
+  const { userData } = useFCUser();
 
   const { hash, pathname } = useLocation();
 
-  const invalidRoute = useMemo(() => {
+  const tabKeys = useMemo(() => {
     const keys = ["general", "students"];
 
-    if (courseDetails.professor.type === TEACHER_TYPE.professor) {
+    if (userData?.type === USER_TYPE.professor && userData.user.type === TEACHER_TYPE.professor) {
       keys.push("settings");
     }
 
-    return !hash || !keys.includes(hash.slice(1));
-  }, [courseDetails.professor.type, hash]);
+    return keys;
+  }, [userData]);
+
+  const invalidRoute = useMemo(() => {
+    return !hash || !tabKeys.includes(hash.slice(1));
+  }, [hash, tabKeys]);
 
   if (invalidRoute) {
     return <Navigate to={pathname + "#general"} replace />;
@@ -70,7 +66,7 @@ const ProfessorCourseDetails = () => {
             </Suspense>
           </Tab>
 
-          {courseDetails.professor.type === TEACHER_TYPE.professor && (
+          {tabKeys.includes("settings") && (
             <Tab key="#settings" title="Settings" href="#settings">
               <Suspense fallback={null}>
                 <SettingsTab />
