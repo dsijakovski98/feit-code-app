@@ -85,17 +85,17 @@ export const shortClerkErrorMessage = (
   return message.split(".")[0].trim() + "!";
 };
 
-export const getDaytime = () => {
-  const [day, ...date] = new Intl.DateTimeFormat("en-US", {
+export const getDaytime = (date: Date | number) => {
+  const [day, ...dateTime] = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "numeric",
     month: "short",
     year: "numeric",
   })
-    .format(Date.now())
+    .format(date)
     .split(" ");
 
-  return `${day} ${date.join(" ")}`;
+  return `${day} ${dateTime.join(" ")}`;
 };
 
 export const getTimeGreeting = (name: string) => {

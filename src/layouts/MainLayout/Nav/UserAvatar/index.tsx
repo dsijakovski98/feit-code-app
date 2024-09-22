@@ -41,22 +41,27 @@ const UserAvatar = () => {
         <DropdownItem
           key="title"
           textValue="Title"
-          className="mb-1 opacity-100 *:text-sm [&_span]:flex [&_span]:items-center [&_span]:gap-2"
+          className="mb-1f opacity-100 *:text-sm [&_span]:flex [&_span]:items-center [&_span]:gap-2"
         >
           <AuthStrategyIcon />
 
-          <p>
+          <p className="font-sans">
             Signed in as <b className="block font-semibold">{email}</b>
           </p>
         </DropdownItem>
 
-        <DropdownItem key="profile" onClick={() => navigate(ROUTES.profile)} textValue="Profile">
+        <DropdownItem
+          key="profile"
+          onClick={() => navigate(ROUTES.profile)}
+          textValue="Profile"
+          className="font-serif"
+        >
           <p className="text-sm font-semibold">Profile</p>
           <p className="text-xs text-content4-foreground">Edit your profile settings</p>
         </DropdownItem>
 
         <DropdownSection>
-          <DropdownItem key="help" textValue="Help & Feedback">
+          <DropdownItem key="help" textValue="Help & Feedback" className="font-serif">
             <Link to={helpFeedbackUrl} target="_blank">
               <p className="text-sm font-semibold">Help & Feedback</p>
               <p className="text-xs text-content4-foreground">Report an issue</p>
@@ -67,6 +72,7 @@ const UserAvatar = () => {
             key="sign-out"
             textValue="Sign out"
             onClick={() => signOut({ redirectUrl: ROUTES.signIn })}
+            className="font-serif"
           >
             <p className="text-sm font-semibold">Sign out</p>
             <p className="text-xs text-content4-foreground">Take a break</p>
