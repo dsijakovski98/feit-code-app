@@ -1,9 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { COURSES_PER_PAGE } from "@/constants/queries";
 import { db } from "@/db";
 import { getAcademicYear } from "@/utils";
 
-const COURSES_PER_PAGE = 5;
 const currentAcademicYear = getAcademicYear();
 
 export const useActiveCourses = () => {

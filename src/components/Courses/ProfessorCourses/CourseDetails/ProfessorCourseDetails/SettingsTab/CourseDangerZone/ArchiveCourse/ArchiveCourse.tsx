@@ -29,7 +29,7 @@ const ArchiveCourse = () => {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "courses", courseId }] }),
         queryClient.invalidateQueries({
-          queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId }],
+          queryKey: [{ name: "courses", type: USER_TYPE.professor, id: professorId }],
         }),
       ]);
 
@@ -45,7 +45,6 @@ const ArchiveCourse = () => {
         color="default"
         className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
         onPress={dialog.toggleOn}
-        // TODO: Disabled based on permissions
       >
         Archive
       </Button>
@@ -68,19 +67,13 @@ const ArchiveCourse = () => {
               <ModalBody className="relative">
                 <p>
                   Are you sure you want to{" "}
-                  <span className="font-semibold text-warning">archive this course?</span> It will
-                  be marked as inactive.
+                  <span className="font-semibold text-warning">archive this course?</span> It will be marked
+                  as inactive.
                 </p>
               </ModalBody>
 
               <ModalFooter>
-                <Button
-                  fullWidth
-                  color="default"
-                  variant="bordered"
-                  isDisabled={isPending}
-                  onPress={onClose}
-                >
+                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
                   Go back
                 </Button>
 

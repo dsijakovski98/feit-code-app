@@ -3,10 +3,9 @@ import { desc, eq } from "drizzle-orm";
 
 import { courses, studentCourses } from "@/db/schema";
 
+import { COURSES_PER_PAGE } from "@/constants/queries";
 import { db } from "@/db";
 import { USER_TYPE } from "@/types";
-
-const COURSES_PER_PAGE = 5;
 
 export const useStudentCourses = (studentId: string) => {
   return useInfiniteQuery({

@@ -1,17 +1,24 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { COURSES_PER_PAGE } from "@/constants/queries";
 import { db } from "@/db";
-import { USER_TYPE } from "@/types";
+import { FCProfessor } from "@/hooks/useFCUser";
+import { TEACHER_TYPE, USER_TYPE } from "@/types";
 import { getAcademicYear } from "@/utils";
 
-const COURSES_PER_PAGE = 5;
 const currentAcademicYear = getAcademicYear();
 
-export const useProfessorCourses = (professorId: string, yearFilter: "all" | "current") => {
+type QueryOptions = {
+  id: string;
+  type: FCProfessor["type"];
+};
+
+export const useProfessorCourses = (options: QueryOptions, yearFilter: "all" | "current") => {
+  const { id, type } = options;
   return useInfiniteQuery({
     initialPageParam: 0,
 
-    queryKey: [{ name: "courses", type: USER_TYPE.professor, professorId, yearFilter }],
+    queryKey: [{ name: "courses", type: USER_TYPE.professor, id, yearFilter }],
     queryFn: async ({ pageParam = 0 }) => {
       const coursesData = await db.query.courses.findMany({
         with: {
@@ -19,11 +26,12 @@ export const useProfessorCourses = (professorId: string, yearFilter: "all" | "cu
           categories: { with: { category: true }, columns: { courseId: false } },
         },
         where: (courses, { eq, and }) => {
-          const professorFilter = eq(courses.professorId, professorId);
+          const teacherColumn = type === TEACHER_TYPE.professor ? courses.professorId : courses.assistantId;
+          const teacherFilter = eq(teacherColumn, id);
 
-          if (yearFilter === "all") return professorFilter;
+          if (yearFilter === "all") return teacherFilter;
 
-          return and(professorFilter, eq(courses.academicYear, currentAcademicYear));
+          return and(teacherFilter, eq(courses.academicYear, currentAcademicYear));
         },
         orderBy: (courses, { desc }) => desc(courses.updatedAt),
         limit: COURSES_PER_PAGE,

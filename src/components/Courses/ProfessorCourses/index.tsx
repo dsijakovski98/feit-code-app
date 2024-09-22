@@ -4,50 +4,52 @@ import { ButtonGroup, Spinner } from "@nextui-org/react";
 
 import CourseCard from "@/components/Courses/CourseCard";
 import CoursesList from "@/components/Courses/CoursesList";
+import EmptyAssistantCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyAssistantCourses";
+import EmptyProfessorCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyProfessorCourses";
 import Button from "@/components/ui/Button";
 import FloatButton from "@/components/ui/FloatButton";
-import Icon from "@/components/ui/Icon";
 
 import { useProfessorCourses } from "@/hooks/professor/useProfessorCourses";
-import { FCUser } from "@/hooks/useFCUser";
+import { FCProfessor } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
-import { USER_TYPE } from "@/types";
+import { TEACHER_TYPE, USER_TYPE } from "@/types";
 
 type Props = {
-  user: NonNullable<FCUser>["user"];
+  user: FCProfessor;
 };
 
 const ProfessorCourses = ({ user }: Props) => {
+  const { id, type } = user;
   const [courseYearFilter, setCourseYearFilter] = useFilter<"all" | "current">({
     name: "year",
     defaultValue: "current",
   });
 
-  const coursesQuery = useProfessorCourses(user.id, courseYearFilter);
+  const coursesQuery = useProfessorCourses({ id, type }, courseYearFilter);
   const { data } = coursesQuery;
 
   return (
     <div className="grid h-full grid-cols-1 grid-rows-[auto_1fr] bg-content2 py-4 dark:bg-primary-50/70 lg:!bg-transparent">
       <section>
         <div className="flex items-end justify-between px-8 lg:px-5">
-          <h2 className="text-lg font-bold uppercase text-foreground/90">
-            {user.firstName}'s Courses
-          </h2>
+          <h2 className="text-lg font-bold uppercase text-foreground/90">{user.firstName}'s Courses</h2>
 
-          <ButtonGroup size="sm" className="*:text-sm">
-            <Button
-              color={courseYearFilter === "current" ? "primary" : "default"}
-              onPress={() => setCourseYearFilter("current")}
-            >
-              This year
-            </Button>
-            <Button
-              color={courseYearFilter === "all" ? "primary" : "default"}
-              onPress={() => setCourseYearFilter("all")}
-            >
-              All courses
-            </Button>
-          </ButtonGroup>
+          {!!data?.pages[0].length && (
+            <ButtonGroup size="sm" className="*:text-sm">
+              <Button
+                color={courseYearFilter === "current" ? "primary" : "default"}
+                onPress={() => setCourseYearFilter("current")}
+              >
+                This year
+              </Button>
+              <Button
+                color={courseYearFilter === "all" ? "primary" : "default"}
+                onPress={() => setCourseYearFilter("all")}
+              >
+                All courses
+              </Button>
+            </ButtonGroup>
+          )}
         </div>
 
         {!data && (
@@ -56,23 +58,8 @@ const ProfessorCourses = ({ user }: Props) => {
           </div>
         )}
 
-        {data?.pages[0].length === 0 && (
-          <div className="grid place-items-center gap-4 p-8 text-center">
-            <p className="font-semibold text-foreground-300">
-              You are not teaching any courses yet. Let's change that.
-            </p>
-
-            <Button
-              as={Link}
-              // @ts-expect-error NextUI not passing through 'as' props
-              to="new"
-              color="primary"
-              startContent={<Icon name="add" className="h-5 w-5" />}
-            >
-              New Course
-            </Button>
-          </div>
-        )}
+        {data?.pages[0].length === 0 &&
+          (type === TEACHER_TYPE.professor ? <EmptyProfessorCourses /> : <EmptyAssistantCourses />)}
 
         {!!data?.pages.length && (
           <div className="mt-2 overflow-x-clip">
@@ -84,7 +71,7 @@ const ProfessorCourses = ({ user }: Props) => {
         )}
       </section>
 
-      {!!data?.pages.length && (
+      {!!data?.pages[0].length && (
         <section className="px-8">
           <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>
         </section>
