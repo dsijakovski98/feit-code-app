@@ -18,7 +18,7 @@ type Props = {
 
 const AuthSidebar = ({ activeLink }: Props) => {
   return (
-    <div className="space-y-2 border-r border-r-content2 bg-background px-3 pb-5 pt-4 font-mono md:hidden">
+    <div className="space-y-2 border-r border-r-content2 bg-background px-3 pb-5 pt-4 md:hidden">
       <p className="font-bold">FEIT Code</p>
 
       <ul className="space-y-2 text-sm">

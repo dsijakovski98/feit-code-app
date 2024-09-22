@@ -37,6 +37,10 @@
   li[role="option"] {
     @apply !font-serif;
   }
+
+  a {
+    @apply font-serif *:font-serif;
+  }
 }
 
 @layer utilities {

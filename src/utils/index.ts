@@ -95,7 +95,7 @@ export const getDaytime = (date: Date | number) => {
     .format(date)
     .split(" ");
 
-  return `${day} ${dateTime.join(" ")}`;
+  return `${day} ${dateTime.join(" ").replace(",", "")}`;
 };
 
 export const getTimeGreeting = (name: string) => {

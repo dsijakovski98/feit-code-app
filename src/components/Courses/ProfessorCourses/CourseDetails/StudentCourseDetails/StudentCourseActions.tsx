@@ -15,7 +15,7 @@ const StudentCourseActions = () => {
   if (!userData || !joinedData) return null;
 
   return (
-    <div className="flex h-full flex-col gap-7 font-quicksand">
+    <div className="flex h-full flex-col gap-7 font-sans">
       <div className="flex items-start justify-between gap-16 text-2xl font-semibold">
         <h4 className="text-pretty">You & This Course</h4>
         <p>{academicYear}</p>
