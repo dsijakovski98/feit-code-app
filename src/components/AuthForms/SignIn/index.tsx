@@ -164,7 +164,7 @@ const SignInForm = () => {
         </Button>
       </div>
 
-      <p className="text-center text-content1-foreground">or</p>
+      <p className="text-center font-sans text-content1-foreground">or</p>
 
       <OAuthJoin joinType="Sign in" isSubmitting={isSubmitting} oAuthJoin={oAuthSignIn} />
 
