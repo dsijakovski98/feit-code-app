@@ -15,8 +15,8 @@ const RadioSelect = ({ children, ...props }: Props) => {
           "data-[selected=true]:border-primary",
         ),
         labelWrapper: "space-y-2",
-        label: "text-lg font-semibold",
-        description: "text-foreground-300 !font-medium text-sm",
+        label: "text-lg font-serif font-semibold",
+        description: "text-foreground-300 font-serif !font-medium text-sm",
       }}
     >
       {children}

@@ -2,15 +2,17 @@ import { useMemo } from "react";
 
 import { Tooltip } from "@nextui-org/react";
 
-import { getRelativeTimeString } from "@/utils";
+import { getDaytime, getRelativeTimeString } from "@/utils";
 
 type Props = {
   children: string;
 };
 
 const Timestamp = ({ children: timestamp }: Props) => {
-  const relativeTime = useMemo(() => getRelativeTimeString(new Date(timestamp)), [timestamp]);
-  const formattedDate = useMemo(() => new Date(timestamp).toDateString(), [timestamp]);
+  const date = useMemo(() => new Date(timestamp), [timestamp]);
+
+  const relativeTime = useMemo(() => getRelativeTimeString(date), [date]);
+  const formattedDate = useMemo(() => getDaytime(date), [date]);
 
   return (
     <Tooltip content={formattedDate} classNames={{ content: "font-semibold" }}>

@@ -17,7 +17,7 @@ const AuthLink = ({ authLink, activeLink }: Props) => {
     <li key={href} className="space-y-2">
       <div className="flex items-center gap-2">
         <Link
-          className={clsx("transition-colors lg:text-[13px]", {
+          className={clsx("!font-mono transition-colors lg:text-[13px]", {
             "focus-within:text-primary-700 hover:text-primary-700": href !== activeLink,
             "!font-bold text-primary-500 underline": href === activeLink,
           })}

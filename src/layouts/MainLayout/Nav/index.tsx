@@ -15,14 +15,14 @@ import { getDaytime, getTimeGreeting } from "@/utils";
 const Nav = () => {
   const { userData } = useFCUser();
 
-  const timestamp = useMemo(() => getDaytime(), []);
+  const timestamp = useMemo(() => getDaytime(Date.now()), []);
   const timeGreeting = useMemo(
     () => (userData?.user.firstName ? getTimeGreeting(userData?.user.firstName) : ""),
     [userData?.user.firstName],
   );
 
   return (
-    <header className="bg-content2 px-8 py-4 font-quicksand dark:bg-[#131038] lg:bg-primary lg:px-5 lg:py-2.5">
+    <header className="bg-content2 px-8 py-4 font-sans dark:bg-[#131038] lg:bg-primary lg:px-5 lg:py-2.5">
       <nav className="flex items-center justify-between">
         <div className="lg:hidden">
           <Skeleton isLoaded={!!timeGreeting} className="min-h-8 rounded-lg">

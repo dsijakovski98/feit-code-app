@@ -27,7 +27,7 @@ const Onboarding = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       toggleOn();
-    }, 200);
+    }, 300);
 
     return () => {
       clearTimeout(timeout);
@@ -38,7 +38,7 @@ const Onboarding = () => {
     <main className="grid min-h-dvh place-items-center bg-dots-light dark:bg-dots-dark">
       <div className="flex flex-col items-center">
         <div className="flex w-fit max-w-40 drop-shadow-[0px_0px_4px_theme(colors.primary)]">
-          <img src="/images/logo.svg" />
+          <img src="/images/logo.svg" alt="FEIT Code logo" />
         </div>
         <h1 className="text-center text-6xl font-bold">
           Welcome to <GradientText>FEIT Code!</GradientText>

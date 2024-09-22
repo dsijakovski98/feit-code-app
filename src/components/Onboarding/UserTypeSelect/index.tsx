@@ -96,7 +96,7 @@ const UserTypeSelector = () => {
                 description="You will not be able to change this later"
                 classNames={{
                   wrapper: "grid grid-cols-2 md:grid-cols-1 gap-4 w-full",
-                  description: "text-sm text-foreground-300 font-semibold mt-2",
+                  description: "text-sm text-foreground-300 font-serif font-semibold mt-2",
                 }}
               >
                 <RadioSelect

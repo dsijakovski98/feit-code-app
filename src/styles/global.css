@@ -16,11 +16,11 @@
   }
 
   textarea {
-    @apply !font-medium;
+    @apply !font-serif !font-medium;
   }
 
   textarea::placeholder {
-    @apply !font-light !text-foreground-300;
+    @apply !font-sans !font-light !text-foreground-300;
   }
 
   input[type="color"] {
@@ -32,6 +32,14 @@
   }
   input[type="color"]::-moz-color-swatch {
     @apply rounded-full border-none;
+  }
+
+  li[role="option"] {
+    @apply !font-serif;
+  }
+
+  a {
+    @apply font-serif *:font-serif;
   }
 }
 

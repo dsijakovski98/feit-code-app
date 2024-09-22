@@ -44,12 +44,12 @@ const WindowBlank = ({ show, minimized }: Props) => {
     shouldShow && (
       <section
         className={clsx(
-          "absolute inset-5 grid animate-appearance-in place-items-center [animation-delay:300ms]",
+          "absolute inset-5 grid animate-appearance-in place-items-center font-sans [animation-delay:300ms]",
         )}
       >
         <div className="text-center">
           <h2 className="mb-2 text-4xl font-medium">
-            {!show.open ? "Welp...That was fun I guess" : "Wow, you made it disappear!"}
+            {!show.open ? "Well...That was fun I guess" : "Wow, you made it disappear!"}
           </h2>
           <p className="mb-8 font-sans text-lg">Let's get you back on track</p>
 

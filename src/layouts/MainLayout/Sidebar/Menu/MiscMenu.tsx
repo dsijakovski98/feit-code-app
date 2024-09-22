@@ -40,7 +40,7 @@ const MiscMenu = () => {
           <div className="!h-12 !w-12 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
             <Icon name="logout" className="!-scale-x-[1]" />
           </div>
-          <p className="max-w-[7ch] text-center font-quicksand text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
+          <p className="max-w-[7ch] text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
             Sign out
           </p>
         </Button>

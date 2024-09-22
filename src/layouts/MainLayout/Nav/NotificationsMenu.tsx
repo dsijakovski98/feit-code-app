@@ -31,9 +31,7 @@ const NotificationsMenu = () => {
       </Badge>
       <DropdownMenu disabledKeys={["empty", "notifications"]}>
         <DropdownItem key="notifications" className="opacity-100" textValue="Notifications">
-          <p className="font-quicksand text-sm font-semibold">
-            Notifications ({NOTIFICATIONS} new)
-          </p>
+          <p className="font-sans text-sm font-semibold">Notifications ({NOTIFICATIONS} new)</p>
         </DropdownItem>
 
         <DropdownItem

@@ -72,7 +72,9 @@ const VerifySignUp = ({ verifyMode }: Props) => {
         "pt-36": fullScreen,
       })}
     >
-      <p className="text-center text-lg">Enter the 6 digit code you received on your email</p>
+      <p className="text-center text-lg font-semibold">
+        Enter the 6 digit code you received on your email
+      </p>
 
       <div
         className={clsx("space-y-1.5", {
@@ -97,6 +99,7 @@ const VerifySignUp = ({ verifyMode }: Props) => {
               classNames={{
                 label: "group-data-[filled-within='true']:!-translate-y-[12px]",
                 errorMessage: fullScreen ? "text-base" : "",
+                input: "!font-sans",
               }}
             />
           )}

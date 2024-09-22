@@ -78,9 +78,10 @@ const VerifyPassword = ({ verifyToggle }: Props) => {
         "pt-2": fullScreen,
       })}
     >
-      <div>
-        <p className="text-center text-lg">Enter the 6 digit code you received on your email</p>
-        <p className="text-center text-sm font-medium text-foreground-300">
+      <div className="text-center">
+        <p className="text-lg font-semibold">Enter the 6 digit code you received on your email</p>
+
+        <p className="text-sm font-medium text-foreground-300">
           Make sure to check your Spam folder just in case
         </p>
       </div>
@@ -108,6 +109,7 @@ const VerifyPassword = ({ verifyToggle }: Props) => {
               classNames={{
                 label: "group-data-[filled-within='true']:!-translate-y-[12px]",
                 errorMessage: fullScreen ? "text-base" : "",
+                input: "!font-sans",
               }}
             />
           )}

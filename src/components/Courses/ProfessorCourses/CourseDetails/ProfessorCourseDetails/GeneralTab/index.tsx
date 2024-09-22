@@ -21,7 +21,7 @@ const GeneralTab = () => {
 
   return (
     <div className="general lg:block lg:space-y-8">
-      <div className="w-[50ch] space-y-10 [grid-area:details]">
+      <div className="max-w-[55ch] space-y-10 [grid-area:details]">
         <div>
           <h2 className="text-2xl font-semibold">
             {name}{" "}
@@ -43,6 +43,14 @@ const GeneralTab = () => {
         </div>
 
         <div className="space-y-6">
+          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
+            {categories.map(({ category, categoryId }) => (
+              <li key={categoryId}>
+                <CategoryChip size="sm" category={category} />
+              </li>
+            ))}
+          </ul>
+
           <div className="flex w-fit items-end gap-12 lg:w-full lg:flex-wrap lg:justify-between">
             <User
               name={
@@ -78,14 +86,6 @@ const GeneralTab = () => {
               </p>
             )}
           </div>
-
-          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
-            {categories.map(({ category, categoryId }) => (
-              <li key={categoryId}>
-                <CategoryChip category={category} />
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 

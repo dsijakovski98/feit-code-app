@@ -35,13 +35,20 @@ const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest },
     <Inpt
       {...rest}
       ref={ref}
+      className="!font-serif"
       classNames={{
         ...rest.classNames,
-        label: clsx("!font-semibold !text-current", rest.classNames?.label || ""),
+        label: clsx(
+          "!font-medium group-data-[filled-within]:!font-semibold !text-current",
+          rest.classNames?.label || "",
+        ),
         errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
         input: clsx(
-          "placeholder:font-light placeholder:text-foreground-300 font-medium",
+          "placeholder:font-light placeholder:text-foreground-300 placeholder:font-sans font-medium",
           rest.classNames?.input || "",
+          {
+            "!font-sans": rest.inputMode === "numeric",
+          },
         ),
       }}
       endContent={
