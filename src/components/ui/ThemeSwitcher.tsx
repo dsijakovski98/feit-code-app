@@ -22,6 +22,7 @@ const ThemeSwitcher = ({ size = "md" }: Props) => {
       radius="full"
       variant="light"
       color="default"
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
       className="p-1.5 lg:text-background lg:dark:text-foreground"
     >
       <Icon name={theme === "dark" ? "moon" : "sun"} />

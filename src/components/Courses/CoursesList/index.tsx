@@ -51,7 +51,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       slidesPerView="auto"
       centerInsufficientSlides
       navigation={{ hideOnClick: true, enabled: !isFetching }}
-      pagination={{ dynamicBullets: true, clickable: true }}
+      pagination={{ dynamicBullets: true }}
       modules={[A11y, Pagination, Navigation]}
       className="swiper-courses !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
     >

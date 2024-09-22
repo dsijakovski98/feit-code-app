@@ -23,6 +23,7 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
           variant="light"
           radius="full"
           color="default"
+          aria-label="Minimize window"
           className="h-6 w-6 p-px"
           onPress={minimized.toggleOn}
         >
@@ -36,6 +37,7 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
           variant="light"
           radius="full"
           color="default"
+          aria-label="Toggle fullscreen"
           className="h-6 w-6 p-1"
           onPress={fullScreen.toggle}
         >
@@ -49,6 +51,7 @@ const WindowControls = ({ show, minimized, fullScreen }: Props) => {
           variant="light"
           radius="full"
           color="default"
+          aria-label="Close window"
           className="h-6 w-6 p-0.5"
           onPress={show.toggleOff}
         >

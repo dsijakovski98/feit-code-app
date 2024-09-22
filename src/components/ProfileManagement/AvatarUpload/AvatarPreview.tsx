@@ -25,6 +25,7 @@ const AvatarPreview = forwardRef<HTMLImageElement, Props>(({ avatar }, ref) => {
         radius="full"
         color="default"
         variant="bordered"
+        aria-label="Avatar"
         className="h-[100px] w-[100px] bg-transparent lg:h-[80px] lg:w-[80px]"
         onPress={previewToggle.toggleOn}
       >

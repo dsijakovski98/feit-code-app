@@ -64,7 +64,6 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
               className="min-w-max px-0 focus-within:outline focus-within:outline-primary"
             >
               <label
-                role="button"
                 tabIndex={0}
                 onKeyDown={handleInputButton}
                 htmlFor="upload-avatar"
@@ -89,6 +88,7 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
               variant="light"
               radius="full"
               color="danger"
+              aria-label="Remove avatar"
               className="p-1.5 text-xs"
               onPress={clearAvatar}
             >

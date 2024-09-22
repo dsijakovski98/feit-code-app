@@ -34,7 +34,7 @@ const StudentCourseCard = ({ courseData }: Props) => {
 
       <div className="grid place-items-center">
         <Button isIconOnly variant="light" color="default" className="h-full rounded-l-none px-6">
-          <Link to={id}>
+          <Link to={id} aria-label="Open course details">
             <Icon name="right" className="h-5 w-5" />
           </Link>
         </Button>
