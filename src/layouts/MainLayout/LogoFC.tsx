@@ -11,13 +11,14 @@ type Props = {
 const LogoFC = ({ className = "" }: Props) => {
   return (
     <Link
+      aria-label="Homepage"
       to={ROUTES.dashboard}
       className={clsx(
         "flex w-fit max-w-14 brightness-200 transition-[filter] hover:brightness-150 dark:brightness-100 dark:hover:drop-shadow-[0px_0px_8px_theme(colors.primary)] lg:max-w-12",
         className,
       )}
     >
-      <img src="/images/logo.svg" />
+      <img src="/images/logo.svg" alt="FEIT Code logo" />
     </Link>
   );
 };

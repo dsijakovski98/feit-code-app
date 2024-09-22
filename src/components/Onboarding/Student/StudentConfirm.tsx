@@ -93,8 +93,9 @@ const StudentConfirm = () => {
 
           <Button
             isIconOnly
-            color="default"
             size="sm"
+            color="default"
+            aria-label="Get random avatar"
             className="absolute bottom-0 right-0 grid place-items-center rounded-full p-1 pt-1.5"
             onPress={getNewStyle}
           >

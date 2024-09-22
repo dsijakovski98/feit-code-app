@@ -23,7 +23,7 @@ const GeneralTab = () => {
     <div className="general lg:block lg:space-y-8">
       <div className="w-[50ch] space-y-10 [grid-area:details]">
         <div>
-          <h4 className="text-2xl font-semibold">
+          <h2 className="text-2xl font-semibold">
             {name}{" "}
             {archived && (
               <Chip
@@ -35,7 +35,7 @@ const GeneralTab = () => {
                 Archived
               </Chip>
             )}
-          </h4>
+          </h2>
           <p className="mb-1 text-lg font-medium">{description}</p>
           <p className="text-base text-foreground-300">
             Updated <Timestamp>{updatedAt}</Timestamp>

@@ -10,7 +10,7 @@ import "@/styles/main-layout.css";
 const MainLayout = () => {
   return (
     <div className="main-layout">
-      <div className="[grid-area:sidebar]">
+      <div className="z-20 [grid-area:sidebar]">
         <Sidebar />
       </div>
 
