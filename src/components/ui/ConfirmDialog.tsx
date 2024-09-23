@@ -1,4 +1,4 @@
-import { Fragment, ReactNode } from "react";
+import { ElementRef, Fragment, ReactNode, useLayoutEffect, useRef } from "react";
 
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
 import { ButtonProps } from "@nextui-org/react";
@@ -21,6 +21,13 @@ type Props = {
 
 const ConfirmDialog = ({ dialog, title, description, color, action, loading }: Props) => {
   const { label, onConfirm } = action;
+
+  const confirmBtn = useRef<ElementRef<typeof Button>>(null);
+
+  useLayoutEffect(() => {
+    if (!dialog.open) return;
+    confirmBtn.current?.focus();
+  }, [dialog.open]);
 
   return (
     <Modal
@@ -48,7 +55,7 @@ const ConfirmDialog = ({ dialog, title, description, color, action, loading }: P
                 Cancel
               </Button>
 
-              <Button type="submit" color={color} isLoading={!!loading} onPress={onConfirm}>
+              <Button type="submit" ref={confirmBtn} color={color} isLoading={!!loading} onPress={onConfirm}>
                 {label}
               </Button>
             </ModalFooter>

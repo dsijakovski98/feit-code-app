@@ -10,8 +10,8 @@ const CourseDangerZone = () => {
 
   return (
     <section className="space-y-12 pt-8">
-      <div className="flex items-start justify-between gap-52 xl:gap-20 lg:flex-col lg:gap-9">
-        <div>
+      <div className="flex items-start justify-between gap-52 xl:gap-20 lg:flex-col lg:gap-6 md:gap-4">
+        <div className="lg:space-y-1">
           <h3 className="text-lg font-semibold">{archived ? "Activate" : "Archive"}</h3>
           {archived ? (
             <p>
@@ -29,7 +29,7 @@ const CourseDangerZone = () => {
       </div>
 
       <div className="flex items-start justify-between gap-8 lg:flex-col lg:gap-4">
-        <div>
+        <div className="lg:space-y-1">
           <h3 className="text-lg font-semibold">Delete</h3>
           <p>Permanently delete this course from the face of the planet.</p>
         </div>

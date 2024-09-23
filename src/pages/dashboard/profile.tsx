@@ -3,7 +3,7 @@ import { Suspense, lazy } from "react";
 import { Spinner } from "@nextui-org/react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import SecuritySettings from "@/components/ProfileManagement/Security";
+import ProfileSettings from "@/components/ProfileManagement/Settings";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
@@ -35,8 +35,8 @@ const ProfilePage = () => {
               </Suspense>
             </Tab>
 
-            <Tab key="security" title="Security">
-              <SecuritySettings />
+            <Tab key="settings" title="Settings">
+              <ProfileSettings />
             </Tab>
           </Tabs>
         ) : (

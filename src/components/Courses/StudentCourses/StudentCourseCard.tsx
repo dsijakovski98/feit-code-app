@@ -14,7 +14,7 @@ const StudentCourseCard = ({ courseData }: Props) => {
   const { id, academicYear, name } = course;
 
   return (
-    <div className="flex h-full items-end justify-between gap-2 rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-lg outline outline-2 -outline-offset-[2px] outline-transparent transition-[outline_background] duration-400 hover:outline-primary dark:border-transparent dark:bg-primary-50 hover:dark:bg-primary-50/10 lg:p-4">
+    <div className="flex h-full items-end justify-between gap-2 rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-lg outline outline-2 -outline-offset-[2px] outline-transparent transition-[outline] duration-400 hover:outline-primary dark:border-transparent dark:bg-background lg:p-4">
       <div className="flex h-full w-[28ch] flex-col justify-between space-y-8 lg:space-y-4">
         <div>
           <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
@@ -27,16 +27,6 @@ const StudentCourseCard = ({ courseData }: Props) => {
         </p>
       </div>
 
-      {/* <Button
-          isIconOnly
-          variant="light"
-          color="primary"
-          className="group h-full rounded-none px-6 hover:!bg-primary"
-        >
-          <Link to={id} aria-label="Open course details">
-            <Icon name="right" className="h-5 w-5 transition-colors group-hover:text-primary-foreground" />
-          </Link>
-        </Button> */}
       <Link to={id} className="group flex w-fit items-center justify-between gap-2 font-semibold lg:gap-1">
         Details{" "}
         <Icon

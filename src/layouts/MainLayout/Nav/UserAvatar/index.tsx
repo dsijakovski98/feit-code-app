@@ -31,7 +31,7 @@ const UserAvatar = () => {
         <Avatar
           isBordered
           src={avatarUrl || ""}
-          className="ring-foreground lg:h-9 lg:w-9 lg:ring-foreground"
+          className="-ring-offset-1 ring-foreground lg:h-9 lg:w-9 lg:ring-foreground"
         />
       </DropdownTrigger>
 

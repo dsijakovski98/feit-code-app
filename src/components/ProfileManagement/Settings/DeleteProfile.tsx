@@ -28,6 +28,7 @@ const DeleteProfile = () => {
       if (!success) return;
 
       navigate(ROUTES.signIn);
+      toast(`Goodbye ${userData?.user.firstName}!`);
     },
     onError: (error) => toast.error(error.message),
   });
@@ -43,11 +44,7 @@ const DeleteProfile = () => {
 
   return (
     <Fragment>
-      <Button
-        color="danger"
-        className="w-[140px] py-[22px] text-sm font-semibold lg:w-full"
-        onPress={dialog.toggleOn}
-      >
+      <Button color="danger" className="w-[140px] shrink-0 font-semibold lg:w-full" onPress={dialog.toggleOn}>
         Delete Profile
       </Button>
 

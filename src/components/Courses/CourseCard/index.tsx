@@ -13,9 +13,9 @@ const CourseCard = (props: CourseCardContext) => {
     <CourseCardProvider {...props}>
       <div
         className={clsx(
-          "relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-md dark:border-transparent dark:bg-primary-50 lg:p-4",
+          "relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-md dark:border-transparent dark:bg-background lg:p-4",
           {
-            "outline outline-2 outline-transparent transition-[outline_background] duration-400 hover:outline-primary hover:dark:bg-primary-50/10":
+            "outline outline-2 outline-transparent transition-[outline] duration-400 hover:outline-primary":
               !archived,
           },
         )}

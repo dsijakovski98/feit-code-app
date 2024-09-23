@@ -94,7 +94,7 @@ const ResetPassword = () => {
       <Button
         variant="ghost"
         color="default"
-        className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
+        className="w-[140px] shrink-0 border-foreground-300 font-semibold text-foreground lg:w-full"
         disabled={!!authStrategy}
         onPress={dialog.toggleOn}
       >

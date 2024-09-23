@@ -66,7 +66,7 @@ export default {
               800: "#c8c4fc",
               900: "#e8e6fe",
               foreground: "#fff",
-              DEFAULT: "#4839f4",
+              DEFAULT: "#685cf6",
             },
 
             secondary: {

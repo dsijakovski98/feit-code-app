@@ -18,7 +18,7 @@ const LogoFC = ({ className = "" }: Props) => {
         className,
       )}
     >
-      <img src="/images/logo.svg" alt="FEIT Code logo" className="scale-150" />
+      <img src="/images/logo.svg" alt="FEIT Code logo" className="scale-[1.35] lg:scale-[1.5]" />
     </Link>
   );
 };
