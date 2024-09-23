@@ -22,7 +22,7 @@ const Nav = () => {
   );
 
   return (
-    <header className="bg-content2 px-8 py-4 font-sans dark:bg-[#131038] lg:bg-primary lg:px-5 lg:py-2.5">
+    <header className="bg-content1 px-8 py-4 font-sans dark:bg-default-100/50 lg:bg-primary lg:px-5 lg:py-2.5">
       <nav className="flex items-center justify-between">
         <div className="lg:hidden">
           <Skeleton isLoaded={!!timeGreeting} className="min-h-8 rounded-lg">

@@ -1,4 +1,4 @@
-import { Suspense, lazy, useMemo } from "react";
+import { Suspense, lazy } from "react";
 
 import { ButtonGroup } from "@nextui-org/button";
 
@@ -20,16 +20,11 @@ const StudentCourses = ({ user }: Props) => {
     defaultValue: "own",
   });
 
-  const coursesTitle = useMemo(
-    () => (coursesFilter === "own" ? "My Courses" : "All Courses"),
-    [coursesFilter],
-  );
-
   return (
-    <div className="grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] gap-8 bg-content2 py-4 dark:bg-primary-50/70 lg:gap-4 lg:!bg-transparent">
+    <div className="grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] gap-8 bg-content1 py-4 dark:bg-default-100/50 lg:gap-4 lg:!bg-transparent">
       <section className="space-y-4">
         <div className="flex items-end justify-between px-8 lg:px-5">
-          <h2 className="text-lg font-bold uppercase text-foreground/90">{coursesTitle}</h2>
+          <h2 className="text-lg font-bold uppercase text-foreground/90">Courses</h2>
 
           <ButtonGroup size="sm" className="*:text-sm">
             <Button

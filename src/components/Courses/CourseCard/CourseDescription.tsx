@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { Fragment, useMemo } from "react";
 
-import { Chip } from "@nextui-org/react";
+import { Chip, Tooltip } from "@nextui-org/react";
 
 import CategoryChip from "@/components/ui/CategoryChip";
 
@@ -14,13 +14,14 @@ const CourseDescription = () => {
   const { course, mode } = useCtx(CourseCardContext);
   const { description, categories, professor } = course;
 
-  const categoriesSlice = useMemo(
-    () => categories.slice(0, CATEGORIES_SLICE).map(({ category }) => category),
-    [categories],
-  );
-  const remainingCategories = useMemo(
-    () => Math.min(Math.max(0, categories.length - CATEGORIES_SLICE), 9),
-    [categories.length],
+  const categoriesList = useMemo(() => categories.map(({ category }) => category), [categories]);
+
+  const categoriesSlice = useMemo(() => categoriesList.slice(0, CATEGORIES_SLICE), [categoriesList]);
+  const remainingCategories = useMemo(() => categoriesList.slice(CATEGORIES_SLICE), [categoriesList]);
+
+  const numRemaining = useMemo(
+    () => Math.min(Math.max(0, categoriesList.length - CATEGORIES_SLICE), 9),
+    [categoriesList.length],
   );
 
   if (mode === USER_TYPE.student) {
@@ -45,18 +46,32 @@ const CourseDescription = () => {
           </li>
         ))}
 
-        {remainingCategories > 0 && (
-          <li>
-            <Chip
-              size="sm"
-              className="text-xs lg:text-[11px]"
-              color="primary"
-              classNames={{
-                content: "font-semibold",
-              }}
+        {numRemaining > 0 && (
+          <li className="cursor-pointer">
+            <Tooltip
+              content={
+                <ul className="flex items-center gap-0.5">
+                  {remainingCategories.map(({ label }, idx) => (
+                    <Fragment>
+                      <li key={label}>{label}</li>
+                      {idx < remainingCategories.length - 1 && <span className="text-xs font-bold">・</span>}
+                    </Fragment>
+                  ))}
+                </ul>
+              }
+              classNames={{ content: "font-semibold text-sm" }}
             >
-              +{remainingCategories}
-            </Chip>
+              <Chip
+                size="sm"
+                className="text-xs"
+                color="secondary"
+                classNames={{
+                  content: "font-semibold",
+                }}
+              >
+                +{numRemaining}
+              </Chip>
+            </Tooltip>
           </li>
         )}
       </ul>

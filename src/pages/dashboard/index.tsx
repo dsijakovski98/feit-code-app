@@ -14,7 +14,7 @@ const Dashboard = () => {
   if (!userData) return <DashboardSkeleton />;
 
   return (
-    <div className="h-full bg-content2 p-8 dark:bg-primary-50/70 lg:min-h-[inherit] lg:!bg-transparent">
+    <div className="h-full bg-content1 p-8 dark:bg-default-100/50 lg:min-h-[inherit] lg:!bg-transparent">
       <Suspense fallback={null}>
         {userData.type === USER_TYPE.student ? <StudentDashboard /> : <ProfessorDashboard />}
       </Suspense>

@@ -40,7 +40,7 @@ const ProfessorCourseDetails = () => {
   }
 
   return (
-    <section className="h-full bg-primary-50/20 p-4">
+    <section className="h-full bg-content1 p-4 dark:bg-default-100/50">
       <div className="mx-auto max-w-[130ch] md:max-w-full">
         <Tabs
           fullWidth

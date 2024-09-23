@@ -13,7 +13,7 @@ const CoursesPage = () => {
 
   if (!userData) {
     return (
-      <div className="grid h-full place-items-center">
+      <div className="grid h-full place-items-center bg-content2 dark:bg-default-100/50 lg:bg-primary">
         <Spinner size="lg" className="scale-150" />
       </div>
     );
