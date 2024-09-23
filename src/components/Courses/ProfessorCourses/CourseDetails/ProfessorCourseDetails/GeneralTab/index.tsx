@@ -61,7 +61,7 @@ const GeneralTab = () => {
         </div>
 
         <div className="space-y-6">
-          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
+          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2 lg:gap-1">
             {categories.map(({ category, categoryId }) => (
               <li key={categoryId}>
                 <CategoryChip size="sm" category={category} />

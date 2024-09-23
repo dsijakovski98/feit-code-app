@@ -3,9 +3,8 @@ import toast from "react-hot-toast";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
-
 import Button from "@/components/ui/Button";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 import { archiveCourseToggle } from "@/actions/courses";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
@@ -15,7 +14,7 @@ import { USER_TYPE } from "@/types";
 
 const ArchiveCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, id: courseId, professorId } = courseDetails;
+  const { name, id: courseId, professorId, archived } = courseDetails;
 
   const queryClient = useQueryClient();
 
@@ -38,59 +37,30 @@ const ArchiveCourse = () => {
     onError: (error) => toast.error(error.message),
   });
 
+  const onConfirm = () => {
+    mutate({ courseId, archived: true });
+  };
+
   return (
     <Fragment>
       <Button
         variant="ghost"
         color="default"
-        className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
+        isDisabled={!!archived}
+        className="w-[140px] shrink-0 border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
         onPress={dialog.toggleOn}
       >
         Archive
       </Button>
 
-      <Modal
-        isOpen={dialog.open}
-        onOpenChange={dialog.toggle}
-        hideCloseButton
-        placement="center"
-        backdrop="opaque"
-        classNames={{
-          backdrop: "bg-background/50",
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <Fragment>
-              <ModalHeader className="text-2xl">Archive Course</ModalHeader>
-
-              <ModalBody className="relative">
-                <p>
-                  Are you sure you want to{" "}
-                  <span className="font-semibold text-warning">archive this course?</span> It will be marked
-                  as inactive.
-                </p>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
-                  Go back
-                </Button>
-
-                <Button
-                  fullWidth
-                  type="submit"
-                  color="warning"
-                  isLoading={isPending}
-                  onPress={() => mutate({ courseId, archived: true })}
-                >
-                  Archive
-                </Button>
-              </ModalFooter>
-            </Fragment>
-          )}
-        </ModalContent>
-      </Modal>
+      <ConfirmDialog
+        dialog={dialog}
+        loading={isPending}
+        color="warning"
+        title="Archive Course?"
+        description="It will be marked as inactive."
+        action={{ label: "Archive", onConfirm }}
+      />
     </Fragment>
   );
 };

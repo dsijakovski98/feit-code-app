@@ -151,7 +151,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
 
       <div className="mt-12">
         <Button fullWidth size="lg" type="submit" isLoading={isSubmitting}>
-          Update
+          Update Profile
         </Button>
       </div>
     </form>

@@ -40,7 +40,7 @@ const ProfessorCourseDetails = () => {
   }
 
   return (
-    <section className="h-full bg-content1 p-4 dark:bg-default-100/50">
+    <section className="bg-main p-4">
       <div className="mx-auto max-w-[130ch] md:max-w-full">
         <Tabs
           fullWidth
@@ -52,7 +52,7 @@ const ProfessorCourseDetails = () => {
           defaultSelectedKey="#general"
           classNames={{
             tabContent: "text-foreground group-data-[selected]:font-semibold",
-            panel: "pt-4 px-10 md:px-6",
+            panel: "pt-4 px-10 lg:px-8 md:px-0",
           }}
         >
           <Tab key="#general" title="General" href="#general">

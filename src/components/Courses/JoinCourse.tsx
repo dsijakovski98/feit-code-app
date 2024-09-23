@@ -3,10 +3,10 @@ import { Fragment } from "react/jsx-runtime";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
 import { Skeleton } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import Timestamp from "@/components/ui/Timestamp";
 
 import { joinCourse } from "@/actions/courses";
@@ -25,7 +25,7 @@ const JoinCourse = () => {
   const queryClient = useQueryClient();
   const { data: joinedCourse, isLoading } = useStudentJoinedCourse(userData?.user.id, courseId);
 
-  const modal = useToggle();
+  const dialog = useToggle();
 
   const { mutate, isPending } = useMutation({
     mutationFn: joinCourse,
@@ -46,7 +46,7 @@ const JoinCourse = () => {
       ]);
 
       toast.success(`You joined ${name}!`);
-      modal.toggleOff();
+      dialog.toggleOff();
     },
     onError: (error) => toast.error(error.message),
   });
@@ -63,52 +63,24 @@ const JoinCourse = () => {
     );
   }
 
+  const onConfirm = () => {
+    mutate({ courseId, studentId: userData.user.id });
+  };
+
   return (
     <Fragment>
-      <Button className="px-8 text-sm" onPress={modal.toggleOn}>
+      <Button className="px-8 text-sm" onPress={dialog.toggleOn}>
         Join
       </Button>
 
-      <Modal
-        isOpen={modal.open}
-        onOpenChange={modal.toggle}
-        hideCloseButton
-        placement="center"
-        backdrop="opaque"
-        classNames={{
-          backdrop: "bg-background/50",
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <Fragment>
-              <ModalHeader className="text-2xl">Join Course</ModalHeader>
-
-              <ModalBody className="relative">
-                <p>
-                  Are you sure you want to join{" "}
-                  <span className="font-semibold text-primary-500">{name}?</span>
-                </p>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
-                  Go back
-                </Button>
-
-                <Button
-                  fullWidth
-                  type="submit"
-                  isLoading={isPending}
-                  onPress={() => mutate({ courseId, studentId: userData.user.id })}
-                >
-                  Join
-                </Button>
-              </ModalFooter>
-            </Fragment>
-          )}
-        </ModalContent>
-      </Modal>
+      <ConfirmDialog
+        dialog={dialog}
+        loading={isPending}
+        color="primary"
+        title="Join Course?"
+        description="You will be able to take exams and receive news updates for this course."
+        action={{ label: "Join", onConfirm }}
+      />
     </Fragment>
   );
 };

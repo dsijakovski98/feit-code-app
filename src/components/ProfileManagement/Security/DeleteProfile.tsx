@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { useUser } from "@clerk/clerk-react";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
 
 import Button from "@/components/ui/Button";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 import { deleteProfile } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
@@ -32,7 +32,7 @@ const DeleteProfile = () => {
     onError: (error) => toast.error(error.message),
   });
 
-  const handleDeleteProfile = () => {
+  const onConfirm = () => {
     if (!user) return;
     if (!userData) return;
 
@@ -51,42 +51,14 @@ const DeleteProfile = () => {
         Delete Profile
       </Button>
 
-      <Modal
-        isOpen={dialog.open}
-        onOpenChange={dialog.toggle}
-        hideCloseButton
-        placement="center"
-        backdrop="opaque"
-        classNames={{
-          backdrop: "bg-background/50",
-        }}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <Fragment>
-              <ModalHeader className="text-2xl">Better safe than sorry</ModalHeader>
-
-              <ModalBody>
-                <p>
-                  Are you sure you want to{" "}
-                  <span className="font-semibold text-danger">delete your profile?</span> No going back after
-                  that.
-                </p>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button fullWidth color="default" variant="bordered" isDisabled={isPending} onPress={onClose}>
-                  Go back
-                </Button>
-
-                <Button fullWidth color="danger" isLoading={isPending} onPress={handleDeleteProfile}>
-                  Yes, Bye
-                </Button>
-              </ModalFooter>
-            </Fragment>
-          )}
-        </ModalContent>
-      </Modal>
+      <ConfirmDialog
+        dialog={dialog}
+        loading={isPending}
+        color="danger"
+        title="Delete Profile?"
+        description="You cannot undo this later."
+        action={{ label: "Delete", onConfirm }}
+      />
     </Fragment>
   );
 };

@@ -39,7 +39,7 @@ const CourseDescription = () => {
     <div className="space-y-2">
       <p className="truncate pb-1 text-medium text-foreground-400 lg:text-base">{description}</p>
 
-      <ul className="flex min-h-[25px] flex-wrap items-center gap-1.5 lg:hidden">
+      <ul className="flex min-h-[25px] flex-wrap items-center gap-2 lg:hidden lg:gap-1">
         {categoriesSlice.map((category) => (
           <li key={category.label}>
             <CategoryChip category={category} />

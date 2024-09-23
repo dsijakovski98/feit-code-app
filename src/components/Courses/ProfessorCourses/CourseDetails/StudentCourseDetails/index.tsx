@@ -19,7 +19,7 @@ const StudentCourseDetails = () => {
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
 
   return (
-    <section className="details h-full bg-content1 p-8 dark:bg-default-100/50 lg:block lg:h-auto lg:space-y-6">
+    <section className="details bg-main h-full p-8 lg:block lg:h-auto lg:space-y-6">
       <div className="max-w-[55ch] space-y-10 [grid-area:details] lg:max-w-full">
         <div>
           <h2 className="text-2xl font-semibold">{name}</h2>
@@ -32,7 +32,7 @@ const StudentCourseDetails = () => {
         </div>
 
         <div className="space-y-4">
-          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
+          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2 lg:gap-1">
             {categories.map(({ category, categoryId }) => (
               <li key={categoryId}>
                 <CategoryChip size="sm" category={category} />

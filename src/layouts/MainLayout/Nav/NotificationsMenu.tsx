@@ -23,7 +23,7 @@ const NotificationsMenu = () => {
             variant="light"
             color="default"
             aria-label="Notifications menu"
-            className="!bg-transparent p-1.5 lg:text-background lg:dark:text-foreground"
+            className="!bg-transparent p-1.5 lg:scale-90"
           >
             <Icon name="bell" />
           </Button>
