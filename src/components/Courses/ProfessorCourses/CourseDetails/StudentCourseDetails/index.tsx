@@ -19,7 +19,7 @@ const StudentCourseDetails = () => {
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
 
   return (
-    <section className="details bg-main h-full p-8 lg:block lg:h-auto lg:space-y-6 lg:px-5">
+    <section className="details bg-main h-full p-8 lg:block lg:h-auto lg:space-y-6 lg:p-5">
       <div className="space-y-10 [grid-area:details]">
         <div>
           <h2 className="text-2xl font-semibold">{name}</h2>
