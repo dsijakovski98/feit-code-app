@@ -73,7 +73,7 @@ const StudentCourseDetails = () => {
                   }}
                 />
               ) : (
-                <p className="font-semibold text-foreground-300">
+                <p className="shrink font-semibold text-foreground-300">
                   There is no assistant for this course yet.
                 </p>
               )}
