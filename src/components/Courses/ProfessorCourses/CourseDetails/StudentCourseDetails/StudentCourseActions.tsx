@@ -22,7 +22,7 @@ const StudentCourseActions = () => {
       </div>
 
       <div className="grid h-full grid-cols-2 gap-8">
-        <div className="flex h-full flex-col justify-between">
+        <div className="flex h-full flex-col justify-between lg:gap-10">
           <p className="text-lg">
             You joined this course <Timestamp>{joinedData.joinedAt}</Timestamp>.
           </p>

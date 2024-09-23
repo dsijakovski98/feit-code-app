@@ -7,7 +7,7 @@ import { ROUTES } from "@/constants/routes";
 
 const NewCoursePage = () => {
   return (
-    <section className="bg-main flex h-auto items-start gap-4 px-8 py-6 lg:flex-col lg:justify-start lg:gap-6 lg:px-6">
+    <section className="bg-main flex h-auto items-start gap-4 px-8 py-6 lg:flex-col lg:justify-start lg:gap-6 lg:px-5">
       <Link
         to={ROUTES.courses}
         className="flex w-fit items-center gap-1 font-semibold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:-translate-x-1 lg:gap-0.5 lg:text-lg"
