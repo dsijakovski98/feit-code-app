@@ -9,6 +9,8 @@ import { A11y, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { COURSES_PER_PAGE } from "@/constants/queries";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
+import { useCtx } from "@/hooks/useCtx";
 
 import "./styles.css";
 
@@ -20,8 +22,9 @@ type Props<T extends { id: string }> = {
 const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: Props<T>) => {
   const { data, fetchNextPage, hasNextPage, isFetching } = coursesQuery;
 
-  const loadMoreRef = useRef<ElementRef<"div">>(null);
+  const { isMobile } = useCtx(ResponsiveContext);
 
+  const loadMoreRef = useRef<ElementRef<"div">>(null);
   const loadMoreCallback = useCallback<IntersectionObserverCallback>(
     (entries) => {
       const [loadMoreEntry] = entries;
@@ -49,7 +52,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
   return (
     <Swiper
       grabCursor={!isFetching}
-      spaceBetween={30}
+      spaceBetween={isMobile ? 20 : 30}
       slidesPerView="auto"
       centerInsufficientSlides={data.pages[0].length > COURSES_PER_PAGE - 1}
       navigation={{ hideOnClick: true, enabled: !isFetching }}

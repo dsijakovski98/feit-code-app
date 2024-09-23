@@ -3,7 +3,7 @@ import { Suspense, lazy } from "react";
 import { Spinner } from "@nextui-org/react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import SecuritySettings from "@/components/ProfileManagement/Security";
+import ProfileSettings from "@/components/ProfileManagement/Settings";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const { userData } = useFCUser();
 
   return (
-    <section className="h-full overflow-y-scroll bg-primary-50/20 py-4 lg:pt-2">
+    <section className="bg-main h-full overflow-y-scroll py-4 lg:pt-2">
       <div className="mx-auto h-full max-w-[85ch] md:max-w-full">
         {userData ? (
           <Tabs
@@ -35,8 +35,8 @@ const ProfilePage = () => {
               </Suspense>
             </Tab>
 
-            <Tab key="security" title="Security">
-              <SecuritySettings />
+            <Tab key="settings" title="Settings">
+              <ProfileSettings />
             </Tab>
           </Tabs>
         ) : (

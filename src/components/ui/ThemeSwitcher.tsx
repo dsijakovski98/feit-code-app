@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useTheme } from "next-themes";
 
 import Button from "@/components/ui/Button";
@@ -23,7 +24,9 @@ const ThemeSwitcher = ({ size = "md" }: Props) => {
       variant="light"
       color="default"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-      className="p-1.5 lg:text-background lg:dark:text-foreground"
+      className={clsx("p-1.5", {
+        "lg:scale-90": size === "md",
+      })}
     >
       <Icon name={theme === "dark" ? "moon" : "sun"} />
     </Button>

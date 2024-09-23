@@ -27,7 +27,7 @@ const CourseDetailsPage = () => {
 
   if (error) {
     return (
-      <section className="grid h-full place-items-center content-center gap-4 bg-primary-50/20 pt-4 lg:pt-2">
+      <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
         <h2 className="text-2xl font-medium text-danger">{error.message}</h2>
         <Button
           variant="light"
@@ -46,7 +46,7 @@ const CourseDetailsPage = () => {
 
   if (isLoading || userIsLoading) {
     return (
-      <section className="grid h-full place-items-center content-center gap-4 bg-primary-50/20 pt-4 lg:pt-2">
+      <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
         <Spinner size="lg" className="scale-150" />
       </section>
     );

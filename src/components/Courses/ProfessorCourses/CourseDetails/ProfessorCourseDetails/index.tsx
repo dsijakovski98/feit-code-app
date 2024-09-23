@@ -1,8 +1,11 @@
 import { Suspense, lazy, useMemo } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
+import Icon from "@/components/ui/Icon";
+
+import { ROUTES } from "@/constants/routes";
 import { useFCUser } from "@/hooks/useFCUser";
 import { TEACHER_TYPE, USER_TYPE } from "@/types";
 
@@ -40,8 +43,16 @@ const ProfessorCourseDetails = () => {
   }
 
   return (
-    <section className="h-full bg-primary-50/20 p-4">
-      <div className="mx-auto max-w-[130ch] md:max-w-full">
+    <section className="bg-main flex gap-2 p-4 pl-6 lg:flex-col lg:gap-4">
+      <Link
+        to={ROUTES.courses}
+        className="flex h-fit w-fit items-center gap-1 pt-2.5 font-semibold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:gap-0.5 lg:pt-0 lg:text-lg"
+      >
+        <Icon name="left" className="h-6 w-6" />
+        Courses
+      </Link>
+
+      <div className="max-w-[120ch] basis-full lg:max-w-full">
         <Tabs
           fullWidth
           size="lg"
@@ -51,8 +62,9 @@ const ProfessorCourseDetails = () => {
           selectedKey={hash}
           defaultSelectedKey="#general"
           classNames={{
+            base: "!px-0",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
-            panel: "pt-4 px-10 md:px-6",
+            panel: "pt-4 px-10 lg:px-8 md:px-0",
           }}
         >
           <Tab key="#general" title="General" href="#general">

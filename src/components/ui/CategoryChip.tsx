@@ -18,8 +18,7 @@ const CategoryChip = ({ category, size = "xs" }: Props) => {
   return (
     <Chip
       size="sm"
-      className={clsx("opacity-90 lg:text-[11px]", {
-        "text-xs": size === "xs",
+      className={clsx("text-xs lg:!text-xs", {
         "text-sm": size === "sm",
       })}
       style={
@@ -31,7 +30,7 @@ const CategoryChip = ({ category, size = "xs" }: Props) => {
           : {}
       }
       classNames={{
-        content: "font-medium",
+        content: "font-bold",
       }}
     >
       {label}

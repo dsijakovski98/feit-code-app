@@ -94,7 +94,7 @@ const ResetPassword = () => {
       <Button
         variant="ghost"
         color="default"
-        className="w-[140px] border-foreground-300 py-[22px] text-sm font-semibold text-foreground lg:w-full"
+        className="w-[140px] shrink-0 border-foreground-300 font-semibold text-foreground lg:w-full"
         disabled={!!authStrategy}
         onPress={dialog.toggleOn}
       >
@@ -111,18 +111,13 @@ const ResetPassword = () => {
           backdrop: "bg-background/50",
         }}
       >
-        <ModalContent className="max-w-[560px]">
+        <ModalContent className="max-w-[480px]">
           {(onClose) => (
             <Fragment>
-              <ModalHeader className="text-2xl">Password reset</ModalHeader>
+              <ModalHeader className="text-2xl">Reset password</ModalHeader>
 
               <ModalBody className="relative">
-                <form
-                  id="reset-pwd"
-                  noValidate
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="space-y-2 px-2 pb-8"
-                >
+                <form id="reset-pwd" noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-2 pb-6">
                   <Controller
                     control={control}
                     name="currentPassword"
@@ -130,7 +125,6 @@ const ResetPassword = () => {
                     render={({ field, fieldState }) => (
                       <Input
                         {...field}
-                        size="lg"
                         type="password"
                         label="Old password"
                         color="default"
@@ -149,7 +143,6 @@ const ResetPassword = () => {
                     render={({ field, fieldState }) => (
                       <Input
                         {...field}
-                        size="lg"
                         type="password"
                         label="New password"
                         color="default"
@@ -168,7 +161,6 @@ const ResetPassword = () => {
                     render={({ field, fieldState }) => (
                       <Input
                         {...field}
-                        size="lg"
                         type="password"
                         label="Confirm new password"
                         color="default"
@@ -186,11 +178,13 @@ const ResetPassword = () => {
                     disabled={isSubmitting}
                     render={({ field: { onChange, onBlur, value } }) => (
                       <Checkbox
+                        size="sm"
                         onBlur={onBlur}
                         onChange={onChange}
                         isSelected={value}
                         isDisabled={isSubmitting}
-                        classNames={{ label: "ml-1" }}
+                        className="!mt-3"
+                        classNames={{ label: "ml-1 !text-sm" }}
                       >
                         Sign out of all sessions
                       </Checkbox>
@@ -205,10 +199,9 @@ const ResetPassword = () => {
                 )}
               </ModalBody>
 
-              <ModalFooter className="px-6">
+              <ModalFooter className="gap-4">
                 <Button
                   fullWidth
-                  size="lg"
                   color="default"
                   variant="bordered"
                   isDisabled={isSubmitting}
@@ -219,14 +212,13 @@ const ResetPassword = () => {
 
                 <Button
                   fullWidth
-                  size="lg"
                   type="submit"
                   form="reset-pwd"
                   color="primary"
                   isLoading={isSubmitting}
                   onPress={resetPassword}
                 >
-                  Submit
+                  Reset
                 </Button>
               </ModalFooter>
             </Fragment>

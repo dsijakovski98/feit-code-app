@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import Timestamp from "@/components/ui/Timestamp";
 
@@ -15,12 +14,12 @@ const StudentCourseCard = ({ courseData }: Props) => {
   const { id, academicYear, name } = course;
 
   return (
-    <div className="flex h-full justify-between gap-2 overflow-hidden rounded-md border border-content3 bg-content1 font-sans shadow-md dark:border-transparent dark:bg-primary-50">
-      <div className="flex h-full w-[32ch] flex-col justify-between space-y-5 overflow-hidden p-6 lg:space-y-2 lg:p-4">
+    <div className="flex h-full items-end justify-between gap-2 rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-lg outline outline-2 -outline-offset-[2px] outline-transparent transition-[outline] duration-400 hover:outline-primary dark:border-transparent dark:bg-background lg:p-4">
+      <div className="flex h-full w-[28ch] flex-col justify-between space-y-8 lg:space-y-4">
         <div>
           <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
 
-          <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">{name}</h3>
+          <h3 className="flex w-full items-end gap-4 text-xl font-semibold lg:text-lg">{name}</h3>
         </div>
 
         <p>
@@ -28,13 +27,13 @@ const StudentCourseCard = ({ courseData }: Props) => {
         </p>
       </div>
 
-      <div className="grid place-items-center">
-        <Button isIconOnly variant="light" color="default" className="h-full rounded-l-none px-6">
-          <Link to={id} aria-label="Open course details">
-            <Icon name="right" className="h-5 w-5" />
-          </Link>
-        </Button>
-      </div>
+      <Link to={id} className="group flex w-fit items-center justify-between gap-2 font-semibold lg:gap-1">
+        Details{" "}
+        <Icon
+          name="right"
+          className="h-5 w-5 -translate-x-2 translate-y-px scale-90 opacity-0 transition-[opacity_transform] group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100 lg:translate-x-0 lg:opacity-100"
+        />
+      </Link>
     </div>
   );
 };

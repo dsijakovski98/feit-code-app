@@ -28,7 +28,11 @@ const UserAvatar = () => {
   return (
     <Dropdown placement="bottom-end">
       <DropdownTrigger className="cursor-pointer focus:ring-primary" tabIndex={0}>
-        <Avatar isBordered src={avatarUrl || ""} className="ring-foreground lg:ring-foreground" />
+        <Avatar
+          isBordered
+          src={avatarUrl || ""}
+          className="-ring-offset-1 ring-foreground lg:h-9 lg:w-9 lg:ring-foreground"
+        />
       </DropdownTrigger>
 
       <DropdownMenu disabledKeys={["title"]} closeOnSelect>

@@ -19,8 +19,8 @@ const StudentCourseDetails = () => {
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
 
   return (
-    <section className="details h-full bg-primary-50/20 p-8 lg:block lg:h-auto lg:space-y-6">
-      <div className="max-w-[55ch] space-y-10 [grid-area:details] lg:max-w-full">
+    <section className="details bg-main h-full p-8 lg:block lg:h-auto lg:space-y-6 lg:p-5">
+      <div className="space-y-10 [grid-area:details]">
         <div>
           <h2 className="text-2xl font-semibold">{name}</h2>
 
@@ -32,7 +32,7 @@ const StudentCourseDetails = () => {
         </div>
 
         <div className="space-y-4">
-          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
+          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2 lg:gap-1">
             {categories.map(({ category, categoryId }) => (
               <li key={categoryId}>
                 <CategoryChip size="sm" category={category} />
@@ -43,7 +43,7 @@ const StudentCourseDetails = () => {
           <div className="space-y-2">
             <p className="text-lg font-semibold">Taught by</p>
 
-            <div className="flex w-fit items-end gap-16 lg:w-full lg:flex-wrap lg:justify-between">
+            <div className="flex w-fit flex-wrap items-end gap-16 lg:w-full lg:justify-between">
               <User
                 name={
                   <a href={`mailto: ${professor.email}`} className="text-base font-semibold">
@@ -73,7 +73,7 @@ const StudentCourseDetails = () => {
                   }}
                 />
               ) : (
-                <p className="font-semibold text-foreground-300">
+                <p className="shrink font-semibold text-foreground-300">
                   There is no assistant for this course yet.
                 </p>
               )}

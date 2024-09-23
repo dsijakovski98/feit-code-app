@@ -4,23 +4,19 @@ import NewCourseForm from "@/components/Courses/Forms/NewCourseForm";
 import Icon from "@/components/ui/Icon";
 
 import { ROUTES } from "@/constants/routes";
-import { ResponsiveContext } from "@/context/ResponsiveContext";
-import { useCtx } from "@/hooks/useCtx";
 
 const NewCoursePage = () => {
-  const { isMobile } = useCtx(ResponsiveContext);
-
   return (
-    <section className="grid h-auto grid-rows-[auto_1fr] gap-4 px-8 py-6 lg:block lg:space-y-5">
+    <section className="bg-main flex h-auto items-start gap-4 px-8 py-6 lg:flex-col lg:justify-start lg:gap-6 lg:px-5">
       <Link
         to={ROUTES.courses}
-        className="flex w-fit items-center gap-1 text-lg font-bold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:text-base"
+        className="flex w-fit items-center gap-1 font-semibold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:-translate-x-1 lg:gap-0.5 lg:text-lg"
       >
-        <Icon name="left" className="h-6 w-6 lg:h-5 lg:w-5" />
-        {isMobile && "Back to"} Courses
+        <Icon name="left" className="h-6 w-6" />
+        Courses
       </Link>
 
-      <div className="mx-auto w-[75ch] lg:w-full lg:translate-y-0">
+      <div className="mx-auto w-[75ch] -translate-x-[50px] -translate-y-1 xl:translate-x-0 lg:w-full lg:translate-y-0">
         <NewCourseForm />
       </div>
     </section>

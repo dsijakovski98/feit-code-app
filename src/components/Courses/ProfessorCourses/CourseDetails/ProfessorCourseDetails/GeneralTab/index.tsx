@@ -14,6 +14,12 @@ import { TEACHER_TYPE } from "@/types";
 
 import "./styles.css";
 
+const userAvatarProps = {
+  isBordered: true,
+  className: "-ring-offset-1",
+  color: "primary",
+} as const;
+
 const GeneralTab = () => {
   const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
@@ -61,7 +67,7 @@ const GeneralTab = () => {
         </div>
 
         <div className="space-y-6">
-          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2">
+          <ul className="flex max-w-[40ch] flex-wrap items-center gap-2 lg:gap-1">
             {categories.map(({ category, categoryId }) => (
               <li key={categoryId}>
                 <CategoryChip size="sm" category={category} />
@@ -69,7 +75,7 @@ const GeneralTab = () => {
             ))}
           </ul>
 
-          <div className="flex w-fit items-end gap-12 lg:w-full lg:flex-wrap lg:justify-between">
+          <div className="flex w-fit flex-wrap items-end gap-12 lg:w-full lg:justify-between">
             <User
               name={
                 <a href={`mailto: ${professor.email}`} className="text-base font-semibold">
@@ -81,7 +87,9 @@ const GeneralTab = () => {
                 size: "lg",
                 showFallback: true,
                 src: professorAvatar ?? "",
+                ...(userFullName === professorFullName ? userAvatarProps : {}),
               }}
+              className="shrink-0"
             />
 
             {assistant ? (
@@ -96,10 +104,14 @@ const GeneralTab = () => {
                   size: "lg",
                   showFallback: true,
                   src: assistantAvatar ?? "",
+                  ...(userFullName === assistantFullName ? userAvatarProps : {}),
                 }}
+                className="shrink-0"
               />
             ) : (
-              <p className="font-semibold text-foreground-300">There is no assistant for this course yet.</p>
+              <p className="shrink font-semibold text-foreground-300">
+                There is no assistant for this course yet.
+              </p>
             )}
           </div>
         </div>

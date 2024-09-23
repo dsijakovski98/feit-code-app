@@ -10,11 +10,11 @@ const SettingsTab = () => {
       variant="splitted"
       defaultExpandedKeys={["edit"]}
       itemClasses={{
-        trigger: "py-4 px-2",
+        trigger: "py-4 px-4",
         title: "text-lg font-semibold",
         subtitle: "font-medium text-foreground-300",
-        base: "bg-transparent mx-20 mb-4 shadow-lg border border-content3/70 dark:border-content2",
-        content: "px-8 pb-4 -translate-y-4",
+        base: "bg-background mx-40 lg:mx-0 mb-3 shadow-lg border border-content3/70 dark:border-content2/70",
+        content: "px-4 pb-4 -translate-y-4",
         indicator: "!rotate-0 w-6 h-6 text-foreground",
       }}
     >

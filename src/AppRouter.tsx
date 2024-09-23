@@ -34,7 +34,7 @@ const AppRouter = () => {
 
                 <Route
                   path={ROUTES.courses}
-                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} />}
+                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} replace />}
                 />
 
                 <Route path={ROUTES.dashboard}>

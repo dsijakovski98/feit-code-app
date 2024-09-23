@@ -88,9 +88,9 @@ const NewCourseForm = () => {
   };
 
   return (
-    <form id="new-course-form" onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-      <div>
-        <h2 className="text-2xl font-semibold lg:text-xl">Create a new course</h2>
+    <form id="new-course-form" onSubmit={handleSubmit(onSubmit)} className="space-y-5 lg:pb-4">
+      <div className="mb-12">
+        <h2 className="text-2xl font-semibold">Create a new course</h2>
         <p className="text-foreground-300 lg:text-sm">
           You will be teaching this course for the <span className="font-semibold">{academicYear}</span>{" "}
           semester

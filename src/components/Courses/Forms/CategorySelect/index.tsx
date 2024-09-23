@@ -68,7 +68,7 @@ const CategorySelect = ({ form, defaultValue }: Props) => {
             isDisabled={isLoading || isSubmitting || categories?.length === 0}
             renderValue={(items) => {
               return (
-                <ul className="flex flex-wrap gap-2">
+                <ul className="flex flex-wrap gap-2 lg:gap-1">
                   {items.map((item) => (
                     <li key={item.key}>
                       <CategoryChip
