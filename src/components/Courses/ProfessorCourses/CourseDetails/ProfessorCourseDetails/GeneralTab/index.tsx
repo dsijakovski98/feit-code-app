@@ -45,7 +45,7 @@ const GeneralTab = () => {
 
   return (
     <div className="general lg:block lg:space-y-6">
-      <div className="max-w-[55ch] space-y-10 [grid-area:details] lg:max-w-full">
+      <div className="space-y-10 [grid-area:details] lg:max-w-full">
         <div>
           <h2 className="text-2xl font-semibold">
             {name}{" "}
