@@ -15,7 +15,7 @@ import { useToggle } from "@/hooks/useToggle";
 
 const StudentActions = () => {
   const { isMobileSm } = useCtx(ResponsiveContext);
-  const { student } = useCtx(StudentContext);
+  const { student, joinedAt } = useCtx(StudentContext);
 
   const removeDialog = useToggle();
   const detailsDialog = useToggle();
@@ -29,7 +29,7 @@ const StudentActions = () => {
   if (isMobileSm) {
     return (
       <Fragment>
-        <Dropdown placement="bottom-end" className="min-w-min" closeOnSelect>
+        <Dropdown placement="bottom-end" className="min-w-min" closeOnSelect offset={0}>
           <DropdownTrigger title="View student details/Remove student">
             <Button isIconOnly color="default" variant="light" radius="full" className="p-1.5">
               <Icon name="more" />
@@ -43,7 +43,7 @@ const StudentActions = () => {
               startContent={<Icon name="details" className="h-5 w-5" />}
               onPress={detailsDialog.toggleOn}
             >
-              <p className="w-fit text-sm font-semibold">View details</p>
+              <p className="w-fit text-sm font-semibold">Details</p>
             </DropdownItem>
 
             <DropdownItem
@@ -53,12 +53,12 @@ const StudentActions = () => {
               startContent={<Icon name="trash" className="h-5 w-5 text-danger" />}
               onPress={removeDialog.toggleOn}
             >
-              <p className="w-fit text-sm font-semibold text-danger">Remove student</p>
+              <p className="w-fit text-sm font-semibold text-danger">Remove</p>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
 
-        <StudentDetails dialog={detailsDialog} />
+        <StudentDetails dialog={detailsDialog} student={student} joinedAt={joinedAt} />
         <RemoveStudent dialog={removeDialog} />
       </Fragment>
     );

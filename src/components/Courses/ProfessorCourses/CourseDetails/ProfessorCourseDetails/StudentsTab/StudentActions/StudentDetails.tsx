@@ -1,21 +1,25 @@
 import { Fragment } from "react";
 
+import { InferSelectModel } from "drizzle-orm";
+
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 import { User } from "@nextui-org/user";
 
+import { students } from "@/db/schema";
+
 import Timestamp from "@/components/ui/Timestamp";
 
-import { StudentContext } from "@/context/StudentContext";
 import { useAvatar } from "@/hooks/useAvatar";
-import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
 
 type Props = {
   dialog: Toggle;
+  student: InferSelectModel<typeof students>;
+  joinedAt: string;
+  onClose?: () => void;
 };
 
-const StudentDetails = ({ dialog }: Props) => {
-  const { student, joinedAt } = useCtx(StudentContext);
+const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
   const { id, firstName, lastName, email, indexNumber, indexYear, major } = student;
 
   const [avatarUrl, isLoading] = useAvatar(id);
@@ -24,6 +28,7 @@ const StudentDetails = ({ dialog }: Props) => {
     <Modal
       isOpen={dialog.open}
       onOpenChange={dialog.toggle}
+      onClose={onClose}
       hideCloseButton
       placement="center"
       backdrop="opaque"

@@ -4,6 +4,24 @@ import { studentCourses } from "@/db/schema";
 
 import { db } from "@/db";
 
+type AddOptions = {
+  studentIds: string[];
+  courseId: string;
+};
+
+export const addStudents = async ({ studentIds, courseId }: AddOptions) => {
+  try {
+    await db.insert(studentCourses).values(studentIds.map((studentId) => ({ studentId, courseId })));
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to add students to course!");
+  }
+
+  return true;
+};
+
 type RemoveOptions = {
   studentId: string;
   courseId: string;

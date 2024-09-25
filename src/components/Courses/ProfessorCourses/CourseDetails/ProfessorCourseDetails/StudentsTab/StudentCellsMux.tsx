@@ -20,7 +20,7 @@ type Props = {
 
 const StudentCellsMux = ({ columnKey }: Props) => {
   const { userId } = useAuth();
-  const { isMobile } = useCtx(ResponsiveContext);
+  const { isMobile, isMobileSm } = useCtx(ResponsiveContext);
   const {
     courseDetails: { professorId },
   } = useCtx(CourseDetailsContext);
@@ -35,12 +35,18 @@ const StudentCellsMux = ({ columnKey }: Props) => {
         name={`${firstName} ${lastName}`}
         description={email}
         avatarProps={{
-          size: "lg",
+          size: isMobile ? "md" : "lg",
           src: studentAvatar ?? "",
           showFallback: isLoading,
-          className: isMobile ? "hidden" : "",
+          className: clsx({
+            "scale-[1.2]": isMobile,
+            hidden: isMobileSm,
+          }),
         }}
         classNames={{
+          base: clsx({
+            "gap-3": isMobile,
+          }),
           name: clsx("text-base font-semibold", {
             "text-sm": isMobile,
           }),

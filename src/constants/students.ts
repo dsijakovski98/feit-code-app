@@ -16,7 +16,7 @@ export const STUDENT_COLUMNS_LG = [
   { key: "student", label: "Student" },
   { key: "index", label: "Index no." },
   { key: "major", label: "Major" },
-  { key: "joined", label: "Joined at" },
+  { key: "joined", label: "Joined on" },
   { key: "actions", label: "Actions" },
 ] as const;
 

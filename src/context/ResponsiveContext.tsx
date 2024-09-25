@@ -11,7 +11,7 @@ export const ResponsiveProvider = ({ children }: PropsWithChildren) => {
     const listener = () => {
       setIsMobile(window.innerWidth < 1024);
 
-      setIsMobileSm(window.innerWidth < 768);
+      setIsMobileSm(window.innerWidth < 670);
     };
 
     window.addEventListener("resize", listener);
