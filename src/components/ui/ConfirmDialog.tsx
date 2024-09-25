@@ -48,7 +48,7 @@ const ConfirmDialog = ({ dialog, title, description, color, action, loading }: P
           <Fragment>
             <ModalHeader className="text-2xl">{title}</ModalHeader>
 
-            <ModalBody className="relative">{description}</ModalBody>
+            <ModalBody className="relative font-sans">{description}</ModalBody>
 
             <ModalFooter>
               <Button color="default" variant="bordered" isDisabled={!!loading} onPress={onClose}>

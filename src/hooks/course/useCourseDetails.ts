@@ -11,7 +11,7 @@ export const useCourseDetails = (courseId?: string) => {
       try {
         const course = await db.query.courses.findFirst({
           with: {
-            students: true,
+            students: { with: { student: true } },
             exams: true,
             professor: true,
             assistant: true,

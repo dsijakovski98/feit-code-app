@@ -110,7 +110,7 @@ const GeneralTab = () => {
               />
             ) : (
               <p className="shrink font-semibold text-foreground-300">
-                There is no assistant for this course yet.
+                This course doesn't have an assistant.
               </p>
             )}
           </div>
