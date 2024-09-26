@@ -54,7 +54,7 @@ const ProfessorCourseDetails = () => {
             base: "!px-0 sticky top-20 py-2 bg-main z-20",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
             tabList: "!mx-0",
-            panel: "pt-4 px-10 lg:px-8 md:px-0",
+            panel: "pt-5 px-10 md:px-6",
           }}
         >
           <Tab key="#general" title="General" href="#general">

@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const { userData } = useFCUser();
 
   return (
-    <section className="bg-main h-full overflow-y-scroll py-4 lg:pt-2">
+    <section className="bg-main p-4 pt-0">
       <div className="mx-auto h-full max-w-[85ch] md:max-w-full">
         {userData ? (
           <Tabs
@@ -25,8 +25,9 @@ const ProfilePage = () => {
             aria-label="Profile tabs"
             destroyInactiveTabPanel={false}
             classNames={{
+              base: "!px-0 sticky top-20 py-2 bg-main z-20",
               tabContent: "text-foreground group-data-[selected]:font-semibold",
-              panel: "pt-6 px-10 md:px-6 lg:py-4",
+              panel: "pt-5 px-10 md:px-6",
             }}
           >
             <Tab key="profile" title="Profile">

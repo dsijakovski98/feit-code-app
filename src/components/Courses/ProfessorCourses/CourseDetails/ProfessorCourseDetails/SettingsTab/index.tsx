@@ -3,7 +3,7 @@ import EditCourseForm from "@/components/Courses/ProfessorCourses/CourseDetails/
 
 const SettingsTab = () => {
   return (
-    <section className="mx-auto max-w-[80ch] space-y-20 pb-8 md:max-w-full">
+    <section className="mx-auto max-w-[77ch] space-y-20 pb-8 md:max-w-full">
       <div className="space-y-4">
         <h2 className="text-lg font-semibold">General</h2>
 

@@ -12,7 +12,7 @@ const ProfileSettings = () => {
   const authStrategy = useMemo(() => getAuthStrategy(user), [user]);
 
   return (
-    <section className="space-y-14 pt-4">
+    <section className="space-y-14">
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Security</h2>
         <div className="flex items-start justify-between gap-52 xl:gap-20 lg:flex-col lg:gap-6 md:gap-4">
