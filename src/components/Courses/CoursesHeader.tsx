@@ -15,9 +15,7 @@ const CoursesHeader = ({ title, searchFilter, children }: Props) => {
 
   return (
     <div className="flex items-end justify-start gap-6 px-8 lg:px-5 md:flex-wrap md:gap-4">
-      <h2 className="text-lg font-bold uppercase text-foreground/90 md:mr-auto md:translate-y-1.5">
-        {title}
-      </h2>
+      <h2 className="translate-y-[7px] text-lg font-bold uppercase text-foreground/90 md:mr-auto">{title}</h2>
 
       <div className="ml-auto md:order-2 md:basis-full">
         <Input
