@@ -1,9 +1,9 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState } from "react";
 
-import { ButtonGroup } from "@nextui-org/button";
+import CoursesHeader from "@/components/Courses/CoursesHeader";
+import SwitchFilter from "@/components/ui/SwitchFilter";
 
-import Button from "@/components/ui/Button";
-
+import CourseSearchProvider from "@/context/CourseSearch.Context";
 import { FCUser } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
 
@@ -15,38 +15,31 @@ type Props = {
 };
 
 const StudentCourses = ({ user }: Props) => {
-  const [coursesFilter, setCoursesFilter] = useFilter<"own" | "all">({
+  const courseFilter = useFilter({
     name: "q",
+    options: [
+      { value: "own", label: "My Courses" },
+      { value: "all", label: "All Courses" },
+    ] as const,
     defaultValue: "own",
   });
+
+  const searchFilter = useState("");
+  const [search] = searchFilter;
 
   return (
     <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] gap-8 py-4 lg:gap-4">
       <section className="space-y-4 lg:pt-0.5">
-        <div className="flex items-end justify-between px-8 lg:px-5">
-          <h2 className="text-lg font-bold uppercase text-foreground/90">Courses</h2>
+        <CoursesHeader title="Course" searchFilter={searchFilter}>
+          <SwitchFilter filter={courseFilter} />
+        </CoursesHeader>
 
-          <ButtonGroup size="sm" className="*:text-sm">
-            <Button
-              color={coursesFilter === "own" ? "primary" : "default"}
-              onPress={() => setCoursesFilter("own")}
-            >
-              My Courses
-            </Button>
-
-            <Button
-              color={coursesFilter === "all" ? "primary" : "default"}
-              onPress={() => setCoursesFilter("all")}
-            >
-              All Courses
-            </Button>
-          </ButtonGroup>
-        </div>
-
-        <Suspense fallback={null}>
-          {coursesFilter === "own" && <StudentCoursesList studentId={user.id} />}
-          {coursesFilter === "all" && <ActiveCoursesList />}
-        </Suspense>
+        <CourseSearchProvider search={search}>
+          <Suspense fallback={null}>
+            {courseFilter.value === "own" && <StudentCoursesList studentId={user.id} />}
+            {courseFilter.value === "all" && <ActiveCoursesList />}
+          </Suspense>
+        </CourseSearchProvider>
       </section>
 
       {/* TODO: Some charts and stats here */}

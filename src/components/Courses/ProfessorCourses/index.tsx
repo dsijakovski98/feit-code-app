@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ButtonGroup, Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import CourseCard from "@/components/Courses/CourseCard";
+import CoursesHeader from "@/components/Courses/CoursesHeader";
 import CoursesList from "@/components/Courses/CoursesList";
 import EmptyAssistantCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyAssistantCourses";
 import EmptyProfessorCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyProfessorCourses";
-import Button from "@/components/ui/Button";
 import FloatButton from "@/components/ui/FloatButton";
+import SwitchFilter from "@/components/ui/SwitchFilter";
 
+import CourseSearchProvider from "@/context/CourseSearch.Context";
 import { useProfessorCourses } from "@/hooks/professor/useProfessorCourses";
 import { FCProfessor } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
@@ -20,37 +23,28 @@ type Props = {
 
 const ProfessorCourses = ({ user }: Props) => {
   const { id, type } = user;
-  const [courseYearFilter, setCourseYearFilter] = useFilter<"all" | "current">({
+
+  const courseYearFilter = useFilter({
     name: "year",
+    options: [
+      { value: "current", label: "This Year" },
+      { value: "all", label: "All Courses" },
+    ] as const,
     defaultValue: "current",
   });
 
-  const coursesQuery = useProfessorCourses({ id, type }, courseYearFilter);
+  const searchFilter = useState("");
+  const [search] = searchFilter;
+
+  const coursesQuery = useProfessorCourses({ id, type }, courseYearFilter.value);
   const { data } = coursesQuery;
 
   return (
     <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4">
       <section>
-        <div className="flex items-end justify-between px-8 lg:px-5">
-          <h2 className="text-lg font-bold uppercase text-foreground/90">{user.firstName}'s Courses</h2>
-
-          {!!data?.pages[0].length && (
-            <ButtonGroup size="sm" className="*:text-sm">
-              <Button
-                color={courseYearFilter === "current" ? "primary" : "default"}
-                onPress={() => setCourseYearFilter("current")}
-              >
-                This year
-              </Button>
-              <Button
-                color={courseYearFilter === "all" ? "primary" : "default"}
-                onPress={() => setCourseYearFilter("all")}
-              >
-                All courses
-              </Button>
-            </ButtonGroup>
-          )}
-        </div>
+        <CoursesHeader title={`${user.firstName}'s Courses`} searchFilter={searchFilter}>
+          <SwitchFilter filter={courseYearFilter} />
+        </CoursesHeader>
 
         {!data && (
           <div className="w-full py-8 text-center">
@@ -63,10 +57,12 @@ const ProfessorCourses = ({ user }: Props) => {
 
         {!!data?.pages.length && (
           <div className="mt-2 overflow-x-clip">
-            <CoursesList
-              coursesQuery={coursesQuery}
-              renderCourse={(course) => <CourseCard course={course} mode={USER_TYPE.professor} />}
-            />
+            <CourseSearchProvider search={search}>
+              <CoursesList
+                coursesQuery={coursesQuery}
+                renderCourse={(course) => <CourseCard course={course} mode={USER_TYPE.professor} />}
+              />
+            </CourseSearchProvider>
           </div>
         )}
       </section>

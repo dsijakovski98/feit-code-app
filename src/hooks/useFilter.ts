@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-type FilterOptions<T extends string> = {
+export type Option = { value: string; label: string };
+
+type FilterOptions<T extends [Option, Option]> = {
   name: string;
-  defaultValue: T;
+  options: T;
+  defaultValue: T[number]["value"];
 };
 
-export const useFilter = <T extends string>({ name, defaultValue }: FilterOptions<T>) => {
+export const useFilter = <T extends [Option, Option]>({ name, defaultValue, options }: FilterOptions<T>) => {
+  type OptionType = T[number]["value"];
+
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [filter, setFilter] = useState<T>((searchParams.get(name) as T) ?? defaultValue);
+  const [filter, setFilter] = useState<OptionType>((searchParams.get(name) as string) ?? defaultValue);
 
-  const updateFilter = (filter: T) => {
+  const updateFilter = (filter: OptionType) => {
     setFilter(filter);
     setSearchParams({ [name]: filter });
   };
 
-  return [filter, updateFilter] as const;
+  return { value: filter, updateFilter, options };
 };
+
+export type Filter<T extends [Option, Option]> = ReturnType<typeof useFilter<T>>;
