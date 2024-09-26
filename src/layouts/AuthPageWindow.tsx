@@ -1,10 +1,7 @@
 import { ComponentProps, PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
 
 import AuthSidebar from "@/components/AuthForms/AuthSidebar";
 import Window from "@/components/ui/Window";
-
-import { ROUTES } from "@/constants/routes";
 
 type Props = {
   title: string;
@@ -15,17 +12,7 @@ type Props = {
 const AuthPageWindow = ({ title, href, heading, children }: Props) => {
   return (
     <main className="relative min-h-[100dvh] bg-dots-light bg-fixed pt-10 dark:!bg-dots-dark lg:pt-5">
-      <div className="flex flex-col items-center px-[10px] text-center">
-        <Link to={ROUTES.home} className="flex items-center gap-2 font-sans text-2xl font-semibold">
-          <p>FEIT</p>
-          <div className="flex w-fit max-w-20 lg:max-w-16">
-            <img src="/images/logo.svg" />
-          </div>
-          <p>Code</p>
-        </Link>
-
-        <h1 className="text-5xl font-semibold lg:text-3xl">{heading}</h1>
-      </div>
+      <h1 className="text-center text-5xl font-semibold lg:text-3xl">{heading}</h1>
 
       <div className="mt-8 flex justify-center lg:mt-3">
         <Window title={title} className="w-[870px] lg:w-[90%] lg:min-w-[350px]">

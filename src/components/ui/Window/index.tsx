@@ -51,9 +51,11 @@ const Window = ({ title, className = "", children }: Props) => {
         <nav className="flex items-center justify-between border-b border-b-content2 bg-gradient-to-r from-background from-20% to-primary-50/20 px-3 py-2 md:px-4 md:py-3">
           <div
             ref={trigger}
-            className="grow cursor-grab group-data-[moving]:cursor-grabbing lg:cursor-default"
+            className="flex grow cursor-grab items-center gap-2 group-data-[moving]:cursor-grabbing lg:cursor-default"
           >
-            <p className="text-lg font-semibold group-data-[moving]:select-none">{title}</p>
+            <img draggable={false} src="/images/logo.svg" alt="FEIT Code logo" className="w-8 scale-[1.4]" />
+
+            <p className="text-lg font-semibold leading-none group-data-[moving]:select-none">{title}</p>
           </div>
 
           <WindowControls show={show} minimized={minimized} fullScreen={fullScreen} />
