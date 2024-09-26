@@ -6,6 +6,9 @@ export type QueryColumns<T> = Partial<Record<keyof T, boolean>>;
 
 export type UseState<T> = [T, Dispatch<SetStateAction<T>>];
 
+export type Column = { key: string; label: string };
+export type ColumnKey<T extends readonly Column[]> = T[number]["key"];
+
 export const USER_TYPE = {
   student: "Student",
   professor: "Professor",

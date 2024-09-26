@@ -11,3 +11,17 @@ export const MAJORS = [
   { label: MAJOR_TYPE.KHIE, description: "Computer Hardware Engineering and Electronics" },
   { label: MAJOR_TYPE.TKII, description: "Telecommunication and Information Engineering" },
 ];
+
+export const STUDENT_COLUMNS_LG = [
+  { key: "student", label: "Student" },
+  { key: "index", label: "Index no." },
+  { key: "major", label: "Major" },
+  { key: "joined", label: "Joined on" },
+  { key: "actions", label: "Actions" },
+] as const;
+
+export const STUDENT_COLUMNS_SM = [
+  { key: "student", label: "Student" },
+  { key: "info", label: "Info" },
+  { key: "actions", label: "Actions" },
+] as const;
