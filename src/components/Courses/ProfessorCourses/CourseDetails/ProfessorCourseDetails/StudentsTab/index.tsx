@@ -44,22 +44,22 @@ const StudentsTab = () => {
   const pages = useMemo(() => Math.ceil(students.length / ROWS_PER_PAGE), [students.length]);
 
   const studentsList = useMemo(() => {
+    // Pagination
+    const start = (page - 1) * ROWS_PER_PAGE;
+    const end = start + ROWS_PER_PAGE;
+
+    const studentsSlice = students.slice(start, end);
+
     // Sorting
-    const sortedStudents = students.sort((stA, stB) => {
+    const sortedStudents = studentsSlice.sort((stA, stB) => {
       const nameA = `${stA.student.firstName} ${stA.student.lastName}`;
       const nameB = `${stB.student.firstName} ${stB.student.lastName}`;
 
       return nameA.localeCompare(nameB);
     });
 
-    // Pagination
-    const start = (page - 1) * ROWS_PER_PAGE;
-    const end = start + ROWS_PER_PAGE;
-
-    const studentsSlice = sortedStudents.slice(start, end);
-
     // Other filtering
-    return studentsSlice.filter(({ student }) =>
+    return sortedStudents.filter(({ student }) =>
       `${student.firstName} ${student.lastName}`.toLowerCase().startsWith(search.toLowerCase()),
     );
   }, [students, search, page]);
@@ -102,6 +102,7 @@ const StudentsTab = () => {
           </StudentsTableHeader>
         }
         bottomContent={
+          // TODO: Fix incoming https://github.com/nextui-org/nextui/pull/3346
           <Pagination
             showControls
             classNames={{
