@@ -20,7 +20,7 @@ const CourseDangerZone = () => {
           ) : (
             <p className="text-sm">
               This will mark your course as <span className="font-semibold">archived</span>. You will not be
-              able to change it in any way afterwards.
+              able to change this later.
             </p>
           )}
         </div>

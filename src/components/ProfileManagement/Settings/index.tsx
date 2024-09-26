@@ -15,8 +15,8 @@ const ProfileSettings = () => {
     <section className="space-y-14">
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Security</h2>
-        <div className="flex items-start justify-between gap-52 xl:gap-20 lg:flex-col lg:gap-6 md:gap-4">
-          <div className="pl-4 lg:space-y-1">
+        <div className="flex items-start justify-between gap-52 px-4 xl:gap-20 lg:flex-col lg:gap-6 md:gap-4">
+          <div className="lg:space-y-1">
             <h3 className="font-semibold">Password</h3>
 
             <p className="text-sm">
@@ -37,8 +37,8 @@ const ProfileSettings = () => {
 
       <div className="space-y-3">
         <h2 className="text-lg font-semibold text-danger">Danger Zone</h2>
-        <div className="flex items-start justify-between gap-8 lg:flex-col lg:gap-4">
-          <div className="pl-4 lg:space-y-1">
+        <div className="flex items-start justify-between gap-8 px-4 lg:flex-col lg:gap-4">
+          <div className="lg:space-y-1">
             <h3 className="font-semibold">Delete Profile</h3>
             <p className="text-sm">Permanently delete your profile from the face of the planet.</p>
           </div>

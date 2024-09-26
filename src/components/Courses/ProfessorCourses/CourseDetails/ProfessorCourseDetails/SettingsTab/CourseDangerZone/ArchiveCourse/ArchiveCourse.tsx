@@ -47,7 +47,7 @@ const ArchiveCourse = () => {
         variant="ghost"
         color="default"
         isDisabled={!!archived}
-        className="w-[140px] shrink-0 border-foreground-300 py-[22px] font-semibold text-foreground lg:w-full"
+        className="w-[140px] shrink-0 border-foreground-300 font-semibold text-foreground lg:w-full"
         onPress={dialog.toggleOn}
       >
         Archive

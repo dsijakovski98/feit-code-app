@@ -44,11 +44,7 @@ const DeleteCourse = () => {
 
   return (
     <Fragment>
-      <Button
-        color="danger"
-        className="w-[140px] py-[22px] font-semibold lg:w-full"
-        onPress={dialog.toggleOn}
-      >
+      <Button color="danger" className="w-[140px] font-semibold lg:w-full" onPress={dialog.toggleOn}>
         Delete Course
       </Button>
 
