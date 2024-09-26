@@ -95,7 +95,9 @@ const EditCourseForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-      <div>
+      <h3 className="font-semibold">Update course details</h3>
+
+      <div className="-space-y-2">
         <Controller
           control={control}
           name="name"

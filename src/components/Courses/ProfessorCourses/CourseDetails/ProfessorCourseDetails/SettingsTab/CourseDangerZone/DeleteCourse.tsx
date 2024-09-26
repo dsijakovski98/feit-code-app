@@ -46,7 +46,7 @@ const DeleteCourse = () => {
     <Fragment>
       <Button
         color="danger"
-        className="w-[140px] py-[22px] text-sm font-semibold lg:w-full"
+        className="w-[140px] py-[22px] font-semibold lg:w-full"
         onPress={dialog.toggleOn}
       >
         Delete Course
