@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Fragment } from "react/jsx-runtime";
+import { Fragment, useEffect } from "react";
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 

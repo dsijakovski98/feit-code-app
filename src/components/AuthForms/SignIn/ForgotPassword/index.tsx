@@ -1,6 +1,5 @@
-import { useLayoutEffect, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Fragment } from "react/jsx-runtime";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import clsx from "clsx";

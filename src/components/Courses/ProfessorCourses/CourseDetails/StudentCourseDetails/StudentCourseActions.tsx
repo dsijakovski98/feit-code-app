@@ -1,3 +1,7 @@
+import clsx from "clsx";
+
+import { Avatar } from "@nextui-org/react";
+
 import JoinCourse from "@/components/Courses/JoinCourse";
 import Timestamp from "@/components/ui/Timestamp";
 
@@ -18,28 +22,44 @@ const StudentCourseActions = () => {
   if (!userData) return null;
 
   return (
-    <div className="flex h-full flex-col gap-7 font-sans">
-      <div className="flex items-start justify-between gap-16 text-2xl font-semibold">
-        <h4 className="text-pretty">You & This Course</h4>
+    <div className="flex h-full flex-col justify-between font-sans">
+      <div className="flex items-start justify-between gap-12 text-lg font-semibold">
+        <div>
+          <h4 className="text-pretty">You & This Course</h4>
+
+          {joinedData && (
+            <p className="text-base font-normal">
+              You joined <Timestamp>{joinedData.joinedAt}</Timestamp>.
+            </p>
+          )}
+        </div>
+
         <p>{academicYear}</p>
       </div>
 
       {joinedData ? (
-        <div className="grid h-full grid-cols-2 gap-8">
-          <div className="flex h-full flex-col justify-between lg:gap-10">
-            <p className="text-lg">
-              You joined this course <Timestamp>{joinedData.joinedAt}</Timestamp>.
-            </p>
+        <div className="flex justify-between gap-4">
+          <div className="space-y-1">
+            <Avatar
+              size="lg"
+              radius="md"
+              name={joinedData.grade ?? "?"}
+              classNames={{
+                name: clsx("text-6xl font-semibold", {
+                  "text-5xl": Number(joinedData.grade) === 10,
+                }),
+                base: "bg-default-100 w-16 h-16",
+              }}
+            />
 
-            <div className="mt-auto">
-              <p className="text-8xl font-bold">{joinedData.grade ?? "N/A"}</p>
-              <p className="pl-2 text-lg">Your grade this semester</p>
-            </div>
+            <p className="text-base">
+              {joinedData.grade ? "Your grade this semester" : "You have no grade yet"}
+            </p>
           </div>
 
-          <div>
+          <div className="content-end">
             {/* TODO: Implement exam UI */}
-            <p className="text-end text-lg font-semibold text-foreground-300">No upcoming exam.</p>
+            <p className="text-pretty font-semibold text-foreground-300">No upcoming exam at the moment</p>
           </div>
         </div>
       ) : (
