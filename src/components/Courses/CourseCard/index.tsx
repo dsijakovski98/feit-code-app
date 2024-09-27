@@ -1,51 +1,68 @@
-import clsx from "clsx";
+import { Fragment } from "react/jsx-runtime";
+
+import { Avatar } from "@nextui-org/react";
 
 import CourseActions from "@/components/Courses/CourseCard/CourseActions";
-import CourseDescription from "@/components/Courses/CourseCard/CourseDescription";
+import CourseActivity from "@/components/Courses/CourseCard/CourseActivity";
+import CourseCategories from "@/components/Courses/CourseCard/CourseCategories";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import Icon from "@/components/ui/Icon";
 
 import CourseCardProvider, { CourseCardContext } from "@/context/CourseCardContext";
+import { useDeleteCourse } from "@/hooks/course/useDeleteCourse";
+import { useToggle } from "@/hooks/useToggle";
 
 const CourseCard = (props: CourseCardContext) => {
   const { course } = props;
-  const { name, academicYear, archived } = course;
+  const { id, name, academicYear, archived, description, professorId } = course;
+
+  const dialog = useToggle();
+
+  const { mutate, isPending } = useDeleteCourse({ name, professorId });
+
+  const onConfirm = () => {
+    mutate(id);
+  };
 
   return (
     <CourseCardProvider {...props}>
-      <div
-        className={clsx(
-          "relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-md dark:border-transparent dark:bg-background lg:p-4",
-          {
-            "outline outline-2 outline-transparent transition-[outline] duration-400 hover:outline-primary":
-              !archived,
-          },
-        )}
-      >
-        <div
-          className={clsx(
-            "flex h-full w-[36ch] flex-col justify-between space-y-5 overflow-hidden lg:space-y-2",
-            {
-              "!justify-start": archived,
-            },
-          )}
-        >
-          <div>
-            <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
+      <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-transparent dark:bg-background lg:p-4">
+        <div className="flex h-full w-[40ch] flex-col justify-start space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-8">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
+              <h3 className="flex w-full items-end gap-4 truncate text-lg font-semibold lg:text-lg">
+                {name}
+              </h3>
+            </div>
 
-            <h3 className="flex w-full items-end gap-4 truncate text-xl font-semibold lg:text-lg">{name}</h3>
+            <Avatar size="sm" color="primary" fallback={<Icon name="course" />} />
           </div>
 
-          <CourseDescription />
+          <p className="line-clamp-2 h-[5.5ch] pb-2 text-base font-medium text-foreground-400">
+            {description}
+          </p>
 
-          <CourseActions />
+          <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-start">
+            {!archived && (
+              <Fragment>
+                <CourseCategories />
+                <CourseActions />
+              </Fragment>
+            )}
+          </div>
         </div>
 
-        {archived && (
-          <div className="pointer-events-none absolute inset-0 bg-foreground-200/20">
-            <p className="text-centers absolute inset-x-0 bottom-0 z-10 bg-foreground-200 py-1 text-center text-xs font-bold uppercase text-white dark:bg-foreground-100">
-              Archived
-            </p>
-          </div>
-        )}
+        {archived && <CourseActivity label="Delete" onPress={dialog.toggleOn} />}
+
+        <ConfirmDialog
+          dialog={dialog}
+          loading={isPending}
+          color="danger"
+          title="Delete Course?"
+          description="You cannot undo this later."
+          action={{ label: "Delete", onConfirm }}
+        />
       </div>
     </CourseCardProvider>
   );

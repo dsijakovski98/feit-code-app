@@ -33,7 +33,7 @@ const ActiveCoursesList = () => {
       )}
 
       {!!data?.pages[0].length && (
-        <div className="mt-2 overflow-x-clip">
+        <div className="overflow-x-clip">
           <CoursesList
             coursesQuery={coursesQuery}
             renderCourse={(course) => <CourseCard course={course} mode={USER_TYPE.student} />}

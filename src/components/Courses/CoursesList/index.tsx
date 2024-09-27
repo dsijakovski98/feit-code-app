@@ -13,7 +13,6 @@ import { courses } from "@/db/schema";
 
 import { COURSES_PER_PAGE } from "@/constants/queries";
 import { CourseSearchContext } from "@/context/CourseSearch.Context";
-import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 
 import "./styles.css";
@@ -49,8 +48,6 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
     [data?.pages, search],
   );
 
-  const { isMobile } = useCtx(ResponsiveContext);
-
   const loadMoreRef = useRef<ElementRef<"div">>(null);
   const loadMoreCallback = useCallback<IntersectionObserverCallback>(
     (entries) => {
@@ -79,7 +76,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
   return (
     <Swiper
       grabCursor={!isFetching}
-      spaceBetween={isMobile ? 20 : 30}
+      spaceBetween={20}
       slidesPerView="auto"
       centerInsufficientSlides={data.pages[0].length > COURSES_PER_PAGE - 1}
       navigation={{ hideOnClick: true, enabled: !isFetching }}
