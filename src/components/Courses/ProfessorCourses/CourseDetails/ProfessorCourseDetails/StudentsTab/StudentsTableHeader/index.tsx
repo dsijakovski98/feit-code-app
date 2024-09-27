@@ -23,7 +23,7 @@ const StudentsTableHeader = ({ children }: PropsWithChildren) => {
       </p>
 
       <div className="ml-auto md:order-2 md:basis-full">{children}</div>
-      <div className="md:order-1">{userId === professorId && <AddStudent />}</div>
+      <div className="empty:hidden md:order-1">{userId === professorId && <AddStudent />}</div>
     </div>
   );
 };

@@ -105,11 +105,7 @@ const StudentsTab = () => {
           // TODO: Fix incoming https://github.com/nextui-org/nextui/pull/3346
           <Pagination
             showControls
-            classNames={{
-              cursor: "bg-foreground text-background",
-              prev: "w-7 h-7 p-0.5 min-w-0",
-              chevronNext: "w-7 h-7 p-0.5 min-w-0",
-            }}
+            hidden={studentsList.length === 0}
             size="sm"
             radius="full"
             color="default"
@@ -118,6 +114,11 @@ const StudentsTab = () => {
             total={pages}
             variant="light"
             onChange={setPage}
+            classNames={{
+              cursor: "bg-foreground text-background",
+              prev: "w-7 h-7 p-0.5 min-w-0",
+              chevronNext: "w-7 h-7 p-0.5 min-w-0",
+            }}
           />
         }
         aria-label={`List of students enrolled to ${name}.`}

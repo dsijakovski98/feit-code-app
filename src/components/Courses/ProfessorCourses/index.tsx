@@ -73,7 +73,7 @@ const ProfessorCourses = ({ user }: Props) => {
         </section>
       )}
 
-      {data?.pages.length && (
+      {!!data?.pages[0].length && (
         <FloatButton
           as={Link}
           // @ts-expect-error NextUI not passing through 'as' props
