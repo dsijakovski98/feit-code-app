@@ -28,8 +28,8 @@ const StudentCourses = ({ user }: Props) => {
   const [search] = searchFilter;
 
   return (
-    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] gap-8 py-4 lg:gap-4">
-      <section className="space-y-4 lg:pt-0.5">
+    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4">
+      <section className="space-y-2">
         <CoursesHeader title="Courses" searchFilter={searchFilter}>
           <SwitchFilter filter={courseFilter} />
         </CoursesHeader>

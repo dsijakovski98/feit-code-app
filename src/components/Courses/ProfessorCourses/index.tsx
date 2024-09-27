@@ -41,7 +41,7 @@ const ProfessorCourses = ({ user }: Props) => {
 
   return (
     <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4">
-      <section>
+      <section className="space-y-2">
         <CoursesHeader title={`${user.firstName}'s Courses`} searchFilter={searchFilter}>
           <SwitchFilter filter={courseYearFilter} />
         </CoursesHeader>
@@ -56,7 +56,7 @@ const ProfessorCourses = ({ user }: Props) => {
           (type === TEACHER_TYPE.professor ? <EmptyProfessorCourses /> : <EmptyAssistantCourses />)}
 
         {!!data?.pages.length && (
-          <div className="mt-2 overflow-x-clip">
+          <div className="overflow-x-clip">
             <CourseSearchProvider search={search}>
               <CoursesList
                 coursesQuery={coursesQuery}
@@ -73,7 +73,7 @@ const ProfessorCourses = ({ user }: Props) => {
         </section>
       )}
 
-      {data?.pages.length && (
+      {!!data?.pages[0].length && (
         <FloatButton
           as={Link}
           // @ts-expect-error NextUI not passing through 'as' props

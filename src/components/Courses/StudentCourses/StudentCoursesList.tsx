@@ -36,7 +36,7 @@ const StudentCoursesList = ({ studentId }: Props) => {
       )}
 
       {!!data?.pages[0].length && (
-        <div className="mt-2 overflow-x-clip">
+        <div className="overflow-x-clip">
           <CoursesList
             coursesQuery={coursesQuery}
             renderCourse={(courseData) => <StudentCourseCard courseData={courseData} />}

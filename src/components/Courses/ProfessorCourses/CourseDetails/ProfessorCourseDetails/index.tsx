@@ -3,8 +3,10 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
+import { CourseDetailsContext } from "@/context/CourseDetailsContext";
+import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
-import { TEACHER_TYPE, USER_TYPE } from "@/types";
+import { USER_TYPE } from "@/types";
 
 const GeneralTab = lazy(
   () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/GeneralTab"),
@@ -18,18 +20,28 @@ const SettingsTab = lazy(
 
 const ProfessorCourseDetails = () => {
   const { userData } = useFCUser();
+  const { courseDetails } = useCtx(CourseDetailsContext);
+  const { assistantId, professorId } = courseDetails;
 
   const { hash, pathname } = useLocation();
 
   const tabKeys = useMemo(() => {
-    const keys = ["general", "students"];
+    const keys = ["general"];
 
-    if (userData?.type === USER_TYPE.professor && userData.user.type === TEACHER_TYPE.professor) {
+    if (userData?.type !== USER_TYPE.professor) {
+      return keys;
+    }
+
+    if ([professorId, assistantId].includes(userData.user.id)) {
+      keys.push("students");
+    }
+
+    if (userData.user.id === professorId) {
       keys.push("settings");
     }
 
     return keys;
-  }, [userData]);
+  }, [userData, professorId, assistantId]);
 
   const invalidRoute = useMemo(() => {
     return !hash || !tabKeys.includes(hash.slice(1));
@@ -37,6 +49,16 @@ const ProfessorCourseDetails = () => {
 
   if (invalidRoute) {
     return <Navigate to={pathname + "#general"} replace />;
+  }
+
+  if (tabKeys.length === 1 && tabKeys[0] === "general") {
+    return (
+      <section className="bg-main min-h-full px-8 pt-5 lg:px-5">
+        <Suspense fallback={null}>
+          <GeneralTab />
+        </Suspense>
+      </section>
+    );
   }
 
   return (
@@ -62,11 +84,14 @@ const ProfessorCourseDetails = () => {
               <GeneralTab />
             </Suspense>
           </Tab>
-          <Tab key="#students" title="Students" href="#students">
-            <Suspense fallback={null}>
-              <StudentsTab />
-            </Suspense>
-          </Tab>
+
+          {tabKeys.includes("students") && (
+            <Tab key="#students" title="Students" href="#students">
+              <Suspense fallback={null}>
+                <StudentsTab />
+              </Suspense>
+            </Tab>
+          )}
 
           {tabKeys.includes("settings") && (
             <Tab key="#settings" title="Settings" href="#settings">

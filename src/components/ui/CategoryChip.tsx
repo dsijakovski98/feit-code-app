@@ -24,13 +24,13 @@ const CategoryChip = ({ category, size = "xs" }: Props) => {
       style={
         color
           ? {
-              backgroundColor: color,
+              backgroundColor: `${color}ef`,
               color: getContrastText(color),
             }
           : {}
       }
       classNames={{
-        content: "font-bold",
+        content: "font-semibold",
       }}
     >
       {label}

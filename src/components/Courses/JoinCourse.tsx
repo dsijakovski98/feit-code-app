@@ -3,11 +3,8 @@ import toast from "react-hot-toast";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Skeleton } from "@nextui-org/react";
-
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
-import Timestamp from "@/components/ui/Timestamp";
 
 import { joinCourse } from "@/actions/courses";
 import { CourseCardContext } from "@/context/CourseCardContext";
@@ -51,16 +48,8 @@ const JoinCourse = () => {
     onError: (error) => toast.error(error.message),
   });
 
-  if (!userData || isLoading) {
-    return <Skeleton className="h-10 w-[90px] rounded-md" />;
-  }
-
-  if (joinedCourse) {
-    return (
-      <p>
-        Joined <Timestamp>{joinedCourse.joinedAt}</Timestamp>
-      </p>
-    );
+  if (!userData || isLoading || joinedCourse) {
+    return null;
   }
 
   const onConfirm = () => {
@@ -69,7 +58,7 @@ const JoinCourse = () => {
 
   return (
     <Fragment>
-      <Button className="px-8 text-sm" onPress={dialog.toggleOn}>
+      <Button size="sm" variant="solid" className="px-6 text-sm" onPress={dialog.toggleOn}>
         Join
       </Button>
 

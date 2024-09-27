@@ -1,9 +1,22 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { Fragment } from "react/jsx-runtime";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { useAuth } from "@clerk/clerk-react";
+import { Avatar } from "@nextui-org/react";
+
+import CourseActivity from "@/components/Courses/CourseCard/CourseActivity";
+import Button from "@/components/ui/Button";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import Icon from "@/components/ui/Icon";
 import Timestamp from "@/components/ui/Timestamp";
 
+import { leaveCourse } from "@/actions/courses";
 import { StudentCourseType } from "@/hooks/student/useStudentCourses";
+import { useToggle } from "@/hooks/useToggle";
+import { USER_TYPE } from "@/types";
 
 type Props = {
   courseData: StudentCourseType;
@@ -11,29 +24,89 @@ type Props = {
 
 const StudentCourseCard = ({ courseData }: Props) => {
   const { course, joinedAt } = courseData;
-  const { id, academicYear, name } = course;
+  const { id: courseId, academicYear, name, description, archived } = course;
+
+  const { userId: studentId } = useAuth();
+  const queryClient = useQueryClient();
+
+  const dialog = useToggle();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: leaveCourse,
+    onSuccess: async (success) => {
+      if (!success) return;
+
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: [{ name: "courses", type: USER_TYPE.student, studentId }],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [{ name: "courses", type: "active" }],
+        }),
+      ]);
+
+      toast(`You just left ${name}.`);
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  const onConfirm = () => {
+    if (!studentId) return;
+
+    mutate({ studentId, courseId });
+  };
 
   return (
-    <div className="flex h-full items-end justify-between gap-2 rounded-lg border border-content3 bg-content1 p-6 font-sans shadow-lg outline outline-2 -outline-offset-[2px] outline-transparent transition-[outline] duration-400 hover:outline-primary dark:border-transparent dark:bg-background lg:p-4">
-      <div className="flex h-full w-[28ch] flex-col justify-between space-y-8 lg:space-y-4">
-        <div>
-          <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
+    <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-transparent dark:bg-background">
+      <div className="flex h-full w-[40ch] flex-col justify-start space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-8">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
+            <h3 className="flex w-full items-end gap-4 truncate text-lg font-semibold lg:text-lg">{name}</h3>
+          </div>
 
-          <h3 className="flex w-full items-end gap-4 text-xl font-semibold lg:text-lg">{name}</h3>
+          <Avatar size="sm" color="primary" fallback={<Icon name="course" />} />
         </div>
 
-        <p>
-          Joined <Timestamp>{joinedAt}</Timestamp>
-        </p>
+        <p className="line-clamp-2 h-[5.5ch] pb-2 text-base font-medium text-foreground-400">{description}</p>
+
+        <div className="flex items-center justify-between gap-4 empty:py-4">
+          {!archived && (
+            <Fragment>
+              <p className="lg:text-sm">
+                Joined <Timestamp>{joinedAt}</Timestamp>
+              </p>
+
+              <Button
+                as={Link}
+                // @ts-expect-error NextUI not passing through 'as' props
+                to={courseId}
+                // size="sm"
+                variant="light"
+                color="default"
+                className="px-5 text-sm"
+              >
+                Details
+              </Button>
+            </Fragment>
+          )}
+        </div>
       </div>
 
-      <Link to={id} className="group flex w-fit items-center justify-between gap-2 font-semibold lg:gap-1">
-        Details{" "}
-        <Icon
-          name="right"
-          className="h-5 w-5 -translate-x-2 translate-y-px scale-90 opacity-0 transition-[opacity_transform] group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100 lg:translate-x-0 lg:opacity-100"
-        />
-      </Link>
+      {archived && <CourseActivity label="Leave" onPress={dialog.toggleOn} />}
+
+      <ConfirmDialog
+        dialog={dialog}
+        title={`Leave course?`}
+        color="danger"
+        description={
+          <p>
+            You will no longer be a part of <span className="font-semibold">{name}</span>.
+          </p>
+        }
+        loading={isPending}
+        action={{ label: "Leave", onConfirm }}
+      />
     </div>
   );
 };

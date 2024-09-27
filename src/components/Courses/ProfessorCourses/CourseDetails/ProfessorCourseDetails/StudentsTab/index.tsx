@@ -44,22 +44,22 @@ const StudentsTab = () => {
   const pages = useMemo(() => Math.ceil(students.length / ROWS_PER_PAGE), [students.length]);
 
   const studentsList = useMemo(() => {
-    // Pagination
-    const start = (page - 1) * ROWS_PER_PAGE;
-    const end = start + ROWS_PER_PAGE;
-
-    const studentsSlice = students.slice(start, end);
-
     // Sorting
-    const sortedStudents = studentsSlice.sort((stA, stB) => {
+    const sortedStudents = students.sort((stA, stB) => {
       const nameA = `${stA.student.firstName} ${stA.student.lastName}`;
       const nameB = `${stB.student.firstName} ${stB.student.lastName}`;
 
       return nameA.localeCompare(nameB);
     });
 
+    // Pagination
+    const start = (page - 1) * ROWS_PER_PAGE;
+    const end = start + ROWS_PER_PAGE;
+
+    const studentsSlice = sortedStudents.slice(start, end);
+
     // Other filtering
-    return sortedStudents.filter(({ student }) =>
+    return studentsSlice.filter(({ student }) =>
       `${student.firstName} ${student.lastName}`.toLowerCase().startsWith(search.toLowerCase()),
     );
   }, [students, search, page]);
@@ -105,11 +105,7 @@ const StudentsTab = () => {
           // TODO: Fix incoming https://github.com/nextui-org/nextui/pull/3346
           <Pagination
             showControls
-            classNames={{
-              cursor: "bg-foreground text-background",
-              prev: "w-7 h-7 p-0.5 min-w-0",
-              chevronNext: "w-7 h-7 p-0.5 min-w-0",
-            }}
+            hidden={studentsList.length === 0}
             size="sm"
             radius="full"
             color="default"
@@ -118,6 +114,11 @@ const StudentsTab = () => {
             total={pages}
             variant="light"
             onChange={setPage}
+            classNames={{
+              cursor: "bg-foreground text-background",
+              prev: "w-7 h-7 p-0.5 min-w-0",
+              chevronNext: "w-7 h-7 p-0.5 min-w-0",
+            }}
           />
         }
         aria-label={`List of students enrolled to ${name}.`}

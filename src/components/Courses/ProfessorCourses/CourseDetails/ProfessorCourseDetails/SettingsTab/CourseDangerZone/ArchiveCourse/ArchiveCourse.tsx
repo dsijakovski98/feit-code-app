@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -7,6 +8,7 @@ import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
 import { archiveCourseToggle } from "@/actions/courses";
+import { ROUTES } from "@/constants/routes";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
@@ -16,6 +18,7 @@ const ArchiveCourse = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
   const { name, id: courseId, professorId, archived } = courseDetails;
 
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const dialog = useToggle();
@@ -33,6 +36,7 @@ const ArchiveCourse = () => {
       ]);
 
       toast(`${name} course archived!`);
+      navigate(ROUTES.courses);
     },
     onError: (error) => toast.error(error.message),
   });

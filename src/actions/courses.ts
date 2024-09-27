@@ -1,14 +1,14 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 import { courses, studentCourses } from "@/db/schema";
 
 import { db } from "@/db";
 
-type JoinOptions = {
+type StudentOptions = {
   courseId: string;
   studentId: string;
 };
-export const joinCourse = async ({ courseId, studentId }: JoinOptions) => {
+export const joinCourse = async ({ courseId, studentId }: StudentOptions) => {
   try {
     await db.insert(studentCourses).values({ courseId, studentId });
   } catch (e) {
@@ -16,6 +16,21 @@ export const joinCourse = async ({ courseId, studentId }: JoinOptions) => {
     console.log({ e });
 
     throw new Error("Failed to join course!");
+  }
+
+  return true;
+};
+
+export const leaveCourse = async ({ courseId, studentId }: StudentOptions) => {
+  try {
+    await db
+      .delete(studentCourses)
+      .where(and(eq(studentCourses.courseId, courseId), eq(studentCourses.studentId, studentId)));
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to leave course!");
   }
 
   return true;
