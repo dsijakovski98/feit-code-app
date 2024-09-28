@@ -25,7 +25,7 @@ const ProfilePage = () => {
             aria-label="Profile tabs"
             destroyInactiveTabPanel={false}
             classNames={{
-              base: "!px-0 sticky top-20 lg:top-0 py-2 bg-main z-20",
+              base: "!px-0 sticky top-20 lg:top-0 py-2 transparent z-20",
               tabContent: "text-foreground group-data-[selected]:font-semibold",
               panel: "pt-5 px-10 md:px-6",
             }}

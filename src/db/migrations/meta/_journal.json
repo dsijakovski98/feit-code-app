@@ -50,6 +50,13 @@
       "when": 1726873793389,
       "tag": "0006_tired_starfox",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1727548579154,
+      "tag": "0007_cooing_paibok",
+      "breakpoints": true
     }
   ]
 }

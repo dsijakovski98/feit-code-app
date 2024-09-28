@@ -1,7 +1,5 @@
 import { useMemo } from "react";
 
-import clsx, { ClassValue } from "clsx";
-
 import { Chip } from "@nextui-org/chip";
 import { User } from "@nextui-org/user";
 
@@ -20,11 +18,7 @@ const userAvatarProps = {
   color: "primary",
 } as const;
 
-type Props = {
-  className?: ClassValue;
-};
-
-const CourseDetails = ({ className = "" }: Props) => {
+const CourseDetails = () => {
   const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
   const { name, description, professor, assistant, categories, archived, updatedAt } = courseDetails;
@@ -44,9 +38,9 @@ const CourseDetails = ({ className = "" }: Props) => {
     [assistant?.firstName, assistant?.lastName],
   );
   return (
-    <div className={clsx(className)}>
+    <div className="space-y-10">
       <div>
-        <h2 className="text-lg font-semibold">
+        <h2 className="text-lg font-bold">
           {name}{" "}
           {archived && (
             <Chip

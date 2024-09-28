@@ -12,6 +12,7 @@ const exams = pgTable("exams", {
   id: primaryId(),
   name: varchar("name", { length: 256 }).notNull(),
   createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+  startsAt: timestamp("starts_at", { mode: "string" }).notNull(),
   duration: timestamp("duration", { mode: "string" }).notNull(),
   points: integer("points").notNull(),
   language: programmingLanguage("programming_language").notNull(),

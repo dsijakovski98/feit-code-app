@@ -1,13 +1,18 @@
 import CourseDetails from "@/components/Courses/CourseDetails";
+import CourseExamInfo from "@/components/Courses/CourseExamInfo";
 
 import "./styles.css";
 
 const GeneralTab = () => {
   return (
     <div className="general lg:block lg:space-y-4">
-      <CourseDetails className="space-y-10 [grid-area:details]" />
+      <div className="[grid-area:details]">
+        <CourseDetails />
+      </div>
 
-      <div className="[grid-area:exam]">Latest exam here</div>
+      <div className="[grid-area:exam]">
+        <CourseExamInfo />
+      </div>
 
       <div className="[grid-area:stats]">Stats here</div>
     </div>
