@@ -1,7 +1,9 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 
 import { useSignIn } from "@clerk/clerk-react";
@@ -17,6 +19,7 @@ import { ROUTES } from "@/constants/routes";
 import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { shortClerkErrorMessage } from "@/utils";
+import { joinOAuth } from "@/utils/auth";
 import { SignInSchema } from "@/utils/formSchemas/auth/signInSchema";
 
 const SignInForm = () => {
@@ -38,12 +41,13 @@ const SignInForm = () => {
     },
   });
 
+  const { mutate, isPending, isSuccess } = useMutation({
+    mutationFn: joinOAuth,
+    onError: (error) => toast.error(error.message),
+  });
+
   const oAuthSignIn = (strategy: OAuthStrategy) => {
-    return signIn?.authenticateWithRedirect({
-      strategy,
-      redirectUrl: ROUTES.ssoCallback,
-      redirectUrlComplete: ROUTES.welcome,
-    });
+    mutate({ strategy, authResource: signIn });
   };
 
   const onSubmit: SubmitHandler<SignInSchema> = async ({ email, password }) => {
@@ -79,6 +83,9 @@ const SignInForm = () => {
     clearErrors("root");
   };
 
+  // isSuccess is needed because need to wait for OAuth to redirect after Promise is resolved
+  const formLoading = isSubmitting || isPending || isSuccess;
+
   return (
     <form
       onChange={handleChange}
@@ -91,7 +98,7 @@ const SignInForm = () => {
         <Controller
           control={control}
           name="email"
-          disabled={isSubmitting}
+          disabled={formLoading}
           render={({ field, fieldState }) => (
             <Input
               {...field}
@@ -110,7 +117,7 @@ const SignInForm = () => {
           <Controller
             control={control}
             name="password"
-            disabled={isSubmitting}
+            disabled={formLoading}
             render={({ field, fieldState }) => (
               <Input
                 {...field}
@@ -125,8 +132,11 @@ const SignInForm = () => {
             )}
           />
           <Link
+            aria-disabled={formLoading}
             to={ROUTES.forgotPassword}
-            className="font-medium transition-colors hover:text-primary focus:text-primary"
+            className={clsx("font-medium transition-colors hover:text-primary focus:text-primary", {
+              "pointer-events-none text-default": formLoading,
+            })}
           >
             Forgot password?
           </Link>
@@ -153,7 +163,7 @@ const SignInForm = () => {
           type="submit"
           color="default"
           variant="solid"
-          disabled={isSubmitting}
+          disabled={formLoading}
           startContent={isSubmitting && <Spinner color="default" size="sm" />}
           className="bg-primary text-base font-semibold text-primary-foreground disabled:bg-slate-400"
         >
@@ -163,11 +173,17 @@ const SignInForm = () => {
 
       <p className="text-center font-sans text-content1-foreground">or</p>
 
-      <OAuthJoin joinType="Sign in" isSubmitting={isSubmitting} oAuthJoin={oAuthSignIn} />
+      <OAuthJoin joinType="Sign in" oAuthJoin={oAuthSignIn} formLoading={formLoading} />
 
       <p className="hidden pt-2 text-center md:block">
         Not a member?{" "}
-        <Link className="text-primary underline" to={ROUTES.signUp}>
+        <Link
+          aria-disabled={formLoading}
+          className={clsx("text-primary underline", {
+            "pointer-events-none text-default": formLoading,
+          })}
+          to={ROUTES.signUp}
+        >
           Join us
         </Link>
       </p>

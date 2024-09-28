@@ -1,8 +1,10 @@
 import { Fragment, useLayoutEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -21,6 +23,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
+import { joinOAuth } from "@/utils/auth";
 import { SignUpSchema } from "@/utils/formSchemas/auth/signUpSchema";
 
 const SignUpForm = () => {
@@ -50,12 +53,13 @@ const SignUpForm = () => {
     },
   });
 
+  const { mutate, isPending, isSuccess } = useMutation({
+    mutationFn: joinOAuth,
+    onError: (error) => toast.error(error.message),
+  });
+
   const oAuthSignUp = (strategy: OAuthStrategy) => {
-    return signUp?.authenticateWithRedirect({
-      strategy,
-      redirectUrl: ROUTES.ssoCallback,
-      redirectUrlComplete: ROUTES.welcome,
-    });
+    mutate({ strategy, authResource: signUp });
   };
 
   const onSubmit: SubmitHandler<SignUpSchema> = async ({ email, password, confirmPassword }) => {
@@ -96,6 +100,9 @@ const SignUpForm = () => {
     clearErrors("root");
   };
 
+  // isSuccess is needed because need to wait for OAuth to redirect after Promise is resolved
+  const formLoading = isSubmitting || isPending || isSuccess;
+
   return (
     <Fragment>
       <AnimatePresence>
@@ -126,7 +133,7 @@ const SignUpForm = () => {
               <Controller
                 control={control}
                 name="email"
-                disabled={isSubmitting}
+                disabled={formLoading}
                 render={({ field, fieldState }) => (
                   <Input
                     {...field}
@@ -145,7 +152,7 @@ const SignUpForm = () => {
                 <Controller
                   control={control}
                   name="password"
-                  disabled={isSubmitting}
+                  disabled={formLoading}
                   render={({ field, fieldState }) => (
                     <Input
                       {...field}
@@ -163,7 +170,7 @@ const SignUpForm = () => {
                 <Controller
                   control={control}
                   name="confirmPassword"
-                  disabled={isSubmitting}
+                  disabled={formLoading}
                   render={({ field, fieldState }) => (
                     <Input
                       {...field}
@@ -200,7 +207,7 @@ const SignUpForm = () => {
                 type="submit"
                 color="default"
                 variant="solid"
-                disabled={isSubmitting}
+                disabled={formLoading}
                 startContent={isSubmitting && <Spinner color="default" size="sm" />}
                 className="bg-primary text-base !font-semibold text-primary-foreground disabled:bg-slate-400"
               >
@@ -210,11 +217,17 @@ const SignUpForm = () => {
 
             <p className="text-center text-content1-foreground">or</p>
 
-            <OAuthJoin joinType="Join" isSubmitting={isSubmitting} oAuthJoin={oAuthSignUp} />
+            <OAuthJoin joinType="Join" oAuthJoin={oAuthSignUp} formLoading={formLoading} />
 
             <p className="hidden pt-2 text-center md:block">
               Already a member?{" "}
-              <Link className="text-primary underline" to={ROUTES.signIn}>
+              <Link
+                aria-disabled={formLoading}
+                className={clsx("text-primary underline", {
+                  "pointer-events-none text-default": formLoading,
+                })}
+                to={ROUTES.signIn}
+              >
                 Sign in
               </Link>
             </p>
