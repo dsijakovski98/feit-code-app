@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import clsx, { ClassValue } from "clsx";
 
+import logo from "@/images/logo.svg?w=75&h=75&img";
+
 import { ROUTES } from "@/constants/routes";
 
 type Props = {
@@ -18,7 +20,7 @@ const LogoFC = ({ className = "" }: Props) => {
         className,
       )}
     >
-      <img src="/images/logo.svg" alt="FEIT Code logo" className="scale-[1.35] lg:scale-[1.5]" />
+      <img src={logo} alt="FEIT Code logo" className="scale-[1.35] lg:scale-[1.5]" />
     </Link>
   );
 };

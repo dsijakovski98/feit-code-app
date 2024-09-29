@@ -1,6 +1,7 @@
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { defineConfig } from "vite";
+import { imagetools } from "vite-imagetools";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import vsharp from "vite-plugin-vsharp";
 import webFontDownload from "vite-plugin-webfont-dl";
@@ -8,6 +9,7 @@ import webFontDownload from "vite-plugin-webfont-dl";
 export default defineConfig({
   plugins: [
     react(),
+    imagetools(),
     webFontDownload([
       "https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap",
       "https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap",

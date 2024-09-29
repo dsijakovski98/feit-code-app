@@ -8,6 +8,8 @@ import UserTypeSelector from "@/components/Onboarding/UserTypeSelect";
 import GradientText from "@/components/ui/GradientText";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 
+import logo from "@/images/logo.svg?w=75&h=75&img";
+
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
@@ -38,7 +40,7 @@ const Onboarding = () => {
     <main className="grid min-h-dvh place-items-center bg-dots-light dark:bg-dots-dark">
       <div className="flex flex-col items-center">
         <div className="flex w-fit max-w-40 drop-shadow-[0px_0px_4px_theme(colors.primary)]">
-          <img src="/images/logo.svg" alt="FEIT Code logo" />
+          <img src={logo} alt="FEIT Code logo" />
         </div>
         <h1 className="text-center text-6xl font-bold">
           Welcome to <GradientText>FEIT Code!</GradientText>

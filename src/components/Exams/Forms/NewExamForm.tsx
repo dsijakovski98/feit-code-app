@@ -1,8 +1,8 @@
-import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { useCtx } from "@/hooks/useCtx";
+// import { CourseDetailsContext } from "@/context/CourseDetailsContext";
+// import { useCtx } from "@/hooks/useCtx";
 
 const NewExamForm = () => {
-  const { courseDetails } = useCtx(CourseDetailsContext);
+  //   const { courseDetails } = useCtx(CourseDetailsContext);
 
   return (
     <form id="new-exam-form" className="space-y-5 lg:pb-4">
