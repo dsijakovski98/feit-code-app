@@ -28,6 +28,7 @@ export const useProfessorCourses = (options: QueryOptions, yearFilter: "all" | "
         where: (courses, { eq, and }) => {
           const teacherColumn = type === TEACHER_TYPE.professor ? courses.professorId : courses.assistantId;
           const teacherFilter = eq(teacherColumn, id);
+          console.log(teacherFilter);
 
           if (yearFilter === "all") return teacherFilter;
 
@@ -38,6 +39,7 @@ export const useProfessorCourses = (options: QueryOptions, yearFilter: "all" | "
         offset: pageParam * COURSES_PER_PAGE,
       });
 
+      console.log(coursesData);
       return coursesData;
     },
 

@@ -4,7 +4,7 @@ import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
 
 export const ExamSchema = object({
   name: pipe(string(), trim(), nonEmpty("Field is required!")),
-  language: pipe(enum_(PROGRAMMING_LANGUAGE), nonEmpty()),
+  language: pipe(enum_(PROGRAMMING_LANGUAGE), nonEmpty("Field is required!")),
   points: pipe(
     string(),
     trim(),

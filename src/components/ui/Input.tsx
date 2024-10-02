@@ -17,6 +17,7 @@ const Inpt = extendVariants(NextUiInput, {
         base: "h-[70px]",
         inputWrapper: "h-[46px]",
         label: "group-data-[filled-within='true']:-translate-y-2 lg:text-base",
+        errorMessage: "!text-xs",
       },
       lg: {
         base: "h-[88px]",

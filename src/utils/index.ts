@@ -141,6 +141,12 @@ export const getAcademicYear = () => {
   return `${startYear}/${endYear.toString().slice(-2)}`;
 };
 
+export const getSemesterType = () => {
+  const currentMonth = new Date().getMonth() + 1;
+
+  return currentMonth <= 9 ? "Summer" : "Winter";
+};
+
 export const getAuthStrategy = (user?: UserResource | null) => {
   if (user?.primaryEmailAddress?.verification.strategy?.includes("google")) {
     return "Google";
