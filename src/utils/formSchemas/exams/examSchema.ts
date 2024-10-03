@@ -1,4 +1,15 @@
-import { InferInput, enum as enum_, nonEmpty, object, pipe, regex, string, trim } from "valibot";
+import {
+  InferInput,
+  date,
+  enum as enum_,
+  minValue,
+  nonEmpty,
+  object,
+  pipe,
+  regex,
+  string,
+  trim,
+} from "valibot";
 
 import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
 
@@ -11,6 +22,8 @@ export const ExamSchema = object({
     nonEmpty("Field is required!"),
     regex(/^\d+$/, "Total points must be a positive number!"),
   ),
+  startDate: date(),
+  startTime: date(),
   durationMinutes: pipe(
     string(),
     trim(),

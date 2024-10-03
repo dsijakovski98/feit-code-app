@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
+import { ButtonProps } from "@nextui-org/react";
 
 import NewTaskForm from "@/components/Tasks/Forms/NewTaskForm";
 import Button from "@/components/ui/Button";
@@ -11,7 +12,9 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
-const AddTask = () => {
+type Props = Pick<ButtonProps, "variant" | "color" | "size">;
+
+const AddTask = (props: Props = { color: "default", variant: "light", size: "md" }) => {
   const { isMobile } = useCtx(ResponsiveContext);
   const { remainingPoints } = useCtx(ExamFormContext);
 
@@ -20,13 +23,12 @@ const AddTask = () => {
   return (
     <Fragment>
       <Button
-        variant="light"
-        color="default"
+        size={isMobile ? "md" : "lg"}
         isDisabled={remainingPoints <= 0}
         onPress={dialog.toggleOn}
-        size={isMobile ? "sm" : "md"}
         startContent={<Icon name="add" className="h-5 w-5" />}
         className="pl-3 lg:text-sm"
+        {...props}
       >
         Add Task
       </Button>

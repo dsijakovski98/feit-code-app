@@ -6,7 +6,6 @@ import { Progress } from "@nextui-org/react";
 
 import ExamForm from "@/components/Exams/Forms/NewExamForm/ExamForm";
 import ExamTasks from "@/components/Exams/Forms/NewExamForm/ExamTasks";
-import ScheduleExam from "@/components/Exams/Forms/NewExamForm/ScheduleExam";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -23,7 +22,7 @@ const NewExamForm = () => {
 
   return (
     <div className="h-full">
-      <div className="mb-12">
+      <div className="mb-14">
         <h2 className="text-2xl font-semibold">Create a new exam</h2>
         <p className="mb-3 text-foreground-300 lg:text-sm">
           Construct the perfect exam and test your students' skills the right way.
@@ -57,13 +56,13 @@ const NewExamForm = () => {
       </AnimatePresence>
 
       <AnimatePresence>
-        {step === "end" && (
+        {step === "confirm" && (
           <motion.div
             initial={{ opacity: 0, height: "0" }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
           >
-            <ScheduleExam />
+            Confirm exam here
           </motion.div>
         )}
       </AnimatePresence>

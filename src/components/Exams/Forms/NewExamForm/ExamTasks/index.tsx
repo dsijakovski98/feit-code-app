@@ -20,22 +20,27 @@ const ExamTasks = () => {
   return (
     <section className="space-y-6">
       <div className="flex items-end justify-between gap-4">
-        <div className="flex items-center gap-1 text-sm font-semibold">
+        <div className="flex items-center gap-1 text-lg font-semibold">
           <h3>Tasks</h3>
           {remainingPoints < totalPoints && <p>・ Points left: {remainingPoints}</p>}
         </div>
 
-        <AddTask />
+        {tasks.length > 0 && <AddTask variant="light" color="default" />}
       </div>
 
       {tasks.length === 0 && (
-        <div className="space-y-4 text-center">
-          <p className="font-semibold text-foreground-300">This exam has no tasks yet, let's add one.</p>
+        <div className="grid place-items-center space-y-4 text-center">
+          <p className="text-lg font-semibold text-foreground-300">
+            This exam has no tasks yet, add as many as you need
+          </p>
 
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-foreground-300">or</p>
-            <Button size="sm" color="default" onPress={() => setStep("exam")} className="px-4 text-xs">
-              Back
+          <div className="flex flex-col items-center gap-2">
+            <AddTask color="default" size="md" />
+
+            <p className="pb-1">or</p>
+
+            <Button variant="bordered" color="default" onPress={() => setStep("exam")}>
+              Back to Exam
             </Button>
           </div>
         </div>

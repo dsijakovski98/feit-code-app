@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
+import ScheduleExam from "../ScheduleExam";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import DurationSelect from "@/components/Exams/Forms/DurationSelect";
@@ -54,8 +55,8 @@ const ExamForm = () => {
   const namePlaceholder = useMemo(() => `Ex. ${name} | ${semester} Semester ${academicYear}`, [name]);
 
   return (
-    <form id="new-exam-form" onSubmit={handleSubmit(onSubmit)} className="space-y-12 lg:pb-4">
-      <div className="space-y-2">
+    <form id="new-exam-form" onSubmit={handleSubmit(onSubmit)} className="space-y-14 lg:pb-4">
+      <div className="space-y-4">
         <Controller
           control={control}
           name="name"
@@ -76,10 +77,14 @@ const ExamForm = () => {
           )}
         />
 
-        <ProgrammingLanguageSelect form={form} />
+        <div className="flex items-center justify-between gap-6 pb-6 *:basis-full lg:contents">
+          <ScheduleExam form={form} />
 
-        <div className="flex items-baseline justify-between gap-4 *:basis-full lg:contents">
           <DurationSelect form={form} />
+        </div>
+
+        <div className="flex items-start justify-between gap-6 *:basis-full lg:contents">
+          <ProgrammingLanguageSelect form={form} />
 
           <Controller
             control={control}
@@ -104,7 +109,7 @@ const ExamForm = () => {
       </div>
 
       <div className="flex items-center justify-between gap-4 *:basis-full lg:contents">
-        <Button fullWidth type="submit" className="transition-size">
+        <Button size="lg" fullWidth type="submit" className="transition-size">
           Continue
         </Button>
       </div>
