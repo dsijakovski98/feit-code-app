@@ -3,26 +3,29 @@ import { Fragment } from "react";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
 import { Tooltip } from "@nextui-org/react";
 
+import CodeEditor from "@/components/CodeEditor";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import PresenceBlock from "@/components/ui/PresenceBlock";
 
-import { ExamFormContext } from "@/context/ExamFormContext";
+import { ExamFormContext, TaskType } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
 type Props = {
-  task: TaskSchema;
+  task: TaskType;
   index: number;
 };
 
 const TaskPreview = ({ task, index }: Props) => {
-  const { title, description, points } = task;
+  const { title, description, points, template } = task;
 
-  const { tasksState } = useCtx(ExamFormContext);
+  const { tasksState, formState } = useCtx(ExamFormContext);
   const [tasks, setTasks] = tasksState;
+  const [{ language }] = formState;
 
   const dialog = useToggle();
+  const templateToggle = useToggle();
 
   const removeTask = () => {
     setTasks((prev) => prev.filter((task) => task.title !== title));
@@ -118,6 +121,7 @@ const TaskPreview = ({ task, index }: Props) => {
       </div>
 
       <Modal
+        size="2xl"
         backdrop="blur"
         placement="center"
         hideCloseButton
@@ -125,15 +129,43 @@ const TaskPreview = ({ task, index }: Props) => {
         onClose={dialog.toggleOff}
         classNames={{
           backdrop: "backdrop-blur-sm brightness-50 dark:mix-blend-darken",
-          base: "max-w-[480px] lg:max-w-[70%] lg:min-w-0",
         }}
       >
         <ModalContent>
-          <ModalHeader className="text-lg">{title}</ModalHeader>
+          <ModalHeader className="items-center justify-between pb-2 text-lg">
+            <h3>{title}</h3>
 
-          <ModalBody className="mb-12">{description}</ModalBody>
+            <Button
+              size="sm"
+              variant="light"
+              color="default"
+              className="text-sm hover:!bg-transparent"
+              startContent={<Icon name={templateToggle.open ? "code-off" : "code"} className="h-4 w-4" />}
+              onPress={templateToggle.toggle}
+            >
+              Template
+            </Button>
+          </ModalHeader>
 
-          <ModalFooter className="justify-start">{points} points</ModalFooter>
+          <PresenceBlock show={!templateToggle.open}>
+            <ModalBody className="mb-4">{description}</ModalBody>
+            <ModalFooter className="justify-start">{points} points</ModalFooter>
+          </PresenceBlock>
+
+          <PresenceBlock show={templateToggle.open}>
+            <ModalBody className="pb-5">
+              {/* Wrapper needed to have smooth toggle animation */}
+              <div className="h-[25dvh]">
+                <CodeEditor
+                  height="25dvh"
+                  readOnly
+                  value={template}
+                  language={language}
+                  className="text-base"
+                />
+              </div>
+            </ModalBody>
+          </PresenceBlock>
         </ModalContent>
       </Modal>
     </Fragment>

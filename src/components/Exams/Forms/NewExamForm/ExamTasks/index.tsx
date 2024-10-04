@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Listbox, ListboxItem, ScrollShadow } from "@nextui-org/react";
 
 import AddTask from "@/components/Exams/Forms/NewExamForm/ExamTasks/AddTask";
-import TaskPreview from "@/components/Exams/Forms/NewExamForm/ExamTasks/TaskPreview";
+import TaskPreview from "@/components/Tasks/TaskPreview";
 import Button from "@/components/ui/Button";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
@@ -72,7 +72,7 @@ const ExamTasks = () => {
               Back
             </Button>
 
-            <Button fullWidth isDisabled={remainingPoints > 0} onPress={() => setStep("end")}>
+            <Button fullWidth isDisabled={remainingPoints > 0} onPress={() => setStep("confirm")}>
               Continue
             </Button>
           </div>

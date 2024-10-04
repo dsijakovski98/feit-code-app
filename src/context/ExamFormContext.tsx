@@ -6,10 +6,11 @@ import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
 type ExamSteps = "exam" | "tasks" | "confirm";
+export type TaskType = TaskSchema & { template: string };
 
 type ExamFormContext = {
   formState: UseState<ExamSchema>;
-  tasksState: UseState<TaskSchema[]>;
+  tasksState: UseState<TaskType[]>;
   remainingPoints: number;
   stepState: UseState<ExamSteps>;
 };
@@ -19,17 +20,17 @@ ExamFormContext.displayName = "ExamFormContext";
 
 const ExamFormProvider = ({ children }: PropsWithChildren) => {
   const formState = useState<ExamSchema>({
-    name: "",
+    name: "Test Exam",
     language: PROGRAMMING_LANGUAGE.javascript,
     startDate: new Date(),
     startTime: new Date(),
-    durationMinutes: "",
-    points: "",
+    durationMinutes: "60",
+    points: "100",
   });
 
-  const tasksState = useState<TaskSchema[]>([]);
+  const tasksState = useState<TaskType[]>([]);
 
-  const stepState = useState<ExamSteps>("exam");
+  const stepState = useState<ExamSteps>("tasks");
 
   const [examForm] = formState;
   const [tasks] = tasksState;

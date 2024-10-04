@@ -1,6 +1,4 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-
-import { valibotResolver } from "@hookform/resolvers/valibot";
+import { Controller, SubmitHandler, UseFormReturn } from "react-hook-form";
 
 import { Textarea } from "@nextui-org/react";
 
@@ -10,15 +8,19 @@ import { ExamFormContext } from "@/context/ExamFormContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
+import { baseTaskTemplate } from "@/utils/code";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
 type Props = {
+  form: UseFormReturn<TaskSchema>;
   dialog: Toggle;
+  taskTemplate: string;
 };
 
-const NewTaskForm = ({ dialog }: Props) => {
+const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
   const { isMobile } = useCtx(ResponsiveContext);
-  const { tasksState, remainingPoints } = useCtx(ExamFormContext);
+  const { formState, tasksState, remainingPoints } = useCtx(ExamFormContext);
+  const [{ language }] = formState;
   const [tasks, setTasks] = tasksState;
 
   const {
@@ -26,17 +28,10 @@ const NewTaskForm = ({ dialog }: Props) => {
     setError,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<TaskSchema>({
-    resolver: valibotResolver(TaskSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-      points: "",
-    },
-  });
+  } = form;
 
   const onSubmit: SubmitHandler<TaskSchema> = (task) => {
-    const { title } = task;
+    const { title, description } = task;
     const taskExists = tasks.find((task) => task.title === title);
 
     if (taskExists) {
@@ -44,7 +39,9 @@ const NewTaskForm = ({ dialog }: Props) => {
       return;
     }
 
-    setTasks((prev) => [...prev, task]);
+    const template = taskTemplate.length ? taskTemplate : baseTaskTemplate({ title, description, language });
+
+    setTasks((prev) => [...prev, { ...task, template }]);
     dialog.toggleOff();
   };
 
