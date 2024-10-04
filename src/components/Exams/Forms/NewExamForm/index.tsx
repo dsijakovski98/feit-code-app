@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 
-import { AnimatePresence, motion } from "framer-motion";
-
 import { Progress } from "@nextui-org/react";
 
 import ExamForm from "@/components/Exams/Forms/NewExamForm/ExamForm";
 import ExamTasks from "@/components/Exams/Forms/NewExamForm/ExamTasks";
+import PresenceBlock from "@/components/ui/PresenceBlock";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -31,41 +30,17 @@ const NewExamForm = () => {
         <Progress size="sm" value={progress} aria-label="Exam creation progress" />
       </div>
 
-      <AnimatePresence>
-        {step === "exam" && (
-          <motion.div
-            initial={{ opacity: 0, height: "0" }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <ExamForm />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <PresenceBlock show={step === "exam"}>
+        <ExamForm />
+      </PresenceBlock>
 
-      <AnimatePresence>
-        {step === "tasks" && (
-          <motion.div
-            initial={{ opacity: 0, height: "0" }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <ExamTasks />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <PresenceBlock show={step === "tasks"}>
+        <ExamTasks />
+      </PresenceBlock>
 
-      <AnimatePresence>
-        {step === "confirm" && (
-          <motion.div
-            initial={{ opacity: 0, height: "0" }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            Confirm exam here
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* TODO: Add "tests" step */}
+
+      <PresenceBlock show={step === "confirm"}>Confirm exam here</PresenceBlock>
     </div>
   );
 };

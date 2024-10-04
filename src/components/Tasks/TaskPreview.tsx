@@ -13,18 +13,19 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
 type Props = {
+  open: boolean;
+  onClose: () => void;
   task: TaskType;
   index: number;
 };
 
-const TaskPreview = ({ task, index }: Props) => {
+const TaskPreview = ({ task, index, open, onClose }: Props) => {
   const { title, description, points, template } = task;
 
   const { tasksState, formState } = useCtx(ExamFormContext);
   const [tasks, setTasks] = tasksState;
   const [{ language }] = formState;
 
-  const dialog = useToggle();
   const templateToggle = useToggle();
 
   const removeTask = () => {
@@ -51,7 +52,7 @@ const TaskPreview = ({ task, index }: Props) => {
 
   return (
     <Fragment>
-      <div className="flex items-center justify-between">
+      <div className="group flex items-center justify-between">
         <div>
           <p className="text-base font-semibold">
             <span className="font-sans">{index + 1}.</span> {title}
@@ -64,24 +65,13 @@ const TaskPreview = ({ task, index }: Props) => {
         <div className="flex items-center gap-1">
           <Button
             isIconOnly
-            aria-label="Show task details"
-            color="default"
-            size="sm"
-            variant="light"
-            radius="full"
-            onPress={dialog.toggleOn}
-          >
-            <Icon name="eye" className="h-5 w-5" />
-          </Button>
-
-          <Button
-            isIconOnly
             aria-label="Remove task"
             color="danger"
             size="sm"
             variant="light"
             radius="full"
             onPress={removeTask}
+            className="opacity-0 transition-opacity group-hover:pointer-events-auto group-hover:opacity-100 group-focus:pointer-events-auto group-focus:opacity-100"
           >
             <Icon name="trash" className="h-5 w-5" />
           </Button>
@@ -125,8 +115,8 @@ const TaskPreview = ({ task, index }: Props) => {
         backdrop="blur"
         placement="center"
         hideCloseButton
-        isOpen={dialog.open}
-        onClose={dialog.toggleOff}
+        isOpen={open}
+        onClose={onClose}
         classNames={{
           backdrop: "backdrop-blur-sm brightness-50 dark:mix-blend-darken",
         }}
@@ -148,8 +138,14 @@ const TaskPreview = ({ task, index }: Props) => {
           </ModalHeader>
 
           <PresenceBlock show={!templateToggle.open}>
-            <ModalBody className="mb-4">{description}</ModalBody>
-            <ModalFooter className="justify-start">{points} points</ModalFooter>
+            <ModalBody className="mb-4 gap-1">
+              <p>{description}</p>
+              <p>{points} points</p>
+            </ModalBody>
+
+            <ModalFooter className="justify-start font-mono text-warning">
+              Automatic tests comming soon...
+            </ModalFooter>
           </PresenceBlock>
 
           <PresenceBlock show={templateToggle.open}>
@@ -159,6 +155,7 @@ const TaskPreview = ({ task, index }: Props) => {
                 <CodeEditor
                   height="25dvh"
                   readOnly
+                  editable={false}
                   value={template}
                   language={language}
                   className="text-base"
