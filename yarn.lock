@@ -4570,17 +4570,10 @@
     "@replit/codemirror-lang-svelte" "^6.0.0"
     codemirror-lang-mermaid "^0.5.0"
 
-"@uiw/codemirror-theme-bbedit@^4.23.4":
+"@uiw/codemirror-theme-quietlight@^4.23.4":
   version "4.23.4"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-bbedit/-/codemirror-theme-bbedit-4.23.4.tgz#cf464eb2bdbb7d46885da03f0d0ea79057c6d5bf"
-  integrity sha512-gs8e6kvKvubpO+1x3MSGwS52XRb1pveKnKyLc8cEZMDrhe5L7ktGlZZ0G9BZ/lrVUnvjFS2eUg5CyF3UgU19zg==
-  dependencies:
-    "@uiw/codemirror-themes" "4.23.4"
-
-"@uiw/codemirror-theme-tokyo-night-day@^4.23.4":
-  version "4.23.4"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-tokyo-night-day/-/codemirror-theme-tokyo-night-day-4.23.4.tgz#d3dbf251bdecc7bec5f1eea8f06fcd56f3df629d"
-  integrity sha512-jn3bG3h1sBKudtc5MkCeI1p7/nQnEYEbkOssK6FswUBce8CKKJCpvQUTX1GSZ5HJMKudbiHrN5F29X2Rsh3ZhQ==
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-quietlight/-/codemirror-theme-quietlight-4.23.4.tgz#d686f18ce16d7681587746a52f872049cfd313da"
+  integrity sha512-IIn3zzVOxFzMndMYB1nO0JCQz/+Q1hGQxfKYYDuVFQ4w3iqkZqfdLEInybUAr7Vpivvuya9oN/h2hJ7Y/7XboQ==
   dependencies:
     "@uiw/codemirror-themes" "4.23.4"
 

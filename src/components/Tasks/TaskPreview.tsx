@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 import { Tooltip } from "@nextui-org/react";
 
 import CodeEditor from "@/components/CodeEditor";
@@ -52,7 +52,7 @@ const TaskPreview = ({ task, index, open, onClose }: Props) => {
 
   return (
     <Fragment>
-      <div className="group flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
           <p className="text-base font-semibold">
             <span className="font-sans">{index + 1}.</span> {title}
@@ -63,19 +63,6 @@ const TaskPreview = ({ task, index, open, onClose }: Props) => {
         </div>
 
         <div className="flex items-center gap-1">
-          <Button
-            isIconOnly
-            aria-label="Remove task"
-            color="danger"
-            size="sm"
-            variant="light"
-            radius="full"
-            onPress={removeTask}
-            className="opacity-0 transition-opacity group-hover:pointer-events-auto group-hover:opacity-100 group-focus:pointer-events-auto group-focus:opacity-100"
-          >
-            <Icon name="trash" className="h-5 w-5" />
-          </Button>
-
           <div className="-space-y-1 *:!scale-80 [&_button]:flex">
             <Tooltip content="Move up" delay={500}>
               <Button
@@ -121,35 +108,48 @@ const TaskPreview = ({ task, index, open, onClose }: Props) => {
           backdrop: "backdrop-blur-sm brightness-50 dark:mix-blend-darken",
         }}
       >
-        <ModalContent>
+        <ModalContent className="pb-4">
           <ModalHeader className="items-center justify-between pb-2 text-lg">
-            <h3>{title}</h3>
+            <h3>
+              {index + 1}. {title}
+            </h3>
 
-            <Button
-              size="sm"
-              variant="light"
-              color="default"
-              className="text-sm hover:!bg-transparent"
-              startContent={<Icon name={templateToggle.open ? "code-off" : "code"} className="h-4 w-4" />}
-              onPress={templateToggle.toggle}
-            >
-              Template
-            </Button>
+            <div className="space-x-2">
+              <Button
+                isIconOnly
+                size="sm"
+                variant="light"
+                color="default"
+                radius="full"
+                aria-label="Code template view"
+                onPress={templateToggle.toggle}
+              >
+                <Icon name={templateToggle.open ? "code-off" : "code"} className="h-5 w-5" />
+              </Button>
+
+              <Button
+                isIconOnly
+                color="danger"
+                size="sm"
+                variant="light"
+                radius="full"
+                aria-label="Remove task"
+                onPress={removeTask}
+              >
+                <Icon name="trash" className="h-5 w-5" />
+              </Button>
+            </div>
           </ModalHeader>
 
           <PresenceBlock show={!templateToggle.open}>
-            <ModalBody className="mb-4 gap-1">
+            <ModalBody className="gap-12 font-semibold">
               <p>{description}</p>
               <p>{points} points</p>
             </ModalBody>
-
-            <ModalFooter className="justify-start font-mono text-warning">
-              Automatic tests comming soon...
-            </ModalFooter>
           </PresenceBlock>
 
           <PresenceBlock show={templateToggle.open}>
-            <ModalBody className="pb-5">
+            <ModalBody>
               {/* Wrapper needed to have smooth toggle animation */}
               <div className="h-[25dvh]">
                 <CodeEditor

@@ -24,5 +24,5 @@ export const baseTaskTemplate = ({ title, description, language }: Template) => 
 
   const functionName = functionNameFromTitle(title);
 
-  return templateMaker(functionName, description).trim();
+  return templateMaker(functionName, description || "No description available.").trim();
 };

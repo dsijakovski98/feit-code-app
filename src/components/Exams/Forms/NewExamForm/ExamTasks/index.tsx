@@ -76,11 +76,12 @@ const ExamTasks = () => {
             </Listbox>
           </ScrollShadow>
 
-          <div className="flex items-center justify-between gap-4">
-            <Button fullWidth size="lg" color="default" onPress={() => setStep("exam")}>
-              Back
-            </Button>
-
+          <div className="relative">
+            {remainingPoints > 0 && (
+              <p className="absolute bottom-full -translate-y-1 font-semibold text-warning-600 dark:text-warning-300">
+                {remainingPoints} points left to distribute to Tasks
+              </p>
+            )}
             <Button fullWidth size="lg" isDisabled={remainingPoints > 0} onPress={() => setStep("confirm")}>
               Continue
             </Button>

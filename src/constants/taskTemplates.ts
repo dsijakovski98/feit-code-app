@@ -14,4 +14,16 @@ function ${fname}(/* Define inputs here */) {
 }
 `;
   },
+
+  [PROGRAMMING_LANGUAGE.typescript]: (fname, description) => {
+    return [
+      "/*",
+      description,
+      "*/",
+      "",
+      `function ${fname}(/* Define inputs here */) {`,
+      "\t // Your code here, make sure you utilize types",
+      "}",
+    ].join("\n");
+  },
 };

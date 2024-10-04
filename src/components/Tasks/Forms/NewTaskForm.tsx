@@ -120,6 +120,7 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
             errorMessage={fieldState.error?.message}
             classNames={{
               label: "text-lg font-semibold !text-foreground lg:text-base",
+              errorMessage: "text-sm",
             }}
           />
         )}

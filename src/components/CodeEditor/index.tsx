@@ -1,7 +1,7 @@
 import { ComponentProps, useMemo } from "react";
 
 import { langs } from "@uiw/codemirror-extensions-langs";
-import { bbedit as lightTheme } from "@uiw/codemirror-theme-bbedit";
+import { quietlight as lightTheme } from "@uiw/codemirror-theme-quietlight";
 import { tokyoNight as darkTheme } from "@uiw/codemirror-theme-tokyo-night";
 import CodeMirror from "@uiw/react-codemirror";
 import { useTheme } from "next-themes";
