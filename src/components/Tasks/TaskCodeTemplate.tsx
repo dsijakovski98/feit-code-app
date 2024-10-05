@@ -6,6 +6,7 @@ import CodeEditor from "../CodeEditor";
 import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
+import Icon from "@/components/ui/Icon";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -40,27 +41,32 @@ const TaskCodeTemplate = ({ form, templateToggle, onSave }: Props) => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <p className="font-semibold">This is the code template students will see to start off the task.</p>
-          <p className="font-light text-foreground-300">You can edit the template or keep it as is.</p>
-        </div>
+    <div className="space-y-1">
+      <div className="flex items-center justify-between gap-6 pb-4">
+        <p className="text-lg">This is the code template students will see to start off the task.</p>
 
         <Button
+          color="default"
+          variant="light"
+          startContent={<Icon name="save" className="h-5 w-5" />}
+          onPress={handleSave}
           className={clsx("pointer-events-none opacity-0 transition-all", {
             "pointer-events-auto opacity-100": templateChanged,
           })}
-          onPress={handleSave}
         >
-          Save
+          Save Template
         </Button>
       </div>
 
+      <p className="flex items-center gap-1 font-semibold">
+        <Icon name="info" className="h-4 w-4 scale-110" />
+        <span>You can edit this template or keep it as is</span>
+      </p>
+
       {/* Wrapper needed to have smooth toggle animation */}
-      <div className="h-[25dvh]">
+      <div className="h-[35dvh]">
         <CodeEditor
-          height="25dvh"
+          height="35dvh"
           value={value}
           onChange={setValue}
           language={language}

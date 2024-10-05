@@ -1,7 +1,7 @@
 import { capitalize } from "..";
 
+import { parseTemplate } from "@/constants/code/taskTemplates";
 import { ProgrammingLanguage } from "@/constants/enums";
-import { taskTemplate } from "@/constants/taskTemplates";
 
 const functionNameFromTitle = (title: string) => {
   return title
@@ -18,11 +18,7 @@ type Template = {
 export const baseTaskTemplate = ({ title, description, language }: Template) => {
   if (title.length === 0) return "Task not defined yet.";
 
-  const templateMaker = taskTemplate[language];
-
-  if (!templateMaker) return `Template for ${language} is not yet supported.`;
-
   const functionName = functionNameFromTitle(title);
 
-  return templateMaker(functionName, description || "No description available.").trim();
+  return parseTemplate({ functionName, description, language });
 };

@@ -98,7 +98,7 @@ const TaskPreview = ({ task, index, open, onClose }: Props) => {
       </div>
 
       <Modal
-        size="2xl"
+        size="3xl"
         backdrop="blur"
         placement="center"
         hideCloseButton

@@ -20,17 +20,17 @@ ExamFormContext.displayName = "ExamFormContext";
 
 const ExamFormProvider = ({ children }: PropsWithChildren) => {
   const formState = useState<ExamSchema>({
-    name: "Test Exam",
+    name: "",
     language: PROGRAMMING_LANGUAGE.javascript,
     startDate: new Date(),
     startTime: new Date(),
-    durationMinutes: "60",
-    points: "100",
+    durationMinutes: "",
+    points: "",
   });
 
   const tasksState = useState<TaskType[]>([]);
 
-  const stepState = useState<ExamSteps>("tasks");
+  const stepState = useState<ExamSteps>("exam");
 
   const [examForm] = formState;
   const [tasks] = tasksState;

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+<description>
+
+# Define the function's inputs if needed
+<fname>() {
+    # Your code here
+}

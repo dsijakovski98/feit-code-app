@@ -36,15 +36,7 @@ const ExamTasks = () => {
             This exam has no tasks yet, add as many as you need
           </p>
 
-          <div className="flex flex-col items-center gap-2">
-            <AddTask color="default" size="md" />
-
-            <p className="pb-1">or</p>
-
-            <Button variant="bordered" color="default" onPress={() => setStep("exam")}>
-              Back to Exam
-            </Button>
-          </div>
+          <AddTask color="default" size="md" />
         </div>
       )}
 

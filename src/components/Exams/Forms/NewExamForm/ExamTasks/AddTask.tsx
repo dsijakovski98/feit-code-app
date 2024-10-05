@@ -52,14 +52,13 @@ const AddTask = (props: Props = { color: "default", variant: "light", size: "md"
       </Button>
 
       <Modal
-        size="3xl"
         hideCloseButton
         backdrop="opaque"
         placement="center"
         isOpen={dialog.open}
         onOpenChange={dialog.toggle}
         classNames={{
-          base: "font-serif",
+          base: "font-serif min-w-[720px] lg:min-w-[90%]",
           backdrop: "bg-background/50",
           header: "border-b border-b-content3 dark:border-b-content3/50 py-3",
           body: "pb-0 pt-4",

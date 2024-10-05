@@ -1,0 +1,9 @@
+<description>
+
+fn <fname>(/* Define inputs here */) {
+    // Your code here
+}
+
+fn main() {
+    
+}
