@@ -24,6 +24,7 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
   const [tasks, setTasks] = tasksState;
 
   const {
+    reset,
     control,
     setError,
     handleSubmit,
@@ -43,6 +44,7 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
 
     setTasks((prev) => [...prev, { ...task, template }]);
     dialog.toggleOff();
+    reset();
   };
 
   return (

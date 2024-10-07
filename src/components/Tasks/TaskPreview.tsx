@@ -1,7 +1,8 @@
 import { Fragment } from "react";
 
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { Tooltip } from "@nextui-org/react";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/tooltip";
 
 import CodeEditor from "@/components/CodeEditor";
 import Button from "@/components/ui/Button";
@@ -109,35 +110,41 @@ const TaskPreview = ({ task, index, open, onClose }: Props) => {
         }}
       >
         <ModalContent className="pb-4">
-          <ModalHeader className="items-center justify-between pb-2 text-lg">
+          <ModalHeader className="items-start justify-between gap-4 pb-2 text-lg">
             <h3>
               {index + 1}. {title}
             </h3>
 
-            <div className="space-x-2">
+            <div className="shrink-0 space-x-1">
               <Button
                 isIconOnly
                 size="sm"
                 variant="light"
                 color="default"
                 radius="full"
-                aria-label="Code template view"
                 onPress={templateToggle.toggle}
               >
                 <Icon name={templateToggle.open ? "code-off" : "code"} className="h-5 w-5" />
               </Button>
 
-              <Button
-                isIconOnly
-                color="danger"
-                size="sm"
-                variant="light"
-                radius="full"
-                aria-label="Remove task"
-                onPress={removeTask}
-              >
-                <Icon name="trash" className="h-5 w-5" />
-              </Button>
+              <Dropdown placement="bottom-end">
+                <DropdownTrigger>
+                  <Button isIconOnly size="sm" variant="light" color="default" radius="full">
+                    <Icon name="more" className="h-5 w-5" />
+                  </Button>
+                </DropdownTrigger>
+
+                <DropdownMenu>
+                  <DropdownItem
+                    key="remove"
+                    color="danger"
+                    onPress={removeTask}
+                    startContent={<Icon name="trash" className="h-5 w-5" />}
+                  >
+                    Remove Task
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </div>
           </ModalHeader>
 

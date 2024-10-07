@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 import { Listbox, ListboxItem, ScrollShadow } from "@nextui-org/react";
 
@@ -41,8 +41,8 @@ const ExamTasks = () => {
       )}
 
       {tasks.length > 0 && (
-        <Fragment>
-          <ScrollShadow className="h-[400px]">
+        <div className="space-y-12">
+          <ScrollShadow className="h-[400px] py-4">
             <Listbox
               variant="bordered"
               items={tasks}
@@ -78,7 +78,7 @@ const ExamTasks = () => {
               Continue
             </Button>
           </div>
-        </Fragment>
+        </div>
       )}
     </section>
   );
