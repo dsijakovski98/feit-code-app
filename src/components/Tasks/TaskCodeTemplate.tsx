@@ -10,17 +10,16 @@ import Icon from "@/components/ui/Icon";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
-import { Toggle } from "@/hooks/useToggle";
 import { baseTaskTemplate } from "@/utils/code";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
 type Props = {
+  template: string;
   form: UseFormReturn<TaskSchema>;
-  templateToggle: Toggle;
   onSave: (template: string) => void;
 };
 
-const TaskCodeTemplate = ({ form, templateToggle, onSave }: Props) => {
+const TaskCodeTemplate = ({ form, template, onSave }: Props) => {
   const { getValues } = form;
   const title = getValues("title");
   const description = getValues("description");
@@ -28,14 +27,18 @@ const TaskCodeTemplate = ({ form, templateToggle, onSave }: Props) => {
   const { formState } = useCtx(ExamFormContext);
   const [{ language }] = formState;
 
-  const defaultValue = baseTaskTemplate({ title, description, language });
-  const [value, setValue] = useState(defaultValue);
+  const [savedValue, setSavedValue] = useState(
+    template || baseTaskTemplate({ title, description, language }),
+  );
+  const [value, setValue] = useState(savedValue);
 
-  const templateChanged = useMemo(() => defaultValue !== value, [value, defaultValue]);
+  const templateChanged = useMemo(() => savedValue !== value, [value, savedValue]);
 
   const handleSave = () => {
-    onSave(value.trim());
-    templateToggle.toggleOff();
+    const newValue = value.trim();
+
+    onSave(newValue);
+    setSavedValue(newValue);
 
     toast.success("Saved new template!");
   };
@@ -43,7 +46,7 @@ const TaskCodeTemplate = ({ form, templateToggle, onSave }: Props) => {
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between gap-6 pb-4">
-        <p className="text-lg">This is the code template students will see to start off the task.</p>
+        <p className="text-lg">This is what students will see to start off the task.</p>
 
         <Button
           color="default"

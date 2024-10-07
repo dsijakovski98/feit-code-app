@@ -100,7 +100,7 @@ const AddTask = (props: Props = { color: "default", variant: "light", size: "md"
 
               <PresenceBlock show={templateToggle.open}>
                 <ModalBody>
-                  <TaskCodeTemplate form={form} onSave={setTemplate} templateToggle={templateToggle} />
+                  <TaskCodeTemplate form={form} onSave={setTemplate} template={template} />
                 </ModalBody>
 
                 <ModalFooter />
