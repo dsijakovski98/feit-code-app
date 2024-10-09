@@ -70,6 +70,6 @@
   }
 
   .bg-main {
-    @apply bg-content2/50 dark:!bg-default-75 lg:bg-content2/50;
+    @apply bg-content2 dark:!bg-default-75 lg:bg-content2;
   }
 }

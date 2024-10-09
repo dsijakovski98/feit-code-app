@@ -73,10 +73,10 @@ const ProfessorCourseDetails = () => {
           selectedKey={hash}
           defaultSelectedKey="#general"
           classNames={{
-            base: "!px-0 sticky top-20 lg:top-0 py-2 bg-transparent z-20",
+            base: "!px-0 sticky top-20 lg:top-0 bg-transparent z-20",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
-            tabList: "!mx-0",
-            panel: "pt-5 px-10 lg:px-5 md:px-0",
+            tabList: "!mx-0 py-5 bg-main",
+            panel: "pt-3 px-10 lg:px-5 md:px-0",
           }}
         >
           <Tab key="#general" title="General" href="#general">
