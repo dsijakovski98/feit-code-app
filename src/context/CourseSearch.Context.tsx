@@ -5,6 +5,7 @@ type CourseSearchContext = {
 };
 
 export const CourseSearchContext = createContext<CourseSearchContext | null>(null);
+CourseSearchContext.displayName = "CourseSearchContext";
 
 type Props = CourseSearchContext & PropsWithChildren;
 

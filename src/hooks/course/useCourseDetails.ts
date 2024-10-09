@@ -29,6 +29,10 @@ export const useCourseDetails = (courseId?: string) => {
         // TODO: Sentry logging
         console.log({ e });
 
+        if (e instanceof Error) {
+          throw e;
+        }
+
         throw new Error("Failed to get course details!");
       }
     },

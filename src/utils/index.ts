@@ -3,6 +3,8 @@ import { UserResource } from "@clerk/types";
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
+export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase();
+
 /**
  * Convert a date to a relative time string, such as
  * "a minute ago", "in 2 hours", "yesterday", "3 months ago", etc.
@@ -139,6 +141,12 @@ export const getAcademicYear = () => {
   }
 
   return `${startYear}/${endYear.toString().slice(-2)}`;
+};
+
+export const getSemesterType = () => {
+  const currentMonth = new Date().getMonth() + 1;
+
+  return currentMonth <= 9 ? "Summer" : "Winter";
 };
 
 export const getAuthStrategy = (user?: UserResource | null) => {

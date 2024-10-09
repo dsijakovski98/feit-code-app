@@ -6,6 +6,8 @@ import { ClassValue } from "clsx";
 import WindowBlank from "@/components/ui/Window/WindowBlank";
 import WindowControls from "@/components/ui/Window/WindowControls";
 
+import logo from "@/images/logo.svg?w=32&h=32&img";
+
 import { WindowProvider } from "@/context/WindowContext";
 import { useDrag } from "@/hooks/useDrag";
 import { useToggle } from "@/hooks/useToggle";
@@ -53,7 +55,7 @@ const Window = ({ title, className = "", children }: Props) => {
             ref={trigger}
             className="flex grow cursor-grab items-center gap-2 group-data-[moving]:cursor-grabbing lg:cursor-default"
           >
-            <img draggable={false} src="/images/logo.svg" alt="FEIT Code logo" className="w-8 scale-[1.4]" />
+            <img draggable={false} src={logo} alt="FEIT Code logo" className="w-8 scale-[1.4]" />
 
             <p className="text-lg font-semibold leading-none group-data-[moving]:select-none">{title}</p>
           </div>

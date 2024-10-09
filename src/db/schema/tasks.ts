@@ -11,6 +11,7 @@ const tasks = pgTable("tasks", {
   title: varchar("title", { length: 256 }).notNull(),
   description: varchar("description", { length: 256 }),
   points: integer("points"),
+  templateUrl: varchar("template_url", { length: 1024 }).notNull(),
 
   examId: varchar("exam_id")
     .notNull()

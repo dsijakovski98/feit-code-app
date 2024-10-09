@@ -26,7 +26,7 @@ const Nav = () => {
       <nav className="mx-8 flex h-full items-center justify-between border-b border-b-foreground-50 py-4 lg:mx-5 lg:border-b-transparent lg:pb-0">
         <div className="lg:hidden">
           <Skeleton isLoaded={!!timeGreeting} className="rounded-lg">
-            <h1 className="text-xl font-semibold">{timeGreeting}</h1>
+            <h1 className="min-h-7 text-xl font-semibold">{timeGreeting}</h1>
           </Skeleton>
 
           <time className="block text-sm">{timestamp}</time>

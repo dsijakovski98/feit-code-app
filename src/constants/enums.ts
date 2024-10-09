@@ -10,7 +10,7 @@ export const PROGRAMMING_LANGUAGE = {
   python: "Python",
   rust: "Rust",
   php: "PHP",
-};
+} as const;
 export type ProgrammingLanguage = RecordValues<typeof PROGRAMMING_LANGUAGE>;
 
 export const EXAM_STATUS = {

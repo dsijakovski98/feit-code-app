@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+<description>
+
+void <fname>(/* Define inputs here */) {
+    // Your code here
+}
+
+int main() {
+    return 0;
+}

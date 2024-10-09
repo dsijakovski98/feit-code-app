@@ -23,6 +23,11 @@
     @apply !font-sans !font-light !text-foreground-300;
   }
 
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    @apply m-0 !appearance-none;
+  }
+
   input[type="color"] {
     @apply aspect-square appearance-none bg-transparent;
   }
@@ -36,6 +41,10 @@
 
   li[role="option"] {
     @apply !font-serif;
+  }
+
+  div[data-slot="calendar"] svg {
+    @apply h-5 w-5;
   }
 
   a {
@@ -61,6 +70,6 @@
   }
 
   .bg-main {
-    @apply bg-content1 dark:!bg-default-50 lg:bg-content1;
+    @apply bg-content2/50 dark:!bg-default-75 lg:bg-content2/50;
   }
 }

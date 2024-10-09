@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTheme } from "next-themes";
 import { InferInput, nonEmpty, object, pipe, string, trim } from "valibot";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
@@ -30,6 +31,8 @@ type Props = {
 };
 
 const NewCategory = ({ formToggle, loading = false }: Props) => {
+  const { theme } = useTheme();
+
   const queryClient = useQueryClient();
 
   const {
@@ -43,7 +46,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
     resolver: valibotResolver(NewCategorySchema),
     defaultValues: {
       label: "",
-      color: "#000000",
+      color: theme === "light" ? "#000000" : "#FFFFFF",
     },
   });
 
@@ -97,7 +100,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
       <PopoverTrigger disabled={loading}>
         <Button
           size="sm"
-          color="secondary"
+          color="default"
           className="shrink-0 text-xs"
           startContent={<Icon name="add" className="h-4 w-4" />}
         >
@@ -114,7 +117,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
                 <input
                   {...field}
                   type="color"
-                  className="-mx-2 h-9 w-9 cursor-pointer transition-[transform] hover:scale-110 focus:scale-110"
+                  className="-mx-2 h-9 w-8 cursor-pointer transition-[transform] hover:scale-110 focus:scale-110"
                 />
               </Tooltip>
             )}
