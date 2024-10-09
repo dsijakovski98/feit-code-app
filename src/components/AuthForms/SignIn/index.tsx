@@ -107,6 +107,7 @@ const SignInForm = () => {
               label="Email"
               color="default"
               variant="underlined"
+              isDisabled={formLoading}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
             />
@@ -126,6 +127,7 @@ const SignInForm = () => {
                 label="Password"
                 color="default"
                 variant="underlined"
+                isDisabled={formLoading}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
               />

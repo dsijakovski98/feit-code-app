@@ -75,6 +75,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
         <Controller
           control={control}
           name="fullName"
+          disabled={isSubmitting}
           render={({ field, fieldState }) => (
             <Input
               {...field}
@@ -94,6 +95,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
           <Controller
             control={control}
             name="department"
+            disabled={isSubmitting}
             render={({ field, fieldState }) => (
               <Select
                 {...field}
@@ -101,8 +103,8 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 label="Major"
                 color="default"
                 variant="underlined"
-                isDisabled={isSubmitting}
                 defaultSelectedKeys={[professor.department]}
+                isDisabled={isSubmitting}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
                 classNames={{
@@ -123,6 +125,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
           <Controller
             control={control}
             name="type"
+            disabled={isSubmitting}
             render={({ field, fieldState }) => (
               <Select
                 {...field}
@@ -131,6 +134,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 color="default"
                 variant="underlined"
                 defaultSelectedKeys={[professor.type]}
+                isDisabled={isSubmitting}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
                 classNames={{

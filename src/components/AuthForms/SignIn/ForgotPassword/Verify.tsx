@@ -7,7 +7,6 @@ import clsx from "clsx";
 
 import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
-import { Spinner } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
@@ -104,6 +103,7 @@ const VerifyPassword = ({ verifyToggle }: Props) => {
               variant="bordered"
               inputMode="numeric"
               label="Verification code"
+              isDisabled={isSubmitting}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
@@ -127,6 +127,7 @@ const VerifyPassword = ({ verifyToggle }: Props) => {
               type="password"
               color="default"
               variant="underlined"
+              isDisabled={isSubmitting}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
             />
@@ -144,8 +145,7 @@ const VerifyPassword = ({ verifyToggle }: Props) => {
             type="submit"
             color="default"
             variant="solid"
-            disabled={isSubmitting}
-            startContent={isSubmitting && <Spinner color="default" size="sm" />}
+            isLoading={isSubmitting}
             className="bg-primary text-primary-foreground disabled:bg-slate-500"
           >
             Reset Password

@@ -11,7 +11,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSignUp } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
 import { OAuthStrategy } from "@clerk/types";
-import { Spinner } from "@nextui-org/react";
 
 import VerifySignUp from "@/components/AuthForms/SignUp/Verify";
 import OAuthJoin from "@/components/OAuthJoin";
@@ -142,6 +141,7 @@ const SignUpForm = () => {
                     label="Email"
                     color="default"
                     variant="underlined"
+                    isDisabled={formLoading}
                     isInvalid={fieldState.invalid}
                     errorMessage={fieldState.error?.message}
                   />
@@ -161,6 +161,7 @@ const SignUpForm = () => {
                       type="password"
                       color="default"
                       variant="underlined"
+                      isDisabled={formLoading}
                       isInvalid={fieldState.invalid}
                       errorMessage={fieldState.error?.message}
                     />
@@ -179,6 +180,7 @@ const SignUpForm = () => {
                       type="password"
                       color="default"
                       variant="underlined"
+                      isDisabled={formLoading}
                       isInvalid={fieldState.invalid}
                       errorMessage={fieldState.error?.message}
                     />
@@ -207,8 +209,7 @@ const SignUpForm = () => {
                 type="submit"
                 color="default"
                 variant="solid"
-                disabled={formLoading}
-                startContent={isSubmitting && <Spinner color="default" size="sm" />}
+                isLoading={formLoading}
                 className="bg-primary text-base !font-semibold text-primary-foreground disabled:bg-slate-400"
               >
                 Sign up

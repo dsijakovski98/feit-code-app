@@ -101,6 +101,7 @@ const EditCourseForm = () => {
         <Controller
           control={control}
           name="name"
+          disabled={isSubmitting}
           render={({ field, fieldState }) => (
             <Input
               {...field}
@@ -120,6 +121,7 @@ const EditCourseForm = () => {
         <Controller
           control={control}
           name="description"
+          disabled={isSubmitting}
           render={({ field, fieldState }) => (
             <Textarea
               {...field}

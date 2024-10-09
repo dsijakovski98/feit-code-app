@@ -107,17 +107,20 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
           New Category
         </Button>
       </PopoverTrigger>
+
       <PopoverContent className="border border-content1 bg-background">
         <form id="add-label-form" onSubmit={handleChildFormSubmit} className="flex items-end gap-4 p-1.5">
           <Controller
             control={control}
             name="color"
+            disabled={isSubmitting}
             render={({ field }) => (
               <Tooltip content={field.value}>
                 <input
                   {...field}
                   type="color"
-                  className="-mx-2 h-9 w-8 cursor-pointer transition-[transform] hover:scale-110 focus:scale-110"
+                  disabled={isSubmitting}
+                  className="-mx-2 h-9 w-8 cursor-pointer transition-[transform] hover:scale-110 focus:scale-110 disabled:pointer-events-none disabled:brightness-75"
                 />
               </Tooltip>
             )}
@@ -126,6 +129,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
           <Controller
             control={control}
             name="label"
+            disabled={isSubmitting}
             render={({ field, fieldState }) => (
               <Input
                 {...field}
