@@ -117,6 +117,7 @@ const ForgotPasswordForm = () => {
                     label="Email"
                     color="default"
                     variant="underlined"
+                    isDisabled={isSubmitting}
                     isInvalid={fieldState.invalid}
                     errorMessage={fieldState.error?.message}
                   />

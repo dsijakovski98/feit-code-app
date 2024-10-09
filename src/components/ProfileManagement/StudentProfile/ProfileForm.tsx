@@ -80,6 +80,7 @@ const StudentProfileForm = ({ student }: Props) => {
         <Controller
           control={control}
           name="fullName"
+          disabled={isSubmitting}
           render={({ field, fieldState }) => (
             <Input
               {...field}
@@ -98,6 +99,7 @@ const StudentProfileForm = ({ student }: Props) => {
         <Controller
           control={control}
           name="bio"
+          disabled={isSubmitting}
           render={({ field, fieldState }) => (
             <Textarea
               {...field}
@@ -121,6 +123,7 @@ const StudentProfileForm = ({ student }: Props) => {
           <Controller
             control={control}
             name="indexNumber"
+            disabled={isSubmitting}
             render={({ field, fieldState }) => (
               <Input
                 {...field}
@@ -141,6 +144,7 @@ const StudentProfileForm = ({ student }: Props) => {
           <Controller
             control={control}
             name="indexYear"
+            disabled={isSubmitting}
             render={({ field, fieldState }) => (
               <Input
                 {...field}
@@ -161,6 +165,7 @@ const StudentProfileForm = ({ student }: Props) => {
         <Controller
           control={control}
           name="major"
+          disabled={isSubmitting}
           render={({ field, fieldState }) => (
             <Select
               {...field}

@@ -6,7 +6,6 @@ import clsx from "clsx";
 
 import { useSignUp } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
-import { Spinner } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
@@ -92,6 +91,7 @@ const VerifySignUp = ({ verifyMode }: Props) => {
               variant="bordered"
               inputMode="numeric"
               label="Verification code"
+              isDisabled={isSubmitting}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
@@ -114,8 +114,7 @@ const VerifySignUp = ({ verifyMode }: Props) => {
             type="submit"
             color="default"
             variant="solid"
-            disabled={isSubmitting}
-            startContent={isSubmitting && <Spinner color="default" size="sm" />}
+            isLoading={isSubmitting}
             className="bg-primary text-primary-foreground disabled:bg-slate-500"
           >
             Verify
