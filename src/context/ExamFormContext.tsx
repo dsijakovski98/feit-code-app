@@ -5,7 +5,7 @@ import { UseState } from "@/types";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
-type ExamSteps = "exam" | "tasks" | "confirm";
+type ExamSteps = "exam" | "tasks" | "confirm" | "creating";
 export type TaskType = TaskSchema & { template: string };
 
 type ExamFormContext = {

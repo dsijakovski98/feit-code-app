@@ -1,8 +1,12 @@
-import { ProgrammingLanguage } from "../enums";
+import { ProgrammingLanguage } from "../../constants/enums";
 
 import { languageComments } from "@/constants/code/languageComments";
 
-const templates = import.meta.glob("./templates/*.txt", { eager: true, query: "?raw", import: "default" });
+const templates = import.meta.glob("./templates/*.txt", {
+  eager: true,
+  query: "?raw",
+  import: "default",
+});
 
 const taskTemplate: Partial<Record<ProgrammingLanguage, string>> = {};
 

@@ -1,5 +1,5 @@
 {
-  "id": "fc6b0cd9-9459-44b8-8164-12d17d5ea973",
+  "id": "18c0acce-02e2-4b97-9ea1-bef514cae2e7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -19,6 +19,12 @@
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true
+        },
+        "color": {
+          "name": "color",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -28,7 +34,9 @@
         "categories_id_unique": {
           "name": "categories_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         }
       }
     },
@@ -55,22 +63,38 @@
           "name": "course_categories_course_id_courses_id_fk",
           "tableFrom": "course_categories",
           "tableTo": "courses",
-          "columnsFrom": ["course_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "course_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "course_categories_category_id_categories_id_fk": {
           "name": "course_categories_category_id_categories_id_fk",
           "tableFrom": "course_categories",
           "tableTo": "categories",
-          "columnsFrom": ["category_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "course_categories_course_id_category_id_pk": {
+          "name": "course_categories_course_id_category_id_pk",
+          "columns": [
+            "course_id",
+            "category_id"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
     "public.courses": {
@@ -134,18 +158,26 @@
           "name": "courses_professor_id_professors_user_id_fk",
           "tableFrom": "courses",
           "tableTo": "professors",
-          "columnsFrom": ["professor_id"],
-          "columnsTo": ["user_id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "professor_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "courses_assistant_id_professors_user_id_fk": {
           "name": "courses_assistant_id_professors_user_id_fk",
           "tableFrom": "courses",
           "tableTo": "professors",
-          "columnsFrom": ["assistant_id"],
-          "columnsTo": ["user_id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "assistant_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "set null",
           "onUpdate": "no action"
         }
       },
@@ -154,7 +186,9 @@
         "courses_id_unique": {
           "name": "courses_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         }
       }
     },
@@ -181,8 +215,8 @@
           "notNull": true,
           "default": "now()"
         },
-        "duration": {
-          "name": "duration",
+        "starts_at": {
+          "name": "starts_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
@@ -221,9 +255,13 @@
           "name": "exams_course_id_courses_id_fk",
           "tableFrom": "exams",
           "tableTo": "courses",
-          "columnsFrom": ["course_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "course_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -232,7 +270,9 @@
         "exams_id_unique": {
           "name": "exams_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         }
       }
     },
@@ -286,7 +326,9 @@
         "professors_email_unique": {
           "name": "professors_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       }
     },
@@ -326,25 +368,36 @@
           "name": "student_courses_student_id_students_user_id_fk",
           "tableFrom": "student_courses",
           "tableTo": "students",
-          "columnsFrom": ["student_id"],
-          "columnsTo": ["user_id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "student_courses_course_id_courses_id_fk": {
           "name": "student_courses_course_id_courses_id_fk",
           "tableFrom": "student_courses",
           "tableTo": "courses",
-          "columnsFrom": ["course_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "course_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "student_courses_student_id_course_id_pk": {
           "name": "student_courses_student_id_course_id_pk",
-          "columns": ["student_id", "course_id"]
+          "columns": [
+            "student_id",
+            "course_id"
+          ]
         }
       },
       "uniqueConstraints": {}
@@ -410,7 +463,9 @@
         "students_email_unique": {
           "name": "students_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       }
     },
@@ -468,8 +523,12 @@
           "name": "task_grades_grader_id_professors_user_id_fk",
           "tableFrom": "task_grades",
           "tableTo": "professors",
-          "columnsFrom": ["grader_id"],
-          "columnsTo": ["user_id"],
+          "columnsFrom": [
+            "grader_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -477,18 +536,26 @@
           "name": "task_grades_student_id_students_user_id_fk",
           "tableFrom": "task_grades",
           "tableTo": "students",
-          "columnsFrom": ["student_id"],
-          "columnsTo": ["user_id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "student_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "task_grades_task_id_tasks_id_fk": {
           "name": "task_grades_task_id_tasks_id_fk",
           "tableFrom": "task_grades",
           "tableTo": "tasks",
-          "columnsFrom": ["task_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "task_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -529,6 +596,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "template_url": {
+          "name": "template_url",
+          "type": "varchar(1024)",
+          "primaryKey": false,
+          "notNull": true
+        },
         "exam_id": {
           "name": "exam_id",
           "type": "varchar",
@@ -542,9 +615,13 @@
           "name": "tasks_exam_id_exams_id_fk",
           "tableFrom": "tasks",
           "tableTo": "exams",
-          "columnsFrom": ["exam_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "exam_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -553,12 +630,16 @@
         "tasks_id_unique": {
           "name": "tasks_id_unique",
           "nullsNotDistinct": false,
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         },
         "tasks_order_index_unique": {
           "name": "tasks_order_index_unique",
           "nullsNotDistinct": false,
-          "columns": ["order_index"]
+          "columns": [
+            "order_index"
+          ]
         }
       }
     }
@@ -567,32 +648,61 @@
     "public.exam_status": {
       "name": "exam_status",
       "schema": "public",
-      "values": ["New", "Ongoing", "Completed"]
+      "values": [
+        "New",
+        "Ongoing",
+        "Completed"
+      ]
     },
     "public.module_type": {
       "name": "module_type",
       "schema": "public",
-      "values": ["KTI", "KSIAR", "KHIE", "TKII"]
+      "values": [
+        "KTI",
+        "KSIAR",
+        "KHIE",
+        "TKII"
+      ]
     },
     "public.programming_language": {
       "name": "programming_language",
       "schema": "public",
-      "values": ["JavaScript", "TypeScript", "C", "C++", "Bash", "Go", "Python", "Rust", "PHP"]
+      "values": [
+        "JavaScript",
+        "TypeScript",
+        "C",
+        "C++",
+        "Bash",
+        "Go",
+        "Python",
+        "Rust",
+        "PHP"
+      ]
     },
     "public.task_status": {
       "name": "task_status",
       "schema": "public",
-      "values": ["Submitted", "In Progress", "Graded"]
+      "values": [
+        "Submitted",
+        "In Progress",
+        "Graded"
+      ]
     },
     "public.teacher_type": {
       "name": "teacher_type",
       "schema": "public",
-      "values": ["Course Professor", "Teaching Assistant"]
+      "values": [
+        "Course Professor",
+        "Teaching Assistant"
+      ]
     },
     "public.user_type": {
       "name": "user_type",
       "schema": "public",
-      "values": ["Student", "Professor"]
+      "values": [
+        "Student",
+        "Professor"
+      ]
     }
   },
   "schemas": {},

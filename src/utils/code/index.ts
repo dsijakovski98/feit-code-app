@@ -1,7 +1,7 @@
 import { capitalize } from "..";
 
-import { parseTemplate } from "@/constants/code/taskTemplates";
 import { ProgrammingLanguage } from "@/constants/enums";
+import { parseTemplate } from "@/utils/code/taskTemplates";
 
 const functionNameFromTitle = (title: string) => {
   return title

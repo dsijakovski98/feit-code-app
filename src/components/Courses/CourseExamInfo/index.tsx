@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { useLatestExam } from "@/hooks/course/useLatestExam";
+import { useLatestExam } from "@/hooks/exam/useLatestExam";
 import { useCtx } from "@/hooks/useCtx";
 
 const CourseExamInfo = () => {

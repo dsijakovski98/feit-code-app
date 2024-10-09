@@ -1,4 +1,5 @@
 import { parseAbsoluteToLocal, parseDate } from "@internationalized/date";
+import dayjs from "dayjs";
 
 import { DateValue, TimeInputValue } from "@nextui-org/react";
 
@@ -18,4 +19,11 @@ export const nextUITimeToDate = (time: string) => {
   const isoTime = time.split("[")[0];
 
   return new Date(isoTime);
+};
+
+export const parseDateTime = (date: Date, time: Date) => {
+  const parsedDate = date.toDateString();
+  const parsedTime = dayjs(time).format("HH:MM");
+
+  return { date: parsedDate, time: parsedTime };
 };

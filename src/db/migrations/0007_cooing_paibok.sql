@@ -1,1 +1,0 @@
-ALTER TABLE "exams" ADD COLUMN "starts_at" timestamp NOT NULL;

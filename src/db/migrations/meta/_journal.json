@@ -5,64 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1726410066629,
-      "tag": "0000_wet_vanisher",
+      "when": 1728508327249,
+      "tag": "0000_broken_puff_adder",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1726734962834,
-      "tag": "0001_medical_dazzler",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1726755681660,
-      "tag": "0002_dry_namorita",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1726857520650,
-      "tag": "0003_zippy_marten_broadcloak",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1726857827055,
-      "tag": "0004_talented_kate_bishop",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1726864723142,
-      "tag": "0005_condemned_ricochet",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1726873793389,
-      "tag": "0006_tired_starfox",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1727548579154,
-      "tag": "0007_cooing_paibok",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1727568108301,
-      "tag": "0008_mute_maginty",
+      "when": 1728508337193,
+      "tag": "0001_giant_redwing",
       "breakpoints": true
     }
   ]

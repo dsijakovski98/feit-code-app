@@ -48,8 +48,8 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
   };
 
   return (
-    <form id="new-task-form" onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-      <div className="grid grid-cols-[3fr_1fr] grid-rows-1 items-center gap-6 lg:contents">
+    <form id="new-task-form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex flex-wrap gap-6 lg:contents lg:!gap-8">
         <Controller
           control={control}
           name="title"
@@ -67,7 +67,32 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
-                base: "grow",
+                base: "basis-[70%]",
+              }}
+            />
+          )}
+        />
+
+        <Controller
+          control={control}
+          name="description"
+          disabled={isSubmitting}
+          render={({ field, fieldState }) => (
+            <Textarea
+              {...field}
+              size={isMobile ? "md" : "lg"}
+              minRows={isMobile ? 3 : 4}
+              color="default"
+              variant="underlined"
+              label="Description"
+              placeholder="Detailed description of the task's requirements"
+              isDisabled={isSubmitting}
+              isInvalid={fieldState.invalid}
+              errorMessage={fieldState.error?.message}
+              className="order-1 lg:mb-8"
+              classNames={{
+                label: "text-lg font-semibold !text-foreground lg:text-base",
+                errorMessage: "text-sm",
               }}
             />
           )}
@@ -90,6 +115,7 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
               isDisabled={isSubmitting}
               isInvalid={fieldState.invalid || Number(field.value) > remainingPoints}
               errorMessage={fieldState.error?.message}
+              classNames={{ base: "basis-[26%] lg:max-w-[150px]" }}
               description={
                 <span className="text-xs">
                   <span className="font-sans font-semibold">
@@ -103,30 +129,6 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
           )}
         />
       </div>
-
-      <Controller
-        control={control}
-        name="description"
-        disabled={isSubmitting}
-        render={({ field, fieldState }) => (
-          <Textarea
-            {...field}
-            size={isMobile ? "md" : "lg"}
-            minRows={isMobile ? 3 : 4}
-            color="default"
-            variant="underlined"
-            label="Description"
-            placeholder="Detailed description of the task's requirements"
-            isDisabled={isSubmitting}
-            isInvalid={fieldState.invalid}
-            errorMessage={fieldState.error?.message}
-            classNames={{
-              label: "text-lg font-semibold !text-foreground lg:text-base",
-              errorMessage: "text-sm",
-            }}
-          />
-        )}
-      />
     </form>
   );
 };
