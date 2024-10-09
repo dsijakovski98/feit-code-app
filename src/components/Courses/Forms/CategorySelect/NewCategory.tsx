@@ -133,12 +133,12 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
+                autoFocus
                 size="sm"
                 type="text"
                 label="Category"
                 color="default"
                 variant="underlined"
-                autoFocus
                 isDisabled={isSubmitting}
                 isInvalid={!!fieldState.error}
                 placeholder="ex. Web Dev, Python..."
