@@ -29,6 +29,7 @@ const AddStudent = () => {
 
   const [selectedStudents, setSelectedStudents] = useState<NonNullable<typeof outsideStudents>>([]);
   const [inputValue, setInputValue] = useState("");
+
   const studentOptions = useMemo(
     () =>
       outsideStudents?.filter(
@@ -121,12 +122,12 @@ const AddStudent = () => {
             <Fragment>
               <ModalHeader className="text-2xl">New Students</ModalHeader>
 
-              <ModalBody className="relative mb-6">
+              <ModalBody className="relative mb-8">
                 <div className="space-y-8">
                   <form className="flex gap-2">
                     <Autocomplete
                       size="lg"
-                      variant="bordered"
+                      variant="underlined"
                       isClearable={false}
                       label="Student select"
                       placeholder="Search by name"
@@ -138,10 +139,9 @@ const AddStudent = () => {
                       onSelectionChange={(key) => selectStudent(key as string)}
                       inputProps={{
                         classNames: {
-                          inputWrapper: "p-4",
                           label: "font-semibold !text-foreground text-lg lg:text-base",
-                          input: "placeholder:!text-foreground-200 translate-y-1",
-                          description: "text-sm",
+                          input: "placeholder:!text-foreground-200",
+                          description: "text-sm text-foreground-300 font-semibold translate-y-0.5",
                         },
                       }}
                       classNames={{
@@ -162,11 +162,6 @@ const AddStudent = () => {
                   </form>
 
                   <motion.ul layout className="max-h-[200px] space-y-4 overflow-y-scroll pl-1">
-                    {selectedStudents.length === 0 && (
-                      <motion.p layout className="font-semibold text-foreground-300">
-                        No students selected.
-                      </motion.p>
-                    )}
                     {selectedStudents.map((student) => (
                       <motion.li layout key={student.id} className="flex justify-between gap-8">
                         <div>{renderStudentItem(student)}</div>
@@ -188,7 +183,7 @@ const AddStudent = () => {
                 </div>
               </ModalBody>
 
-              <ModalFooter as={motion.div} layout className={selectedStudents.length > 0 ? "mt-4" : ""}>
+              <ModalFooter as={motion.div} layout>
                 <Button
                   fullWidth
                   color="default"

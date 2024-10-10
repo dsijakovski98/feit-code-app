@@ -93,6 +93,7 @@ const StudentsTab = () => {
         topContent={
           <StudentsTableHeader>
             <Input
+              fullWidth
               variant="bordered"
               placeholder="Search by name..."
               startContent={<Icon name="search" className="h-5 w-5" />}
