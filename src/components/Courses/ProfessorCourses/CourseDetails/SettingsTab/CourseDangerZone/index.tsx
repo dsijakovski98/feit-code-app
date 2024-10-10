@@ -1,5 +1,5 @@
-import ArchiveCourse from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/CourseDangerZone/ArchiveCourse/ArchiveCourse";
-import DeleteCourse from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab/CourseDangerZone/DeleteCourse";
+import ArchiveCourse from "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/CourseDangerZone/ArchiveCourse/ArchiveCourse";
+import DeleteCourse from "@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab/CourseDangerZone/DeleteCourse";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";

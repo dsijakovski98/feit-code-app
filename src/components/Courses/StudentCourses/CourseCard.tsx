@@ -22,7 +22,7 @@ type Props = {
   courseData: StudentCourseType;
 };
 
-const StudentCourseCard = ({ courseData }: Props) => {
+const CourseCard = ({ courseData }: Props) => {
   const { course, joinedAt } = courseData;
   const { id: courseId, academicYear, name, description, archived } = course;
 
@@ -68,7 +68,7 @@ const StudentCourseCard = ({ courseData }: Props) => {
           <Avatar size="sm" color="primary" fallback={<Icon name="course" />} />
         </div>
 
-        <p className="line-clamp-2 h-[5.5ch] pb-2 text-base font-medium text-foreground-400">{description}</p>
+        <p className="line-clamp-2 h-[5.5ch] pb-1 text-base font-medium text-foreground-400">{description}</p>
 
         <div className="flex items-center justify-between gap-4 empty:py-4">
           {!archived && (
@@ -111,4 +111,4 @@ const StudentCourseCard = ({ courseData }: Props) => {
   );
 };
 
-export default StudentCourseCard;
+export default CourseCard;

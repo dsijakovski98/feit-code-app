@@ -4,7 +4,7 @@
 
 @layer utilities {
   .general {
-    @apply grid grid-cols-[1.5fr_2fr] grid-rows-[auto_1fr] gap-4;
+    @apply grid grid-cols-[1fr_1fr] grid-rows-[auto_1fr] gap-6;
 
     grid-template-areas:
       "details exam"

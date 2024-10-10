@@ -2,8 +2,8 @@ import { Fragment, useEffect } from "react";
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 
-import RemoveStudent from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentActions/RemoveStudent";
-import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentActions/StudentDetails";
+import RemoveStudent from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/RemoveStudent";
+import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/StudentDetails";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 

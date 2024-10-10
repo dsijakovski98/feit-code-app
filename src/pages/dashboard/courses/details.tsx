@@ -12,12 +12,8 @@ import { useCourseDetails } from "@/hooks/course/useCourseDetails";
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
 
-const ProfessorCourseDetails = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails"),
-);
-const StudentCourseDetails = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/StudentCourseDetails"),
-);
+const ProfessorCourseDetails = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails"));
+const StudentCourseDetails = lazy(() => import("@/components/Courses/StudentCourses/CourseDetails"));
 
 const CourseDetailsPage = () => {
   const { id } = useParams<{ id: string }>();

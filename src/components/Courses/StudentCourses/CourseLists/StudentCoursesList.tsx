@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Spinner } from "@nextui-org/react";
 
 import CoursesList from "@/components/Courses/CoursesList";
-import StudentCourseCard from "@/components/Courses/StudentCourses/StudentCourseCard";
+import CourseCard from "@/components/Courses/StudentCourses/CourseCard";
 
 import { useStudentCourses } from "@/hooks/student/useStudentCourses";
 
@@ -39,7 +39,7 @@ const StudentCoursesList = ({ studentId }: Props) => {
         <div className="overflow-x-clip">
           <CoursesList
             coursesQuery={coursesQuery}
-            renderCourse={(courseData) => <StudentCourseCard courseData={courseData} />}
+            renderCourse={(courseData) => <CourseCard courseData={courseData} />}
           />
         </div>
       )}

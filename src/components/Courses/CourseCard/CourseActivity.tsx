@@ -16,7 +16,7 @@ const CourseActivity = ({ label, onPress }: Props) => {
         </Chip>
         {/* <p className="text-sm font-semibold text-foreground">Archived</p> */}
 
-        <Button size="sm" color="danger" onPress={onPress} className="px-5 text-xs dark:bg-danger-600">
+        <Button size="sm" color="danger" onPress={onPress} className="px-5 text-sm dark:bg-danger-600">
           {label}
         </Button>
       </div>

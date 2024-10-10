@@ -49,6 +49,8 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
         });
       }),
     );
+
+    // TODO: Notify students about new exam
   } catch (e) {
     // TODO: Sentry logging
     console.log({ e });

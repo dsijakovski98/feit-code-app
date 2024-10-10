@@ -8,15 +8,9 @@ import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
 
-const GeneralTab = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/GeneralTab"),
-);
-const StudentsTab = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab"),
-);
-const SettingsTab = lazy(
-  () => import("@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/SettingsTab"),
-);
+const GeneralTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/GeneralTab"));
+const StudentsTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab"));
+const SettingsTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab"));
 
 const ProfessorCourseDetails = () => {
   const { userData } = useFCUser();
@@ -63,7 +57,7 @@ const ProfessorCourseDetails = () => {
 
   return (
     <section className="bg-main min-h-full p-4 pt-0">
-      <div className="mx-auto max-w-[130ch] lg:mx-0 lg:max-w-full">
+      <div className="mx-auto h-full max-w-[140ch] lg:mx-0 lg:max-w-full">
         <Tabs
           fullWidth
           size="lg"
