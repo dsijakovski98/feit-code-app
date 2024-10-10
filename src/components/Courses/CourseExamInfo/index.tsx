@@ -16,9 +16,9 @@ import { examStatusColor } from "@/utils/colors";
 
 const CourseExamInfo = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { id } = courseDetails;
+  const { id: courseId } = courseDetails;
 
-  const { data: exam, isLoading } = useLatestExam(id);
+  const { data: exam, isLoading } = useLatestExam({ courseId });
 
   if (isLoading) {
     return (

@@ -1,5 +1,5 @@
 import CourseDetails from "@/components/Courses/Misc/CourseDetails";
-import StudentCourseActions from "@/components/Courses/StudentCourses/CourseDetails/StudentCourseActions";
+import StudentCourseInfo from "@/components/Courses/StudentCourses/CourseDetails/StudentCourseInfo";
 
 import "./styles.css";
 
@@ -11,7 +11,7 @@ const StudentCourseDetails = () => {
       </div>
 
       <div className="[grid-area:actions]">
-        <StudentCourseActions />
+        <StudentCourseInfo />
       </div>
 
       {/* TODO: Implement stats UI */}

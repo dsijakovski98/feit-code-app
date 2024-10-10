@@ -38,6 +38,7 @@ const CourseDetails = () => {
     () => `${assistant?.firstName} ${assistant?.lastName}`,
     [assistant?.firstName, assistant?.lastName],
   );
+
   return (
     <div className="space-y-16">
       <div className="flex items-start justify-between gap-6">
@@ -65,7 +66,7 @@ const CourseDetails = () => {
         <p className="text-xl font-semibold">{academicYear}</p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         <ul className="flex max-w-[40ch] flex-wrap items-center gap-2 lg:gap-1">
           {categories.map(({ category, categoryId }) => (
             <li key={categoryId}>
@@ -83,6 +84,7 @@ const CourseDetails = () => {
             }
             description={<p className="text-sm">{TEACHER_TYPE.professor}</p>}
             avatarProps={{
+              size: "lg",
               showFallback: true,
               src: professorAvatar ?? "",
               ...(userFullName === professorFullName ? userAvatarProps : {}),
@@ -99,6 +101,7 @@ const CourseDetails = () => {
               }
               description={<p className="text-sm">{TEACHER_TYPE.assistant}</p>}
               avatarProps={{
+                size: "lg",
                 showFallback: true,
                 src: assistantAvatar ?? "",
                 ...(userFullName === assistantFullName ? userAvatarProps : {}),
