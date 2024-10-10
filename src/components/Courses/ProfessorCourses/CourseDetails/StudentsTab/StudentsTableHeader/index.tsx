@@ -22,7 +22,7 @@ const StudentsTableHeader = ({ children }: PropsWithChildren) => {
         Total {studentsTotal} student{studentsTotal > 1 && "s"}
       </p>
 
-      <div className="ml-auto md:order-2 md:basis-full">{children}</div>
+      <div className="ml-auto w-[240px] md:order-2 md:basis-full">{children}</div>
       <div className="empty:hidden md:order-1">{userId === professorId && <AddStudent />}</div>
     </div>
   );

@@ -17,8 +17,9 @@ const CoursesHeader = ({ title, searchFilter, children }: Props) => {
     <div className="flex items-end justify-start gap-4 px-8 lg:px-5 md:flex-wrap">
       <h2 className="translate-y-1 text-lg font-bold uppercase text-foreground/90 md:mr-auto">{title}</h2>
 
-      <div className="ml-auto md:order-2 md:basis-full">
+      <div className="ml-auto w-[240px] md:order-2 md:basis-full">
         <Input
+          fullWidth
           radius="lg"
           variant="bordered"
           placeholder="Search by name..."

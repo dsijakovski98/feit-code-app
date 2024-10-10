@@ -18,7 +18,7 @@ const MiscMenu = () => {
   const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   return (
-    <ul className="mt-auto space-y-6 lg:hidden">
+    <ul className="mt-auto space-y-9 lg:hidden">
       <SidebarItem href={ROUTES.profile} label="Profile" icon={<Icon name="profile" />} />
 
       <SidebarItem

@@ -29,6 +29,7 @@ const AddStudent = () => {
 
   const [selectedStudents, setSelectedStudents] = useState<NonNullable<typeof outsideStudents>>([]);
   const [inputValue, setInputValue] = useState("");
+
   const studentOptions = useMemo(
     () =>
       outsideStudents?.filter(
@@ -103,6 +104,7 @@ const AddStudent = () => {
       </Button>
 
       <Modal
+        size="xl"
         isOpen={dialog.open}
         onOpenChange={dialog.toggle}
         hideCloseButton
@@ -112,7 +114,7 @@ const AddStudent = () => {
           base: "font-serif",
           backdrop: "bg-background/50",
           header: "border-b border-b-content3 dark:border-b-content3/50 py-3",
-          body: "pb-0 pt-4",
+          body: "pb-0 pt-6",
         }}
       >
         <ModalContent>
@@ -120,12 +122,13 @@ const AddStudent = () => {
             <Fragment>
               <ModalHeader className="text-2xl">New Students</ModalHeader>
 
-              <ModalBody className="relative">
-                <div className="space-y-6">
+              <ModalBody className="relative mb-8">
+                <div className="space-y-8">
                   <form className="flex gap-2">
                     <Autocomplete
                       size="lg"
-                      variant="bordered"
+                      variant="underlined"
+                      isClearable={false}
                       label="Student select"
                       placeholder="Search by name"
                       description="Select students you want to add to this course."
@@ -138,12 +141,12 @@ const AddStudent = () => {
                         classNames: {
                           label: "font-semibold !text-foreground text-lg lg:text-base",
                           input: "placeholder:!text-foreground-200",
-                          description: "text-xs",
+                          description: "text-sm text-foreground-300 font-semibold translate-y-0.5",
                         },
                       }}
                       classNames={{
                         clearButton: "p-0.5",
-                        endContentWrapper: "gap-2 *:h-6 *:w-6 *:min-w-0",
+                        endContentWrapper: "*:h-6 *:w-6 *:min-w-0 -mr-0.5",
                       }}
                     >
                       {(student) => (
@@ -158,12 +161,7 @@ const AddStudent = () => {
                     <button type="submit" hidden aria-hidden aria-label="Select student" />
                   </form>
 
-                  <motion.ul layout className="max-h-[200px] space-y-3 overflow-y-scroll pl-1">
-                    {selectedStudents.length === 0 && (
-                      <motion.p layout className="font-semibold text-foreground-300">
-                        No students selected.
-                      </motion.p>
-                    )}
+                  <motion.ul layout className="max-h-[200px] space-y-4 overflow-y-scroll pl-1">
                     {selectedStudents.map((student) => (
                       <motion.li layout key={student.id} className="flex justify-between gap-8">
                         <div>{renderStudentItem(student)}</div>
@@ -185,20 +183,31 @@ const AddStudent = () => {
                 </div>
               </ModalBody>
 
-              <ModalFooter as={motion.div} layout className={selectedStudents.length > 0 ? "mt-4" : ""}>
-                <Button color="default" variant="bordered" onPress={onClose} isDisabled={isPending}>
+              <ModalFooter as={motion.div} layout>
+                <Button
+                  fullWidth
+                  color="default"
+                  variant="bordered"
+                  onPress={onClose}
+                  isDisabled={isPending}
+                  className="text-sm"
+                >
                   Cancel
                 </Button>
 
                 <Button
+                  fullWidth
                   type="submit"
                   color="primary"
                   isLoading={isPending}
                   isDisabled={selectedStudents.length === 0}
                   onPress={handleAddStudents}
+                  className="text-sm"
                 >
-                  Add Student{selectedStudents.length > 1 && "s"}{" "}
-                  {selectedStudents.length > 0 && `(${selectedStudents.length})`}
+                  Add Student{selectedStudents.length > 1 && "s"}
+                  <span className="-translate-x-1 font-sans">
+                    {selectedStudents.length > 0 && `(${selectedStudents.length})`}
+                  </span>
                 </Button>
               </ModalFooter>
             </Fragment>

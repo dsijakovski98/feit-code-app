@@ -16,7 +16,7 @@ const ProfilePage = () => {
 
   return (
     <section className="bg-main min-h-full p-4 pt-0">
-      <div className="mx-auto h-full max-w-[85ch] md:max-w-full">
+      <div className="mx-auto h-full max-w-[90ch] md:max-w-full">
         {userData ? (
           <Tabs
             fullWidth
