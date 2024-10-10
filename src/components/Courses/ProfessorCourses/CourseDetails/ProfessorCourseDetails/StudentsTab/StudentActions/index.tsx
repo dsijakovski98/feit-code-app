@@ -34,6 +34,7 @@ const StudentActions = () => {
               <Icon name="more" />
             </Button>
           </DropdownTrigger>
+
           <DropdownMenu>
             <DropdownItem
               key="details"
@@ -71,7 +72,7 @@ const StudentActions = () => {
         variant="light"
         radius="full"
         aria-label={`Remove ${student.firstName} ${student.lastName} from this course.`}
-        className="p-1.5"
+        className="p-2"
         onPress={removeDialog.toggleOn}
       >
         <Icon name="trash" />
