@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useAuth } from "@clerk/clerk-react";
 import { User } from "@nextui-org/react";
 
-import StudentActions from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentActions";
+import StudentActions from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions";
 
 import { STUDENT_COLUMNS_LG, STUDENT_COLUMNS_SM } from "@/constants/students";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";

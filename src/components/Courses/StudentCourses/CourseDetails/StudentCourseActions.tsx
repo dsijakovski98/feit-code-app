@@ -14,7 +14,7 @@ import { USER_TYPE } from "@/types";
 
 const StudentCourseActions = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { id: courseId, academicYear, name } = courseDetails;
+  const { id: courseId, name } = courseDetails;
 
   const { userData } = useFCUser();
   const { data: joinedData } = useStudentJoinedCourse(userData?.user.id, courseId);
@@ -33,8 +33,6 @@ const StudentCourseActions = () => {
             </p>
           )}
         </div>
-
-        <p className="text-xl font-semibold">{academicYear}</p>
       </div>
 
       {joinedData ? (

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { Spinner } from "@nextui-org/spinner";
 
 import CourseCard from "@/components/Courses/CourseCard";
-import CoursesHeader from "@/components/Courses/CoursesHeader";
 import CoursesList from "@/components/Courses/CoursesList";
+import CoursesHeader from "@/components/Courses/Misc/CoursesHeader";
 import EmptyAssistantCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyAssistantCourses";
 import EmptyProfessorCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyProfessorCourses";
 import FloatButton from "@/components/ui/FloatButton";

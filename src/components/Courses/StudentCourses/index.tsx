@@ -1,14 +1,18 @@
 import { Suspense, lazy, useState } from "react";
 
-import CoursesHeader from "@/components/Courses/CoursesHeader";
+import CoursesHeader from "@/components/Courses/Misc/CoursesHeader";
 import SwitchFilter from "@/components/ui/SwitchFilter";
 
 import CourseSearchProvider from "@/context/CourseSearch.Context";
 import { FCUser } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
 
-const ActiveCoursesList = lazy(() => import("@/components/Courses/StudentCourses/ActiveCoursesList"));
-const StudentCoursesList = lazy(() => import("@/components/Courses/StudentCourses/StudentCoursesList"));
+const ActiveCoursesList = lazy(
+  () => import("@/components/Courses/StudentCourses/CourseLists/ActiveCoursesList"),
+);
+const StudentCoursesList = lazy(
+  () => import("@/components/Courses/StudentCourses/CourseLists/StudentCoursesList"),
+);
 
 type Props = {
   user: NonNullable<FCUser>["user"];
