@@ -27,3 +27,7 @@ export const parseDateTime = (date: Date, time: Date) => {
 
   return { date: parsedDate, time: parsedTime };
 };
+
+export const formatTimestamp = (timestamp: string) => {
+  return dayjs(timestamp).format("MMM DD YYYY, HH:MM");
+};

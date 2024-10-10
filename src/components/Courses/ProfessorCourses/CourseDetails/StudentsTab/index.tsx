@@ -12,9 +12,9 @@ import {
   TableRow,
 } from "@nextui-org/table";
 
-import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentActions/StudentDetails";
-import StudentCellsMux from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentCellsMux";
-import StudentsTableHeader from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentsTableHeader";
+import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/StudentDetails";
+import StudentCellsMux from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentCellsMux";
+import StudentsTableHeader from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentsTableHeader";
 import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 

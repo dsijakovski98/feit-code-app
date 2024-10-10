@@ -95,8 +95,6 @@ const EditCourseForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-      <h3 className="font-semibold">Update course details</h3>
-
       <div className="-space-y-2">
         <Controller
           control={control}
@@ -149,13 +147,7 @@ const EditCourseForm = () => {
         defaultValue={defaultCategories.length ? defaultCategories.split(",") : []}
       />
 
-      <Button
-        fullWidth
-        size={isMobile ? "md" : "lg"}
-        type="submit"
-        className="!mt-10"
-        isLoading={isSubmitting}
-      >
+      <Button fullWidth type="submit" className="!mt-14" isLoading={isSubmitting}>
         Confirm
       </Button>
     </form>

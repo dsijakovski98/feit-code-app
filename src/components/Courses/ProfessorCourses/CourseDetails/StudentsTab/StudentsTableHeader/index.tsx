@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 
 import { useAuth } from "@clerk/clerk-react";
 
-import AddStudent from "@/components/Courses/ProfessorCourses/CourseDetails/ProfessorCourseDetails/StudentsTab/StudentsTableHeader/AddStudent";
+import AddStudent from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentsTableHeader/AddStudent";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";

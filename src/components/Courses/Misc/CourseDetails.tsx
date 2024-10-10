@@ -21,7 +21,8 @@ const userAvatarProps = {
 const CourseDetails = () => {
   const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, description, professor, assistant, categories, archived, updatedAt } = courseDetails;
+  const { name, description, professor, assistant, categories, archived, updatedAt, academicYear } =
+    courseDetails;
   const [professorAvatar] = useAvatar(courseDetails?.professorId);
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
 
@@ -37,30 +38,35 @@ const CourseDetails = () => {
     () => `${assistant?.firstName} ${assistant?.lastName}`,
     [assistant?.firstName, assistant?.lastName],
   );
-  return (
-    <div className="space-y-10">
-      <div>
-        <h2 className="text-lg font-bold">
-          {name}{" "}
-          {archived && (
-            <Chip
-              size="sm"
-              color="default"
-              className="ml-2 -translate-y-1 px-2"
-              classNames={{ content: "font-semibold text-sm" }}
-            >
-              Archived
-            </Chip>
-          )}
-        </h2>
 
-        <p className="mb-2 font-medium">{description}</p>
-        <p className="text-sm text-foreground-300">
-          Updated <Timestamp>{updatedAt}</Timestamp>
-        </p>
+  return (
+    <div className="space-y-16">
+      <div className="flex items-start justify-between gap-6">
+        <div>
+          <h2 className="text-xl font-semibold">
+            {name}{" "}
+            {archived && (
+              <Chip
+                size="sm"
+                color="default"
+                className="ml-2 -translate-y-1 px-2"
+                classNames={{ content: "font-semibold text-sm" }}
+              >
+                Archived
+              </Chip>
+            )}
+          </h2>
+
+          <p className="mb-2 font-medium">{description}</p>
+          <p className="text-sm text-foreground-300">
+            Updated <Timestamp>{updatedAt}</Timestamp>
+          </p>
+        </div>
+
+        <p className="text-xl font-semibold">{academicYear}</p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         <ul className="flex max-w-[40ch] flex-wrap items-center gap-2 lg:gap-1">
           {categories.map(({ category, categoryId }) => (
             <li key={categoryId}>
@@ -78,6 +84,7 @@ const CourseDetails = () => {
             }
             description={<p className="text-sm">{TEACHER_TYPE.professor}</p>}
             avatarProps={{
+              size: "lg",
               showFallback: true,
               src: professorAvatar ?? "",
               ...(userFullName === professorFullName ? userAvatarProps : {}),
@@ -94,6 +101,7 @@ const CourseDetails = () => {
               }
               description={<p className="text-sm">{TEACHER_TYPE.assistant}</p>}
               avatarProps={{
+                size: "lg",
                 showFallback: true,
                 src: assistantAvatar ?? "",
                 ...(userFullName === assistantFullName ? userAvatarProps : {}),

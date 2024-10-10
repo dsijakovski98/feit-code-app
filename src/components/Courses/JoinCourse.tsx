@@ -58,15 +58,15 @@ const JoinCourse = () => {
 
   return (
     <Fragment>
-      <Button size="sm" variant="solid" className="px-6 text-sm" onPress={dialog.toggleOn}>
-        Join
+      <Button variant="solid" className="px-6" onPress={dialog.toggleOn}>
+        Join Course
       </Button>
 
       <ConfirmDialog
         dialog={dialog}
         loading={isPending}
         color="primary"
-        title="Join Course?"
+        title={`Join ${name}`}
         description="You will be able to take exams and receive news updates for this course."
         action={{ label: "Join", onConfirm }}
       />

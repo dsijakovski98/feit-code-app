@@ -1,5 +1,5 @@
-import CourseDetails from "@/components/Courses/CourseDetails";
 import CourseExamInfo from "@/components/Courses/CourseExamInfo";
+import CourseDetails from "@/components/Courses/Misc/CourseDetails";
 
 import "./styles.css";
 
