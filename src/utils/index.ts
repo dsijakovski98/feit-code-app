@@ -1,5 +1,6 @@
 import { UserResource } from "@clerk/types";
 
+import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
@@ -159,4 +160,14 @@ export const getAuthStrategy = (user?: UserResource | null) => {
   }
 
   return null;
+};
+
+export const parseExamStatus = (status: ExamStatus): string => {
+  switch (status) {
+    case EXAM_STATUS.new:
+      return "Upcoming exam";
+
+    default:
+      return status;
+  }
 };

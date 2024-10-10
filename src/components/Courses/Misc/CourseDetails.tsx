@@ -57,8 +57,8 @@ const CourseDetails = () => {
             )}
           </h2>
 
-          <p className="mb-2 font-medium">{description}</p>
-          <p className="text-sm text-foreground-300">
+          <p className="mb-1 font-medium">{description}</p>
+          <p className="text-foreground-300">
             Updated <Timestamp>{updatedAt}</Timestamp>
           </p>
         </div>

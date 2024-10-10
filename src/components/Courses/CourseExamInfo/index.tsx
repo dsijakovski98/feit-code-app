@@ -12,6 +12,7 @@ import { EXAM_STATUS } from "@/constants/enums";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useLatestExam } from "@/hooks/exam/useLatestExam";
 import { useCtx } from "@/hooks/useCtx";
+import { parseExamStatus } from "@/utils";
 import { examStatusColor } from "@/utils/colors";
 
 const CourseExamInfo = () => {
@@ -61,12 +62,8 @@ const CourseExamInfo = () => {
           <p>Latest Exam</p>
         </div>
 
-        <Chip
-          className="text-sm uppercase"
-          classNames={{ content: "font-semibold" }}
-          color={examStatusColor(status)}
-        >
-          {status}
+        <Chip size="lg" classNames={{ content: "font-semibold" }} color={examStatusColor(status)}>
+          {parseExamStatus(status)}
         </Chip>
       </div>
 
