@@ -40,7 +40,7 @@ const CourseDetails = () => {
   return (
     <div className="space-y-10">
       <div>
-        <h2 className="text-lg font-bold">
+        <h2 className="text-xl font-semibold">
           {name}{" "}
           {archived && (
             <Chip
