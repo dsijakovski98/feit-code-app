@@ -2,10 +2,10 @@ import { useMemo } from "react";
 
 import { Spinner } from "@nextui-org/react";
 
+import ExamCard from "@/components/Exams/ExamCard";
 import ExamsList from "@/components/Exams/ExamsList";
 import EmptyExamsList from "@/components/Exams/Misc/EmptyExamsList";
 import ExamHeader from "@/components/Exams/Misc/ExamHeader";
-import ExamCard from "@/components/Exams/ProfessorExams/ExamCard";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { ALL_OPTION } from "@/constants";

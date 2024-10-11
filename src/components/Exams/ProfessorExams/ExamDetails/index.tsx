@@ -1,48 +1,48 @@
-import { Suspense, lazy, useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import { CourseDetailsContext } from "@/context/CourseDetailsContext";
+import { EXAM_STATUS } from "@/constants/enums";
+import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useInvalidRoute } from "@/hooks/useInvalidRoute";
-import { USER_TYPE } from "@/types";
-
-const GeneralTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/GeneralTab"));
-const StudentsTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab"));
-const SettingsTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab"));
 
 const TABS = {
   general: "#general",
-  students: "#students",
+  monitor: "#monitor",
+  results: "#results",
   settings: "#settings",
 };
 
-const ProfessorCourseDetails = () => {
+const ProfessorExamDetails = () => {
   const { userData } = useFCUser();
-  const { courseDetails } = useCtx(CourseDetailsContext);
-  const { assistantId, professorId } = courseDetails;
+  const { examDetails } = useCtx(ExamDetailsContext);
+  const {
+    status,
+    course: { professorId },
+  } = examDetails;
 
   const { hash, pathname } = useLocation();
 
   const tabKeys = useMemo(() => {
     const keys = [TABS.general];
 
-    if (userData?.type !== USER_TYPE.professor) {
-      return keys;
+    if (status === EXAM_STATUS.ongoing) {
+      keys.push(TABS.monitor);
     }
 
-    if ([professorId, assistantId].includes(userData.user.id)) {
-      keys.push(TABS.students);
+    if (status === EXAM_STATUS.completed) {
+      keys.push(TABS.results);
     }
 
-    if (userData.user.id === professorId) {
+    if (userData?.user.id === professorId && status === EXAM_STATUS.new) {
       keys.push(TABS.settings);
     }
 
     return keys;
-  }, [userData, professorId, assistantId]);
+  }, [userData, professorId, status]);
 
   const { invalidRoute } = useInvalidRoute({ tabKeys });
 
@@ -54,13 +54,13 @@ const ProfessorCourseDetails = () => {
     <section className="bg-main min-h-full p-4 pt-0">
       <div className="mx-auto h-full max-w-[140ch] lg:mx-0 lg:max-w-full">
         <Tabs
-          size="lg"
           fullWidth
+          size="lg"
           variant="underlined"
-          aria-label="Course details tabs"
+          aria-label="Exam details tabs"
           destroyInactiveTabPanel={false}
           selectedKey={hash}
-          defaultSelectedKey={TABS.general}
+          defaultSelectedKey="#general"
           classNames={{
             base: "!px-0 sticky top-20 lg:top-0 bg-transparent z-20",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
@@ -69,24 +69,24 @@ const ProfessorCourseDetails = () => {
           }}
         >
           <Tab key={TABS.general} title="General" href={TABS.general}>
-            <Suspense fallback={null}>
-              <GeneralTab />
-            </Suspense>
+            <Suspense fallback={null}>General tab</Suspense>
           </Tab>
 
-          {tabKeys.includes(TABS.students) && (
-            <Tab key={TABS.students} title="Students" href={TABS.students}>
-              <Suspense fallback={null}>
-                <StudentsTab />
-              </Suspense>
+          {tabKeys.includes(TABS.monitor) && (
+            <Tab key={TABS.monitor} title="Monitor" href={TABS.monitor}>
+              <Suspense fallback={null}>Monitor tab</Suspense>
+            </Tab>
+          )}
+
+          {tabKeys.includes(TABS.results) && (
+            <Tab key={TABS.results} title="Results" href={TABS.results}>
+              <Suspense fallback={null}>Results tab</Suspense>
             </Tab>
           )}
 
           {tabKeys.includes(TABS.settings) && (
             <Tab key={TABS.settings} title="Settings" href={TABS.settings}>
-              <Suspense fallback={null}>
-                <SettingsTab />
-              </Suspense>
+              <Suspense fallback={null}>Settings tab</Suspense>
             </Tab>
           )}
         </Tabs>
@@ -95,4 +95,4 @@ const ProfessorCourseDetails = () => {
   );
 };
 
-export default ProfessorCourseDetails;
+export default ProfessorExamDetails;

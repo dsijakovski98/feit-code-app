@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 
 import AuthLayout from "@/layouts/AuthLayout";
 import CourseDetailsLayout from "@/layouts/DetailsLayout/CourseDetailsLayout";
+import ExamDetailsLayout from "@/layouts/DetailsLayout/ExamDetailsLayout";
 import MainLayout from "@/layouts/MainLayout";
 import OnboardingLayout from "@/layouts/OnboardingLayout";
 import PageFallback from "@/layouts/PageFallback";
@@ -23,6 +24,7 @@ const CoursesPage = lazy(() => import("@/pages/dashboard/courses"));
 const CourseDetailsPage = lazy(() => import("@/pages/dashboard/courses/details"));
 const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
 const NewExamPage = lazy(() => import("@/pages/dashboard/courses/new-exam"));
+const ExamDetailsPage = lazy(() => import("@/pages/dashboard/exams/details"));
 
 const AppRouter = () => {
   return (
@@ -58,6 +60,9 @@ const AppRouter = () => {
 
                   <Route path="exams">
                     <Route index element={<ExamsPage />} />
+                    <Route path=":id" element={<ExamDetailsLayout />}>
+                      <Route index element={<ExamDetailsPage />} />
+                    </Route>
                   </Route>
                 </Route>
 
