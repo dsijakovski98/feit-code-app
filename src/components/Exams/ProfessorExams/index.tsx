@@ -2,7 +2,10 @@ import { useMemo } from "react";
 
 import { Spinner } from "@nextui-org/react";
 
+import ExamsList from "@/components/Exams/ExamsList";
+import EmptyExamsList from "@/components/Exams/Misc/EmptyExamsList";
 import ExamHeader from "@/components/Exams/Misc/ExamHeader";
+import ExamCard from "@/components/Exams/ProfessorExams/ExamCard";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
@@ -51,19 +54,21 @@ const ProfessorExams = ({ user }: Props) => {
     return course?.id || "";
   }, [courseFilter.value, courses]);
 
-  const { data, isLoading } = useProfessorExams({
+  const examsQuery = useProfessorExams({
     userId: id,
     courseId: selectedCourseId,
     status: statusFilter.value,
   });
 
+  const { data, isLoading } = examsQuery;
+
   return (
-    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-8 p-8 lg:px-5">
-      <section className="space-y-2">
+    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4">
+      <section className="space-y-2 lg:space-y-3">
         <ExamHeader title="My Exams">
-          <SelectFilter size="md" label="Status" filter={statusFilter} className="w-[240px] lg:w-full" />
+          <SelectFilter size="sm" label="Exam status" filter={statusFilter} className="w-[240px] lg:w-full" />
           <SelectFilter
-            size="md"
+            size="sm"
             label="Course"
             filter={courseFilter}
             isLoading={coursesLoading}
@@ -78,27 +83,14 @@ const ProfessorExams = ({ user }: Props) => {
         )}
 
         {data?.pages[0].length === 0 && (
-          <div className="grid place-items-center p-8 text-center">
-            <p className="text-lg text-foreground-300">
-              No{" "}
-              {statusFilter.value === "all" ? (
-                ""
-              ) : (
-                <span className="font-semibold">{parseExamStatus(statusFilter.value)}</span>
-              )}{" "}
-              exams found{" "}
-              {courseFilter.value === "all" ? (
-                ""
-              ) : (
-                <span>
-                  for <span className="font-semibold">{courseFilter.value}</span>
-                </span>
-              )}
-            </p>
-          </div>
+          <EmptyExamsList status={statusFilter.value} course={courseFilter.value} />
         )}
 
-        {!!data?.pages[0].length && <section className="px-8">Exams list here</section>}
+        {!!data?.pages[0].length && (
+          <section className="overflow-x-clip">
+            <ExamsList examsQuery={examsQuery} renderExam={(exam) => <ExamCard exam={exam} />} />
+          </section>
+        )}
       </section>
 
       {/* TODO: Implement stats UI */}

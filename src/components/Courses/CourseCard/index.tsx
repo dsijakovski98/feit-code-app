@@ -26,9 +26,9 @@ const CourseCard = (props: CourseCardContext) => {
 
   return (
     <CourseCardProvider {...props}>
-      <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background lg:p-4">
+      <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background">
         <div className="flex h-full w-[40ch] flex-col justify-start space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-8">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start justify-between gap-6">
             <div>
               <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
               <h3 className="flex w-full items-end gap-4 truncate text-lg font-semibold lg:text-lg">

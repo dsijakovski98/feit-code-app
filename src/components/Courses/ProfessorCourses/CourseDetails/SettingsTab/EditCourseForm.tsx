@@ -147,7 +147,7 @@ const EditCourseForm = () => {
         defaultValue={defaultCategories.length ? defaultCategories.split(",") : []}
       />
 
-      <Button fullWidth type="submit" className="!mt-14" isLoading={isSubmitting}>
+      <Button fullWidth type="submit" className="!mt-12" isLoading={isSubmitting}>
         Confirm
       </Button>
     </form>

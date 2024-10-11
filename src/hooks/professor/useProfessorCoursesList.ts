@@ -22,7 +22,11 @@ export const useProfessorCoursesList = ({ userId, type }: QueryOptions) => {
           const teacherColumn = type === TEACHER_TYPE.professor ? courses.professorId : courses.assistantId;
           const teacherFilter = eq(teacherColumn, userId);
 
-          return and(teacherFilter, eq(courses.academicYear, currentAcademicYear));
+          return and(
+            teacherFilter,
+            eq(courses.archived, false),
+            eq(courses.academicYear, currentAcademicYear),
+          );
         },
         orderBy: (courses, { asc }) => asc(courses.name),
       });

@@ -25,6 +25,7 @@ const SelectFilter = <T extends Option[]>({ filter, ...rest }: Props<T>) => {
       selectionMode="single"
       selectedKeys={new Set([filterValue])}
       onSelectionChange={handleChange}
+      radius="lg"
       classNames={{
         label: "text-base font-semibold !text-foreground",
       }}

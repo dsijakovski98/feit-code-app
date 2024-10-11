@@ -16,8 +16,6 @@ import { CourseSearchContext } from "@/context/CourseSearch.Context";
 import { useCtx } from "@/hooks/useCtx";
 import { useLoadMore } from "@/hooks/useLoadMore";
 
-import "./styles.css";
-
 type Props<T extends { id: string }> = {
   coursesQuery: UseInfiniteQueryResult<InfiniteData<T[]>>;
   renderCourse: (course: T) => ReactNode;
@@ -62,7 +60,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       navigation={{ hideOnClick: true, enabled: !isFetching }}
       pagination={{ dynamicBullets: true }}
       modules={[A11y, Pagination, Navigation]}
-      className="swiper-courses !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
+      className="swiper-items !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
     >
       {filteredPages.flatMap((page) =>
         page.map((item) => (

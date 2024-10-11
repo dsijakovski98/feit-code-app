@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { ExamStatus } from "@/constants/enums";
 import { EXAMS_PER_PAGE } from "@/constants/queries";
 import { db } from "@/db";
 import { USER_TYPE } from "@/types";
@@ -20,9 +21,16 @@ export const useProfessorExams = ({ userId, courseId, status }: QueryOptions) =>
       const examsData = await db.query.exams.findMany({
         where: (exams, { eq, and }) => {
           const courseFilter = courseId !== "all" ? eq(exams.courseId, courseId) : undefined;
-          const statusFilter = status !== "all" ? eq(exams.status, status) : undefined;
+          const statusFilter = status !== "all" ? eq(exams.status, status as ExamStatus) : undefined;
 
           return and(courseFilter, statusFilter);
+        },
+        with: {
+          course: {
+            columns: { name: true },
+            with: { professor: { columns: { firstName: true, lastName: true } } },
+          },
+          tasks: { columns: { id: true } },
         },
         orderBy: (exams, { desc }) => desc(exams.createdAt),
         limit: EXAMS_PER_PAGE,

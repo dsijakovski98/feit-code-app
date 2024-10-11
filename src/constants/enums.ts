@@ -17,7 +17,7 @@ export const EXAM_STATUS = {
   new: "New",
   ongoing: "Ongoing",
   completed: "Completed",
-};
+} as const;
 export type ExamStatus = RecordValues<typeof EXAM_STATUS>;
 
 export const TASK_STATUS = {

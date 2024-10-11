@@ -76,9 +76,9 @@ const ProfessorCourses = ({ user }: Props) => {
       {!!data?.pages[0].length && (
         <FloatButton
           as={Link}
+          icon="add"
           // @ts-expect-error NextUI not passing through 'as' props
           to="new"
-          icon="add"
           containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
         >
           New Course

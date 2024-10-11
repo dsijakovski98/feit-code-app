@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 
-import { Chip, Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import CompletedExamInfo from "@/components/Courses/CourseExamInfo/CompletedExamInfo";
+import ExamStats from "@/components/Courses/CourseExamInfo/ExamStats";
 import NewExamInfo from "@/components/Courses/CourseExamInfo/NewExamInfo";
 import OngoingExamInfo from "@/components/Courses/CourseExamInfo/OngoingExamInfo";
 import Button from "@/components/ui/Button";
+import FloatButton from "@/components/ui/FloatButton";
 import Icon from "@/components/ui/Icon";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useLatestExam } from "@/hooks/exam/useLatestExam";
 import { useCtx } from "@/hooks/useCtx";
-import { parseExamStatus } from "@/utils";
-import { examStatusColor } from "@/utils/colors";
 
 const CourseExamInfo = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
@@ -42,7 +42,7 @@ const CourseExamInfo = () => {
           startContent={<Icon name="add" className="h-4 w-4" />}
           className="text-xs"
         >
-          New exam
+          New Exam
         </Button>
       </div>
     );
@@ -50,28 +50,27 @@ const CourseExamInfo = () => {
 
   if (!exam) return null;
 
-  const { name, language, status } = exam;
+  const { status } = exam;
 
   return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <h2 className="text-xl font-bold">
-            {name}・{language}
-          </h2>
-          <p>Latest Exam</p>
-        </div>
-
-        <Chip size="lg" classNames={{ content: "font-semibold" }} color={examStatusColor(status)}>
-          {parseExamStatus(status)} exam
-        </Chip>
-      </div>
-
+    <div className="flex h-full flex-col justify-start gap-6">
       {status === EXAM_STATUS.new && <NewExamInfo exam={exam} />}
 
       {status === EXAM_STATUS.ongoing && <OngoingExamInfo exam={exam} />}
 
       {status === EXAM_STATUS.completed && <CompletedExamInfo exam={exam} />}
+
+      <ExamStats />
+
+      <FloatButton
+        as={Link}
+        icon="add"
+        // @ts-expect-error NextUI not passing through 'as' props
+        to="new-exam"
+        containerClass="bottom-10 right-10 lg:bottom-20 lg:right-5"
+      >
+        New Exam
+      </FloatButton>
     </div>
   );
 };
