@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
 import { Chip } from "@nextui-org/chip";
-import { User } from "@nextui-org/user";
 
+import CourseTeacher from "@/components/Courses/Misc/CourseTeacher";
 import CategoryChip from "@/components/ui/CategoryChip";
 import Timestamp from "@/components/ui/Timestamp";
 
@@ -12,31 +12,16 @@ import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { TEACHER_TYPE } from "@/types";
 
-const userAvatarProps = {
-  isBordered: true,
-  className: "-ring-offset-1",
-  color: "primary",
-} as const;
-
 const CourseDetails = () => {
   const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { name, description, professor, assistant, categories, archived, updatedAt, academicYear } =
-    courseDetails;
+  const { name, description, professor, assistant, categories, archived, updatedAt } = courseDetails;
   const [professorAvatar] = useAvatar(courseDetails?.professorId);
   const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
 
   const userFullName = useMemo(
     () => `${userData?.user.firstName} ${userData?.user.lastName}`,
     [userData?.user.firstName, userData?.user.lastName],
-  );
-  const professorFullName = useMemo(
-    () => `${professor.firstName} ${professor.lastName}`,
-    [professor.firstName, professor.lastName],
-  );
-  const assistantFullName = useMemo(
-    () => `${assistant?.firstName} ${assistant?.lastName}`,
-    [assistant?.firstName, assistant?.lastName],
   );
 
   return (
@@ -63,7 +48,7 @@ const CourseDetails = () => {
           </p>
         </div>
 
-        <p className="text-xl font-semibold">{academicYear}</p>
+        <p className="text-xl font-semibold">{courseDetails.academicYear}</p>
       </div>
 
       <div className="space-y-8">
@@ -76,37 +61,19 @@ const CourseDetails = () => {
         </ul>
 
         <div className="flex w-fit flex-wrap items-end gap-8 lg:w-full lg:justify-between">
-          <User
-            name={
-              <a href={`mailto: ${professor.email}`} className="font-semibold">
-                {userFullName === professorFullName ? "You" : professorFullName}
-              </a>
-            }
-            description={<p className="text-sm">{TEACHER_TYPE.professor}</p>}
-            avatarProps={{
-              size: "lg",
-              showFallback: true,
-              src: professorAvatar ?? "",
-              ...(userFullName === professorFullName ? userAvatarProps : {}),
-            }}
-            className="shrink-0"
+          <CourseTeacher
+            teacher={professor}
+            type={TEACHER_TYPE.professor}
+            userFullName={userFullName}
+            avatarUrl={professorAvatar}
           />
 
           {assistant ? (
-            <User
-              name={
-                <a href={`mailto:${assistant.email}`} className="font-semibold">
-                  {userFullName === assistantFullName ? "You" : assistantFullName}
-                </a>
-              }
-              description={<p className="text-sm">{TEACHER_TYPE.assistant}</p>}
-              avatarProps={{
-                size: "lg",
-                showFallback: true,
-                src: assistantAvatar ?? "",
-                ...(userFullName === assistantFullName ? userAvatarProps : {}),
-              }}
-              className="shrink-0"
+            <CourseTeacher
+              teacher={assistant}
+              type={TEACHER_TYPE.assistant}
+              userFullName={userFullName}
+              avatarUrl={assistantAvatar}
             />
           ) : (
             <p className="shrink font-semibold text-foreground-300">This course doesn't have an assistant.</p>
