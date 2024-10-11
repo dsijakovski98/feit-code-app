@@ -8,19 +8,13 @@ import ExamHeader from "@/components/Exams/Misc/ExamHeader";
 import ExamCard from "@/components/Exams/ProfessorExams/ExamCard";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
-import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
+import { ALL_OPTION } from "@/constants";
+import { EXAM_STATUS_OPTIONS } from "@/constants/exams";
+import { useExams } from "@/hooks/exam/useExams";
 import { useProfessorCoursesList } from "@/hooks/professor/useProfessorCoursesList";
-import { useProfessorExams } from "@/hooks/professor/useProfessorExams";
 import { FCProfessor } from "@/hooks/useFCUser";
-import { Option, useFilter } from "@/hooks/useFilter";
-import { parseExamStatus } from "@/utils";
-
-const statusOptions = Object.values(EXAM_STATUS).map((status: ExamStatus) => ({
-  value: status,
-  label: parseExamStatus(status),
-}));
-
-const allOption: Option = { value: "all", label: "All" };
+import { useFilter } from "@/hooks/useFilter";
+import { USER_TYPE } from "@/types";
 
 type Props = {
   user: FCProfessor;
@@ -31,19 +25,19 @@ const ProfessorExams = ({ user }: Props) => {
 
   const { data: courses, isLoading: coursesLoading } = useProfessorCoursesList({ userId: id, type });
   const courseOptions = useMemo(
-    () => courses?.map((course) => ({ value: course.name, label: course.name })) ?? [],
+    () => courses?.map(({ name }) => ({ value: name, label: name })) ?? [],
     [courses],
   );
 
   const courseFilter = useFilter({
     name: "course",
-    options: [allOption, ...courseOptions],
+    options: [ALL_OPTION, ...courseOptions],
     defaultValue: "all",
   });
 
   const statusFilter = useFilter({
     name: "status",
-    options: [allOption, ...statusOptions],
+    options: [ALL_OPTION, ...EXAM_STATUS_OPTIONS],
     defaultValue: "all",
   });
 
@@ -54,8 +48,9 @@ const ProfessorExams = ({ user }: Props) => {
     return course?.id || "";
   }, [courseFilter.value, courses]);
 
-  const examsQuery = useProfessorExams({
+  const examsQuery = useExams({
     userId: id,
+    type: USER_TYPE.professor,
     courseId: selectedCourseId,
     status: statusFilter.value,
   });

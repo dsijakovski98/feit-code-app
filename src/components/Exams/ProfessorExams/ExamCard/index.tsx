@@ -8,18 +8,27 @@ import { courses, exams } from "@/db/schema";
 
 import Button from "@/components/ui/Button";
 
+import { ROUTES } from "@/constants/routes";
+import { useFCUser } from "@/hooks/useFCUser";
+import { USER_TYPE } from "@/types";
 import { parseExamStatus } from "@/utils";
 import { examStatusColor } from "@/utils/colors";
 import { formatTimestamp } from "@/utils/dates";
 
 type Props = {
   exam: InferSelectModel<typeof exams> & {
-    course: Pick<InferSelectModel<typeof courses>, "name">;
+    course: Pick<InferSelectModel<typeof courses>, "name" | "id">;
   };
 };
 
 const ExamCard = ({ exam }: Props) => {
   const { id, course, name, language, startsAt, status } = exam;
+
+  const { userData } = useFCUser();
+
+  if (!userData) return null;
+
+  const { type } = userData;
 
   return (
     <div className="h-full w-[36ch] space-y-16 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background sm:w-[34ch] sm:space-y-20">
@@ -42,13 +51,13 @@ const ExamCard = ({ exam }: Props) => {
         <Button
           as={Link}
           // @ts-expect-error NextUI not passing through 'as' props
-          to={id}
+          to={type === USER_TYPE.professor ? id : `${ROUTES.dashboard}${ROUTES.courses}/${course.id}`}
           size="sm"
           variant="light"
           color="default"
           className="px-5 text-sm lg:px-0"
         >
-          Details
+          {type === USER_TYPE.professor ? "Details" : "Course"}
         </Button>
       </div>
     </div>

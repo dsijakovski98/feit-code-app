@@ -21,7 +21,11 @@ const ExamsPage = () => {
 
   return (
     <Suspense fallback={null}>
-      {userData.type === USER_TYPE.student ? <StudentExams /> : <ProfessorExams user={userData.user} />}
+      {userData.type === USER_TYPE.student ? (
+        <StudentExams user={userData.user} />
+      ) : (
+        <ProfessorExams user={userData.user} />
+      )}
     </Suspense>
   );
 };

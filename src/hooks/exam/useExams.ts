@@ -3,20 +3,21 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { ExamStatus } from "@/constants/enums";
 import { EXAMS_PER_PAGE } from "@/constants/queries";
 import { db } from "@/db";
-import { USER_TYPE } from "@/types";
+import { UserType } from "@/types";
 
 type QueryOptions = {
   userId: string;
+  type: UserType;
   courseId: string;
   status: string;
 };
 
-export const useProfessorExams = ({ userId, courseId, status }: QueryOptions) => {
+export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
   return useInfiniteQuery({
     initialPageParam: 0,
     enabled: !!courseId,
 
-    queryKey: [{ name: "exams", type: USER_TYPE.professor, id: userId, courseId, status }],
+    queryKey: [{ name: "exams", type, id: userId, courseId, status }],
     queryFn: async ({ pageParam = 0 }) => {
       const examsData = await db.query.exams.findMany({
         where: (exams, { eq, and }) => {
@@ -27,7 +28,7 @@ export const useProfessorExams = ({ userId, courseId, status }: QueryOptions) =>
         },
         with: {
           course: {
-            columns: { name: true },
+            columns: { name: true, id: true },
             with: { professor: { columns: { firstName: true, lastName: true } } },
           },
           tasks: { columns: { id: true } },
