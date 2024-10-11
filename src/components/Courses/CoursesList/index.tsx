@@ -1,4 +1,4 @@
-import { ElementRef, ReactNode, useCallback, useLayoutEffect, useMemo, useRef } from "react";
+import { ReactNode, useMemo } from "react";
 
 import { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { InferSelectModel } from "drizzle-orm";
@@ -14,6 +14,7 @@ import { courses } from "@/db/schema";
 import { COURSES_PER_PAGE } from "@/constants/queries";
 import { CourseSearchContext } from "@/context/CourseSearch.Context";
 import { useCtx } from "@/hooks/useCtx";
+import { useLoadMore } from "@/hooks/useLoadMore";
 
 import "./styles.css";
 
@@ -26,6 +27,8 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
   const { data, fetchNextPage, hasNextPage, isFetching } = coursesQuery;
 
   const { search } = useCtx(CourseSearchContext);
+
+  const { ref } = useLoadMore(fetchNextPage);
 
   const filteredPages = useMemo(
     () =>
@@ -47,29 +50,6 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       }) ?? [],
     [data?.pages, search],
   );
-
-  const loadMoreRef = useRef<ElementRef<"div">>(null);
-  const loadMoreCallback = useCallback<IntersectionObserverCallback>(
-    (entries) => {
-      const [loadMoreEntry] = entries;
-
-      if (loadMoreEntry.isIntersecting) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage],
-  );
-
-  useLayoutEffect(() => {
-    if (!loadMoreRef.current) return;
-
-    const observer = new IntersectionObserver(loadMoreCallback);
-    observer.observe(loadMoreRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [loadMoreCallback]);
 
   if (!data) return null;
 
@@ -93,8 +73,8 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       )}
 
       {hasNextPage && (
-        <SwiperSlide hidden>
-          <div ref={loadMoreRef} aria-hidden />
+        <SwiperSlide>
+          <div ref={ref} aria-hidden />
         </SwiperSlide>
       )}
     </Swiper>

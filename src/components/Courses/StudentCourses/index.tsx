@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState } from "react";
 
 import CoursesHeader from "@/components/Courses/Misc/CoursesHeader";
-import SwitchFilter from "@/components/ui/SwitchFilter";
+import SwitchFilter from "@/components/ui/Filters/SwitchFilter";
 
 import CourseSearchProvider from "@/context/CourseSearch.Context";
 import { FCUser } from "@/hooks/useFCUser";

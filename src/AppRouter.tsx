@@ -18,6 +18,7 @@ const CallbackSSO = lazy(() => import("@/pages/auth/sso-callback"));
 const WelcomePage = lazy(() => import("@/pages/welcome"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
+const ExamsPage = lazy(() => import("@/pages/dashboard/exams"));
 const CoursesPage = lazy(() => import("@/pages/dashboard/courses"));
 const CourseDetailsPage = lazy(() => import("@/pages/dashboard/courses/details"));
 const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
@@ -38,6 +39,11 @@ const AppRouter = () => {
                   element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} replace />}
                 />
 
+                <Route
+                  path={ROUTES.exams}
+                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.exams}`} replace />}
+                />
+
                 <Route path={ROUTES.dashboard}>
                   <Route index element={<Dashboard />} />
 
@@ -48,6 +54,10 @@ const AppRouter = () => {
                       <Route index element={<CourseDetailsPage />} />
                       <Route path="new-exam" element={<NewExamPage />} />
                     </Route>
+                  </Route>
+
+                  <Route path="exams">
+                    <Route index element={<ExamsPage />} />
                   </Route>
                 </Route>
 

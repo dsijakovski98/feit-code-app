@@ -63,7 +63,7 @@ const CourseExamInfo = () => {
         </div>
 
         <Chip size="lg" classNames={{ content: "font-semibold" }} color={examStatusColor(status)}>
-          {parseExamStatus(status)}
+          {parseExamStatus(status)} exam
         </Chip>
       </div>
 

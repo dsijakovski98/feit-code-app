@@ -165,7 +165,7 @@ export const getAuthStrategy = (user?: UserResource | null) => {
 export const parseExamStatus = (status: ExamStatus): string => {
   switch (status) {
     case EXAM_STATUS.new:
-      return "Upcoming exam";
+      return "Upcoming";
 
     default:
       return status;

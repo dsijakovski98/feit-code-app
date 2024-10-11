@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import clsx from "clsx";
 
-import JoinCourse from "@/components/Courses/JoinCourse";
+import JoinCourse from "@/components/Courses/Forms/JoinCourse";
 import Button from "@/components/ui/Button";
 
 import { CourseCardContext } from "@/context/CourseCardContext";

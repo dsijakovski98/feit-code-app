@@ -11,9 +11,9 @@ type Props<T extends [Option, Option]> = {
 };
 
 const SwitchFilter = <T extends [Option, Option]>({ filter }: Props<T>) => {
-  const { isMobileSm } = useCtx(ResponsiveContext);
-
   const { value: filterValue, updateFilter, options } = filter;
+
+  const { isMobileSm } = useCtx(ResponsiveContext);
 
   return (
     <ButtonGroup size={isMobileSm ? "sm" : "md"} className="*:basis-full *:px-3 *:py-2 *:text-xs md:order-1">
