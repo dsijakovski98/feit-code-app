@@ -216,7 +216,7 @@ const SignUpForm = () => {
               </Button>
             </div>
 
-            <p className="text-center text-content1-foreground">or</p>
+            <p className="my-1 text-center text-content1-foreground">or</p>
 
             <OAuthJoin joinType="Join" oAuthJoin={oAuthSignUp} formLoading={formLoading} />
 

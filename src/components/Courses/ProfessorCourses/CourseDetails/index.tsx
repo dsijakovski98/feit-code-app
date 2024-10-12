@@ -51,8 +51,8 @@ const ProfessorCourseDetails = () => {
   }
 
   return (
-    <section className="bg-main min-h-full p-4 pt-0">
-      <div className="mx-auto h-full max-w-[140ch] lg:mx-0 lg:max-w-full">
+    <section className="bg-main h-auto pt-0">
+      <div className="max-w-[140ch mx-auto lg:mx-0 lg:max-w-full">
         <Tabs
           size="lg"
           fullWidth
@@ -62,10 +62,10 @@ const ProfessorCourseDetails = () => {
           selectedKey={hash}
           defaultSelectedKey={TABS.general}
           classNames={{
-            base: "!px-0 sticky top-20 lg:top-0 bg-transparent z-20",
+            base: "!px-0 sticky top-[85px] lg:top-0 bg-transparent z-20",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
             tabList: "!mx-0 py-5 bg-main",
-            panel: "pt-3 px-10 lg:px-5 md:px-0",
+            panel: "pt-3 px-10 lg:px-5 overflow-y-scroll max-h-[calc(100dvh-85px-80px)]",
           }}
         >
           <Tab key={TABS.general} title="General" href={TABS.general}>

@@ -84,8 +84,8 @@ const EditExamForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-1">
-        <div className="flex gap-6">
+      <div className="space-y-1 lg:space-y-3">
+        <div className="flex items-baseline gap-6 md:contents">
           <Controller
             control={control}
             name="name"
@@ -108,7 +108,7 @@ const EditExamForm = () => {
             )}
           />
 
-          <div className="min-w-[240px] shrink">
+          <div className="lg:min-w-auto min-w-[240px] shrink">
             <DurationSelect form={form} />
           </div>
         </div>

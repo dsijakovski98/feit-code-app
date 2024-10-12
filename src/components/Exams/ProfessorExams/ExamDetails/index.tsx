@@ -1,15 +1,16 @@
-import { Suspense, useMemo } from "react";
+import { Suspense, lazy, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
-
-import ExamSettings from "@/components/Exams/ProfessorExams/ExamDetails/ExamSettings";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useInvalidRoute } from "@/hooks/useInvalidRoute";
+
+const GeneralTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/GeneralTab"));
+const SettingsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/SettingsTab"));
 
 const TABS = {
   general: "#general",
@@ -71,16 +72,20 @@ const ProfessorExamDetails = () => {
           }}
         >
           <Tab key={TABS.general} title="General" href={TABS.general}>
-            <Suspense fallback={null}>General tab</Suspense>
+            <Suspense fallback={null}>
+              <GeneralTab />
+            </Suspense>
           </Tab>
 
           {tabKeys.includes(TABS.monitor) && (
+            // TODO: Implement Monitor tab
             <Tab key={TABS.monitor} title="Monitor" href={TABS.monitor}>
               <Suspense fallback={null}>Monitor tab</Suspense>
             </Tab>
           )}
 
           {tabKeys.includes(TABS.results) && (
+            // TODO: Implement Results tab
             <Tab key={TABS.results} title="Results" href={TABS.results}>
               <Suspense fallback={null}>Results tab</Suspense>
             </Tab>
@@ -89,7 +94,7 @@ const ProfessorExamDetails = () => {
           {tabKeys.includes(TABS.settings) && (
             <Tab key={TABS.settings} title="Settings" href={TABS.settings}>
               <Suspense fallback={null}>
-                <ExamSettings />
+                <SettingsTab />
               </Suspense>
             </Tab>
           )}

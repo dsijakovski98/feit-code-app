@@ -1,8 +1,8 @@
-import { Suspense, lazy } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "@nextui-org/spinner";
 
+import ProfessorExamDetails from "@/components/Exams/ProfessorExams/ExamDetails";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
@@ -10,10 +10,6 @@ import { ROUTES } from "@/constants/routes";
 import ExamDetailsProvider from "@/context/ExamDetailsContext";
 import { useExamDetails } from "@/hooks/exam/useExamDetails";
 import { useFCUser } from "@/hooks/useFCUser";
-import { USER_TYPE } from "@/types";
-
-const ProfessorExamDetails = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails"));
-const StudentExamDetails = lazy(() => import("@/components/Exams/StudentExams/ExamDetails"));
 
 const ExamDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,9 +50,7 @@ const ExamDetailsPage = () => {
 
   return (
     <ExamDetailsProvider examDetails={data}>
-      <Suspense fallback={null}>
-        {userData.type === USER_TYPE.student ? <StudentExamDetails /> : <ProfessorExamDetails />}
-      </Suspense>
+      <ProfessorExamDetails />
     </ExamDetailsProvider>
   );
 };

@@ -173,7 +173,7 @@ const SignInForm = () => {
         </Button>
       </div>
 
-      <p className="text-center font-sans text-content1-foreground">or</p>
+      <p className="my-1 text-center font-sans text-content1-foreground">or</p>
 
       <OAuthJoin joinType="Sign in" oAuthJoin={oAuthSignIn} formLoading={formLoading} />
 

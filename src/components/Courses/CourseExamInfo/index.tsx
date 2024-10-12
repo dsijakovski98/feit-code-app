@@ -60,7 +60,7 @@ const CourseExamInfo = () => {
   const { status } = exam;
 
   return (
-    <div className="flex h-full flex-col justify-start gap-6">
+    <div className="flex h-full flex-col justify-start gap-6 md:gap-20">
       {status === EXAM_STATUS.new && <NewExamInfo exam={exam} />}
 
       {status === EXAM_STATUS.ongoing && <OngoingExamInfo exam={exam} />}

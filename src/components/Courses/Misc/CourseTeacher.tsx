@@ -45,7 +45,7 @@ const CourseTeacher = ({ userFullName, teacher, type, avatarUrl }: Props) => {
       }}
       className="shrink-0"
       classNames={{
-        name: "font-semibold",
+        name: "font-semibold text-base",
       }}
     />
   );
