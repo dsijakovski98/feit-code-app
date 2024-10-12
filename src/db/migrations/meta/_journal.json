@@ -15,6 +15,20 @@
       "when": 1728508337193,
       "tag": "0001_giant_redwing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1728766406125,
+      "tag": "0002_cheerful_gertrude_yorkes",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1728768489004,
+      "tag": "0003_steady_yellow_claw",
+      "breakpoints": true
     }
   ]
 }

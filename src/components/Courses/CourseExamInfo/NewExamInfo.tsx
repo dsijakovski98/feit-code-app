@@ -8,6 +8,7 @@ import { Chip } from "@nextui-org/react";
 
 import { exams } from "@/db/schema";
 
+import { ROUTES } from "@/constants/routes";
 import { parseExamStatus } from "@/utils";
 import { examStatusColor } from "@/utils/colors";
 import { formatTimestamp } from "@/utils/dates";
@@ -21,7 +22,7 @@ const NewExamInfo = ({ exam }: Props) => {
   const timestamp = useMemo(() => formatTimestamp(startsAt), [startsAt]);
 
   return (
-    <Link to={id} className="group space-y-0.5 *:font-sans">
+    <Link to={`${ROUTES.dashboard}${ROUTES.exams}/${id}`} className="group space-y-0.5 *:font-sans">
       <div className="flex items-start justify-between gap-6">
         <div>
           <p className="transition-colors group-hover:text-primary-600 group-focus:text-primary-600">

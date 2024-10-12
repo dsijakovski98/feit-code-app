@@ -35,6 +35,9 @@ const ScheduleExam = ({ form }: Props) => {
             classNames={{
               selectorIcon: "h-6 w-6",
             }}
+            dateInputClassNames={{
+              segment: "focus:bg-primary focus:text-primary-foreground",
+            }}
           />
         )}
       />
@@ -51,7 +54,10 @@ const ScheduleExam = ({ form }: Props) => {
             variant="underlined"
             value={nextUITime(field.value)}
             onChange={(e) => field.onChange(nextUITimeToDate(e.toString()))}
-            label={<span className="font-semibold text-foreground">Time</span>}
+            label={<span className="font-semibold text-foreground">Start Time</span>}
+            classNames={{
+              segment: "focus:bg-primary focus:text-primary-foreground",
+            }}
           />
         )}
       />

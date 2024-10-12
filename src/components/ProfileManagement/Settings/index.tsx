@@ -13,13 +13,13 @@ const ProfileSettings = () => {
 
   return (
     <section className="space-y-14">
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold">Security</h2>
+      <div className="space-y-2">
+        <h2 className="text-xl font-semibold">Security</h2>
         <div className="flex items-start justify-between gap-52 px-4 xl:gap-20 lg:flex-col lg:gap-6 md:gap-4">
           <div className="lg:space-y-1">
-            <h3 className="font-semibold">Password</h3>
+            <h3 className="text-lg font-semibold">Password</h3>
 
-            <p className="text-sm">
+            <p>
               {authStrategy ? (
                 <Fragment>
                   You are logged in using <span className="font-bold">{authStrategy}</span>. We cannot reset
@@ -35,12 +35,12 @@ const ProfileSettings = () => {
         </div>
       </div>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-danger">Danger Zone</h2>
+      <div className="space-y-2">
+        <h2 className="text-xl font-semibold text-danger">Danger Zone</h2>
         <div className="flex items-start justify-between gap-8 px-4 lg:flex-col lg:gap-4">
           <div className="lg:space-y-1">
-            <h3 className="font-semibold">Delete Profile</h3>
-            <p className="text-sm">Permanently delete your profile from the face of the planet.</p>
+            <h3 className="text-lg font-semibold">Delete Profile</h3>
+            <p>Permanently delete your profile from the face of the planet.</p>
           </div>
 
           <DeleteProfile />

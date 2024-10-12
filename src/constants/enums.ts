@@ -20,9 +20,9 @@ export const EXAM_STATUS = {
 } as const;
 export type ExamStatus = RecordValues<typeof EXAM_STATUS>;
 
-export const TASK_STATUS = {
+export const SUBMISSION_STATUS = {
   submitted: "Submitted",
   inProgress: "In Progress",
   graded: "Graded",
 };
-export type TaskStatus = RecordValues<typeof TASK_STATUS>;
+export type SubmissionStatus = RecordValues<typeof SUBMISSION_STATUS>;

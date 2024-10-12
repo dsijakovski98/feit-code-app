@@ -5,7 +5,7 @@ const SettingsTab = () => {
   return (
     <section className="mx-auto !h-auto max-w-[85ch] space-y-14 pb-8 md:max-w-full">
       <div className="space-y-2">
-        <h2 className="text-xl font-semibold">General</h2>
+        <h2 className="text-xl font-semibold">Edit Course</h2>
 
         <div className="pl-4">
           <EditCourseForm />

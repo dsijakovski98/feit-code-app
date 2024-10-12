@@ -3,6 +3,8 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
+import ExamSettings from "@/components/Exams/ProfessorExams/ExamDetails/ExamSettings";
+
 import { EXAM_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -86,7 +88,9 @@ const ProfessorExamDetails = () => {
 
           {tabKeys.includes(TABS.settings) && (
             <Tab key={TABS.settings} title="Settings" href={TABS.settings}>
-              <Suspense fallback={null}>Settings tab</Suspense>
+              <Suspense fallback={null}>
+                <ExamSettings />
+              </Suspense>
             </Tab>
           )}
         </Tabs>

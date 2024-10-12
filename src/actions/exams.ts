@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { eq } from "drizzle-orm";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 import { exams, tasks as tasksTable } from "@/db/schema";
@@ -9,6 +10,15 @@ import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 
+type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
+
+const parseExamDates = ({ startDate, startTime }: ExamDates) => {
+  const parsedDate = dayjs(startDate).format("YYYY-MM-DD");
+  const parsedTime = dayjs(startTime).format("HH:MM");
+
+  return `${parsedDate} ${parsedTime}`;
+};
+
 type CreateExamOptions = {
   courseId: string;
   exam: ExamSchema;
@@ -16,9 +26,7 @@ type CreateExamOptions = {
 };
 export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) => {
   const { name, language, durationMinutes, points, startDate, startTime } = exam;
-  const parsedDate = dayjs(startDate).format("YYYY-MM-DD");
-  const parsedTime = dayjs(startTime).format("HH:MM");
-  const startsAt = `${parsedDate} ${parsedTime}`;
+  const startsAt = parseExamDates({ startDate, startTime });
 
   try {
     const [{ examId }] = await db
@@ -56,6 +64,44 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
     console.log({ e });
 
     throw new Error("Failed to create exam!");
+  }
+
+  return true;
+};
+
+type UpdateExamOptions = Pick<ExamSchema, "name" | "durationMinutes" | "startDate" | "startTime"> & {
+  examId: string;
+};
+
+export const updateExam = async (options: UpdateExamOptions) => {
+  const { examId, name, durationMinutes, startDate, startTime } = options;
+  const startsAt = parseExamDates({ startDate, startTime });
+
+  try {
+    await db
+      .update(exams)
+      .set({ name, startsAt, durationMinutes: Number(durationMinutes) })
+      .where(eq(exams.id, examId));
+
+    // TODO: Notify students that exam has been updated
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to update exam!");
+  }
+
+  return true;
+};
+
+export const cancelExam = async (examId: string) => {
+  try {
+    await db.delete(exams).where(eq(exams.id, examId));
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to cancel exam");
   }
 
   return true;

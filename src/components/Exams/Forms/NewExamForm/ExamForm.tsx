@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import ScheduleExam from "../ScheduleExam";
@@ -12,12 +11,9 @@ import Input from "@/components/ui/Input";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
+import { useExamNamePlaceholder } from "@/hooks/exam/useExamNamePlaceholder";
 import { useCtx } from "@/hooks/useCtx";
-import { getAcademicYear, getSemesterType } from "@/utils";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
-
-const academicYear = getAcademicYear();
-const semester = getSemesterType();
 
 const ExamForm = () => {
   const { isMobile } = useCtx(ResponsiveContext);
@@ -52,7 +48,7 @@ const ExamForm = () => {
     setStep("tasks");
   };
 
-  const namePlaceholder = useMemo(() => `Ex. ${name} | ${semester} Semester ${academicYear}`, [name]);
+  const namePlaceholder = useExamNamePlaceholder(name);
 
   return (
     <form id="new-exam-form" onSubmit={handleSubmit(onSubmit)} className="space-y-14 lg:pb-4">
