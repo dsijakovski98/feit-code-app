@@ -8,7 +8,7 @@ export const TaskSchema = object({
     regex(/^[A-Za-z_ ]+$/, "Alphabetical characters, underscore (_) and space allowed!"),
   ),
   description: pipe(string(), trim(), nonEmpty("Field is required!")),
-  points: pipe(string(), trim(), nonEmpty(), regex(/^\d+$/, "Points must be a positive number!")),
+  points: pipe(string(), trim(), nonEmpty("Field is required!"), regex(/^\d+$/, "Positive numbers only!")),
 });
 
 export type TaskSchema = InferInput<typeof TaskSchema>;

@@ -7,7 +7,7 @@ import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextu
 import { ButtonProps } from "@nextui-org/react";
 
 import NewTaskForm from "@/components/Tasks/Forms/NewTaskForm";
-import TaskCodeTemplate from "@/components/Tasks/TaskCodeTemplate";
+import TaskCodeTemplate from "@/components/Tasks/Forms/NewTaskForm/TaskCodeTemplate";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import PresenceBlock from "@/components/ui/PresenceBlock";

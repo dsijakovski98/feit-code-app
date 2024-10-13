@@ -4,9 +4,10 @@ import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
 import { UseState } from "@/types";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
+import { TaskTestSchema } from "@/utils/formSchemas/tasks/testSchema";
 
-type ExamSteps = "exam" | "tasks" | "confirm" | "creating";
-export type TaskType = TaskSchema & { template: string };
+type ExamSteps = "exam" | "tasks" | "tests" | "confirm" | "creating";
+export type TaskType = TaskSchema & { template: string; tests: TaskTestSchema[] };
 
 type ExamFormContext = {
   formState: UseState<ExamSchema>;

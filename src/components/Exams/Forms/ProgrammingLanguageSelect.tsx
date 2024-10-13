@@ -4,7 +4,10 @@ import clsx from "clsx";
 
 import { Select, SelectItem } from "@nextui-org/select";
 
-import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
+import Icon from "@/components/ui/Icon";
+
+import { LANUGAGES_SUPPORTED_TESTS } from "@/constants/code/languageTests";
+import { PROGRAMMING_LANGUAGE, ProgrammingLanguage } from "@/constants/enums";
 import { PROGRAMMING_LANGUAGES } from "@/constants/exams";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 
@@ -19,7 +22,7 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
   } = form;
 
   const renderItem = ({ name, img = "", size }: { name: string; img?: string; size: "sm" | "md" }) => (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2.5">
       <img
         src={img}
         alt={img}
@@ -27,7 +30,13 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
         height={size === "md" ? 26 : 20}
         className={clsx({ "scale-[1.75] dark:invert": name === PROGRAMMING_LANGUAGE.rust })}
       />
-      <p className="text-base font-semibold">{name}</p>
+      <div className="mr-5 flex grow items-center justify-between gap-4">
+        <p className="text-base font-semibold leading-none">{name}</p>
+
+        {LANUGAGES_SUPPORTED_TESTS.includes(name as ProgrammingLanguage) && (
+          <Icon name="test" className="h-3.5 w-3.5" />
+        )}
+      </div>
     </div>
   );
 
@@ -42,12 +51,16 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
           color="default"
           variant="underlined"
           selectionMode="single"
-          label="Programming language"
-          description={"The base programming language used in the exam's Tasks"}
+          label="Language"
+          description={
+            <div className="flex translate-y-0.5 items-center text-foreground">
+              <Icon name="test" className="h-4 w-4" /> - Task tests supported.
+            </div>
+          }
           isDisabled={isSubmitting}
           isInvalid={fieldState.invalid}
-          errorMessage={fieldState.error?.message}
           defaultSelectedKeys={[field.value]}
+          errorMessage={fieldState.error?.message}
           renderValue={([item]) => renderItem({ name: item.key as string, img: item.textValue, size: "sm" })}
           classNames={{
             label: "font-semibold text-lg lg:text-base !text-foreground",

@@ -9,6 +9,7 @@ import { languageExtensions } from "@/constants/code/languageExtensions";
 import { ProgrammingLanguage } from "@/constants/enums";
 
 type Props = { language: ProgrammingLanguage } & ComponentProps<typeof CodeMirror>;
+
 const CodeEditor = ({ language, ...rest }: Props) => {
   const { theme } = useTheme();
 
@@ -18,6 +19,13 @@ const CodeEditor = ({ language, ...rest }: Props) => {
   return (
     <CodeMirror
       {...rest}
+      spellCheck
+      onInvalid={(e) => {
+        console.log("INVALID", e);
+      }}
+      onError={(e) => {
+        console.log("ERROR", e);
+      }}
       theme={editorTheme}
       extensions={langExtension ? [langExtension, ...(rest.extensions || [])] : rest.extensions}
     />

@@ -51,7 +51,7 @@ const DurationSelect = ({ form }: Props) => {
               <AutocompleteItem
                 key={item.duration}
                 textValue={item.duration}
-                classNames={{ title: "font-sans text-sm font-semibold" }}
+                classNames={{ title: "font-sans text-base font-semibold" }}
                 title={`${item.duration} min (${hours}h)`}
               />
             );

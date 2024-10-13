@@ -42,7 +42,13 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
 
     const template = taskTemplate.length ? taskTemplate : baseTaskTemplate({ title, description, language });
 
-    setTasks((prev) => [...prev, { ...task, template }]);
+    const newTask = {
+      ...task,
+      template,
+      tests: [], // Tests added separately
+    };
+
+    setTasks((prev) => [...prev, newTask]);
     dialog.toggleOff();
     reset();
   };

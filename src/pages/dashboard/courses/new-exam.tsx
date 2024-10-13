@@ -53,7 +53,7 @@ const NewExamPage = () => {
         Back to Course
       </Link>
 
-      <div className="mx-auto h-full w-[80ch] -translate-x-[50px] -translate-y-1 xl:translate-x-0 lg:w-full lg:translate-y-0">
+      <div className="mx-auto h-full w-[80ch] -translate-x-[80px] -translate-y-1 xl:translate-x-0 lg:w-full lg:translate-y-0">
         {courseDetails && (
           <CourseDetailsProvider courseDetails={courseDetails}>
             <ExamFormProvider>

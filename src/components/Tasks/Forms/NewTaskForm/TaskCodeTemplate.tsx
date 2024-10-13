@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import CodeEditor from "../CodeEditor";
+import CodeEditor from "../../../CodeEditor";
 import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
@@ -44,9 +44,9 @@ const TaskCodeTemplate = ({ form, template, onSave }: Props) => {
   };
 
   return (
-    <div className="space-y-1">
-      <div className="flex items-center justify-between gap-6 pb-4">
-        <p className="text-lg">This is what students will see to start off the task.</p>
+    <div className="space-y-2">
+      <div className="mb-4 flex items-center justify-between gap-6">
+        <p className="text-lg">This will be the starting point of the task.</p>
 
         <Button
           color="default"
@@ -57,11 +57,11 @@ const TaskCodeTemplate = ({ form, template, onSave }: Props) => {
             "pointer-events-auto opacity-100": templateChanged,
           })}
         >
-          Save Template
+          Save
         </Button>
       </div>
 
-      <p className="flex items-center gap-1 font-semibold">
+      <p className="flex items-center gap-1">
         <Icon name="info" className="h-4 w-4 scale-110" />
         <span>You can edit this template or keep it as is</span>
       </p>
