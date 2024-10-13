@@ -1,12 +1,9 @@
-import { useMemo } from "react";
+import { Suspense, lazy, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 import { Spinner } from "@nextui-org/spinner";
 
-import CompletedExamInfo from "@/components/Courses/CourseExamInfo/CompletedExamInfo";
 import ExamStats from "@/components/Courses/CourseExamInfo/ExamStats";
-import NewExamInfo from "@/components/Courses/CourseExamInfo/NewExamInfo";
-import OngoingExamInfo from "@/components/Courses/CourseExamInfo/OngoingExamInfo";
 import Button from "@/components/ui/Button";
 import FloatButton from "@/components/ui/FloatButton";
 import Icon from "@/components/ui/Icon";
@@ -16,6 +13,12 @@ import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useLatestExam } from "@/hooks/exam/useLatestExam";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
+
+const CompletedExamInfo = lazy(
+  () => import("@/components/Courses/CourseExamInfo/ExamInfo/CompletedExamInfo"),
+);
+const OngoingExamInfo = lazy(() => import("@/components/Courses/CourseExamInfo/ExamInfo/OngoingExamInfo"));
+const UpcomingExamInfo = lazy(() => import("@/components/Courses/CourseExamInfo/ExamInfo/UpcomingExamInfo"));
 
 const CourseExamInfo = () => {
   const { userData } = useFCUser();
@@ -61,11 +64,11 @@ const CourseExamInfo = () => {
 
   return (
     <div className="flex h-full flex-col justify-start gap-6 md:gap-20">
-      {status === EXAM_STATUS.new && <NewExamInfo exam={exam} />}
-
-      {status === EXAM_STATUS.ongoing && <OngoingExamInfo exam={exam} />}
-
-      {status === EXAM_STATUS.completed && <CompletedExamInfo exam={exam} />}
+      <Suspense fallback={null}>
+        {status === EXAM_STATUS.new && <UpcomingExamInfo exam={exam} />}
+        {status === EXAM_STATUS.ongoing && <OngoingExamInfo exam={exam} />}
+        {status === EXAM_STATUS.completed && <CompletedExamInfo exam={exam} />}
+      </Suspense>
 
       <ExamStats />
 

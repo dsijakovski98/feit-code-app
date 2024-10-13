@@ -1,28 +1,16 @@
-import { useMemo } from "react";
-
 import { Chip } from "@nextui-org/chip";
 
-import CourseTeacher from "@/components/Courses/Misc/CourseTeacher";
 import CategoryChip from "@/components/ui/CategoryChip";
+import Teacher from "@/components/ui/Teacher";
 import Timestamp from "@/components/ui/Timestamp";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
-import { useFCUser } from "@/hooks/useFCUser";
 import { TEACHER_TYPE } from "@/types";
 
 const CourseDetails = () => {
-  const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
   const { name, description, professor, assistant, categories, archived, updatedAt } = courseDetails;
-  const [professorAvatar] = useAvatar(courseDetails?.professorId);
-  const [assistantAvatar] = useAvatar(courseDetails?.assistantId ?? "");
-
-  const userFullName = useMemo(
-    () => `${userData?.user.firstName} ${userData?.user.lastName}`,
-    [userData?.user.firstName, userData?.user.lastName],
-  );
 
   return (
     <div className="space-y-16">
@@ -61,20 +49,10 @@ const CourseDetails = () => {
         </ul>
 
         <div className="flex w-fit flex-wrap items-end gap-8 lg:w-full lg:justify-between">
-          <CourseTeacher
-            teacher={professor}
-            type={TEACHER_TYPE.professor}
-            userFullName={userFullName}
-            avatarUrl={professorAvatar}
-          />
+          <Teacher teacher={professor} type={TEACHER_TYPE.professor} />
 
           {assistant ? (
-            <CourseTeacher
-              teacher={assistant}
-              type={TEACHER_TYPE.assistant}
-              userFullName={userFullName}
-              avatarUrl={assistantAvatar}
-            />
+            <Teacher teacher={assistant} type={TEACHER_TYPE.assistant} />
           ) : (
             <p className="shrink font-semibold text-foreground-300">This course doesn't have an assistant.</p>
           )}

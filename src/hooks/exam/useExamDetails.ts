@@ -12,8 +12,10 @@ export const useExamDetails = (examId?: string) => {
         const exam = await db.query.exams.findFirst({
           where: (exams, { eq }) => eq(exams.id, examId),
           with: {
-            tasks: true,
-            course: true,
+            tasks: { orderBy: (tasks, { asc }) => asc(tasks.orderIndex) },
+            course: {
+              with: { professor: true },
+            },
           },
         });
 

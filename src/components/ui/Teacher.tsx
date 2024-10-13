@@ -8,7 +8,8 @@ import { User } from "@nextui-org/react";
 import { professors } from "@/db/schema";
 
 import { ROUTES } from "@/constants/routes";
-import { TeacherType } from "@/types";
+import { useAvatar } from "@/hooks/useAvatar";
+import { useFCUser } from "@/hooks/useFCUser";
 
 const userAvatarProps = {
   isBordered: true,
@@ -17,17 +18,23 @@ const userAvatarProps = {
 } as const;
 
 type Props = {
-  type: TeacherType;
-  userFullName: string;
+  type: string;
   teacher: InferSelectModel<typeof professors>;
-  avatarUrl?: string | null;
 };
 
-const CourseTeacher = ({ userFullName, teacher, type, avatarUrl }: Props) => {
+const Teacher = ({ teacher, type }: Props) => {
+  const { userData } = useFCUser();
+  const userFullName = useMemo(
+    () => `${userData?.user.firstName} ${userData?.user.lastName}`,
+    [userData?.user.firstName, userData?.user.lastName],
+  );
+
   const teacherFullName = useMemo(
     () => `${teacher.firstName} ${teacher.lastName}`,
     [teacher.firstName, teacher.lastName],
   );
+
+  const [avatarUrl] = useAvatar(teacher.id);
 
   const isMe = userFullName === teacherFullName;
 
@@ -51,4 +58,4 @@ const CourseTeacher = ({ userFullName, teacher, type, avatarUrl }: Props) => {
   );
 };
 
-export default CourseTeacher;
+export default Teacher;

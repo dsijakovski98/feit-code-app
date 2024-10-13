@@ -17,12 +17,12 @@ type Props = {
   exam: InferSelectModel<typeof exams>;
 };
 
-const NewExamInfo = ({ exam }: Props) => {
+const UpcomingExamInfo = ({ exam }: Props) => {
   const { id, startsAt, name, language, status } = exam;
   const timestamp = useMemo(() => formatTimestamp(startsAt), [startsAt]);
 
   return (
-    <Link to={`${ROUTES.dashboard}${ROUTES.exams}/${id}`} className="group space-y-0.5 *:font-sans">
+    <Link to={`${ROUTES.dashboard}${ROUTES.exams}/${id}#general`} className="group space-y-0.5 *:font-sans">
       <div className="flex items-start justify-between gap-6">
         <div>
           <p className="transition-colors group-hover:text-primary-600 group-focus:text-primary-600">
@@ -49,4 +49,4 @@ const NewExamInfo = ({ exam }: Props) => {
   );
 };
 
-export default NewExamInfo;
+export default UpcomingExamInfo;

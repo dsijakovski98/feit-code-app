@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 import { Tooltip } from "@nextui-org/tooltip";
 
 import CodeEditor from "@/components/CodeEditor";
