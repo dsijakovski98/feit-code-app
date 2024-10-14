@@ -1,5 +1,6 @@
 import { capitalize } from "..";
 
+import { LANGUAGES_CONFIG } from "@/constants/code/languages";
 import { ProgrammingLanguage } from "@/constants/enums";
 import { parseTemplate } from "@/utils/code/taskTemplates";
 
@@ -21,4 +22,8 @@ export const baseTaskTemplate = ({ title, description, language }: Template) => 
   const functionName = functionNameFromTitle(title);
 
   return parseTemplate({ functionName, description, language });
+};
+
+export const supportsTests = (language: ProgrammingLanguage) => {
+  return !!LANGUAGES_CONFIG[language].testsSupport;
 };

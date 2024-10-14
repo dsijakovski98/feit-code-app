@@ -11,8 +11,8 @@ import PresenceBlock from "@/components/ui/PresenceBlock";
 import { ExamFormContext, TaskType } from "@/context/ExamFormContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import TaskPreviewProvider from "@/context/TaskPreviewContext";
-import { useTestsSupported } from "@/hooks/task/useTestsSupported";
 import { useCtx } from "@/hooks/useCtx";
+import { supportsTests } from "@/utils/code";
 
 const ExamTasks = () => {
   const { isMobile } = useCtx(ResponsiveContext);
@@ -21,9 +21,9 @@ const ExamTasks = () => {
   const [tasks] = tasksState;
   const [{ language }] = formState;
 
-  const testsSupported = useTestsSupported(language);
   const [activeTask, setActiveTask] = useState<TaskType | null>(null);
 
+  const testsSupported = useMemo(() => supportsTests(language), [language]);
   const tasksAdded = useMemo(() => remainingPoints === 0, [remainingPoints]);
 
   return (

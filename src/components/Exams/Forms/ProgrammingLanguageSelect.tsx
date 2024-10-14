@@ -6,9 +6,9 @@ import { Select, SelectItem } from "@nextui-org/select";
 
 import Icon from "@/components/ui/Icon";
 
-import { LANUGAGES_SUPPORTED_TESTS } from "@/constants/code/languageTests";
 import { PROGRAMMING_LANGUAGE, ProgrammingLanguage } from "@/constants/enums";
 import { PROGRAMMING_LANGUAGES } from "@/constants/exams";
+import { supportsTests } from "@/utils/code";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 
 type Props = {
@@ -33,9 +33,7 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
       <div className="mr-5 flex grow items-center justify-between gap-4">
         <p className="text-base font-semibold leading-none">{name}</p>
 
-        {LANUGAGES_SUPPORTED_TESTS.includes(name as ProgrammingLanguage) && (
-          <Icon name="test" className="h-3.5 w-3.5" />
-        )}
+        {supportsTests(name as ProgrammingLanguage) && <Icon name="test" className="h-3.5 w-3.5" />}
       </div>
     </div>
   );

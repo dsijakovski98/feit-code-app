@@ -13,6 +13,7 @@
     "build": "tsc -b && vite build",
     "start": "vite preview",
     "lint": "eslint .",
+    "typecheck": "tsc -b",
     "format": "prettier --write src/",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",

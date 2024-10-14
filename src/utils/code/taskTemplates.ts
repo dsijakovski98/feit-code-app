@@ -1,6 +1,6 @@
 import { ProgrammingLanguage } from "../../constants/enums";
 
-import { languageComments } from "@/constants/code/languageComments";
+import { LANGUAGES_CONFIG } from "@/constants/code/languages";
 
 const templates = import.meta.glob("./templates/*.txt", {
   eager: true,
@@ -35,7 +35,7 @@ export const parseTemplate = (params: TemplateParams) => {
     .split(".")
     .filter((chunk) => !!chunk.length)
     .map((chunk) => {
-      const comment = languageComments[language];
+      const { comment } = LANGUAGES_CONFIG[language];
 
       return `${comment} ${chunk.trim()}`;
     });
