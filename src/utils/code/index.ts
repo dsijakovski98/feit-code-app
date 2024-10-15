@@ -5,10 +5,10 @@ import { ProgrammingLanguage } from "@/constants/enums";
 import { parseTemplate } from "@/utils/code/taskTemplates";
 
 const functionNameFromTitle = (title: string) => {
-  return title
-    .split(/\s+/)
-    .map((w) => capitalize(w))
-    .join("");
+  const words = title.split(/\s+/);
+  const parsedWords = words.map((word) => (words.length > 1 ? capitalize(word) : word));
+
+  return parsedWords.join("");
 };
 
 type Template = {
@@ -26,4 +26,15 @@ export const baseTaskTemplate = ({ title, description, language }: Template) => 
 
 export const supportsTests = (language: ProgrammingLanguage) => {
   return !!LANGUAGES_CONFIG[language].testsSupport;
+};
+
+const funcNameRegex = (language: ProgrammingLanguage) => {
+  const prefix = LANGUAGES_CONFIG[language].funcPrefix;
+  return new RegExp(`${prefix}\\s+(\\w+)\\s*\\(`);
+};
+
+export const extractFunctionName = (template: string, language: ProgrammingLanguage) => {
+  const funcRegex = funcNameRegex(language);
+
+  return funcRegex.exec(template)?.at(1) ?? "";
 };

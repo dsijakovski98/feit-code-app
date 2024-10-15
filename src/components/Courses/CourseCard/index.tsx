@@ -24,6 +24,7 @@ const CourseCard = (props: CourseCardContext) => {
     mutate(id);
   };
 
+  // TODO: Fix height when only-archived courses are present
   return (
     <CourseCardProvider {...props}>
       <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background">

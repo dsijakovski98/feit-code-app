@@ -8,6 +8,7 @@ import { fbStorage } from "@/services/firebase";
 
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
+import { extractFunctionName } from "@/utils/code";
 import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 
 type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
@@ -47,11 +48,14 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
         const snapshot = await uploadString(templateRef, template, "raw");
         const templateUrl = await getDownloadURL(snapshot.ref);
 
+        const functionName = extractFunctionName(template, language);
+
         return db.insert(tasksTable).values({
           examId,
           title,
           templateUrl,
           description,
+          functionName,
           orderIndex: idx,
           points: Number(points),
         });

@@ -2,6 +2,8 @@ import { InferSelectModel } from "drizzle-orm";
 
 import { tasks } from "@/db/schema";
 
+import Icon from "@/components/ui/Icon";
+
 type Props = {
   task: InferSelectModel<typeof tasks>;
 };
@@ -24,8 +26,8 @@ const TaskItem = ({ task }: Props) => {
         </p>
       </div>
 
-      <p className="-translate-y-4 text-base font-semibold text-foreground-300 opacity-0 transition-transform-opacity group-hover:-translate-y-0 group-hover:opacity-100">
-        Open Template
+      <p className="flex -translate-y-4 items-center gap-2 text-base font-semibold text-foreground-300 opacity-0 transition-transform-opacity group-hover:-translate-y-0 group-hover:opacity-100">
+        <Icon name="code" className="h-5 w-5" /> Template
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from "react";
+import { ElementRef, ReactNode, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { InferSelectModel } from "drizzle-orm";
@@ -28,6 +28,24 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
 
   const { ref } = useLoadMore(fetchNextPage);
 
+  const swiperRef = useRef<ElementRef<typeof Swiper>>(null);
+  const [listHeight, setListHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    if (!swiperRef.current) return;
+
+    const updateHeight = () => {
+      setListHeight((swiperRef.current as unknown as HTMLElement).offsetHeight);
+    };
+
+    window.addEventListener("resize", updateHeight);
+    updateHeight();
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
+
   const filteredPages = useMemo(
     () =>
       data?.pages.map((page) => {
@@ -51,6 +69,16 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
 
   if (!data) return null;
 
+  if (filteredPages[0].length === 0) {
+    return (
+      <div style={{ height: `${listHeight}px` }} className="grid place-items-center px-8 lg:px-5">
+        <p>
+          No courses found with name <span className="font-semibold">"{search}"</span>
+        </p>
+      </div>
+    );
+  }
+
   return (
     <Swiper
       grabCursor={!isFetching}
@@ -61,6 +89,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       pagination={{ dynamicBullets: true }}
       modules={[A11y, Pagination, Navigation]}
       className="swiper-items !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
+      ref={swiperRef}
     >
       {filteredPages.flatMap((page) =>
         page.map((item) => (

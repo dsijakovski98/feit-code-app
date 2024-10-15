@@ -26,11 +26,15 @@ const EmptyExamsList = ({ status, course }: Props) => {
     [course],
   );
 
+  const emptyExamsMessage = useMemo(() => {
+    if (!statusValue && !courseValue) return "No exams found";
+
+    return `No ${statusValue} exams ${courseValue}`;
+  }, [statusValue, courseValue]);
+
   return (
     <div className="grid place-items-center p-8 text-center">
-      <p className="text-lg text-foreground-300">
-        No {statusValue} exams {courseValue}
-      </p>
+      <p className="text-lg text-foreground-300">{emptyExamsMessage}</p>
     </div>
   );
 };
