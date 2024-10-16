@@ -26,7 +26,7 @@ const TaskItem = ({ task }: Props) => {
         </p>
       </div>
 
-      <p className="flex -translate-y-4 items-center gap-2 text-base font-semibold text-foreground-300 opacity-0 transition-transform-opacity group-hover:-translate-y-0 group-hover:opacity-100">
+      <p className="flex items-center gap-2 text-base font-semibold text-foreground-300 opacity-0 transition-opacity group-hover:opacity-100 group-focus:opacity-100">
         <Icon name="code" className="h-5 w-5" /> Template
       </p>
     </div>
