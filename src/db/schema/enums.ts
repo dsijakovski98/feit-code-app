@@ -1,6 +1,12 @@
 import { pgEnum } from "drizzle-orm/pg-core";
 
-import { EXAM_STATUS, PROGRAMMING_LANGUAGE, SUBMISSION_STATUS } from "@/constants/enums";
+import {
+  EXAM_STATUS,
+  PARAMETER_TYPE,
+  PROGRAMMING_LANGUAGE,
+  SUBMISSION_STATUS,
+  VALUE_TYPE,
+} from "@/constants/enums";
 import { MAJOR_TYPE } from "@/constants/students";
 import { TEACHER_TYPE, USER_TYPE } from "@/types";
 
@@ -38,3 +44,12 @@ export const submissionStatus = pgEnum("submission_status", [
   SUBMISSION_STATUS.inProgress,
   SUBMISSION_STATUS.graded,
 ]);
+
+export const valueType = pgEnum("value_type", [
+  VALUE_TYPE.string,
+  VALUE_TYPE.number,
+  VALUE_TYPE.boolean,
+  VALUE_TYPE.empty,
+]);
+
+export const parameterType = pgEnum("parameter_type", [PARAMETER_TYPE.input, PARAMETER_TYPE.output]);

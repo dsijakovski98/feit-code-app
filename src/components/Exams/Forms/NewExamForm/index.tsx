@@ -23,6 +23,8 @@ const NewExamForm = () => {
   }, [step]);
 
   useEffect(() => {
+    if (import.meta.env.DEV) return;
+
     window.onbeforeunload = () => {
       return "Are you sure?";
     };
@@ -35,7 +37,7 @@ const NewExamForm = () => {
   return (
     <div className="h-full space-y-14">
       <div>
-        <h2 className="text-2xl font-semibold">Create a new exam</h2>
+        <h2 className="text-2xl font-semibold">Create a new Exam</h2>
         <p className="mb-3 text-foreground-300 lg:text-sm">
           Construct the perfect exam and test your students' skills the right way.
         </p>

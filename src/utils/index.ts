@@ -4,6 +4,13 @@ import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
+export const isNumber = (value: unknown) => {
+  if (typeof value !== "number") return false;
+  if (isNaN(value)) return false;
+
+  return true;
+};
+
 export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
 /**

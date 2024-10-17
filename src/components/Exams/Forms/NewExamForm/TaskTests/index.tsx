@@ -1,12 +1,10 @@
-import { useState } from "react";
-
-import { Listbox, ListboxItem, ScrollShadow } from "@nextui-org/react";
+import { Accordion, AccordionItem } from "@nextui-org/accordion";
+import { ScrollShadow } from "@nextui-org/react";
 
 import TaskTestPreview from "@/components/Exams/Forms/NewExamForm/TaskTests/TaskTestPreview";
-import TaskTestForm from "@/components/Tasks/Forms/TaskTestForm";
 import Button from "@/components/ui/Button";
 
-import { ExamFormContext, TaskType } from "@/context/ExamFormContext";
+import { ExamFormContext } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
 
 const TaskTests = () => {
@@ -15,42 +13,38 @@ const TaskTests = () => {
   const [tasks] = tasksState;
   const [, setStep] = stepState;
 
-  const [activeTask, setActiveTask] = useState<TaskType | null>(null);
-
   return (
     <section className="space-y-6">
       <div>
         <h3 className="text-xl font-semibold">Tests</h3>
-        <p>
-          <span className="text-lg font-semibold">{language}</span> exams support automatic tests. Add one or
-          more tests to any task.
+        <p className="text-lg">
+          <span className="font-semibold">{language}</span> exams support automatic tests. Click on any Task
+          to add a Test to it.
         </p>
       </div>
 
       <div className="space-y-12">
-        <ScrollShadow className="h-[400px] py-4">
-          <Listbox
-            variant="bordered"
-            items={tasks}
+        <ScrollShadow className="h-[400px] py-4 pr-2">
+          <Accordion
+            variant="light"
             aria-label="Exam tasks list"
-            classNames={{ list: "gap-4" }}
+            className="rounded-md border border-foreground/20 px-4 dark:border-content2"
           >
-            {/* {(task) => ( */}
             {tasks.map((task) => (
-              <ListboxItem
+              <AccordionItem
                 key={task.title}
-                textValue={task.title}
-                classNames={{ base: "rounded-md border-default-200", title: "px-2 py-1" }}
-                onPress={() => setActiveTask(task)}
+                title={task.title}
+                classNames={{
+                  base: "!border-transparent",
+                  title: "text-lg font-semibold",
+                  indicator: "text-foreground",
+                }}
               >
                 <TaskTestPreview task={task} />
-              </ListboxItem>
+              </AccordionItem>
             ))}
-            {/* )} */}
-          </Listbox>
+          </Accordion>
         </ScrollShadow>
-
-        <TaskTestForm task={activeTask} onClose={() => setActiveTask(null)} />
 
         <div className="flex items-center justify-between gap-6">
           <Button fullWidth size="lg" color="default" onPress={() => setStep("tasks")}>

@@ -3,6 +3,7 @@ import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 import exams from "@/db/schema/exams";
 import submissionTasks from "@/db/schema/submissionTasks";
+import tests from "@/db/schema/tests";
 import { primaryId } from "@/db/schema/utils";
 
 const tasks = pgTable("tasks", {
@@ -24,6 +25,7 @@ export const taskRelations = relations(tasks, ({ one, many }) => ({
     fields: [tasks.examId],
     references: [exams.id],
   }),
+  tests: many(tests),
   submissions: many(submissionTasks),
 }));
 

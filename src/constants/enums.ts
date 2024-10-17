@@ -24,5 +24,19 @@ export const SUBMISSION_STATUS = {
   submitted: "Submitted",
   inProgress: "In Progress",
   graded: "Graded",
-};
+} as const;
 export type SubmissionStatus = RecordValues<typeof SUBMISSION_STATUS>;
+
+export const VALUE_TYPE = {
+  string: "string",
+  number: "number",
+  boolean: "boolean",
+  empty: "empty",
+} as const;
+export type ValueType = RecordValues<typeof VALUE_TYPE>;
+
+export const PARAMETER_TYPE = {
+  input: "input",
+  output: "output",
+};
+export type ParameterType = RecordValues<typeof PARAMETER_TYPE>;

@@ -6,6 +6,7 @@ import { PROGRAMMING_LANGUAGE, ProgrammingLanguage } from "@/constants/enums";
 export type LanguageConfig = {
   comment: string;
   funcPrefix: string;
+  emptyValue?: string;
   extension: Extension;
   testsSupport?: boolean;
 };
@@ -14,6 +15,7 @@ export const LANGUAGES_CONFIG: Record<ProgrammingLanguage, LanguageConfig> = {
   [PROGRAMMING_LANGUAGE.javascript]: {
     comment: "//",
     funcPrefix: "function",
+    emptyValue: "null",
     extension: langs.javascript(),
     testsSupport: true,
   },
@@ -21,6 +23,7 @@ export const LANGUAGES_CONFIG: Record<ProgrammingLanguage, LanguageConfig> = {
   [PROGRAMMING_LANGUAGE.typescript]: {
     comment: "//",
     funcPrefix: "function",
+    emptyValue: "null",
     extension: langs.typescript(),
     testsSupport: true,
   },
@@ -40,6 +43,7 @@ export const LANGUAGES_CONFIG: Record<ProgrammingLanguage, LanguageConfig> = {
   [PROGRAMMING_LANGUAGE.python]: {
     comment: "#",
     funcPrefix: "def",
+    emptyValue: "None",
     extension: langs.python(),
     testsSupport: true,
   },
@@ -47,6 +51,7 @@ export const LANGUAGES_CONFIG: Record<ProgrammingLanguage, LanguageConfig> = {
   [PROGRAMMING_LANGUAGE.go]: {
     comment: "//",
     funcPrefix: "func",
+    emptyValue: "nil",
     extension: langs.go(),
     testsSupport: true,
   },
