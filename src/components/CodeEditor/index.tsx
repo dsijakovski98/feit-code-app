@@ -20,12 +20,6 @@ const CodeEditor = ({ language, ...rest }: Props) => {
     <CodeMirror
       {...rest}
       spellCheck
-      onInvalid={(e) => {
-        console.log("INVALID", e);
-      }}
-      onError={(e) => {
-        console.log("ERROR", e);
-      }}
       theme={editorTheme}
       extensions={langExtension ? [langExtension, ...(rest.extensions || [])] : rest.extensions}
     />

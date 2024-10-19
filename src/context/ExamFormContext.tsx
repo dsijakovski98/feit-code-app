@@ -6,7 +6,7 @@ import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 import { TaskTestSchema, TestInputSchema } from "@/utils/formSchemas/tasks/testSchema";
 
-type ExamSteps = "exam" | "tasks" | "tests" | "confirm" | "creating";
+type ExamSteps = "exam" | "tasks" | "confirm" | "creating";
 export type TaskType = TaskSchema & {
   template: string;
   tests: Array<TaskTestSchema & { inputs: TestInputSchema[] }>;
@@ -34,17 +34,8 @@ const ExamFormProvider = ({ children }: PropsWithChildren) => {
     points: "100",
   });
 
-  const tasksState = useState<TaskType[]>([
-    {
-      title: "Find the biggest number",
-      description: "Some description here",
-      template: "",
-      tests: [],
-      points: "100",
-    },
-  ]);
-
-  const stepState = useState<ExamSteps>("tasks");
+  const tasksState = useState<TaskType[]>([]);
+  const stepState = useState<ExamSteps>("exam");
 
   const [examForm] = formState;
   const [tasks] = tasksState;

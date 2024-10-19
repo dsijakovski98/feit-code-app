@@ -7,7 +7,7 @@ import { ExamFormContext } from "@/context/ExamFormContext";
 import { TaskPreviewContext } from "@/context/TaskPreviewContext";
 import { useCtx } from "@/hooks/useCtx";
 
-const PreviewActions = () => {
+const TaskPreviewActions = () => {
   const { task, onClose } = useCtx(TaskPreviewContext);
   const { title } = task;
 
@@ -42,4 +42,4 @@ const PreviewActions = () => {
   );
 };
 
-export default PreviewActions;
+export default TaskPreviewActions;

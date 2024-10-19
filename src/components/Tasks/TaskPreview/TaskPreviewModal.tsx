@@ -1,7 +1,7 @@
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
 
 import CodeEditor from "@/components/CodeEditor";
-import PreviewActions from "@/components/Tasks/TaskPreview/PreviewActions";
+import TaskPreviewActions from "@/components/Tasks/TaskPreview/TaskPreviewActions";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import PresenceBlock from "@/components/ui/PresenceBlock";
@@ -11,7 +11,7 @@ import { TaskPreviewContext } from "@/context/TaskPreviewContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
-const PreviewModal = () => {
+const TaskPreviewModal = () => {
   const { task, open, onClose } = useCtx(TaskPreviewContext);
   const { title, description, points, template } = task;
 
@@ -41,7 +41,7 @@ const PreviewModal = () => {
               <Icon name={templateToggle.open ? "code-off" : "code"} className="h-5 w-5" />
             </Button>
 
-            <PreviewActions />
+            <TaskPreviewActions />
           </div>
         </ModalHeader>
 
@@ -73,4 +73,4 @@ const PreviewModal = () => {
   );
 };
 
-export default PreviewModal;
+export default TaskPreviewModal;

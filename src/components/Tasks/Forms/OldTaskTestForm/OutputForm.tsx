@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
-import ValueTypeSelect from "@/components/Tasks/Forms/TaskTestForm/ValueTypeSelect";
+import ValueTypeSelect from "@/components/Tasks/Forms/OldTaskTestForm/ValueTypeSelect";
 
 import { VALUE_TYPE } from "@/constants/enums";
 import { TaskTestSchema, isValueValid } from "@/utils/formSchemas/tasks/testSchema";

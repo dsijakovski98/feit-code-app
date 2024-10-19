@@ -5,7 +5,6 @@ import { Progress } from "@nextui-org/react";
 import ConfirmExam from "@/components/Exams/Forms/NewExamForm/ConfirmExam";
 import ExamForm from "@/components/Exams/Forms/NewExamForm/ExamForm";
 import ExamTasks from "@/components/Exams/Forms/NewExamForm/ExamTasks";
-import TaskTests from "@/components/Exams/Forms/NewExamForm/TaskTests";
 import PresenceBlock from "@/components/ui/PresenceBlock";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
@@ -17,7 +16,7 @@ const NewExamForm = () => {
 
   const progress = useMemo(() => {
     if (step === "exam") return 1.5;
-    if (step === "tasks" || step === "tests") return 50;
+    if (step === "tasks") return 50;
     if (step === "confirm") return 98.5;
     return 100;
   }, [step]);
@@ -52,10 +51,6 @@ const NewExamForm = () => {
 
         <PresenceBlock show={step === "tasks"}>
           <ExamTasks />
-        </PresenceBlock>
-
-        <PresenceBlock show={step === "tests"}>
-          <TaskTests />
         </PresenceBlock>
 
         <PresenceBlock show={step === "confirm" || step === "creating"}>

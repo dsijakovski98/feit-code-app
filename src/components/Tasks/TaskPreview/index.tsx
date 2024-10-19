@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { Tooltip } from "@nextui-org/tooltip";
 
-import PreviewModal from "@/components/Tasks/TaskPreview/PreviewModal";
+import TaskPreviewModal from "@/components/Tasks/TaskPreview/TaskPreviewModal";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
@@ -82,7 +82,7 @@ const TaskPreview = () => {
         </div>
       </div>
 
-      <PreviewModal />
+      <TaskPreviewModal />
     </Fragment>
   );
 };

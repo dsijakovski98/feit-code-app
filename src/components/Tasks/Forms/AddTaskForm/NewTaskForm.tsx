@@ -1,4 +1,6 @@
-import { Controller, SubmitHandler, UseFormReturn } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import { Textarea } from "@nextui-org/react";
 
@@ -6,30 +8,32 @@ import Input from "@/components/ui/Input";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
+import { TaskFormContext } from "@/context/TaskFormContext";
 import { useCtx } from "@/hooks/useCtx";
-import { Toggle } from "@/hooks/useToggle";
 import { baseTaskTemplate } from "@/utils/code";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
-type Props = {
-  form: UseFormReturn<TaskSchema>;
-  dialog: Toggle;
-  taskTemplate: string;
-};
-
-const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
+const NewTaskForm = () => {
   const { isMobile } = useCtx(ResponsiveContext);
+
   const { formState, tasksState, remainingPoints } = useCtx(ExamFormContext);
   const [{ language }] = formState;
-  const [tasks, setTasks] = tasksState;
+  const [tasks] = tasksState;
+
+  const { formState: taskFormState, templateState, stepState: taskStepState } = useCtx(TaskFormContext);
+  const [taskForm, setTaskForm] = taskFormState;
+  const [, setTaskTemplate] = templateState;
+  const [, setTaskStep] = taskStepState;
 
   const {
-    reset,
     control,
     setError,
     handleSubmit,
     formState: { isSubmitting },
-  } = form;
+  } = useForm<TaskSchema>({
+    resolver: valibotResolver(TaskSchema),
+    defaultValues: taskForm,
+  });
 
   const onSubmit: SubmitHandler<TaskSchema> = (task) => {
     const { title, description } = task;
@@ -40,17 +44,10 @@ const NewTaskForm = ({ form, taskTemplate, dialog }: Props) => {
       return;
     }
 
-    const template = taskTemplate.length ? taskTemplate : baseTaskTemplate({ title, description, language });
+    setTaskForm(task);
+    setTaskTemplate(baseTaskTemplate({ title, description, language }));
 
-    const newTask = {
-      ...task,
-      template,
-      tests: [], // Tests added separately
-    };
-
-    setTasks((prev) => [...prev, newTask]);
-    dialog.toggleOff();
-    reset();
+    setTaskStep("ask-tests");
   };
 
   return (

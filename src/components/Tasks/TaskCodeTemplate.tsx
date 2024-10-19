@@ -1,47 +1,43 @@
 import { useMemo, useState } from "react";
-import { UseFormReturn } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import CodeEditor from "../../../CodeEditor";
+import CodeEditor from "../CodeEditor";
 import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 import { ExamFormContext } from "@/context/ExamFormContext";
+import { TaskFormContext } from "@/context/TaskFormContext";
 import { useCtx } from "@/hooks/useCtx";
-import { baseTaskTemplate } from "@/utils/code";
-import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
-type Props = {
-  template: string;
-  form: UseFormReturn<TaskSchema>;
-  onSave: (template: string) => void;
-};
-
-const TaskCodeTemplate = ({ form, template, onSave }: Props) => {
-  const { getValues } = form;
-  const title = getValues("title");
-  const description = getValues("description");
-
+const TaskCodeTemplate = () => {
   const { formState } = useCtx(ExamFormContext);
   const [{ language }] = formState;
 
-  const [savedValue, setSavedValue] = useState(
-    template || baseTaskTemplate({ title, description, language }),
-  );
+  const { templateState, stepState: taskStepState } = useCtx(TaskFormContext);
+  const [initialTemplate, setTemplate] = templateState;
+  const [taskStep] = taskStepState;
+
+  const [savedValue, setSavedValue] = useState(initialTemplate);
   const [value, setValue] = useState(savedValue);
 
   const templateChanged = useMemo(() => savedValue !== value, [value, savedValue]);
 
-  const handleSave = () => {
+  const handleSaveTemplate = () => {
     const newValue = value.trim();
 
-    onSave(newValue);
+    setTemplate(newValue);
     setSavedValue(newValue);
 
-    toast.success("Saved new template!");
+    toast.success("Template saved!");
   };
+
+  if (taskStep !== "tests") {
+    console.error('TaskCodeTemplate can only be shown during the "tests" step!');
+
+    return null;
+  }
 
   return (
     <div className="space-y-2">
@@ -52,7 +48,7 @@ const TaskCodeTemplate = ({ form, template, onSave }: Props) => {
           color="default"
           variant="light"
           startContent={<Icon name="save" className="h-5 w-5" />}
-          onPress={handleSave}
+          onPress={handleSaveTemplate}
           className={clsx("pointer-events-none opacity-0 transition-all", {
             "pointer-events-auto opacity-100": templateChanged,
           })}
