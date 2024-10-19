@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
 
+import InputsForm from "@/components/Tasks/Forms/TaskTestForm/InputsForm";
 import InputsSelect from "@/components/Tasks/Forms/TaskTestForm/InputsSelect";
 import OutputForm from "@/components/Tasks/Forms/TaskTestForm/OutputForm";
 import Button from "@/components/ui/Button";
@@ -26,7 +27,8 @@ const TaskTestForm = ({ task, dialog }: Props) => {
 
   const [step, setStep] = useState<"start" | "inputs" | "outputs">("start");
 
-  const [inputs, setInputs] = useState<InputType[]>([]);
+  const inputsState = useState<InputType[]>([]);
+  const [inputs, setInputs] = inputsState;
 
   const handleOnClose = () => {
     setStep("start");
@@ -83,13 +85,24 @@ const TaskTestForm = ({ task, dialog }: Props) => {
         </ModalHeader>
 
         <PresenceBlock show={step === "start"}>
-          <ModalBody className="pb-8">
+          <ModalBody className="pb-9">
             <InputsSelect onValueChange={handleInputSelect} />
           </ModalBody>
         </PresenceBlock>
 
         <PresenceBlock show={step === "inputs"}>
-          <ModalBody>Inputs here</ModalBody>
+          <ModalBody className="mb-2">
+            <InputsForm inputsState={inputsState} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color="default" onPress={() => setStep("start")} className="text-sm">
+              Go Back
+            </Button>
+            <Button onPress={() => setStep("outputs")} isDisabled={inputs.length === 0} className="text-sm">
+              Continue
+            </Button>
+          </ModalFooter>
         </PresenceBlock>
 
         <PresenceBlock show={step === "outputs"}>

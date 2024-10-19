@@ -43,7 +43,7 @@ const OutputForm = ({ onSubmit }: Props) => {
   return (
     <form id="create-test-form" onSubmit={handleOnSubmit}>
       <div className="space-y-4">
-        <p className="text-lg font-semibold">Output</p>
+        <p className="text-lg font-semibold">Define Output</p>
 
         <ValueTypeSelect form={form} className={'data-[type="empty"]:!-mb-1 data-[type="boolean"]:pb-6'} />
       </div>
