@@ -37,7 +37,10 @@ const ConfirmExam = () => {
     onSuccess: async (success) => {
       if (!success) return;
 
-      await queryClient.invalidateQueries({ queryKey: [{ name: "latest-exam", courseId }] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: [{ name: "exams" }] }),
+        queryClient.invalidateQueries({ queryKey: [{ name: "latest-exam", courseId }] }),
+      ]);
 
       toast.success(`${language} exam "${name}" created!`);
       navigate(`${ROUTES.dashboard}${ROUTES.courses}/${courseId}`);

@@ -12,15 +12,10 @@ import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { USER_TYPE } from "@/types";
 
 const CancelExam = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
-  const {
-    name,
-    courseId,
-    course: { professorId },
-  } = examDetails;
+  const { name } = examDetails;
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -33,7 +28,7 @@ const CancelExam = () => {
       if (!success) return;
 
       await queryClient.invalidateQueries({
-        queryKey: [{ name: "exams", type: USER_TYPE.professor, id: professorId, courseId }],
+        queryKey: [{ name: "exams" }],
       });
 
       toast(`${name} exam canceled!`);
