@@ -7,7 +7,7 @@ import { Toggle } from "@/hooks/useToggle";
 import { UseState } from "@/types";
 import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
 
-export type TaskFormStep = "task" | "ask-tests" | "tests" | "finish";
+export type TaskFormStep = "task" | "ask-tests" | "define-tests" | "add-tests" | "finish";
 
 type TaskFormContext = {
   formState: UseState<TaskSchema>;
@@ -30,9 +30,9 @@ const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
   const [, setTasks] = tasksState;
 
   const formState = useState<TaskSchema>({
-    title: "",
-    description: "",
-    points: "",
+    title: "Test Task",
+    description: "Some description here whatever",
+    points: "100",
   });
 
   const templateState = useState("");

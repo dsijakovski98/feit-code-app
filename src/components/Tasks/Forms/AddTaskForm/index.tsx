@@ -5,13 +5,14 @@ import { Progress } from "@nextui-org/progress";
 
 import AskTests from "@/components/Tasks/Forms/AddTaskForm/AskTests";
 import NewTaskForm from "@/components/Tasks/Forms/AddTaskForm/NewTaskForm";
-import TaskCodeTemplate from "@/components/Tasks/TaskCodeTemplate";
+import CreateTests from "@/components/Tasks/Forms/TaskTests/CreateTests";
+import DefineTests from "@/components/Tasks/Forms/TaskTests/DefineTests";
 import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
 import PresenceBlock from "@/components/ui/PresenceBlock";
 
 import TaskFormProvider, { TaskFormStep } from "@/context/TaskFormContext";
-import { Toggle, useToggle } from "@/hooks/useToggle";
+import TestFormProvider from "@/context/TestFormContext";
+import { Toggle } from "@/hooks/useToggle";
 
 type Props = {
   dialog: Toggle;
@@ -21,8 +22,6 @@ const AddTaskForm = ({ dialog }: Props) => {
   const stepState = useState<TaskFormStep>("task");
   const [step, setStep] = stepState;
 
-  const templateToggle = useToggle();
-
   const handleClose = () => {
     setStep("task");
     dialog.toggleOff();
@@ -30,8 +29,9 @@ const AddTaskForm = ({ dialog }: Props) => {
 
   const progress = useMemo(() => {
     if (step === "task") return 1.5;
-    if (step === "ask-tests") return 50;
-    if (step === "tests") return 98.5;
+    if (step === "ask-tests") return 25;
+    if (step === "define-tests") return 50;
+    if (step === "add-tests") return 75;
 
     return 100;
   }, [step]);
@@ -52,59 +52,41 @@ const AddTaskForm = ({ dialog }: Props) => {
     >
       <ModalContent>
         <TaskFormProvider stepState={stepState} taskDialog={dialog}>
-          <ModalHeader className="mb-2 block space-y-1.5 pt-2">
-            <div className="flex h-10 items-center justify-between">
-              <h3 className="font-sans text-xl">Create a new Task</h3>
-
-              <PresenceBlock show={step === "tests"} mode="appear">
-                <Button
-                  variant="light"
-                  color="default"
-                  className="!bg-transparent"
-                  startContent={<Icon name={templateToggle.open ? "code-off" : "code"} className="h-5 w-5" />}
-                  onPress={templateToggle.toggle}
-                >
-                  Template
-                </Button>
-              </PresenceBlock>
-            </div>
+          <ModalHeader className="mb-2 block space-y-1.5">
+            <h3 className="font-sans text-xl">Create a new Task</h3>
 
             <Progress size="sm" value={progress} aria-label="Task creation progress" />
           </ModalHeader>
 
-          <PresenceBlock show={!templateToggle.open}>
-            <PresenceBlock show={step === "task"}>
-              <ModalBody className="mb-10">
-                <NewTaskForm />
-              </ModalBody>
-
-              <ModalFooter className="gap-4">
-                <Button fullWidth color="default" variant="bordered" onPress={handleClose}>
-                  Cancel
-                </Button>
-
-                <Button fullWidth type="submit" form="new-task-form">
-                  Continue
-                </Button>
-              </ModalFooter>
-            </PresenceBlock>
-
-            <PresenceBlock show={step === "ask-tests"}>
-              <AskTests />
-            </PresenceBlock>
-
-            <PresenceBlock show={step === "tests"}>
-              <ModalBody></ModalBody>
-            </PresenceBlock>
-          </PresenceBlock>
-
-          <PresenceBlock show={templateToggle.open}>
-            <ModalBody>
-              <TaskCodeTemplate />
+          <PresenceBlock show={step === "task"}>
+            <ModalBody className="mb-10">
+              <NewTaskForm />
             </ModalBody>
 
-            <ModalFooter />
+            <ModalFooter className="gap-4">
+              <Button fullWidth color="default" variant="bordered" onPress={handleClose}>
+                Cancel
+              </Button>
+
+              <Button fullWidth type="submit" form="new-task-form">
+                Continue
+              </Button>
+            </ModalFooter>
           </PresenceBlock>
+
+          <PresenceBlock show={step === "ask-tests"}>
+            <AskTests />
+          </PresenceBlock>
+
+          <TestFormProvider>
+            <PresenceBlock show={step === "define-tests"}>
+              <DefineTests />
+            </PresenceBlock>
+
+            <PresenceBlock show={step === "add-tests"}>
+              <CreateTests />
+            </PresenceBlock>
+          </TestFormProvider>
         </TaskFormProvider>
       </ModalContent>
     </Modal>

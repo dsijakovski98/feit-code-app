@@ -19,18 +19,21 @@ const AskTests = () => {
 
   const testsSupported = useMemo(() => supportsTests(language), [language]);
 
-  if (!testsSupported) {
-    // TODO: Finish UI
-    return <p>Tests are not supported for this language.</p>;
-  }
-
   return (
     <Fragment>
       <ModalBody className="mb-10">
-        <div className="font-sans">
-          <p className="text-lg font-semibold">Do you want to add Tests to this Task?</p>
-          <p className="text-foreground-300">They can help make the review process much quicker and easier</p>
-        </div>
+        {testsSupported ? (
+          <div className="font-sans">
+            <p className="text-lg font-semibold">Do you want to create Tests for this Task?</p>
+            <p className="text-foreground-300">
+              They can help make the review process much quicker and easier
+            </p>
+          </div>
+        ) : (
+          <p className="font-sans text-lg font-semibold text-foreground-300">
+            Tests are not yet supported in {language} exams
+          </p>
+        )}
       </ModalBody>
 
       <ModalFooter className="items-center">
@@ -47,12 +50,15 @@ const AskTests = () => {
           <Button color="default" onPress={createTask}>
             Continue without Tests
           </Button>
-          <Button
-            startContent={<Icon name="test" className="h-4 w-4" />}
-            onPress={() => setTaskStep("tests")}
-          >
-            Add Tests
-          </Button>
+
+          {testsSupported && (
+            <Button
+              startContent={<Icon name="test" className="h-4 w-4" />}
+              onPress={() => setTaskStep("define-tests")}
+            >
+              Create Tests
+            </Button>
+          )}
         </div>
       </ModalFooter>
     </Fragment>

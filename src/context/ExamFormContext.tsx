@@ -35,7 +35,7 @@ const ExamFormProvider = ({ children }: PropsWithChildren) => {
   });
 
   const tasksState = useState<TaskType[]>([]);
-  const stepState = useState<ExamSteps>("exam");
+  const stepState = useState<ExamSteps>("tasks");
 
   const [examForm] = formState;
   const [tasks] = tasksState;

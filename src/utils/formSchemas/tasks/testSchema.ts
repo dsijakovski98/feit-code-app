@@ -1,12 +1,17 @@
-import { InferInput, enum_, nonEmpty, object, pipe, string, toLowerCase } from "valibot";
+import { InferInput, enum_, nonEmpty, object, pipe, string } from "valibot";
 
 import { VALUE_TYPE } from "@/constants/enums";
 import { BOOLEANS } from "@/constants/tests";
 import { isNumber } from "@/utils";
 
-export const TypeValueSchema = object({
+export const TypeSchema = object({
   type: pipe(enum_(VALUE_TYPE), nonEmpty("Field is required")),
+});
+export type TypeSchema = InferInput<typeof TypeSchema>;
+
+export const TypeValueSchema = object({
   value: string("Not a string"),
+  ...TypeSchema.entries,
 });
 export type TypeValueSchema = InferInput<typeof TypeValueSchema>;
 
@@ -16,7 +21,7 @@ export const TaskTestSchema = object({
 export type TaskTestSchema = InferInput<typeof TaskTestSchema>;
 
 export const TestInputSchema = object({
-  name: pipe(string(), nonEmpty("Field is required"), toLowerCase()),
+  name: pipe(string(), nonEmpty("Field is required")),
   ...TypeValueSchema.entries,
 });
 

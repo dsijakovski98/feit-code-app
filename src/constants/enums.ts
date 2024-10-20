@@ -33,7 +33,7 @@ export const VALUE_TYPE = {
   boolean: "boolean",
   empty: "empty",
 } as const;
-export type ValueType = RecordValues<typeof VALUE_TYPE>;
+export type InputValueType = RecordValues<typeof VALUE_TYPE>;
 
 export const PARAMETER_TYPE = {
   input: "input",

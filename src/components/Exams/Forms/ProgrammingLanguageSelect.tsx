@@ -52,7 +52,7 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
           label="Language"
           description={
             <div className="flex translate-y-0.5 items-center text-foreground">
-              <Icon name="test" className="h-4 w-4" /> - Task tests supported.
+              <Icon name="test" className="mr-px h-4 w-4" /> - Supports Tests
             </div>
           }
           isDisabled={isSubmitting}

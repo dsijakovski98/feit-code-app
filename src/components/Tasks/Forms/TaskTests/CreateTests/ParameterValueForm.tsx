@@ -20,7 +20,7 @@ type Props = {
   className?: ClassValue;
 };
 
-const ValueTypeSelect = ({ form, className = "" }: Props) => {
+const ParameterValueForm = ({ form, className = "" }: Props) => {
   const {
     watch,
     control,
@@ -151,4 +151,4 @@ const ValueTypeSelect = ({ form, className = "" }: Props) => {
   );
 };
 
-export default ValueTypeSelect;
+export default ParameterValueForm;
