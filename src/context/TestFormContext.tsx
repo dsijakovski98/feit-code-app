@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useState } from "react";
 
-import { InputValueType } from "@/constants/enums";
+import { InputValueType, VALUE_TYPE } from "@/constants/enums";
 import { Toggle, useToggle } from "@/hooks/useToggle";
 import { UseState } from "@/types";
 import { TestInputSchema } from "@/utils/schemas/tasks/testSchema";
@@ -18,15 +18,10 @@ export const TestFormContext = createContext<TestFormContext | null>(null);
 TestFormContext.displayName = "TestFormContext";
 
 const TestFormProvider = ({ children }: PropsWithChildren) => {
-  const withInputs = useToggle(true);
+  const withInputs = useToggle();
 
-  const inputsMetaState = useState<InputMeta[]>([
-    { name: "firstName", type: "string" },
-    { name: "age", type: "number" },
-    { name: "isUser", type: "boolean" },
-    { name: "date", type: "empty" },
-  ]);
-  const outputTypeState = useState<InputValueType>("string");
+  const inputsMetaState = useState<InputMeta[]>([]);
+  const outputTypeState = useState<InputValueType>(VALUE_TYPE.string);
 
   return (
     <TestFormContext.Provider value={{ withInputs, inputsMetaState, outputTypeState }}>

@@ -22,7 +22,7 @@ const OutputTypeForm = () => {
   } = useForm<TypeSchema>({
     resolver: valibotResolver(TypeSchema),
     defaultValues: {
-      type: "string",
+      type: VALUE_TYPE.string,
     },
   });
 

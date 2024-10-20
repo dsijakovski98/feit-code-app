@@ -1,4 +1,5 @@
 import TestInputsTable from "@/components/Tasks/Forms/TaskTests/AddTests/TestInputs";
+import TestNoInputs from "@/components/Tasks/Forms/TaskTests/AddTests/TestsNoInputs";
 
 import { TestFormContext } from "@/context/TestFormContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -10,8 +11,7 @@ const AddTests = () => {
     return <TestInputsTable />;
   }
 
-  // TODO Implement Tests with no-inputs
-  return null;
+  return <TestNoInputs />;
 };
 
 export default AddTests;

@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 
 import { Avatar } from "@nextui-org/react";
 

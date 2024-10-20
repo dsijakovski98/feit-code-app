@@ -1,21 +1,22 @@
+import { VALUE_TYPE } from "@/constants/enums";
 import { InputType } from "@/context/ExamFormContext";
 
 type Props = Pick<InputType, "type" | "value">;
 
 const TestParameterValue = ({ type, value }: Props) => {
-  if (type === "string") {
+  if (type === VALUE_TYPE.string) {
     return <span className="break-words font-medium text-foreground-300">"{value}"</span>;
   }
 
-  if (type === "number") {
+  if (type === VALUE_TYPE.number) {
     return <span className="font-sans font-medium text-primary-600">{value}</span>;
   }
 
-  if (type === "boolean") {
+  if (type === VALUE_TYPE.boolean) {
     return <span className="font-medium">{value.toUpperCase()}</span>;
   }
 
-  if (type === "empty") {
+  if (type === VALUE_TYPE.empty) {
     return <span className="font-medium text-foreground-300">None</span>;
   }
 

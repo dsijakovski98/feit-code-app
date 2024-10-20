@@ -33,7 +33,7 @@ const DefineInputsForm = () => {
     resolver: valibotResolver(TestInputSchema),
     defaultValues: {
       name: "",
-      type: "string",
+      type: VALUE_TYPE.string,
       value: "",
     },
   });

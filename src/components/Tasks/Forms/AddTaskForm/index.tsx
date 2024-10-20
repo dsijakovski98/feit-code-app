@@ -19,7 +19,7 @@ type Props = {
 };
 
 const AddTaskForm = ({ dialog }: Props) => {
-  const stepState = useState<TaskFormStep>("add-tests");
+  const stepState = useState<TaskFormStep>("define-tests");
   const [step, setStep] = stepState;
 
   const handleClose = () => {

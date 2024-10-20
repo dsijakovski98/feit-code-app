@@ -36,35 +36,7 @@ const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
     points: "100",
   });
 
-  const testsState = useState<TestType[]>([
-    {
-      id: "abc",
-      inputs: [
-        {
-          name: "firstName",
-          type: "string",
-          value: "Daniel",
-        },
-        {
-          name: "age",
-          type: "number",
-          value: "25",
-        },
-        {
-          name: "isUser",
-          type: "boolean",
-          value: "True",
-        },
-        {
-          name: "date",
-          type: "empty",
-          value: "null",
-        },
-      ],
-      type: "string",
-      value: "Daniel, 25",
-    },
-  ]);
+  const testsState = useState<TestType[]>([]);
 
   const createTask = () => {
     setTaskStep("finish");
