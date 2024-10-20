@@ -5,7 +5,7 @@ import { today } from "@internationalized/date";
 import { DatePicker, TimeInput } from "@nextui-org/react";
 
 import { nextUIDate, nextUITime, nextUITimeToDate } from "@/utils/dates";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type Props = {
   form: UseFormReturn<ExamSchema>;

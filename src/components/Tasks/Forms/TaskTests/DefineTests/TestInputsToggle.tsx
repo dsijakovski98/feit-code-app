@@ -32,7 +32,9 @@ const TestInputsToggle = () => {
     >
       <div className="space-y-1">
         <p className="font-semibold">Enable Inputs</p>
-        <p className="text-sm text-foreground-200">Tasks can have 0 or many Inputs</p>
+        <p className="text-sm text-foreground-200">
+          Tasks can have up to <span className="font-sans font-semibold">4</span> inputs
+        </p>
       </div>
     </Switch>
   );

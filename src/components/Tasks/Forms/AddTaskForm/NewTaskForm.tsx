@@ -10,19 +10,16 @@ import { ExamFormContext } from "@/context/ExamFormContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { TaskFormContext } from "@/context/TaskFormContext";
 import { useCtx } from "@/hooks/useCtx";
-import { baseTaskTemplate } from "@/utils/code";
-import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
+import { TaskSchema } from "@/utils/schemas/tasks/taskSchema";
 
 const NewTaskForm = () => {
   const { isMobile } = useCtx(ResponsiveContext);
 
-  const { formState, tasksState, remainingPoints } = useCtx(ExamFormContext);
-  const [{ language }] = formState;
+  const { tasksState, remainingPoints } = useCtx(ExamFormContext);
   const [tasks] = tasksState;
 
-  const { formState: taskFormState, templateState, stepState: taskStepState } = useCtx(TaskFormContext);
+  const { formState: taskFormState, stepState: taskStepState } = useCtx(TaskFormContext);
   const [taskForm, setTaskForm] = taskFormState;
-  const [, setTaskTemplate] = templateState;
   const [, setTaskStep] = taskStepState;
 
   const {
@@ -36,7 +33,7 @@ const NewTaskForm = () => {
   });
 
   const onSubmit: SubmitHandler<TaskSchema> = (task) => {
-    const { title, description } = task;
+    const { title } = task;
     const taskExists = tasks.find((task) => task.title === title);
 
     if (taskExists) {
@@ -45,8 +42,6 @@ const NewTaskForm = () => {
     }
 
     setTaskForm(task);
-    setTaskTemplate(baseTaskTemplate({ title, description, language }));
-
     setTaskStep("ask-tests");
   };
 

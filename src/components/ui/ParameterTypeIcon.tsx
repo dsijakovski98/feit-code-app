@@ -14,7 +14,7 @@ const ParameterTypeIcon = ({ type, className = "" }: Props) => {
     <Icon
       name={type}
       className={clsx("text-primary", className, {
-        "scale-125": type === VALUE_TYPE.boolean || type === VALUE_TYPE.number,
+        "!scale-110": type === VALUE_TYPE.boolean || type === VALUE_TYPE.number,
       })}
     />
   );

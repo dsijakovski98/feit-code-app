@@ -5,7 +5,7 @@ import { Avatar } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
 
 import { useAssistants } from "@/hooks/useAssistants";
-import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
+import { CourseSchema } from "@/utils/schemas/courses/courseSchema";
 
 type Props = {
   form: UseFormReturn<CourseSchema>;

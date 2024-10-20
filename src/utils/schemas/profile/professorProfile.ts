@@ -1,6 +1,6 @@
 import { InferInput, intersect } from "valibot";
 
-import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
+import { ProfessorOnboardingSchema } from "@/utils/schemas/onboarding/professorOnboarding";
 
 export const ProfessorProfileSchema = intersect([ProfessorOnboardingSchema]);
 

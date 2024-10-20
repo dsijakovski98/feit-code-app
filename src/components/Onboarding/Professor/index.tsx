@@ -8,7 +8,7 @@ import { MAJOR_TYPE } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { TEACHER_TYPE, UseState } from "@/types";
-import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
+import { ProfessorOnboardingSchema } from "@/utils/schemas/onboarding/professorOnboarding";
 
 export type ProfessorForm = ProfessorOnboardingSchema;
 

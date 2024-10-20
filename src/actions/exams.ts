@@ -9,7 +9,7 @@ import { fbStorage } from "@/services/firebase";
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
 import { extractFunctionName } from "@/utils/code";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
 

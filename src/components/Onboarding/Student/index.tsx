@@ -12,7 +12,7 @@ import { UseState } from "@/types";
 import {
   StudentOnboardingBasicInfoSchema,
   StudentOnboardingMajorSchema,
-} from "@/utils/formSchemas/onboarding/studentOnboarding";
+} from "@/utils/schemas/onboarding/studentOnboarding";
 
 export type StudentForm = StudentOnboardingBasicInfoSchema & StudentOnboardingMajorSchema;
 

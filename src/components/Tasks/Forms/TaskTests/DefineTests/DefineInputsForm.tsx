@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -11,13 +12,16 @@ import Input from "@/components/ui/Input";
 import ParameterTypeIcon from "@/components/ui/ParameterTypeIcon";
 
 import { VALUE_TYPE } from "@/constants/enums";
+import { MAX_TASK_INPUTS } from "@/constants/exams";
 import { TestFormContext } from "@/context/TestFormContext";
 import { useCtx } from "@/hooks/useCtx";
-import { TestInputSchema } from "@/utils/formSchemas/tasks/testSchema";
+import { TestInputSchema } from "@/utils/schemas/tasks/testSchema";
 
 const DefineInputsForm = () => {
   const { inputsMetaState } = useCtx(TestFormContext);
   const [inputsMeta, setInputsMeta] = inputsMetaState;
+
+  const maxInputsReached = useMemo(() => inputsMeta.length >= MAX_TASK_INPUTS, [inputsMeta.length]);
 
   const {
     reset,
@@ -35,6 +39,14 @@ const DefineInputsForm = () => {
   });
 
   const onSubmit: SubmitHandler<TestInputSchema> = ({ name, type }) => {
+    if (maxInputsReached) {
+      const message = "Maximum number of allowed inputs reached!";
+      setError("root", { message });
+      toast.error(message);
+
+      return;
+    }
+
     const inputExists = inputsMeta.find((inputMeta) => inputMeta.name === name);
 
     if (inputExists) {
@@ -55,7 +67,7 @@ const DefineInputsForm = () => {
         <Controller
           control={control}
           name="name"
-          disabled={isSubmitting}
+          disabled={isSubmitting || maxInputsReached}
           render={({ field, fieldState }) => (
             <Input
               {...field}
@@ -64,7 +76,7 @@ const DefineInputsForm = () => {
               color="default"
               variant="underlined"
               placeholder="ex. firstName"
-              isDisabled={isSubmitting}
+              isDisabled={isSubmitting || maxInputsReached}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
@@ -77,7 +89,7 @@ const DefineInputsForm = () => {
         <Controller
           control={control}
           name="type"
-          disabled={isSubmitting}
+          disabled={isSubmitting || maxInputsReached}
           render={({ field, fieldState }) => (
             <Select
               {...field}
@@ -86,8 +98,9 @@ const DefineInputsForm = () => {
               color="default"
               variant="underlined"
               selectionMode="single"
+              disallowEmptySelection
               isLoading={isSubmitting}
-              isDisabled={isSubmitting}
+              isDisabled={isSubmitting || maxInputsReached}
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               defaultSelectedKeys={[defaultValues!.type!]}
@@ -112,7 +125,14 @@ const DefineInputsForm = () => {
         />
       </div>
 
-      <Button type="submit" isIconOnly variant="light" color="default" radius="full">
+      <Button
+        isIconOnly
+        type="submit"
+        variant="light"
+        color="default"
+        radius="full"
+        isDisabled={maxInputsReached}
+      >
         <Icon name="add" className="h-6 w-6" />
       </Button>
     </form>

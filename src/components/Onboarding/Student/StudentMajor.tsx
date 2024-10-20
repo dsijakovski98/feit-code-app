@@ -11,7 +11,7 @@ import Input from "@/components/ui/Input";
 import { MAJORS } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { StudentOnboardingMajorSchema } from "@/utils/formSchemas/onboarding/studentOnboarding";
+import { StudentOnboardingMajorSchema } from "@/utils/schemas/onboarding/studentOnboarding";
 
 const StudentMajor = () => {
   const { prevStep, nextStep } = useCtx(OnboardingContext);

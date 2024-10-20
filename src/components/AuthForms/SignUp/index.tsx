@@ -23,7 +23,7 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
 import { joinOAuth } from "@/utils/auth";
-import { SignUpSchema } from "@/utils/formSchemas/auth/signUpSchema";
+import { SignUpSchema } from "@/utils/schemas/auth/signUpSchema";
 
 const SignUpForm = () => {
   const { fullScreen } = useCtx(WindowContext);

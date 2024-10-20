@@ -31,7 +31,8 @@ const DefineTests = () => {
   };
 
   const handleCreateTests = () => {
-    if (!withInputs.open) {
+    if (!withInputs.open || inputsMeta.length === 0) {
+      withInputs.toggleOff();
       setInputsMeta([]);
     }
 
@@ -95,7 +96,7 @@ const DefineTests = () => {
         </Button>
 
         <Button startContent={<Icon name="test" className="h-4 w-4" />} onPress={handleCreateTests}>
-          Create Tests
+          Add Tests
         </Button>
       </ModalFooter>
     </Fragment>

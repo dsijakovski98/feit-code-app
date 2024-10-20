@@ -1,7 +1,8 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
+import { SharedSelection } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
 
 import ParameterTypeIcon from "@/components/ui/ParameterTypeIcon";
@@ -9,7 +10,7 @@ import ParameterTypeIcon from "@/components/ui/ParameterTypeIcon";
 import { InputValueType, VALUE_TYPE } from "@/constants/enums";
 import { TestFormContext } from "@/context/TestFormContext";
 import { useCtx } from "@/hooks/useCtx";
-import { TypeSchema } from "@/utils/formSchemas/tasks/testSchema";
+import { TypeSchema } from "@/utils/schemas/tasks/testSchema";
 
 const OutputTypeForm = () => {
   const { outputTypeState } = useCtx(TestFormContext);
@@ -17,7 +18,6 @@ const OutputTypeForm = () => {
 
   const {
     control,
-    handleSubmit,
     formState: { isSubmitting, defaultValues },
   } = useForm<TypeSchema>({
     resolver: valibotResolver(TypeSchema),
@@ -26,12 +26,14 @@ const OutputTypeForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<TypeSchema> = ({ type }) => {
-    setOutputType(type);
+  const handleSelectionChange = (keys: SharedSelection) => {
+    const [type] = [...keys];
+
+    setOutputType(type as InputValueType);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grow">
+    <form className="grow">
       <Controller
         control={control}
         name="type"
@@ -44,6 +46,7 @@ const OutputTypeForm = () => {
             color="default"
             variant="bordered"
             selectionMode="single"
+            onSelectionChange={handleSelectionChange}
             isLoading={isSubmitting}
             isDisabled={isSubmitting}
             isInvalid={fieldState.invalid}

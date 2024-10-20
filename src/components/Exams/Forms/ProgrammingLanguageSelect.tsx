@@ -9,7 +9,7 @@ import Icon from "@/components/ui/Icon";
 import { PROGRAMMING_LANGUAGE, ProgrammingLanguage } from "@/constants/enums";
 import { PROGRAMMING_LANGUAGES } from "@/constants/exams";
 import { supportsTests } from "@/utils/code";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type Props = {
   form: UseFormReturn<ExamSchema>;

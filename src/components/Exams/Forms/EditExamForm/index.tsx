@@ -16,7 +16,7 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useExamNamePlaceholder } from "@/hooks/exam/useExamNamePlaceholder";
 import { useCtx } from "@/hooks/useCtx";
 import { USER_TYPE } from "@/types";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 const EditExamForm = () => {
   const { isMobile } = useCtx(ResponsiveContext);

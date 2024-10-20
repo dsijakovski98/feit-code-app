@@ -10,7 +10,7 @@ import Input from "@/components/ui/Input";
 
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
-import { StudentOnboardingBasicInfoSchema } from "@/utils/formSchemas/onboarding/studentOnboarding";
+import { StudentOnboardingBasicInfoSchema } from "@/utils/schemas/onboarding/studentOnboarding";
 
 const StudentBasicInfo = () => {
   const { nextStep } = useCtx(OnboardingContext);

@@ -5,7 +5,7 @@ import { Progress } from "@nextui-org/progress";
 
 import AskTests from "@/components/Tasks/Forms/AddTaskForm/AskTests";
 import NewTaskForm from "@/components/Tasks/Forms/AddTaskForm/NewTaskForm";
-import CreateTests from "@/components/Tasks/Forms/TaskTests/CreateTests";
+import AddTests from "@/components/Tasks/Forms/TaskTests/AddTests";
 import DefineTests from "@/components/Tasks/Forms/TaskTests/DefineTests";
 import Button from "@/components/ui/Button";
 import PresenceBlock from "@/components/ui/PresenceBlock";
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const AddTaskForm = ({ dialog }: Props) => {
-  const stepState = useState<TaskFormStep>("task");
+  const stepState = useState<TaskFormStep>("add-tests");
   const [step, setStep] = stepState;
 
   const handleClose = () => {
@@ -38,13 +38,14 @@ const AddTaskForm = ({ dialog }: Props) => {
 
   return (
     <Modal
+      size="4xl"
       hideCloseButton
       backdrop="opaque"
       placement="center"
       isOpen={dialog.open}
       onClose={handleClose}
       classNames={{
-        wrapper: "!translate-x-[55px]",
+        wrapper: "!translate-x-[55px] lg:!translate-x-0",
         base: "font-serif min-w-[720px] lg:min-w-[90%]",
         backdrop: "bg-background/50",
         body: "pb-0 pt-4",
@@ -84,7 +85,7 @@ const AddTaskForm = ({ dialog }: Props) => {
             </PresenceBlock>
 
             <PresenceBlock show={step === "add-tests"}>
-              <CreateTests />
+              <AddTests />
             </PresenceBlock>
           </TestFormProvider>
         </TaskFormProvider>

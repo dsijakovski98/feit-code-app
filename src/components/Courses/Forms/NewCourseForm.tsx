@@ -21,7 +21,7 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { db } from "@/db";
 import { useCtx } from "@/hooks/useCtx";
 import { getAcademicYear } from "@/utils";
-import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
+import { CourseSchema } from "@/utils/schemas/courses/courseSchema";
 
 const NewCourseForm = () => {
   const { userId } = useAuth();

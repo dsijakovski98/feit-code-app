@@ -23,10 +23,9 @@ import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import StudentProvider from "@/context/StudentContext";
 import { useCtx } from "@/hooks/useCtx";
+import { ROWS_PER_PAGE } from "@/hooks/usePaginate";
 import { useToggle } from "@/hooks/useToggle";
 import { Column, ColumnKey } from "@/types";
-
-const ROWS_PER_PAGE = 5;
 
 const StudentsTab = () => {
   const { userId } = useAuth();

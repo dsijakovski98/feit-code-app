@@ -17,7 +17,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
-import { ForgotPasswordSchema } from "@/utils/formSchemas/auth/forgotPasswordSchema";
+import { ForgotPasswordSchema } from "@/utils/schemas/auth/forgotPasswordSchema";
 
 const ForgotPasswordForm = () => {
   const { fullScreen } = useCtx(WindowContext);

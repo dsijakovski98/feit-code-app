@@ -5,14 +5,14 @@ import { ExamFormContext, TestType } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
 import { UseState } from "@/types";
-import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
+import { baseTaskTemplate } from "@/utils/code";
+import { TaskSchema } from "@/utils/schemas/tasks/taskSchema";
 
 export type TaskFormStep = "task" | "ask-tests" | "define-tests" | "add-tests" | "finish";
 
 type TaskFormContext = {
   formState: UseState<TaskSchema>;
   stepState: UseState<TaskFormStep>;
-  templateState: UseState<string>;
   testsState: UseState<TestType[]>;
 
   createTask: () => void;
@@ -26,7 +26,8 @@ type Props = Pick<TaskFormContext, "stepState"> & { taskDialog: Toggle } & Props
 const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
   const [, setTaskStep] = stepState;
 
-  const { tasksState } = useCtx(ExamFormContext);
+  const { formState: examFormState, tasksState } = useCtx(ExamFormContext);
+  const [{ language }] = examFormState;
   const [, setTasks] = tasksState;
 
   const formState = useState<TaskSchema>({
@@ -35,21 +36,49 @@ const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
     points: "100",
   });
 
-  const templateState = useState("");
-  const testsState = useState<TestType[]>([]);
+  const testsState = useState<TestType[]>([
+    {
+      id: "abc",
+      inputs: [
+        {
+          name: "firstName",
+          type: "string",
+          value: "Daniel",
+        },
+        {
+          name: "age",
+          type: "number",
+          value: "25",
+        },
+        {
+          name: "isUser",
+          type: "boolean",
+          value: "True",
+        },
+        {
+          name: "date",
+          type: "empty",
+          value: "null",
+        },
+      ],
+      type: "string",
+      value: "Daniel, 25",
+    },
+  ]);
 
   const createTask = () => {
     setTaskStep("finish");
 
     setTimeout(() => {
       const [task, setTask] = formState;
+      const { title, description } = task;
+      const template = baseTaskTemplate({ title, description, language });
+
       const [tests, setTests] = testsState;
-      const [template, setTemplate] = templateState;
       setTasks((prev) => [...prev, { ...task, template, tests }]);
 
       // Reset everything
       setTests([]);
-      setTemplate("");
       setTaskStep("task");
       setTask({ title: "", description: "", points: "" });
 
@@ -59,7 +88,7 @@ const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
   };
 
   return (
-    <TaskFormContext.Provider value={{ formState, stepState, templateState, testsState, createTask }}>
+    <TaskFormContext.Provider value={{ formState, stepState, testsState, createTask }}>
       {children}
     </TaskFormContext.Provider>
   );

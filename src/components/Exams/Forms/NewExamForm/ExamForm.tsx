@@ -13,7 +13,7 @@ import { ExamFormContext } from "@/context/ExamFormContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useExamNamePlaceholder } from "@/hooks/exam/useExamNamePlaceholder";
 import { useCtx } from "@/hooks/useCtx";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 const ExamForm = () => {
   const { isMobile } = useCtx(ResponsiveContext);

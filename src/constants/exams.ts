@@ -38,3 +38,5 @@ export const EXAM_STATUS_OPTIONS = Object.values(EXAM_STATUS).map((status: ExamS
   value: status,
   label: parseExamStatus(status),
 }));
+
+export const MAX_TASK_INPUTS = 4;
