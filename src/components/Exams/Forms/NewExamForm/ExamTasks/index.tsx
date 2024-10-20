@@ -26,7 +26,7 @@ const ExamTasks = () => {
   const showPointsLeft = useMemo(() => tasks.length > 0 && !tasksAdded, [tasks.length, tasksAdded]);
 
   const pointsLeftMessage = useMemo(
-    () => `${remainingPoints} point${remainingPoints > 1 && "s"} left`,
+    () => `${remainingPoints} point${remainingPoints !== 1 && "s"} left`,
     [remainingPoints],
   );
 

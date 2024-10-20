@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
-import { exams, tasks as tasksTable } from "@/db/schema";
+import { exams, inputs as inputsTable, tasks as tasksTable, tests as testsTable } from "@/db/schema";
 
 import { fbStorage } from "@/services/firebase";
 
@@ -42,23 +42,66 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
       })
       .returning({ examId: exams.id });
 
-    await Promise.all(
-      tasks.map(async ({ title, description, points, template }, idx) => {
+    // Add tasks
+    const newTasks = await Promise.all(
+      tasks.map(async ({ title, description, points, template, tests }, idx) => {
         const templateRef = ref(fbStorage, `course_${courseId}/exam_${examId}/${title}/template`);
         const snapshot = await uploadString(templateRef, template, "raw");
         const templateUrl = await getDownloadURL(snapshot.ref);
 
         const functionName = extractFunctionName(template, language);
 
-        return db.insert(tasksTable).values({
-          examId,
-          title,
-          templateUrl,
-          description,
-          functionName,
-          orderIndex: idx,
-          points: Number(points),
-        });
+        const [{ taskId }] = await db
+          .insert(tasksTable)
+          .values({
+            examId,
+            title,
+            templateUrl,
+            description,
+            functionName,
+            orderIndex: idx,
+            points: Number(points),
+          })
+          .returning({ taskId: tasksTable.id });
+
+        return { taskId, tests };
+      }),
+    );
+
+    // Add tests
+    await Promise.all(
+      newTasks.flatMap(async ({ taskId, tests }) => {
+        const newTests = await Promise.all(
+          tests.map(async ({ type, value, inputs }) => {
+            const [{ testId }] = await db
+              .insert(testsTable)
+              .values({
+                taskId,
+                output: value,
+                outputType: type,
+              })
+              .returning({ testId: testsTable.id });
+
+            return { testId, inputs };
+          }),
+        );
+
+        // Add inputs
+        await Promise.all(
+          newTests.map(async ({ testId, inputs }) => {
+            await Promise.all(
+              inputs.map(({ name, type, value }, idx) =>
+                db.insert(inputsTable).values({
+                  testId,
+                  name,
+                  value,
+                  valueType: type,
+                  orderIndex: idx,
+                }),
+              ),
+            );
+          }),
+        );
       }),
     );
 

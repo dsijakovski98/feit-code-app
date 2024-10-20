@@ -20,7 +20,6 @@ type Props = {
   user: FCStudent;
 };
 
-// TODO: Implement page
 const StudentExams = ({ user }: Props) => {
   const { id } = user;
 

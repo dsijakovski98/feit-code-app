@@ -8,7 +8,7 @@ import { primaryId } from "@/db/schema/utils";
 
 const tasks = pgTable("tasks", {
   id: primaryId(),
-  orderIndex: integer("order_index").unique().notNull(),
+  orderIndex: integer("order_index").notNull(),
   title: varchar("title", { length: 256 }).notNull(),
   description: varchar("description", { length: 256 }),
   points: integer("points"),

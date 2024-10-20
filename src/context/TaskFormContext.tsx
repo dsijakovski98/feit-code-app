@@ -31,9 +31,9 @@ const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
   const [, setTasks] = tasksState;
 
   const formState = useState<TaskSchema>({
-    title: "Test Task",
-    description: "Some description here whatever",
-    points: "100",
+    title: "",
+    description: "",
+    points: "",
   });
 
   const testsState = useState<TestType[]>([]);

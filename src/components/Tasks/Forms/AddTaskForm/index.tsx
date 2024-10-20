@@ -19,7 +19,7 @@ type Props = {
 };
 
 const AddTaskForm = ({ dialog }: Props) => {
-  const stepState = useState<TaskFormStep>("define-tests");
+  const stepState = useState<TaskFormStep>("task");
   const [step, setStep] = stepState;
 
   const handleClose = () => {
@@ -45,7 +45,6 @@ const AddTaskForm = ({ dialog }: Props) => {
       isOpen={dialog.open}
       onClose={handleClose}
       classNames={{
-        wrapper: "!translate-x-[55px] lg:!translate-x-0",
         base: "font-serif min-w-[720px] lg:min-w-[90%]",
         backdrop: "bg-background/50",
         body: "pb-0 pt-4",

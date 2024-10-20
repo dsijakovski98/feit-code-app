@@ -2,13 +2,13 @@ import { Fragment, useMemo } from "react";
 
 import clsx from "clsx";
 
-import { ModalBody, ModalFooter } from "@nextui-org/modal";
+import { ModalBody } from "@nextui-org/modal";
 import { Pagination } from "@nextui-org/pagination";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table";
 
-import TestParameterCell from "@/components/Tasks/Forms/TaskTests/AddTests/TestInputs/TestParameterCell";
-import NewInputsTestForm from "@/components/Tests/Forms/NewInputsTestForm";
-import Button from "@/components/ui/Button";
+import TestParameterCell from "@/components/Tasks/Forms/TaskTests/AddTests/TestParameterCell";
+import TestsTableFooter from "@/components/Tasks/Forms/TaskTests/AddTests/TestTableFooter";
+import NewInputsForm from "@/components/Tests/Forms/NewInputsForm";
 import Icon from "@/components/ui/Icon";
 import ParameterTypeIcon from "@/components/ui/ParameterTypeIcon";
 
@@ -18,14 +18,8 @@ import { useCtx } from "@/hooks/useCtx";
 import { ROWS_PER_PAGE, usePaginate } from "@/hooks/usePaginate";
 
 const TestInputsTable = () => {
-  const {
-    formState: examFormState,
-    stepState: taskStepState,
-    testsState,
-    createTask,
-  } = useCtx(TaskFormContext);
+  const { formState: examFormState, testsState } = useCtx(TaskFormContext);
   const [{ title }] = examFormState;
-  const [, setTaskStep] = taskStepState;
   const [tests] = testsState;
 
   const { inputsMetaState, outputTypeState } = useCtx(TestFormContext);
@@ -77,7 +71,7 @@ const TestInputsTable = () => {
                   }}
                 />
 
-                <NewInputsTestForm columns={columns} />
+                <NewInputsForm columns={columns} />
               </div>
             }
           >
@@ -101,6 +95,7 @@ const TestInputsTable = () => {
                 </TableColumn>
               )}
             </TableHeader>
+
             <TableBody items={paginatedTests} emptyContent={<p className="pt-6">No Tests added yet.</p>}>
               {(test) => (
                 <TableRow key={test.id} className="group relative hover:bg-default-100">
@@ -127,21 +122,7 @@ const TestInputsTable = () => {
         </p>
       </ModalBody>
 
-      <ModalFooter className="justify-between">
-        <Button
-          color="default"
-          variant="light"
-          isDisabled={paginatedTests.length > 0}
-          className="!bg-transparent pl-0"
-          onPress={() => setTaskStep("define-tests")}
-        >
-          Go Back
-        </Button>
-
-        <Button className="w-[125px] px-8 text-sm" onPress={createTask}>
-          Finish
-        </Button>
-      </ModalFooter>
+      <TestsTableFooter />
     </Fragment>
   );
 };
