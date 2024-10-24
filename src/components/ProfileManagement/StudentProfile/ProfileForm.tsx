@@ -17,7 +17,7 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { UserProfile } from "@/hooks/useProfile";
 import { USER_TYPE } from "@/types";
-import { StudentProfileSchema } from "@/utils/formSchemas/profile/studentProfile";
+import { StudentProfileSchema } from "@/utils/schemas/profile/studentProfile";
 
 type Props = {
   student: UserProfile<"Student">;

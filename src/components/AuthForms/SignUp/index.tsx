@@ -23,7 +23,7 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { shortClerkErrorMessage } from "@/utils";
 import { joinOAuth } from "@/utils/auth";
-import { SignUpSchema } from "@/utils/formSchemas/auth/signUpSchema";
+import { SignUpSchema } from "@/utils/schemas/auth/signUpSchema";
 
 const SignUpForm = () => {
   const { fullScreen } = useCtx(WindowContext);
@@ -216,7 +216,7 @@ const SignUpForm = () => {
               </Button>
             </div>
 
-            <p className="text-center text-content1-foreground">or</p>
+            <p className="my-1 text-center text-content1-foreground">or</p>
 
             <OAuthJoin joinType="Join" oAuthJoin={oAuthSignUp} formLoading={formLoading} />
 

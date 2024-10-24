@@ -17,12 +17,26 @@ export const EXAM_STATUS = {
   new: "New",
   ongoing: "Ongoing",
   completed: "Completed",
-};
+} as const;
 export type ExamStatus = RecordValues<typeof EXAM_STATUS>;
 
-export const TASK_STATUS = {
+export const SUBMISSION_STATUS = {
   submitted: "Submitted",
   inProgress: "In Progress",
   graded: "Graded",
+} as const;
+export type SubmissionStatus = RecordValues<typeof SUBMISSION_STATUS>;
+
+export const VALUE_TYPE = {
+  string: "string",
+  number: "number",
+  boolean: "boolean",
+  empty: "empty",
+} as const;
+export type InputValueType = RecordValues<typeof VALUE_TYPE>;
+
+export const PARAMETER_TYPE = {
+  input: "input",
+  output: "output",
 };
-export type TaskStatus = RecordValues<typeof TASK_STATUS>;
+export type ParameterType = RecordValues<typeof PARAMETER_TYPE>;

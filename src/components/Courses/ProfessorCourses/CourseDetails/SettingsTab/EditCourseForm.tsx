@@ -20,7 +20,7 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { db } from "@/db";
 import { useCtx } from "@/hooks/useCtx";
 import { USER_TYPE } from "@/types";
-import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
+import { CourseSchema } from "@/utils/schemas/courses/courseSchema";
 
 const EditCourseForm = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
@@ -147,7 +147,7 @@ const EditCourseForm = () => {
         defaultValue={defaultCategories.length ? defaultCategories.split(",") : []}
       />
 
-      <Button fullWidth type="submit" className="!mt-14" isLoading={isSubmitting}>
+      <Button fullWidth type="submit" className="!mt-12" isLoading={isSubmitting}>
         Confirm
       </Button>
     </form>

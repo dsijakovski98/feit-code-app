@@ -204,7 +204,7 @@ const AddStudent = () => {
                   onPress={handleAddStudents}
                   className="text-sm"
                 >
-                  Add Student{selectedStudents.length > 1 && "s"}
+                  Add Student{selectedStudents.length !== 1 && "s"}
                   <span className="-translate-x-1 font-sans">
                     {selectedStudents.length > 0 && `(${selectedStudents.length})`}
                   </span>

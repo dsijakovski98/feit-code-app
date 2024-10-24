@@ -72,4 +72,16 @@
   .bg-main {
     @apply bg-content2 dark:!bg-default-75 lg:bg-content2;
   }
+
+  .swiper-items :is(.swiper-button-next, .swiper-button-prev) {
+    @apply -translate-y-3 !scale-80 lg:hidden;
+  }
+
+  .swiper-items .swiper-button-prev {
+    @apply left-2.5;
+  }
+
+  .swiper-items .swiper-button-next {
+    @apply right-2.5;
+  }
 }

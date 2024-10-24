@@ -1,24 +1,17 @@
-import { capitalize } from "..";
-
+import { LANGUAGES_CONFIG } from "@/constants/code/languages";
 import { ProgrammingLanguage } from "@/constants/enums";
-import { parseTemplate } from "@/utils/code/taskTemplates";
 
-const functionNameFromTitle = (title: string) => {
-  return title
-    .split(/\s+/)
-    .map((w) => capitalize(w))
-    .join("");
+export const supportsTests = (language: ProgrammingLanguage) => {
+  return !!LANGUAGES_CONFIG[language].supportsTests;
 };
 
-type Template = {
-  title: string;
-  description: string;
-  language: ProgrammingLanguage;
+const funcNameRegex = (language: ProgrammingLanguage) => {
+  const prefix = LANGUAGES_CONFIG[language].funcPrefix;
+  return new RegExp(`${prefix}\\s+(\\w+)\\s*\\(`);
 };
-export const baseTaskTemplate = ({ title, description, language }: Template) => {
-  if (title.length === 0) return "Task not defined yet.";
 
-  const functionName = functionNameFromTitle(title);
+export const extractFunctionName = (template: string, language: ProgrammingLanguage) => {
+  const funcRegex = funcNameRegex(language);
 
-  return parseTemplate({ functionName, description, language });
+  return funcRegex.exec(template)?.at(1) ?? "";
 };

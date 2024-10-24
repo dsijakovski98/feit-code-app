@@ -62,11 +62,12 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
                 tabIndex={0}
                 onKeyDown={handleInputButton}
                 htmlFor="upload-avatar"
-                className="grid h-full cursor-pointer place-items-center px-3 text-xs !outline-none"
+                className="grid h-full cursor-pointer place-items-center px-4 text-sm !outline-none"
               >
                 Upload
               </label>
             </Button>
+
             <input
               ref={inputRef}
               id="upload-avatar"
@@ -80,11 +81,12 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
 
             <Button
               isIconOnly
+              size="sm"
               variant="light"
               radius="full"
               color="danger"
               aria-label="Remove avatar"
-              className="p-1.5 text-xs"
+              className="p-1 text-xs"
               onPress={clearAvatar}
             >
               <Icon name="trash" />

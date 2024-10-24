@@ -3,13 +3,16 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 
 import AuthLayout from "@/layouts/AuthLayout";
 import CourseDetailsLayout from "@/layouts/DetailsLayout/CourseDetailsLayout";
+import ExamDetailsLayout from "@/layouts/DetailsLayout/ExamDetailsLayout";
 import MainLayout from "@/layouts/MainLayout";
 import OnboardingLayout from "@/layouts/OnboardingLayout";
 import PageFallback from "@/layouts/PageFallback";
+import UserTypeOnlyLayout from "@/layouts/UserTypeOnly";
 
 import PageWrapper from "@/components/PageWrapper";
 
 import { ROUTES } from "@/constants/routes";
+import { USER_TYPE } from "@/types";
 
 const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
@@ -18,10 +21,12 @@ const CallbackSSO = lazy(() => import("@/pages/auth/sso-callback"));
 const WelcomePage = lazy(() => import("@/pages/welcome"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const ProfilePage = lazy(() => import("@/pages/dashboard/profile"));
+const ExamsPage = lazy(() => import("@/pages/dashboard/exams"));
 const CoursesPage = lazy(() => import("@/pages/dashboard/courses"));
 const CourseDetailsPage = lazy(() => import("@/pages/dashboard/courses/details"));
 const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
 const NewExamPage = lazy(() => import("@/pages/dashboard/courses/new-exam"));
+const ExamDetailsPage = lazy(() => import("@/pages/dashboard/exams/details"));
 
 const AppRouter = () => {
   return (
@@ -38,15 +43,34 @@ const AppRouter = () => {
                   element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} replace />}
                 />
 
+                <Route
+                  path={ROUTES.exams}
+                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.exams}`} replace />}
+                />
+
                 <Route path={ROUTES.dashboard}>
                   <Route index element={<Dashboard />} />
 
                   <Route path="courses">
                     <Route index element={<CoursesPage />} />
-                    <Route path="new" element={<NewCoursePage />} />
+
+                    <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                      <Route path="new" element={<NewCoursePage />} />
+                    </Route>
+
                     <Route path=":id" element={<CourseDetailsLayout />}>
                       <Route index element={<CourseDetailsPage />} />
-                      <Route path="new-exam" element={<NewExamPage />} />
+
+                      <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                        <Route path="new-exam" element={<NewExamPage />} />
+                      </Route>
+                    </Route>
+                  </Route>
+
+                  <Route path="exams">
+                    <Route index element={<ExamsPage />} />
+                    <Route path=":id" element={<ExamDetailsLayout />}>
+                      <Route index element={<ExamDetailsPage />} />
                     </Route>
                   </Route>
                 </Route>

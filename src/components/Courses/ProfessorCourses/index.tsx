@@ -8,8 +8,8 @@ import CoursesList from "@/components/Courses/CoursesList";
 import CoursesHeader from "@/components/Courses/Misc/CoursesHeader";
 import EmptyAssistantCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyAssistantCourses";
 import EmptyProfessorCourses from "@/components/Courses/ProfessorCourses/EmptyCourses/EmptyProfessorCourses";
+import SwitchFilter from "@/components/ui/Filters/SwitchFilter";
 import FloatButton from "@/components/ui/FloatButton";
-import SwitchFilter from "@/components/ui/SwitchFilter";
 
 import CourseSearchProvider from "@/context/CourseSearch.Context";
 import { useProfessorCourses } from "@/hooks/professor/useProfessorCourses";
@@ -36,8 +36,8 @@ const ProfessorCourses = ({ user }: Props) => {
   const searchFilter = useState("");
   const [search] = searchFilter;
 
-  const coursesQuery = useProfessorCourses({ id, type }, courseYearFilter.value);
-  const { data } = coursesQuery;
+  const coursesQuery = useProfessorCourses({ userId: id, type }, courseYearFilter.value);
+  const { data, isLoading } = coursesQuery;
 
   return (
     <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4">
@@ -46,7 +46,7 @@ const ProfessorCourses = ({ user }: Props) => {
           <SwitchFilter filter={courseYearFilter} />
         </CoursesHeader>
 
-        {!data && (
+        {isLoading && (
           <div className="w-full py-8 text-center">
             <Spinner size="lg" />
           </div>
@@ -76,9 +76,9 @@ const ProfessorCourses = ({ user }: Props) => {
       {!!data?.pages[0].length && (
         <FloatButton
           as={Link}
+          icon="add"
           // @ts-expect-error NextUI not passing through 'as' props
           to="new"
-          icon="add"
           containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
         >
           New Course

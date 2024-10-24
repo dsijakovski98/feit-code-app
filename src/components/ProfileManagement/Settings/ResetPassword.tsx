@@ -17,7 +17,7 @@ import { resetPassword } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
 import { useToggle } from "@/hooks/useToggle";
 import { getAuthStrategy, shortClerkErrorMessage } from "@/utils";
-import { ResetPasswordSchema } from "@/utils/formSchemas/profile/resetPassword";
+import { ResetPasswordSchema } from "@/utils/schemas/profile/resetPassword";
 
 const ResetPassword = () => {
   const { user } = useUser();

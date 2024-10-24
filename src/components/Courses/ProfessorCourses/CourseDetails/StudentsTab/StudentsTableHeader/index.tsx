@@ -19,7 +19,7 @@ const StudentsTableHeader = ({ children }: PropsWithChildren) => {
   return (
     <div className="flex items-end justify-start gap-6 md:flex-wrap md:gap-2">
       <p className="leading-none text-foreground-300 md:mr-auto md:self-center">
-        Total {studentsTotal} student{studentsTotal > 1 && "s"}
+        Total {studentsTotal} student{studentsTotal !== 1 && "s"}
       </p>
 
       <div className="ml-auto w-[240px] md:order-2 md:basis-full">{children}</div>

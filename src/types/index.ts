@@ -1,6 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 
+import { Extension } from "@uiw/react-codemirror";
+
 import { ButtonProps } from "@nextui-org/react";
+
+import { TestType } from "@/context/ExamFormContext";
 
 export type RecordValues<T extends Record<string, unknown>> = T[keyof T];
 
@@ -24,3 +28,13 @@ export const TEACHER_TYPE = {
   assistant: "Teaching Assistant",
 } as const;
 export type TeacherType = RecordValues<typeof TEACHER_TYPE>;
+
+export type LanguageConfig = {
+  comment: string;
+  funcPrefix: string;
+  emptyValue?: string;
+  extension: Extension;
+} & (
+  | { supportsTests: true; parseIO: (test: Omit<TestType, "id">) => { inputs: string[]; output: string } }
+  | { supportsTests?: never }
+);

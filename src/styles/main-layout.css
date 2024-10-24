@@ -4,7 +4,7 @@
 
 @layer utilities {
   .main-layout {
-    @apply z-0 grid min-h-dvh grid-cols-[auto_1fr] grid-rows-[auto_1fr];
+    @apply z-0 grid h-dvh grid-cols-[auto_1fr] grid-rows-[auto_1fr];
 
     grid-template-areas:
       "sidebar nav"

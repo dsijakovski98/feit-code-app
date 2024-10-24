@@ -1,6 +1,6 @@
+import { Fragment } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { Fragment } from "react/jsx-runtime";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

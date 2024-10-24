@@ -6,11 +6,18 @@ import { Tab, Tabs } from "@nextui-org/tabs";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
+import { useInvalidRoute } from "@/hooks/useInvalidRoute";
 import { USER_TYPE } from "@/types";
 
 const GeneralTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/GeneralTab"));
 const StudentsTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab"));
 const SettingsTab = lazy(() => import("@/components/Courses/ProfessorCourses/CourseDetails/SettingsTab"));
+
+const TABS = {
+  general: "#general",
+  students: "#students",
+  settings: "#settings",
+};
 
 const ProfessorCourseDetails = () => {
   const { userData } = useFCUser();
@@ -20,75 +27,63 @@ const ProfessorCourseDetails = () => {
   const { hash, pathname } = useLocation();
 
   const tabKeys = useMemo(() => {
-    const keys = ["general"];
+    const keys = [TABS.general];
 
     if (userData?.type !== USER_TYPE.professor) {
       return keys;
     }
 
     if ([professorId, assistantId].includes(userData.user.id)) {
-      keys.push("students");
+      keys.push(TABS.students);
     }
 
     if (userData.user.id === professorId) {
-      keys.push("settings");
+      keys.push(TABS.settings);
     }
 
     return keys;
   }, [userData, professorId, assistantId]);
 
-  const invalidRoute = useMemo(() => {
-    return !hash || !tabKeys.includes(hash.slice(1));
-  }, [hash, tabKeys]);
+  const { invalidRoute } = useInvalidRoute({ tabKeys });
 
   if (invalidRoute) {
-    return <Navigate to={pathname + "#general"} replace />;
-  }
-
-  if (tabKeys.length === 1 && tabKeys[0] === "general") {
-    return (
-      <section className="bg-main min-h-full px-8 pt-5 lg:px-5">
-        <Suspense fallback={null}>
-          <GeneralTab />
-        </Suspense>
-      </section>
-    );
+    return <Navigate to={pathname + TABS.general} replace />;
   }
 
   return (
-    <section className="bg-main min-h-full p-4 pt-0">
-      <div className="mx-auto h-full max-w-[140ch] lg:mx-0 lg:max-w-full">
+    <section className="bg-main h-auto pt-0">
+      <div className="mx-auto max-w-[140ch] lg:mx-0 lg:max-w-full">
         <Tabs
-          fullWidth
           size="lg"
+          fullWidth
           variant="underlined"
           aria-label="Course details tabs"
           destroyInactiveTabPanel={false}
           selectedKey={hash}
-          defaultSelectedKey="#general"
+          defaultSelectedKey={TABS.general}
           classNames={{
-            base: "!px-0 sticky top-20 lg:top-0 bg-transparent z-20",
+            base: "!px-0 sticky top-[85px] lg:top-0 bg-transparent z-20",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
             tabList: "!mx-0 py-5 bg-main",
-            panel: "pt-3 px-10 lg:px-5 md:px-0",
+            panel: "pt-3 px-10 lg:px-5 overflow-y-scroll max-h-[calc(100dvh-85px-80px)]",
           }}
         >
-          <Tab key="#general" title="General" href="#general">
+          <Tab key={TABS.general} title="General" href={TABS.general}>
             <Suspense fallback={null}>
               <GeneralTab />
             </Suspense>
           </Tab>
 
-          {tabKeys.includes("students") && (
-            <Tab key="#students" title="Students" href="#students">
+          {tabKeys.includes(TABS.students) && (
+            <Tab key={TABS.students} title="Students" href={TABS.students}>
               <Suspense fallback={null}>
                 <StudentsTab />
               </Suspense>
             </Tab>
           )}
 
-          {tabKeys.includes("settings") && (
-            <Tab key="#settings" title="Settings" href="#settings">
+          {tabKeys.includes(TABS.settings) && (
+            <Tab key={TABS.settings} title="Settings" href={TABS.settings}>
               <Suspense fallback={null}>
                 <SettingsTab />
               </Suspense>

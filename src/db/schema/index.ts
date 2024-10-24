@@ -6,6 +6,8 @@ export { default as courseCategories, courseCategoryRelations } from "./courseCa
 export { default as exams, examRelations } from "./exams";
 export { default as tasks, taskRelations } from "./tasks";
 export { default as studentCourses, studentCourseRelations } from "./studentCourses";
-export { default as taskGrades, taskGradeRelations } from "./taskGrades";
+export { default as submissions, submissionsRelations } from "./submissions";
+export { default as tests, testRelations } from "./tests";
+export { default as inputs, inputRelations } from "./inputs";
 
 export * from "./enums";

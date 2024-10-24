@@ -1,4 +1,4 @@
-import { ElementRef, ReactNode, useCallback, useLayoutEffect, useMemo, useRef } from "react";
+import { ElementRef, ReactNode, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { InferSelectModel } from "drizzle-orm";
@@ -14,8 +14,7 @@ import { courses } from "@/db/schema";
 import { COURSES_PER_PAGE } from "@/constants/queries";
 import { CourseSearchContext } from "@/context/CourseSearch.Context";
 import { useCtx } from "@/hooks/useCtx";
-
-import "./styles.css";
+import { useLoadMore } from "@/hooks/useLoadMore";
 
 type Props<T extends { id: string }> = {
   coursesQuery: UseInfiniteQueryResult<InfiniteData<T[]>>;
@@ -26,6 +25,26 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
   const { data, fetchNextPage, hasNextPage, isFetching } = coursesQuery;
 
   const { search } = useCtx(CourseSearchContext);
+
+  const { ref } = useLoadMore(fetchNextPage);
+
+  const swiperRef = useRef<ElementRef<typeof Swiper>>(null);
+  const [listHeight, setListHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    if (!swiperRef.current) return;
+
+    const updateHeight = () => {
+      setListHeight((swiperRef.current as unknown as HTMLElement).offsetHeight);
+    };
+
+    window.addEventListener("resize", updateHeight);
+    updateHeight();
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
 
   const filteredPages = useMemo(
     () =>
@@ -48,30 +67,17 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
     [data?.pages, search],
   );
 
-  const loadMoreRef = useRef<ElementRef<"div">>(null);
-  const loadMoreCallback = useCallback<IntersectionObserverCallback>(
-    (entries) => {
-      const [loadMoreEntry] = entries;
-
-      if (loadMoreEntry.isIntersecting) {
-        fetchNextPage();
-      }
-    },
-    [fetchNextPage],
-  );
-
-  useLayoutEffect(() => {
-    if (!loadMoreRef.current) return;
-
-    const observer = new IntersectionObserver(loadMoreCallback);
-    observer.observe(loadMoreRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [loadMoreCallback]);
-
   if (!data) return null;
+
+  if (filteredPages[0].length === 0) {
+    return (
+      <div style={{ height: `${listHeight}px` }} className="grid place-items-center px-8 lg:px-5">
+        <p>
+          No courses found with name <span className="font-semibold">"{search}"</span>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <Swiper
@@ -82,7 +88,8 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       navigation={{ hideOnClick: true, enabled: !isFetching }}
       pagination={{ dynamicBullets: true }}
       modules={[A11y, Pagination, Navigation]}
-      className="swiper-courses !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
+      className="swiper-items !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
+      ref={swiperRef}
     >
       {filteredPages.flatMap((page) =>
         page.map((item) => (
@@ -93,8 +100,8 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
       )}
 
       {hasNextPage && (
-        <SwiperSlide hidden>
-          <div ref={loadMoreRef} aria-hidden />
+        <SwiperSlide>
+          <div ref={ref} aria-hidden />
         </SwiperSlide>
       )}
     </Swiper>

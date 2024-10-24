@@ -20,7 +20,7 @@ import { WindowContext } from "@/context/WindowContext";
 import { useCtx } from "@/hooks/useCtx";
 import { shortClerkErrorMessage } from "@/utils";
 import { joinOAuth } from "@/utils/auth";
-import { SignInSchema } from "@/utils/formSchemas/auth/signInSchema";
+import { SignInSchema } from "@/utils/schemas/auth/signInSchema";
 
 const SignInForm = () => {
   const { fullScreen } = useCtx(WindowContext);
@@ -173,7 +173,7 @@ const SignInForm = () => {
         </Button>
       </div>
 
-      <p className="text-center font-sans text-content1-foreground">or</p>
+      <p className="my-1 text-center font-sans text-content1-foreground">or</p>
 
       <OAuthJoin joinType="Sign in" oAuthJoin={oAuthSignIn} formLoading={formLoading} />
 

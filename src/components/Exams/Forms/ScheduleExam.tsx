@@ -5,7 +5,7 @@ import { today } from "@internationalized/date";
 import { DatePicker, TimeInput } from "@nextui-org/react";
 
 import { nextUIDate, nextUITime, nextUITimeToDate } from "@/utils/dates";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type Props = {
   form: UseFormReturn<ExamSchema>;
@@ -31,9 +31,12 @@ const ScheduleExam = ({ form }: Props) => {
             minValue={today("UTC")}
             value={nextUIDate(field.value)}
             onChange={(e) => field.onChange(e.toDate("UTC"))}
-            label={<span className="font-semibold text-foreground">Start Date</span>}
+            label={<span className="text-base font-semibold text-foreground lg:text-sm">Start Date</span>}
             classNames={{
               selectorIcon: "h-6 w-6",
+            }}
+            dateInputClassNames={{
+              segment: "focus:bg-primary focus:text-primary-foreground",
             }}
           />
         )}
@@ -46,12 +49,15 @@ const ScheduleExam = ({ form }: Props) => {
         render={({ field }) => (
           <TimeInput
             size="lg"
-            hourCycle={24}
             hideTimeZone
+            hourCycle={24}
             variant="underlined"
             value={nextUITime(field.value)}
             onChange={(e) => field.onChange(nextUITimeToDate(e.toString()))}
-            label={<span className="font-semibold text-foreground">Time</span>}
+            label={<span className="text-base font-semibold text-foreground lg:text-sm">Start Time</span>}
+            classNames={{
+              segment: "focus:bg-primary focus:text-primary-foreground",
+            }}
           />
         )}
       />

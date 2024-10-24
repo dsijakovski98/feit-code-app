@@ -21,7 +21,7 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { db } from "@/db";
 import { useCtx } from "@/hooks/useCtx";
 import { getAcademicYear } from "@/utils";
-import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
+import { CourseSchema } from "@/utils/schemas/courses/courseSchema";
 
 const NewCourseForm = () => {
   const { userId } = useAuth();
@@ -90,7 +90,7 @@ const NewCourseForm = () => {
   return (
     <form id="new-course-form" onSubmit={handleSubmit(onSubmit)} className="space-y-5 lg:pb-4">
       <div className="mb-12">
-        <h2 className="text-2xl font-semibold">Create a new course</h2>
+        <h2 className="text-2xl font-semibold">Create a new Course</h2>
         <p className="text-foreground-300 lg:text-sm">
           You will be teaching this course for the <span className="font-semibold">{academicYear}</span>{" "}
           semester

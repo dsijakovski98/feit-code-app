@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Progress } from "@nextui-org/react";
 
@@ -21,10 +21,22 @@ const NewExamForm = () => {
     return 100;
   }, [step]);
 
+  useEffect(() => {
+    if (import.meta.env.DEV) return;
+
+    window.onbeforeunload = () => {
+      return "Are you sure?";
+    };
+
+    return () => {
+      window.onbeforeunload = null;
+    };
+  }, []);
+
   return (
-    <div className="h-full">
-      <div className="mb-14">
-        <h2 className="text-2xl font-semibold">Create a new exam</h2>
+    <div className="h-full space-y-14">
+      <div>
+        <h2 className="text-2xl font-semibold">Create a new Exam</h2>
         <p className="mb-3 text-foreground-300 lg:text-sm">
           Construct the perfect exam and test your students' skills the right way.
         </p>
@@ -32,17 +44,19 @@ const NewExamForm = () => {
         <Progress size="sm" value={progress} aria-label="Exam creation progress" />
       </div>
 
-      <PresenceBlock show={step === "exam"}>
-        <ExamForm />
-      </PresenceBlock>
+      <div>
+        <PresenceBlock show={step === "exam"}>
+          <ExamForm />
+        </PresenceBlock>
 
-      <PresenceBlock show={step === "tasks"}>
-        <ExamTasks />
-      </PresenceBlock>
+        <PresenceBlock show={step === "tasks"}>
+          <ExamTasks />
+        </PresenceBlock>
 
-      <PresenceBlock show={step === "confirm" || step === "creating"}>
-        <ConfirmExam />
-      </PresenceBlock>
+        <PresenceBlock show={step === "confirm" || step === "creating"}>
+          <ConfirmExam />
+        </PresenceBlock>
+      </div>
     </div>
   );
 };

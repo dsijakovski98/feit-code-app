@@ -15,7 +15,7 @@ import { updateProfessor } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
 import { UserProfile } from "@/hooks/useProfile";
 import { TEACHER_TYPE, USER_TYPE } from "@/types";
-import { ProfessorProfileSchema } from "@/utils/formSchemas/profile/professorProfile";
+import { ProfessorProfileSchema } from "@/utils/schemas/profile/professorProfile";
 
 type Props = {
   professor: UserProfile<"Professor">;

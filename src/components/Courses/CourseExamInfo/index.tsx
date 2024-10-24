@@ -1,25 +1,33 @@
+import { Suspense, lazy, useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import { Chip, Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
-import CompletedExamInfo from "@/components/Courses/CourseExamInfo/CompletedExamInfo";
-import NewExamInfo from "@/components/Courses/CourseExamInfo/NewExamInfo";
-import OngoingExamInfo from "@/components/Courses/CourseExamInfo/OngoingExamInfo";
+import ExamStats from "@/components/Courses/CourseExamInfo/ExamStats";
 import Button from "@/components/ui/Button";
+import FloatButton from "@/components/ui/FloatButton";
 import Icon from "@/components/ui/Icon";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useLatestExam } from "@/hooks/exam/useLatestExam";
 import { useCtx } from "@/hooks/useCtx";
-import { parseExamStatus } from "@/utils";
-import { examStatusColor } from "@/utils/colors";
+import { useFCUser } from "@/hooks/useFCUser";
+
+const CompletedExamInfo = lazy(
+  () => import("@/components/Courses/CourseExamInfo/ExamInfo/CompletedExamInfo"),
+);
+const OngoingExamInfo = lazy(() => import("@/components/Courses/CourseExamInfo/ExamInfo/OngoingExamInfo"));
+const UpcomingExamInfo = lazy(() => import("@/components/Courses/CourseExamInfo/ExamInfo/UpcomingExamInfo"));
 
 const CourseExamInfo = () => {
+  const { userData } = useFCUser();
   const { courseDetails } = useCtx(CourseDetailsContext);
-  const { id: courseId } = courseDetails;
+  const { id: courseId, professorId } = courseDetails;
 
   const { data: exam, isLoading } = useLatestExam({ courseId });
+
+  const isCourseProfessor = useMemo(() => userData?.user.id === professorId, [userData, professorId]);
 
   if (isLoading) {
     return (
@@ -34,44 +42,47 @@ const CourseExamInfo = () => {
       <div className="grid h-full place-items-center content-center gap-3">
         <p className="font-semibold text-foreground-300">You don't have an upcoming exam yet.</p>
 
-        <Button
-          size="sm"
-          as={Link}
-          // @ts-expect-error NextUI not passing through 'as' props
-          to="new-exam"
-          startContent={<Icon name="add" className="h-4 w-4" />}
-          className="text-xs"
-        >
-          New exam
-        </Button>
+        {isCourseProfessor && (
+          <Button
+            size="sm"
+            as={Link}
+            // @ts-expect-error NextUI not passing through 'as' props
+            to="new-exam"
+            startContent={<Icon name="add" className="h-4 w-4" />}
+            className="text-xs"
+          >
+            New Exam
+          </Button>
+        )}
       </div>
     );
   }
 
   if (!exam) return null;
 
-  const { name, language, status } = exam;
+  const { status } = exam;
 
   return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <h2 className="text-xl font-bold">
-            {name}・{language}
-          </h2>
-          <p>Latest Exam</p>
-        </div>
+    <div className="flex h-full flex-col justify-start gap-6 md:gap-20">
+      <Suspense fallback={null}>
+        {status === EXAM_STATUS.new && <UpcomingExamInfo exam={exam} />}
+        {status === EXAM_STATUS.ongoing && <OngoingExamInfo exam={exam} />}
+        {status === EXAM_STATUS.completed && <CompletedExamInfo exam={exam} />}
+      </Suspense>
 
-        <Chip size="lg" classNames={{ content: "font-semibold" }} color={examStatusColor(status)}>
-          {parseExamStatus(status)}
-        </Chip>
-      </div>
+      <ExamStats />
 
-      {status === EXAM_STATUS.new && <NewExamInfo exam={exam} />}
-
-      {status === EXAM_STATUS.ongoing && <OngoingExamInfo exam={exam} />}
-
-      {status === EXAM_STATUS.completed && <CompletedExamInfo exam={exam} />}
+      {isCourseProfessor && (
+        <FloatButton
+          as={Link}
+          icon="add"
+          // @ts-expect-error NextUI not passing through 'as' props
+          to="new-exam"
+          containerClass="bottom-10 right-10 lg:bottom-20 lg:right-5"
+        >
+          New Exam
+        </FloatButton>
+      )}
     </div>
   );
 };

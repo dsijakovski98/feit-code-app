@@ -1,5 +1,5 @@
 <description>
 
-function <fname>(/* Define inputs here */) {
+function <fname>(<inputs>) {
     // Your code here
 }

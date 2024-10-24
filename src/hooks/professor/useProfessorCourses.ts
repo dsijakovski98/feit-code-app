@@ -9,16 +9,17 @@ import { getAcademicYear } from "@/utils";
 const currentAcademicYear = getAcademicYear();
 
 type QueryOptions = {
-  id: string;
+  userId: string;
   type: FCProfessor["type"];
 };
 
+// Returns a paginated list of courses for a given professor
 export const useProfessorCourses = (options: QueryOptions, yearFilter: "all" | "current") => {
-  const { id, type } = options;
+  const { userId, type } = options;
   return useInfiniteQuery({
     initialPageParam: 0,
 
-    queryKey: [{ name: "courses", type: USER_TYPE.professor, id, yearFilter }],
+    queryKey: [{ name: "courses", type: USER_TYPE.professor, id: userId, yearFilter }],
     queryFn: async ({ pageParam = 0 }) => {
       const coursesData = await db.query.courses.findMany({
         with: {
@@ -27,7 +28,7 @@ export const useProfessorCourses = (options: QueryOptions, yearFilter: "all" | "
         },
         where: (courses, { eq, and }) => {
           const teacherColumn = type === TEACHER_TYPE.professor ? courses.professorId : courses.assistantId;
-          const teacherFilter = eq(teacherColumn, id);
+          const teacherFilter = eq(teacherColumn, userId);
 
           if (yearFilter === "all") return teacherFilter;
 

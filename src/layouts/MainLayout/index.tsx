@@ -18,7 +18,7 @@ const MainLayout = () => {
         <Nav />
       </div>
 
-      <main className="empty:bg-main z-0 grid grid-cols-1 grid-rows-1 [grid-area:main] lg:block lg:h-[calc(100dvh-70px-58px)] lg:overflow-y-auto">
+      <main className="empty:bg-main z-0 grid grid-cols-1 grid-rows-1 [grid-area:main] lg:block lg:h-[calc(100dvh-65px-65px)]">
         <Suspense fallback={<PageFallback />}>
           <Outlet />
         </Suspense>

@@ -3,7 +3,7 @@ import { Controller, UseFormReturn } from "react-hook-form";
 import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 
 import { EXAM_DURATIONS } from "@/constants/exams";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type Props = {
   form: UseFormReturn<ExamSchema>;
@@ -51,7 +51,7 @@ const DurationSelect = ({ form }: Props) => {
               <AutocompleteItem
                 key={item.duration}
                 textValue={item.duration}
-                classNames={{ title: "font-sans text-sm font-semibold" }}
+                classNames={{ title: "font-sans text-base font-semibold" }}
                 title={`${item.duration} min (${hours}h)`}
               />
             );

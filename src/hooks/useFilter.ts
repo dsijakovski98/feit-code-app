@@ -3,13 +3,13 @@ import { useSearchParams } from "react-router-dom";
 
 export type Option = { value: string; label: string };
 
-type FilterOptions<T extends [Option, Option]> = {
+type FilterOptions<T extends Option[]> = {
   name: string;
   options: T;
   defaultValue: T[number]["value"];
 };
 
-export const useFilter = <T extends [Option, Option]>({ name, defaultValue, options }: FilterOptions<T>) => {
+export const useFilter = <T extends Option[]>({ name, defaultValue, options }: FilterOptions<T>) => {
   type OptionType = T[number]["value"];
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,4 +24,4 @@ export const useFilter = <T extends [Option, Option]>({ name, defaultValue, opti
   return { value: filter, updateFilter, options };
 };
 
-export type Filter<T extends [Option, Option]> = ReturnType<typeof useFilter<T>>;
+export type Filter<T extends Option[]> = ReturnType<typeof useFilter<T>>;

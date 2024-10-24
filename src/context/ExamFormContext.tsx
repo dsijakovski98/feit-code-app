@@ -2,11 +2,17 @@ import { PropsWithChildren, createContext, useMemo, useState } from "react";
 
 import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
 import { UseState } from "@/types";
-import { ExamSchema } from "@/utils/formSchemas/exams/examSchema";
-import { TaskSchema } from "@/utils/formSchemas/tasks/taskSchema";
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
+import { TaskSchema } from "@/utils/schemas/tasks/taskSchema";
+import { TaskTestSchema, TestInputSchema } from "@/utils/schemas/tasks/testSchema";
 
 type ExamSteps = "exam" | "tasks" | "confirm" | "creating";
-export type TaskType = TaskSchema & { template: string };
+export type TaskType = TaskSchema & {
+  template: string;
+  tests: Array<TaskTestSchema & { inputs: TestInputSchema[] }>;
+};
+export type TestType = TaskType["tests"][number] & { id: string };
+export type InputType = TestType["inputs"][number];
 
 type ExamFormContext = {
   formState: UseState<ExamSchema>;
@@ -29,7 +35,6 @@ const ExamFormProvider = ({ children }: PropsWithChildren) => {
   });
 
   const tasksState = useState<TaskType[]>([]);
-
   const stepState = useState<ExamSteps>("exam");
 
   const [examForm] = formState;

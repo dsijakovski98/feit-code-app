@@ -29,7 +29,7 @@ const Nav = () => {
             <h1 className="min-h-7 text-xl font-semibold">{timeGreeting}</h1>
           </Skeleton>
 
-          <time className="block text-sm">{timestamp}</time>
+          <time className="block text-foreground-300">{timestamp}</time>
         </div>
 
         <LogoFC className="hidden lg:flex" />

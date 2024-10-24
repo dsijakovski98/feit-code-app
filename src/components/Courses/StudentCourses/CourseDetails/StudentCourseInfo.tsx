@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import { Spinner } from "@nextui-org/react";
 
-import JoinCourse from "@/components/Courses/JoinCourse";
+import JoinCourse from "@/components/Courses/Forms/JoinCourse";
 import UpcomingExam from "@/components/Courses/StudentCourses/CourseDetails/UpcomingExam";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

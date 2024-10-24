@@ -8,7 +8,8 @@ import py from "@/images/programming-languages/python.svg";
 import rust from "@/images/programming-languages/rust.svg";
 import ts from "@/images/programming-languages/typescript.svg";
 
-import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
+import { EXAM_STATUS, ExamStatus, PROGRAMMING_LANGUAGE } from "@/constants/enums";
+import { parseExamStatus } from "@/utils";
 
 export const PROGRAMMING_LANGUAGES: Array<{ name: string; img: typeof js }> = [
   { name: PROGRAMMING_LANGUAGE.javascript, img: js },
@@ -32,3 +33,10 @@ export const EXAM_DURATIONS: Array<{ duration: string }> = [
   { duration: "150" },
   { duration: "180" },
 ];
+
+export const EXAM_STATUS_OPTIONS = Object.values(EXAM_STATUS).map((status: ExamStatus) => ({
+  value: status,
+  label: parseExamStatus(status),
+}));
+
+export const MAX_TASK_INPUTS = 4;

@@ -12,7 +12,7 @@ import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCourseCategories } from "@/hooks/course/useCourseCategories";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
-import { CourseSchema } from "@/utils/formSchemas/courses/courseSchema";
+import { CourseSchema } from "@/utils/schemas/courses/courseSchema";
 
 type Props = {
   form: UseFormReturn<CourseSchema>;

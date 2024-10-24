@@ -12,7 +12,7 @@ import { MAJORS } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { useCtx } from "@/hooks/useCtx";
 import { TEACHER_TYPE } from "@/types";
-import { ProfessorOnboardingSchema } from "@/utils/formSchemas/onboarding/professorOnboarding";
+import { ProfessorOnboardingSchema } from "@/utils/schemas/onboarding/professorOnboarding";
 
 const ProfessorBasicInfo = () => {
   const { nextStep } = useCtx(OnboardingContext);

@@ -4,6 +4,13 @@ import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
 import { HREF } from "@/constants/routes";
 import { UseFCUser } from "@/hooks/useFCUser";
 
+export const isNumber = (value: unknown) => {
+  if (typeof value !== "number") return false;
+  if (isNaN(value)) return false;
+
+  return true;
+};
+
 export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
 /**
@@ -165,7 +172,7 @@ export const getAuthStrategy = (user?: UserResource | null) => {
 export const parseExamStatus = (status: ExamStatus): string => {
   switch (status) {
     case EXAM_STATUS.new:
-      return "Upcoming exam";
+      return "Upcoming";
 
     default:
       return status;

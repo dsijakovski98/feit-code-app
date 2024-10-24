@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Divider } from "@nextui-org/react";
+import { Divider, ScrollShadow } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
+import Icon from "@/components/ui/Icon";
 
 import { createExam } from "@/actions/exams";
 import { ROUTES } from "@/constants/routes";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { ExamFormContext } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
+import { supportsTests } from "@/utils/code";
 import { parseDateTime } from "@/utils/dates";
 
 const ConfirmExam = () => {
@@ -30,6 +32,8 @@ const ConfirmExam = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  const testsSupported = useMemo(() => supportsTests(language), [language]);
+
   const { date, time } = useMemo(() => parseDateTime(startDate, startTime), [startDate, startTime]);
 
   const { mutate, isPending } = useMutation({
@@ -37,7 +41,10 @@ const ConfirmExam = () => {
     onSuccess: async (success) => {
       if (!success) return;
 
-      await queryClient.invalidateQueries({ queryKey: [{ name: "latest-exam", courseId }] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: [{ name: "exams" }] }),
+        queryClient.invalidateQueries({ queryKey: [{ name: "latest-exam", courseId }] }),
+      ]);
 
       toast.success(`${language} exam "${name}" created!`);
       navigate(`${ROUTES.dashboard}${ROUTES.courses}/${courseId}`);
@@ -51,7 +58,7 @@ const ConfirmExam = () => {
   };
 
   return (
-    <section className="space-y-16">
+    <section className="space-y-14">
       <div className="space-y-6">
         <h2 className="text-3xl">
           {name}・{language}
@@ -74,18 +81,26 @@ const ConfirmExam = () => {
       </div>
 
       <div className="space-y-8">
-        <ul className="space-y-4">
-          {tasks.map(({ title, description, points }) => (
-            <li key={title} className="flex items-end justify-between gap-6">
-              <div>
-                <p className="text-lg font-semibold">{title}</p>
-                <p>{description}</p>
-              </div>
+        <ScrollShadow className="h-[270px] pr-2">
+          <ul className="space-y-6">
+            {tasks.map(({ title, points, tests }) => (
+              <li key={title} className="flex items-start justify-between gap-6">
+                <div>
+                  <p className="text-lg font-semibold">{title}</p>
 
-              <p className="text-xl font-semibold">{points} points</p>
-            </li>
-          ))}
-        </ul>
+                  {testsSupported && (
+                    <div className="flex items-center gap-2 font-semibold">
+                      <Icon name="test" className="h-4 w-4" />
+                      {tests.length} Test{tests.length !== 1 && "s"}
+                    </div>
+                  )}
+                </div>
+
+                <p className="text-xl font-semibold">{points} points</p>
+              </li>
+            ))}
+          </ul>
+        </ScrollShadow>
 
         <Divider className="!h-px" />
 

@@ -2,15 +2,17 @@ import { relations } from "drizzle-orm";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 import exams from "@/db/schema/exams";
-import taskGrades from "@/db/schema/taskGrades";
+import submissionTasks from "@/db/schema/submissionTasks";
+import tests from "@/db/schema/tests";
 import { primaryId } from "@/db/schema/utils";
 
 const tasks = pgTable("tasks", {
   id: primaryId(),
-  orderIndex: integer("order_index").unique().notNull(),
+  orderIndex: integer("order_index").notNull(),
   title: varchar("title", { length: 256 }).notNull(),
   description: varchar("description", { length: 256 }),
   points: integer("points"),
+  functionName: varchar("func_name", { length: 256 }).notNull(),
   templateUrl: varchar("template_url", { length: 1024 }).notNull(),
 
   examId: varchar("exam_id")
@@ -23,7 +25,8 @@ export const taskRelations = relations(tasks, ({ one, many }) => ({
     fields: [tasks.examId],
     references: [exams.id],
   }),
-  grades: many(taskGrades),
+  tests: many(tests),
+  submissions: many(submissionTasks),
 }));
 
 export default tasks;
