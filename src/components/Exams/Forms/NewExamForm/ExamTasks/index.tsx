@@ -92,7 +92,7 @@ const ExamTasks = () => {
                   <TaskPreviewProvider
                     task={task}
                     index={index}
-                    open={!!activeTask}
+                    open={activeTask?.title === task.title}
                     onClose={() => setActiveTask(null)}
                   >
                     <TaskPreview />

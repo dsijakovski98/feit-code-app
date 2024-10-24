@@ -2,7 +2,7 @@ package main
 
 <description>
 
-func <fname>(<inputs>) <output> {
+func <fname>(<inputs>)<output> {
     // Your code here
 }
 

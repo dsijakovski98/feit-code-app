@@ -18,7 +18,7 @@ export const TestFormContext = createContext<TestFormContext | null>(null);
 TestFormContext.displayName = "TestFormContext";
 
 const TestFormProvider = ({ children }: PropsWithChildren) => {
-  const withInputs = useToggle(true);
+  const withInputs = useToggle();
 
   const inputsMetaState = useState<InputMeta[]>([]);
 

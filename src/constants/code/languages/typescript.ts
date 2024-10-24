@@ -18,7 +18,8 @@ export const tsConfig: LanguageConfig = {
   supportsTests: true,
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => `${input.name}: ${typeMap[input.type]}`);
-    const output = typeMap[test.type];
+    // Trailing colon needed for proper formatting ex. function (a: int, b: int): int {}
+    const output = `: ${typeMap[test.type]}`;
 
     return { inputs, output };
   },

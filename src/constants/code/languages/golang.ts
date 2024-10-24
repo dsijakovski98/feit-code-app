@@ -18,7 +18,8 @@ export const goConfig: LanguageConfig = {
   supportsTests: true,
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => `${input.name} ${typeMap[input.type]}`);
-    const output = typeMap[test.type];
+    // Trailing space needed for proper formatting ex. func (a int, b int) int {}
+    const output = ` ${typeMap[test.type]}`;
 
     return { inputs, output };
   },

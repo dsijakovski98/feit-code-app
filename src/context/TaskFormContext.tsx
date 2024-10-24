@@ -24,7 +24,8 @@ TaskFormContext.displayName = "TaskFormContext";
 type Props = Pick<TaskFormContext, "stepState"> & { taskDialog: Toggle } & PropsWithChildren;
 
 const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
-  const [, setTaskStep] = stepState;
+  const [step, setTaskStep] = stepState;
+  console.log({ step });
 
   const { formState: examFormState, tasksState } = useCtx(ExamFormContext);
   const [{ language }] = examFormState;

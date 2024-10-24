@@ -1,5 +1,5 @@
 <description>
 
-function <fname>(<inputs>): <output> {
+function <fname>(<inputs>)<output> {
     // Your code here
 }

@@ -31,6 +31,7 @@ export type TemplateParams = Pick<TaskType, "title" | "description" | "tests"> &
 };
 export const parseTaskTemplate = ({ title, description, tests, language }: TemplateParams) => {
   if (title.length === 0) return "Task not defined yet.";
+  console.log(tests);
 
   let template = taskTemplate[language];
 
@@ -54,6 +55,14 @@ export const parseTaskTemplate = ({ title, description, tests, language }: Templ
   if (LANGUAGES_CONFIG[language].supportsTests) {
     // Only need the fist test because we want the types, which are the same for each test
     const sampleTest = tests[0];
+
+    if (!sampleTest) {
+      template = template.replace("<inputs>", "");
+      template = template.replace("<output>", "");
+
+      return template.trim();
+    }
+
     const { inputs, output } = LANGUAGES_CONFIG[language].parseIO(sampleTest);
 
     template = template.replace("<inputs>", inputs.length ? inputs.join(", ") : "");
