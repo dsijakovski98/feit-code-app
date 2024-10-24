@@ -7,10 +7,12 @@ import ExamDetailsLayout from "@/layouts/DetailsLayout/ExamDetailsLayout";
 import MainLayout from "@/layouts/MainLayout";
 import OnboardingLayout from "@/layouts/OnboardingLayout";
 import PageFallback from "@/layouts/PageFallback";
+import UserTypeOnlyLayout from "@/layouts/UserTypeOnly";
 
 import PageWrapper from "@/components/PageWrapper";
 
 import { ROUTES } from "@/constants/routes";
+import { USER_TYPE } from "@/types";
 
 const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
@@ -51,10 +53,17 @@ const AppRouter = () => {
 
                   <Route path="courses">
                     <Route index element={<CoursesPage />} />
-                    <Route path="new" element={<NewCoursePage />} />
+
+                    <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                      <Route path="new" element={<NewCoursePage />} />
+                    </Route>
+
                     <Route path=":id" element={<CourseDetailsLayout />}>
                       <Route index element={<CourseDetailsPage />} />
-                      <Route path="new-exam" element={<NewExamPage />} />
+
+                      <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                        <Route path="new-exam" element={<NewExamPage />} />
+                      </Route>
                     </Route>
                   </Route>
 
