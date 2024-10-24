@@ -22,7 +22,7 @@ const TaskPreviewModal = () => {
 
   return (
     <Modal
-      size="2xl"
+      size="4xl"
       backdrop="blur"
       placement="center"
       hideCloseButton
@@ -53,6 +53,11 @@ const TaskPreviewModal = () => {
 
         <PresenceBlock show={templateToggle.open}>
           <ModalBody>
+            <p className="font-medium">
+              This is the <span className="font-mono font-semibold">Code Template</span>. Students will start
+              off with this code when solving the Task.
+            </p>
+
             {/* Wrapper needed for a smooth toggle animation */}
             <div className="h-[25dvh]">
               <CodeEditor

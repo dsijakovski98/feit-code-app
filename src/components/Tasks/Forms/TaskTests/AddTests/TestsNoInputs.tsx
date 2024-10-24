@@ -66,7 +66,7 @@ const TestNoInputsTable = () => {
                   page={page}
                   total={pages}
                   onChange={setPage}
-                  hidden={paginatedTests.length < ROWS_PER_PAGE}
+                  hidden={tests.length < ROWS_PER_PAGE}
                   classNames={{
                     wrapper: "ml-auto",
                     cursor: "bg-foreground text-background",
