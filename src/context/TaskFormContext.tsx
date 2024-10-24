@@ -5,7 +5,7 @@ import { ExamFormContext, TestType } from "@/context/ExamFormContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
 import { UseState } from "@/types";
-import { baseTaskTemplate } from "@/utils/code";
+import { parseTaskTemplate } from "@/utils/code/taskTemplates";
 import { TaskSchema } from "@/utils/schemas/tasks/taskSchema";
 
 export type TaskFormStep = "task" | "ask-tests" | "define-tests" | "add-tests" | "finish";
@@ -43,10 +43,10 @@ const TaskFormProvider = ({ stepState, taskDialog, children }: Props) => {
 
     setTimeout(() => {
       const [task, setTask] = formState;
-      const { title, description } = task;
-      const template = baseTaskTemplate({ title, description, language });
-
       const [tests, setTests] = testsState;
+
+      const template = parseTaskTemplate({ ...task, tests, language });
+
       setTasks((prev) => [...prev, { ...task, template, tests }]);
 
       // Reset everything

@@ -1,76 +1,31 @@
-import { langs } from "@uiw/codemirror-extensions-langs";
-import { Extension } from "@uiw/react-codemirror";
-
+import { bashConfig } from "@/constants/code/languages/bash";
+import { cConfig } from "@/constants/code/languages/c";
+import { cppConfig } from "@/constants/code/languages/cpp";
+import { goConfig } from "@/constants/code/languages/golang";
+import { jsConfig } from "@/constants/code/languages/javascript";
+import { phpConfig } from "@/constants/code/languages/php";
+import { pyConfig } from "@/constants/code/languages/python";
+import { rustConfig } from "@/constants/code/languages/rust";
+import { tsConfig } from "@/constants/code/languages/typescript";
 import { PROGRAMMING_LANGUAGE, ProgrammingLanguage } from "@/constants/enums";
-
-export type LanguageConfig = {
-  comment: string;
-  funcPrefix: string;
-  emptyValue?: string;
-  extension: Extension;
-  testsSupport?: boolean;
-};
+import { LanguageConfig } from "@/types";
 
 export const LANGUAGES_CONFIG: Record<ProgrammingLanguage, LanguageConfig> = {
-  [PROGRAMMING_LANGUAGE.javascript]: {
-    comment: "//",
-    funcPrefix: "function",
-    emptyValue: "null",
-    extension: langs.javascript(),
-    testsSupport: true,
-  },
+  [PROGRAMMING_LANGUAGE.javascript]: jsConfig,
 
-  [PROGRAMMING_LANGUAGE.typescript]: {
-    comment: "//",
-    funcPrefix: "function",
-    emptyValue: "null",
-    extension: langs.typescript(),
-    testsSupport: true,
-  },
+  [PROGRAMMING_LANGUAGE.typescript]: tsConfig,
 
-  [PROGRAMMING_LANGUAGE.c]: {
-    comment: "//",
-    funcPrefix: ".", // Can be any return type void | int | char etc
-    extension: langs.c(),
-  },
+  [PROGRAMMING_LANGUAGE.c]: cConfig,
 
-  [PROGRAMMING_LANGUAGE.cpp]: {
-    comment: "//",
-    funcPrefix: ".", // Can be any return type void | int | char etc
-    extension: langs.cpp(),
-  },
+  [PROGRAMMING_LANGUAGE.cpp]: cppConfig,
 
-  [PROGRAMMING_LANGUAGE.python]: {
-    comment: "#",
-    funcPrefix: "def",
-    emptyValue: "None",
-    extension: langs.python(),
-    testsSupport: true,
-  },
+  [PROGRAMMING_LANGUAGE.python]: pyConfig,
 
-  [PROGRAMMING_LANGUAGE.go]: {
-    comment: "//",
-    funcPrefix: "func",
-    emptyValue: "nil",
-    extension: langs.go(),
-    testsSupport: true,
-  },
+  [PROGRAMMING_LANGUAGE.go]: goConfig,
 
-  [PROGRAMMING_LANGUAGE.rust]: {
-    comment: "//",
-    funcPrefix: "fn",
-    extension: langs.rust(),
-  },
+  [PROGRAMMING_LANGUAGE.rust]: rustConfig,
 
-  [PROGRAMMING_LANGUAGE.php]: {
-    comment: "//",
-    funcPrefix: "function",
-    extension: langs.php(),
-  },
+  [PROGRAMMING_LANGUAGE.php]: phpConfig,
 
-  [PROGRAMMING_LANGUAGE.bash]: {
-    comment: "#",
-    funcPrefix: "function",
-    extension: langs.shell(),
-  },
+  [PROGRAMMING_LANGUAGE.bash]: bashConfig,
 };

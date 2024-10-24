@@ -1,6 +1,8 @@
 import { ProgrammingLanguage } from "../../constants/enums";
 
 import { LANGUAGES_CONFIG } from "@/constants/code/languages";
+import { TaskType } from "@/context/ExamFormContext";
+import { capitalize } from "@/utils";
 
 const templates = import.meta.glob("./templates/*.txt", {
   eager: true,
@@ -17,17 +19,24 @@ for (const template in templates) {
   taskTemplate[language] = templates[template] as string;
 }
 
-type TemplateParams = {
-  functionName: string;
-  description: string;
+const functionNameFromTitle = (title: string) => {
+  const words = title.split(/\s+/);
+  const parsedWords = words.map((word) => (words.length > 1 ? capitalize(word) : word));
+
+  return parsedWords.join("");
+};
+
+export type TemplateParams = Pick<TaskType, "title" | "description" | "tests"> & {
   language: ProgrammingLanguage;
 };
-export const parseTemplate = (params: TemplateParams) => {
-  const { functionName, description, language } = params;
+export const parseTaskTemplate = ({ title, description, tests, language }: TemplateParams) => {
+  if (title.length === 0) return "Task not defined yet.";
+
   let template = taskTemplate[language];
 
   if (!template) return `Template for ${language} is not yet supported.`;
 
+  const functionName = functionNameFromTitle(title);
   template = template.replace("<fname>", functionName);
 
   const baseDescription = description || "No description available.";
@@ -41,6 +50,15 @@ export const parseTemplate = (params: TemplateParams) => {
     });
 
   template = template.replace("<description>", descriptionChunks.join("\n"));
+
+  if (LANGUAGES_CONFIG[language].supportsTests) {
+    // Only need the fist test because we want the types, which are the same for each test
+    const sampleTest = tests[0];
+    const { inputs, output } = LANGUAGES_CONFIG[language].parseIO(sampleTest);
+
+    template = template.replace("<inputs>", inputs.length ? inputs.join(", ") : "");
+    template = template.replace("<output>", output);
+  }
 
   return template.trim();
 };

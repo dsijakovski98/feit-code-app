@@ -1,6 +1,6 @@
 <description>
 
 # Define the function's inputs if needed
-def <fname>():
+def <fname>(<inputs>):
     # Your code here
     pass
