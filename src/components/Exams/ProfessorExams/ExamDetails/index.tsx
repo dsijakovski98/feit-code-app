@@ -8,6 +8,7 @@ import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useInvalidRoute } from "@/hooks/useInvalidRoute";
+import { canStartExam } from "@/utils/dates";
 
 const GeneralTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/GeneralTab"));
 const SettingsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/SettingsTab"));
@@ -24,6 +25,7 @@ const ProfessorExamDetails = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
   const {
     status,
+    startsAt,
     course: { professorId },
   } = examDetails;
 
@@ -40,12 +42,17 @@ const ProfessorExamDetails = () => {
       keys.push(TABS.results);
     }
 
-    if (userData?.user.id === professorId && status === EXAM_STATUS.new) {
-      keys.push(TABS.settings);
+    if (status === EXAM_STATUS.new) {
+      const isProfessor = userData?.user.id === professorId;
+      const canStart = canStartExam(startsAt);
+
+      if (isProfessor && !canStart) {
+        keys.push(TABS.settings);
+      }
     }
 
     return keys;
-  }, [userData, professorId, status]);
+  }, [userData, professorId, status, startsAt]);
 
   const { invalidRoute } = useInvalidRoute({ tabKeys });
 

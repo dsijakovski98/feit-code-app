@@ -6,6 +6,7 @@ import { exams, inputs as inputsTable, tasks as tasksTable, tests as testsTable 
 
 import { fbStorage } from "@/services/firebase";
 
+import { EXAM_STATUS } from "@/constants/enums";
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
 import { extractFunctionName } from "@/utils/code";
@@ -148,7 +149,25 @@ export const cancelExam = async (examId: string) => {
     // TODO: Sentry logging
     console.log({ e });
 
-    throw new Error("Failed to cancel exam");
+    throw new Error("Failed to cancel exam!");
+  }
+
+  return true;
+};
+
+export const startExam = async (examId: string) => {
+  try {
+    await db
+      .update(exams)
+      .set({
+        status: EXAM_STATUS.ongoing,
+      })
+      .where(eq(exams.id, examId));
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to start exam!");
   }
 
   return true;
