@@ -161,6 +161,7 @@ export const startExam = async (examId: string) => {
       .update(exams)
       .set({
         status: EXAM_STATUS.ongoing,
+        startedAt: dayjs().format("YYYY-MM-DD HH:MM"),
       })
       .where(eq(exams.id, examId));
   } catch (e) {

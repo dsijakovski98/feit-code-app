@@ -31,7 +31,6 @@ export type TemplateParams = Pick<TaskType, "title" | "description" | "tests"> &
 };
 export const parseTaskTemplate = ({ title, description, tests, language }: TemplateParams) => {
   if (title.length === 0) return "Task not defined yet.";
-  console.log(tests);
 
   let template = taskTemplate[language];
 
