@@ -15,7 +15,7 @@ const Stat = ({ value, label, badge = false, size = "md" }: Props) => {
       <p
         className={clsx("font-bold", {
           "text-6xl font-bold": size === "md",
-          "text-5xl font-semibold": size === "sm",
+          "text-4xl font-semibold": size === "sm",
         })}
       >
         {value > 9 ? "9+" : value}
