@@ -1,7 +1,6 @@
 import { Suspense, lazy, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { Badge } from "@nextui-org/react";
 import { Tab, Tabs } from "@nextui-org/tabs";
 
 import { EXAM_STATUS } from "@/constants/enums";
@@ -87,15 +86,7 @@ const ProfessorExamDetails = () => {
 
           {tabKeys.includes(TABS.monitor) && (
             // TODO: Implement Monitor tab
-            <Tab
-              key={TABS.monitor}
-              title={
-                <Badge isDot content="" color="danger" className="translate-x-[18px] scale-80 animate-pulse">
-                  Monitor
-                </Badge>
-              }
-              href={TABS.monitor}
-            >
+            <Tab key={TABS.monitor} title="Monitor" href={TABS.monitor}>
               <Suspense fallback={null}>Monitor tab</Suspense>
             </Tab>
           )}

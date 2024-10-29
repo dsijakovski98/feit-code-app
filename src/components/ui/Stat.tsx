@@ -23,7 +23,7 @@ const Stat = ({ value, label, badge = false, size = "md" }: Props) => {
 
       <Badge
         content=""
-        color="danger"
+        color="warning"
         isDot
         isInvisible={!badge}
         className="translate-x-[18px] translate-y-0 scale-85 animate-pulse"
