@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 
@@ -28,26 +27,24 @@ const queryClient = new QueryClient({
 });
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <NextUIProvider>
-        <ThemeProvider attribute="class" defaultTheme="dark" themes={["dark", "light"]}>
-          <ClerkProvider publishableKey={CLERK_KEY} afterSignOutUrl="/">
-            <ResponsiveProvider>
-              <AppRouter />
-              <Toaster
-                toastOptions={{
-                  position: "bottom-right",
-                  className: "bg-background text-foreground",
-                  blank: {
-                    icon: <Icon name="info" className="h-5 w-5" />,
-                  },
-                }}
-              />
-            </ResponsiveProvider>
-          </ClerkProvider>
-        </ThemeProvider>
-      </NextUIProvider>
-    </QueryClientProvider>
-  </StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <NextUIProvider>
+      <ThemeProvider attribute="class" defaultTheme="dark" themes={["dark", "light"]}>
+        <ClerkProvider publishableKey={CLERK_KEY} afterSignOutUrl="/">
+          <ResponsiveProvider>
+            <AppRouter />
+            <Toaster
+              toastOptions={{
+                position: "bottom-right",
+                className: "bg-background text-foreground",
+                blank: {
+                  icon: <Icon name="info" className="h-5 w-5" />,
+                },
+              }}
+            />
+          </ResponsiveProvider>
+        </ClerkProvider>
+      </ThemeProvider>
+    </NextUIProvider>
+  </QueryClientProvider>,
 );

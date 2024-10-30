@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import Stat from "@/components/ui/Stat";
 
@@ -16,14 +16,14 @@ const OngoingExamStats = () => {
     finishedStudents: 0,
   });
 
-  useDatabaseListen<ExamStats>(`exams/${id}`, (stats) => {
-    if (!stats) return;
-
+  const onData = useCallback((stats: ExamStats | null) => {
     setExamStats({
-      activeStudents: Object.keys(stats.activeStudents).length,
-      finishedStudents: Object.keys(stats.finishedStudents).length,
+      activeStudents: Object.keys(stats?.activeStudents ?? {}).length,
+      finishedStudents: Object.keys(stats?.finishedStudents ?? {}).length,
     });
-  });
+  }, []);
+
+  useDatabaseListen<ExamStats>(`exams/${id}`, onData);
   return (
     <div className="flex items-end justify-start gap-14">
       <Stat size="sm" value={examStats.activeStudents} label="Active Students" />

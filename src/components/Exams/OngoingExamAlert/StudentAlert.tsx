@@ -2,6 +2,7 @@ import { useMemo } from "react";
 
 import ExamAlert from "@/components/Exams/OngoingExamAlert/ExamAlert";
 
+import { ROUTES } from "@/constants/routes";
 import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
 import { FCStudent } from "@/hooks/useFCUser";
 
@@ -18,7 +19,7 @@ const StudentExamAlert = ({ user }: Props) => {
       courseIds={courseIds}
       join={{
         label: "Join",
-        getHref: () => "#",
+        getHref: (examId) => `${ROUTES.examSession}/${examId}`,
       }}
     />
   );

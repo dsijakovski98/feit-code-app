@@ -4,6 +4,8 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 import AuthLayout from "@/layouts/AuthLayout";
 import CourseDetailsLayout from "@/layouts/DetailsLayout/CourseDetailsLayout";
 import ExamDetailsLayout from "@/layouts/DetailsLayout/ExamDetailsLayout";
+import ExamSessionLayout from "@/layouts/ExamSession/ExamSessionLayout";
+import StudentExamLayout from "@/layouts/ExamSession/StudentExamLayout";
 import MainLayout from "@/layouts/MainLayout";
 import OnboardingLayout from "@/layouts/OnboardingLayout";
 import PageFallback from "@/layouts/PageFallback";
@@ -27,6 +29,7 @@ const CourseDetailsPage = lazy(() => import("@/pages/dashboard/courses/details")
 const NewCoursePage = lazy(() => import("@/pages/dashboard/courses/new-course"));
 const NewExamPage = lazy(() => import("@/pages/dashboard/courses/new-exam"));
 const ExamDetailsPage = lazy(() => import("@/pages/dashboard/exams/details"));
+const ExamSessionPage = lazy(() => import("@/pages/exam-session"));
 
 const AppRouter = () => {
   return (
@@ -76,6 +79,18 @@ const AppRouter = () => {
                 </Route>
 
                 <Route path={ROUTES.profile} element={<ProfilePage />} />
+              </Route>
+
+              <Route element={<UserTypeOnlyLayout type={USER_TYPE.student} />}>
+                <Route element={<ExamSessionLayout />}>
+                  <Route element={<StudentExamLayout />}>
+                    <Route path={ROUTES.examSession}>
+                      <Route index element={<Navigate to={ROUTES.dashboard} />} />
+
+                      <Route path=":id" element={<ExamSessionPage />} />
+                    </Route>
+                  </Route>
+                </Route>
               </Route>
             </Route>
 
