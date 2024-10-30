@@ -14,20 +14,20 @@ const CourseActions = () => {
   const { id } = course;
 
   return (
-    <div className={clsx("mt-auto flex items-center justify-between gap-2 lg:w-full lg:pb-1")}>
+    <div className={clsx("mt-auto flex items-stretch justify-between gap-4 lg:w-full lg:pb-1")}>
       <Button
         as={Link}
         // @ts-expect-error NextUI not passing through 'as' props
         to={id}
-        size="sm"
         variant="light"
         color="default"
+        size={mode === USER_TYPE.student ? "md" : "sm"}
         className="px-5 text-sm lg:px-0"
       >
         Details
       </Button>
 
-      {mode === USER_TYPE.student && <JoinCourse />}
+      {mode === USER_TYPE.student && <JoinCourse label="Join" />}
     </div>
   );
 };

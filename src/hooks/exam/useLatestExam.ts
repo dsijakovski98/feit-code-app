@@ -1,25 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { EXAM_STATUS } from "@/constants/enums";
 import { db } from "@/db";
 
 type Options = {
   courseId: string;
-  upcoming?: boolean;
 };
 
-export const useLatestExam = ({ courseId, upcoming = false }: Options) => {
+export const useLatestExam = ({ courseId }: Options) => {
   return useQuery({
     queryKey: [{ name: "latest-exam", courseId }],
     queryFn: async () => {
       try {
         const latestExam = await db.query.exams.findFirst({
-          where: (exams, { eq, and }) => {
-            const idFilter = eq(exams.courseId, courseId);
-
-            if (!upcoming) return idFilter;
-
-            return and(idFilter, eq(exams.status, EXAM_STATUS.new));
+          where: (exams, { eq }) => {
+            return eq(exams.courseId, courseId);
           },
           orderBy: (exams, { desc }) => desc(exams.startsAt),
         });

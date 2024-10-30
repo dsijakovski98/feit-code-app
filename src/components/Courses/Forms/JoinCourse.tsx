@@ -14,7 +14,11 @@ import { useFCUser } from "@/hooks/useFCUser";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPE } from "@/types";
 
-const JoinCourse = () => {
+type Props = {
+  label?: string;
+};
+
+const JoinCourse = ({ label }: Props) => {
   const { course } = useCtx(CourseCardContext);
   const { id: courseId, name } = course;
 
@@ -59,7 +63,7 @@ const JoinCourse = () => {
   return (
     <Fragment>
       <Button variant="solid" className="px-6" onPress={dialog.toggleOn}>
-        Join Course
+        {label ?? "Join Course"}
       </Button>
 
       <ConfirmDialog
