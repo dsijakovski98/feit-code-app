@@ -72,7 +72,6 @@ const CategorySelect = ({ form, defaultValue }: Props) => {
                   {items.map((item) => (
                     <li key={item.key}>
                       <CategoryChip
-                        size="sm"
                         category={{
                           id: item.textValue ?? "",
                           label: item["aria-label"] ?? "",

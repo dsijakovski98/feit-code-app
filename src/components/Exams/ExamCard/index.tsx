@@ -44,7 +44,7 @@ const ExamCard = ({ exam }: Props) => {
       </div>
 
       <div className="flex items-center justify-between gap-6">
-        <Chip size="sm" color={examStatusColor(status)} classNames={{ content: "font-semibold text-xs" }}>
+        <Chip size="sm" color={examStatusColor(status)} classNames={{ content: "font-semibold text-sm p-2" }}>
           {parseExamStatus(status)}
         </Chip>
 

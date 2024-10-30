@@ -37,8 +37,8 @@ const OngoingDetails = () => {
         to="#monitor"
         size="lg"
         fullWidth
-        variant="ghost"
         color="default"
+        variant="bordered"
         startContent={<Icon name="monitor" className="h-6 w-6" />}
       >
         Monitor Exam

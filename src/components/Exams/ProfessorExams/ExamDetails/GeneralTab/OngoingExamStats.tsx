@@ -25,9 +25,9 @@ const OngoingExamStats = () => {
     });
   });
   return (
-    <div className="flex items-end justify-start gap-20">
-      <Stat badge size="sm" value={examStats.activeStudents} label="Active" />
-      <Stat badge size="sm" value={examStats.finishedStudents} label="Finished" />
+    <div className="flex items-end justify-start gap-14">
+      <Stat size="sm" value={examStats.activeStudents} label="Active Students" />
+      <Stat size="sm" value={examStats.finishedStudents} label="Students Finished" />
     </div>
   );
 };

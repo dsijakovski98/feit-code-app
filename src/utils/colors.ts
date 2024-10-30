@@ -10,7 +10,7 @@ export const examStatusColor = (status: ExamStatus): ThemeColor => {
       return "default";
 
     case EXAM_STATUS.ongoing:
-      return "warning";
+      return "secondary";
 
     default:
       throw new Error(`Invalid exam status: ${status}`);

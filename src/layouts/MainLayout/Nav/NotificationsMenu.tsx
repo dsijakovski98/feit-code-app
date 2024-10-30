@@ -12,9 +12,9 @@ const NotificationsMenu = () => {
     <Dropdown placement="bottom-end">
       <Badge
         isDot
-        isInvisible={NOTIFICATIONS === 0}
         variant="solid"
-        className="aspect-square -translate-x-[5px] translate-y-1 scale-80 border-[1.5px] border-transparent bg-danger dark:bg-warning-600"
+        isInvisible={NOTIFICATIONS === 0}
+        className="aspect-square -translate-x-[5px] translate-y-1 scale-85 border-transparent bg-secondary dark:bg-warning-600"
       >
         <DropdownTrigger>
           <Button
