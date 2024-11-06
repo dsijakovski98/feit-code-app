@@ -82,12 +82,20 @@ const AppRouter = () => {
               </Route>
 
               <Route element={<UserTypeOnlyLayout type={USER_TYPE.student} />}>
-                <Route element={<ExamSessionLayout />}>
-                  <Route element={<StudentExamLayout />}>
-                    <Route path={ROUTES.examSession}>
-                      <Route index element={<Navigate to={ROUTES.dashboard} />} />
+                <Route
+                  element={
+                    <Suspense fallback={<PageFallback bg="dots" />}>
+                      <Outlet />
+                    </Suspense>
+                  }
+                >
+                  <Route element={<ExamSessionLayout />}>
+                    <Route element={<StudentExamLayout />}>
+                      <Route path={ROUTES.examSession}>
+                        <Route index element={<Navigate to={ROUTES.dashboard} />} />
 
-                      <Route path=":id" element={<ExamSessionPage />} />
+                        <Route path=":id" element={<ExamSessionPage />} />
+                      </Route>
                     </Route>
                   </Route>
                 </Route>

@@ -73,6 +73,10 @@
     @apply bg-content2 dark:!bg-default-75 lg:bg-content2;
   }
 
+  .bg-dots {
+    @apply bg-dots-light dark:bg-dots-dark;
+  }
+
   .swiper-items :is(.swiper-button-next, .swiper-button-prev) {
     @apply -translate-y-3 !scale-80 lg:hidden;
   }

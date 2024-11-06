@@ -1,9 +1,6 @@
-import { Suspense } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 import { useUser } from "@clerk/clerk-react";
-
-import PageFallback from "@/layouts/PageFallback";
 
 import { ROUTES } from "@/constants/routes";
 
@@ -30,11 +27,7 @@ const OnboardingLayout = ({ mode }: Props) => {
     return <Navigate to={ROUTES.dashboard} />;
   }
 
-  return (
-    <Suspense fallback={<PageFallback />}>
-      <Outlet />
-    </Suspense>
-  );
+  return <Outlet />;
 };
 
 export default OnboardingLayout;

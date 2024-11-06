@@ -17,7 +17,7 @@ const ExamSessionPage = () => {
   // TODO: Implement UI
   return (
     <Fragment>
-      <main className="h-dvh overflow-hidden bg-dots-light dark:bg-dots-dark">
+      <main className="bg-dots h-dvh overflow-hidden">
         {examDetails.name}・{examDetails.language}
         <LeaveSession studentId={userData.user.id} />
       </main>

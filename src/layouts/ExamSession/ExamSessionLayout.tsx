@@ -13,7 +13,7 @@ const ExamSessionLayout = () => {
 
   if (isLoading) {
     return (
-      <div className="grid min-h-dvh place-items-center bg-dots-light dark:bg-dots-dark">
+      <div className="bg-dots grid min-h-dvh place-items-center">
         <CircularProgress aria-label="Loading exam session..." size="lg" className="scale-[2]" />
       </div>
     );
