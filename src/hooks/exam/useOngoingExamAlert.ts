@@ -18,7 +18,7 @@ export const useOngoingExamAlert = (courseIds?: string[]) => {
           orderBy: (exams, { desc }) => desc(exams.startedAt),
         });
 
-        return ongoingExam;
+        return ongoingExam ?? null;
       } catch (e) {
         // TODO: Sentry logging
         console.log({ e });

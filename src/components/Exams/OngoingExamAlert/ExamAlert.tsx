@@ -30,6 +30,10 @@ const ExamAlert = ({ courseIds, join }: Props) => {
     return null;
   }
 
+  if (!ongoingExam) {
+    return null;
+  }
+
   return (
     <div
       role="alert"
