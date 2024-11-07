@@ -1,5 +1,7 @@
 import { useMemo } from "react";
 
+import clsx, { ClassValue } from "clsx";
+
 import { Divider } from "@nextui-org/divider";
 import { Skeleton } from "@nextui-org/react";
 
@@ -12,7 +14,12 @@ import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
 import { useFCUser } from "@/hooks/useFCUser";
 import { getDaytime, getTimeGreeting } from "@/utils";
 
-const Nav = () => {
+type Props = {
+  className?: ClassValue;
+  hideDivider?: boolean;
+};
+
+const Nav = ({ className = "", hideDivider = false }: Props) => {
   const { userData } = useFCUser();
 
   const timestamp = useMemo(() => getDaytime(Date.now()), []);
@@ -22,8 +29,15 @@ const Nav = () => {
   );
 
   return (
-    <header className="bg-main font-sans">
-      <nav className="mx-8 flex h-full items-center justify-between border-b border-b-foreground-50 py-4 lg:mx-5 lg:border-b-transparent lg:pb-0">
+    <header className={clsx("bg-main font-sans", className)}>
+      <nav
+        className={clsx(
+          "mx-8 flex h-full items-center justify-between border-b border-b-foreground-50 py-4 lg:mx-5 lg:border-b-transparent lg:pb-0",
+          {
+            "border-b-transparent": hideDivider,
+          },
+        )}
+      >
         <div className="lg:hidden">
           <Skeleton isLoaded={!!timeGreeting} className="rounded-lg">
             <h1 className="min-h-7 text-xl font-semibold">{timeGreeting}</h1>

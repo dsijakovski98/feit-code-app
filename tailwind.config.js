@@ -17,6 +17,8 @@ export default {
         mono: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {
+        "drag-dots-h": "url('/images/drag-dots-horizontal.svg')",
+        "drag-dots-v": "url('/images/drag-dots-vertical.svg')",
         "dots-light":
           "radial-gradient(circle, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3)), url('/images/bg-dots-light.webp')",
         "dots-dark":

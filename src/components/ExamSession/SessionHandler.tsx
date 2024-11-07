@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useBeforeUnload } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -10,7 +11,7 @@ type Props = {
   studentId: string;
 };
 
-const JoinSessionHandler = ({ studentId }: Props) => {
+const SessionHandler = ({ studentId }: Props) => {
   const { examDetails } = useCtx(ExamDetailsContext);
   const { id: examId } = examDetails;
 
@@ -22,7 +23,13 @@ const JoinSessionHandler = ({ studentId }: Props) => {
     mutate({ studentId, examId });
   }, [mutate, studentId, examId]);
 
+  useBeforeUnload(
+    useCallback(() => {
+      // TODO: Save user progress
+    }, []),
+  );
+
   return null;
 };
 
-export default JoinSessionHandler;
+export default SessionHandler;

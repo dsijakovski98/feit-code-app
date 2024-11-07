@@ -1,28 +1,38 @@
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 
-import JoinSessionHandler from "@/components/ExamSession/JoinSessionHandler";
-import LeaveSession from "@/components/ExamSession/LeaveSession";
+import Nav from "@/layouts/MainLayout/Nav";
 
-import { ExamDetailsContext } from "@/context/ExamDetailsContext";
+import ExamSession from "@/components/ExamSession";
+import SessionHandler from "@/components/ExamSession/SessionHandler";
+
+import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 
 const ExamSessionPage = () => {
-  const { examDetails } = useCtx(ExamDetailsContext);
+  const { isMobile } = useCtx(ResponsiveContext);
 
   const { userData } = useFCUser();
 
   if (!userData) return null;
 
-  // TODO: Implement UI
   return (
     <Fragment>
-      <main className="bg-dots h-dvh overflow-hidden">
-        {examDetails.name}・{examDetails.language}
-        <LeaveSession studentId={userData.user.id} />
-      </main>
+      <div className="bg-dots relative grid h-dvh grid-rows-[auto_1fr] gap-2">
+        <Nav hideDivider className="!bg-transparent dark:bg-transparent" />
 
-      <JoinSessionHandler studentId={userData.user.id} />
+        {!isMobile && <ExamSession />}
+
+        {isMobile && (
+          <div className="absolute inset-0 grid place-items-center p-5 pt-0">
+            <h1 className="text-center font-sans text-lg font-semibold">
+              For the best experience, please use the Desktop version. Sorry for the inconvenience.
+            </h1>
+          </div>
+        )}
+      </div>
+
+      <SessionHandler studentId={userData.user.id} />
     </Fragment>
   );
 };
