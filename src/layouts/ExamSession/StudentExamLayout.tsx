@@ -1,8 +1,11 @@
 import { useMemo } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
+import { CircularProgress } from "@nextui-org/react";
+
 import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
+import ExamSessionProvider from "@/context/ExamSessionContext";
 import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
@@ -25,10 +28,18 @@ const StudentExamLayout = () => {
   }
 
   if (validExam === null || !userData) {
-    return null;
+    return (
+      <div className="bg-dots grid min-h-dvh place-items-center brightness-75">
+        <CircularProgress aria-label="Loading exam session..." size="lg" className="scale-[2]" />
+      </div>
+    );
   }
 
-  return <Outlet />;
+  return (
+    <ExamSessionProvider exam={examDetails} student={userData.user}>
+      <Outlet />
+    </ExamSessionProvider>
+  );
 };
 
 export default StudentExamLayout;

@@ -7,16 +7,13 @@ import Button from "@/components/ui/Button";
 
 import { leaveExamSession } from "@/actions/exam-session";
 import { ROUTES } from "@/constants/routes";
-import { ExamDetailsContext } from "@/context/ExamDetailsContext";
+import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { useCtx } from "@/hooks/useCtx";
 
-type Props = {
-  studentId: string;
-};
-
-const LeaveSession = ({ studentId }: Props) => {
-  const { examDetails } = useCtx(ExamDetailsContext);
-  const { id: examId } = examDetails;
+const LeaveSession = () => {
+  const { student, exam } = useCtx(ExamSessionContext);
+  const { id: studentId } = student;
+  const { id: examId } = exam;
 
   const navigate = useNavigate();
 

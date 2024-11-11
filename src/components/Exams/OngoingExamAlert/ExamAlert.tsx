@@ -61,7 +61,7 @@ const ExamAlert = ({ courseIds, join }: Props) => {
           size="sm"
           color="default"
           variant="bordered"
-          className="border-secondary-foreground px-5 py-[18px] text-sm"
+          className="border-secondary-foreground px-5 py-[18px] text-sm text-secondary-foreground"
           onPress={show.toggleOff}
         >
           Dismiss

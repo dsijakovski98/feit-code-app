@@ -28,12 +28,15 @@ export const useCountdown = (targetDate: Dayjs) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const newDuration = calcDuration(targetDate);
-      setDuration(newDuration);
+      setDuration((prev) => {
+        const newDuration = prev - 1;
 
-      if (newDuration <= 0) {
-        clearInterval(timer);
-      }
+        if (newDuration <= 0) {
+          clearInterval(timer);
+        }
+
+        return newDuration;
+      });
 
       return () => {
         clearInterval(timer);

@@ -4,16 +4,13 @@ import { useBeforeUnload } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { joinExamSession } from "@/actions/exam-session";
-import { ExamDetailsContext } from "@/context/ExamDetailsContext";
+import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { useCtx } from "@/hooks/useCtx";
 
-type Props = {
-  studentId: string;
-};
-
-const SessionHandler = ({ studentId }: Props) => {
-  const { examDetails } = useCtx(ExamDetailsContext);
-  const { id: examId } = examDetails;
+const SessionHandler = () => {
+  const { student, exam } = useCtx(ExamSessionContext);
+  const { id: studentId } = student;
+  const { id: examId } = exam;
 
   const { mutate } = useMutation({
     mutationFn: joinExamSession,

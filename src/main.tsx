@@ -36,7 +36,7 @@ createRoot(document.getElementById("root")!).render(
             <Toaster
               toastOptions={{
                 position: "bottom-right",
-                className: "bg-background text-foreground",
+                className: "bg-background text-foreground [&>[role=status]:empty]:hidden",
                 blank: {
                   icon: <Icon name="info" className="h-5 w-5" />,
                 },

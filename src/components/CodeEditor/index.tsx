@@ -1,4 +1,4 @@
-import { ComponentProps, useMemo } from "react";
+import { ComponentProps, ElementRef, forwardRef, useMemo } from "react";
 
 import { quietlight as lightTheme } from "@uiw/codemirror-theme-quietlight";
 import { tokyoNight as darkTheme } from "@uiw/codemirror-theme-tokyo-night";
@@ -10,7 +10,7 @@ import { ProgrammingLanguage } from "@/constants/enums";
 
 type Props = { language: ProgrammingLanguage } & ComponentProps<typeof CodeMirror>;
 
-const CodeEditor = ({ language, ...rest }: Props) => {
+const CodeEditor = forwardRef<ElementRef<typeof CodeMirror>, Props>(({ language, ...rest }, ref) => {
   const { theme } = useTheme();
 
   const langExtension = useMemo(() => LANGUAGES_CONFIG[language].extension || null, [language]);
@@ -19,11 +19,12 @@ const CodeEditor = ({ language, ...rest }: Props) => {
   return (
     <CodeMirror
       {...rest}
+      ref={ref}
       spellCheck
       theme={editorTheme}
       extensions={langExtension ? [langExtension, ...(rest.extensions || [])] : rest.extensions}
     />
   );
-};
+});
 
 export default CodeEditor;

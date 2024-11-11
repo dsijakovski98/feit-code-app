@@ -1,46 +1,52 @@
 import Split from "react-split";
 
+import ExamCodeEditor from "@/components/ExamSession/ExamCodeEditor";
 import LeaveSession from "@/components/ExamSession/LeaveSession";
 
-import { useFCUser } from "@/hooks/useFCUser";
+import { ExamSessionContext } from "@/context/ExamSessionContext";
+import { ExamSessionTaskContext } from "@/context/ExamSessionTaskContext";
+import { useCtx } from "@/hooks/useCtx";
 
 const ExamSession = () => {
-  const { userData } = useFCUser();
+  const { exam } = useCtx(ExamSessionContext);
+  const { task: activeTask } = useCtx(ExamSessionTaskContext);
 
-  if (!userData) return null;
-
-  // TODO: Implement UI
   return (
-    <main className="*:h-full">
+    <main className="bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full">
       <Split
-        sizes={[65, 35]}
-        minSize={[800, 400]}
-        maxSize={[Infinity, 800]}
+        sizes={[70, 30]}
+        minSize={[400, 400]}
         snapOffset={5}
-        gutterSize={8}
+        gutterSize={10}
         dragInterval={1}
         gutterAlign="center"
         direction="horizontal"
         cursor="col-resize"
         className="flex [&>.gutter]:rounded"
       >
-        <div className="px-8">Code IDE here</div>
+        <div className="h-[90dvh] *:h-full">
+          {exam.tasks.map((task) => task.id === activeTask.id && <ExamCodeEditor key={task.id} />)}
+        </div>
 
         <div className="*:h-full">
           <Split
             sizes={[50, 50]}
             snapOffset={5}
-            gutterSize={8}
+            gutterSize={10}
             dragInterval={1}
             gutterAlign="center"
             direction="vertical"
             cursor="row-resize"
           >
-            <div className="px-8">
-              <LeaveSession studentId={userData.user.id} />
+            <div className="max-h-full overflow-y-auto px-8">
+              {/* TODO: Task details UI */}
+              <LeaveSession />
             </div>
 
-            <div className="p-8">Console here</div>
+            <div className="max-h-full overflow-y-auto bg-slate-900 px-8 py-5 font-mono text-white">
+              Console here
+              {/* TODO: Console + Actions UI */}
+            </div>
           </Split>
         </div>
       </Split>

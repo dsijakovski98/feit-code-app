@@ -2,14 +2,10 @@ import { useMemo } from "react";
 
 import clsx, { ClassValue } from "clsx";
 
-import { Divider } from "@nextui-org/divider";
 import { Skeleton } from "@nextui-org/react";
 
 import LogoFC from "@/layouts/MainLayout/LogoFC";
-import NotificationsMenu from "@/layouts/MainLayout/Nav/NotificationsMenu";
-import UserAvatar from "@/layouts/MainLayout/Nav/UserAvatar";
-
-import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
+import NavActions from "@/layouts/MainLayout/Nav/NavActions";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { getDaytime, getTimeGreeting } from "@/utils";
@@ -32,7 +28,7 @@ const Nav = ({ className = "", hideDivider = false }: Props) => {
     <header className={clsx("bg-main font-sans", className)}>
       <nav
         className={clsx(
-          "mx-8 flex h-full items-center justify-between border-b border-b-foreground-50 py-4 lg:mx-5 lg:border-b-transparent lg:pb-0",
+          "flex h-full items-center justify-between border-b border-b-foreground-50 px-8 py-4 lg:border-b-transparent lg:px-5 lg:pb-0",
           {
             "border-b-transparent": hideDivider,
           },
@@ -48,17 +44,7 @@ const Nav = ({ className = "", hideDivider = false }: Props) => {
 
         <LogoFC className="hidden lg:flex" />
 
-        <div className="flex -translate-x-0.5 items-center gap-4">
-          <div className="space-x-2 lg:space-x-1">
-            <ThemeSwitcher />
-
-            <NotificationsMenu />
-          </div>
-
-          <Divider orientation="vertical" className="mr-2 block !h-10 w-px self-stretch" />
-
-          <UserAvatar />
-        </div>
+        <NavActions />
       </nav>
     </header>
   );

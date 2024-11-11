@@ -11,7 +11,7 @@ const PageFallback = ({ bg = "main" }: Props) => {
     <div
       className={clsx("grid h-dvh place-items-center", {
         "bg-main": bg === "main",
-        "bg-dots": bg === "dots",
+        "bg-dots brightness-75": bg === "dots",
       })}
     >
       <Spinner size="lg" className="scale-[2]" />

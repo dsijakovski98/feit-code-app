@@ -104,12 +104,12 @@
 }
 
 .gutter-horizontal::after {
-  @apply bg-drag-dots-v top-1/2 h-20 w-full -translate-y-1/2;
+  @apply top-1/2 h-20 w-full -translate-y-1/2 bg-drag-dots-v;
   translate: 0 -6px;
 }
 
 .gutter-horizontal::before {
-  @apply bg-drag-dots-v top-1/2 h-20 w-full -translate-y-1/2;
+  @apply top-1/2 h-20 w-full -translate-y-1/2 bg-drag-dots-v;
   translate: 0 6px;
 }
 
@@ -118,11 +118,15 @@
 }
 
 .gutter-vertical::after {
-  @apply bg-drag-dots-h left-1/2 top-0 h-full w-20 -translate-x-1/2;
+  @apply left-1/2 top-0 h-full w-20 -translate-x-1/2 bg-drag-dots-h;
   translate: -6px;
 }
 
 .gutter-vertical::before {
-  @apply bg-drag-dots-h left-1/2 top-0 h-full w-20 -translate-x-1/2;
+  @apply left-1/2 top-0 h-full w-20 -translate-x-1/2 bg-drag-dots-h;
   translate: 6px;
+}
+
+.cm-gutters {
+  @apply min-w-[39px];
 }
