@@ -1,7 +1,8 @@
 import Split from "react-split";
 
-import ExamCodeEditor from "@/components/ExamSession/ExamCodeEditor";
-import LeaveSession from "@/components/ExamSession/LeaveSession";
+import ExamCodeEditor from "@/components/ExamSession/ExamTask/CodeEditor";
+import ExamTaskDescription from "@/components/ExamSession/ExamTask/Description";
+import ExamTaskOutput from "@/components/ExamSession/ExamTask/Output";
 
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { ExamSessionTaskContext } from "@/context/ExamSessionTaskContext";
@@ -12,7 +13,7 @@ const ExamSession = () => {
   const { task: activeTask } = useCtx(ExamSessionTaskContext);
 
   return (
-    <main className="bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full">
+    <main className="border-t-8 border-t-content4 bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full dark:border-t-content2">
       <Split
         sizes={[70, 30]}
         minSize={[400, 400]}
@@ -22,9 +23,9 @@ const ExamSession = () => {
         gutterAlign="center"
         direction="horizontal"
         cursor="col-resize"
-        className="flex [&>.gutter]:rounded"
+        className="flex"
       >
-        <div className="h-[90dvh] *:h-full">
+        <div className="h-[calc(90dvh-5.5px)] *:h-full">
           {exam.tasks.map((task) => task.id === activeTask.id && <ExamCodeEditor key={task.id} />)}
         </div>
 
@@ -38,14 +39,12 @@ const ExamSession = () => {
             direction="vertical"
             cursor="row-resize"
           >
-            <div className="max-h-full overflow-y-auto px-8">
-              {/* TODO: Task details UI */}
-              <LeaveSession />
+            <div className="max-h-full overflow-y-auto px-8 pb-5 pt-2">
+              <ExamTaskDescription />
             </div>
 
-            <div className="max-h-full overflow-y-auto bg-slate-900 px-8 py-5 font-mono text-white">
-              Console here
-              {/* TODO: Console + Actions UI */}
+            <div className="max-h-full overflow-y-auto bg-slate-950 px-8">
+              {exam.tasks.map((task) => task.id === activeTask.id && <ExamTaskOutput key={task.id} />)}
             </div>
           </Split>
         </div>

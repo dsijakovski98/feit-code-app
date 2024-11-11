@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
@@ -6,16 +6,17 @@ import NavActions from "@/layouts/MainLayout/Nav/NavActions";
 
 import ExamSession from "@/components/ExamSession";
 import SessionHandler from "@/components/ExamSession/SessionHandler";
+import SessionTimer from "@/components/ExamSession/SessionTimer";
 
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { ExamSessionTaskProvider } from "@/context/ExamSessionTaskContext";
 import { useCtx } from "@/hooks/useCtx";
 
 const ExamSessionPage = () => {
-  const { exam } = useCtx(ExamSessionContext);
+  const { currentTaskState, submittedTasksState, exam } = useCtx(ExamSessionContext);
+  const [currentTask, setCurrentTask] = currentTaskState;
+  const [submittedTasks] = submittedTasksState;
   const { tasks } = exam;
-
-  const [currentTask, setCurrentTask] = useState(tasks[0]);
 
   const handleSelectTask = (taskId: string) => {
     const selectedTask = tasks.find((task) => task.id === taskId);
@@ -31,7 +32,7 @@ const ExamSessionPage = () => {
 
         <div className="z-10 grid grid-rows-[auto_1fr]">
           <header className="px-8 py-6 lg:hidden">
-            <nav className="flex items-center justify-between gap-6 lg:*:!pointer-events-none">
+            <nav className="flex items-center gap-6 lg:*:!pointer-events-none">
               <Tabs
                 size="lg"
                 color="primary"
@@ -47,12 +48,15 @@ const ExamSessionPage = () => {
                 }}
               >
                 {tasks.map((task) => (
-                  <Tab key={task.id} title={task.title} />
+                  <Tab key={task.id} title={task.title} isDisabled={submittedTasks.includes(task.id)} />
                 ))}
               </Tabs>
-              {/* TODO: Timer UI */}
 
-              <NavActions />
+              <SessionTimer />
+
+              <div className="ml-auto">
+                <NavActions />
+              </div>
             </nav>
           </header>
 

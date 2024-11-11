@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { Badge } from "@nextui-org/badge";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 
@@ -34,7 +36,11 @@ const NotificationsMenu = () => {
           <p className="font-sans text-sm font-semibold">Notifications ({NOTIFICATIONS} new)</p>
         </DropdownItem>
 
-        <DropdownItem key="empty" textValue="Empty" className="opacity-100" hidden={NOTIFICATIONS > 0}>
+        <DropdownItem
+          key="empty"
+          textValue="Empty"
+          className={clsx("opacity-100", { hidden: NOTIFICATIONS > 0 })}
+        >
           {NOTIFICATIONS === 0 && "No notifications yet."}
         </DropdownItem>
       </DropdownMenu>

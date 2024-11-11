@@ -91,12 +91,12 @@
 }
 
 .gutter {
-  @apply relative bg-content3;
+  @apply relative bg-content4 dark:bg-content2;
 }
 
 .gutter::after,
 .gutter::before {
-  @apply absolute bg-center bg-no-repeat opacity-50 content-[''] dark:opacity-100;
+  @apply absolute bg-center bg-no-repeat opacity-50 content-[''] dark:invert;
 }
 
 .gutter-horizontal {

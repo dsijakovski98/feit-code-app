@@ -4,10 +4,17 @@ import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { FCStudent } from "@/hooks/useFCUser";
 import { UseState } from "@/types";
 
+type TaskState = {
+  code: string;
+  output: string;
+};
+
 type ExamSessionContext = {
   student: FCStudent;
   exam: ExamDetails;
-  tasksCodeState: UseState<Record<string, string>>;
+  submittedTasksState: UseState<string[]>;
+  tasksState: UseState<Record<string, TaskState>>;
+  currentTaskState: UseState<ExamDetails["tasks"][number]>;
 };
 
 export const ExamSessionContext = createContext<ExamSessionContext | null>(null);
@@ -15,20 +22,26 @@ export const ExamSessionContext = createContext<ExamSessionContext | null>(null)
 type Props = Pick<ExamSessionContext, "student" | "exam"> & PropsWithChildren;
 
 const ExamSessionProvider = ({ children, ...ctx }: Props) => {
-  const tasksCodeState = useState(() => {
+  const currentTaskState = useState(ctx.exam.tasks[0]);
+  const submittedTasksState = useState<string[]>([]);
+
+  const tasksState = useState(() => {
     return ctx.exam.tasks.reduce(
       (acc, task) => {
-        console.log(task.title, sessionStorage.getItem(task.id));
-        acc[task.id] = sessionStorage.getItem(task.id) || "";
-
+        acc[task.id] = {
+          code: sessionStorage.getItem(task.id) || "",
+          output: "",
+        };
         return acc;
       },
-      {} as Record<string, string>,
+      {} as Record<string, TaskState>,
     );
   });
 
   return (
-    <ExamSessionContext.Provider value={{ ...ctx, tasksCodeState }}>{children}</ExamSessionContext.Provider>
+    <ExamSessionContext.Provider value={{ ...ctx, currentTaskState, submittedTasksState, tasksState }}>
+      {children}
+    </ExamSessionContext.Provider>
   );
 };
 

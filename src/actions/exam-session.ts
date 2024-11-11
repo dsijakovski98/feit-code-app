@@ -2,6 +2,7 @@ import { onValue, push, ref, set } from "firebase/database";
 
 import { fbDatabase } from "@/services/firebase";
 
+import { ProgrammingLanguage } from "@/constants/enums";
 import { ExamStats } from "@/types/exams";
 
 const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
@@ -63,4 +64,15 @@ export const leaveExamSession = async ({ examId, studentId }: SessionOptions) =>
   });
 
   return leaveSuccess;
+};
+
+type RunCodeOptions = {
+  code: string;
+  name: string;
+  language: ProgrammingLanguage;
+};
+export const runTaskCode = async ({ code, name, language }: RunCodeOptions) => {
+  // TODO: Run code call to API
+
+  return { code, name, language };
 };

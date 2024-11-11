@@ -24,6 +24,15 @@ export default {
         "dots-dark":
           "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url('/images/bg-dots-dark.webp')",
       },
+      keyframes: {
+        blink: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
+        },
+      },
+      animation: {
+        blink: "blink 1s infinite",
+      },
     },
     screens: {
       "2xl": { max: "1535px" },

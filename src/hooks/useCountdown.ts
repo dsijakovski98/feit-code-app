@@ -1,20 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
+
+import { getSecondsRemaining } from "@/utils/dates";
 
 const getHours = (seconds: number) => Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
 const getMinutes = (seconds: number) => Math.floor((seconds % (60 * 60)) / 60);
 const getSeconds = (seconds: number) => Math.floor(seconds % 60);
 
-const calcDuration = (targetDate: Dayjs) => {
-  const targetDateUtc = dayjs.tz(targetDate, "UTC");
-  const nowUtc = dayjs.tz(dayjs(), "UTC");
-
-  return targetDateUtc.diff(nowUtc, "seconds");
-};
-
 export const useCountdown = (targetDate: Dayjs) => {
-  const [duration, setDuration] = useState(calcDuration(targetDate));
+  const [duration, setDuration] = useState(getSecondsRemaining(targetDate));
   const countdown = useMemo(
     () => ({
       hours: getHours(duration),
@@ -44,5 +39,7 @@ export const useCountdown = (targetDate: Dayjs) => {
     }, 1000);
   }, [targetDate]);
 
-  return { countdown, done };
+  return { countdown, done, secondsRemaining: duration };
 };
+
+export type UseCountdown = ReturnType<typeof useCountdown>;
