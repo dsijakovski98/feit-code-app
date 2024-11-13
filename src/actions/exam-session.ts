@@ -70,9 +70,23 @@ type RunCodeOptions = {
   code: string;
   name: string;
   language: ProgrammingLanguage;
+  token: string;
 };
-export const runTaskCode = async ({ code, name, language }: RunCodeOptions) => {
-  // TODO: Run code call to API
+export const runTaskCode = async ({ code, name, language, token }: RunCodeOptions) => {
+  const response = await fetch("http://localhost:4000/run", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, code, language }),
+  });
 
-  return { code, name, language };
+  if (!response.ok) {
+    const { error } = (await response.json()) as { error: string };
+    throw new Error(error);
+  }
+
+  const { output } = (await response.json()) as { output: string };
+  return output;
 };

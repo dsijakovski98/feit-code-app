@@ -34,6 +34,7 @@ export type LanguageConfig = {
   funcPrefix: string;
   emptyValue?: string;
   extension: Extension;
+  commandExec: (taskName: string) => string;
 } & (
   | { supportsTests: true; parseIO: (test: Omit<TestType, "id">) => { inputs: string[]; output: string } }
   | { supportsTests?: never }

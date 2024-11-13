@@ -6,4 +6,5 @@ export const rustConfig: LanguageConfig = {
   comment: "//",
   funcPrefix: "fn",
   extension: langs.rust(),
+  commandExec: (taskName) => `rustc ${taskName}.rs && ./${taskName}`,
 };

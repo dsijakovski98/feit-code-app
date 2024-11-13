@@ -6,4 +6,5 @@ export const phpConfig: LanguageConfig = {
   comment: "//",
   funcPrefix: "function",
   extension: langs.php(),
+  commandExec: (taskName) => `php ${taskName}.php`,
 };

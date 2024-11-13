@@ -16,6 +16,7 @@ export const goConfig: LanguageConfig = {
   emptyValue: "nil",
   extension: langs.go(),
   supportsTests: true,
+  commandExec: (taskName) => `go run ${taskName}.go`,
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => `${input.name} ${typeMap[input.type]}`);
     // Trailing space needed for proper formatting ex. func (a int, b int) int {}
