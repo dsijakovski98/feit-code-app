@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { Badge } from "@nextui-org/badge";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 
@@ -12,9 +14,9 @@ const NotificationsMenu = () => {
     <Dropdown placement="bottom-end">
       <Badge
         isDot
-        isInvisible={NOTIFICATIONS === 0}
         variant="solid"
-        className="aspect-square -translate-x-[5px] translate-y-1 scale-80 border-[1.5px] border-transparent bg-danger dark:bg-warning-600"
+        isInvisible={NOTIFICATIONS === 0}
+        className="aspect-square -translate-x-[5px] translate-y-1 scale-85 border-transparent bg-secondary dark:bg-warning-600"
       >
         <DropdownTrigger>
           <Button
@@ -34,7 +36,11 @@ const NotificationsMenu = () => {
           <p className="font-sans text-sm font-semibold">Notifications ({NOTIFICATIONS} new)</p>
         </DropdownItem>
 
-        <DropdownItem key="empty" textValue="Empty" className="opacity-100" hidden={NOTIFICATIONS > 0}>
+        <DropdownItem
+          key="empty"
+          textValue="Empty"
+          className={clsx("opacity-100", { hidden: NOTIFICATIONS > 0 })}
+        >
           {NOTIFICATIONS === 0 && "No notifications yet."}
         </DropdownItem>
       </DropdownMenu>

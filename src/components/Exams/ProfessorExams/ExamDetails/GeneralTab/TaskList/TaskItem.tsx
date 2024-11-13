@@ -13,7 +13,7 @@ const TaskItem = ({ task }: Props) => {
 
   return (
     <div className="group flex items-start justify-between gap-6">
-      <div className="max-w-[70ch] space-y-4">
+      <div className="space-y-4">
         <div>
           <p className="text-lg font-semibold">
             <span className="font-sans">{orderIndex + 1}.</span> {title}
@@ -26,7 +26,7 @@ const TaskItem = ({ task }: Props) => {
         </p>
       </div>
 
-      <p className="flex items-center gap-2 text-base font-semibold text-foreground-300 opacity-0 transition-opacity group-hover:opacity-100 group-focus:opacity-100">
+      <p className="flex items-center gap-2 text-base font-semibold text-foreground-300 opacity-0 transition-opacity group-hover:opacity-100">
         <Icon name="code" className="h-5 w-5" /> Template
       </p>
     </div>

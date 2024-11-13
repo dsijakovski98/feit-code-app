@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { InferSelectModel } from "drizzle-orm";
 
 import { Chip } from "@nextui-org/react";
@@ -9,18 +8,15 @@ import { getContrastText } from "@/utils";
 
 type Props = {
   category: InferSelectModel<typeof categories>;
-  size?: "xs" | "sm";
 };
 
-const CategoryChip = ({ category, size = "xs" }: Props) => {
+const CategoryChip = ({ category }: Props) => {
   const { label, color } = category;
 
   return (
     <Chip
       size="sm"
-      className={clsx("text-xs lg:!text-xs", {
-        "text-sm": size === "sm",
-      })}
+      className="text-sm lg:text-xs"
       style={
         color
           ? {

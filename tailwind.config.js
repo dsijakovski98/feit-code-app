@@ -17,10 +17,21 @@ export default {
         mono: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {
+        "drag-dots-h": "url('/images/drag-dots-horizontal.svg')",
+        "drag-dots-v": "url('/images/drag-dots-vertical.svg')",
         "dots-light":
           "radial-gradient(circle, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3)), url('/images/bg-dots-light.webp')",
         "dots-dark":
           "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url('/images/bg-dots-dark.webp')",
+      },
+      keyframes: {
+        blink: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
+        },
+      },
+      animation: {
+        blink: "blink 1s infinite",
       },
     },
     screens: {
@@ -199,18 +210,18 @@ export default {
               DEFAULT: "#685cf6",
             },
             secondary: {
-              50: "#f7dffd",
-              100: "#edb3fa",
-              200: "#e286f7",
-              300: "#d759f4",
-              400: "#cd2df1",
-              500: "#c200ee",
-              600: "#a000c4",
-              700: "#7e009b",
-              800: "#5c0071",
-              900: "#3a0047",
+              50: "#eee4f8",
+              100: "#d7bfef",
+              200: "#bf99e5",
+              300: "#a773db",
+              400: "#904ed2",
+              500: "#7828c8",
+              600: "#6321a5",
+              700: "#4e1a82",
+              800: "#39135f",
+              900: "#240c3c",
               foreground: "#fff",
-              DEFAULT: "#cd2df1",
+              DEFAULT: "#7828c8",
             },
             success: {
               50: "#e2f8ec",

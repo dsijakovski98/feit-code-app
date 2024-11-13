@@ -1,16 +1,50 @@
 import { useMemo } from "react";
+import toast from "react-hot-toast";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import DetailsHeader from "@/components/Exams/ProfessorExams/ExamDetails/GeneralTab/Details/DetailsHeader";
+import Button from "@/components/ui/Button";
 
+import { startExam } from "@/actions/exams";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
-import { formatTimestamp } from "@/utils/dates";
+import { canStartExam, formatTimestamp } from "@/utils/dates";
 
 const UpcomingDetails = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
-  const { startsAt, durationMinutes, points, tasks } = examDetails;
+  const { id, name, startsAt, durationMinutes, points, tasks } = examDetails;
 
   const timestamp = useMemo(() => formatTimestamp(startsAt), [startsAt]);
+  const canStart = useMemo(() => canStartExam(startsAt), [startsAt]);
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: startExam,
+    onSuccess: async (success) => {
+      if (!success) return;
+
+      await queryClient.invalidateQueries({ queryKey: [{ name: "exams", examId: id }] });
+      toast.success(`${name} exam started!`);
+    },
+    onError: (error) => toast.error(error.message),
+  });
+
+  const handleStartExam = () => {
+    mutate(id);
+  };
+
+  if (canStart) {
+    return (
+      <div className="grid h-full place-items-center content-center gap-4">
+        <p className="text-2xl font-semibold">Ready to Start!</p>
+        <Button color="secondary" onPress={handleStartExam} isLoading={isPending}>
+          Start Exam
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full flex-col justify-between space-y-8">

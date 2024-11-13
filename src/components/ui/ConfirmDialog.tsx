@@ -16,10 +16,11 @@ type Props = {
     label: string;
     onConfirm: () => unknown;
   };
+  cancelable?: boolean;
   loading?: boolean;
 };
 
-const ConfirmDialog = ({ dialog, title, description, color, action, loading }: Props) => {
+const ConfirmDialog = ({ dialog, title, description, color, action, cancelable = true, loading }: Props) => {
   const { label, onConfirm } = action;
 
   const confirmBtn = useRef<ElementRef<typeof Button>>(null);
@@ -48,12 +49,14 @@ const ConfirmDialog = ({ dialog, title, description, color, action, loading }: P
           <Fragment>
             <ModalHeader className="text-2xl">{title}</ModalHeader>
 
-            <ModalBody className="relative font-sans">{description}</ModalBody>
+            <ModalBody className="relative mb-2 font-sans">{description}</ModalBody>
 
             <ModalFooter>
-              <Button color="default" variant="bordered" isDisabled={!!loading} onPress={onClose}>
-                Cancel
-              </Button>
+              {cancelable && (
+                <Button color="default" variant="bordered" isDisabled={!!loading} onPress={onClose}>
+                  Cancel
+                </Button>
+              )}
 
               <Button type="submit" ref={confirmBtn} color={color} isLoading={!!loading} onPress={onConfirm}>
                 {label}

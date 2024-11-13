@@ -12,6 +12,7 @@ export const ROUTES = {
   profile: "/profile",
   courses: "/courses",
   exams: "/exams",
+  examSession: "/exam-session",
 } as const;
 
 export const PAGE_TITLES = {

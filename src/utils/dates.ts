@@ -1,7 +1,19 @@
 import { parseAbsoluteToLocal, parseDate } from "@internationalized/date";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 import { DateValue, TimeInputValue } from "@nextui-org/react";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export const getSecondsRemaining = (targetDate: Dayjs) => {
+  const targetDateUtc = dayjs.tz(targetDate, "UTC");
+  const nowUtc = dayjs.tz(dayjs(), "UTC");
+
+  return targetDateUtc.diff(nowUtc, "seconds");
+};
 
 export const nextUIDate = (date: Date) => {
   const isoDateString = date.toISOString().split("T")[0];
@@ -30,4 +42,8 @@ export const parseDateTime = (date: Date, time: Date) => {
 
 export const formatTimestamp = (timestamp: string) => {
   return dayjs(timestamp).format("MMM DD YYYY, HH:MM");
+};
+
+export const canStartExam = (timestamp: string) => {
+  return dayjs().isAfter(timestamp);
 };

@@ -57,6 +57,13 @@
       "when": 1729472722821,
       "tag": "0007_round_beyonder",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1730071125592,
+      "tag": "0008_daffy_kabuki",
+      "breakpoints": true
     }
   ]
 }

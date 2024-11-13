@@ -1,5 +1,7 @@
 import { Spinner } from "@nextui-org/react";
 
+import Stat from "@/components/ui/Stat";
+
 import { ExamStatus } from "@/constants/enums";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCourseExamStats } from "@/hooks/exam/useCourseExamStats";
@@ -24,10 +26,7 @@ const ExamStats = () => {
   return (
     <div className="mt-auto flex content-end items-end justify-around gap-4">
       {Object.entries(stats).map(([stat, numExams]) => (
-        <div key={stat}>
-          <p className="text-6xl font-bold">{numExams > 9 ? "9+" : numExams}</p>
-          <p>{parseExamStatus(stat as ExamStatus)}</p>
-        </div>
+        <Stat key={stat} value={numExams} label={parseExamStatus(stat as ExamStatus)} />
       ))}
     </div>
   );

@@ -70,7 +70,11 @@
   }
 
   .bg-main {
-    @apply bg-content2 dark:!bg-default-75 lg:bg-content2;
+    @apply bg-content2 dark:bg-default-75 lg:bg-content2 dark:lg:bg-default-75;
+  }
+
+  .bg-dots {
+    @apply bg-dots-light dark:bg-dots-dark;
   }
 
   .swiper-items :is(.swiper-button-next, .swiper-button-prev) {
@@ -84,4 +88,45 @@
   .swiper-items .swiper-button-next {
     @apply right-2.5;
   }
+}
+
+.gutter {
+  @apply relative bg-content4 dark:bg-content2;
+}
+
+.gutter::after,
+.gutter::before {
+  @apply absolute bg-center bg-no-repeat opacity-50 content-[''] dark:invert;
+}
+
+.gutter-horizontal {
+  @apply hover:cursor-col-resize;
+}
+
+.gutter-horizontal::after {
+  @apply top-1/2 h-20 w-full -translate-y-1/2 bg-drag-dots-v;
+  translate: 0 -6px;
+}
+
+.gutter-horizontal::before {
+  @apply top-1/2 h-20 w-full -translate-y-1/2 bg-drag-dots-v;
+  translate: 0 6px;
+}
+
+.gutter-vertical {
+  @apply hover:cursor-row-resize;
+}
+
+.gutter-vertical::after {
+  @apply left-1/2 top-0 h-full w-20 -translate-x-1/2 bg-drag-dots-h;
+  translate: -6px;
+}
+
+.gutter-vertical::before {
+  @apply left-1/2 top-0 h-full w-20 -translate-x-1/2 bg-drag-dots-h;
+  translate: 6px;
+}
+
+.cm-gutters {
+  @apply min-w-[39px];
 }
