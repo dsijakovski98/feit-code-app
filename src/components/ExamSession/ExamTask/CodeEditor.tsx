@@ -24,7 +24,7 @@ const ExamCodeEditor = () => {
   useEffect(() => {
     if (template) {
       setTasks((prev) => {
-        if (prev[task.id]) return prev;
+        if (prev[task.id].code) return prev;
 
         prev[task.id].code = template;
         return { ...prev };

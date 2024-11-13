@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import toast from "react-hot-toast";
 
 import { useMutation } from "@tanstack/react-query";
+import clsx from "clsx";
 
 import ExamTaskActions from "@/components/ExamSession/ExamTask/Actions";
 import Icon from "@/components/ui/Icon";
@@ -46,15 +47,22 @@ const ExamTaskOutput = () => {
   };
 
   return (
-    <div className="group relative flex h-full flex-col justify-between pt-5 font-mono text-white">
+    <div className="relative flex h-full flex-col justify-between pt-5 font-mono text-white">
       <div className="space-y-4">
-        <p className="text-success">
-          {emailSlug}@{titleSlug}
+        <div
+          className={clsx("text-success", {
+            "pointer-events-none opacity-90": isPending,
+          })}
+        >
+          <span>
+            {emailSlug}@{titleSlug}
+          </span>
+
           <Icon
             name="right"
-            className="group-hover:animate-blink group-focus-within:animate-blink ml-1 inline h-4 w-4"
+            className={clsx("ml-2 inline h-4 w-4 scale-110", { "animate-blink": isPending })}
           />
-        </p>
+        </div>
 
         <PresenceBlock show={!!taskState.output}>
           <p>{taskState.output}</p>
