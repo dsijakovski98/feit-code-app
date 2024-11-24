@@ -26,7 +26,7 @@ const ExamTaskOutput = () => {
   const taskState = tasks[task.id];
 
   const emailSlug = useMemo(() => student.email.split("@")[0], [student.email]);
-  const titleSlug = useMemo(() => task.title.replace(/ /g, "_").toLowerCase(), [task.title]);
+  const titleSlug = useMemo(() => task.title.replace(/ /g, "_"), [task.title]);
   const runCommand = useMemo(
     () => LANGUAGES_CONFIG[exam.language].commandExec(titleSlug),
     [exam.language, titleSlug],
@@ -36,8 +36,6 @@ const ExamTaskOutput = () => {
     mutationFn: runTaskCode,
     onSuccess: (output) => {
       if (!output) return;
-
-      // TODO: Handle post-run code
 
       setTasks((prev) => {
         prev[task.id].output = output;
@@ -65,9 +63,9 @@ const ExamTaskOutput = () => {
 
   return (
     <div className="relative flex h-full flex-col justify-between pt-5 font-mono text-white">
-      <div className="space-y-4">
+      <div className="space-y-2 pb-4">
         <div
-          className={clsx("space-x-1.5 text-sm text-success", {
+          className={clsx("space-x-1.5 font-semibold text-success", {
             "pointer-events-none opacity-90": isPending,
           })}
         >
@@ -77,14 +75,13 @@ const ExamTaskOutput = () => {
 
           <Icon name="right" className={clsx("inline h-4 w-4", { "animate-blink": isPending })} />
 
-          {(isPending || !!taskState.output) && <span className="text-foreground">{runCommand}</span>}
+          {(isPending || !!taskState.output) && (
+            <span className={clsx("text-foreground", { "animate-blink": isPending })}>{runCommand}</span>
+          )}
         </div>
 
         <PresenceBlock show={!!taskState.output}>
-          <div className="text-sm">
-            <p className="text-success">Result</p>
-            <p>{taskState.output}</p>
-          </div>
+          <p className="whitespace-pre-line break-words leading-normal">{taskState.output}</p>
         </PresenceBlock>
       </div>
 

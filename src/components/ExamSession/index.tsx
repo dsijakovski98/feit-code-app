@@ -15,7 +15,7 @@ const ExamSession = () => {
   return (
     <main className="border-t-8 border-t-content4 bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full dark:border-t-content2">
       <Split
-        sizes={[70, 30]}
+        sizes={[65, 35]}
         minSize={[400, 400]}
         snapOffset={5}
         gutterSize={10}
@@ -31,7 +31,7 @@ const ExamSession = () => {
 
         <div className="*:h-full">
           <Split
-            sizes={[50, 50]}
+            sizes={[40, 60]}
             snapOffset={5}
             gutterSize={10}
             dragInterval={1}

@@ -1,5 +1,4 @@
-import { useCallback, useEffect } from "react";
-import { useBeforeUnload } from "react-router-dom";
+import { useEffect } from "react";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -19,12 +18,6 @@ const SessionHandler = () => {
   useEffect(() => {
     mutate({ studentId, examId });
   }, [mutate, studentId, examId]);
-
-  useBeforeUnload(
-    useCallback(() => {
-      // TODO: Save user progress
-    }, []),
-  );
 
   return null;
 };

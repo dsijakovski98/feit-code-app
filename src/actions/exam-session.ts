@@ -88,5 +88,6 @@ export const runTaskCode = async ({ code, name, language, token }: RunCodeOption
   }
 
   const { output } = (await response.json()) as { output: string };
+
   return output;
 };
