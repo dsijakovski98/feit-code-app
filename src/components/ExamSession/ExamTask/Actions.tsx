@@ -1,5 +1,4 @@
 import { Fragment, useMemo } from "react";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
@@ -93,7 +92,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
           {submitMode}
         </Button>
 
-        <Dropdown>
+        <Dropdown placement="top-end">
           <DropdownTrigger>
             <Button isIconOnly variant="light" radius="full" color="default">
               <Icon name="more" className="h-5 w-5" />
