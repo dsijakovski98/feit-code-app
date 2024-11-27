@@ -14,6 +14,7 @@ import { leaveExamSession } from "@/actions/exam-session";
 import { ROUTES } from "@/constants/routes";
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { ExamSessionTaskContext } from "@/context/ExamSessionTaskContext";
+import { useSubmitExam } from "@/hooks/exam/useSubmitExam";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useToggle } from "@/hooks/useToggle";
@@ -25,33 +26,17 @@ type Props = {
 };
 
 const ExamTaskActions = ({ runCode, loading }: Props) => {
-  const { userData } = useFCUser();
-  const { exam, student, currentTaskState, submittedTasksState, tasksState } = useCtx(ExamSessionContext);
-  const [, setTasks] = tasksState;
-  const [, setCurrentTask] = currentTaskState;
-  const [submittedTasks, setSubmittedTasks] = submittedTasksState;
-
-  const { id: studentId } = student;
-  const { id: examId } = exam;
-
   const { task, template } = useCtx(ExamSessionTaskContext);
+  const { exam, student, tasksState } = useCtx(ExamSessionContext);
+  const [, setTasks] = tasksState;
 
+  const { userData } = useFCUser();
   const navigate = useNavigate();
 
-  const submitToggle = useToggle();
-  const startOverToggle = useToggle();
   const leaveToggle = useToggle();
+  const startOverToggle = useToggle();
 
-  const submitMode = useMemo(() => {
-    const totalTasks = exam.tasks.length;
-    const submitted = submittedTasks.length;
-
-    if (totalTasks === submitted + 1) {
-      return "Finish";
-    }
-
-    return "Submit";
-  }, [exam.tasks.length, submittedTasks.length]);
+  const { submitToggle, submitMode, handleSubmit, isSubmitting } = useSubmitExam();
 
   const examIssueUrl = useMemo(() => getExamIssueUrl(userData, task), [userData, task]);
 
@@ -65,6 +50,10 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
     onError: (error) => toast.error(error.message),
   });
 
+  const handleLeaveExam = () => {
+    mutate({ examId: exam.id, studentId: student.id });
+  };
+
   const handleStartOver = () => {
     if (!task) return;
     if (!template) return;
@@ -75,24 +64,6 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
 
       return { ...prev };
     });
-  };
-
-  const onConfirm = async () => {
-    const newSubmitted = [...submittedTasks, task.id];
-    setSubmittedTasks(newSubmitted);
-
-    if (submitMode === "Submit") {
-      const remainingTasks = exam.tasks.filter((task) => !newSubmitted.includes(task.id));
-      setCurrentTask(remainingTasks[0]);
-
-      submitToggle.toggleOff();
-    }
-
-    if (submitMode === "Finish") {
-      // TODO: Finish exam
-
-      submitToggle.toggleOff();
-    }
   };
 
   return (
@@ -158,12 +129,13 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
 
       <ConfirmDialog
         color="primary"
+        loading={isSubmitting}
         dialog={submitToggle}
         title={submitMode === "Submit" ? "Submit task?" : "Finish exam?"}
         description={
           submitMode === "Submit" ? "You cannot undo this." : `Make sure you've double checked everything!`
         }
-        action={{ label: submitMode, onConfirm }}
+        action={{ label: submitMode, onConfirm: handleSubmit }}
       />
 
       <ConfirmDialog
@@ -180,7 +152,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
         dialog={leaveToggle}
         title="Leave exam session?"
         description="You will lose all of your progress."
-        action={{ label: "Leave", onConfirm: () => mutate({ examId, studentId }) }}
+        action={{ label: "Leave", onConfirm: handleLeaveExam }}
       />
     </Fragment>
   );

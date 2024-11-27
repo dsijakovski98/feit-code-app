@@ -3,6 +3,7 @@ import { pgTable, varchar } from "drizzle-orm/pg-core";
 
 import courses from "@/db/schema/courses";
 import { moduleType, teacherType } from "@/db/schema/enums";
+import submissions from "@/db/schema/submissions";
 import { userId } from "@/db/schema/utils";
 
 const professors = pgTable("professors", {
@@ -17,6 +18,7 @@ const professors = pgTable("professors", {
 export const professorRelations = relations(professors, ({ many }) => ({
   courseProfessor: many(courses, { relationName: "professor" }),
   courseAssistant: many(courses, { relationName: "assistant" }),
+  submissions: many(submissions),
 }));
 
 export default professors;

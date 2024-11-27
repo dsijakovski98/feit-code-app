@@ -9,7 +9,7 @@ import { fbStorage } from "@/services/firebase";
 import { EXAM_STATUS } from "@/constants/enums";
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
-import { extractFunctionName } from "@/utils/code";
+import { extractFunctionName, taskTemplateRef } from "@/utils/code";
 import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
@@ -46,7 +46,9 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
     // Add tasks
     const newTasks = await Promise.all(
       tasks.map(async ({ title, description, points, template, tests }, idx) => {
-        const templateRef = ref(fbStorage, `course_${courseId}/exam_${examId}/${title}/template`);
+        const taskPath = taskTemplateRef({ courseId, examId, taskTitle: title });
+        const templateRef = ref(fbStorage, `${taskPath}/template`);
+
         const snapshot = await uploadString(templateRef, template, "raw");
         const templateUrl = await getDownloadURL(snapshot.ref);
 

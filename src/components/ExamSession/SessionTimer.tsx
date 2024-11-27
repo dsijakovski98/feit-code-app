@@ -9,15 +9,18 @@ import Icon from "@/components/ui/Icon";
 import TimeLeft from "@/components/ui/TimeLeft";
 
 import { ExamSessionContext } from "@/context/ExamSessionContext";
+import { useFinishExam } from "@/hooks/exam/useFinishExam";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
 const SessionTimer = () => {
-  const { exam } = useCtx(ExamSessionContext);
+  const { exam, student, tasksState } = useCtx(ExamSessionContext);
   const { durationMinutes, startedAt } = exam;
 
   const doneDialog = useToggle();
+
+  const { mutate, isPending } = useFinishExam({ studentId: student.id });
 
   const targetDate = useMemo(
     () => dayjs(startedAt).add(durationMinutes, "minutes"),
@@ -42,8 +45,7 @@ const SessionTimer = () => {
   }, [progress]);
 
   const onConfirm = () => {
-    // TODO: Finish exam
-    doneDialog.toggleOff();
+    mutate({ exam, student, tasksState });
   };
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const SessionTimer = () => {
       <div className="group relative isolate">
         <div className="absolute right-full top-1/2 -z-10 -translate-y-1/2 whitespace-nowrap">
           {done ? (
-            <p className="translate-x-4 text-lg font-semibold">Time's up!</p>
+            <p className="-translate-x-4 text-lg font-semibold">Time's up!</p>
           ) : (
             <TimeLeft
               countdown={countdown}
@@ -83,6 +85,7 @@ const SessionTimer = () => {
       <ConfirmDialog
         color="primary"
         cancelable={false}
+        loading={isPending}
         dialog={doneDialog}
         title={`Time's up!`}
         description={`Don't worry, your progress so far will be saved.`}
