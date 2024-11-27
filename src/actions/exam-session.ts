@@ -3,7 +3,7 @@ import { onValue, push, ref, set } from "firebase/database";
 import { fbDatabase } from "@/services/firebase";
 
 import { ProgrammingLanguage } from "@/constants/enums";
-import { ExamStats } from "@/types/exams";
+import { ExamStats, StudentSession } from "@/types/exams";
 
 const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
 
@@ -19,18 +19,21 @@ export const joinExamSession = async ({ examId, studentId }: SessionOptions) => 
     sessionRef,
     (snapshot) => {
       const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+      const studentData: StudentSession = { userId: studentId, pasteCount: 0, timeOff: 0 };
 
       if (!examSession) {
-        push(sessionRef, studentId);
+        push(sessionRef, studentData);
 
         return;
       }
 
-      const studentJoined = Object.values(examSession).find((id) => id === studentId);
+      const studentJoined = Object.values(examSession).find(
+        (studentData) => studentData.userId === studentId,
+      );
 
       if (studentJoined) return;
 
-      push(sessionRef, studentId);
+      push(sessionRef, studentData);
     },
     { onlyOnce: true },
   );
@@ -49,7 +52,9 @@ export const leaveExamSession = async ({ examId, studentId }: SessionOptions) =>
           return resolve(false);
         }
 
-        const targetStudent = Object.entries(examSession).find(([, id]) => id === studentId);
+        const targetStudent = Object.entries(examSession).find(
+          ([, studentData]) => studentData.userId === studentId,
+        );
 
         if (!targetStudent) {
           return resolve(false);

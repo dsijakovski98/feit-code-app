@@ -1,12 +1,17 @@
 import { Fragment, useMemo } from "react";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
+import { useMutation } from "@tanstack/react-query";
+
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
 
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import Icon from "@/components/ui/Icon";
 
+import { leaveExamSession } from "@/actions/exam-session";
+import { ROUTES } from "@/constants/routes";
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { ExamSessionTaskContext } from "@/context/ExamSessionTaskContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -21,14 +26,21 @@ type Props = {
 
 const ExamTaskActions = ({ runCode, loading }: Props) => {
   const { userData } = useFCUser();
-  const { exam, currentTaskState, submittedTasksState, tasksState } = useCtx(ExamSessionContext);
+  const { exam, student, currentTaskState, submittedTasksState, tasksState } = useCtx(ExamSessionContext);
   const [, setTasks] = tasksState;
   const [, setCurrentTask] = currentTaskState;
   const [submittedTasks, setSubmittedTasks] = submittedTasksState;
 
+  const { id: studentId } = student;
+  const { id: examId } = exam;
+
   const { task, template } = useCtx(ExamSessionTaskContext);
 
+  const navigate = useNavigate();
+
   const submitToggle = useToggle();
+  const startOverToggle = useToggle();
+  const leaveToggle = useToggle();
 
   const submitMode = useMemo(() => {
     const totalTasks = exam.tasks.length;
@@ -43,7 +55,15 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
 
   const examIssueUrl = useMemo(() => getExamIssueUrl(userData, task), [userData, task]);
 
-  const startOverToggle = useToggle();
+  const { mutate, isPending } = useMutation({
+    mutationFn: leaveExamSession,
+    onSuccess: (success) => {
+      if (!success) return;
+
+      navigate(ROUTES.dashboard);
+    },
+    onError: (error) => toast.error(error.message),
+  });
 
   const handleStartOver = () => {
     if (!task) return;
@@ -100,21 +120,37 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
           </DropdownTrigger>
 
           <DropdownMenu>
-            <DropdownItem
-              startContent={<Icon name="restart" className="h-5 w-5" />}
-              onPress={startOverToggle.toggleOn}
+            <DropdownSection
+              showDivider
+              title="Help"
+              classNames={{ heading: "text-sm font-semibold", divider: "h-[0.5px] opacity-50" }}
             >
-              <p className="text-base">Start Over</p>
-            </DropdownItem>
+              <DropdownItem
+                textValue="Start Over"
+                startContent={<Icon name="restart" className="h-5 w-5" />}
+                onPress={startOverToggle.toggleOn}
+              >
+                <p className="text-base">Start Over</p>
+              </DropdownItem>
+
+              <DropdownItem
+                as={Link}
+                target="_blank"
+                // @ts-expect-error NextUI not passing through 'as' props
+                to={examIssueUrl}
+                aria-label="Report an Issue"
+                startContent={<Icon name="info" className="h-5 w-5" />}
+              >
+                <p className="text-base">Report an Issue</p>
+              </DropdownItem>
+            </DropdownSection>
 
             <DropdownItem
-              as={Link}
-              target="_blank"
-              // @ts-expect-error NextUI not passing through 'as' props
-              to={examIssueUrl}
-              startContent={<Icon name="info" className="h-5 w-5" />}
+              textValue="Leave"
+              startContent={<Icon name="logout" className="h-5 w-5" />}
+              onPress={leaveToggle.toggleOn}
             >
-              <p className="text-base">Report an Issue</p>
+              <p className="text-base">Leave</p>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
@@ -136,6 +172,15 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
         title={`Start over with ${task.functionName}?`}
         description="You will lose your progress so far and start fresh."
         action={{ label: "Start Over", onConfirm: handleStartOver }}
+      />
+
+      <ConfirmDialog
+        color="danger"
+        loading={isPending}
+        dialog={leaveToggle}
+        title="Leave exam session?"
+        description="You will lose all of your progress."
+        action={{ label: "Leave", onConfirm: () => mutate({ examId, studentId }) }}
       />
     </Fragment>
   );

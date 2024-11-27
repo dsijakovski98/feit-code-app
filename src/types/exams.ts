@@ -1,4 +1,11 @@
+export type StudentSession = {
+  userId: string;
+  pasteCount: number;
+  // Time in seconds
+  timeOff: number;
+};
+
 export type ExamStats = {
-  activeStudents: string[];
-  finishedStudents: string[];
+  activeStudents: StudentSession[];
+  finishedStudents: StudentSession[];
 };

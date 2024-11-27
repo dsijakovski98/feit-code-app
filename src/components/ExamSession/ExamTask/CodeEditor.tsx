@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { ClipboardEvent, useEffect } from "react";
 
 import CodeEditor from "@/components/CodeEditor";
 
@@ -21,6 +21,10 @@ const ExamCodeEditor = () => {
     sessionStorage.setItem(task.id, value);
   };
 
+  const handlePaste = (e: ClipboardEvent) => {
+    console.log(e);
+  };
+
   useEffect(() => {
     if (template) {
       setTasks((prev) => {
@@ -38,6 +42,7 @@ const ExamCodeEditor = () => {
       height="100%"
       value={taskState.code}
       onChange={handleChange}
+      onPaste={handlePaste}
       language={exam.language}
       className="bg-gradient-to-b from-background/70 to-background/20 text-base *:bg-transparent [&_.cm-content]:py-[1ch]"
     />
