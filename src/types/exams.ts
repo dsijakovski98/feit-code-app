@@ -1,8 +1,7 @@
 export type StudentSession = {
   userId: string;
   pasteCount: number;
-  // Time in seconds
-  timeOff: number;
+  timeOff?: Record<string, number>; // Key - start date, Value - duration in seconds
 };
 
 export type ExamStats = {

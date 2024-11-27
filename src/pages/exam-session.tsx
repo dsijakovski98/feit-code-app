@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { Tab, Tabs } from "@nextui-org/tabs";
 
-import NavActions from "@/layouts/MainLayout/Nav/NavActions";
+import LogoFC from "@/layouts/MainLayout/LogoFC";
 
 import ExamSession from "@/components/ExamSession";
 import SessionHandler from "@/components/ExamSession/SessionHandler";
@@ -33,6 +33,14 @@ const ExamSessionPage = () => {
         <div className="z-10 grid grid-rows-[auto_1fr]">
           <header className="px-8 py-6 lg:hidden">
             <nav className="flex items-center gap-6 lg:*:!pointer-events-none">
+              <div>
+                <LogoFC />
+              </div>
+
+              <div className="ml-auto">
+                <SessionTimer />
+              </div>
+
               <Tabs
                 size="lg"
                 color="primary"
@@ -51,12 +59,6 @@ const ExamSessionPage = () => {
                   <Tab key={task.id} title={task.title} isDisabled={submittedTasks.includes(task.id)} />
                 ))}
               </Tabs>
-
-              <SessionTimer />
-
-              <div className="ml-auto">
-                <NavActions />
-              </div>
             </nav>
           </header>
 

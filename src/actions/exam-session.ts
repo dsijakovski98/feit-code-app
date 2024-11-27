@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import { onValue, push, ref, set } from "firebase/database";
 
 import { fbDatabase } from "@/services/firebase";
@@ -5,21 +6,21 @@ import { fbDatabase } from "@/services/firebase";
 import { ProgrammingLanguage } from "@/constants/enums";
 import { ExamStats, StudentSession } from "@/types/exams";
 
-type SessionOptions = {
+export type ExamSessionOptions = {
   examId: string;
   studentId: string;
 };
 
 const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
 
-export const joinExamSession = async ({ examId, studentId }: SessionOptions) => {
+export const joinExamSession = async ({ examId, studentId }: ExamSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   onValue(
     sessionRef,
     (snapshot) => {
       const examSession: ExamStats["activeStudents"] | null = snapshot.val();
-      const studentData: StudentSession = { userId: studentId, pasteCount: 0, timeOff: 0 };
+      const studentData: StudentSession = { userId: studentId, pasteCount: 0, timeOff: {} };
 
       if (!examSession) {
         push(sessionRef, studentData);
@@ -39,7 +40,7 @@ export const joinExamSession = async ({ examId, studentId }: SessionOptions) => 
   );
 };
 
-export const leaveExamSession = async ({ examId, studentId }: SessionOptions) => {
+export const leaveExamSession = async ({ examId, studentId }: ExamSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   const leaveSuccess = await new Promise((resolve) => {
@@ -71,7 +72,7 @@ export const leaveExamSession = async ({ examId, studentId }: SessionOptions) =>
   return leaveSuccess;
 };
 
-export const handlePasteDetect = async ({ examId, studentId }: SessionOptions) => {
+export const handlePasteDetect = async ({ examId, studentId }: ExamSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   await new Promise((resolve) => {
@@ -94,6 +95,45 @@ export const handlePasteDetect = async ({ examId, studentId }: SessionOptions) =
 
         const studentKey = targetStudent[0] as keyof typeof examSession;
         examSession[studentKey].pasteCount++;
+
+        set(sessionRef, examSession);
+        resolve(true);
+      },
+      { onlyOnce: true },
+    );
+  });
+};
+
+type TimeOffOptions = { timeOff: number; startTime: Dayjs } & ExamSessionOptions;
+export const handleSessionTimeOff = async ({ examId, studentId, timeOff, startTime }: TimeOffOptions) => {
+  const sessionRef = activeStudentsRef(examId);
+
+  await new Promise((resolve) => {
+    onValue(
+      sessionRef,
+      (snapshot) => {
+        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+
+        if (!examSession) {
+          return resolve(false);
+        }
+
+        const targetStudent = Object.entries(examSession).find(
+          ([, studentData]) => studentData.userId === studentId,
+        );
+
+        if (!targetStudent) {
+          return resolve(false);
+        }
+
+        const studentKey = targetStudent[0] as keyof typeof examSession;
+        const timestamp = startTime.format("YYYY-MM-DD HH:MM:ss");
+
+        if (examSession[studentKey].timeOff) {
+          examSession[studentKey].timeOff[timestamp] = timeOff;
+        } else {
+          examSession[studentKey].timeOff = { [timestamp]: timeOff };
+        }
 
         set(sessionRef, examSession);
         resolve(true);

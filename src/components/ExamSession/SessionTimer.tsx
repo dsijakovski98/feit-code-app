@@ -56,6 +56,17 @@ const SessionTimer = () => {
   return (
     <Fragment>
       <div className="group relative isolate">
+        <div className="absolute right-full top-1/2 -z-10 -translate-y-1/2 whitespace-nowrap">
+          {done ? (
+            <p className="translate-x-4 text-lg font-semibold">Time's up!</p>
+          ) : (
+            <TimeLeft
+              countdown={countdown}
+              className="opacity-0 transition-transform-opacity *:text-lg group-hover:-translate-x-4 group-hover:opacity-100"
+            />
+          )}
+        </div>
+
         <CircularProgress
           value={progress}
           color={progressColor}
@@ -66,17 +77,6 @@ const SessionTimer = () => {
           name="alarm"
           className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 scale-95"
         />
-
-        <div className="absolute left-full top-1/2 -z-10 -translate-y-1/2 whitespace-nowrap">
-          {done ? (
-            <p className="translate-x-4 text-lg font-semibold">Time's up!</p>
-          ) : (
-            <TimeLeft
-              countdown={countdown}
-              className="opacity-0 transition-transform-opacity *:text-lg group-hover:translate-x-4 group-hover:opacity-100"
-            />
-          )}
-        </div>
       </div>
 
       {/* TODO: Finish dialog here */}
