@@ -9,15 +9,18 @@ import Icon from "@/components/ui/Icon";
 import TimeLeft from "@/components/ui/TimeLeft";
 
 import { ExamSessionContext } from "@/context/ExamSessionContext";
+import { useFinishExam } from "@/hooks/exam/useFinishExam";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
 const SessionTimer = () => {
-  const { exam } = useCtx(ExamSessionContext);
+  const { exam, student, tasksState } = useCtx(ExamSessionContext);
   const { durationMinutes, startedAt } = exam;
 
   const doneDialog = useToggle();
+
+  const { mutate, isPending } = useFinishExam({ studentId: student.id });
 
   const targetDate = useMemo(
     () => dayjs(startedAt).add(durationMinutes, "minutes"),
@@ -42,8 +45,7 @@ const SessionTimer = () => {
   }, [progress]);
 
   const onConfirm = () => {
-    // TODO: Finish exam
-    doneDialog.toggleOff();
+    mutate({ exam, student, tasksState });
   };
 
   useEffect(() => {
@@ -56,6 +58,17 @@ const SessionTimer = () => {
   return (
     <Fragment>
       <div className="group relative isolate">
+        <div className="absolute right-full top-1/2 -z-10 -translate-y-1/2 whitespace-nowrap">
+          {done ? (
+            <p className="-translate-x-4 text-lg font-semibold">Time's up!</p>
+          ) : (
+            <TimeLeft
+              countdown={countdown}
+              className="opacity-0 transition-transform-opacity *:text-lg group-hover:-translate-x-4 group-hover:opacity-100"
+            />
+          )}
+        </div>
+
         <CircularProgress
           value={progress}
           color={progressColor}
@@ -66,23 +79,13 @@ const SessionTimer = () => {
           name="alarm"
           className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 scale-95"
         />
-
-        <div className="absolute left-full top-1/2 -z-10 -translate-y-1/2 whitespace-nowrap">
-          {done ? (
-            <p className="translate-x-4 text-lg font-semibold">Time's up!</p>
-          ) : (
-            <TimeLeft
-              countdown={countdown}
-              className="opacity-0 transition-transform-opacity *:text-lg group-hover:translate-x-4 group-hover:opacity-100"
-            />
-          )}
-        </div>
       </div>
 
       {/* TODO: Finish dialog here */}
       <ConfirmDialog
         color="primary"
         cancelable={false}
+        loading={isPending}
         dialog={doneDialog}
         title={`Time's up!`}
         description={`Don't worry, your progress so far will be saved.`}

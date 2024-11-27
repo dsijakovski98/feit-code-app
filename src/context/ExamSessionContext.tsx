@@ -9,7 +9,7 @@ type TaskState = {
   output: string;
 };
 
-type ExamSessionContext = {
+export type ExamSessionContext = {
   student: FCStudent;
   exam: ExamDetails;
   submittedTasksState: UseState<string[]>;

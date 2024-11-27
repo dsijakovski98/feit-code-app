@@ -6,4 +6,5 @@ export const bashConfig: LanguageConfig = {
   comment: "#",
   funcPrefix: "function",
   extension: langs.shell(),
+  commandExec: (taskName) => `./${taskName}.sh`,
 };

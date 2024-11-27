@@ -2,6 +2,7 @@ import { UserResource } from "@clerk/types";
 
 import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
 import { HREF } from "@/constants/routes";
+import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { UseFCUser } from "@/hooks/useFCUser";
 
 export const isNumber = (value: unknown) => {
@@ -127,6 +128,23 @@ export const getHelpFeedbackUrl = (userData: UseFCUser["userData"]) => {
   baseUrl.searchParams.append("name", `${firstName} ${lastName}`);
   baseUrl.searchParams.append("email", email);
   baseUrl.searchParams.append("type", "report-issue");
+
+  return baseUrl.href;
+};
+
+export const getExamIssueUrl = (userData: UseFCUser["userData"], taskData: ExamDetails["tasks"][number]) => {
+  if (!userData) return "";
+
+  const {
+    user: { firstName, lastName, email },
+  } = userData;
+
+  const baseUrl = new URL(HREF.feitCode.contactUs);
+  baseUrl.searchParams.append("name", `${firstName} ${lastName}`);
+  baseUrl.searchParams.append("email", email);
+  baseUrl.searchParams.append("taskId", taskData.id);
+  baseUrl.searchParams.append("examId", taskData.examId);
+  baseUrl.searchParams.append("type", "exam-issue");
 
   return baseUrl.href;
 };

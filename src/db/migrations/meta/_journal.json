@@ -64,6 +64,20 @@
       "when": 1730071125592,
       "tag": "0008_daffy_kabuki",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1732747459415,
+      "tag": "0009_wise_sharon_carter",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1732749970831,
+      "tag": "0010_overjoyed_giant_girl",
+      "breakpoints": true
     }
   ]
 }

@@ -2,7 +2,6 @@ import { relations } from "drizzle-orm";
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
 import exams from "@/db/schema/exams";
-import submissionTasks from "@/db/schema/submissionTasks";
 import tests from "@/db/schema/tests";
 import { primaryId } from "@/db/schema/utils";
 
@@ -26,7 +25,6 @@ export const taskRelations = relations(tasks, ({ one, many }) => ({
     references: [exams.id],
   }),
   tests: many(tests),
-  submissions: many(submissionTasks),
 }));
 
 export default tasks;

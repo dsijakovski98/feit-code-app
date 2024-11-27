@@ -3,6 +3,7 @@ import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import courses from "@/db/schema/courses";
 import { examStatus, programmingLanguage } from "@/db/schema/enums";
+import submissions from "@/db/schema/submissions";
 import tasks from "@/db/schema/tasks";
 import { primaryId } from "@/db/schema/utils";
 
@@ -30,6 +31,7 @@ export const examRelations = relations(exams, ({ one, many }) => ({
     references: [courses.id],
   }),
   tasks: many(tasks),
+  submissions: many(submissions),
 }));
 
 export default exams;
