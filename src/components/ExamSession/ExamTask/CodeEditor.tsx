@@ -2,15 +2,19 @@ import { ClipboardEvent, useEffect } from "react";
 
 import CodeEditor from "@/components/CodeEditor";
 
+import { handlePasteDetect } from "@/actions/exam-session";
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { ExamSessionTaskContext } from "@/context/ExamSessionTaskContext";
 import { useCtx } from "@/hooks/useCtx";
 
 const ExamCodeEditor = () => {
-  const { exam, tasksState } = useCtx(ExamSessionContext);
+  const { exam, student, tasksState } = useCtx(ExamSessionContext);
   const { task, template } = useCtx(ExamSessionTaskContext);
   const [tasks, setTasks] = tasksState;
   const taskState = tasks[task.id];
+
+  const { id: examId } = exam;
+  const { id: studentId } = student;
 
   const handleChange = (value: string) => {
     setTasks((prev) => {
@@ -21,8 +25,12 @@ const ExamCodeEditor = () => {
     sessionStorage.setItem(task.id, value);
   };
 
-  const handlePaste = (e: ClipboardEvent) => {
-    console.log(e);
+  const handlePaste = (e: ClipboardEvent<HTMLDivElement>) => {
+    const newData = e.clipboardData.getData("text/plain").trim();
+
+    if (newData.length > 0) {
+      handlePasteDetect({ examId, studentId });
+    }
   };
 
   useEffect(() => {

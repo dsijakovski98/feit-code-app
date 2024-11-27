@@ -6,6 +6,6 @@ export type StudentSession = {
 };
 
 export type ExamStats = {
-  activeStudents: StudentSession[];
-  finishedStudents: StudentSession[];
+  activeStudents: Record<string, StudentSession>;
+  finishedStudents: Record<string, StudentSession>;
 };

@@ -5,12 +5,12 @@ import { fbDatabase } from "@/services/firebase";
 import { ProgrammingLanguage } from "@/constants/enums";
 import { ExamStats, StudentSession } from "@/types/exams";
 
-const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
-
 type SessionOptions = {
   examId: string;
   studentId: string;
 };
+
+const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
 
 export const joinExamSession = async ({ examId, studentId }: SessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
@@ -45,7 +45,7 @@ export const leaveExamSession = async ({ examId, studentId }: SessionOptions) =>
   const leaveSuccess = await new Promise((resolve) => {
     onValue(
       sessionRef,
-      async (snapshot) => {
+      (snapshot) => {
         const examSession: ExamStats["activeStudents"] | null = snapshot.val();
 
         if (!examSession) {
@@ -69,6 +69,38 @@ export const leaveExamSession = async ({ examId, studentId }: SessionOptions) =>
   });
 
   return leaveSuccess;
+};
+
+export const handlePasteDetect = async ({ examId, studentId }: SessionOptions) => {
+  const sessionRef = activeStudentsRef(examId);
+
+  await new Promise((resolve) => {
+    onValue(
+      sessionRef,
+      async (snapshot) => {
+        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+
+        if (!examSession) {
+          return resolve(false);
+        }
+
+        const targetStudent = Object.entries(examSession).find(
+          ([, studentData]) => studentData.userId === studentId,
+        );
+
+        if (!targetStudent) {
+          return resolve(false);
+        }
+
+        const studentKey = targetStudent[0] as keyof typeof examSession;
+        examSession[studentKey].pasteCount++;
+
+        set(sessionRef, examSession);
+        resolve(true);
+      },
+      { onlyOnce: true },
+    );
+  });
 };
 
 type RunCodeOptions = {
