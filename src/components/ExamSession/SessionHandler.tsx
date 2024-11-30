@@ -8,7 +8,10 @@ const SessionHandler = () => {
   const { id: studentId } = student;
   const { id: examId } = exam;
 
+  // Create exam session in realtime DB on page load
   useJoinExam({ examId, studentId });
+
+  // Handle window blur event
   useExamTimeOff({ examId, studentId });
 
   return null;
