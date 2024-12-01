@@ -22,7 +22,7 @@ const SessionActions = () => {
   if (isMobileSm) {
     return (
       <Fragment>
-        <Dropdown placement="bottom-end" closeOnSelect>
+        <Dropdown isDisabled={!!session.removed} placement="bottom-end" closeOnSelect>
           <DropdownTrigger>
             <Button isIconOnly color="default" variant="light" radius="full" className="p-1.5">
               <Icon name="more" />
@@ -66,6 +66,7 @@ const SessionActions = () => {
         variant="light"
         color="danger"
         className="p-2"
+        isDisabled={!!session.removed}
         onPress={removeDialog.toggleOn}
       >
         <Icon name="logout" />

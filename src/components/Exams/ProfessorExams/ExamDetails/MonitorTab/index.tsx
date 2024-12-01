@@ -5,21 +5,26 @@ import { CircularProgress } from "@nextui-org/react";
 import SessionsTable from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionsTable";
 
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
-import { MonitorExamProvider } from "@/context/MonitorExamContext";
+import { MonitorExamProvider, MonitorSession } from "@/context/MonitorExamContext";
 import { useDatabaseListen } from "@/hooks/firebase/useDatabaseListen";
 import { useCtx } from "@/hooks/useCtx";
-import { ExamStats, StudentSession } from "@/types/exams";
+import { ExamStats } from "@/types/exams";
 
 const MonitorTab = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
 
-  const [studentSessions, setStudentSessions] = useState<StudentSession[] | null>(null);
+  const [studentSessions, setStudentSessions] = useState<MonitorSession[] | null>(null);
 
   const onData = useCallback((examStats: ExamStats) => {
-    const sessions: StudentSession[] = [];
+    const sessions: MonitorSession[] = [];
 
-    Object.values(examStats.activeStudents ?? {}).forEach((session) => sessions.push(session));
-    Object.values(examStats.finishedStudents ?? {}).forEach((session) => sessions.push(session));
+    Object.entries(examStats.activeStudents ?? {}).forEach(([sessionId, session]) =>
+      sessions.push({ ...session, sessionId, status: session.removed ? "Removed" : "Active" }),
+    );
+
+    Object.entries(examStats.finishedStudents ?? {}).forEach(([sessionId, session]) =>
+      sessions.push({ ...session, sessionId, status: "Finished" }),
+    );
 
     setStudentSessions(sessions);
   }, []);

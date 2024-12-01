@@ -81,7 +81,6 @@ const SessionTimer = () => {
         />
       </div>
 
-      {/* TODO: Finish dialog here */}
       <ConfirmDialog
         color="primary"
         cancelable={false}

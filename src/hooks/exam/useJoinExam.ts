@@ -2,11 +2,25 @@ import { useEffect } from "react";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { ExamSessionOptions, joinExamSession } from "@/actions/exam-session";
+import { joinExamSession } from "@/actions/exam-session";
+import { ExamSessionContext } from "@/context/ExamSessionContext";
+import { useCtx } from "@/hooks/useCtx";
 
-export const useJoinExam = ({ examId, student }: ExamSessionOptions) => {
+export const useJoinExam = () => {
+  const {
+    student,
+    sessionIdState,
+    exam: { id: examId },
+  } = useCtx(ExamSessionContext);
+  const [, setSessionId] = sessionIdState;
+
   const { mutate } = useMutation({
     mutationFn: joinExamSession,
+    onSuccess: (key) => {
+      if (!key) return;
+
+      setSessionId(key);
+    },
   });
 
   useEffect(() => {

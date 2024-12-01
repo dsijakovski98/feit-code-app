@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
+import { Chip } from "@nextui-org/react";
 import { User } from "@nextui-org/user";
 
 import SessionActions from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions";
@@ -13,6 +14,7 @@ import { StudentSessionContext } from "@/context/StudentSessionContext";
 import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { ColumnKey } from "@/types";
+import { sessionStatusColor, sessionTimeOffDuration } from "@/utils/examSession";
 
 type Props = {
   columnKey: ColumnKey<(typeof SESSION_COLUMNS)["lg"]> | ColumnKey<(typeof SESSION_COLUMNS)["sm"]>;
@@ -22,28 +24,16 @@ const SessionCellsMux = ({ columnKey }: Props) => {
   const { isMobile, isMobileSm } = useCtx(ResponsiveContext);
   const { session } = useCtx(StudentSessionContext);
 
-  const { student, pasteCount, timeOff } = session;
+  const { student, status, pasteCount, timeOff } = session;
   const { id, firstName, lastName, email } = student;
 
   const totalTimeOff = useMemo(() => {
     const timeChunks = Object.values(timeOff ?? {});
 
-    if (timeChunks.length === 0) return 0;
-
     return timeChunks.reduce((acc, current) => acc + current, 0);
   }, [timeOff]);
 
-  const timeOffDuration = useMemo(() => {
-    const timePlural = (time: string, value: number) => `${time}${value > 1 && "s"}`;
-
-    if (totalTimeOff < 60) return `${totalTimeOff} ${timePlural("second", totalTimeOff)}`;
-
-    const totalMinutes = Math.floor(totalTimeOff / 60);
-    if (totalMinutes < 60) return `${totalMinutes} ${timePlural("minute", totalMinutes)}`;
-
-    const totalHours = Math.floor(totalMinutes / 60);
-    return `${totalHours} ${timePlural("hour", totalHours)}`;
-  }, [totalTimeOff]);
+  const timeOffDuration = useMemo(() => sessionTimeOffDuration(totalTimeOff), [totalTimeOff]);
 
   const [studentAvatar, isLoading] = useAvatar(id);
 
@@ -73,6 +63,14 @@ const SessionCellsMux = ({ columnKey }: Props) => {
           }),
         }}
       />
+    );
+  }
+
+  if (columnKey === "status") {
+    return (
+      <Chip size="sm" color={sessionStatusColor(status)} classNames={{ content: "font-semibold text-sm" }}>
+        {status}
+      </Chip>
     );
   }
 

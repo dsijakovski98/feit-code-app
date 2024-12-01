@@ -2,21 +2,30 @@ import { useCallback, useEffect, useState } from "react";
 
 import dayjs, { Dayjs } from "dayjs";
 
-import { ExamSessionOptions, handleSessionTimeOff } from "@/actions/exam-session";
+import { handleSessionTimeOff } from "@/actions/exam-session";
+import { ExamSessionContext } from "@/context/ExamSessionContext";
+import { useCtx } from "@/hooks/useCtx";
 
-export const useExamTimeOff = ({ examId, student }: ExamSessionOptions) => {
+export const useExamTimeOff = () => {
+  const {
+    sessionIdState,
+    exam: { id: examId },
+  } = useCtx(ExamSessionContext);
+  const [sessionId] = sessionIdState;
+
   const [startTime, setStartTime] = useState<Dayjs>();
 
   const handleWindowFocus = useCallback(() => {
     if (!startTime) return;
+    if (!sessionId) return;
 
     const timeOff = dayjs().diff(startTime, "seconds");
 
     if (timeOff > 0) {
-      handleSessionTimeOff({ examId, student, timeOff, startTime });
+      handleSessionTimeOff({ examId, sessionId, timeOff, startTime });
       setStartTime(undefined);
     }
-  }, [startTime, examId, student]);
+  }, [startTime, examId, sessionId]);
 
   const handleWindowBlur = () => {
     setStartTime(dayjs());

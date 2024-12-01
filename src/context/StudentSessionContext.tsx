@@ -1,9 +1,9 @@
 import { PropsWithChildren, createContext } from "react";
 
-import { StudentSession } from "@/types/exams";
+import { MonitorSession } from "@/context/MonitorExamContext";
 
 type StudentSessionContext = {
-  session: StudentSession;
+  session: MonitorSession;
 };
 
 export const StudentSessionContext = createContext<StudentSessionContext | null>(null);

@@ -5,7 +5,8 @@ import { Tab, Tabs } from "@nextui-org/tabs";
 import LogoFC from "@/layouts/MainLayout/LogoFC";
 
 import ExamSession from "@/components/ExamSession";
-import SessionHandler from "@/components/ExamSession/SessionHandler";
+import RemoveSessionHandler from "@/components/ExamSession/Handlers/RemoveSessionHandler";
+import SessionActionsHandler from "@/components/ExamSession/Handlers/SessionActionsHandler";
 import SessionTimer from "@/components/ExamSession/SessionTimer";
 
 import { ExamSessionContext } from "@/context/ExamSessionContext";
@@ -76,7 +77,8 @@ const ExamSessionPage = () => {
         </div>
       </div>
 
-      <SessionHandler />
+      <SessionActionsHandler />
+      <RemoveSessionHandler />
     </Fragment>
   );
 };

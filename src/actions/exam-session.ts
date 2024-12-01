@@ -13,63 +13,75 @@ import { FCStudent } from "@/hooks/useFCUser";
 import { ExamStats, StudentSession } from "@/types/exams";
 import { studentTaskRef, taskTemplateRef } from "@/utils/code";
 
-export type ExamSessionOptions = {
+export type SessionOptions = {
   examId: string;
-  student: FCStudent;
+  sessionId?: string;
 };
 
 const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
 const finishedStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/finishedStudents`);
 
-export const joinExamSession = async ({ examId, student }: ExamSessionOptions) => {
-  const sessionRef = activeStudentsRef(examId);
-
-  onValue(
-    sessionRef,
-    (snapshot) => {
-      const examSession: ExamStats["activeStudents"] | null = snapshot.val();
-      const studentData: StudentSession = { student, pasteCount: 0, timeOff: {} };
-
-      if (!examSession) {
-        push(sessionRef, studentData);
-
-        return;
-      }
-
-      const studentJoined = Object.values(examSession).find(
-        (studentData) => studentData.student.id === student.id,
-      );
-
-      if (studentJoined) return;
-
-      push(sessionRef, studentData);
-    },
-    { onlyOnce: true },
-  );
+const activeSessionRef = ({ examId, sessionId }: SessionOptions) => {
+  return ref(fbDatabase, `exams/${examId}/activeStudents/${sessionId}`);
 };
 
-export const leaveExamSession = async ({ examId, student }: ExamSessionOptions) => {
+type JoinSessionOptions = {
+  examId: string;
+  student: FCStudent;
+};
+export const joinExamSession = async ({ examId, student }: JoinSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
-  const leaveSuccess = await new Promise((resolve) => {
+  const sessionKey: string | null = await new Promise((resolve) => {
+    onValue(
+      sessionRef,
+      async (snapshot) => {
+        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+        const studentData: StudentSession = { student, pasteCount: 0, timeOff: {} };
+
+        if (!examSession) {
+          const { key } = await push(sessionRef, studentData);
+          return resolve(key);
+        }
+
+        const studentJoined = Object.entries(examSession).find(
+          ([, studentData]) => studentData.student.id === student.id,
+        );
+
+        if (studentJoined) {
+          return resolve(studentJoined[0]);
+        }
+
+        const { key } = await push(sessionRef, studentData);
+        resolve(key);
+      },
+      { onlyOnce: true },
+    );
+  });
+
+  return sessionKey;
+};
+
+export const leaveExamSession = async ({ examId, sessionId }: SessionOptions) => {
+  if (!sessionId) throw new Error(`Session ID missing!`);
+
+  const sessionRef = activeStudentsRef(examId);
+
+  const leaveSuccess = await new Promise((resolve, reject) => {
     onValue(
       sessionRef,
       (snapshot) => {
         const examSession: ExamStats["activeStudents"] | null = snapshot.val();
 
         if (!examSession) {
-          return resolve(false);
+          return reject(`Exam session doesn't exist!`);
         }
 
-        const targetStudent = Object.entries(examSession).find(
-          ([, studentData]) => studentData.student.id === student.id,
-        );
-
-        if (!targetStudent) {
-          return resolve(false);
+        if (!examSession[sessionId]) {
+          return reject(`Student session doesn't exist!`);
         }
 
-        delete examSession[targetStudent[0] as keyof typeof examSession];
+        delete examSession[sessionId];
         set(sessionRef, examSession);
         resolve(true);
       },
@@ -80,31 +92,24 @@ export const leaveExamSession = async ({ examId, student }: ExamSessionOptions) 
   return leaveSuccess;
 };
 
-export const handlePasteDetect = async ({ examId, student }: ExamSessionOptions) => {
-  const sessionRef = activeStudentsRef(examId);
+export const handlePasteDetect = async ({ examId, sessionId }: SessionOptions) => {
+  if (!sessionId) throw new Error(`Session ID missing!`);
+
+  const sessionRef = activeSessionRef({ examId, sessionId });
 
   await new Promise((resolve) => {
     onValue(
       sessionRef,
       async (snapshot) => {
-        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+        const session: StudentSession | null = snapshot.val();
 
-        if (!examSession) {
+        if (!session) {
           return resolve(false);
         }
 
-        const targetStudent = Object.entries(examSession).find(
-          ([, studentData]) => studentData.student.id === student.id,
-        );
+        session.pasteCount++;
 
-        if (!targetStudent) {
-          return resolve(false);
-        }
-
-        const studentKey = targetStudent[0] as keyof typeof examSession;
-        examSession[studentKey].pasteCount++;
-
-        set(sessionRef, examSession);
+        set(sessionRef, session);
         resolve(true);
       },
       { onlyOnce: true },
@@ -112,38 +117,29 @@ export const handlePasteDetect = async ({ examId, student }: ExamSessionOptions)
   });
 };
 
-type TimeOffOptions = { timeOff: number; startTime: Dayjs } & ExamSessionOptions;
-export const handleSessionTimeOff = async ({ examId, student, timeOff, startTime }: TimeOffOptions) => {
-  const sessionRef = activeStudentsRef(examId);
+type TimeOffOptions = { timeOff: number; startTime: Dayjs } & SessionOptions;
+export const handleSessionTimeOff = async ({ examId, sessionId, timeOff, startTime }: TimeOffOptions) => {
+  const sessionRef = activeSessionRef({ examId, sessionId });
 
   await new Promise((resolve) => {
     onValue(
       sessionRef,
       (snapshot) => {
-        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+        const session: StudentSession | null = snapshot.val();
 
-        if (!examSession) {
+        if (!session) {
           return resolve(false);
         }
 
-        const targetStudent = Object.entries(examSession).find(
-          ([, studentData]) => studentData.student.id === student.id,
-        );
-
-        if (!targetStudent) {
-          return resolve(false);
-        }
-
-        const studentKey = targetStudent[0] as keyof typeof examSession;
         const timestamp = startTime.format("YYYY-MM-DD HH:MM:ss");
 
-        if (examSession[studentKey].timeOff) {
-          examSession[studentKey].timeOff[timestamp] = timeOff;
+        if (session.timeOff) {
+          session.timeOff[timestamp] = timeOff;
         } else {
-          examSession[studentKey].timeOff = { [timestamp]: timeOff };
+          session.timeOff = { [timestamp]: timeOff };
         }
 
-        set(sessionRef, examSession);
+        set(sessionRef, session);
         resolve(true);
       },
       { onlyOnce: true },
@@ -151,30 +147,29 @@ export const handleSessionTimeOff = async ({ examId, student, timeOff, startTime
   });
 };
 
-type RunCodeOptions = {
-  code: string;
-  name: string;
-  language: ProgrammingLanguage;
-  token: string;
-};
-export const runTaskCode = async ({ code, name, language, token }: RunCodeOptions) => {
-  const response = await fetch("http://localhost:4000/run", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ name, code, language }),
+type RemoveSessionOptions = SessionOptions & Pick<StudentSession, "removed">;
+export const removeStudentSession = async ({ examId, sessionId, removed }: RemoveSessionOptions) => {
+  const sessionRef = activeSessionRef({ examId, sessionId });
+
+  const result = await new Promise((resolve, reject) => {
+    onValue(
+      sessionRef,
+      (snapshot) => {
+        const session: StudentSession | null = snapshot.val();
+
+        if (!session) {
+          return reject(`Session doesn't exist!`);
+        }
+
+        session.removed = removed;
+        set(sessionRef, session);
+        resolve(true);
+      },
+      { onlyOnce: true },
+    );
   });
 
-  if (!response.ok) {
-    const { error } = (await response.json()) as { error: string };
-    throw new Error(error);
-  }
-
-  const { output } = (await response.json()) as { output: string };
-
-  return output;
+  return result;
 };
 
 type FinishExamOptions = Pick<ExamSessionContext, "exam" | "tasksState" | "student">;
@@ -273,4 +268,30 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
 
     throw new Error("Failed to finish exam!");
   }
+};
+
+type RunCodeOptions = {
+  code: string;
+  name: string;
+  language: ProgrammingLanguage;
+  token: string;
+};
+export const runTaskCode = async ({ code, name, language, token }: RunCodeOptions) => {
+  const response = await fetch(`${import.meta.env.VITE_CODE_RUNNER_URL}/run`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, code, language }),
+  });
+
+  if (!response.ok) {
+    const { error } = (await response.json()) as { error: string };
+    throw new Error(error);
+  }
+
+  const { output } = (await response.json()) as { output: string };
+
+  return output;
 };

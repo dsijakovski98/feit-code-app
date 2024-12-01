@@ -32,6 +32,7 @@ export const STUDENT_COLUMNS = {
 export const SESSION_COLUMNS = {
   lg: [
     { key: "student", label: "Student" },
+    { key: "status", label: "Status" },
     { key: "paste", label: "Paste Count" },
     { key: "blur", label: "Time off Session" },
     { key: "actions", label: "More" },
@@ -39,6 +40,7 @@ export const SESSION_COLUMNS = {
 
   sm: [
     { key: "student", label: "Student" },
+    { key: "status", label: "Status" },
     { key: "actions", label: "More" },
   ] as const,
 } satisfies Record<string, Column[]>;

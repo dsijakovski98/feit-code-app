@@ -37,7 +37,7 @@ const SessionsTable = () => {
   const detailsDialog = useToggle();
 
   const [search, setSearch] = useState("");
-  const { page, pages, setPage, items: sessionItems } = usePaginate(studentSessions ?? []);
+  const { page, pages, setPage, items: sessionItems } = usePaginate(studentSessions);
 
   const sessionsList = useMemo(() => {
     if (search.trim().length === 0) return sessionItems;
@@ -51,6 +51,12 @@ const SessionsTable = () => {
   }, [search, sessionItems]);
 
   const totalSessions = useMemo(() => studentSessions?.length, [studentSessions?.length]);
+
+  const disabledSessions = useMemo(() => {
+    const removedSessions = studentSessions.filter((session) => !!session.removed);
+
+    return removedSessions.map((session) => session.student.id);
+  }, [studentSessions]);
 
   const handleSelect = (key: Selection) => {
     if (!studentSessions) return;
@@ -71,6 +77,7 @@ const SessionsTable = () => {
         onSelectionChange={handleSelect}
         selectionMode={isMobileSm ? "none" : "single"}
         selectedKeys={new Set(selectedSession ? [selectedSession.student.id] : [])}
+        disabledKeys={new Set(disabledSessions)}
         topContent={
           <div className="flex items-end justify-between gap-6">
             <p className="leading-none text-foreground-300 md:mr-auto md:self-center">
@@ -121,7 +128,7 @@ const SessionsTable = () => {
                   ? isMobileSm
                     ? "end"
                     : "center"
-                  : column.key === "paste" || column.key == "blur"
+                  : column.key === "paste" || column.key === "blur" || column.key === "status"
                     ? "center"
                     : "start"
               }
@@ -129,7 +136,8 @@ const SessionsTable = () => {
             >
               <div
                 className={clsx("flex w-full items-center gap-2", {
-                  "justify-center": column.key === "paste" || column.key === "blur",
+                  "justify-center":
+                    column.key === "paste" || column.key === "blur" || column.key === "status",
                   "lg:justify-end": column.key === "actions",
                 })}
               >
@@ -157,7 +165,10 @@ const SessionsTable = () => {
         </TableHeader>
         <TableBody items={sessionsList} emptyContent="No students to display.">
           {(session) => (
-            <TableRow key={session.student.id} className="cursor-pointer lg:cursor-default">
+            <TableRow
+              key={session.student.id}
+              className="cursor-pointer data-[disabled]:select-none data-[disabled]:opacity-50 lg:cursor-default"
+            >
               {(columnKey) => (
                 <TableCell
                   align={
@@ -165,7 +176,7 @@ const SessionsTable = () => {
                       ? isMobileSm
                         ? "right"
                         : "center"
-                      : columnKey === "paste" || columnKey == "blur"
+                      : columnKey === "paste" || columnKey === "blur" || columnKey === "status"
                         ? "center"
                         : "left"
                   }

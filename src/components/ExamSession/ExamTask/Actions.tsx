@@ -27,7 +27,8 @@ type Props = {
 
 const ExamTaskActions = ({ runCode, loading }: Props) => {
   const { task, template } = useCtx(ExamSessionTaskContext);
-  const { exam, student, tasksState } = useCtx(ExamSessionContext);
+  const { exam, sessionIdState, tasksState } = useCtx(ExamSessionContext);
+  const [sessionId] = sessionIdState;
   const [, setTasks] = tasksState;
 
   const { userData } = useFCUser();
@@ -51,7 +52,9 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
   });
 
   const handleLeaveExam = () => {
-    mutate({ examId: exam.id, student });
+    if (!sessionId) return;
+
+    mutate({ examId: exam.id, sessionId });
   };
 
   const handleStartOver = () => {
