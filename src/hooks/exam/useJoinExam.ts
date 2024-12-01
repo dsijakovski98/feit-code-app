@@ -4,12 +4,12 @@ import { useMutation } from "@tanstack/react-query";
 
 import { ExamSessionOptions, joinExamSession } from "@/actions/exam-session";
 
-export const useJoinExam = ({ examId, studentId }: ExamSessionOptions) => {
+export const useJoinExam = ({ examId, student }: ExamSessionOptions) => {
   const { mutate } = useMutation({
     mutationFn: joinExamSession,
   });
 
   useEffect(() => {
-    mutate({ studentId, examId });
-  }, [mutate, studentId, examId]);
+    mutate({ examId, student });
+  }, [mutate, examId, student]);
 };

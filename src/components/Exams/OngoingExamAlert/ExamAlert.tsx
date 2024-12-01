@@ -20,13 +20,17 @@ const ExamAlert = ({ courseIds, join }: Props) => {
 
   const { pathname } = useLocation();
 
-  const onExamsPath = useMemo(() => {
+  const onExamPath = useMemo(() => {
     return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.exams}/${ongoingExam?.id}`);
   }, [pathname, ongoingExam?.id]);
 
+  const onExamCoursePath = useMemo(() => {
+    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.courses}/${ongoingExam?.courseId}`);
+  }, [pathname, ongoingExam?.courseId]);
+
   const show = useToggle(true);
 
-  if (isLoading || onExamsPath || !show.open) {
+  if (isLoading || onExamPath || onExamCoursePath || !show.open) {
     return null;
   }
 

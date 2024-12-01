@@ -4,7 +4,7 @@ import dayjs, { Dayjs } from "dayjs";
 
 import { ExamSessionOptions, handleSessionTimeOff } from "@/actions/exam-session";
 
-export const useExamTimeOff = ({ examId, studentId }: ExamSessionOptions) => {
+export const useExamTimeOff = ({ examId, student }: ExamSessionOptions) => {
   const [startTime, setStartTime] = useState<Dayjs>();
 
   const handleWindowFocus = useCallback(() => {
@@ -13,10 +13,10 @@ export const useExamTimeOff = ({ examId, studentId }: ExamSessionOptions) => {
     const timeOff = dayjs().diff(startTime, "seconds");
 
     if (timeOff > 0) {
-      handleSessionTimeOff({ examId, studentId, timeOff, startTime });
+      handleSessionTimeOff({ examId, student, timeOff, startTime });
       setStartTime(undefined);
     }
-  }, [startTime, examId, studentId]);
+  }, [startTime, examId, student]);
 
   const handleWindowBlur = () => {
     setStartTime(dayjs());

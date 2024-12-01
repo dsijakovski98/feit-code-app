@@ -9,25 +9,26 @@ import { fbDatabase, fbStorage } from "@/services/firebase";
 import { ProgrammingLanguage } from "@/constants/enums";
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { db } from "@/db";
+import { FCStudent } from "@/hooks/useFCUser";
 import { ExamStats, StudentSession } from "@/types/exams";
 import { studentTaskRef, taskTemplateRef } from "@/utils/code";
 
 export type ExamSessionOptions = {
   examId: string;
-  studentId: string;
+  student: FCStudent;
 };
 
 const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
 const finishedStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/finishedStudents`);
 
-export const joinExamSession = async ({ examId, studentId }: ExamSessionOptions) => {
+export const joinExamSession = async ({ examId, student }: ExamSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   onValue(
     sessionRef,
     (snapshot) => {
       const examSession: ExamStats["activeStudents"] | null = snapshot.val();
-      const studentData: StudentSession = { userId: studentId, pasteCount: 0, timeOff: {} };
+      const studentData: StudentSession = { student, pasteCount: 0, timeOff: {} };
 
       if (!examSession) {
         push(sessionRef, studentData);
@@ -36,7 +37,7 @@ export const joinExamSession = async ({ examId, studentId }: ExamSessionOptions)
       }
 
       const studentJoined = Object.values(examSession).find(
-        (studentData) => studentData.userId === studentId,
+        (studentData) => studentData.student.id === student.id,
       );
 
       if (studentJoined) return;
@@ -47,7 +48,7 @@ export const joinExamSession = async ({ examId, studentId }: ExamSessionOptions)
   );
 };
 
-export const leaveExamSession = async ({ examId, studentId }: ExamSessionOptions) => {
+export const leaveExamSession = async ({ examId, student }: ExamSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   const leaveSuccess = await new Promise((resolve) => {
@@ -61,7 +62,7 @@ export const leaveExamSession = async ({ examId, studentId }: ExamSessionOptions
         }
 
         const targetStudent = Object.entries(examSession).find(
-          ([, studentData]) => studentData.userId === studentId,
+          ([, studentData]) => studentData.student.id === student.id,
         );
 
         if (!targetStudent) {
@@ -79,7 +80,7 @@ export const leaveExamSession = async ({ examId, studentId }: ExamSessionOptions
   return leaveSuccess;
 };
 
-export const handlePasteDetect = async ({ examId, studentId }: ExamSessionOptions) => {
+export const handlePasteDetect = async ({ examId, student }: ExamSessionOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   await new Promise((resolve) => {
@@ -93,7 +94,7 @@ export const handlePasteDetect = async ({ examId, studentId }: ExamSessionOption
         }
 
         const targetStudent = Object.entries(examSession).find(
-          ([, studentData]) => studentData.userId === studentId,
+          ([, studentData]) => studentData.student.id === student.id,
         );
 
         if (!targetStudent) {
@@ -112,7 +113,7 @@ export const handlePasteDetect = async ({ examId, studentId }: ExamSessionOption
 };
 
 type TimeOffOptions = { timeOff: number; startTime: Dayjs } & ExamSessionOptions;
-export const handleSessionTimeOff = async ({ examId, studentId, timeOff, startTime }: TimeOffOptions) => {
+export const handleSessionTimeOff = async ({ examId, student, timeOff, startTime }: TimeOffOptions) => {
   const sessionRef = activeStudentsRef(examId);
 
   await new Promise((resolve) => {
@@ -126,7 +127,7 @@ export const handleSessionTimeOff = async ({ examId, studentId, timeOff, startTi
         }
 
         const targetStudent = Object.entries(examSession).find(
-          ([, studentData]) => studentData.userId === studentId,
+          ([, studentData]) => studentData.student.id === student.id,
         );
 
         if (!targetStudent) {
@@ -210,7 +211,7 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
           }
 
           const targetSession = Object.entries(examSession).find(
-            ([, sessionData]) => sessionData.userId === student.id,
+            ([, sessionData]) => sessionData.student.id === student.id,
           );
 
           if (!targetSession) {
@@ -243,7 +244,7 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
           }
 
           const studentFinished = !!Object.values(sessionFinish).find(
-            (studentData) => studentData.userId === student.id,
+            (studentData) => studentData.student.id === student.id,
           );
 
           if (studentFinished) {

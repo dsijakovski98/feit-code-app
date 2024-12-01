@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from "react";
+import { ComponentProps, Fragment, useMemo, useState } from "react";
 
 import { useAuth } from "@clerk/clerk-react";
 import { Pagination } from "@nextui-org/pagination";
@@ -18,14 +18,14 @@ import StudentsTableHeader from "@/components/Courses/ProfessorCourses/CourseDet
 import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 
-import { STUDENT_COLUMNS_LG, STUDENT_COLUMNS_SM } from "@/constants/students";
+import { STUDENT_COLUMNS } from "@/constants/students";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import StudentProvider from "@/context/StudentContext";
 import { useCtx } from "@/hooks/useCtx";
 import { ROWS_PER_PAGE } from "@/hooks/usePaginate";
 import { useToggle } from "@/hooks/useToggle";
-import { Column, ColumnKey } from "@/types";
+import { Column } from "@/types";
 
 const StudentsTab = () => {
   const { userId } = useAuth();
@@ -59,12 +59,12 @@ const StudentsTab = () => {
 
     // Other filtering
     return studentsSlice.filter(({ student }) =>
-      `${student.firstName} ${student.lastName}`.toLowerCase().startsWith(search.toLowerCase()),
+      `${student.firstName} ${student.lastName}`.match(new RegExp(search, "i")),
     );
   }, [students, search, page]);
 
   const columns = useMemo(() => {
-    const cols = (isMobile ? STUDENT_COLUMNS_SM : STUDENT_COLUMNS_LG) as unknown as Column[];
+    const cols = (isMobile ? STUDENT_COLUMNS.sm : STUDENT_COLUMNS.lg) as unknown as Column[];
 
     // Remove 'Actions' column for TAs
     if (userId !== professorId) return cols.slice(0, -1);
@@ -142,11 +142,7 @@ const StudentsTab = () => {
                 <TableCell align={columnKey === "actions" ? "center" : "left"}>
                   <StudentProvider student={item.student} joinedAt={item.joinedAt}>
                     <StudentCellsMux
-                      columnKey={
-                        columnKey as unknown as
-                          | ColumnKey<typeof STUDENT_COLUMNS_LG>
-                          | ColumnKey<typeof STUDENT_COLUMNS_SM>
-                      }
+                      columnKey={columnKey as ComponentProps<typeof StudentCellsMux>["columnKey"]}
                     />
                   </StudentProvider>
                 </TableCell>
@@ -156,14 +152,12 @@ const StudentsTab = () => {
         </TableBody>
       </Table>
 
-      {selectedStudent && (
-        <StudentDetails
-          dialog={detailsDialog}
-          student={selectedStudent.student}
-          joinedAt={selectedStudent.joinedAt}
-          onClose={() => setSelectedStudent(null)}
-        />
-      )}
+      <StudentDetails
+        dialog={detailsDialog}
+        student={selectedStudent?.student}
+        joinedAt={selectedStudent?.joinedAt}
+        onClose={() => setSelectedStudent(null)}
+      />
     </Fragment>
   );
 };

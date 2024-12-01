@@ -27,12 +27,12 @@ const OngoingExamInfo = ({ exam }: Props) => {
     <Link to={`${ROUTES.dashboard}${ROUTES.exams}/${id}#general`} className="group space-y-0.5 *:font-sans">
       <div className="flex items-start justify-between gap-6">
         <div>
-          <p className="transition-colors group-hover:text-warning-600 group-focus:text-warning-600">
+          <p className="transition-colors group-hover:text-secondary-500 group-focus:text-secondary-500">
             Latest Exam
           </p>
           <h2
             className={clsx(
-              "text-xl font-bold transition-colors group-hover:text-warning-600 group-focus:text-warning-600",
+              "text-xl font-bold transition-colors group-hover:text-secondary-500 group-focus:text-secondary-500",
             )}
           >
             {name}・{language}
@@ -44,7 +44,7 @@ const OngoingExamInfo = ({ exam }: Props) => {
         </Chip>
       </div>
 
-      <p className="text-lg text-foreground-300 transition-colors group-hover:text-warning-600 group-focus:text-warning-600">
+      <p className="text-lg text-foreground-300 transition-colors group-hover:text-secondary-500 group-focus:text-secondary-500">
         {timestamp}
       </p>
     </Link>

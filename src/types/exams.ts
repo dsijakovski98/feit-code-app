@@ -1,5 +1,7 @@
+import { FCStudent } from "@/hooks/useFCUser";
+
 export type StudentSession = {
-  userId: string;
+  student: FCStudent;
   pasteCount: number;
   timeOff?: Record<string, number>; // Key - start date, Value - duration in seconds
 };

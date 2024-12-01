@@ -47,7 +47,7 @@ const ConfirmDialog = ({ dialog, title, description, color, action, cancelable =
       <ModalContent>
         {(onClose) => (
           <Fragment>
-            <ModalHeader className="text-2xl">{title}</ModalHeader>
+            <ModalHeader className="text-xl">{title}</ModalHeader>
 
             <ModalBody className="relative mb-2 font-sans">{description}</ModalBody>
 

@@ -13,6 +13,7 @@ import { canStartExam } from "@/utils/dates";
 
 const GeneralTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/GeneralTab"));
 const SettingsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/SettingsTab"));
+const MonitorTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/MonitorTab"));
 
 const TABS = {
   general: "#general",
@@ -62,7 +63,7 @@ const ProfessorExamDetails = () => {
   }
 
   return (
-    <section className="bg-main h-auto p-4 pt-0">
+    <section className="bg-main h-auto p-4 pt-0 lg:h-full">
       <div className="mx-auto h-full max-w-[140ch] lg:mx-0 lg:max-w-full">
         <Tabs
           fullWidth
@@ -86,17 +87,23 @@ const ProfessorExamDetails = () => {
           </Tab>
 
           {tabKeys.includes(TABS.monitor) && (
-            // TODO: Implement Monitor tab
             <Tab
               key={TABS.monitor}
               title={
-                <Badge isDot content="" color="secondary" className="translate-x-5 scale-90 animate-pulse">
+                <Badge
+                  isDot
+                  content=""
+                  color="secondary"
+                  className="translate-x-6 translate-y-0 scale-90 animate-pulse"
+                >
                   Monitor
                 </Badge>
               }
               href={TABS.monitor}
             >
-              <Suspense fallback={null}>Monitor tab</Suspense>
+              <Suspense fallback={null}>
+                <MonitorTab />
+              </Suspense>
             </Tab>
           )}
 

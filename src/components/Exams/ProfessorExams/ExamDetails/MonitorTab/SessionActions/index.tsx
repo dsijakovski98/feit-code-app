@@ -1,35 +1,29 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react/jsx-runtime";
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 
-import RemoveStudent from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/RemoveStudent";
-import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/StudentDetails";
+import RemoveSession from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions/RemoveSession";
+import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions/SessionDetails";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 import { ResponsiveContext } from "@/context/ResponsiveContext";
-import { StudentContext } from "@/context/StudentContext";
+import { StudentSessionContext } from "@/context/StudentSessionContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
-const StudentActions = () => {
+const SessionActions = () => {
   const { isMobileSm } = useCtx(ResponsiveContext);
-  const { student, joinedAt } = useCtx(StudentContext);
+  const { session } = useCtx(StudentSessionContext);
 
   const removeDialog = useToggle();
   const detailsDialog = useToggle();
 
-  useEffect(() => {
-    if (!isMobileSm && detailsDialog.open) {
-      detailsDialog.toggleOff();
-    }
-  }, [isMobileSm, detailsDialog]);
-
   if (isMobileSm) {
     return (
       <Fragment>
-        <Dropdown placement="bottom-end" className="min-w-min" closeOnSelect offset={0}>
-          <DropdownTrigger title={`Student ${student.firstName} ${student.lastName} actions.`}>
+        <Dropdown placement="bottom-end" closeOnSelect>
+          <DropdownTrigger>
             <Button isIconOnly color="default" variant="light" radius="full" className="p-1.5">
               <Icon name="more" />
             </Button>
@@ -39,18 +33,18 @@ const StudentActions = () => {
             <DropdownItem
               key="details"
               className="gap-4"
-              textValue="View details"
+              textValue="Session details"
               startContent={<Icon name="details" className="h-5 w-5" />}
               onPress={detailsDialog.toggleOn}
             >
-              <p className="w-fit text-sm font-semibold">Details</p>
+              <p className="w-fit text-sm font-semibold">Session details</p>
             </DropdownItem>
 
             <DropdownItem
               key="remove"
               className="gap-4"
-              textValue="Remove student"
-              startContent={<Icon name="trash" className="h-5 w-5 text-danger" />}
+              textValue="Remove from exam"
+              startContent={<Icon name="logout" className="h-5 w-5 text-danger" />}
               onPress={removeDialog.toggleOn}
             >
               <p className="w-fit text-sm font-semibold text-danger">Remove</p>
@@ -58,8 +52,8 @@ const StudentActions = () => {
           </DropdownMenu>
         </Dropdown>
 
-        <StudentDetails dialog={detailsDialog} student={student} joinedAt={joinedAt} />
-        <RemoveStudent dialog={removeDialog} />
+        <SessionDetails dialog={detailsDialog} session={session} />
+        <RemoveSession dialog={removeDialog} />
       </Fragment>
     );
   }
@@ -68,19 +62,18 @@ const StudentActions = () => {
     <Fragment>
       <Button
         isIconOnly
-        color="danger"
-        variant="light"
         radius="full"
-        aria-label={`Remove ${student.firstName} ${student.lastName} from this course.`}
+        variant="light"
+        color="danger"
         className="p-2"
         onPress={removeDialog.toggleOn}
       >
-        <Icon name="trash" />
+        <Icon name="logout" />
       </Button>
 
-      <RemoveStudent dialog={removeDialog} />
+      <RemoveSession dialog={removeDialog} />
     </Fragment>
   );
 };
 
-export default StudentActions;
+export default SessionActions;

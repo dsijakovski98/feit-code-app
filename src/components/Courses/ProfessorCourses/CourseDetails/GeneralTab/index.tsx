@@ -5,7 +5,7 @@ import "./styles.css";
 
 const GeneralTab = () => {
   return (
-    <section className="course-general lg:block lg:space-y-4">
+    <section className="course-general lg:block lg:space-y-4 lg:pb-12">
       <div className="[grid-area:details]">
         <CourseDetails />
       </div>

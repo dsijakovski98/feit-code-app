@@ -14,7 +14,6 @@ const ExamCodeEditor = () => {
   const taskState = tasks[task.id];
 
   const { id: examId } = exam;
-  const { id: studentId } = student;
 
   const handleChange = (value: string) => {
     setTasks((prev) => {
@@ -29,7 +28,7 @@ const ExamCodeEditor = () => {
     const newData = e.clipboardData.getData("text/plain").trim();
 
     if (newData.length > 0) {
-      handlePasteDetect({ examId, studentId });
+      handlePasteDetect({ examId, student });
     }
   };
 

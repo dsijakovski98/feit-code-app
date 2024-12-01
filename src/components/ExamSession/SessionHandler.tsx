@@ -5,14 +5,13 @@ import { useCtx } from "@/hooks/useCtx";
 
 const SessionHandler = () => {
   const { student, exam } = useCtx(ExamSessionContext);
-  const { id: studentId } = student;
   const { id: examId } = exam;
 
   // Create exam session in realtime DB on page load
-  useJoinExam({ examId, studentId });
+  useJoinExam({ examId, student });
 
   // Handle window blur event
-  useExamTimeOff({ examId, studentId });
+  useExamTimeOff({ examId, student });
 
   return null;
 };

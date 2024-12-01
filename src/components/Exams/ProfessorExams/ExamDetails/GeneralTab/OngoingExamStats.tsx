@@ -24,6 +24,7 @@ const OngoingExamStats = () => {
   }, []);
 
   useDatabaseListen<ExamStats>(`exams/${id}`, onData);
+
   return (
     <div className="flex items-end justify-start gap-14">
       <Stat size="sm" value={examStats.activeStudents} label="Active Students" />

@@ -51,7 +51,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
   });
 
   const handleLeaveExam = () => {
-    mutate({ examId: exam.id, studentId: student.id });
+    mutate({ examId: exam.id, student });
   };
 
   const handleStartOver = () => {
