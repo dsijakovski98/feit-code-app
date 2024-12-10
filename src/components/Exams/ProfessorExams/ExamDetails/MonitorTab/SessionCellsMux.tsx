@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
-import { Chip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
 import { User } from "@nextui-org/user";
 
 import SessionActions from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions";

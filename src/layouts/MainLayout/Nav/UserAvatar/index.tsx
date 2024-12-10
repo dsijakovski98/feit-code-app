@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useAuth } from "@clerk/clerk-react";
 import { Avatar } from "@nextui-org/avatar";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
 
@@ -10,20 +9,19 @@ import UserAvatarSkeleton from "@/layouts/MainLayout/Nav/UserAvatar/Skeleton";
 
 import { ROUTES } from "@/constants/routes";
 import { useFCUser } from "@/hooks/useFCUser";
+import { useLogout } from "@/hooks/useLogout";
 import { getHelpFeedbackUrl } from "@/utils";
 
 const UserAvatar = () => {
   const { userData } = useFCUser();
-  const { signOut } = useAuth();
+  const { logOut } = useLogout();
   const navigate = useNavigate();
 
   const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   if (!userData) return <UserAvatarSkeleton />;
 
-  const {
-    user: { avatarUrl, email },
-  } = userData;
+  const { email, avatarUrl } = userData.user;
 
   return (
     <Dropdown placement="bottom-end">
@@ -66,12 +64,7 @@ const UserAvatar = () => {
             </Link>
           </DropdownItem>
 
-          <DropdownItem
-            key="sign-out"
-            textValue="Sign out"
-            onClick={() => signOut({ redirectUrl: ROUTES.signIn })}
-            className="font-serif"
-          >
+          <DropdownItem key="sign-out" textValue="Sign out" onClick={() => logOut()} className="font-serif">
             <p className="text-sm font-semibold">Sign out</p>
             <p className="text-xs text-content4-foreground">Take a break</p>
           </DropdownItem>

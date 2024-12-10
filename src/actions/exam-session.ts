@@ -92,6 +92,43 @@ export const leaveExamSession = async ({ examId, sessionId }: SessionOptions) =>
   return leaveSuccess;
 };
 
+type LeaveSessionLogout = {
+  studentId: string;
+};
+export const leaveExamSessionLogout = async ({ studentId }: LeaveSessionLogout) => {
+  const activeExamsRef = ref(fbDatabase, "exams");
+
+  await new Promise((resolve) => {
+    onValue(
+      activeExamsRef,
+      async (snapshot) => {
+        const examSessions = snapshot.val() as Record<string, ExamStats> | null;
+
+        if (!examSessions) {
+          return resolve(false);
+        }
+
+        const sessionKeys = Object.keys(examSessions);
+
+        sessionKeys.forEach((key: keyof typeof examSessions) => {
+          const activeStudents = examSessions[key].activeStudents;
+          const activeStudent = Object.entries(activeStudents).find(
+            ([, studentSession]) => studentSession.student.id === studentId,
+          );
+
+          if (activeStudent) {
+            delete examSessions[key].activeStudents[activeStudent[0]];
+          }
+        });
+
+        set(activeExamsRef, examSessions);
+        resolve(true);
+      },
+      { onlyOnce: true },
+    );
+  });
+};
+
 export const handlePasteDetect = async ({ examId, sessionId }: SessionOptions) => {
   if (!sessionId) throw new Error(`Session ID missing!`);
 
