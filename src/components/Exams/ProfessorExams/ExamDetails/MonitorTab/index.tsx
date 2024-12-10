@@ -15,7 +15,12 @@ const MonitorTab = () => {
 
   const [studentSessions, setStudentSessions] = useState<MonitorSession[] | null>(null);
 
-  const onData = useCallback((examStats: ExamStats) => {
+  const onData = useCallback((examStats: ExamStats | null) => {
+    if (!examStats) {
+      setStudentSessions([]);
+      return;
+    }
+
     const sessions: MonitorSession[] = [];
 
     Object.entries(examStats.activeStudents ?? {}).forEach(([sessionId, session]) =>

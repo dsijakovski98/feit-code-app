@@ -13,8 +13,8 @@ import {
   TableRow,
 } from "@nextui-org/table";
 
-import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions/SessionDetails";
 import SessionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionCellsMux";
+import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";
 import Icon from "@/components/ui/Icon";
 import Input from "@/components/ui/Input";
 
@@ -26,14 +26,23 @@ import { StudentSessionProvider } from "@/context/StudentSessionContext";
 import { useCtx } from "@/hooks/useCtx";
 import { usePaginate } from "@/hooks/usePaginate";
 import { useToggle } from "@/hooks/useToggle";
-import { StudentSession } from "@/types/exams";
 
 const SessionsTable = () => {
   const { isMobileSm } = useCtx(ResponsiveContext);
   const { studentSessions } = useCtx(MonitorExamContext);
   const { examDetails } = useCtx(ExamDetailsContext);
 
-  const [selectedSession, setSelectedSession] = useState<StudentSession | null>(null);
+  const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null);
+
+  const selectedSession = useMemo(() => {
+    if (!selectedSessionId) return null;
+
+    const session = studentSessions.find((studentSession) => studentSession.sessionId === selectedSessionId);
+    if (!session) return null;
+
+    return session;
+  }, [selectedSessionId, studentSessions]);
+
   const detailsDialog = useToggle();
 
   const [search, setSearch] = useState("");
@@ -66,7 +75,7 @@ const SessionsTable = () => {
 
     if (!session) return;
 
-    setSelectedSession(session);
+    setSelectedSessionId(session.sessionId);
     detailsDialog.toggleOn();
   };
 
@@ -163,7 +172,7 @@ const SessionsTable = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={sessionsList} emptyContent="No students to display.">
+        <TableBody items={sessionsList} emptyContent="No one has joined exam yet.">
           {(session) => (
             <TableRow
               key={session.student.id}
@@ -196,7 +205,7 @@ const SessionsTable = () => {
       <SessionDetails
         dialog={detailsDialog}
         session={selectedSession}
-        onClose={() => setSelectedSession(null)}
+        onClose={() => setSelectedSessionId(null)}
       />
     </Fragment>
   );

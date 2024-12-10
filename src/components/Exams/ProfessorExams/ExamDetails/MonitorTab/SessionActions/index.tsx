@@ -3,7 +3,7 @@ import { Fragment } from "react/jsx-runtime";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
 
 import RemoveSession from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions/RemoveSession";
-import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions/SessionDetails";
+import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 

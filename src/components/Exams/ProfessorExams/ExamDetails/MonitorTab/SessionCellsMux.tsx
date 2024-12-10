@@ -11,7 +11,6 @@ import SessionActions from "@/components/Exams/ProfessorExams/ExamDetails/Monito
 import { SESSION_COLUMNS } from "@/constants/students";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { StudentSessionContext } from "@/context/StudentSessionContext";
-import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { ColumnKey } from "@/types";
 import { sessionStatusColor, sessionTimeOffDuration } from "@/utils/examSession";
@@ -25,7 +24,7 @@ const SessionCellsMux = ({ columnKey }: Props) => {
   const { session } = useCtx(StudentSessionContext);
 
   const { student, status, pasteCount, timeOff } = session;
-  const { id, firstName, lastName, email } = student;
+  const { firstName, lastName, email } = student;
 
   const totalTimeOff = useMemo(() => {
     const timeChunks = Object.values(timeOff ?? {});
@@ -35,8 +34,6 @@ const SessionCellsMux = ({ columnKey }: Props) => {
 
   const timeOffDuration = useMemo(() => sessionTimeOffDuration(totalTimeOff), [totalTimeOff]);
 
-  const [studentAvatar, isLoading] = useAvatar(id);
-
   if (columnKey === "student") {
     return (
       <User
@@ -44,8 +41,7 @@ const SessionCellsMux = ({ columnKey }: Props) => {
         description={email}
         avatarProps={{
           size: isMobile ? "md" : "lg",
-          src: studentAvatar ?? "",
-          showFallback: isLoading,
+          src: student.avatarUrl ?? "",
           className: clsx({
             "scale-[1.2]": isMobile,
             hidden: isMobileSm,
