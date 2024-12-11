@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 
 import { CircularProgress } from "@nextui-org/react";
 
+import EndExamHandler from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/EndExamHandler";
 import SessionsTable from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionsTable";
 
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
@@ -47,6 +48,8 @@ const MonitorTab = () => {
   return (
     <MonitorExamProvider studentSessions={studentSessions}>
       <SessionsTable />
+
+      <EndExamHandler />
     </MonitorExamProvider>
   );
 };

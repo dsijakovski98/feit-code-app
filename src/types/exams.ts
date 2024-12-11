@@ -15,4 +15,5 @@ export type StudentSession = {
 export type ExamStats = {
   activeStudents: Record<string, StudentSession>;
   finishedStudents: Record<string, StudentSession>;
+  finished?: boolean;
 };

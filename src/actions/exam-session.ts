@@ -1,5 +1,5 @@
 import { Dayjs } from "dayjs";
-import { onValue, push, ref, set } from "firebase/database";
+import { onValue, push, ref, remove, set } from "firebase/database";
 import { ref as storageRef, uploadString } from "firebase/storage";
 
 import { submissions } from "@/db/schema";
@@ -209,6 +209,7 @@ export const removeStudentSession = async ({ examId, sessionId, removed }: Remov
   return result;
 };
 
+// Student submitting finished exam
 type FinishExamOptions = Pick<ExamSessionContext, "exam" | "tasksState" | "student">;
 export const finishExam = async ({ exam, tasksState, student }: FinishExamOptions) => {
   try {
@@ -225,6 +226,23 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
         return uploadString(templateRef, tasks[task.id].code, "raw");
       }),
     );
+
+    // Add submission to DB
+    await db.insert(submissions).values({
+      examId,
+      studentId: student.id,
+    });
+
+    // Check if exam session was already finished
+    const examSessionRef = ref(fbDatabase, `exams/${exam.id}`);
+    const examFinished = await new Promise((resolve) => {
+      onValue(examSessionRef, (snapshot) => resolve(snapshot.val() === null), { onlyOnce: true });
+    });
+
+    if (examFinished) {
+      // No need to update active/finished sessions if exam already ended
+      return true;
+    }
 
     // Move session from active to finished
     const activeSessionRef = activeStudentsRef(examId);
@@ -292,12 +310,6 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
       );
     });
 
-    // Add submission to DB
-    await db.insert(submissions).values({
-      examId,
-      studentId: student.id,
-    });
-
     return true;
   } catch (e) {
     // TODO: Sentry logging
@@ -307,11 +319,16 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
   }
 };
 
+export const removeExamSession = async (examId: string) => {
+  const examSessionRef = ref(fbDatabase, `exams/${examId}`);
+  await remove(examSessionRef);
+};
+
 type RunCodeOptions = {
   code: string;
   name: string;
-  language: ProgrammingLanguage;
   token: string;
+  language: ProgrammingLanguage;
 };
 export const runTaskCode = async ({ code, name, language, token }: RunCodeOptions) => {
   const response = await fetch(`${import.meta.env.VITE_CODE_RUNNER_URL}/run`, {

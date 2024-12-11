@@ -9,9 +9,10 @@ import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type Props = {
   form: UseFormReturn<ExamSchema>;
+  disabled?: boolean;
 };
 
-const ScheduleExam = ({ form }: Props) => {
+const ScheduleExam = ({ form, disabled = false }: Props) => {
   const {
     control,
     formState: { isSubmitting },
@@ -22,7 +23,7 @@ const ScheduleExam = ({ form }: Props) => {
       <Controller
         control={control}
         name="startDate"
-        disabled={isSubmitting}
+        disabled={isSubmitting || disabled}
         render={({ field }) => (
           <DatePicker
             size="lg"
