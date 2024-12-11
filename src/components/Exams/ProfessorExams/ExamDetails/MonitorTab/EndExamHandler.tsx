@@ -10,6 +10,7 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import { endExam } from "@/actions/exams";
 import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
+import { MonitorExamContext } from "@/context/MonitorExamContext";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
@@ -18,10 +19,17 @@ const EndExamHandler = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
   const { id: examId, name, startedAt, durationMinutes } = examDetails;
 
+  const { studentSessions } = useCtx(MonitorExamContext);
+
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const finishDialog = useToggle();
+
+  const activeSessionsRemaining = useMemo(
+    () => studentSessions.some((session) => session.status === "Active"),
+    [studentSessions],
+  );
 
   const targetDate = useMemo(
     () => dayjs(startedAt).add(durationMinutes, "minutes"),
@@ -64,8 +72,12 @@ const EndExamHandler = () => {
       loading={isPending}
       dialog={finishDialog}
       title={`${name} has ended!`}
-      description={`Finish this exam and start the grading process.`}
-      action={{ label: "Finish", onConfirm }}
+      description={
+        activeSessionsRemaining
+          ? `There are still students that haven't finished.`
+          : "Finish this exam and start the grading process."
+      }
+      action={{ label: activeSessionsRemaining ? "Finish anyway" : "Finish", onConfirm }}
     />
   );
 };
