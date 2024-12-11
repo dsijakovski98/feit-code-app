@@ -54,9 +54,9 @@ const UpcomingDetails = () => {
       </DetailsHeader>
 
       <div className="flex items-end justify-between *:basis-full">
-        <div className="grid justify-center">
-          <p className="text-5xl font-semibold">{durationMinutes}</p>
-          <p>Minutes</p>
+        <div className="grid justify-start">
+          <p className="text-5xl font-semibold">{durationMinutes} min</p>
+          <p>Duration</p>
         </div>
 
         <div className="grid justify-center">
@@ -64,9 +64,9 @@ const UpcomingDetails = () => {
           <p>Tasks</p>
         </div>
 
-        <div className="grid justify-center">
+        <div className="grid justify-end">
           <p className="text-5xl font-semibold">{points}</p>
-          <p>Points</p>
+          <p>Total Points</p>
         </div>
       </div>
     </div>

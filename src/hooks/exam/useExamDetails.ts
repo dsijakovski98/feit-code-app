@@ -16,6 +16,11 @@ export const useExamDetails = (examId?: string) => {
             course: {
               with: { professor: true },
             },
+            submissions: {
+              with: {
+                student: true,
+              },
+            },
           },
         });
 

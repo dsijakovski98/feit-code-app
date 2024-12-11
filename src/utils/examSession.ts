@@ -1,6 +1,7 @@
 import { ChipProps } from "@nextui-org/react";
 
 import { MonitorSession } from "@/context/MonitorExamContext";
+import { simplePlural } from "@/utils";
 
 export const sessionStatusColor = (status: MonitorSession["status"]): ChipProps["color"] => {
   if (status === "Active") return "success";
@@ -13,19 +14,17 @@ export const sessionStatusColor = (status: MonitorSession["status"]): ChipProps[
 };
 
 export const sessionTimeOffDuration = (totalTimeOff: number) => {
-  const timePlural = (time: string, value: number) => `${time}${value !== 1 ? "s" : ""}`;
-
   if (totalTimeOff < 60) {
-    return `${totalTimeOff} ${timePlural("second", totalTimeOff)}`;
+    return `${totalTimeOff} ${simplePlural("second", totalTimeOff)}`;
   }
 
   const totalMinutes = Math.floor(totalTimeOff / 60);
 
   if (totalMinutes < 60) {
-    return `${totalMinutes} ${timePlural("minute", totalMinutes)}`;
+    return `${totalMinutes} ${simplePlural("minute", totalMinutes)}`;
   }
 
   const totalHours = Math.floor(totalMinutes / 60);
 
-  return `${totalHours} ${timePlural("hour", totalHours)}`;
+  return `${totalHours} ${simplePlural("hour", totalHours)}`;
 };

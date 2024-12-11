@@ -88,7 +88,6 @@ const ExamTasks = () => {
                   classNames={{ base: "rounded-md border-default-200", title: "px-2 py-1" }}
                   onPress={() => setActiveTask(task)}
                 >
-                  {/* TODO: Maybe add DND for reordering */}
                   <TaskPreviewProvider
                     task={task}
                     index={index}

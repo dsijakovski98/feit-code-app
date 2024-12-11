@@ -99,7 +99,7 @@ const ProfessorExamDetails = () => {
           )}
 
           {tabKeys.includes(TABS.results) && (
-            // TODO: Implement Results tab
+            // TODO: Results UI
             <Tab key={TABS.results} title="Results" href={TABS.results}>
               <Suspense fallback={null}>Results tab</Suspense>
             </Tab>
