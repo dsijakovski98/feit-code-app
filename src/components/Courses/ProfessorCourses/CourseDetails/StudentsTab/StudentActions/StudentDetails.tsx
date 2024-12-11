@@ -14,19 +14,17 @@ import { Toggle } from "@/hooks/useToggle";
 
 type Props = {
   dialog: Toggle;
-  student: InferSelectModel<typeof students>;
-  joinedAt: string;
+  student?: InferSelectModel<typeof students> | null;
+  joinedAt?: string;
   onClose?: () => void;
 };
 
 const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
-  const { id, firstName, lastName, email, indexNumber, indexYear, major } = student;
-
-  const [avatarUrl, isLoading] = useAvatar(id);
+  const [avatarUrl, isLoading] = useAvatar(student?.id);
 
   return (
     <Modal
-      isOpen={dialog.open}
+      isOpen={dialog.open && !!student}
       onOpenChange={dialog.toggle}
       onClose={onClose}
       hideCloseButton
@@ -44,34 +42,38 @@ const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
           <ModalHeader className="text-2xl">Student Details</ModalHeader>
 
           <ModalBody className="relative font-sans">
-            <div className="space-y-6">
-              <User
-                name={`${firstName} ${lastName}`}
-                description={email}
-                avatarProps={{
-                  size: "lg",
-                  src: avatarUrl ?? "",
-                  showFallback: isLoading,
-                }}
-                classNames={{
-                  name: "font-semibold text-lg",
-                  description: "text-base",
-                }}
-              />
+            {student && (
+              <div className="space-y-6">
+                <User
+                  name={`${student.firstName} ${student.lastName}`}
+                  description={student.email}
+                  avatarProps={{
+                    size: "lg",
+                    src: avatarUrl ?? "",
+                    showFallback: isLoading,
+                  }}
+                  classNames={{
+                    name: "font-semibold text-lg",
+                    description: "text-base",
+                  }}
+                />
 
-              <div>
-                <p className="font-semibold">
-                  {indexNumber}/{indexYear}
-                </p>
-                <p>
-                  Student @ <span className="font-semibold">{major}</span>
-                </p>
+                <div>
+                  <p className="font-semibold">
+                    {student.indexNumber}/{student.indexYear}
+                  </p>
+                  <p>
+                    Student @ <span className="font-semibold">{student.major}</span>
+                  </p>
+                </div>
+
+                {!!joinedAt && (
+                  <p>
+                    Joined at <Timestamp>{joinedAt}</Timestamp>
+                  </p>
+                )}
               </div>
-
-              <p>
-                Joined at <Timestamp>{joinedAt}</Timestamp>
-              </p>
-            </div>
+            )}
           </ModalBody>
         </Fragment>
       </ModalContent>

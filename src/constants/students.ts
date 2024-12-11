@@ -1,3 +1,5 @@
+import { Column } from "@/types";
+
 export const MAJOR_TYPE = {
   KTI: "KTI",
   KSIAR: "KSIAR",
@@ -12,16 +14,33 @@ export const MAJORS = [
   { label: MAJOR_TYPE.TKII, description: "Telecommunication and Information Engineering" },
 ];
 
-export const STUDENT_COLUMNS_LG = [
-  { key: "student", label: "Student" },
-  { key: "index", label: "Index no." },
-  { key: "major", label: "Major" },
-  { key: "joined", label: "Joined on" },
-  { key: "actions", label: "Actions" },
-] as const;
+export const STUDENT_COLUMNS = {
+  lg: [
+    { key: "student", label: "Student" },
+    { key: "index", label: "Index no." },
+    { key: "major", label: "Major" },
+    { key: "joined", label: "Joined on" },
+    { key: "actions", label: "More" },
+  ] as const,
+  sm: [
+    { key: "student", label: "Student" },
+    { key: "info", label: "Info" },
+    { key: "actions", label: "More" },
+  ] as const,
+} satisfies Record<string, Column[]>;
 
-export const STUDENT_COLUMNS_SM = [
-  { key: "student", label: "Student" },
-  { key: "info", label: "Info" },
-  { key: "actions", label: "Actions" },
-] as const;
+export const SESSION_COLUMNS = {
+  lg: [
+    { key: "student", label: "Student" },
+    { key: "status", label: "Status" },
+    { key: "paste", label: "Paste Count" },
+    { key: "blur", label: "Time off Session" },
+    { key: "actions", label: "More" },
+  ] as const,
+
+  sm: [
+    { key: "student", label: "Student" },
+    { key: "status", label: "Status" },
+    { key: "actions", label: "More" },
+  ] as const,
+} satisfies Record<string, Column[]>;

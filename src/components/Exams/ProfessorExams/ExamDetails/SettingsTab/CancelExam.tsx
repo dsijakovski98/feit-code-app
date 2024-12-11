@@ -13,9 +13,13 @@ import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
-const CancelExam = () => {
+type Props = {
+  label: string;
+};
+
+const CancelExam = ({ label }: Props) => {
   const { examDetails } = useCtx(ExamDetailsContext);
-  const { name } = examDetails;
+  const { name, courseId, id: examId } = examDetails;
 
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -38,20 +42,20 @@ const CancelExam = () => {
   });
 
   const onConfirm = () => {
-    mutate(examDetails.id);
+    mutate({ examId, courseId });
   };
 
   return (
     <Fragment>
       <Button color="danger" className="w-[140px] font-semibold lg:w-full" onPress={dialog.toggleOn}>
-        Cancel
+        {label}
       </Button>
 
       <ConfirmDialog
         dialog={dialog}
         loading={isPending}
         color="danger"
-        title="Cancel Exam?"
+        title={`${label} Exam?`}
         description="You cannot undo this later."
         action={{ label: "Confirm", onConfirm }}
       />

@@ -17,17 +17,21 @@ export default {
         mono: ['"Roboto Mono"', ...defaultTheme.fontFamily.mono],
       },
       backgroundImage: {
-        "drag-dots-h": "url('/images/drag-dots-horizontal.svg')",
-        "drag-dots-v": "url('/images/drag-dots-vertical.svg')",
+        "drag-dots-h": "url(/images/drag-dots-horizontal.svg)",
+        "drag-dots-v": "url(/images/drag-dots-vertical.svg)",
         "dots-light":
-          "radial-gradient(circle, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3)), url('/images/bg-dots-light.webp')",
+          "radial-gradient(circle, rgba(255, 255, 255, 0), rgba(255, 255, 255, .3)), url(/images/bg-dots-light.webp)",
         "dots-dark":
-          "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url('/images/bg-dots-dark.webp')",
+          "radial-gradient(circle, rgba(35, 80, 255, 0.3), rgba(255, 255, 255, 0)), url(/images/bg-dots-dark.webp)",
       },
       keyframes: {
         blink: {
-          "0%, 100%": { opacity: 1 },
-          "50%": { opacity: 0 },
+          "0%, 100%": {
+            opacity: "1",
+          },
+          "50%": {
+            opacity: "0",
+          },
         },
       },
       animation: {
@@ -35,12 +39,24 @@ export default {
       },
     },
     screens: {
-      "2xl": { max: "1535px" },
-      xl: { max: "1279px" },
-      lg: { max: "1023px" },
-      md: { max: "767px" },
-      sm: { max: "669px" },
-      xs: { max: "378px" },
+      "2xl": {
+        max: "1535px",
+      },
+      xl: {
+        max: "1279px",
+      },
+      lg: {
+        max: "1023px",
+      },
+      md: {
+        max: "767px",
+      },
+      sm: {
+        max: "669px",
+      },
+      xs: {
+        max: "378px",
+      },
     },
   },
   darkMode: "class",
@@ -330,5 +346,6 @@ export default {
         hoverOpacity: "0.9",
       },
     }),
+    require("tailwindcss-animate"),
   ],
 };

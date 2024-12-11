@@ -25,6 +25,11 @@ const ConfirmDialog = ({ dialog, title, description, color, action, cancelable =
 
   const confirmBtn = useRef<ElementRef<typeof Button>>(null);
 
+  const handleOpenChange = (isOpen: boolean) => {
+    if (!isOpen && !cancelable) return;
+    dialog.toggle();
+  };
+
   useLayoutEffect(() => {
     if (!dialog.open) return;
     confirmBtn.current?.focus();
@@ -33,10 +38,11 @@ const ConfirmDialog = ({ dialog, title, description, color, action, cancelable =
   return (
     <Modal
       isOpen={dialog.open}
-      onOpenChange={dialog.toggle}
+      onOpenChange={handleOpenChange}
       hideCloseButton
       placement="center"
       backdrop="opaque"
+      size="xl"
       classNames={{
         base: "font-serif",
         backdrop: "bg-background/50",
@@ -47,7 +53,7 @@ const ConfirmDialog = ({ dialog, title, description, color, action, cancelable =
       <ModalContent>
         {(onClose) => (
           <Fragment>
-            <ModalHeader className="text-2xl">{title}</ModalHeader>
+            <ModalHeader className="text-xl">{title}</ModalHeader>
 
             <ModalBody className="relative mb-2 font-sans">{description}</ModalBody>
 

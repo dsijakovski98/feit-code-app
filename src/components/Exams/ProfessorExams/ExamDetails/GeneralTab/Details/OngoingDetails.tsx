@@ -21,12 +21,15 @@ const OngoingDetails = () => {
   );
 
   return (
-    <div className="flex h-full flex-col justify-between">
-      <div className="flex items-end justify-between gap-6">
+    <div className="flex h-full flex-col justify-between gap-6">
+      <div className="flex items-end justify-between gap-6 lg:contents">
         <OngoingExamStats />
 
-        <div className="text-end">
-          <Countdown targetDate={targetDate} className="justify-end text-3xl font-semibold" />
+        <div className="text-end lg:order-[-1] lg:text-start">
+          <Countdown
+            targetDate={targetDate}
+            className="justify-end text-3xl font-semibold lg:justify-start"
+          />
           <p>Time Remaining</p>
         </div>
       </div>

@@ -9,10 +9,10 @@ import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useInvalidRoute } from "@/hooks/useInvalidRoute";
-import { canStartExam } from "@/utils/dates";
 
 const GeneralTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/GeneralTab"));
 const SettingsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/SettingsTab"));
+const MonitorTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/MonitorTab"));
 
 const TABS = {
   general: "#general",
@@ -24,11 +24,7 @@ const TABS = {
 const ProfessorExamDetails = () => {
   const { userData } = useFCUser();
   const { examDetails } = useCtx(ExamDetailsContext);
-  const {
-    status,
-    startsAt,
-    course: { professorId },
-  } = examDetails;
+  const { status, course } = examDetails;
 
   const { hash, pathname } = useLocation();
 
@@ -40,20 +36,16 @@ const ProfessorExamDetails = () => {
     }
 
     if (status === EXAM_STATUS.completed) {
-      keys.push(TABS.results);
+      keys.push(TABS.results, TABS.settings);
     }
 
-    if (status === EXAM_STATUS.new) {
-      const isProfessor = userData?.user.id === professorId;
-      const canStart = canStartExam(startsAt);
-
-      if (isProfessor && !canStart) {
-        keys.push(TABS.settings);
-      }
+    const isProfessor = userData?.user.id === course.professorId;
+    if (status === EXAM_STATUS.new && isProfessor) {
+      keys.push(TABS.settings);
     }
 
     return keys;
-  }, [userData, professorId, status, startsAt]);
+  }, [userData, course.professorId, status]);
 
   const { invalidRoute } = useInvalidRoute({ tabKeys });
 
@@ -62,7 +54,7 @@ const ProfessorExamDetails = () => {
   }
 
   return (
-    <section className="bg-main h-auto p-4 pt-0">
+    <section className="bg-main h-auto p-4 pt-0 lg:h-full">
       <div className="mx-auto h-full max-w-[140ch] lg:mx-0 lg:max-w-full">
         <Tabs
           fullWidth
@@ -86,17 +78,23 @@ const ProfessorExamDetails = () => {
           </Tab>
 
           {tabKeys.includes(TABS.monitor) && (
-            // TODO: Implement Monitor tab
             <Tab
               key={TABS.monitor}
               title={
-                <Badge isDot content="" color="secondary" className="translate-x-5 scale-90 animate-pulse">
+                <Badge
+                  isDot
+                  content=""
+                  color="secondary"
+                  className="translate-x-6 translate-y-0 scale-90 animate-pulse"
+                >
                   Monitor
                 </Badge>
               }
               href={TABS.monitor}
             >
-              <Suspense fallback={null}>Monitor tab</Suspense>
+              <Suspense fallback={null}>
+                <MonitorTab />
+              </Suspense>
             </Tab>
           )}
 

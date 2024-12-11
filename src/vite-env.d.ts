@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_FIREBASE_DATABASE_URL: string;
 
   readonly VITE_WEBSITE_URL: string;
+  readonly VITE_CODE_RUNNER_URL: string;
 }
 
 interface ImportMeta {

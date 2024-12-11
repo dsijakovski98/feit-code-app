@@ -1,11 +1,12 @@
 import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadString } from "firebase/storage";
 
 import { exams, inputs as inputsTable, tasks as tasksTable, tests as testsTable } from "@/db/schema";
 
 import { fbStorage } from "@/services/firebase";
 
+import { removeExamSession } from "@/actions/exam-session";
 import { EXAM_STATUS } from "@/constants/enums";
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
@@ -144,9 +145,18 @@ export const updateExam = async (options: UpdateExamOptions) => {
   return true;
 };
 
-export const cancelExam = async (examId: string) => {
+type CancelExamOptions = {
+  examId: string;
+  courseId: string;
+};
+export const cancelExam = async ({ examId, courseId }: CancelExamOptions) => {
   try {
-    await db.delete(exams).where(eq(exams.id, examId));
+    const examStorageRef = ref(fbStorage, `course_${courseId}/exam_${examId}`);
+
+    await Promise.all([
+      db.delete(exams).where(eq(exams.id, examId)),
+      deleteObject(examStorageRef).catch(() => {}),
+    ]);
   } catch (e) {
     // TODO: Sentry logging
     console.log({ e });
@@ -171,6 +181,27 @@ export const startExam = async (examId: string) => {
     console.log({ e });
 
     throw new Error("Failed to start exam!");
+  }
+
+  return true;
+};
+
+export const endExam = async (examId: string) => {
+  try {
+    await Promise.all([
+      removeExamSession(examId),
+      db
+        .update(exams)
+        .set({
+          status: EXAM_STATUS.completed,
+        })
+        .where(eq(exams.id, examId)),
+    ]);
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to end exam!");
   }
 
   return true;

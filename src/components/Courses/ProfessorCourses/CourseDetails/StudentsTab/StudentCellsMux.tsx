@@ -5,7 +5,7 @@ import { User } from "@nextui-org/react";
 
 import StudentActions from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions";
 
-import { STUDENT_COLUMNS_LG, STUDENT_COLUMNS_SM } from "@/constants/students";
+import { STUDENT_COLUMNS } from "@/constants/students";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { StudentContext } from "@/context/StudentContext";
@@ -15,7 +15,7 @@ import { ColumnKey } from "@/types";
 import { getDaytime } from "@/utils";
 
 type Props = {
-  columnKey: ColumnKey<typeof STUDENT_COLUMNS_LG> | ColumnKey<typeof STUDENT_COLUMNS_SM>;
+  columnKey: ColumnKey<(typeof STUDENT_COLUMNS)["lg"]> | ColumnKey<(typeof STUDENT_COLUMNS)["sm"]>;
 };
 
 const StudentCellsMux = ({ columnKey }: Props) => {
@@ -95,7 +95,7 @@ const StudentCellsMux = ({ columnKey }: Props) => {
     return <StudentActions />;
   }
 
-  throw new Error(`Unsupported columKey value ${columnKey}`);
+  throw new Error(`Unsupported columnKey value ${columnKey}`);
 };
 
 export default StudentCellsMux;

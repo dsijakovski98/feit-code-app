@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Dayjs } from "dayjs";
 
@@ -10,6 +10,8 @@ const getSeconds = (seconds: number) => Math.floor(seconds % 60);
 
 export const useCountdown = (targetDate: Dayjs) => {
   const [duration, setDuration] = useState(getSecondsRemaining(targetDate));
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
   const countdown = useMemo(
     () => ({
       hours: getHours(duration),
@@ -22,19 +24,25 @@ export const useCountdown = (targetDate: Dayjs) => {
   const done = useMemo(() => duration <= 0, [duration]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
       setDuration((prev) => {
         const newDuration = prev - 1;
 
-        if (newDuration <= 0) {
-          clearInterval(timer);
+        if (newDuration <= 0 && timerRef.current) {
+          clearInterval(timerRef.current);
         }
 
         return newDuration;
       });
 
       return () => {
-        clearInterval(timer);
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
       };
     }, 1000);
   }, [targetDate]);

@@ -20,8 +20,9 @@ export const useFinishExam = ({ studentId }: FinishExamOptions) => {
       if (!success) return;
 
       await queryClient.invalidateQueries({ queryKey: [{ name: "submissions", studentId }] });
+
       toast.success("Exam finished!");
-      navigate(ROUTES.dashboard);
+      navigate(ROUTES.dashboard, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });

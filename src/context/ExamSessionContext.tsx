@@ -15,6 +15,7 @@ export type ExamSessionContext = {
   submittedTasksState: UseState<string[]>;
   tasksState: UseState<Record<string, TaskState>>;
   currentTaskState: UseState<ExamDetails["tasks"][number]>;
+  sessionIdState: UseState<string | undefined>;
 };
 
 export const ExamSessionContext = createContext<ExamSessionContext | null>(null);
@@ -24,6 +25,7 @@ type Props = Pick<ExamSessionContext, "student" | "exam"> & PropsWithChildren;
 const ExamSessionProvider = ({ children, ...ctx }: Props) => {
   const currentTaskState = useState(ctx.exam.tasks[0]);
   const submittedTasksState = useState<string[]>([]);
+  const sessionIdState = useState<string>();
 
   const tasksState = useState(() => {
     return ctx.exam.tasks.reduce(
@@ -39,7 +41,9 @@ const ExamSessionProvider = ({ children, ...ctx }: Props) => {
   });
 
   return (
-    <ExamSessionContext.Provider value={{ ...ctx, currentTaskState, submittedTasksState, tasksState }}>
+    <ExamSessionContext.Provider
+      value={{ ...ctx, currentTaskState, submittedTasksState, tasksState, sessionIdState }}
+    >
       {children}
     </ExamSessionContext.Provider>
   );

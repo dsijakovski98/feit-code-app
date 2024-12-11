@@ -158,7 +158,7 @@ export const deleteProfile = async ({ user, type }: DeleteProfileConfig) => {
     await Promise.all([
       user.delete(),
       db.delete(table).where(eq(table.id, user.id)),
-      deleteObject(avatarRef).catch(null),
+      deleteObject(avatarRef).catch(() => {}),
     ]);
   } catch (e) {
     // TODO: Sentry logging
