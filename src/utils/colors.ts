@@ -7,7 +7,7 @@ export const examStatusColor = (status: ExamStatus): ThemeColor => {
       return "primary";
 
     case EXAM_STATUS.completed:
-      return "default";
+      return "success";
 
     case EXAM_STATUS.ongoing:
       return "secondary";

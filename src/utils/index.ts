@@ -12,6 +12,8 @@ export const isNumber = (value: unknown) => {
   return true;
 };
 
+export const simplePlural = (word: string, value: number) => `${word}${value !== 1 ? "s" : ""}`;
+
 export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
 /**

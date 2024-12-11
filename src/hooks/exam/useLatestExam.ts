@@ -15,7 +15,7 @@ export const useLatestExam = ({ courseId }: Options) => {
           where: (exams, { eq }) => {
             return eq(exams.courseId, courseId);
           },
-          orderBy: (exams, { desc }) => desc(exams.startsAt),
+          orderBy: (exams, { desc }) => desc(exams.createdAt),
         });
 
         return latestExam ?? null;
