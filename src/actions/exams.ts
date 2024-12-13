@@ -206,3 +206,33 @@ export const endExam = async (examId: string) => {
 
   return true;
 };
+
+export const getOngoingExam = async (examIds: string[]) => {
+  try {
+    const ongoingExam = await db.query.exams.findFirst({
+      where: (exams, { eq, and, inArray }) => {
+        const statusFilter = eq(exams.status, EXAM_STATUS.ongoing);
+        const validExamFilter = inArray(exams.id, examIds);
+
+        return and(statusFilter, validExamFilter);
+      },
+
+      columns: { id: true, name: true, courseId: true },
+
+      with: {
+        course: { columns: { name: true } },
+      },
+
+      orderBy: (exams, { desc }) => desc(exams.startedAt),
+    });
+
+    return ongoingExam ?? null;
+  } catch (e) {
+    // TODO: Sentry logging
+    console.log({ e });
+
+    throw new Error("Failed to find ongoing exam!");
+  }
+};
+
+export type OngoingExam = NonNullable<Awaited<ReturnType<typeof getOngoingExam>>>;

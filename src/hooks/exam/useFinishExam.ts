@@ -19,7 +19,10 @@ export const useFinishExam = ({ studentId }: FinishExamOptions) => {
     onSuccess: async (success) => {
       if (!success) return;
 
-      await queryClient.invalidateQueries({ queryKey: [{ name: "submissions", studentId }] });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: [{ name: "submissions", studentId }] }),
+        queryClient.invalidateQueries({ queryKey: [{ name: "ongoing-exam" }] }),
+      ]);
 
       toast.success("Exam finished!");
       navigate(ROUTES.dashboard, { replace: true });

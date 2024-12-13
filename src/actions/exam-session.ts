@@ -2,7 +2,7 @@ import { Dayjs } from "dayjs";
 import { onValue, push, ref, remove, set } from "firebase/database";
 import { ref as storageRef, uploadString } from "firebase/storage";
 
-import { submissions } from "@/db/schema";
+import { examSessionStats, submissions } from "@/db/schema";
 
 import { fbDatabase, fbStorage } from "@/services/firebase";
 
@@ -112,6 +112,9 @@ export const leaveExamSessionLogout = async ({ studentId }: LeaveSessionLogout) 
 
         sessionKeys.forEach((key: keyof typeof examSessions) => {
           const activeStudents = examSessions[key].activeStudents;
+
+          if (!activeStudents) return;
+
           const activeStudent = Object.entries(activeStudents).find(
             ([, studentSession]) => studentSession.student.id === studentId,
           );
@@ -210,8 +213,10 @@ export const removeStudentSession = async ({ examId, sessionId, removed }: Remov
 };
 
 // Student submitting finished exam
-type FinishExamOptions = Pick<ExamSessionContext, "exam" | "tasksState" | "student">;
-export const finishExam = async ({ exam, tasksState, student }: FinishExamOptions) => {
+type FinishExamOptions = Pick<ExamSessionContext, "exam" | "tasksState" | "student"> & {
+  stats: Pick<StudentSession, "pasteCount" | "timeOff">;
+};
+export const finishExam = async ({ exam, tasksState, student, stats }: FinishExamOptions) => {
   try {
     const [tasks] = tasksState;
     const { courseId, id: examId } = exam;
@@ -227,9 +232,16 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
       }),
     );
 
+    // Add submission stats
+    const [{ sessionStatsId }] = await db
+      .insert(examSessionStats)
+      .values({ ...stats })
+      .returning({ sessionStatsId: examSessionStats.id });
+
     // Add submission to DB
     await db.insert(submissions).values({
       examId,
+      sessionStatsId,
       studentId: student.id,
     });
 

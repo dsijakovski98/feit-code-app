@@ -1,10 +1,13 @@
 import { FCStudent } from "@/hooks/useFCUser";
 import { TeacherType } from "@/types";
 
-export type StudentSession = {
-  student: FCStudent;
+export type SessionStats = {
   pasteCount: number;
   timeOff?: Record<string, number>; // Key - start date, Value - duration in seconds
+};
+
+export type StudentSession = SessionStats & {
+  student: FCStudent;
   removed?: {
     teacherType: TeacherType;
     remover: string;

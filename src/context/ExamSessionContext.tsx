@@ -1,8 +1,10 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useCallback, useState } from "react";
 
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
+import { useDatabaseListen } from "@/hooks/firebase/useDatabaseListen";
 import { FCStudent } from "@/hooks/useFCUser";
 import { UseState } from "@/types";
+import { SessionStats } from "@/types/exams";
 
 type TaskState = {
   code: string;
@@ -16,6 +18,7 @@ export type ExamSessionContext = {
   tasksState: UseState<Record<string, TaskState>>;
   currentTaskState: UseState<ExamDetails["tasks"][number]>;
   sessionIdState: UseState<string | undefined>;
+  stats: SessionStats | null;
 };
 
 export const ExamSessionContext = createContext<ExamSessionContext | null>(null);
@@ -27,6 +30,15 @@ const ExamSessionProvider = ({ children, ...ctx }: Props) => {
   const currentTaskState = useState(ctx.exam.tasks[0]);
   const submittedTasksState = useState<string[]>([]);
   const sessionIdState = useState<string>();
+  const [sessionId] = sessionIdState;
+
+  const [stats, setStats] = useState<SessionStats | null>(null);
+
+  const onData = useCallback((sessionStats: SessionStats | null) => {
+    setStats(sessionStats);
+  }, []);
+
+  useDatabaseListen(`exams/${ctx.exam.id}/activeStudents/${sessionId}`, onData);
 
   const tasksState = useState(() => {
     return ctx.exam.tasks.reduce(
@@ -43,7 +55,14 @@ const ExamSessionProvider = ({ children, ...ctx }: Props) => {
 
   return (
     <ExamSessionContext.Provider
-      value={{ ...ctx, currentTaskState, submittedTasksState, tasksState, sessionIdState }}
+      value={{
+        ...ctx,
+        currentTaskState,
+        submittedTasksState,
+        tasksState,
+        sessionIdState,
+        stats,
+      }}
     >
       {children}
     </ExamSessionContext.Provider>

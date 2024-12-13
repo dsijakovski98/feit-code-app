@@ -3,38 +3,40 @@ import { Link, useLocation } from "react-router-dom";
 
 import Button from "@/components/ui/Button";
 
+import { OngoingExam } from "@/actions/exams";
 import { ROUTES } from "@/constants/routes";
-import { useOngoingExamAlert } from "@/hooks/exam/useOngoingExamAlert";
 import { useToggle } from "@/hooks/useToggle";
+import { USER_TYPE, UserType } from "@/types";
 
 type Props = {
-  courseIds?: string[];
-  join: {
-    label: string;
-    getHref: (examId: string) => string;
-  };
+  exam: OngoingExam;
+  userType: UserType;
 };
 
-const ExamAlert = ({ courseIds, join }: Props) => {
-  const { ongoingExam, isLoading } = useOngoingExamAlert(courseIds);
-
+const ExamAlert = ({ exam, userType }: Props) => {
   const { pathname } = useLocation();
-
-  const onExamPath = useMemo(() => {
-    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.exams}/${ongoingExam?.id}`);
-  }, [pathname, ongoingExam?.id]);
-
-  const onExamCoursePath = useMemo(() => {
-    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.courses}/${ongoingExam?.courseId}`);
-  }, [pathname, ongoingExam?.courseId]);
 
   const show = useToggle(true);
 
-  if (isLoading || onExamPath || onExamCoursePath || !show.open) {
-    return null;
-  }
+  const onExamPath = useMemo(() => {
+    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.exams}/${exam.id}`);
+  }, [pathname, exam.id]);
 
-  if (!ongoingExam) {
+  const onExamCoursePath = useMemo(() => {
+    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.courses}/${exam.courseId}`);
+  }, [pathname, exam.courseId]);
+
+  const label = useMemo(() => (userType === USER_TYPE.student ? "Join Now" : "Monitor"), [userType]);
+
+  const href = useMemo(() => {
+    if (userType === USER_TYPE.student) {
+      return `${ROUTES.examSession}/${exam.id}`;
+    }
+
+    return `${ROUTES.dashboard}${ROUTES.exams}/${exam.id}#monitor`;
+  }, [userType, exam.id]);
+
+  if (onExamPath || onExamCoursePath || !show.open) {
     return null;
   }
 
@@ -45,7 +47,7 @@ const ExamAlert = ({ courseIds, join }: Props) => {
     >
       <p className="font-medium leading-none">
         <span className="text-lg font-bold">
-          {ongoingExam?.course.name}・{ongoingExam?.name}
+          {exam.course.name}・{exam.name}
         </span>{" "}
         is happening right now...
       </p>
@@ -54,11 +56,11 @@ const ExamAlert = ({ courseIds, join }: Props) => {
         <Button
           as={Link}
           // @ts-expect-error NextUI not passing through 'as' props
-          to={join.getHref(ongoingExam?.id)}
+          to={href}
           size="sm"
           className="border-secondary-default bg-secondary-foreground px-7 py-[18px] text-sm font-bold text-secondary lg:w-full lg:text-base"
         >
-          {join.label}
+          {label}
         </Button>
 
         <Button

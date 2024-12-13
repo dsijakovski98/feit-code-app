@@ -116,7 +116,7 @@ const ResultsTab = () => {
         </TableBody>
       </Table>
 
-      {/* TODO: Submission Details dialog */}
+      {/* TODO: Submission Details UI */}
     </Fragment>
   );
 };

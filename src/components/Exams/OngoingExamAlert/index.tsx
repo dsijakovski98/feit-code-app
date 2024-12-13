@@ -14,9 +14,9 @@ const OngoingExamAlert = () => {
   return (
     <Suspense fallback={null}>
       {userData.type === USER_TYPE.student ? (
-        <StudentExamAlert user={userData.user} />
+        <StudentExamAlert studentId={userData.user.id} />
       ) : (
-        <ProfessorExamAlert user={userData.user} />
+        <ProfessorExamAlert professorId={userData.user.id} />
       )}
     </Suspense>
   );

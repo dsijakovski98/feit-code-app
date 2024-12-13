@@ -8,7 +8,8 @@ import { useToggle } from "@/hooks/useToggle";
 
 export const useSubmitExam = () => {
   const { task } = useCtx(ExamSessionTaskContext);
-  const { exam, student, tasksState, currentTaskState, submittedTasksState } = useCtx(ExamSessionContext);
+  const examSession = useCtx(ExamSessionContext);
+  const { exam, student, tasksState, currentTaskState, submittedTasksState, stats } = examSession;
   const [, setCurrentTask] = currentTaskState;
   const [submittedTasks, setSubmittedTasks] = submittedTasksState;
 
@@ -32,7 +33,10 @@ export const useSubmitExam = () => {
     setSubmittedTasks(newSubmitted);
 
     if (submitMode === "Finish") {
-      mutate({ exam, tasksState, student });
+      if (!stats) return;
+
+      mutate({ exam, tasksState, student, stats });
+
       return;
     }
 
