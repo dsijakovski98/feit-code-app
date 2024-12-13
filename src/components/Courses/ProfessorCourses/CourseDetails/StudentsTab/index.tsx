@@ -1,7 +1,6 @@
-import { ComponentProps, Fragment, useMemo, useState } from "react";
+import { ComponentProps, Fragment, useDeferredValue, useMemo, useState } from "react";
 
 import { useAuth } from "@clerk/clerk-react";
-import { Pagination } from "@nextui-org/pagination";
 import {
   Selection,
   Table,
@@ -12,18 +11,19 @@ import {
   TableRow,
 } from "@nextui-org/table";
 
+import AddStudent from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/AddStudent";
 import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/StudentDetails";
 import StudentCellsMux from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentCellsMux";
-import StudentsTableHeader from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentsTableHeader";
-import Icon from "@/components/ui/Icon";
-import Input from "@/components/ui/Input";
+import TableHeading from "@/components/ui/Table/TableHeading";
+import TablePagination from "@/components/ui/Table/TablePagination";
+import TableSearch from "@/components/ui/Table/TableSearch";
 
 import { STUDENT_COLUMNS } from "@/constants/students";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import StudentProvider from "@/context/StudentContext";
 import { useCtx } from "@/hooks/useCtx";
-import { ROWS_PER_PAGE } from "@/hooks/usePaginate";
+import { usePaginate } from "@/hooks/usePaginate";
 import { useToggle } from "@/hooks/useToggle";
 import { Column } from "@/types";
 
@@ -37,31 +37,31 @@ const StudentsTab = () => {
   const detailsDialog = useToggle();
   const [selectedStudent, setSelectedStudent] = useState<(typeof students)[number] | null>(null);
 
+  const selectedKeys = useMemo(
+    () => new Set(selectedStudent ? [selectedStudent.studentId] : []),
+    [selectedStudent],
+  );
+
   const [search, setSearch] = useState("");
+  const searchQuery = useDeferredValue(search);
 
-  const [page, setPage] = useState(1);
-  const pages = useMemo(() => Math.ceil(students.length / ROWS_PER_PAGE), [students.length]);
+  const pagination = usePaginate(students);
+  const { items: studentItems } = pagination;
 
-  const studentsList = useMemo(() => {
-    // Sorting
-    const sortedStudents = students.sort((stA, stB) => {
+  const sortedStudents = useMemo(() => {
+    return studentItems.toSorted((stA, stB) => {
       const nameA = `${stA.student.firstName} ${stA.student.lastName}`;
       const nameB = `${stB.student.firstName} ${stB.student.lastName}`;
 
       return nameA.localeCompare(nameB);
     });
+  }, [studentItems]);
 
-    // Pagination
-    const start = (page - 1) * ROWS_PER_PAGE;
-    const end = start + ROWS_PER_PAGE;
-
-    const studentsSlice = sortedStudents.slice(start, end);
-
-    // Other filtering
-    return studentsSlice.filter(({ student }) =>
-      `${student.firstName} ${student.lastName}`.match(new RegExp(search, "i")),
+  const studentsList = useMemo(() => {
+    return sortedStudents.filter(({ student }) =>
+      `${student.firstName} ${student.lastName}`.match(new RegExp(searchQuery, "i")),
     );
-  }, [students, search, page]);
+  }, [sortedStudents, searchQuery]);
 
   const columns = useMemo(() => {
     const cols = (isMobile ? STUDENT_COLUMNS.sm : STUDENT_COLUMNS.lg) as unknown as Column[];
@@ -86,41 +86,23 @@ const StudentsTab = () => {
     <Fragment>
       <Table
         removeWrapper
-        selectedKeys={new Set(selectedStudent ? [selectedStudent.studentId] : [])}
-        selectionMode={isMobileSm ? "none" : "single"}
+        selectedKeys={selectedKeys}
         onSelectionChange={handleSelect}
+        selectionMode={isMobileSm ? "none" : "single"}
         topContent={
-          <StudentsTableHeader>
-            <Input
-              fullWidth
-              variant="bordered"
-              placeholder="Search by name..."
-              startContent={<Icon name="search" className="h-5 w-5" />}
-              value={search}
-              onValueChange={setSearch}
-            />
-          </StudentsTableHeader>
+          <TableHeading itemName="Student" totalItems={students.length} className="md:flex-wrap md:gap-2">
+            <Fragment>
+              <TableSearch
+                search={search}
+                onSearch={setSearch}
+                className="ml-auto w-[240px] md:order-2 md:basis-full"
+              />
+
+              <div className="empty:hidden md:order-1">{userId === professorId && <AddStudent />}</div>
+            </Fragment>
+          </TableHeading>
         }
-        bottomContent={
-          // TODO: Fix incoming https://github.com/nextui-org/nextui/pull/3346
-          <Pagination
-            showControls
-            hidden={studentsList.length === 0}
-            size="sm"
-            radius="full"
-            color="default"
-            isDisabled={!!search}
-            page={page}
-            total={pages}
-            variant="light"
-            onChange={setPage}
-            classNames={{
-              cursor: "bg-foreground text-background",
-              prev: "w-7 h-7 p-0.5 min-w-0",
-              chevronNext: "w-7 h-7 p-0.5 min-w-0",
-            }}
-          />
-        }
+        bottomContent={<TablePagination {...pagination} items={studentsList} disabled={!!searchQuery} />}
         aria-label={`List of students enrolled to ${name}.`}
         classNames={{ td: "py-3" }}
       >

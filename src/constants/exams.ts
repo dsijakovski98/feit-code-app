@@ -9,6 +9,7 @@ import rust from "@/images/programming-languages/rust.svg";
 import ts from "@/images/programming-languages/typescript.svg";
 
 import { EXAM_STATUS, ExamStatus, PROGRAMMING_LANGUAGE } from "@/constants/enums";
+import { Column } from "@/types";
 import { parseExamStatus } from "@/utils";
 
 export const PROGRAMMING_LANGUAGES: Array<{ name: string; img: typeof js }> = [
@@ -40,3 +41,9 @@ export const EXAM_STATUS_OPTIONS = Object.values(EXAM_STATUS).map((status: ExamS
 }));
 
 export const MAX_TASK_INPUTS = 4;
+
+export const EXAM_RESULTS_COLUMNS = {
+  lg: [{ key: "test", label: "Test" }] as const,
+
+  sm: [{ key: "test", label: "Test" }] as const,
+} satisfies Record<string, Column[]>;

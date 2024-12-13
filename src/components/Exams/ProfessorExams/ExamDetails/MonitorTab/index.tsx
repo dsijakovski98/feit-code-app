@@ -48,7 +48,6 @@ const MonitorTab = () => {
   return (
     <MonitorExamProvider studentSessions={studentSessions}>
       <SessionsTable />
-
       <EndExamHandler />
     </MonitorExamProvider>
   );

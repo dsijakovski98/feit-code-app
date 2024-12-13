@@ -11,8 +11,9 @@ import { useFCUser } from "@/hooks/useFCUser";
 import { useInvalidRoute } from "@/hooks/useInvalidRoute";
 
 const GeneralTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/GeneralTab"));
-const SettingsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/SettingsTab"));
 const MonitorTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/MonitorTab"));
+const ResultsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/ResultsTab"));
+const SettingsTab = lazy(() => import("@/components/Exams/ProfessorExams/ExamDetails/SettingsTab"));
 
 const TABS = {
   general: "#general",
@@ -99,9 +100,10 @@ const ProfessorExamDetails = () => {
           )}
 
           {tabKeys.includes(TABS.results) && (
-            // TODO: Results UI
             <Tab key={TABS.results} title="Results" href={TABS.results}>
-              <Suspense fallback={null}>Results tab</Suspense>
+              <Suspense fallback={null}>
+                <ResultsTab />
+              </Suspense>
             </Tab>
           )}
 

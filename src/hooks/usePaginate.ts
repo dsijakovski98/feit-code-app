@@ -19,3 +19,5 @@ export const usePaginate = <T>(items: T[]) => {
     items: paginatedItems,
   };
 };
+
+export type UsePaginate<T> = ReturnType<typeof usePaginate<T>>;
