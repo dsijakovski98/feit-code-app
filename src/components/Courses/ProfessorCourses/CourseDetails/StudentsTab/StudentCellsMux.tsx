@@ -1,13 +1,11 @@
-import clsx from "clsx";
-
 import { useAuth } from "@clerk/clerk-react";
 import { User } from "@nextui-org/react";
 
 import StudentActions from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions";
+import StudentCell from "@/components/ui/Table/Cells/StudentCell";
 
 import { STUDENT_COLUMNS } from "@/constants/students";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { StudentContext } from "@/context/StudentContext";
 import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
@@ -20,10 +18,10 @@ type Props = {
 
 const StudentCellsMux = ({ columnKey }: Props) => {
   const { userId } = useAuth();
-  const { isMobile, isMobileSm } = useCtx(ResponsiveContext);
-  const {
-    courseDetails: { professorId },
-  } = useCtx(CourseDetailsContext);
+
+  const { courseDetails } = useCtx(CourseDetailsContext);
+  const { professorId } = courseDetails;
+
   const { student, joinedAt } = useCtx(StudentContext);
   const { firstName, lastName, email, indexNumber, indexYear, id, major } = student;
 
@@ -31,30 +29,7 @@ const StudentCellsMux = ({ columnKey }: Props) => {
 
   if (columnKey === "student") {
     return (
-      <User
-        name={`${firstName} ${lastName}`}
-        description={email}
-        avatarProps={{
-          size: isMobile ? "md" : "lg",
-          src: studentAvatar ?? "",
-          showFallback: isLoading,
-          className: clsx({
-            "scale-[1.2]": isMobile,
-            hidden: isMobileSm,
-          }),
-        }}
-        classNames={{
-          base: clsx({
-            "gap-3": isMobile,
-          }),
-          name: clsx("text-base font-semibold", {
-            "text-sm": isMobile,
-          }),
-          description: clsx("text-sm", {
-            "text-xs sm:hidden": isMobile,
-          }),
-        }}
-      />
+      <StudentCell student={{ firstName, lastName, email }} avatar={{ url: studentAvatar, isLoading }} />
     );
   }
 

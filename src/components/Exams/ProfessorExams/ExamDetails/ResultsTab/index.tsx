@@ -10,16 +10,19 @@ import {
   TableRow,
 } from "@nextui-org/table";
 
+import SubmissionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionCellsMux";
 import TableHeading from "@/components/ui/Table/TableHeading";
 import TablePagination from "@/components/ui/Table/TablePagination";
 import TableSearch from "@/components/ui/Table/TableSearch";
 
 import { EXAM_RESULTS_COLUMNS } from "@/constants/exams";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
+import ExamSubmissionProvider from "@/context/ExamSubmissionContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { usePaginate } from "@/hooks/usePaginate";
 import { useToggle } from "@/hooks/useToggle";
+import { ColumnKey } from "@/types";
 
 const ResultsTab = () => {
   const { isMobileSm } = useCtx(ResponsiveContext);
@@ -81,14 +84,34 @@ const ResultsTab = () => {
       >
         <TableHeader columns={isMobileSm ? EXAM_RESULTS_COLUMNS.sm : EXAM_RESULTS_COLUMNS.lg}>
           {(column) => (
-            <TableColumn key={column.key} className="text-xs font-bold uppercase text-foreground-300">
+            <TableColumn
+              key={column.key}
+              align={
+                column.key === "actions"
+                  ? isMobileSm
+                    ? "end"
+                    : "center"
+                  : column.key === "timestamp" || column.key === "status"
+                    ? "center"
+                    : "start"
+              }
+              className="text-xs font-bold uppercase text-foreground-300"
+            >
               {column.label}
             </TableColumn>
           )}
         </TableHeader>
         <TableBody items={submissionsList} emptyContent="No one has submitted a solution.">
           {(submission) => (
-            <TableRow key={submission.id}>{(columnKey) => <TableCell>{columnKey}</TableCell>}</TableRow>
+            <TableRow key={submission.id}>
+              {(columnKey) => (
+                <TableCell>
+                  <ExamSubmissionProvider submission={submission}>
+                    <SubmissionCellsMux columnKey={columnKey as ColumnKey<typeof EXAM_RESULTS_COLUMNS.lg>} />
+                  </ExamSubmissionProvider>
+                </TableCell>
+              )}
+            </TableRow>
           )}
         </TableBody>
       </Table>

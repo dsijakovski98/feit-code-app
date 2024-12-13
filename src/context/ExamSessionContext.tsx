@@ -19,6 +19,7 @@ export type ExamSessionContext = {
 };
 
 export const ExamSessionContext = createContext<ExamSessionContext | null>(null);
+ExamSessionContext.displayName = "ExamSessionContext";
 
 type Props = Pick<ExamSessionContext, "student" | "exam"> & PropsWithChildren;
 

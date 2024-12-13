@@ -12,10 +12,7 @@ const PageWrapper = () => {
 
     if (pageTitle) {
       document.title = `${baseTitle} | ${pageTitle}`;
-      return;
     }
-
-    document.title = baseTitle;
   }, [pathname]);
 
   return <Outlet />;

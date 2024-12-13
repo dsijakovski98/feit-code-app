@@ -12,6 +12,7 @@ type MonitorExamContext = {
 };
 
 export const MonitorExamContext = createContext<MonitorExamContext | null>(null);
+MonitorExamContext.displayName = "MonitorExamContext";
 
 type Props = MonitorExamContext & PropsWithChildren;
 

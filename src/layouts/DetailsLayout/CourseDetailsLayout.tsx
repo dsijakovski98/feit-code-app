@@ -12,8 +12,10 @@ const CourseDetailsLayout = () => {
   useEffect(() => {
     if (pathname.endsWith("new-exam")) {
       document.title = "FEIT Code | New Exam";
-    } else {
-      if (!data?.name) return;
+      return;
+    }
+
+    if (data?.name) {
       document.title = `FEIT Code | Course: ${data.name}`;
     }
   }, [pathname, data?.name]);

@@ -43,7 +43,16 @@ export const EXAM_STATUS_OPTIONS = Object.values(EXAM_STATUS).map((status: ExamS
 export const MAX_TASK_INPUTS = 4;
 
 export const EXAM_RESULTS_COLUMNS = {
-  lg: [{ key: "test", label: "Test" }] as const,
+  lg: [
+    { key: "student", label: "Student" },
+    { key: "timestamp", label: "Submitted At" },
+    { key: "status", label: "Status" },
+    { key: "actions", label: "More" },
+  ] as const,
 
-  sm: [{ key: "test", label: "Test" }] as const,
+  sm: [
+    { key: "student", label: "Student" },
+    { key: "status", label: "Status" },
+    { key: "actions", label: "More" },
+  ] as const,
 } satisfies Record<string, Column[]>;
