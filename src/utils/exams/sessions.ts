@@ -1,5 +1,6 @@
 import { ChipProps } from "@nextui-org/react";
 
+import { ROUTES } from "@/constants/routes";
 import { MonitorSession } from "@/context/MonitorExamContext";
 import { simplePlural } from "@/utils";
 
@@ -27,4 +28,8 @@ export const sessionTimeOffDuration = (totalTimeOff: number) => {
   const totalHours = Math.floor(totalMinutes / 60);
 
   return `${totalHours} ${simplePlural("hour", totalHours)}`;
+};
+
+export const gradeExamHref = (examId: string, studentId: string) => {
+  return `${ROUTES.dashboard}${ROUTES.exams}/${examId}${ROUTES.gradeExam}/${studentId}`;
 };

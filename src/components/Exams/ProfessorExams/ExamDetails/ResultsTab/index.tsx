@@ -11,6 +11,7 @@ import {
 } from "@nextui-org/table";
 
 import SubmissionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionCellsMux";
+import SubmissionDetails from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionDetails";
 import TableHeading from "@/components/ui/Table/TableHeading";
 import TablePagination from "@/components/ui/Table/TablePagination";
 import TableSearch from "@/components/ui/Table/TableSearch";
@@ -116,7 +117,11 @@ const ResultsTab = () => {
         </TableBody>
       </Table>
 
-      {/* TODO: Submission Details UI */}
+      <SubmissionDetails
+        dialog={submissionDialog}
+        submission={selectedSubmission}
+        onClose={() => setSelectedSubmission(null)}
+      />
     </Fragment>
   );
 };

@@ -1,5 +1,4 @@
-import { Chip } from "@nextui-org/chip";
-
+import SubmissionStatus from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/Misc/SubmissionStatus";
 import SubmissionActions from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionActions";
 import StudentCell from "@/components/ui/Table/Cells/StudentCell";
 import Timestamp from "@/components/ui/Timestamp";
@@ -9,7 +8,6 @@ import { ExamSubmissionContext } from "@/context/ExamSubmissionContext";
 import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { ColumnKey } from "@/types";
-import { submissionStatusColor } from "@/utils/exams/results";
 
 type Props = {
   columnKey: ColumnKey<typeof EXAM_RESULTS_COLUMNS.lg>;
@@ -33,11 +31,7 @@ const SubmissionCellsMux = ({ columnKey }: Props) => {
   }
 
   if (columnKey === "status") {
-    return (
-      <Chip size="sm" color={submissionStatusColor(status!)} classNames={{ content: "text-sm" }}>
-        {status}
-      </Chip>
-    );
+    return <SubmissionStatus status={status!} />;
   }
 
   if (columnKey === "actions") {

@@ -4,25 +4,27 @@ import { Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart } from "re
 
 import { ChartContainer } from "@/components/ui/shadcn/chart";
 
-import { StudentSession } from "@/types/exams";
+import { SessionStats } from "@/types/exams";
 
 type Props = {
-  session: StudentSession;
+  pasteCount: SessionStats["pasteCount"] | null;
 };
 
-const PasteCountChart = ({ session }: Props) => {
-  const { pasteCount } = session;
-
+const PasteCountChart = ({ pasteCount }: Props) => {
   const pasteData = useMemo(() => [{ count: pasteCount }], [pasteCount]);
 
-  const pasteCountLabel = useMemo(() => (pasteCount > 999 ? "999+" : pasteCount), [pasteCount]);
+  const pasteCountLabel = useMemo(() => {
+    if (!pasteCount) return "0";
+
+    return pasteCount > 999 ? "999+" : pasteCount;
+  }, [pasteCount]);
 
   return (
     <ChartContainer config={{ count: { label: "Count" } }} className="aspect-square h-[100px] translate-y-1">
       <RadialBarChart
         data={pasteData}
         startAngle={0}
-        endAngle={(session?.pasteCount || 0) * Math.PI}
+        endAngle={(pasteCount || 0) * Math.PI}
         innerRadius={45}
         outerRadius={65}
         title="Paste Count"
