@@ -1,5 +1,5 @@
 {
-  "id": "18c0acce-02e2-4b97-9ea1-bef514cae2e7",
+  "id": "04a82406-41d4-4287-92e3-a7fd936c26a9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -221,6 +221,18 @@
           "primaryKey": false,
           "notNull": true
         },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duration_minutes": {
+          "name": "duration_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "points": {
           "name": "points",
           "type": "integer",
@@ -269,6 +281,75 @@
       "uniqueConstraints": {
         "exams_id_unique": {
           "name": "exams_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      }
+    },
+    "public.inputs": {
+      "name": "inputs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(128)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value_type": {
+          "name": "value_type",
+          "type": "value_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order_index": {
+          "name": "order_index",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "test_id": {
+          "name": "test_id",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "inputs_test_id_tests_id_fk": {
+          "name": "inputs_test_id_tests_id_fk",
+          "tableFrom": "inputs",
+          "tableTo": "tests",
+          "columnsFrom": [
+            "test_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "inputs_id_unique": {
+          "name": "inputs_id_unique",
           "nullsNotDistinct": false,
           "columns": [
             "id"
@@ -469,34 +550,28 @@
         }
       }
     },
-    "public.task_grades": {
-      "name": "task_grades",
+    "public.submissions": {
+      "name": "submissions",
       "schema": "",
       "columns": {
-        "grader_id": {
-          "name": "grader_id",
-          "type": "text",
-          "primaryKey": false,
+        "id": {
+          "name": "id",
+          "type": "varchar(128)",
+          "primaryKey": true,
           "notNull": true
         },
         "status": {
           "name": "status",
-          "type": "task_status",
+          "type": "submission_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
-        },
-        "file_url": {
-          "name": "file_url",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": true
         },
         "points": {
           "name": "points",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "feedback": {
           "name": "feedback",
@@ -504,24 +579,51 @@
           "primaryKey": false,
           "notNull": false
         },
-        "student_id": {
-          "name": "student_id",
+        "submitted_at": {
+          "name": "submitted_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "paste_count": {
+          "name": "paste_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "time_off": {
+          "name": "time_off",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'{}'::json"
+        },
+        "grader_id": {
+          "name": "grader_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "exam_id": {
+          "name": "exam_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "task_id": {
-          "name": "task_id",
-          "type": "varchar",
+        "student_id": {
+          "name": "student_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "task_grades_grader_id_professors_user_id_fk": {
-          "name": "task_grades_grader_id_professors_user_id_fk",
-          "tableFrom": "task_grades",
+        "submissions_grader_id_professors_user_id_fk": {
+          "name": "submissions_grader_id_professors_user_id_fk",
+          "tableFrom": "submissions",
           "tableTo": "professors",
           "columnsFrom": [
             "grader_id"
@@ -529,12 +631,25 @@
           "columnsTo": [
             "user_id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "task_grades_student_id_students_user_id_fk": {
-          "name": "task_grades_student_id_students_user_id_fk",
-          "tableFrom": "task_grades",
+        "submissions_exam_id_exams_id_fk": {
+          "name": "submissions_exam_id_exams_id_fk",
+          "tableFrom": "submissions",
+          "tableTo": "exams",
+          "columnsFrom": [
+            "exam_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "submissions_student_id_students_user_id_fk": {
+          "name": "submissions_student_id_students_user_id_fk",
+          "tableFrom": "submissions",
           "tableTo": "students",
           "columnsFrom": [
             "student_id"
@@ -544,23 +659,18 @@
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
-        },
-        "task_grades_task_id_tasks_id_fk": {
-          "name": "task_grades_task_id_tasks_id_fk",
-          "tableFrom": "task_grades",
-          "tableTo": "tasks",
-          "columnsFrom": [
-            "task_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "submissions_id_unique": {
+          "name": "submissions_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id"
+          ]
+        }
+      }
     },
     "public.tasks": {
       "name": "tasks",
@@ -595,6 +705,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "func_name": {
+          "name": "func_name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
         },
         "template_url": {
           "name": "template_url",
@@ -633,12 +749,62 @@
           "columns": [
             "id"
           ]
+        }
+      }
+    },
+    "public.tests": {
+      "name": "tests",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(128)",
+          "primaryKey": true,
+          "notNull": true
         },
-        "tasks_order_index_unique": {
-          "name": "tasks_order_index_unique",
+        "output_type": {
+          "name": "output_type",
+          "type": "value_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "output": {
+          "name": "output",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "task_id": {
+          "name": "task_id",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tests_task_id_tasks_id_fk": {
+          "name": "tests_task_id_tasks_id_fk",
+          "tableFrom": "tests",
+          "tableTo": "tasks",
+          "columnsFrom": [
+            "task_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "tests_id_unique": {
+          "name": "tests_id_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "order_index"
+            "id"
           ]
         }
       }
@@ -664,6 +830,14 @@
         "TKII"
       ]
     },
+    "public.parameter_type": {
+      "name": "parameter_type",
+      "schema": "public",
+      "values": [
+        "input",
+        "output"
+      ]
+    },
     "public.programming_language": {
       "name": "programming_language",
       "schema": "public",
@@ -679,8 +853,8 @@
         "PHP"
       ]
     },
-    "public.task_status": {
-      "name": "task_status",
+    "public.submission_status": {
+      "name": "submission_status",
       "schema": "public",
       "values": [
         "Submitted",
@@ -702,6 +876,16 @@
       "values": [
         "Student",
         "Professor"
+      ]
+    },
+    "public.value_type": {
+      "name": "value_type",
+      "schema": "public",
+      "values": [
+        "string",
+        "number",
+        "boolean",
+        "empty"
       ]
     }
   },

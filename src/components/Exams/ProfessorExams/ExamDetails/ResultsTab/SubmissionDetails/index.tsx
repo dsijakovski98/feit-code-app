@@ -1,5 +1,3 @@
-import { Fragment } from "react/jsx-runtime";
-
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 
 import SubmissionGeneral from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionDetails/SubmissionGeneral";
@@ -37,43 +35,37 @@ const SubmissionDetails = ({ dialog, submission, onClose }: Props) => {
       }}
     >
       <ModalContent>
-        <Fragment>
-          <ModalHeader className="text-2xl">
-            <h2>
-              Exam Results: {examDetails.name}・{examDetails.language}
-            </h2>
-          </ModalHeader>
+        <ModalHeader className="text-2xl">
+          <h2>
+            Exam Results: {examDetails.name}・{examDetails.language}
+          </h2>
+        </ModalHeader>
 
-          <ModalBody className="space-y-4 font-sans">
-            {submission && <SubmissionGeneral submission={submission} />}
+        <ModalBody className="space-y-6 font-sans">
+          {submission && <SubmissionGeneral submission={submission} />}
 
-            <div className="-space-y-3">
-              <h3 className="text-2xl font-semibold">Statistics</h3>
+          <div className="translate-y-3 -space-y-3">
+            <h3 className="text-2xl font-semibold">Statistics</h3>
 
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-xl font-medium">Time spent off session</h4>
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="text-xl font-medium">Time spent off session</h4>
 
-                  <p className="text-foreground-300">
-                    Time chunks (in minutes) when{" "}
-                    <b>
-                      {submission?.student.firstName} {submission?.student.lastName}
-                    </b>{" "}
-                    was off during the session.
-                  </p>
-                </div>
-
-                {submission?.sessionStats && (
-                  <PasteCountChart pasteCount={submission.sessionStats.pasteCount} />
-                )}
+                <p className="text-foreground-300">
+                  Time chunks (in minutes) when{" "}
+                  <b>
+                    {submission?.student.firstName} {submission?.student.lastName}
+                  </b>{" "}
+                  was off during the session.
+                </p>
               </div>
-            </div>
 
-            {submission?.sessionStats && (
-              <TimeOffChart timeOff={submission.sessionStats.timeOff} className="max-h-[300px]" />
-            )}
-          </ModalBody>
-        </Fragment>
+              {submission?.pasteCount && <PasteCountChart pasteCount={submission.pasteCount} />}
+            </div>
+          </div>
+
+          {submission?.timeOff && <TimeOffChart timeOff={submission.timeOff} className="max-h-[300px]" />}
+        </ModalBody>
       </ModalContent>
     </Modal>
   );

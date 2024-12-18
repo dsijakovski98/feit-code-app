@@ -1,8 +1,7 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { integer, json, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import { submissionStatus } from "@/db/schema/enums";
-import examSessionStats from "@/db/schema/examSessionStats";
 import exams from "@/db/schema/exams";
 import professors from "@/db/schema/professors";
 import students from "@/db/schema/students";
@@ -18,7 +17,8 @@ const submissions = pgTable("submissions", {
   feedback: varchar("feedback", { length: 10_000 }),
   submittedAt: timestamp("submitted_at", { mode: "string" }).notNull().defaultNow(),
 
-  sessionStatsId: text("session_stats_id").references(() => examSessionStats.id, { onDelete: "no action" }),
+  pasteCount: integer("paste_count").default(0),
+  timeOff: json("time_off").$type<Record<string, number>>().default({}),
 
   // Gets updates when a feedback is provided by a professor/assistant
   graderId: text("grader_id").references(() => professors.id, { onDelete: "cascade" }),
@@ -32,11 +32,6 @@ const submissions = pgTable("submissions", {
 });
 
 export const submissionsRelations = relations(submissions, ({ one }) => ({
-  sessionStats: one(examSessionStats, {
-    fields: [submissions.sessionStatsId],
-    references: [examSessionStats.id],
-  }),
-
   grader: one(professors, {
     fields: [submissions.examId],
     references: [professors.id],

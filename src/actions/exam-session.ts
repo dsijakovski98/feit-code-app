@@ -2,7 +2,7 @@ import { Dayjs } from "dayjs";
 import { onValue, push, ref, remove, set } from "firebase/database";
 import { ref as storageRef, uploadString } from "firebase/storage";
 
-import { examSessionStats, submissions } from "@/db/schema";
+import { submissions } from "@/db/schema";
 
 import { fbDatabase, fbStorage } from "@/services/firebase";
 
@@ -223,26 +223,20 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
 
     // Upload tasks content
     await Promise.all(
-      exam.tasks.map((task) => {
+      exam.tasks.map(async (task) => {
         const taskPath = taskTemplateRef({ courseId, examId, taskTitle: task.title });
         const studentPath = studentTaskRef(student);
         const templateRef = storageRef(fbStorage, `${taskPath}/${studentPath}`);
 
-        return uploadString(templateRef, tasks[task.id].code, "raw");
+        await uploadString(templateRef, tasks[task.id].code, "raw");
       }),
     );
-
-    // Add submission stats
-    const [{ sessionStatsId }] = await db
-      .insert(examSessionStats)
-      .values({ ...stats })
-      .returning({ sessionStatsId: examSessionStats.id });
 
     // Add submission to DB
     await db.insert(submissions).values({
       examId,
-      sessionStatsId,
       studentId: student.id,
+      ...stats,
     });
 
     // Check if exam session was already finished

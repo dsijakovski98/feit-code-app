@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
-import { deleteObject, getDownloadURL, ref, uploadString } from "firebase/storage";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 import { exams, inputs as inputsTable, tasks as tasksTable, tests as testsTable } from "@/db/schema";
 
@@ -11,6 +11,7 @@ import { EXAM_STATUS } from "@/constants/enums";
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
 import { extractFunctionName, taskTemplateRef } from "@/utils/code";
+import { deleteExamFolder } from "@/utils/exams/storage";
 import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 
 type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
@@ -151,11 +152,9 @@ type CancelExamOptions = {
 };
 export const cancelExam = async ({ examId, courseId }: CancelExamOptions) => {
   try {
-    const examStorageRef = ref(fbStorage, `course_${courseId}/exam_${examId}`);
-
     await Promise.all([
+      deleteExamFolder(`course_${courseId}/exam_${examId}`),
       db.delete(exams).where(eq(exams.id, examId)),
-      deleteObject(examStorageRef).catch(() => {}),
     ]);
   } catch (e) {
     // TODO: Sentry logging

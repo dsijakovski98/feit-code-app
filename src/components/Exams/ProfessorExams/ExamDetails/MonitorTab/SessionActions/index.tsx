@@ -66,7 +66,7 @@ const SessionActions = () => {
         variant="light"
         color="danger"
         className="p-2"
-        isDisabled={!!session.removed}
+        isDisabled={!!session.removed || session.status === "Finished"}
         onPress={removeDialog.toggleOn}
       >
         <Icon name="logout" />

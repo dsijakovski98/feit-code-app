@@ -19,7 +19,6 @@ export const useExamDetails = (examId?: string) => {
             submissions: {
               with: {
                 student: true,
-                sessionStats: true,
               },
             },
           },

@@ -1,1 +1,0 @@
-ALTER TABLE "tasks" ADD COLUMN "func_name" varchar(256) NOT NULL;
