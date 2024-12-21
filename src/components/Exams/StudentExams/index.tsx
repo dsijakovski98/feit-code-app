@@ -42,6 +42,8 @@ const StudentExams = ({ user }: Props) => {
   });
 
   const selectedCourseId = useMemo(() => {
+    if (!courses || courses?.length === 0) return "";
+
     if (courseFilter.value === "all") return courseFilter.value;
 
     const course = courses?.find((course) => course.name === courseFilter.value);
@@ -79,7 +81,7 @@ const StudentExams = ({ user }: Props) => {
           </div>
         )}
 
-        {data?.pages[0].length === 0 && (
+        {(data?.pages[0].length === 0 || courses?.length === 0) && (
           <EmptyExamsList status={statusFilter.value} course={courseFilter.value} />
         )}
 
