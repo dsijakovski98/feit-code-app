@@ -26,7 +26,7 @@ export const useSubmissionDetails = ({ examId, studentId }: Options) => {
         throw new Error("Submission not found!");
       }
 
-      return submission;
+      return submission ?? null;
     },
   });
 };
