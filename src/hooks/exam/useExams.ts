@@ -8,7 +8,7 @@ import { UserType } from "@/types";
 type QueryOptions = {
   userId: string;
   type: UserType;
-  courseId: string;
+  courseId?: string;
   status: string;
 };
 
@@ -19,6 +19,8 @@ export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
 
     queryKey: [{ name: "exams", type, id: userId, courseId, status }],
     queryFn: async ({ pageParam = 0 }) => {
+      if (!courseId) return [];
+
       const examsData = await db.query.exams.findMany({
         where: (exams, { eq, and }) => {
           const courseFilter = courseId !== "all" ? eq(exams.courseId, courseId) : undefined;
@@ -38,7 +40,7 @@ export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
         offset: pageParam * EXAMS_PER_PAGE,
       });
 
-      return examsData;
+      return examsData ?? [];
     },
 
     getNextPageParam: (lastPage, _, lastPageParam) => {

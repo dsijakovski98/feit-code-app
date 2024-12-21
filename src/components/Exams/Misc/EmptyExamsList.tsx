@@ -14,6 +14,7 @@ const EmptyExamsList = ({ status, course }: Props) => {
       status === "all" ? "" : <span className="font-semibold">{parseExamStatus(status as ExamStatus)}</span>,
     [status],
   );
+
   const courseValue = useMemo(
     () =>
       course === "all" ? (
@@ -29,7 +30,11 @@ const EmptyExamsList = ({ status, course }: Props) => {
   const emptyExamsMessage = useMemo(() => {
     if (!statusValue && !courseValue) return "No exams found";
 
-    return `No ${statusValue} exams ${courseValue}`;
+    return (
+      <span>
+        No {statusValue} exams found {courseValue}
+      </span>
+    );
   }, [statusValue, courseValue]);
 
   return (

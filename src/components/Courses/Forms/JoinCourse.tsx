@@ -44,6 +44,9 @@ const JoinCourse = ({ label }: Props) => {
         queryClient.invalidateQueries({
           queryKey: [{ name: "courses", type: "joined", studentId, courseId }],
         }),
+        queryClient.invalidateQueries({
+          queryKey: [{ name: "ongoing-exam", userId: studentId, type: USER_TYPE.student }],
+        }),
       ]);
 
       toast.success(`You joined ${name}!`);
