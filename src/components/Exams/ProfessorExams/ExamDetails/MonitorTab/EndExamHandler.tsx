@@ -1,16 +1,12 @@
 import { useEffect, useMemo } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 
-import { endExam } from "@/actions/exams";
-import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { MonitorExamContext } from "@/context/MonitorExamContext";
+import { useEndExam } from "@/hooks/exam/useEndExam";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
@@ -20,9 +16,6 @@ const EndExamHandler = () => {
   const { id: examId, name, startedAt, durationMinutes } = examDetails;
 
   const { studentSessions } = useCtx(MonitorExamContext);
-
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   const finishDialog = useToggle();
 
@@ -45,21 +38,7 @@ const EndExamHandler = () => {
     finishDialog.toggleOn();
   }, [done, finishDialog]);
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: endExam,
-    onSuccess: async (success) => {
-      if (!success) return;
-
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: [{ name: "exams", examId }] }),
-        queryClient.invalidateQueries({ queryKey: [{ name: "courses" }] }),
-      ]);
-
-      toast.success("Exam ended!");
-      navigate(`${ROUTES.dashboard}${ROUTES.exams}/${examId}`, { replace: true });
-    },
-    onError: (error) => toast.error(error.message),
-  });
+  const { mutate, isPending } = useEndExam({ examId });
 
   const onConfirm = () => {
     mutate(examId);

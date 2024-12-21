@@ -62,7 +62,12 @@ const DefineTests = () => {
                     {inputsMeta.length > 0 && (
                       <ol className="flex flex-wrap items-center gap-4 px-3">
                         {inputsMeta.map(({ name, type }) => (
-                          <Tooltip as="li" content={type} key={name} classNames={{ content: "capitalize" }}>
+                          <Tooltip
+                            as="li"
+                            content={type}
+                            key={name}
+                            classNames={{ content: "capitalize font-serif" }}
+                          >
                             <Chip
                               onClose={() => removeInput(name)}
                               startContent={<ParameterTypeIcon type={type} className="mr-1 h-4 w-4" />}

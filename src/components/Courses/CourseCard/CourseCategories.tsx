@@ -62,7 +62,7 @@ const CourseCategories = () => {
                 ))}
               </ul>
             }
-            classNames={{ content: "font-semibold text-sm" }}
+            classNames={{ content: "font-semibold text-sm font-serif" }}
           >
             <Chip
               size="sm"
