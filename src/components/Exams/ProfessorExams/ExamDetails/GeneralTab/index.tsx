@@ -20,9 +20,8 @@ const UpcomingDetails = lazy(
 );
 
 const GeneralTab = () => {
-  const {
-    examDetails: { status },
-  } = useCtx(ExamDetailsContext);
+  const { examDetails } = useCtx(ExamDetailsContext);
+  const { status } = examDetails;
 
   return (
     <section className="exam-general lg:block lg:space-y-4 lg:pb-12">

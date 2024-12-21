@@ -112,6 +112,9 @@ export const leaveExamSessionLogout = async ({ studentId }: LeaveSessionLogout) 
 
         sessionKeys.forEach((key: keyof typeof examSessions) => {
           const activeStudents = examSessions[key].activeStudents;
+
+          if (!activeStudents) return;
+
           const activeStudent = Object.entries(activeStudents).find(
             ([, studentSession]) => studentSession.student.id === studentId,
           );
@@ -210,20 +213,22 @@ export const removeStudentSession = async ({ examId, sessionId, removed }: Remov
 };
 
 // Student submitting finished exam
-type FinishExamOptions = Pick<ExamSessionContext, "exam" | "tasksState" | "student">;
-export const finishExam = async ({ exam, tasksState, student }: FinishExamOptions) => {
+type FinishExamOptions = Pick<ExamSessionContext, "exam" | "tasksState" | "student"> & {
+  stats: Pick<StudentSession, "pasteCount" | "timeOff">;
+};
+export const finishExam = async ({ exam, tasksState, student, stats }: FinishExamOptions) => {
   try {
     const [tasks] = tasksState;
     const { courseId, id: examId } = exam;
 
     // Upload tasks content
     await Promise.all(
-      exam.tasks.map((task) => {
+      exam.tasks.map(async (task) => {
         const taskPath = taskTemplateRef({ courseId, examId, taskTitle: task.title });
         const studentPath = studentTaskRef(student);
         const templateRef = storageRef(fbStorage, `${taskPath}/${studentPath}`);
 
-        return uploadString(templateRef, tasks[task.id].code, "raw");
+        await uploadString(templateRef, tasks[task.id].code, "raw");
       }),
     );
 
@@ -231,6 +236,7 @@ export const finishExam = async ({ exam, tasksState, student }: FinishExamOption
     await db.insert(submissions).values({
       examId,
       studentId: student.id,
+      ...stats,
     });
 
     // Check if exam session was already finished

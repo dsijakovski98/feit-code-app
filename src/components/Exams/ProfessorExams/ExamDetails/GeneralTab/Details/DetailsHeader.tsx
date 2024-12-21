@@ -8,9 +8,8 @@ import { parseExamStatus } from "@/utils";
 import { examStatusColor } from "@/utils/colors";
 
 const DetailsHeader = ({ children }: PropsWithChildren) => {
-  const {
-    examDetails: { status },
-  } = useCtx(ExamDetailsContext);
+  const { examDetails } = useCtx(ExamDetailsContext);
+  const { status } = examDetails;
 
   return (
     <div className="flex items-start justify-between gap-6">

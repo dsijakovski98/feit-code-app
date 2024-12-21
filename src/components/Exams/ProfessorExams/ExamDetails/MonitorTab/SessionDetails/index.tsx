@@ -3,8 +3,8 @@ import { Fragment } from "react/jsx-runtime";
 import { Avatar } from "@nextui-org/avatar";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
 
-import PasteCountChart from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails/PasteCountChart";
-import TimeOffChart from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails/TimeOffChart";
+import PasteCountChart from "@/components/ui/ExamStats/PasteCountChart";
+import TimeOffChart from "@/components/ui/ExamStats/TimeOffChart";
 
 import { Toggle } from "@/hooks/useToggle";
 import { StudentSession } from "@/types/exams";
@@ -57,10 +57,10 @@ const SessionDetails = ({ dialog, session, onClose }: Props) => {
                 </p>
               </div>
 
-              {session && <PasteCountChart session={session} />}
+              {session && <PasteCountChart pasteCount={session.pasteCount} />}
             </div>
 
-            {session && <TimeOffChart session={session} />}
+            {session && <TimeOffChart timeOff={session.timeOff} />}
           </ModalBody>
         </Fragment>
       </ModalContent>

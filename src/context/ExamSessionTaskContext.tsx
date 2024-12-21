@@ -10,6 +10,7 @@ type ExamSessionTaskContext = {
 };
 
 export const ExamSessionTaskContext = createContext<ExamSessionTaskContext | null>(null);
+ExamSessionTaskContext.displayName = "ExamSessionTaskContext";
 
 type Props = Pick<ExamSessionTaskContext, "task"> & PropsWithChildren;
 

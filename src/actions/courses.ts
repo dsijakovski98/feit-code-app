@@ -1,11 +1,9 @@
 import { and, eq } from "drizzle-orm";
-import { deleteObject, ref } from "firebase/storage";
 
 import { courses, studentCourses } from "@/db/schema";
 
-import { fbStorage } from "@/services/firebase";
-
 import { db } from "@/db";
+import { deleteCourseFolder } from "@/utils/courses/storage";
 
 type StudentOptions = {
   courseId: string;
@@ -58,10 +56,8 @@ export const archiveCourseToggle = async ({ courseId, archived }: ArchiveOptions
 
 export const deleteCourse = async (courseId: string) => {
   try {
-    const courseStorageRef = ref(fbStorage, `course_${courseId}`);
-
     await Promise.all([
-      deleteObject(courseStorageRef).catch(() => {}),
+      deleteCourseFolder(`course_${courseId}`),
       db.delete(courses).where(eq(courses.id, courseId)),
     ]);
   } catch (e) {

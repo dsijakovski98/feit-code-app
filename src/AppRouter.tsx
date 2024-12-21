@@ -16,6 +16,9 @@ import PageWrapper from "@/components/PageWrapper";
 import { ROUTES } from "@/constants/routes";
 import { USER_TYPE } from "@/types";
 
+const GradeSubmissionPage = lazy(() => import("@/pages/dashboard/exams/grade/grade-submission"));
+const GradeExamRedirect = lazy(() => import("@/pages/dashboard/exams/grade/redirect-to-exam"));
+
 const SignInPage = lazy(() => import("@/pages/auth/sign-in"));
 const SignUpPage = lazy(() => import("@/pages/auth/sign-up"));
 const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password"));
@@ -72,8 +75,14 @@ const AppRouter = () => {
 
                   <Route path="exams">
                     <Route index element={<ExamsPage />} />
+
                     <Route path=":id" element={<ExamDetailsLayout />}>
                       <Route index element={<ExamDetailsPage />} />
+
+                      <Route path="grade">
+                        <Route index element={<GradeExamRedirect />} />
+                        <Route path=":sid" element={<GradeSubmissionPage />} />
+                      </Route>
                     </Route>
                   </Route>
                 </Route>

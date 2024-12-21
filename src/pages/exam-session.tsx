@@ -78,6 +78,7 @@ const ExamSessionPage = () => {
       </div>
 
       <SessionActionsHandler />
+
       <RemoveSessionHandler />
     </Fragment>
   );

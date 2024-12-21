@@ -1,1 +1,0 @@
-ALTER TABLE "exams" ADD COLUMN "duration_minutes" integer NOT NULL;

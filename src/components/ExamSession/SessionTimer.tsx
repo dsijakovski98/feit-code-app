@@ -15,7 +15,7 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
 const SessionTimer = () => {
-  const { exam, student, tasksState } = useCtx(ExamSessionContext);
+  const { exam, student, tasksState, stats } = useCtx(ExamSessionContext);
   const { durationMinutes, startedAt } = exam;
 
   const doneDialog = useToggle();
@@ -45,7 +45,9 @@ const SessionTimer = () => {
   }, [progress]);
 
   const onConfirm = () => {
-    mutate({ exam, student, tasksState });
+    if (!stats) return;
+
+    mutate({ exam, student, tasksState, stats });
   };
 
   useEffect(() => {

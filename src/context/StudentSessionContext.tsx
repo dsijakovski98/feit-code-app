@@ -7,6 +7,7 @@ type StudentSessionContext = {
 };
 
 export const StudentSessionContext = createContext<StudentSessionContext | null>(null);
+StudentSessionContext.displayName = "StudentSessionContext";
 
 type Props = StudentSessionContext & PropsWithChildren;
 
