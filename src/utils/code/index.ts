@@ -26,6 +26,10 @@ export const taskTemplateRef = ({ courseId, examId, taskTitle }: TemplateOptions
   return `course_${courseId}/exam_${examId}/${taskTitle}`;
 };
 
-export const studentTaskRef = ({ id, firstName, lastName }: FCStudent) => {
+export const studentTaskRef = ({
+  id,
+  firstName,
+  lastName,
+}: Pick<FCStudent, "id" | "firstName" | "lastName">) => {
   return `student_${id}_${firstName}_${lastName}`;
 };
