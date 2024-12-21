@@ -15,10 +15,9 @@ import {
 
 import SessionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionCellsMux";
 import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";
+import SessionsHeader from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionsTable/SessionsHeader";
 import Icon from "@/components/ui/Icon";
-import TableHeading from "@/components/ui/Table/TableHeading";
 import TablePagination from "@/components/ui/Table/TablePagination";
-import TableSearch from "@/components/ui/Table/TableSearch";
 
 import { SESSION_COLUMNS } from "@/constants/students";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
@@ -33,7 +32,6 @@ const SessionsTable = () => {
   const { isMobileSm } = useCtx(ResponsiveContext);
   const { studentSessions } = useCtx(MonitorExamContext);
   const { examDetails } = useCtx(ExamDetailsContext);
-  const totalSessions = studentSessions.length;
 
   const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null);
 
@@ -94,11 +92,7 @@ const SessionsTable = () => {
         selectionMode={isMobileSm ? "none" : "single"}
         selectedKeys={selectedKeys}
         disabledKeys={disabledSessions}
-        topContent={
-          <TableHeading itemName="Student" totalItems={totalSessions}>
-            <TableSearch search={search} onSearch={setSearch} />
-          </TableHeading>
-        }
+        topContent={<SessionsHeader search={search} onSearch={setSearch} />}
         bottomContent={<TablePagination {...pagination} items={sessionsList} disabled={!!searchQuery} />}
         aria-label={`List of students doing ${examDetails.name} exam.`}
         classNames={{ td: "py-3" }}
