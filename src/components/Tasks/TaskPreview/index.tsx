@@ -49,7 +49,7 @@ const TaskPreview = () => {
 
         <div className="flex items-center gap-1">
           <div className="-space-y-1 *:!scale-80 [&_button]:flex">
-            <Tooltip content="Move up" delay={500}>
+            <Tooltip content="Move up" delay={500} classNames={{ content: "font-serif" }}>
               <Button
                 isIconOnly
                 size="sm"
@@ -64,7 +64,7 @@ const TaskPreview = () => {
               </Button>
             </Tooltip>
 
-            <Tooltip content="Move down" delay={500}>
+            <Tooltip content="Move down" delay={500} classNames={{ content: "font-serif" }}>
               <Button
                 isIconOnly
                 size="sm"

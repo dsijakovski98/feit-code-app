@@ -15,7 +15,7 @@ const Timestamp = ({ children: timestamp }: Props) => {
   const formattedDate = useMemo(() => getDaytime(date), [date]);
 
   return (
-    <Tooltip content={formattedDate} classNames={{ content: "font-semibold" }}>
+    <Tooltip content={formattedDate} classNames={{ content: "font-semibold font-serif" }}>
       <b className="cursor-help font-semibold">{relativeTime}</b>
     </Tooltip>
   );

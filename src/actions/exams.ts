@@ -188,13 +188,13 @@ export const startExam = async (examId: string) => {
 export const endExam = async (examId: string) => {
   try {
     await Promise.all([
-      removeExamSession(examId),
       db
         .update(exams)
         .set({
           status: EXAM_STATUS.completed,
         })
         .where(eq(exams.id, examId)),
+      removeExamSession(examId),
     ]);
   } catch (e) {
     // TODO: Sentry logging

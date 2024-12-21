@@ -45,7 +45,7 @@ const TestNoInputsTable = () => {
                     placement="top-start"
                     content="Depending on the Task, it may be impossible for a function to  have multiple Outputs given the same (empty) Inputs."
                     className="p-4"
-                    classNames={{ content: "text-base" }}
+                    classNames={{ content: "text-base font-serif" }}
                   >
                     <div>
                       <Icon name="info" className="h-5 w-5 cursor-pointer" />

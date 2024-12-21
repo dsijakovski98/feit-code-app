@@ -115,7 +115,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
             name="color"
             disabled={isSubmitting}
             render={({ field }) => (
-              <Tooltip content={field.value}>
+              <Tooltip content={field.value} classNames={{ content: "font-serif" }}>
                 <input
                   {...field}
                   type="color"

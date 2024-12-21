@@ -2,7 +2,6 @@ import { ComponentProps, Fragment, useDeferredValue, useMemo, useState } from "r
 
 import clsx from "clsx";
 
-import { Tooltip } from "@nextui-org/react";
 import {
   Selection,
   Table,
@@ -12,9 +11,11 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
+import { Tooltip } from "@nextui-org/tooltip";
 
 import SessionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionCellsMux";
 import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";
+import FinishExamEarly from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionsTable/FinishExamEarly";
 import SessionsHeader from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionsTable/SessionsHeader";
 import Icon from "@/components/ui/Icon";
 import TablePagination from "@/components/ui/Table/TablePagination";
@@ -93,7 +94,18 @@ const SessionsTable = () => {
         selectedKeys={selectedKeys}
         disabledKeys={disabledSessions}
         topContent={<SessionsHeader search={search} onSearch={setSearch} />}
-        bottomContent={<TablePagination {...pagination} items={sessionsList} disabled={!!searchQuery} />}
+        bottomContent={
+          <div className="flex items-center justify-between">
+            <TablePagination
+              {...pagination}
+              items={sessionsList}
+              disabled={!!searchQuery}
+              className="w-fit"
+            />
+
+            <FinishExamEarly />
+          </div>
+        }
         aria-label={`List of students doing ${examDetails.name} exam.`}
         classNames={{ td: "py-3" }}
       >
@@ -131,6 +143,7 @@ const SessionsTable = () => {
                           "Total time the Student has opened a different tab/window from the session."}
                       </p>
                     }
+                    classNames={{ content: "font-serif" }}
                   >
                     <p className="cursor-help">
                       <Icon name="info" className="h-3 w-3" />

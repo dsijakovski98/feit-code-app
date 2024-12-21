@@ -4,9 +4,10 @@ import { ROWS_PER_PAGE, UsePaginate } from "@/hooks/usePaginate";
 
 type Props = UsePaginate<unknown> & {
   disabled?: boolean;
+  className?: string;
 };
 
-const TablePagination = ({ page, pages, setPage, items, disabled = false }: Props) => {
+const TablePagination = ({ page, pages, setPage, items, disabled = false, className = "" }: Props) => {
   return (
     <Pagination
       showControls
@@ -19,6 +20,7 @@ const TablePagination = ({ page, pages, setPage, items, disabled = false }: Prop
       total={pages}
       onChange={setPage}
       isDisabled={disabled}
+      className={className}
       classNames={{
         cursor: "bg-foreground text-background",
         prev: "w-7 h-7 p-0.5 min-w-0",
