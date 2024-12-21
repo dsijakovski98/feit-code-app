@@ -34,6 +34,8 @@ const NewExamPage = lazy(() => import("@/pages/dashboard/courses/new-exam"));
 const ExamDetailsPage = lazy(() => import("@/pages/dashboard/exams/details"));
 const ExamSessionPage = lazy(() => import("@/pages/exam-session"));
 
+const UnknownPage = lazy(() => import("@/pages/404"));
+
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -130,6 +132,8 @@ const AppRouter = () => {
               <Route path={ROUTES.ssoCallback} element={<CallbackSSO />} />
             </Route>
           </Route>
+
+          <Route path="*" element={<UnknownPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
