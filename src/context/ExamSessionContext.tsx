@@ -43,8 +43,9 @@ const ExamSessionProvider = ({ children, ...ctx }: Props) => {
   const tasksState = useState(() => {
     return ctx.exam.tasks.reduce(
       (acc, task) => {
+        const taskKey = `${sessionId}_${task.id}`;
         acc[task.id] = {
-          code: sessionStorage.getItem(task.id) || "",
+          code: sessionStorage.getItem(taskKey) || "",
           output: "",
         };
         return acc;

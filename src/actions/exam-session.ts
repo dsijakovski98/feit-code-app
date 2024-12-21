@@ -25,6 +25,17 @@ const activeSessionRef = ({ examId, sessionId }: SessionOptions) => {
   return ref(fbDatabase, `exams/${examId}/activeStudents/${sessionId}`);
 };
 
+const cleanUpExamSessionStorage = (examSessionKey: string) => {
+  const sessionStorageKeys = Object.keys(sessionStorage);
+
+  // Clean up session storage of user, related to the exam session
+  sessionStorageKeys.forEach((sessionStorageKey) => {
+    if (sessionStorageKey.startsWith(examSessionKey)) {
+      sessionStorage.removeItem(sessionStorageKey);
+    }
+  });
+};
+
 type JoinSessionOptions = {
   examId: string;
   student: FCStudent;
@@ -120,7 +131,10 @@ export const leaveExamSessionLogout = async ({ studentId }: LeaveSessionLogout) 
           );
 
           if (activeStudent) {
-            delete examSessions[key].activeStudents[activeStudent[0]];
+            const studentSessionId = activeStudent[0];
+
+            cleanUpExamSessionStorage(studentSessionId);
+            delete examSessions[key].activeStudents[studentSessionId];
           }
         });
 
@@ -276,8 +290,11 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
             return;
           }
 
-          const sessionKey = targetSession[0] as keyof typeof examSession;
-          delete examSession[sessionKey];
+          const studentSessionKey = targetSession[0] as keyof typeof examSession;
+
+          cleanUpExamSessionStorage(studentSessionKey);
+          delete examSession[studentSessionKey];
+
           set(activeSessionRef, examSession);
 
           resolve(targetSession[1]);

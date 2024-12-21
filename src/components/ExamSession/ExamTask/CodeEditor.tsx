@@ -22,7 +22,8 @@ const ExamCodeEditor = () => {
       return { ...prev };
     });
 
-    sessionStorage.setItem(task.id, value);
+    const taskKey = `${sessionId}_${task.id}`;
+    sessionStorage.setItem(taskKey, value);
   };
 
   const handlePaste = (e: ClipboardEvent<HTMLDivElement>) => {
