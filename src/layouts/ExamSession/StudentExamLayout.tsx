@@ -1,4 +1,5 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import toast from "react-hot-toast";
 import { Navigate, Outlet } from "react-router-dom";
 
 import { CircularProgress } from "@nextui-org/react";
@@ -7,6 +8,7 @@ import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import ExamSessionProvider from "@/context/ExamSessionContext";
 import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
+import { useSubmissionDetails } from "@/hooks/student/useStudentSubmissionDetails";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 
@@ -16,6 +18,17 @@ const StudentExamLayout = () => {
 
   const { userData } = useFCUser();
   const { data: studentCourses } = useStudentCoursesList(userData?.user.id || "");
+
+  const { data: submission } = useSubmissionDetails({
+    examId: examDetails.id,
+    studentId: userData?.user.id ?? "",
+  });
+
+  useEffect(() => {
+    if (submission) {
+      toast("You have already submitted this exam for grading!");
+    }
+  }, [submission]);
 
   const validExam = useMemo(() => {
     if (!studentCourses) return null;
@@ -33,6 +46,10 @@ const StudentExamLayout = () => {
         <CircularProgress aria-label="Loading exam session..." size="lg" className="scale-[2]" />
       </div>
     );
+  }
+
+  if (submission) {
+    return <Navigate to={ROUTES.dashboard} />;
   }
 
   return (
