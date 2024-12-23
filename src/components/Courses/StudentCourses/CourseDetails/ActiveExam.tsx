@@ -9,7 +9,7 @@ import { EXAM_STATUS } from "@/constants/enums";
 import { ROUTES } from "@/constants/routes";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useLatestExam } from "@/hooks/exam/useLatestExam";
-import { useSubmissionDetails } from "@/hooks/student/useStudentSubmissionDetails";
+import { useSubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { parseExamStatus } from "@/utils";

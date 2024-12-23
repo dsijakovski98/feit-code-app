@@ -1,12 +1,16 @@
 import { useMemo } from "react";
 
+import { InferSelectModel } from "drizzle-orm";
+
 import { Chip } from "@nextui-org/chip";
 
-import { ExamSessionTaskContext } from "@/context/ExamSessionTaskContext";
-import { useCtx } from "@/hooks/useCtx";
+import { tasks } from "@/db/schema";
 
-const ExamTaskDescription = () => {
-  const { task } = useCtx(ExamSessionTaskContext);
+type Props = {
+  task: Pick<InferSelectModel<typeof tasks>, "orderIndex" | "title" | "description" | "points">;
+};
+
+const ExamTaskDescription = ({ task }: Props) => {
   const { orderIndex, title, description, points } = task;
 
   const taskPoints = useMemo(() => `${points} point${Number(points) > 9 && "s"}`, [points]);

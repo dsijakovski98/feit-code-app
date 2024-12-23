@@ -8,7 +8,7 @@ import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import ExamSessionProvider from "@/context/ExamSessionContext";
 import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
-import { useSubmissionDetails } from "@/hooks/student/useStudentSubmissionDetails";
+import { useSubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 

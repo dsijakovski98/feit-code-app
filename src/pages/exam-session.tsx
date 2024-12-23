@@ -1,13 +1,12 @@
 import { Fragment } from "react";
 
-import { Tab, Tabs } from "@nextui-org/tabs";
-
 import LogoFC from "@/layouts/MainLayout/LogoFC";
 
 import ExamSession from "@/components/ExamSession";
 import RemoveSessionHandler from "@/components/ExamSession/Handlers/RemoveSessionHandler";
 import SessionActionsHandler from "@/components/ExamSession/Handlers/SessionActionsHandler";
 import SessionTimer from "@/components/ExamSession/SessionTimer";
+import TaskTabs from "@/components/ui/TaskTabs";
 
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { ExamSessionTaskProvider } from "@/context/ExamSessionTaskContext";
@@ -42,24 +41,12 @@ const ExamSessionPage = () => {
                 <SessionTimer />
               </div>
 
-              <Tabs
-                size="lg"
-                color="primary"
-                variant="light"
-                selectedKey={currentTask.id}
-                onSelectionChange={(e) => handleSelectTask(e.toString())}
-                // @ts-expect-error Custom style property
-                style={{ "--tasks": tasks.length }}
-                classNames={{
-                  tab: "min-w-[10dvw]",
-                  tabList: "max-w-[calc(10dvw*var(--tasks))] max-w-[60dvw]",
-                  tabContent: "text-foreground font-medium group-data[selected=true]:text-primary-foreground",
-                }}
-              >
-                {tasks.map((task) => (
-                  <Tab key={task.id} title={task.title} isDisabled={submittedTasks.includes(task.id)} />
-                ))}
-              </Tabs>
+              <TaskTabs
+                tasks={tasks}
+                activeId={currentTask.id}
+                onSelect={handleSelectTask}
+                disabledTasks={submittedTasks}
+              />
             </nav>
           </header>
 

@@ -23,7 +23,7 @@ export const useSubmissionDetails = ({ examId, studentId }: Options) => {
           return and(examFilter, studentFilter);
         },
 
-        with: { student: true, exam: { with: { tasks: true } } },
+        with: { student: true, exam: { with: { tasks: { with: { tests: { with: { inputs: true } } } } } } },
       });
 
       if (!submission) {
@@ -33,7 +33,7 @@ export const useSubmissionDetails = ({ examId, studentId }: Options) => {
       const { exam, student } = submission;
       const { id, firstName, lastName } = student;
 
-      const tasksWithUrls = await Promise.all(
+      const tasksWithCode = await Promise.all(
         submission.exam.tasks.map(async (task) => {
           const taskPath = taskTemplateRef({
             examId,
@@ -43,13 +43,15 @@ export const useSubmissionDetails = ({ examId, studentId }: Options) => {
           const studentPath = studentTaskRef({ id, firstName, lastName });
           const templateRef = storageRef(fbStorage, `${taskPath}/${studentPath}`);
 
-          const submissionUrl = await getDownloadURL(templateRef);
+          const url = await getDownloadURL(templateRef);
+          const response = await fetch(url);
+          const code = await response.text();
 
-          return { ...task, submissionUrl };
+          return { ...task, code };
         }),
       );
 
-      return { ...submission, exam: { ...submission.exam, tasks: tasksWithUrls } };
+      return { ...submission, exam: { ...submission.exam, tasks: tasksWithCode } };
     },
   });
 };

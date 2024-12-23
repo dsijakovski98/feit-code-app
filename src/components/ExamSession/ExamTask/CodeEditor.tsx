@@ -9,9 +9,10 @@ import { useCtx } from "@/hooks/useCtx";
 
 const ExamCodeEditor = () => {
   const { exam, sessionIdState, tasksState } = useCtx(ExamSessionContext);
-  const { task, template } = useCtx(ExamSessionTaskContext);
   const [sessionId] = sessionIdState;
   const [tasks, setTasks] = tasksState;
+
+  const { task, template } = useCtx(ExamSessionTaskContext);
   const taskState = tasks[task.id];
 
   const { id: examId } = exam;

@@ -8,7 +8,7 @@ import Icon from "@/components/ui/Icon";
 
 import { ROUTES } from "@/constants/routes";
 import GradeSubmissionProvider from "@/context/GradeSubmissionContext";
-import { useSubmissionDetails } from "@/hooks/student/useStudentSubmissionDetails";
+import { useSubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
 
 const GradeStudentPage = () => {
   const { id: examId = "", sid: studentId = "" } = useParams<{ id: string; sid: string }>();
