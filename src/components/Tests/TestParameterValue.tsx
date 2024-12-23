@@ -1,23 +1,31 @@
+import clsx, { ClassValue } from "clsx";
+
 import { VALUE_TYPE } from "@/constants/enums";
 import { InputType } from "@/context/ExamFormContext";
 
-type Props = Pick<InputType, "type" | "value">;
+type Props = {
+  className?: ClassValue;
+} & Pick<InputType, "type" | "value">;
 
-const TestParameterValue = ({ type, value }: Props) => {
+const TestParameterValue = ({ type, value, className = "" }: Props) => {
   if (type === VALUE_TYPE.string) {
-    return <span className="break-words font-sans font-medium text-foreground-300">"{value}"</span>;
+    return (
+      <span className={clsx("break-words font-sans font-medium text-foreground-300", className)}>
+        "{value}"
+      </span>
+    );
   }
 
   if (type === VALUE_TYPE.number) {
-    return <span className="font-sans font-medium text-primary-600">{value}</span>;
+    return <span className={clsx("font-sans font-medium text-primary-600", className)}>{value}</span>;
   }
 
   if (type === VALUE_TYPE.boolean) {
-    return <span className="font-mono font-medium">{value.toUpperCase()}</span>;
+    return <span className={clsx("font-mono font-medium", className)}>{value.toUpperCase()}</span>;
   }
 
   if (type === VALUE_TYPE.empty) {
-    return <span className="font-sans font-medium text-foreground-300">None</span>;
+    return <span className={clsx("font-sans font-medium text-foreground-300", className)}>None</span>;
   }
 
   throw new Error(`Unsupported value type ${type}`);

@@ -9,6 +9,7 @@ export const jsConfig: LanguageConfig = {
   extension: langs.javascript(),
   supportsTests: true,
   commandExec: (taskName) => `node ${taskName}.js`,
+
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => input.name);
 

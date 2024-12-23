@@ -9,7 +9,7 @@ import { primaryId } from "@/db/schema/utils";
 const tests = pgTable("tests", {
   id: primaryId(),
   outputType: valueType("output_type").notNull(),
-  output: varchar("output", { length: 256 }).notNull(),
+  outputValue: varchar("output", { length: 256 }).notNull(),
 
   taskId: varchar("task_id", { length: 256 })
     .notNull()
