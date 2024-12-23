@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 
+import clsx from "clsx";
+
 import { Tab, Tabs } from "@nextui-org/tabs";
 
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import TaskTabs from "@/components/ui/TaskTabs";
 
@@ -14,9 +17,11 @@ import { FeedbackView } from "@/types/exams";
 type Props = {
   feedbackView: FeedbackView;
   setFeedbackView: UseState<FeedbackView>[1];
+
+  onSubmit: () => void;
 };
 
-const GradeHeader = ({ feedbackView, setFeedbackView }: Props) => {
+const GradeHeader = ({ feedbackView, setFeedbackView, onSubmit }: Props) => {
   const { submission, activeTask, setActiveId } = useCtx(GradeSubmissionContext);
   const { exam, student } = submission;
 
@@ -75,7 +80,25 @@ const GradeHeader = ({ feedbackView, setFeedbackView }: Props) => {
           </p>
         </div>
 
-        <TaskTabs tasks={exam.tasks} activeId={activeTask.id} onSelect={setActiveId} />
+        <div className="grid place-items-end [grid-template-areas:'stack'] *:[grid-area:stack]">
+          <div
+            className={clsx("transition-opacity duration-500", {
+              "pointer-events-none invisible opacity-0": feedbackView === "feedback",
+            })}
+          >
+            <TaskTabs tasks={exam.tasks} activeId={activeTask.id} onSelect={setActiveId} />
+          </div>
+
+          <div
+            className={clsx("self-center transition-opacity duration-500", {
+              "pointer-events-none invisible opacity-0": feedbackView === "code",
+            })}
+          >
+            <Button radius="full" className="px-6 text-base font-medium" onPress={onSubmit}>
+              Submit Feedback
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

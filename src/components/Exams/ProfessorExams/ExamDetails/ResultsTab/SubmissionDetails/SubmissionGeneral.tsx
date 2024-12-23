@@ -7,6 +7,7 @@ import SubmissionStatus from "@/components/Exams/ProfessorExams/ExamDetails/Resu
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
+import { SUBMISSION_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { useAvatar } from "@/hooks/useAvatar";
@@ -20,7 +21,7 @@ type Props = {
 };
 
 const SubmissionGeneral = ({ submission }: Props) => {
-  const { student, examId, studentId } = submission;
+  const { student, examId, studentId, status } = submission;
 
   const { examDetails } = useCtx(ExamDetailsContext);
 
@@ -64,6 +65,7 @@ const SubmissionGeneral = ({ submission }: Props) => {
           to={gradeHref}
           startContent={<Icon name="grade" className="h-6 w-6" />}
           className="px-8"
+          isDisabled={status === SUBMISSION_STATUS.graded}
         >
           Grade Student
         </Button>
@@ -73,7 +75,7 @@ const SubmissionGeneral = ({ submission }: Props) => {
         <div className="flex items-center gap-12">
           <div className="mr-auto space-y-1">
             <SubmissionStatus status={submission.status!} />
-            <p className="text-foreground-300">{submissionStatusDescription(submission.status!)}</p>
+            <p>{submissionStatusDescription(submission.status!)}</p>
           </div>
 
           <div>
