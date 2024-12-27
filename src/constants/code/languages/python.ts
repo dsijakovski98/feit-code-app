@@ -8,12 +8,4 @@ export const pyConfig: LanguageConfig = {
   emptyValue: "None",
   extension: langs.python(),
   commandExec: (taskName) => `python3 ${taskName}.py`,
-
-  supportsTests: true,
-  parseIO: (test) => {
-    const inputs = test.inputs.map((input) => input.name);
-
-    // Python without types, doesn't need input types NOR output
-    return { inputs, output: "" };
-  },
 };

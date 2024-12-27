@@ -72,7 +72,7 @@ const GradeHeader = ({ feedbackView, setFeedbackView, onSubmit }: Props) => {
 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-semibold">
+          <h2 className="text-xl font-semibold">
             {exam.name}・{exam.language}
           </h2>
           <p>

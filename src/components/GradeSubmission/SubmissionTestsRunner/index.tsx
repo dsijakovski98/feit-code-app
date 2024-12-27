@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
 import { Listbox, ListboxItem } from "@nextui-org/listbox";
@@ -24,6 +24,8 @@ type Props = {
 
 const SubmissionTestsRunner = ({ dialog }: Props) => {
   const { getToken } = useAuth();
+
+  const queryClient = useQueryClient();
 
   const { activeTask, submission } = useCtx(GradeSubmissionContext);
   const { title, tests } = activeTask;
@@ -59,6 +61,10 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
     onSuccess: (results) => {
       if (!results) return;
 
+      Object.entries(results).forEach(([testId, result]) => {
+        queryClient.setQueryData([{ name: "test-result", testId }], result);
+      });
+
       setTestResults(results);
     },
   });
@@ -67,6 +73,29 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
     if (!cleanCode) return;
 
     resetResults();
+
+    const cachedResultsData = queryClient.getQueriesData<TestResult>({ queryKey: [{ name: "test-result" }] });
+    if (cachedResultsData) {
+      const cachedResults = cachedResultsData.reduce(
+        (acc, resultData) => {
+          const [queryKey, testResult] = resultData;
+          if (!testResult) return acc;
+
+          const { testId } = queryKey[0] as { name: string; testId: string };
+
+          acc[testId] = testResult;
+          return acc;
+        },
+        {} as Record<string, TestResult>,
+      );
+
+      setTestResults(cachedResults);
+
+      // No need to run mutation if all test results are cached
+      if (cachedResultsData.length === tests.length) {
+        return;
+      }
+    }
 
     const token = await getToken();
 

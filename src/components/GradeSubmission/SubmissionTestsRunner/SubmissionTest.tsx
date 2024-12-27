@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 
 import { useAuth } from "@clerk/clerk-react";
@@ -31,27 +31,41 @@ type Props = {
 const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = false }: Props) => {
   const { getToken } = useAuth();
 
+  const queryClient = useQueryClient();
+
   const { submission, activeTask } = useCtx(GradeSubmissionContext);
   const { exam } = submission;
   const { title } = activeTask;
 
   const { data: cleanCode } = useCtx(CleanSubmissionCodeContext);
 
+  const updateTestResult = (testResult: TestResult) => {
+    setTestResults((prev) => {
+      prev[test.id] = testResult;
+      return { ...prev };
+    });
+  };
+
   const { mutate, isPending } = useMutation({
     mutationFn: runSingleTest,
     onSuccess: (testResult) => {
       if (!testResult) return;
 
-      setTestResults((prev) => {
-        prev[test.id] = testResult;
-        return { ...prev };
-      });
+      queryClient.setQueryData([{ name: "test-result", testId: test.id }], testResult);
+      updateTestResult(testResult);
     },
     onError: (error) => toast.error(error.message),
   });
 
   const runTest = async () => {
     if (!cleanCode) return;
+
+    const cachedResult = queryClient.getQueryData<TestResult>([{ name: "test-result", testId: test.id }]);
+
+    if (cachedResult) {
+      updateTestResult(cachedResult);
+      return;
+    }
 
     const token = await getToken();
 

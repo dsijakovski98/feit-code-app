@@ -1,9 +1,6 @@
 import { langs } from "@uiw/codemirror-extensions-langs";
 
-import { PROGRAMMING_LANGUAGE } from "@/constants/enums";
-import { PLACEHOLDER_COMMENT } from "@/constants/grades";
 import { LanguageConfig } from "@/types";
-import { testFuncArguments } from "@/utils/code";
 
 export const jsConfig: LanguageConfig = {
   comment: "//",
@@ -21,12 +18,5 @@ export const jsConfig: LanguageConfig = {
     return { inputs, output: "" };
   },
 
-  addTestCommand: ({ code, funcName, testInputs }) => {
-    const args = testFuncArguments(testInputs, PROGRAMMING_LANGUAGE.javascript);
-
-    const funcCall = `${funcName}(${args})`;
-    const callCommand = `console.log(${funcCall})`;
-
-    return code.replace(`// ${PLACEHOLDER_COMMENT}`, callCommand);
-  },
+  testCallExpression: (funcCall) => `console.log(${funcCall})`,
 };

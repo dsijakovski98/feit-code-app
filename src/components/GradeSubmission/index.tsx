@@ -157,8 +157,8 @@ const GradeSubmission = () => {
                 <ExamTaskDescription task={activeTask} />
               </div>
 
-              <CleanSubmissionCodeProvider>
-                <div className="max-h-full overflow-y-auto bg-slate-950 px-8">
+              <div className="max-h-full overflow-y-auto bg-slate-950 px-8 *:h-full">
+                <CleanSubmissionCodeProvider>
                   <ExamTaskOutput
                     output={activeOutput}
                     title={activeTask.title}
@@ -168,8 +168,8 @@ const GradeSubmission = () => {
                   >
                     <GradeActions runCode={runCode} loading={runLoading} />
                   </ExamTaskOutput>
-                </div>
-              </CleanSubmissionCodeProvider>
+                </CleanSubmissionCodeProvider>
+              </div>
             </Split>
           </div>
         </Split>

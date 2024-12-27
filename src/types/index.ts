@@ -1,11 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
 import { Extension } from "@uiw/react-codemirror";
-import { InferSelectModel } from "drizzle-orm";
 
 import { ButtonProps } from "@nextui-org/react";
-
-import { inputs } from "@/db/schema";
 
 import { TestType } from "@/context/ExamFormContext";
 
@@ -45,10 +42,6 @@ export type LanguageConfig = {
   | {
       supportsTests: true;
       parseIO: (test: Omit<TestType, "id">) => { inputs: string[]; output: string };
-      addTestCommand: (options: {
-        code: string;
-        funcName: string;
-        testInputs: InferSelectModel<typeof inputs>[];
-      }) => string;
+      testCallExpression: (funcCall: string) => string;
     }
 );

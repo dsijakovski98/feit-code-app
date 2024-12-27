@@ -5,10 +5,11 @@ import { submissions } from "@/db/schema";
 import { RunCodeOptions, runTaskCode } from "@/actions/exam-session";
 import { LANGUAGES_CONFIG } from "@/constants/code/languages";
 import { ProgrammingLanguage, SUBMISSION_STATUS } from "@/constants/enums";
+import { PLACEHOLDER_COMMENT } from "@/constants/grades";
 import { db } from "@/db";
 import { SubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
 import { isNumber } from "@/utils";
-import { parseParameterValue } from "@/utils/code";
+import { parseParameterValue, testFuncArguments } from "@/utils/code";
 import { functionNameFromTitle } from "@/utils/code/taskTemplates";
 
 type FeedbackOptions = {
@@ -70,8 +71,16 @@ export const runSingleTest = async ({ code, name, language, test, token }: Singl
     throw new Error(`This language doesn't support tests!`);
   }
 
+  // Generate test call components
   const funcName = functionNameFromTitle(name);
-  const testCode = langConfig.addTestCommand({ code, funcName, testInputs: test.inputs });
+  const args = testFuncArguments(test.inputs, language);
+
+  // Generate actual test call expression
+  const funcCall = `${funcName}(${args})`;
+  const testCallExpression = langConfig.testCallExpression(funcCall);
+
+  // Replace placeholder comment with test call expression
+  const testCode = code.replace(`${langConfig.comment} ${PLACEHOLDER_COMMENT}`, testCallExpression);
 
   const output = await runTaskCode({ code: testCode, name, language, token });
 
@@ -100,7 +109,7 @@ type CompareOptions = {
 const compareOutput = ({ output, test, language }: CompareOptions): TestResult => {
   let success = false;
   const emptyValue = LANGUAGES_CONFIG[language].emptyValue;
-  const taskOutput = test.outputType === "string" ? output : output.trim();
+  const taskOutput = output.trim();
 
   if (test.outputType === "string") {
     success = taskOutput === test.outputValue;
@@ -122,8 +131,9 @@ const compareOutput = ({ output, test, language }: CompareOptions): TestResult =
 
   if (!success) {
     const expected = parseParameterValue(test.outputValue, test.outputType, emptyValue);
+    const received = parseParameterValue(taskOutput, test.outputType, emptyValue);
 
-    return { message: `Expected  ${expected}, but received: ${taskOutput}!`, success: false };
+    return { message: `Expected  ${expected}, but received: ${received}`, success: false };
   }
 
   return { message: "Test ran successfully!", success: true };
