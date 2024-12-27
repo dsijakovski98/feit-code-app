@@ -7,8 +7,9 @@ export const pyConfig: LanguageConfig = {
   funcPrefix: "def",
   emptyValue: "None",
   extension: langs.python(),
-  supportsTests: true,
   commandExec: (taskName) => `python3 ${taskName}.py`,
+
+  supportsTests: true,
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => input.name);
 

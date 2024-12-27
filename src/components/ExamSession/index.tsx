@@ -54,7 +54,7 @@ const ExamSession = () => {
   };
 
   return (
-    <main className="border-t-8 border-t-content4 bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full dark:border-t-content2">
+    <main className="h-[calc(100dvh-105px)] overflow-hidden border-t-8 border-t-content4 bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full dark:border-t-content2">
       <Split
         sizes={[65, 35]}
         minSize={[400, 400]}

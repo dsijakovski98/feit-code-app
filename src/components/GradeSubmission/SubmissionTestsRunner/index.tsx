@@ -13,6 +13,7 @@ import PresenceBlock from "@/components/ui/PresenceBlock";
 import Stat from "@/components/ui/Stat";
 
 import { TestResult, runTests } from "@/actions/grades";
+import { CleanSubmissionCodeContext } from "@/context/CleanSubmissionCodeContext";
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { useCtx } from "@/hooks/useCtx";
 import { Toggle } from "@/hooks/useToggle";
@@ -25,9 +26,11 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
   const { getToken } = useAuth();
 
   const { activeTask, submission } = useCtx(GradeSubmissionContext);
-  const { title, tests, code } = activeTask;
+  const { title, tests } = activeTask;
   const { student, exam } = submission;
   const { language } = exam;
+
+  const { data: cleanCode } = useCtx(CleanSubmissionCodeContext);
 
   const emptyResults = () => {
     return tests.reduce(
@@ -47,6 +50,10 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
   const successCount = useMemo(() => testRuns.filter((result) => !!result?.success).length, [testRuns]);
   const failedCount = testRuns.length - successCount;
 
+  const resetResults = () => {
+    setTestResults(emptyResults());
+  };
+
   const { mutate, isPending } = useMutation({
     mutationFn: runTests,
     onSuccess: (results) => {
@@ -57,7 +64,9 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
   });
 
   const runAllTests = async () => {
-    setTestResults(emptyResults());
+    if (!cleanCode) return;
+
+    resetResults();
 
     const token = await getToken();
 
@@ -66,7 +75,7 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
       return;
     }
 
-    mutate({ tests, token, code, language, name: title });
+    mutate({ tests, token, code: cleanCode, language, name: title });
   };
 
   return (
@@ -100,8 +109,9 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
             {tests.map((test, idx) => (
               <ListboxItem
                 key={test.id}
+                disableAnimation
                 textValue={`Test ${idx + 1}`}
-                className="rounded-lg px-2 outline outline-content2 hover:!bg-content2/50"
+                className="!cursor-default rounded-lg !bg-transparent px-3 outline outline-content2 hover:!bg-transparent"
               >
                 <SubmissionTest
                   test={test}
@@ -115,16 +125,22 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
           </Listbox>
         </ModalBody>
 
-        <ModalFooter className="items-center">
+        <ModalFooter className="items-center gap-4">
           <div className="mr-auto">
             <PresenceBlock show={showStats} mode="appear">
               <div className="flex items-end gap-12 font-sans *:!text-sm">
-                <Stat label="Total Runs" value={tests.length} size="sm" />
+                <Stat label="Total Runs" value={testRuns.length} size="sm" />
                 <Stat label="Success" value={successCount} size="sm" />
-                <Stat label="Failed" value={failedCount} size="sm" />
+                <Stat label="Fail" value={failedCount} size="sm" />
               </div>
             </PresenceBlock>
           </div>
+
+          <PresenceBlock show={showStats} mode="appear">
+            <Button className="px-6 text-base" color="default" onPress={resetResults} isDisabled={isPending}>
+              Clear Tests
+            </Button>
+          </PresenceBlock>
 
           <Button className="px-6 text-base" color="success" onPress={runAllTests} isDisabled={isPending}>
             Run All Tests

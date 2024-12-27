@@ -18,3 +18,5 @@ export const FEEDBACK_TOOLBAR_LEFT: Commands[] = [
 ];
 
 export const FEEDBACK_TOOLBAR_RIGHT: Commands[] = ["preview"];
+
+export const PLACEHOLDER_COMMENT = "PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER";

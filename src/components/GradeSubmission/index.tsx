@@ -21,6 +21,7 @@ import { runTaskCode } from "@/actions/exam-session";
 import { addFeedback } from "@/actions/grades";
 import { FEEDBACK_TOOLBAR_LEFT, FEEDBACK_TOOLBAR_RIGHT } from "@/constants/grades";
 import { ROUTES } from "@/constants/routes";
+import CleanSubmissionCodeProvider from "@/context/CleanSubmissionCodeContext";
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
@@ -156,17 +157,19 @@ const GradeSubmission = () => {
                 <ExamTaskDescription task={activeTask} />
               </div>
 
-              <div className="max-h-full overflow-y-auto bg-slate-950 px-8">
-                <ExamTaskOutput
-                  output={activeOutput}
-                  title={activeTask.title}
-                  language={exam.language}
-                  studentEmail={student.email}
-                  loading={runLoading}
-                >
-                  <GradeActions runCode={runCode} loading={runLoading} />
-                </ExamTaskOutput>
-              </div>
+              <CleanSubmissionCodeProvider>
+                <div className="max-h-full overflow-y-auto bg-slate-950 px-8">
+                  <ExamTaskOutput
+                    output={activeOutput}
+                    title={activeTask.title}
+                    language={exam.language}
+                    studentEmail={student.email}
+                    loading={runLoading}
+                  >
+                    <GradeActions runCode={runCode} loading={runLoading} />
+                  </ExamTaskOutput>
+                </div>
+              </CleanSubmissionCodeProvider>
             </Split>
           </div>
         </Split>

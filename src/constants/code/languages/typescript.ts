@@ -1,7 +1,9 @@
 import { langs } from "@uiw/codemirror-extensions-langs";
 
-import { InputValueType, VALUE_TYPE } from "@/constants/enums";
+import { InputValueType, PROGRAMMING_LANGUAGE, VALUE_TYPE } from "@/constants/enums";
+import { PLACEHOLDER_COMMENT } from "@/constants/grades";
 import { LanguageConfig } from "@/types";
+import { testFuncArguments } from "@/utils/code";
 
 const typeMap: Record<InputValueType, string> = {
   [VALUE_TYPE.string]: "string",
@@ -15,13 +17,24 @@ export const tsConfig: LanguageConfig = {
   funcPrefix: "function",
   emptyValue: "null",
   extension: langs.typescript(),
-  supportsTests: true,
   commandExec: (taskName) => `bun run ${taskName}.ts`,
+
+  supportsTests: true,
+
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => `${input.name}: ${typeMap[input.type]}`);
     // Trailing colon needed for proper formatting ex. function (a: int, b: int): int {}
     const output = `: ${typeMap[test.type]}`;
 
     return { inputs, output };
+  },
+
+  addTestCommand: ({ code, funcName, testInputs }) => {
+    const args = testFuncArguments(testInputs, PROGRAMMING_LANGUAGE.typescript);
+
+    const funcCall = `${funcName}(${args})`;
+    const callCommand = `console.log(${funcCall})`;
+
+    return code.replace(`// ${PLACEHOLDER_COMMENT}`, callCommand);
   },
 };

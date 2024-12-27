@@ -11,6 +11,7 @@ import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 import { TestResult, runSingleTest } from "@/actions/grades";
+import { CleanSubmissionCodeContext } from "@/context/CleanSubmissionCodeContext";
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { SubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
 import { useCtx } from "@/hooks/useCtx";
@@ -31,10 +32,10 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
   const { getToken } = useAuth();
 
   const { submission, activeTask } = useCtx(GradeSubmissionContext);
-  const {
-    exam: { language },
-  } = submission;
-  const { title, code } = activeTask;
+  const { exam } = submission;
+  const { title } = activeTask;
+
+  const { data: cleanCode } = useCtx(CleanSubmissionCodeContext);
 
   const { mutate, isPending } = useMutation({
     mutationFn: runSingleTest,
@@ -46,9 +47,12 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
         return { ...prev };
       });
     },
+    onError: (error) => toast.error(error.message),
   });
 
   const runTest = async () => {
+    if (!cleanCode) return;
+
     const token = await getToken();
 
     if (!token) {
@@ -56,7 +60,7 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
       return;
     }
 
-    mutate({ test, token, code, language, name: title });
+    mutate({ test, token, code: cleanCode, language: exam.language, name: title });
   };
 
   const isLoading = resultsLoading || isPending;
@@ -64,13 +68,13 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
   const selectedKeys = result ? [test.id] : [];
 
   return (
-    <div className="flex items-center gap-6">
+    <div className={clsx("flex gap-3", result ? "items-start" : "items-center")}>
       <Accordion hideIndicator selectedKeys={selectedKeys} onSelectionChange={undefined}>
         <AccordionItem
           as={"div"}
           key={test.id}
           aria-label={`Test ${index + 1} header`}
-          classNames={{ trigger: "py-1" }}
+          classNames={{ trigger: "py-1 cursor-default" }}
           title={
             <div className="flex">
               <div>
@@ -91,14 +95,14 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
 
               <div className="ml-auto flex flex-col items-end">
                 <p className="text-sm font-medium">Output</p>
-                <TestParameterValue type={test.outputType} value={test.outputValue} className="text-xl" />
+                <TestParameterValue type={test.outputType} value={test.outputValue} className="text-base" />
               </div>
             </div>
           }
         >
           {result && (
             <p
-              className={clsx("text-base font-semibold", {
+              className={clsx("font-sans text-base font-semibold", {
                 "text-success": result.success,
                 "text-danger": !result.success,
               })}
