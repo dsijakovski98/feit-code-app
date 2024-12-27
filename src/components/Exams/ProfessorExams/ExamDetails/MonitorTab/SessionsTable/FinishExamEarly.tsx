@@ -17,7 +17,7 @@ const FinishExamEarly = () => {
   const { studentSessions } = useCtx(MonitorExamContext);
 
   const canFinishEarly = useMemo(
-    () => studentSessions.every((session) => session.status === "Finished"),
+    () => studentSessions.length > 0 && studentSessions.every((session) => session.status === "Finished"),
     [studentSessions],
   );
 
