@@ -37,7 +37,7 @@ const StudentExamLayout = () => {
   }, [examDetails.courseId, studentCourses]);
 
   if (validExam === false) {
-    return <Navigate to={ROUTES.dashboard} />;
+    return <Navigate to={ROUTES.dashboard} replace />;
   }
 
   if (validExam === null || !userData) {
@@ -49,7 +49,7 @@ const StudentExamLayout = () => {
   }
 
   if (submission) {
-    return <Navigate to={ROUTES.dashboard} />;
+    return <Navigate to={ROUTES.dashboard} replace />;
   }
 
   return (

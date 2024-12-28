@@ -14,14 +14,18 @@ import { functionNameFromTitle } from "@/utils/code/taskTemplates";
 
 type FeedbackOptions = {
   submissionId: string;
+  graderId: string;
   feedback: string;
+  points: number;
 };
-export const addFeedback = async ({ submissionId, feedback }: FeedbackOptions) => {
+export const addFeedback = async ({ submissionId, graderId, feedback, points }: FeedbackOptions) => {
   try {
     await db
       .update(submissions)
       .set({
+        points,
         feedback,
+        graderId,
         status: SUBMISSION_STATUS.graded,
       })
       .where(eq(submissions.id, submissionId));

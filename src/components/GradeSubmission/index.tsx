@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { ElementRef, Fragment, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Split from "react-split";
 
@@ -29,6 +29,26 @@ const GradeSubmission = () => {
   const { getToken } = useAuth();
   const { theme } = useTheme();
 
+  const submitDialog = useToggle();
+
+  const mainSplitRef = useRef<ElementRef<typeof Split>>(null);
+  const [markdownWidth, setMarkdownWidth] = useState<number | null>(null);
+
+  const updateMarkdownWidth = () => {
+    if (!mainSplitRef.current) return;
+
+    // @ts-expect-error Parent actually exists
+    const parent = mainSplitRef.current.parent as HTMLDivElement;
+    const splitElement = parent.firstChild as HTMLDivElement;
+    setMarkdownWidth(splitElement.offsetWidth);
+  };
+
+  useEffect(() => {
+    if (!mainSplitRef.current) return;
+
+    updateMarkdownWidth();
+  }, []);
+
   const { submission, setOutputs, activeTask, activeOutput } = useCtx(GradeSubmissionContext);
   const { exam, student } = submission;
 
@@ -39,8 +59,6 @@ const GradeSubmission = () => {
     setFeedback(newFeedback);
     localStorage.setItem(feedbackKey(submission.id), newFeedback);
   };
-
-  const submitDialog = useToggle();
 
   const { mutate, isPending } = useMutation({
     mutationFn: runTaskCode,
@@ -75,6 +93,8 @@ const GradeSubmission = () => {
     <Fragment>
       <main className="bg-main lg:invisible lg:hidden lg:p-5">
         <Split
+          ref={mainSplitRef}
+          onDrag={updateMarkdownWidth}
           sizes={[65, 35]}
           minSize={[400, 400]}
           snapOffset={5}
@@ -92,7 +112,7 @@ const GradeSubmission = () => {
               onSubmit={submitDialog.toggleOn}
             />
 
-            <div className="grid h-full [grid-template-areas:'stack'] *:[grid-area:stack]">
+            <div className="grid h-full [grid-template-areas:'stack'] *:!max-w-full *:[grid-area:stack]">
               <CodeEditor
                 readOnly
                 editable={false}
@@ -108,7 +128,7 @@ const GradeSubmission = () => {
               />
 
               <div
-                className={clsx("h-full transition-opacity duration-500", {
+                className={clsx("h-full w-full transition-opacity duration-500", {
                   "pointer-events-none invisible opacity-0": feedbackView === "code",
                   "pointer-events-auto visible opacity-100": feedbackView === "feedback",
                 })}
@@ -120,6 +140,7 @@ const GradeSubmission = () => {
                   toolbars={FEEDBACK_TOOLBAR_LEFT}
                   toolbarsMode={FEEDBACK_TOOLBAR_RIGHT}
                   theme={theme as "light" | "dark"}
+                  style={markdownWidth ? { width: `${markdownWidth}px` } : {}}
                   className="h-full !bg-transparent text-base *:!bg-transparent [&_.cm-editor]:!bg-transparent [&_.md-editor-toolbar]:!px-8"
                 />
               </div>

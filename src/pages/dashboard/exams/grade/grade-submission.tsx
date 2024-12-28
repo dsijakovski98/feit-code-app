@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -74,6 +74,10 @@ const GradeStudentPage = () => {
 
   if (!submission) {
     return null;
+  }
+
+  if (submission.status === SUBMISSION_STATUS.graded) {
+    return <Navigate to={`${ROUTES.dashboard}${ROUTES.exams}/${examId}#results`} replace />;
   }
 
   return (

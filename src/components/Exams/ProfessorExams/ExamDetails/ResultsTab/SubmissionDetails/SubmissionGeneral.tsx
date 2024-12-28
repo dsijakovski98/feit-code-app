@@ -59,16 +59,21 @@ const SubmissionGeneral = ({ submission }: Props) => {
           </div>
         )}
 
-        <Button
-          as={Link}
-          // @ts-expect-error NextUI not passing through 'as' props
-          to={gradeHref}
-          startContent={<Icon name="grade" className="h-6 w-6" />}
-          className="px-8"
-          isDisabled={status === SUBMISSION_STATUS.graded}
-        >
-          Grade Student
-        </Button>
+        {status === SUBMISSION_STATUS.graded ? (
+          <p className="self-center font-sans text-3xl font-semibold">
+            {submission.points} / {examDetails.points} pts
+          </p>
+        ) : (
+          <Button
+            as={Link}
+            // @ts-expect-error NextUI not passing through 'as' props
+            to={gradeHref}
+            startContent={<Icon name="grade" className="h-6 w-6" />}
+            className="px-8"
+          >
+            Grade Student
+          </Button>
+        )}
       </div>
 
       {submission && (
