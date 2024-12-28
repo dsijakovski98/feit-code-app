@@ -27,6 +27,8 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { FeedbackView } from "@/types/exams";
 
+const feedbackKey = (submissionId: string) => `submission_${submissionId}`;
+
 const GradeSubmission = () => {
   const { getToken } = useAuth();
   const { theme } = useTheme();
@@ -38,7 +40,13 @@ const GradeSubmission = () => {
   const { exam, student } = submission;
 
   const [feedbackView, setFeedbackView] = useState<FeedbackView>("code");
-  const [feedback, setFeedback] = useState("");
+
+  const [feedback, setFeedback] = useState(localStorage.getItem(feedbackKey(submission.id)) ?? "");
+
+  const onFeedbackChange = (newFeedback: string) => {
+    setFeedback(newFeedback);
+    localStorage.setItem(feedbackKey(submission.id), newFeedback);
+  };
 
   const submitDialog = useToggle();
 
@@ -49,6 +57,7 @@ const GradeSubmission = () => {
 
       await queryClient.invalidateQueries({ queryKey: [{ name: "exams", examId: exam.id }] });
 
+      localStorage.removeItem(feedbackKey(submission.id));
       toast.success(`Submitted feedback for ${student.firstName}'s task!`);
       navigate(`${ROUTES.dashboard}${ROUTES.exams}/${exam.id}#results`);
     },
@@ -133,7 +142,7 @@ const GradeSubmission = () => {
                 <MarkdownEditor
                   height="100%"
                   value={feedback}
-                  onChange={setFeedback}
+                  onChange={onFeedbackChange}
                   toolbars={FEEDBACK_TOOLBAR_LEFT}
                   toolbarsMode={FEEDBACK_TOOLBAR_RIGHT}
                   theme={theme as "light" | "dark"}
