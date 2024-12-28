@@ -82,8 +82,8 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
               .insert(testsTable)
               .values({
                 taskId,
-                output: value,
                 outputType: type,
+                outputValue: value,
               })
               .returning({ testId: testsTable.id });
 

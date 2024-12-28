@@ -22,7 +22,7 @@ const CourseDetailsLayout = () => {
   }, [pathname, data?.name]);
 
   if (error) {
-    return <Navigate to={ROUTES.courses} />;
+    return <Navigate to={ROUTES.courses} replace />;
   }
 
   return <Outlet />;

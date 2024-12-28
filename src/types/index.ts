@@ -36,6 +36,12 @@ export type LanguageConfig = {
   extension: Extension;
   commandExec: (taskName: string) => string;
 } & (
-  | { supportsTests: true; parseIO: (test: Omit<TestType, "id">) => { inputs: string[]; output: string } }
-  | { supportsTests?: never }
+  | {
+      supportsTests?: never;
+    }
+  | {
+      supportsTests: true;
+      parseIO: (test: Omit<TestType, "id">) => { inputs: string[]; output: string };
+      testCallExpression: (funcCall: string) => string;
+    }
 );

@@ -7,12 +7,16 @@ export const jsConfig: LanguageConfig = {
   funcPrefix: "function",
   emptyValue: "null",
   extension: langs.javascript(),
-  supportsTests: true,
   commandExec: (taskName) => `node ${taskName}.js`,
+
+  supportsTests: true,
+
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => input.name);
 
     // JS needs inputs only, output is not explicitly defined
     return { inputs, output: "" };
   },
+
+  testCallExpression: (funcCall) => `console.log(${funcCall})`,
 };

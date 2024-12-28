@@ -19,7 +19,7 @@ for (const template in templates) {
   taskTemplate[language] = templates[template] as string;
 }
 
-const functionNameFromTitle = (title: string) => {
+export const functionNameFromTitle = (title: string) => {
   const words = title.split(/\s+/);
   const parsedWords = words.map((word) => (words.length > 1 ? capitalize(word) : word));
 

@@ -21,11 +21,11 @@ const ExamSessionLayout = () => {
   }
 
   if (error || !exam) {
-    return <Navigate to={ROUTES.dashboard} />;
+    return <Navigate to={ROUTES.dashboard} replace />;
   }
 
   if (exam.status !== EXAM_STATUS.ongoing) {
-    return <Navigate to={ROUTES.dashboard} />;
+    return <Navigate to={ROUTES.dashboard} replace />;
   }
 
   return (

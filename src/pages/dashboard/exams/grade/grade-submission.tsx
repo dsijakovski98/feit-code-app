@@ -1,4 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { Spinner } from "@nextui-org/spinner";
 
@@ -6,14 +9,33 @@ import GradeSubmission from "@/components/GradeSubmission";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
+import { updateSubmissionGrading } from "@/actions/grades";
+import { SUBMISSION_STATUS } from "@/constants/enums";
 import { ROUTES } from "@/constants/routes";
 import GradeSubmissionProvider from "@/context/GradeSubmissionContext";
-import { useSubmissionDetails } from "@/hooks/student/useStudentSubmissionDetails";
+import { useSubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
 
 const GradeStudentPage = () => {
   const { id: examId = "", sid: studentId = "" } = useParams<{ id: string; sid: string }>();
 
   const { data: submission, error, isLoading } = useSubmissionDetails({ examId, studentId });
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: updateSubmissionGrading,
+    onSuccess: (success) => {
+      if (!success) return;
+
+      queryClient.invalidateQueries({ queryKey: [{ name: "exams", examId: submission?.examId }] });
+    },
+  });
+
+  useEffect(() => {
+    if (submission?.status === SUBMISSION_STATUS.submitted) {
+      mutate({ submissionId: submission.id });
+    }
+  }, [submission?.status, mutate, submission?.id]);
 
   if (error) {
     const submissionNotFound = !!error.message.match(/submission not found/i);
@@ -52,6 +74,10 @@ const GradeStudentPage = () => {
 
   if (!submission) {
     return null;
+  }
+
+  if (submission.status === SUBMISSION_STATUS.graded) {
+    return <Navigate to={`${ROUTES.dashboard}${ROUTES.exams}/${examId}#results`} replace />;
   }
 
   return (

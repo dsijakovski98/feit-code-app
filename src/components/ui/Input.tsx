@@ -10,7 +10,7 @@ import Icon from "@/components/ui/Icon";
 
 import { useToggle } from "@/hooks/useToggle";
 
-const Inpt = extendVariants(NextUiInput, {
+const InputComponent = extendVariants(NextUiInput, {
   variants: {
     size: {
       md: {
@@ -27,13 +27,13 @@ const Inpt = extendVariants(NextUiInput, {
   },
 });
 
-type Props = ComponentProps<typeof Inpt> & PropsWithChildren;
+type Props = ComponentProps<typeof InputComponent> & PropsWithChildren;
 
-const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest }, ref) => {
+const Input = forwardRef<ElementRef<typeof InputComponent>, Props>(({ children, ...rest }, ref) => {
   const visible = useToggle();
 
   return (
-    <Inpt
+    <InputComponent
       {...rest}
       ref={ref}
       className="!font-serif"
@@ -78,7 +78,7 @@ const Input = forwardRef<ElementRef<typeof Inpt>, Props>(({ children, ...rest },
       type={rest.type === "password" ? (visible.open ? "text" : "password") : rest.type}
     >
       {children}
-    </Inpt>
+    </InputComponent>
   );
 });
 export default Input;

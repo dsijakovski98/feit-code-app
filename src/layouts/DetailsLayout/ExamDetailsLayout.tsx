@@ -25,13 +25,13 @@ const ExamDetailsLayout = () => {
   }, [data?.name, pathname]);
 
   if (error) {
-    return <Navigate to={ROUTES.exams} />;
+    return <Navigate to={ROUTES.exams} replace />;
   }
 
   if (!userData) return null;
 
   if (userData.type === USER_TYPE.student) {
-    return <Navigate to={ROUTES.exams} />;
+    return <Navigate to={ROUTES.exams} replace />;
   }
 
   return <Outlet />;

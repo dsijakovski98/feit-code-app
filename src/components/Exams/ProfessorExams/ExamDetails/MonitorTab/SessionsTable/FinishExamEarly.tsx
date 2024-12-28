@@ -1,7 +1,5 @@
 import { Fragment, useMemo } from "react";
 
-import { Tooltip } from "@nextui-org/tooltip";
-
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import PresenceBlock from "@/components/ui/PresenceBlock";
@@ -19,7 +17,7 @@ const FinishExamEarly = () => {
   const { studentSessions } = useCtx(MonitorExamContext);
 
   const canFinishEarly = useMemo(
-    () => studentSessions.every((session) => session.status === "Finished"),
+    () => studentSessions.length > 0 && studentSessions.every((session) => session.status === "Finished"),
     [studentSessions],
   );
 
@@ -34,14 +32,9 @@ const FinishExamEarly = () => {
   return (
     <Fragment>
       <PresenceBlock show={canFinishEarly} mode="appear">
-        <Tooltip
-          content="Everybody has finished. You can finish the exam early."
-          classNames={{ content: "p-2 font-serif" }}
-        >
-          <Button color="default" onPress={finishDialog.toggleOn}>
-            Finish Exam
-          </Button>
-        </Tooltip>
+        <Button color="default" onPress={finishDialog.toggleOn}>
+          Finish Exam
+        </Button>
       </PresenceBlock>
 
       <ConfirmDialog

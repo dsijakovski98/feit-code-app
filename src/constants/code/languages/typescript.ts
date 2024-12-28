@@ -15,8 +15,10 @@ export const tsConfig: LanguageConfig = {
   funcPrefix: "function",
   emptyValue: "null",
   extension: langs.typescript(),
-  supportsTests: true,
   commandExec: (taskName) => `bun run ${taskName}.ts`,
+
+  supportsTests: true,
+
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => `${input.name}: ${typeMap[input.type]}`);
     // Trailing colon needed for proper formatting ex. function (a: int, b: int): int {}
@@ -24,4 +26,6 @@ export const tsConfig: LanguageConfig = {
 
     return { inputs, output };
   },
+
+  testCallExpression: (funcCall) => `console.log(${funcCall})`,
 };

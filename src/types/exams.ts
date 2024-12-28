@@ -20,3 +20,5 @@ export type ExamStats = {
   finishedStudents: Record<string, StudentSession>;
   finished?: boolean;
 };
+
+export type FeedbackView = "code" | "feedback";

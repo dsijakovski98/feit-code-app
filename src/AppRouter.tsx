@@ -81,7 +81,7 @@ const AppRouter = () => {
                     <Route path=":id" element={<ExamDetailsLayout />}>
                       <Route index element={<ExamDetailsPage />} />
 
-                      <Route path="grade">
+                      <Route path="grade" element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
                         <Route index element={<GradeExamRedirect />} />
                         <Route path=":sid" element={<GradeSubmissionPage />} />
                       </Route>

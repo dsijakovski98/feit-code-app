@@ -15,8 +15,10 @@ export const goConfig: LanguageConfig = {
   funcPrefix: "func",
   emptyValue: "nil",
   extension: langs.go(),
-  supportsTests: true,
   commandExec: (taskName) => `go run ${taskName}.go`,
+
+  supportsTests: true,
+
   parseIO: (test) => {
     const inputs = test.inputs.map((input) => `${input.name} ${typeMap[input.type]}`);
     // Trailing space needed for proper formatting ex. func (a int, b int) int {}
@@ -24,4 +26,6 @@ export const goConfig: LanguageConfig = {
 
     return { inputs, output };
   },
+
+  testCallExpression: (funcCall) => `fmt.Println(${funcCall})`,
 };

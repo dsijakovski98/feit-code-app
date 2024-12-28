@@ -95,7 +95,7 @@ const SessionsTable = () => {
         disabledKeys={disabledSessions}
         topContent={<SessionsHeader search={search} onSearch={setSearch} />}
         bottomContent={
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between *:last:ml-auto">
             <TablePagination
               {...pagination}
               items={sessionsList}

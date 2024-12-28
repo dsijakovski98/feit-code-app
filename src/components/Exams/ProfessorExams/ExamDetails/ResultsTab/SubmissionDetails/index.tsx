@@ -60,11 +60,11 @@ const SubmissionDetails = ({ dialog, submission, onClose }: Props) => {
                 </p>
               </div>
 
-              {submission?.pasteCount && <PasteCountChart pasteCount={submission.pasteCount} />}
+              {submission && <PasteCountChart pasteCount={submission.pasteCount} />}
             </div>
           </div>
 
-          {submission?.timeOff && <TimeOffChart timeOff={submission.timeOff} className="max-h-[300px]" />}
+          {submission && <TimeOffChart timeOff={submission.timeOff} className="max-h-[300px]" />}
         </ModalBody>
       </ModalContent>
     </Modal>

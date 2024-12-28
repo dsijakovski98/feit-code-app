@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { integer, json, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, json, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import { submissionStatus } from "@/db/schema/enums";
 import exams from "@/db/schema/exams";
@@ -16,6 +16,8 @@ const submissions = pgTable("submissions", {
   points: integer("points"),
   feedback: varchar("feedback", { length: 10_000 }),
   submittedAt: timestamp("submitted_at", { mode: "string" }).notNull().defaultNow(),
+
+  seen: boolean("seen").default(false),
 
   pasteCount: integer("paste_count").default(0),
   timeOff: json("time_off").$type<Record<string, number>>().default({}),

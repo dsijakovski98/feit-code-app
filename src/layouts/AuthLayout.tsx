@@ -16,11 +16,11 @@ const AuthLayout = ({ mode }: Props) => {
   }
 
   if (mode === "protect" && !userId) {
-    return <Navigate to={ROUTES.signIn} />;
+    return <Navigate to={ROUTES.signIn} replace />;
   }
 
   if (mode === "auth-pages" && userId) {
-    return <Navigate to={ROUTES.dashboard} />;
+    return <Navigate to={ROUTES.dashboard} replace />;
   }
 
   return <Outlet />;

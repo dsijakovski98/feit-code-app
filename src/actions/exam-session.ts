@@ -347,7 +347,7 @@ export const removeExamSession = async (examId: string) => {
   await remove(examSessionRef);
 };
 
-type RunCodeOptions = {
+export type RunCodeOptions = {
   code: string;
   name: string;
   token: string;

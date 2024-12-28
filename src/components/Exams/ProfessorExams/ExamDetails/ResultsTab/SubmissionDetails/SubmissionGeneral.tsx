@@ -7,6 +7,7 @@ import SubmissionStatus from "@/components/Exams/ProfessorExams/ExamDetails/Resu
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
+import { SUBMISSION_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { useAvatar } from "@/hooks/useAvatar";
@@ -20,7 +21,7 @@ type Props = {
 };
 
 const SubmissionGeneral = ({ submission }: Props) => {
-  const { student, examId, studentId } = submission;
+  const { student, examId, studentId, status } = submission;
 
   const { examDetails } = useCtx(ExamDetailsContext);
 
@@ -58,22 +59,28 @@ const SubmissionGeneral = ({ submission }: Props) => {
           </div>
         )}
 
-        <Button
-          as={Link}
-          // @ts-expect-error NextUI not passing through 'as' props
-          to={gradeHref}
-          startContent={<Icon name="grade" className="h-6 w-6" />}
-          className="px-8"
-        >
-          Grade Student
-        </Button>
+        {status === SUBMISSION_STATUS.graded ? (
+          <p className="self-center font-sans text-3xl font-semibold">
+            {submission.points} / {examDetails.points} pts
+          </p>
+        ) : (
+          <Button
+            as={Link}
+            // @ts-expect-error NextUI not passing through 'as' props
+            to={gradeHref}
+            startContent={<Icon name="grade" className="h-6 w-6" />}
+            className="px-8"
+          >
+            Grade Student
+          </Button>
+        )}
       </div>
 
       {submission && (
         <div className="flex items-center gap-12">
           <div className="mr-auto space-y-1">
             <SubmissionStatus status={submission.status!} />
-            <p className="text-foreground-300">{submissionStatusDescription(submission.status!)}</p>
+            <p>{submissionStatusDescription(submission.status!)}</p>
           </div>
 
           <div>

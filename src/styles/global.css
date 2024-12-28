@@ -130,3 +130,11 @@
 .cm-gutters {
   @apply min-w-[39px];
 }
+
+.md-editor-toolbar {
+  @apply !gap-3.5 !p-3;
+}
+
+.md-editor-toolbar:is(:first-child, :last-child) {
+  @apply *:scale-[1.5] *:rounded-full *:p-1;
+}

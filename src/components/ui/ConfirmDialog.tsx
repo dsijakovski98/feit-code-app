@@ -14,13 +14,15 @@ type Props = {
   color: ButtonProps["color"];
   action: {
     label: string;
-    onConfirm: () => unknown;
+    onConfirm?: () => unknown;
   };
+  formId?: string;
   cancelable?: boolean;
   loading?: boolean;
 };
 
-const ConfirmDialog = ({ dialog, title, description, color, action, cancelable = true, loading }: Props) => {
+const ConfirmDialog = (props: Props) => {
+  const { dialog, title, description, color, action, formId, cancelable = true, loading } = props;
   const { label, onConfirm } = action;
 
   const confirmBtn = useRef<ElementRef<typeof Button>>(null);
@@ -64,7 +66,14 @@ const ConfirmDialog = ({ dialog, title, description, color, action, cancelable =
                 </Button>
               )}
 
-              <Button type="submit" ref={confirmBtn} color={color} isLoading={!!loading} onPress={onConfirm}>
+              <Button
+                type="submit"
+                form={formId}
+                ref={confirmBtn}
+                color={color}
+                isLoading={!!loading}
+                onPress={onConfirm}
+              >
                 {label}
               </Button>
             </ModalFooter>

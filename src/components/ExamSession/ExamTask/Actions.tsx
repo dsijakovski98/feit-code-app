@@ -79,7 +79,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
           isLoading={loading}
           onPress={runCode}
         >
-          Run Code
+          Run
         </Button>
 
         <Button fullWidth className="!font-mono text-sm" disabled={loading} onPress={submitToggle.toggleOn}>
