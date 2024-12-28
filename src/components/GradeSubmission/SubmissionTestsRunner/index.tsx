@@ -97,11 +97,20 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
       );
 
       setTestResults(cachedResults);
+    }
 
-      // No need to run mutation if all test results are cached
-      if (cachedResultsData.length === tests.length) {
-        return;
-      }
+    const testsToCheck = cachedResultsData
+      ? tests.filter(
+          (test) =>
+            !cachedResultsData.find((cachedResult) => {
+              const [{ testId }] = cachedResult[0] as [TestResultQueryKey];
+              return testId === test.id;
+            }),
+        )
+      : tests;
+
+    if (testsToCheck.length === 0) {
+      return;
     }
 
     const token = await getToken();
@@ -111,7 +120,7 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
       return;
     }
 
-    mutate({ tests, token, code: cleanCode, language, name: title });
+    mutate({ tests: testsToCheck, token, code: cleanCode, language, name: title });
   };
 
   return (
