@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import toast from "react-hot-toast";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -10,7 +11,7 @@ import TestParameterValue from "@/components/Tests/TestParameterValue";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
-import { TestResult, runSingleTest } from "@/actions/grades";
+import { TestResult, TestResultQueryKey, runSingleTest } from "@/actions/grades";
 import { CleanSubmissionCodeContext } from "@/context/CleanSubmissionCodeContext";
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { SubmissionDetails } from "@/hooks/submission/useSubmissionDetails";
@@ -39,6 +40,11 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
 
   const { data: cleanCode } = useCtx(CleanSubmissionCodeContext);
 
+  const testResultQueryKey = useMemo<TestResultQueryKey>(
+    () => ({ name: "test-result", submissionId: submission.id, testId: test.id }),
+    [submission.id, test.id],
+  );
+
   const updateTestResult = (testResult: TestResult) => {
     setTestResults((prev) => {
       prev[test.id] = testResult;
@@ -51,7 +57,7 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
     onSuccess: (testResult) => {
       if (!testResult) return;
 
-      queryClient.setQueryData([{ name: "test-result", testId: test.id }], testResult);
+      queryClient.setQueryData([testResultQueryKey], testResult);
       updateTestResult(testResult);
     },
     onError: (error) => toast.error(error.message),
@@ -60,7 +66,7 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
   const runTest = async () => {
     if (!cleanCode) return;
 
-    const cachedResult = queryClient.getQueryData<TestResult>([{ name: "test-result", testId: test.id }]);
+    const cachedResult = queryClient.getQueryData<TestResult>([testResultQueryKey]);
 
     if (cachedResult) {
       updateTestResult(cachedResult);

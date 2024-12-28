@@ -5,6 +5,9 @@ import { HREF } from "@/constants/routes";
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { UseFCUser } from "@/hooks/useFCUser";
 
+// Local storage key for a specific submission's feedback
+export const feedbackKey = (submissionId: string) => `submission_${submissionId}`;
+
 export const isNumber = (value: unknown) => {
   if (typeof value !== "number") return false;
   if (isNaN(value)) return false;

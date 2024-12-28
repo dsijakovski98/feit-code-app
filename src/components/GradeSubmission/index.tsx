@@ -1,9 +1,8 @@
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import Split from "react-split";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import clsx from "clsx";
 import { useTheme } from "next-themes";
@@ -13,34 +12,27 @@ import { useAuth } from "@clerk/clerk-react";
 import CodeEditor from "@/components/CodeEditor";
 import GradeActions from "@/components/GradeSubmission/GradeActions";
 import GradeHeader from "@/components/GradeSubmission/GradeHeader";
-import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import SubmitFeedback from "@/components/GradeSubmission/SubmitFeedback";
 import ExamTaskDescription from "@/components/ui/ExamTask/Description";
 import ExamTaskOutput from "@/components/ui/ExamTask/Output";
 
 import { runTaskCode } from "@/actions/exam-session";
-import { addFeedback } from "@/actions/grades";
 import { FEEDBACK_TOOLBAR_LEFT, FEEDBACK_TOOLBAR_RIGHT } from "@/constants/grades";
-import { ROUTES } from "@/constants/routes";
 import CleanSubmissionCodeProvider from "@/context/CleanSubmissionCodeContext";
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { FeedbackView } from "@/types/exams";
-
-const feedbackKey = (submissionId: string) => `submission_${submissionId}`;
+import { feedbackKey } from "@/utils";
 
 const GradeSubmission = () => {
   const { getToken } = useAuth();
   const { theme } = useTheme();
 
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
   const { submission, setOutputs, activeTask, activeOutput } = useCtx(GradeSubmissionContext);
   const { exam, student } = submission;
 
   const [feedbackView, setFeedbackView] = useState<FeedbackView>("code");
-
   const [feedback, setFeedback] = useState(localStorage.getItem(feedbackKey(submission.id)) ?? "");
 
   const onFeedbackChange = (newFeedback: string) => {
@@ -50,25 +42,7 @@ const GradeSubmission = () => {
 
   const submitDialog = useToggle();
 
-  const { mutate: mutateFeedback, isPending: feedbackLoading } = useMutation({
-    mutationFn: addFeedback,
-    onSuccess: async (success) => {
-      if (!success) return;
-
-      await queryClient.invalidateQueries({ queryKey: [{ name: "exams", examId: exam.id }] });
-
-      localStorage.removeItem(feedbackKey(submission.id));
-      toast.success(`Submitted feedback for ${student.firstName}'s task!`);
-      navigate(`${ROUTES.dashboard}${ROUTES.exams}/${exam.id}#results`);
-    },
-    onError: (error) => toast.error(error.message),
-  });
-
-  const submitFeedback = () => {
-    mutateFeedback({ submissionId: submission.id, feedback });
-  };
-
-  const { mutate: mutateRunCode, isPending: runLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: runTaskCode,
     onSuccess: (output) => {
       if (!output) return;
@@ -89,7 +63,7 @@ const GradeSubmission = () => {
       return;
     }
 
-    mutateRunCode({ code: activeTask.code, name: activeTask.title, language: exam.language, token });
+    mutate({ code: activeTask.code, name: activeTask.title, language: exam.language, token });
 
     setOutputs((prev) => {
       prev[activeTask.id] = "";
@@ -173,9 +147,9 @@ const GradeSubmission = () => {
                     title={activeTask.title}
                     language={exam.language}
                     studentEmail={student.email}
-                    loading={runLoading}
+                    loading={isPending}
                   >
-                    <GradeActions runCode={runCode} loading={runLoading} />
+                    <GradeActions runCode={runCode} loading={isPending} />
                   </ExamTaskOutput>
                 </CleanSubmissionCodeProvider>
               </div>
@@ -184,15 +158,7 @@ const GradeSubmission = () => {
         </Split>
       </main>
 
-      <ConfirmDialog
-        dialog={submitDialog}
-        loading={feedbackLoading}
-        color="primary"
-        title="Submit feedback?"
-        // TODO: Add form for submitting tasks points
-        description="You're happy with the feedback you left."
-        action={{ label: "Submit", onConfirm: submitFeedback }}
-      />
+      <SubmitFeedback dialog={submitDialog} feedback={feedback} />
 
       <main className="bg-main invisible hidden h-full place-items-center px-5 lg:visible lg:!grid">
         <h1 className="text-center font-sans text-lg font-semibold">

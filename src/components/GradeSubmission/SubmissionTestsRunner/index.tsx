@@ -12,7 +12,7 @@ import Button from "@/components/ui/Button";
 import PresenceBlock from "@/components/ui/PresenceBlock";
 import Stat from "@/components/ui/Stat";
 
-import { TestResult, runTests } from "@/actions/grades";
+import { TestResult, TestResultQueryKey, runTests } from "@/actions/grades";
 import { CleanSubmissionCodeContext } from "@/context/CleanSubmissionCodeContext";
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { useCtx } from "@/hooks/useCtx";
@@ -62,7 +62,12 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
       if (!results) return;
 
       Object.entries(results).forEach(([testId, result]) => {
-        queryClient.setQueryData([{ name: "test-result", testId }], result);
+        const testResultQueryKey: TestResultQueryKey = {
+          name: "test-result",
+          submissionId: submission.id,
+          testId,
+        };
+        queryClient.setQueryData([testResultQueryKey], result);
       });
 
       setTestResults(results);
@@ -74,14 +79,16 @@ const SubmissionTestsRunner = ({ dialog }: Props) => {
 
     resetResults();
 
-    const cachedResultsData = queryClient.getQueriesData<TestResult>({ queryKey: [{ name: "test-result" }] });
+    const cachedResultsData = queryClient.getQueriesData<TestResult>({
+      queryKey: [{ name: "test-result", submissionId: submission.id }],
+    });
     if (cachedResultsData) {
       const cachedResults = cachedResultsData.reduce(
         (acc, resultData) => {
           const [queryKey, testResult] = resultData;
           if (!testResult) return acc;
 
-          const { testId } = queryKey[0] as { name: string; testId: string };
+          const { testId } = queryKey[0] as TestResultQueryKey;
 
           acc[testId] = testResult;
           return acc;

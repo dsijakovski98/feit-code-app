@@ -61,6 +61,12 @@ export type TestResult = {
   success: boolean;
 } | null;
 
+export type TestResultQueryKey = {
+  name: "test-result";
+  submissionId: string;
+  testId: string;
+};
+
 type SingleTestRunOptions = {
   test: SubmissionDetails["exam"]["tasks"][number]["tests"][number];
 } & RunCodeOptions;
