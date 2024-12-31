@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { boolean, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import courseCategories from "@/db/schema/courseCategories";
@@ -7,6 +7,8 @@ import professors from "@/db/schema/professors";
 import studentCourses from "@/db/schema/studentCourses";
 import { primaryId } from "@/db/schema/utils";
 
+import { dbNow } from "@/utils/dates";
+
 const courses = pgTable("courses", {
   id: primaryId(),
   name: varchar("name", { length: 256 }).notNull(),
@@ -14,8 +16,8 @@ const courses = pgTable("courses", {
   academicYear: varchar("academic_year", { length: 128 }).notNull(),
   updatedAt: timestamp("updated_at", { mode: "string" })
     .notNull()
-    .defaultNow()
-    .$onUpdate(() => sql`now()`),
+    .$defaultFn(dbNow)
+    .$onUpdate(() => dbNow()),
   archived: boolean("archived").default(false),
 
   professorId: text("professor_id")

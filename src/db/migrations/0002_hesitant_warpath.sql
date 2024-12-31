@@ -1,0 +1,1 @@
+ALTER TABLE "student_courses" ALTER COLUMN "joined_at" SET DEFAULT '2024-12-31 13:06:12.154';

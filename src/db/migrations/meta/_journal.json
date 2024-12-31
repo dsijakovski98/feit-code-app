@@ -15,6 +15,34 @@
       "when": 1735353787512,
       "tag": "0001_curvy_luminals",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1735646772164,
+      "tag": "0002_hesitant_warpath",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1735646835923,
+      "tag": "0003_tiresome_ricochet",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1735647364471,
+      "tag": "0004_steep_cannonball",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1735647515799,
+      "tag": "0005_familiar_big_bertha",
+      "breakpoints": true
     }
   ]
 }

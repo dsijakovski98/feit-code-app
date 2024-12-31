@@ -1,9 +1,14 @@
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+
 import { UserResource } from "@clerk/types";
 
 import { EXAM_STATUS, ExamStatus } from "@/constants/enums";
 import { HREF } from "@/constants/routes";
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { UseFCUser } from "@/hooks/useFCUser";
+
+dayjs.extend(timezone);
 
 // Local storage key for a specific submission's feedback
 export const feedbackKey = (submissionId: string) => `submission_${submissionId}`;
@@ -19,17 +24,17 @@ export const simplePlural = (word: string, value: number) => `${word}${value !==
 
 export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
+const timeZone = dayjs.tz.guess();
+
 /**
  * Convert a date to a relative time string, such as
  * "a minute ago", "in 2 hours", "yesterday", "3 months ago", etc.
  * using Intl.RelativeTimeFormat
  */
 // https://www.builder.io/blog/relative-time
-export function getRelativeTimeString(date: Date | number, lang = navigator.language): string {
-  if (date instanceof Date) {
-    // Convert to CEST timezone
-    date.setHours(date.getHours() + 2);
-  }
+export function getRelativeTimeString(clientDate: Date | number, lang = navigator.language): string {
+  const date = dayjs.tz(clientDate, timeZone).toDate();
+
   // Allow dates or times to be passed
   const timeMs = typeof date === "number" ? date : date.getTime();
 

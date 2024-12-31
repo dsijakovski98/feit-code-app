@@ -8,14 +8,15 @@ import students from "@/db/schema/students";
 import { primaryId } from "@/db/schema/utils";
 
 import { SUBMISSION_STATUS } from "@/constants/enums";
+import { dbNow } from "@/utils/dates";
 
 const submissions = pgTable("submissions", {
   id: primaryId(),
 
-  status: submissionStatus("status").$default(() => SUBMISSION_STATUS.submitted),
+  status: submissionStatus("status").default(SUBMISSION_STATUS.submitted),
   points: integer("points"),
   feedback: varchar("feedback", { length: 10_000 }),
-  submittedAt: timestamp("submitted_at", { mode: "string" }).notNull().defaultNow(),
+  submittedAt: timestamp("submitted_at", { mode: "string" }).notNull().$defaultFn(dbNow),
 
   seen: boolean("seen").default(false),
 
