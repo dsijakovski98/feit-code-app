@@ -53,6 +53,7 @@ const ProfessorCourses = ({ user }: Props) => {
         )}
 
         {data?.pages[0].length === 0 &&
+          search.length === 0 &&
           (type === TEACHER_TYPE.professor ? <EmptyProfessorCourses /> : <EmptyAssistantCourses />)}
 
         {!!data?.pages.length && (

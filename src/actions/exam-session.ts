@@ -185,7 +185,7 @@ export const handleSessionTimeOff = async ({ examId, sessionId, timeOff, startTi
           return resolve(false);
         }
 
-        const timestamp = startTime.format("YYYY-MM-DD HH:MM:ss");
+        const timestamp = startTime.format("YYYY-MM-DD HH:mm:ss");
 
         if (session.timeOff) {
           session.timeOff[timestamp] = timeOff;

@@ -62,7 +62,7 @@ const StudentExams = ({ user }: Props) => {
 
   return (
     <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4">
-      <section className="space-y-2 lg:space-y-3">
+      <section className="space-y-3">
         <ExamHeader title="Exams">
           <SelectFilter size="sm" label="Exam status" filter={statusFilter} className="w-[240px] lg:w-full" />
 

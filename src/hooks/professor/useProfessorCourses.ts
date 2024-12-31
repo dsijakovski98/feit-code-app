@@ -39,7 +39,7 @@ export const useProfessorCourses = (options: QueryOptions, yearFilter: "all" | "
         offset: pageParam * COURSES_PER_PAGE,
       });
 
-      return coursesData;
+      return coursesData ?? null;
     },
 
     getNextPageParam: (lastPage, _, lastPageParam) => {

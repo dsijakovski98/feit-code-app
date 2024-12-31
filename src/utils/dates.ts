@@ -6,9 +6,19 @@ import utc from "dayjs/plugin/utc";
 
 import { DateValue, TimeInputValue } from "@nextui-org/react";
 
+import { ExamSchema } from "@/utils/schemas/exams/examSchema";
+
 dayjs.extend(timezone);
 dayjs.extend(duration);
 dayjs.extend(utc);
+
+type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
+export const parseExamDates = ({ startDate, startTime }: ExamDates) => {
+  const parsedDate = dayjs(startDate).format("YYYY-MM-DD");
+  const parsedTime = dayjs(startTime).format("HH:mm");
+
+  return `${parsedDate} ${parsedTime}`;
+};
 
 export const getSecondsRemaining = (targetDate: Dayjs) => {
   const targetDateUtc = dayjs.tz(targetDate, "UTC");
@@ -37,13 +47,13 @@ export const nextUITimeToDate = (time: string) => {
 
 export const parseDateTime = (date: Date, time: Date) => {
   const parsedDate = date.toDateString();
-  const parsedTime = dayjs(time).format("HH:MM");
+  const parsedTime = dayjs(time).format("HH:mm");
 
   return { date: parsedDate, time: parsedTime };
 };
 
 export const formatTimestamp = (timestamp: string) => {
-  return dayjs(timestamp).format("MMM DD YYYY, HH:MM");
+  return dayjs(timestamp).format("MMM DD YYYY, HH:mm");
 };
 
 export const canStartExam = (timestamp: string) => {

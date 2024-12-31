@@ -148,3 +148,7 @@ const compareOutput = ({ output, test, language }: CompareOptions): TestResult =
 
   return { message: "Test ran successfully!", success: true };
 };
+
+export const seenFeedback = async (submissionId: string) => {
+  await db.update(submissions).set({ seen: true }).where(eq(submissions.id, submissionId));
+};

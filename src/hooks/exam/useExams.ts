@@ -33,6 +33,21 @@ export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
             columns: { name: true, id: true },
             with: { professor: { columns: { firstName: true, lastName: true } } },
           },
+          submissions: {
+            limit: 1,
+            where: (submissions, { eq }) => eq(submissions.studentId, userId),
+            with: { grader: { columns: { firstName: true, lastName: true, email: true } } },
+            columns: {
+              id: true,
+              status: true,
+              seen: true,
+              graderId: true,
+              feedback: true,
+              points: true,
+              submittedAt: true,
+              studentId: true,
+            },
+          },
           tasks: { columns: { id: true } },
         },
         orderBy: (exams, { desc }) => desc(exams.createdAt),
@@ -48,3 +63,5 @@ export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
     },
   });
 };
+
+export type ExamCard = NonNullable<ReturnType<typeof useExams>["data"]>["pages"][number][number];

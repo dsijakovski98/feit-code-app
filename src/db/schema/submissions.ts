@@ -35,7 +35,7 @@ const submissions = pgTable("submissions", {
 
 export const submissionsRelations = relations(submissions, ({ one }) => ({
   grader: one(professors, {
-    fields: [submissions.examId],
+    fields: [submissions.graderId],
     references: [professors.id],
   }),
 
