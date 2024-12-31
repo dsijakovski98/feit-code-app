@@ -43,7 +43,6 @@ const AddTaskForm = ({ dialog }: Props) => {
       backdrop="opaque"
       placement="center"
       isOpen={dialog.open}
-      onClose={handleClose}
       classNames={{
         base: "font-serif min-w-[720px] lg:min-w-[90%]",
         backdrop: "bg-background/50",

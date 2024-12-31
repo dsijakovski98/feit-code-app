@@ -24,10 +24,9 @@ const CourseCard = (props: CourseCardContext) => {
     mutate(id);
   };
 
-  // TODO: Fix height when only-archived courses are present
   return (
     <CourseCardProvider {...props}>
-      <div className="relative flex h-full flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background">
+      <div className="relative flex h-full min-h-[210px] flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background">
         <div className="flex h-full w-[40ch] flex-col justify-start space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-8">
           <div className="flex items-start justify-between gap-6">
             <div>

@@ -55,10 +55,9 @@ const TaskPreviewModal = () => {
           <ModalBody>
             <p className="font-medium">
               This is the <span className="font-mono font-semibold">Code Template</span>. Students will start
-              off with this code when solving the Task.
+              off with this code when solving the task.
             </p>
 
-            {/* Wrapper needed for a smooth toggle animation */}
             <div className="h-[25dvh]">
               <CodeEditor
                 height="25dvh"
@@ -72,7 +71,7 @@ const TaskPreviewModal = () => {
           </ModalBody>
         </PresenceBlock>
 
-        <ModalFooter className="justify-start text-lg font-semibold">{points} points</ModalFooter>
+        <ModalFooter className="z-10 justify-start text-lg font-semibold">{points} points</ModalFooter>
       </ModalContent>
     </Modal>
   );

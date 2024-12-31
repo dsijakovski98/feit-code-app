@@ -27,11 +27,11 @@ const TaskTemplatePreview = ({ onClose, task }: Props) => {
       size="3xl"
       backdrop="blur"
       placement="center"
-      hideCloseButton
       isOpen={!!task}
       onClose={onClose}
       classNames={{
         backdrop: "backdrop-blur-sm brightness-50 dark:mix-blend-darken",
+        closeButton: "mr-4 mt-2.5",
       }}
     >
       <ModalContent className="pb-4">
@@ -50,12 +50,12 @@ const TaskTemplatePreview = ({ onClose, task }: Props) => {
 
           {template && (
             <CodeEditor
-              height="30dvh"
               readOnly
+              height="30dvh"
               editable={false}
               value={template}
               language={language}
-              className="text-base"
+              className="text-base *:!bg-transparent [&_.cm-gutters]:bg-transparent"
             />
           )}
         </ModalBody>

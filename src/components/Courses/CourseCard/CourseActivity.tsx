@@ -14,7 +14,6 @@ const CourseActivity = ({ label, onPress }: Props) => {
         <Chip size="sm" color="default" classNames={{ content: "font-semibold text-xs" }}>
           Archived
         </Chip>
-        {/* <p className="text-sm font-semibold text-foreground">Archived</p> */}
 
         <Button size="sm" color="danger" onPress={onPress} className="px-5 text-sm dark:bg-danger-600">
           {label}

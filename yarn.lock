@@ -4701,19 +4701,19 @@
     "@replit/codemirror-lang-svelte" "^6.0.0"
     codemirror-lang-mermaid "^0.5.0"
 
-"@uiw/codemirror-theme-quietlight@^4.23.4":
-  version "4.23.4"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-quietlight/-/codemirror-theme-quietlight-4.23.4.tgz#d686f18ce16d7681587746a52f872049cfd313da"
-  integrity sha512-IIn3zzVOxFzMndMYB1nO0JCQz/+Q1hGQxfKYYDuVFQ4w3iqkZqfdLEInybUAr7Vpivvuya9oN/h2hJ7Y/7XboQ==
-  dependencies:
-    "@uiw/codemirror-themes" "4.23.4"
-
 "@uiw/codemirror-theme-tokyo-night@^4.23.4":
   version "4.23.4"
   resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-tokyo-night/-/codemirror-theme-tokyo-night-4.23.4.tgz#6bdc0924f54ab7f7c30b8200b52e2ae5f1d68a2f"
   integrity sha512-0D3RMIKXsXMPtb1oz4WFavm1IgAkaSVb3hXayskNiNxeYXwCekY06oZ0rncmfavy9sCgk65UYxIx+ZCbayS7Sg==
   dependencies:
     "@uiw/codemirror-themes" "4.23.4"
+
+"@uiw/codemirror-theme-vscode@^4.23.7":
+  version "4.23.7"
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-theme-vscode/-/codemirror-theme-vscode-4.23.7.tgz#73a6d2b720e56022a6608991a6d43f973c9fe710"
+  integrity sha512-KDTeBWsLY9L0jBXFZXovuNJeDxR2B7qR5jKDptGT0M4sLCq8XG6jYGZbWDCgR8cq0CUvmrw+26xeTKcnA1BJOA==
+  dependencies:
+    "@uiw/codemirror-themes" "4.23.7"
 
 "@uiw/codemirror-themes@4.23.4":
   version "4.23.4"
@@ -4724,7 +4724,7 @@
     "@codemirror/state" "^6.0.0"
     "@codemirror/view" "^6.0.0"
 
-"@uiw/codemirror-themes@^4.12.3":
+"@uiw/codemirror-themes@4.23.7", "@uiw/codemirror-themes@^4.12.3":
   version "4.23.7"
   resolved "https://registry.yarnpkg.com/@uiw/codemirror-themes/-/codemirror-themes-4.23.7.tgz#33d09a2d9df3eda3e3affcb68d91672e41bf646a"
   integrity sha512-UNf1XOx1hG9OmJnrtT86PxKcdcwhaNhbrcD+nsk8WxRJ3n5c8nH6euDvgVPdVLPwbizsaQcZTILACgA/FjRpVg==
