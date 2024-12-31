@@ -69,9 +69,9 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
 
   if (!data) return null;
 
-  if (filteredPages[0].length === 0) {
+  if (search.length > 0 && filteredPages[0].length === 0) {
     return (
-      <div style={{ height: `${listHeight}px` }} className="grid place-items-center px-8 lg:px-5">
+      <div style={{ height: `${listHeight}px` }} className="grid place-items-center p-10 lg:p-8">
         <p>
           No courses found with name <span className="font-semibold">"{search}"</span>
         </p>

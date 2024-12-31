@@ -11,17 +11,9 @@ import { EXAM_STATUS } from "@/constants/enums";
 import { TaskType } from "@/context/ExamFormContext";
 import { db } from "@/db";
 import { extractFunctionName, taskTemplateRef } from "@/utils/code";
+import { parseExamDates } from "@/utils/dates";
 import { deleteExamFolder } from "@/utils/exams/storage";
 import { ExamSchema } from "@/utils/schemas/exams/examSchema";
-
-type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
-
-const parseExamDates = ({ startDate, startTime }: ExamDates) => {
-  const parsedDate = dayjs(startDate).format("YYYY-MM-DD");
-  const parsedTime = dayjs(startTime).format("HH:MM");
-
-  return `${parsedDate} ${parsedTime}`;
-};
 
 type CreateExamOptions = {
   courseId: string;
@@ -31,6 +23,8 @@ type CreateExamOptions = {
 export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) => {
   const { name, language, durationMinutes, points, startDate, startTime } = exam;
   const startsAt = parseExamDates({ startDate, startTime });
+  console.log(startsAt);
+  throw new Error("TEST");
 
   try {
     const [{ examId }] = await db
@@ -172,7 +166,7 @@ export const startExam = async (examId: string) => {
       .update(exams)
       .set({
         status: EXAM_STATUS.ongoing,
-        startedAt: dayjs().format("YYYY-MM-DD HH:MM"),
+        startedAt: dayjs().format("YYYY-MM-DD HH:mm"),
       })
       .where(eq(exams.id, examId));
   } catch (e) {

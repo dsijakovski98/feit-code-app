@@ -1,5 +1,4 @@
 import { PropsWithChildren, createContext, useEffect } from "react";
-import toast from "react-hot-toast";
 
 import { GradeSubmissionContext } from "@/context/GradeSubmissionContext";
 import { useCleanSubmission } from "@/hooks/submission/useCleanSubmission";
@@ -27,7 +26,8 @@ const CleanSubmissionCodeProvider = ({ children }: PropsWithChildren) => {
     if (import.meta.env.PROD) return;
     if (!query.error) return;
 
-    toast.error(query.error.message);
+    // TODO: Sentry logging
+    console.log({ e: query.error.message });
   }, [query.error]);
 
   return <CleanSubmissionCodeContext.Provider value={query}>{children}</CleanSubmissionCodeContext.Provider>;

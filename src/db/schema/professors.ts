@@ -18,7 +18,7 @@ const professors = pgTable("professors", {
 export const professorRelations = relations(professors, ({ many }) => ({
   courseProfessor: many(courses, { relationName: "professor" }),
   courseAssistant: many(courses, { relationName: "assistant" }),
-  submissions: many(submissions),
+  submissions: many(submissions, { relationName: "grader" }),
 }));
 
 export default professors;
