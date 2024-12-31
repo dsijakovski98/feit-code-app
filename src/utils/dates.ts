@@ -12,6 +12,10 @@ dayjs.extend(timezone);
 dayjs.extend(duration);
 dayjs.extend(utc);
 
+export const dbNow = () => {
+  return dayjs.tz(new Date(), dayjs.tz.guess()).format("YYYY-MM-DD HH:mm:ss.SSS");
+};
+
 type ExamDates = Pick<ExamSchema, "startDate" | "startTime">;
 export const parseExamDates = ({ startDate, startTime }: ExamDates) => {
   const parsedDate = dayjs(startDate).format("YYYY-MM-DD");

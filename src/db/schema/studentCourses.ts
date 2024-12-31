@@ -4,6 +4,8 @@ import { numeric, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-
 import courses from "@/db/schema/courses";
 import students from "@/db/schema/students";
 
+import { dbNow } from "@/utils/dates";
+
 const studentCourses = pgTable(
   "student_courses",
   {
@@ -15,7 +17,7 @@ const studentCourses = pgTable(
       .references(() => courses.id, { onDelete: "cascade" }),
 
     grade: numeric("grade", { precision: 2 }),
-    joinedAt: timestamp("joined_at", { mode: "string" }).notNull().defaultNow(),
+    joinedAt: timestamp("joined_at", { mode: "string" }).notNull().$defaultFn(dbNow),
   },
   (table) => ({
     pk: primaryKey({ columns: [table.studentId, table.courseId] }),

@@ -8,11 +8,12 @@ import tasks from "@/db/schema/tasks";
 import { primaryId } from "@/db/schema/utils";
 
 import { EXAM_STATUS } from "@/constants/enums";
+import { dbNow } from "@/utils/dates";
 
 const exams = pgTable("exams", {
   id: primaryId(),
   name: varchar("name", { length: 256 }).notNull(),
-  createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+  createdAt: timestamp("created_at", { mode: "string" }).notNull().$defaultFn(dbNow),
   startsAt: timestamp("starts_at", { mode: "string" }).notNull(),
   startedAt: timestamp("started_at", { mode: "string" }),
   durationMinutes: integer("duration_minutes").notNull(),
