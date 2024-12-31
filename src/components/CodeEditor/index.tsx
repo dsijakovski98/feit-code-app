@@ -1,7 +1,7 @@
 import { ComponentProps, ElementRef, forwardRef, useMemo } from "react";
 
-import { quietlight as lightTheme } from "@uiw/codemirror-theme-quietlight";
 import { tokyoNight as darkTheme } from "@uiw/codemirror-theme-tokyo-night";
+import { vscodeLight as lightTheme } from "@uiw/codemirror-theme-vscode";
 import CodeMirror from "@uiw/react-codemirror";
 import { useTheme } from "next-themes";
 

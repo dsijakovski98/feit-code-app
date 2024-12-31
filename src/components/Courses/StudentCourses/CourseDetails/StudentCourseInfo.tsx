@@ -62,7 +62,7 @@ const StudentCourseInfo = () => {
           variant="light"
           isDisabled={!joinedData.grade}
           startContent={<Icon name="history" className="h-5 w-5" />}
-          // TODO: Navigate to course exam history page
+          // TODO: Exam history modal UI
         >
           Exam History
         </Button>
@@ -80,7 +80,7 @@ const StudentCourseInfo = () => {
             </p>
           </div>
 
-          <p>Average grade</p>
+          <p>Course grade</p>
         </div>
 
         <ActiveExam />

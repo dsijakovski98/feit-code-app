@@ -23,8 +23,6 @@ type CreateExamOptions = {
 export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) => {
   const { name, language, durationMinutes, points, startDate, startTime } = exam;
   const startsAt = parseExamDates({ startDate, startTime });
-  console.log(startsAt);
-  throw new Error("TEST");
 
   try {
     const [{ examId }] = await db
