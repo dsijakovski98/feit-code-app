@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { finishExam } from "@/actions/exam-session";
 import { ROUTES } from "@/constants/routes";
+import { USER_TYPE } from "@/types";
 
 type FinishExamOptions = {
   studentId: string;
@@ -19,10 +20,14 @@ export const useFinishExam = ({ studentId }: FinishExamOptions) => {
     onSuccess: async (success) => {
       if (!success) return;
 
+      const ongoingExamKey = [{ name: "ongoing-exam", userId: studentId, type: USER_TYPE.student }];
+
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: [{ name: "submissions", studentId }] }),
-        queryClient.invalidateQueries({ queryKey: [{ name: "ongoing-exam" }] }),
+        queryClient.setQueryData(ongoingExamKey, null),
       ]);
+
+      queryClient.invalidateQueries({ queryKey: ongoingExamKey });
 
       toast.success("Exam finished!");
       navigate(ROUTES.dashboard, { replace: true });

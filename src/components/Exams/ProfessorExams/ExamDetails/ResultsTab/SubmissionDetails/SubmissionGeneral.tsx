@@ -18,9 +18,10 @@ import { gradeExamHref } from "@/utils/exams/sessions";
 
 type Props = {
   submission: ExamDetails["submissions"][number];
+  onClose: () => void;
 };
 
-const SubmissionGeneral = ({ submission }: Props) => {
+const SubmissionGeneral = ({ submission, onClose }: Props) => {
   const { student, examId, studentId, status } = submission;
 
   const { examDetails } = useCtx(ExamDetailsContext);
@@ -68,8 +69,9 @@ const SubmissionGeneral = ({ submission }: Props) => {
             as={Link}
             // @ts-expect-error NextUI not passing through 'as' props
             to={gradeHref}
-            startContent={<Icon name="grade" className="h-6 w-6" />}
             className="px-8"
+            startContent={<Icon name="grade" className="h-6 w-6" />}
+            onPress={onClose}
           >
             Grade Student
           </Button>

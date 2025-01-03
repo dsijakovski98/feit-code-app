@@ -23,7 +23,7 @@ export const useSubmitExam = () => {
       return "Finish";
     }
 
-    return "Submit";
+    return "Submit Task";
   }, [exam.tasks.length, submittedTasks.length]);
 
   const { mutate, isPending } = useFinishExam({ studentId: student.id });
@@ -40,7 +40,7 @@ export const useSubmitExam = () => {
       return;
     }
 
-    if (submitMode === "Submit") {
+    if (submitMode === "Submit Task") {
       const remainingTasks = exam.tasks.filter((task) => !newSubmitted.includes(task.id));
       setCurrentTask(remainingTasks[0]);
 

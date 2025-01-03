@@ -1,4 +1,4 @@
-import { ElementRef, Fragment, useEffect, useRef, useState } from "react";
+import { ElementRef, Fragment, useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Split from "react-split";
 
@@ -24,6 +24,7 @@ import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { FeedbackView } from "@/types/exams";
 import { feedbackKey } from "@/utils";
+import { prefillFeedback } from "@/utils/exams/results";
 
 const GradeSubmission = () => {
   const { getToken } = useAuth();
@@ -52,8 +53,14 @@ const GradeSubmission = () => {
   const { submission, setOutputs, activeTask, activeOutput } = useCtx(GradeSubmissionContext);
   const { exam, student } = submission;
 
+  const feedbackPrefill = useMemo(
+    () => prefillFeedback({ student, tasks: exam.tasks }),
+    [student, exam.tasks],
+  );
   const [feedbackView, setFeedbackView] = useState<FeedbackView>("code");
-  const [feedback, setFeedback] = useState(localStorage.getItem(feedbackKey(submission.id)) ?? "");
+  const [feedback, setFeedback] = useState(
+    localStorage.getItem(feedbackKey(submission.id)) ?? feedbackPrefill,
+  );
 
   const onFeedbackChange = (newFeedback: string) => {
     setFeedback(newFeedback);

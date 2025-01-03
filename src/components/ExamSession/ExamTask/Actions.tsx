@@ -104,7 +104,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
                 startContent={<Icon name="restart" className="h-5 w-5" />}
                 onPress={startOverToggle.toggleOn}
               >
-                <p className="text-base">Start Over</p>
+                <p className="text-base">Start Task Over</p>
               </DropdownItem>
 
               <DropdownItem
@@ -134,9 +134,11 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
         color="primary"
         loading={isSubmitting}
         dialog={submitToggle}
-        title={submitMode === "Submit" ? "Submit task?" : "Finish exam?"}
+        title={submitMode === "Submit Task" ? "Submit task?" : "Finish exam?"}
         description={
-          submitMode === "Submit" ? "You cannot undo this." : `Make sure you've double checked everything!`
+          submitMode === "Submit Task"
+            ? "You cannot undo this."
+            : `Make sure you've double checked everything!`
         }
         action={{ label: submitMode, onConfirm: handleSubmit }}
       />
