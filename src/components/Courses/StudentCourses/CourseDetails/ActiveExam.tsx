@@ -68,7 +68,7 @@ const ActiveExam = () => {
 
         {exam.status === EXAM_STATUS.ongoing && (
           <Fragment>
-            {submission === null && (
+            {!submission && (
               <Button
                 as={Link}
                 // @ts-expect-error NextUI not passing through 'as' props
