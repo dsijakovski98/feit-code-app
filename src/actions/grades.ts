@@ -12,13 +12,17 @@ import { isNumber } from "@/utils";
 import { parseParameterValue, testFuncArguments } from "@/utils/code";
 import { functionNameFromTitle } from "@/utils/code/taskTemplates";
 
+const MD_COMMENT = /^<!--.*-->\n?/gm;
+
 type FeedbackOptions = {
   submissionId: string;
   graderId: string;
-  feedback: string;
+  rawFeedback: string;
   points: number;
 };
-export const addFeedback = async ({ submissionId, graderId, feedback, points }: FeedbackOptions) => {
+export const addFeedback = async ({ submissionId, graderId, rawFeedback, points }: FeedbackOptions) => {
+  const feedback = rawFeedback.replaceAll(MD_COMMENT, "");
+
   try {
     await db
       .update(submissions)
