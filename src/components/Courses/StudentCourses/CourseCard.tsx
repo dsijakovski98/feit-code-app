@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/avatar";
 
 import CourseActivity from "@/components/Courses/CourseCard/CourseActivity";
 import Button from "@/components/ui/Button";

@@ -1,4 +1,4 @@
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/avatar";
 
 const UserAvatarSkeleton = () => {
   return <Avatar isBordered className="animate-pulse ring-foreground" classNames={{ icon: "scale-80" }} />;

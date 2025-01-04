@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
 import { OAuthStrategy } from "@clerk/types";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import OAuthJoin from "@/components/OAuthJoin";
 import Button from "@/components/ui/Button";
@@ -68,7 +68,7 @@ const SignInForm = () => {
         setError("root", { message: "Could not verify code!" });
       }
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
 
       if (isClerkAPIResponseError(e)) {

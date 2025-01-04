@@ -3,7 +3,9 @@ import { Fragment } from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
-import { Chip, ModalBody, ModalFooter, Tooltip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
+import { ModalBody, ModalFooter } from "@nextui-org/modal";
+import { Tooltip } from "@nextui-org/tooltip";
 
 import DefineInputsForm from "@/components/Tasks/Forms/TaskTests/DefineTests/DefineInputsForm";
 import OutputTypeForm from "@/components/Tasks/Forms/TaskTests/DefineTests/OutputTypeForm";

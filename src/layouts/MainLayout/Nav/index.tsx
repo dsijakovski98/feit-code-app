@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import clsx, { ClassValue } from "clsx";
 
-import { Skeleton } from "@nextui-org/react";
+import { Skeleton } from "@nextui-org/skeleton";
 
 import LogoFC from "@/layouts/MainLayout/LogoFC";
 import NavActions from "@/layouts/MainLayout/Nav/NavActions";

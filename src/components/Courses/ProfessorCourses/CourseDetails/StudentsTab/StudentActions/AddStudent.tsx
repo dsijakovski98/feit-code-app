@@ -4,8 +4,9 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
+import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
-import { Autocomplete, AutocompleteItem, User } from "@nextui-org/react";
+import { User } from "@nextui-org/user";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

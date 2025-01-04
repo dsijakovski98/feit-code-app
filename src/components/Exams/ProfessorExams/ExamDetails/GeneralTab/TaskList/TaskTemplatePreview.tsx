@@ -1,7 +1,7 @@
 import { InferSelectModel } from "drizzle-orm";
 
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import { tasks } from "@/db/schema";
 

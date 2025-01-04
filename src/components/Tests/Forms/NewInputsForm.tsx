@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table";
 
 import ParameterForm from "@/components/Tests/Forms/ParameterForm";
 import Button from "@/components/ui/Button";

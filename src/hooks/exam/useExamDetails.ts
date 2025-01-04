@@ -30,7 +30,7 @@ export const useExamDetails = (examId?: string) => {
 
         return exam;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         if (e instanceof Error) {

@@ -53,7 +53,7 @@ const VerifySignUp = ({ verifyMode }: Props) => {
         setError("code", { message: "Could not verify code!" });
       }
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
 
       if (isClerkAPIResponseError(e)) {

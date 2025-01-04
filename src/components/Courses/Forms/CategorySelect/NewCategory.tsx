@@ -8,7 +8,8 @@ import { useTheme } from "next-themes";
 import { InferInput, nonEmpty, object, pipe, string, trim } from "valibot";
 
 import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
-import { Spinner, Tooltip } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
+import { Tooltip } from "@nextui-org/tooltip";
 
 import { categories } from "@/db/schema";
 
@@ -74,7 +75,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
 
       reset();
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
       const message = "Failed to create new category!";
 

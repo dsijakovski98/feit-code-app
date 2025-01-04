@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/avatar";
 import { Select, SelectItem } from "@nextui-org/select";
 
 import { useAssistants } from "@/hooks/useAssistants";

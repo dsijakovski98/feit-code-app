@@ -4,7 +4,8 @@ import duration from "dayjs/plugin/duration";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 
-import { DateValue, TimeInputValue } from "@nextui-org/react";
+import { DateValue } from "@nextui-org/calendar";
+import { TimeInputValue } from "@nextui-org/date-input";
 
 import { ExamSchema } from "@/utils/schemas/exams/examSchema";
 

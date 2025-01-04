@@ -104,7 +104,7 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
 
     // TODO: Notify students about new exam
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to create exam!");
@@ -129,7 +129,7 @@ export const updateExam = async (options: UpdateExamOptions) => {
 
     // TODO: Notify students that exam has been updated
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to update exam!");
@@ -149,7 +149,7 @@ export const cancelExam = async ({ examId, courseId }: CancelExamOptions) => {
       db.delete(exams).where(eq(exams.id, examId)),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to cancel exam!");
@@ -168,7 +168,7 @@ export const startExam = async (examId: string) => {
       })
       .where(eq(exams.id, examId));
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to start exam!");
@@ -189,7 +189,7 @@ export const endExam = async (examId: string) => {
       removeExamSession(examId),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to end exam!");
@@ -219,7 +219,7 @@ export const getOngoingExam = async (examIds: string[]) => {
 
     return ongoingExam ?? null;
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to find ongoing exam!");

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { Radio, RadioProps } from "@nextui-org/react";
+import { Radio, RadioProps } from "@nextui-org/radio";
 
 type Props = RadioProps;
 

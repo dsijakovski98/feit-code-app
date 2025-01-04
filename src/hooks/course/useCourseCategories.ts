@@ -10,7 +10,7 @@ export const useCourseCategories = () => {
         const categories = await db.query.categories.findMany();
         return categories;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         throw new Error("Error while fetching course categories!");

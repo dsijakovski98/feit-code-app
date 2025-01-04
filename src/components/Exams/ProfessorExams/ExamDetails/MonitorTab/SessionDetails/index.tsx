@@ -1,4 +1,4 @@
-import { Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
 
 import { Avatar } from "@nextui-org/avatar";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";

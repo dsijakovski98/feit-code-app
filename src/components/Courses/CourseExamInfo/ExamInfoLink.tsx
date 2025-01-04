@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { InferSelectModel } from "drizzle-orm";
 
-import { Chip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
 
 import { exams } from "@/db/schema";
 

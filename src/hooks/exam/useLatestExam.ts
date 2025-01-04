@@ -20,7 +20,7 @@ export const useLatestExam = ({ courseId }: Options) => {
 
         return latestExam ?? null;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         throw new Error("Failed to get latest exam!");

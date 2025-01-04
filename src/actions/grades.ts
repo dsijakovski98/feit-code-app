@@ -38,7 +38,7 @@ export const addFeedback = async ({ submissionId, graderId, rawFeedback, points 
 
     return true;
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to submit feedback!");
@@ -57,7 +57,7 @@ export const updateSubmissionGrading = async ({ submissionId }: Options) => {
 
     return true;
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to update submission status to In progress...");

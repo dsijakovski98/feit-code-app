@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from "react";
 
-import { ModalBody, ModalFooter } from "@nextui-org/react";
+import { ModalBody, ModalFooter } from "@nextui-org/modal";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

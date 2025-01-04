@@ -13,7 +13,7 @@ export const addStudents = async ({ studentIds, courseId }: AddOptions) => {
   try {
     await db.insert(studentCourses).values(studentIds.map((studentId) => ({ studentId, courseId })));
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to add students to course!");
@@ -33,7 +33,7 @@ export const removeStudent = async ({ studentId, courseId }: RemoveOptions) => {
       .where(and(eq(studentCourses.studentId, studentId), eq(studentCourses.courseId, courseId)));
     // TODO: Notify student of removal
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to remove student from course!");

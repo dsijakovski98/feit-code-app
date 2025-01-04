@@ -26,7 +26,7 @@ export const useAssistants = (columns?: QueryColumns<InferSelectModel<typeof pro
 
         return assistantsWithAvatars;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         throw new Error("Error while fetching Teaching Assistants!");

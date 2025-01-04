@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 type Props = {
   bg?: "main" | "dots";

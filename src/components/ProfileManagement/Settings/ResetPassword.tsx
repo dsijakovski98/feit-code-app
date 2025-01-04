@@ -7,8 +7,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
+import { Checkbox } from "@nextui-org/checkbox";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
-import { Checkbox } from "@nextui-org/react";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
@@ -78,7 +78,7 @@ const ResetPassword = () => {
         dialog.toggleOff();
       }
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
 
       if (isClerkAPIResponseError(e)) {

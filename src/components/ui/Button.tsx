@@ -3,7 +3,7 @@ import { type ComponentProps, ElementRef, type PropsWithChildren, forwardRef } f
 import clsx from "clsx";
 
 import { Button as NextUiButton } from "@nextui-org/button";
-import { extendVariants } from "@nextui-org/react";
+import { extendVariants } from "@nextui-org/system";
 
 const Btn = extendVariants(NextUiButton, {
   defaultVariants: {

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { InferSelectModel } from "drizzle-orm";
 
-import { User } from "@nextui-org/react";
+import { User } from "@nextui-org/user";
 
 import { students } from "@/db/schema";
 

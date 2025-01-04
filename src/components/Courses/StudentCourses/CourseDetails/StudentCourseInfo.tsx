@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import JoinCourse from "@/components/Courses/Forms/JoinCourse";
 import ActiveExam from "@/components/Courses/StudentCourses/CourseDetails/ActiveExam";

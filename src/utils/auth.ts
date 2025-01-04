@@ -14,7 +14,7 @@ export const joinOAuth = async ({ strategy, authResource }: JoinOptions) => {
       redirectUrlComplete: ROUTES.welcome,
     });
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error(`Failed to join via ${strategy}. Status: ${authResource?.status}`);

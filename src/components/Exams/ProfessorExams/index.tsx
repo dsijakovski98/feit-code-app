@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import ExamCard from "@/components/Exams/ExamCard";
 import ExamsList from "@/components/Exams/ExamsList";

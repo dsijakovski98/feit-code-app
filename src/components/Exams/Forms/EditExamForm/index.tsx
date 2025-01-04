@@ -73,7 +73,7 @@ const EditExamForm = () => {
 
       toast.success("Exam details updated!");
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
 
       const message = "Failed to update exam!";

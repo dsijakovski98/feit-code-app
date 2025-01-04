@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
 
 import SidebarItem from "@/layouts/MainLayout/Sidebar/SidebarItem";
 

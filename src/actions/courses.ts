@@ -13,7 +13,7 @@ export const joinCourse = async ({ courseId, studentId }: StudentOptions) => {
   try {
     await db.insert(studentCourses).values({ courseId, studentId });
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to join course!");
@@ -28,7 +28,7 @@ export const leaveCourse = async ({ courseId, studentId }: StudentOptions) => {
       .delete(studentCourses)
       .where(and(eq(studentCourses.courseId, courseId), eq(studentCourses.studentId, studentId)));
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to leave course!");
@@ -45,7 +45,7 @@ export const archiveCourseToggle = async ({ courseId, archived }: ArchiveOptions
   try {
     await db.update(courses).set({ archived }).where(eq(courses.id, courseId));
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error(`Failed to ${archived ? "archive" : "activate"} course!`);
@@ -61,7 +61,7 @@ export const deleteCourse = async (courseId: string) => {
       db.delete(courses).where(eq(courses.id, courseId)),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to delete course!");

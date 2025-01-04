@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import NewExamForm from "@/components/Exams/Forms/NewExamForm";
 import Button from "@/components/ui/Button";

@@ -16,7 +16,7 @@ export const useStudentJoinedCourse = (studentId: string | undefined, courseId: 
 
         return joinedCourse ?? null;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         throw new Error("Failed to find course");

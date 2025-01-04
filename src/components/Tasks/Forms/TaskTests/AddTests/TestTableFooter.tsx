@@ -1,4 +1,4 @@
-import { ModalFooter } from "@nextui-org/react";
+import { ModalFooter } from "@nextui-org/modal";
 
 import Button from "@/components/ui/Button";
 

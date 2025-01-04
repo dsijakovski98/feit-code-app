@@ -78,7 +78,7 @@ const NewCourseForm = () => {
       navigate(ROUTES.courses);
       toast.success(`You created a new course "${name}"!`);
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
       const message = `Failed to create a new course!`;
 

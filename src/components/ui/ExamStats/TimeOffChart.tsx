@@ -4,7 +4,7 @@ import clsx, { ClassValue } from "clsx";
 import { useTheme } from "next-themes";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import { colors } from "@nextui-org/react";
+import { colors } from "@nextui-org/theme";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 

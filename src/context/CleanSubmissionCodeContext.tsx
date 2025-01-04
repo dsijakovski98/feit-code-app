@@ -26,7 +26,7 @@ const CleanSubmissionCodeProvider = ({ children }: PropsWithChildren) => {
     if (import.meta.env.PROD) return;
     if (!query.error) return;
 
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e: query.error.message });
   }, [query.error]);
 

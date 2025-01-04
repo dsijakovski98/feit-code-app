@@ -1,7 +1,7 @@
 import { Suspense, lazy, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { Badge } from "@nextui-org/react";
+import { Badge } from "@nextui-org/badge";
 import { Tab, Tabs } from "@nextui-org/tabs";
 
 import { EXAM_STATUS } from "@/constants/enums";

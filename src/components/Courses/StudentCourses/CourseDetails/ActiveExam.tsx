@@ -1,7 +1,8 @@
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Fragment } from "react/jsx-runtime";
 
-import { Chip, Spinner } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
+import { Spinner } from "@nextui-org/spinner";
 
 import Button from "@/components/ui/Button";
 

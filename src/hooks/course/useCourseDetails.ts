@@ -26,7 +26,7 @@ export const useCourseDetails = (courseId?: string) => {
 
         return course;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         if (e instanceof Error) {

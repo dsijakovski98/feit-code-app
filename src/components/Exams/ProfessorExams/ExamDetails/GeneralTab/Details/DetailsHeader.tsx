@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import { Chip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
 
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useCtx } from "@/hooks/useCtx";

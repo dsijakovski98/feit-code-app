@@ -1,4 +1,4 @@
-import { ChipProps } from "@nextui-org/react";
+import { ChipProps } from "@nextui-org/chip";
 
 import { ROUTES } from "@/constants/routes";
 import { MonitorSession } from "@/context/MonitorExamContext";

@@ -1,6 +1,6 @@
 import { InferSelectModel } from "drizzle-orm";
 
-import { Chip } from "@nextui-org/react";
+import { Chip } from "@nextui-org/chip";
 
 import { categories } from "@/db/schema";
 

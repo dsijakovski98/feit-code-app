@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from "react";
 
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import OnboardingStep from "@/components/Onboarding/OnboardingStep";
 import UserTypeSelector from "@/components/Onboarding/UserTypeSelect";

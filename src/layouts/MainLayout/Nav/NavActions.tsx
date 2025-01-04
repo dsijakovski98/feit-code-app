@@ -1,4 +1,4 @@
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@nextui-org/divider";
 
 import UserAvatar from "@/layouts/MainLayout/Nav/UserAvatar";
 

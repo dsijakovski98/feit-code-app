@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 
 import clsx from "clsx";
 
-import type { As } from "@nextui-org/react";
+import type { As } from "@nextui-org/system";
 
 type Props = {
   as?: As;

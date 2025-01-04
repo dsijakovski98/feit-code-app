@@ -6,7 +6,7 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 import { eq } from "drizzle-orm";
 
-import { Textarea } from "@nextui-org/react";
+import { Textarea } from "@nextui-org/input";
 
 import { courseCategories, courses } from "@/db/schema";
 
@@ -84,7 +84,7 @@ const EditCourseForm = () => {
 
       toast.success("Updated course details!");
     } catch (e) {
-      // TODO: Sentry logging
+      // Sentry logging
       console.log({ e });
 
       const message = "Failed to update course details!";

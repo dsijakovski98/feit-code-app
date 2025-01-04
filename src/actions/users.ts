@@ -45,7 +45,7 @@ export const createNewStudent = async ({
       user.update({ unsafeMetadata: { onboardingComplete: true } }),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
     throw new Error("Failed to add student!");
   }
@@ -81,7 +81,7 @@ export const updateStudent = async ({
       updateAvatar(userId, avatarUrl),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
     throw new Error("An error happened while updating your profile!");
   }
@@ -105,7 +105,7 @@ export const createNewProfessor = async ({ user, fullName, department, type, ava
       user.update({ unsafeMetadata: { onboardingComplete: true } }),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
     throw new Error("Failed to add professor!");
   }
@@ -137,7 +137,7 @@ export const updateProfessor = async ({
       updateAvatar(userId, avatarUrl),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("An error happened while updating your profile!");
@@ -161,7 +161,7 @@ export const deleteProfile = async ({ user, type }: DeleteProfileConfig) => {
       deleteObject(avatarRef).catch(() => {}),
     ]);
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to delete user!");

@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import { Extension } from "@uiw/react-codemirror";
 
-import { ButtonProps } from "@nextui-org/react";
+import { ButtonProps } from "@nextui-org/button";
 
 import { TestType } from "@/context/ExamFormContext";
 

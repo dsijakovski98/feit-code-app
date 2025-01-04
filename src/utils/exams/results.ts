@@ -1,4 +1,4 @@
-import { ChipProps } from "@nextui-org/react";
+import { ChipProps } from "@nextui-org/chip";
 
 import { SUBMISSION_STATUS, SubmissionStatus } from "@/constants/enums";
 import { ExamDetails } from "@/hooks/exam/useExamDetails";

@@ -17,7 +17,7 @@ export const useOutsideStudents = (joinedIds: string[]) => {
 
         return students;
       } catch (e) {
-        // TODO: Sentry logging
+        // Sentry logging
         console.log({ e });
 
         throw new Error("Failed to find students list outside of this course!");

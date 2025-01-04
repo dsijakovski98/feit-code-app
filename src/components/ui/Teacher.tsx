@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { InferSelectModel } from "drizzle-orm";
 
-import { User } from "@nextui-org/react";
+import { User } from "@nextui-org/user";
 
 import { professors } from "@/db/schema";
 

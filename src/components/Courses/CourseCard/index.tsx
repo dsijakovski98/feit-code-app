@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Avatar } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/avatar";
 
 import CourseActions from "@/components/Courses/CourseCard/CourseActions";
 import CourseActivity from "@/components/Courses/CourseCard/CourseActivity";

@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/spinner";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

@@ -2,8 +2,8 @@ import { Controller, useForm } from "react-hook-form";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
-import { SharedSelection } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
+import { SharedSelection } from "@nextui-org/system-rsc";
 
 import ParameterTypeIcon from "@/components/ui/ParameterTypeIcon";
 

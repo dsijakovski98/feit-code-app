@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 
-import { Progress } from "@nextui-org/react";
+import { Progress } from "@nextui-org/progress";
 
 import ConfirmExam from "@/components/Exams/Forms/NewExamForm/ConfirmExam";
 import ExamForm from "@/components/Exams/Forms/NewExamForm/ExamForm";

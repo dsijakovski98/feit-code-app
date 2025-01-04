@@ -335,7 +335,7 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
 
     return true;
   } catch (e) {
-    // TODO: Sentry logging
+    // Sentry logging
     console.log({ e });
 
     throw new Error("Failed to finish exam!");

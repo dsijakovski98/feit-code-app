@@ -1,4 +1,5 @@
-import { Avatar, Skeleton } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/avatar";
+import { Skeleton } from "@nextui-org/skeleton";
 
 const ProfessorProfileSkeleton = () => {
   return (

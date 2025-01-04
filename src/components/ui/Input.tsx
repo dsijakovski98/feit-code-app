@@ -3,7 +3,7 @@ import { ComponentProps, ElementRef, PropsWithChildren, forwardRef } from "react
 import clsx from "clsx";
 
 import { Input as NextUiInput } from "@nextui-org/input";
-import { extendVariants } from "@nextui-org/react";
+import { extendVariants } from "@nextui-org/system";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

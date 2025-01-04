@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import { Navigate, Outlet } from "react-router-dom";
 
-import { CircularProgress } from "@nextui-org/react";
+import { CircularProgress } from "@nextui-org/progress";
 
 import { ROUTES } from "@/constants/routes";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
