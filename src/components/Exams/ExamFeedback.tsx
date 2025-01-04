@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import MarkdownPreview from "@uiw/react-markdown-preview";
@@ -24,8 +25,16 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
   const [submission] = submissions;
 
   const queryClient = useQueryClient();
+  const [, setSearchParams] = useSearchParams();
 
   const [avatarUrl, isLoading] = useAvatar(submission.graderId ?? "");
+
+  const closeFeedback = () => {
+    setSearchParams((prev) => {
+      prev.delete("fb");
+      return prev;
+    });
+  };
 
   const { mutate } = useMutation({
     mutationFn: seenFeedback,
@@ -53,6 +62,7 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
     <Modal
       isOpen={dialog.open}
       onOpenChange={dialog.toggle}
+      onClose={closeFeedback}
       hideCloseButton
       size="3xl"
       placement="center"

@@ -17,12 +17,10 @@ export const GRADE_RULES = [
 
 type GradeOptions = {
   totalPoints: number;
-  examPoints: number;
+  points: number;
 };
-export const calculateCourseGrade = ({ totalPoints, examPoints }: GradeOptions) => {
-  const percentage = Math.round((examPoints / totalPoints) * 100);
-  console.log({ examPoints, totalPoints });
-  console.log({ percentage });
+export const calculateGrade = ({ totalPoints, points }: GradeOptions) => {
+  const percentage = Math.round((points / totalPoints) * 100);
 
   if (percentage <= 50) return 5;
 

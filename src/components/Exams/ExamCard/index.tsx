@@ -1,5 +1,5 @@
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Fragment, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import clsx from "clsx";
 
@@ -29,7 +29,11 @@ const ExamCard = ({ exam }: Props) => {
   const { id, course, name, language, startsAt, status, submissions } = exam;
 
   const { userData } = useFCUser();
-  const feedbackDialog = useToggle();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const feedbackDefaultOpen = useMemo(() => searchParams.get("fb") === id, [id, searchParams]);
+  const feedbackDialog = useToggle(feedbackDefaultOpen);
 
   const submission = submissions[0];
   const submissionGraded = submission?.status === SUBMISSION_STATUS.graded;
@@ -38,6 +42,15 @@ const ExamCard = ({ exam }: Props) => {
 
   const onSeen = () => {
     setFeedbackSeen(true);
+  };
+
+  const openExamFeedback = () => {
+    setSearchParams((prev) => {
+      prev.append("fb", id);
+      return prev;
+    });
+
+    feedbackDialog.toggleOn();
   };
 
   if (!userData) return null;
@@ -88,11 +101,7 @@ const ExamCard = ({ exam }: Props) => {
           )}
 
           {submissionGraded ? (
-            <Button
-              color="success"
-              onPress={feedbackDialog.toggleOn}
-              className={!feedbackSeen ? "!font-bold" : ""}
-            >
+            <Button color="success" onPress={openExamFeedback} className={!feedbackSeen ? "!font-bold" : ""}>
               Feedback
             </Button>
           ) : (

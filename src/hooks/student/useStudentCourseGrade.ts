@@ -5,7 +5,7 @@ import { submissions } from "@/db/schema";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { db } from "@/db";
-import { calculateCourseGrade } from "@/utils/courses/grade";
+import { calculateGrade } from "@/utils/courses/grade";
 
 type Options = {
   studentId: string;
@@ -31,14 +31,14 @@ export const useStudentCourseGrade = ({ studentId, courseId }: Options) => {
       const totalPoints = examsData.reduce((acc, exam) => acc + exam.points, 0);
       const examIds = examsData.map((exam) => exam.id);
 
-      const [{ examPoints }] = await db
-        .select({ examPoints: sum(submissions.points).mapWith(Number) })
+      const [{ points }] = await db
+        .select({ points: sum(submissions.points).mapWith(Number) })
         .from(submissions)
         .where(and(eq(submissions.studentId, studentId), inArray(submissions.examId, examIds)));
 
-      if (examPoints === null) return null;
+      if (points === null) return null;
 
-      return calculateCourseGrade({ totalPoints, examPoints });
+      return calculateGrade({ totalPoints, points });
     },
   });
 };

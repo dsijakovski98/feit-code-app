@@ -61,8 +61,8 @@ const ExamTasks = () => {
         <div className="space-y-12">
           <ScrollShadow className="h-[400px] py-4">
             <Listbox
-              variant="bordered"
               items={tasks}
+              variant="bordered"
               aria-label="Exam tasks list"
               classNames={{ list: "gap-4" }}
               emptyContent={

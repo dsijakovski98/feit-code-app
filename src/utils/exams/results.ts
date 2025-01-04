@@ -56,8 +56,8 @@ export const prefillFeedback = ({ student, tasks }: GradeOptions) => {
   const header = [title, helpNote].join("\n");
 
   const taskNotes = tasks
-    .map((task) => {
-      const title = `### ${task.title}`;
+    .map((task, idx) => {
+      const title = `### Task ${idx + 1}: ${task.title}`;
       const comment = `<!-- Feedback related to the ${task.title} task -->`;
 
       return [title, comment].join("\n");
