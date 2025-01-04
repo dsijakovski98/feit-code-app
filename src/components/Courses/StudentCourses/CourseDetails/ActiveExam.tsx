@@ -41,7 +41,7 @@ const ActiveExam = () => {
   }
 
   if (exam === null || exam?.status === EXAM_STATUS.completed) {
-    return <p className="text-lg font-semibold text-foreground-300">No active exams at the moment.</p>;
+    return <p className="text-foreground-300">No active exams at the moment.</p>;
   }
 
   if (!exam) return null;

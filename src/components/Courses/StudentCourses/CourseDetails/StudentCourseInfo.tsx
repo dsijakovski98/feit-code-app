@@ -1,15 +1,14 @@
-import clsx from "clsx";
-
 import { Spinner } from "@nextui-org/spinner";
 
 import JoinCourse from "@/components/Courses/Forms/JoinCourse";
 import ActiveExam from "@/components/Courses/StudentCourses/CourseDetails/ActiveExam";
-import Button from "@/components/ui/Button";
-import Icon from "@/components/ui/Icon";
+import CourseGrade from "@/components/Courses/StudentCourses/CourseDetails/CourseGrade";
+import ExamHistory from "@/components/Courses/StudentCourses/CourseDetails/ExamHistory";
 import Timestamp from "@/components/ui/Timestamp";
 
 import CourseCardProvider from "@/context/CourseCardContext";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
+import JoinedCourseProvider from "@/context/JoinedCourseContext";
 import { useStudentJoinedCourse } from "@/hooks/student/useStudentJoinedCourse";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
@@ -20,9 +19,9 @@ const StudentCourseInfo = () => {
   const { id: courseId, name } = courseDetails;
 
   const { userData } = useFCUser();
-  const { data: joinedData } = useStudentJoinedCourse(userData?.user.id, courseId);
+  const { data: joinedData, isPending } = useStudentJoinedCourse(userData?.user.id, courseId);
 
-  if (!userData) {
+  if (!userData || isPending) {
     return (
       <div className="grid h-full place-items-center">
         <Spinner size="lg" />
@@ -30,7 +29,7 @@ const StudentCourseInfo = () => {
     );
   }
 
-  if (!joinedData) {
+  if (joinedData === null) {
     return (
       <div className="flex h-full flex-col">
         <h4 className="text-pretty text-xl font-semibold">You & This Course</h4>
@@ -46,46 +45,29 @@ const StudentCourseInfo = () => {
     );
   }
 
+  if (!joinedData) return null;
+
   return (
-    <div className="flex h-full flex-col justify-between gap-20">
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <h2 className="text-xl font-semibold">You & This Course</h2>
-          <p>
-            You joined <Timestamp>{joinedData.joinedAt}</Timestamp>
-          </p>
-        </div>
-
-        <Button
-          size="lg"
-          color="default"
-          variant="light"
-          isDisabled={!joinedData.grade}
-          startContent={<Icon name="history" className="h-5 w-5" />}
-          // TODO: Exam history modal UI
-        >
-          Exam History
-        </Button>
-      </div>
-
-      <div className="flex items-end justify-between gap-6">
-        <div className="space-y-1">
-          <div className="grid aspect-square max-h-[70px] max-w-[70px] place-items-center rounded-md bg-default dark:bg-default-100">
-            <p
-              className={clsx("text-5xl font-semibold", {
-                "!text-4xl": joinedData.grade && joinedData.grade.length > 1,
-              })}
-            >
-              {joinedData.grade ?? "-"}
+    <JoinedCourseProvider joinedData={joinedData}>
+      <div className="flex h-full flex-col justify-between gap-20">
+        <div className="flex items-start justify-between gap-6">
+          <div>
+            <h2 className="text-xl font-semibold">You & This Course</h2>
+            <p>
+              You joined <Timestamp>{joinedData.joinedAt}</Timestamp>
             </p>
           </div>
 
-          <p>Course grade</p>
+          <ExamHistory />
         </div>
 
-        <ActiveExam />
+        <div className="flex items-end justify-between gap-6">
+          <CourseGrade />
+
+          <ActiveExam />
+        </div>
       </div>
-    </div>
+    </JoinedCourseProvider>
   );
 };
 

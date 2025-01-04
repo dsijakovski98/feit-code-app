@@ -24,3 +24,5 @@ export const useStudentJoinedCourse = (studentId: string | undefined, courseId: 
     },
   });
 };
+
+export type JoinedCourse = NonNullable<ReturnType<typeof useStudentJoinedCourse>["data"]>;
