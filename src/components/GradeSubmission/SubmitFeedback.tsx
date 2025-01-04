@@ -93,7 +93,12 @@ const SubmitFeedback = ({ dialog, feedback }: Props) => {
   const submitFeedback: SubmitHandler<FeedbackSchema> = () => {
     if (!userData) return;
 
-    mutate({ submissionId: submission.id, graderId: userData.user.id, feedback, points: totalPoints });
+    mutate({
+      submissionId: submission.id,
+      graderId: userData.user.id,
+      rawFeedback: feedback,
+      points: totalPoints,
+    });
   };
 
   const loading = isSubmitting || isPending;
@@ -108,9 +113,9 @@ const SubmitFeedback = ({ dialog, feedback }: Props) => {
       description={
         <div className="relative space-y-6">
           <p>Assign points for each task before submitting your feedback:</p>
-          <form id={formId} onSubmit={handleSubmit(submitFeedback)} onChange={onChange} className="space-y-">
+          <form id={formId} onSubmit={handleSubmit(submitFeedback)} onChange={onChange}>
             {exam.tasks.map((task) => (
-              <div key={task.title} className="flex items-baseline gap-2">
+              <div key={task.title} className="flex items-center gap-2">
                 <Controller
                   control={control}
                   name={task.title}
@@ -128,10 +133,10 @@ const SubmitFeedback = ({ dialog, feedback }: Props) => {
                       isInvalid={fieldState.invalid}
                       errorMessage={fieldState.error?.message}
                       classNames={{
-                        base: "max-w-[14ch] group",
+                        base: "max-w-[10ch] group",
                         errorMessage: "font-sans",
-                        input: "text-base translate-y-1",
-                        label: "text-base !truncate !max-w-[10ch] group-hover:!max-w-fit",
+                        input: "text-lg translate-y-1.5",
+                        label: "text-base !truncate !max-w-[12ch] group-hover:!max-w-fit",
                       }}
                     />
                   )}

@@ -40,7 +40,7 @@ const TimeOffChart = ({ timeOff, className = "" }: Props) => {
     if (!timeOff) return [];
 
     return Object.entries(timeOff).map(([timestamp, timeSeconds]) => {
-      const time = Number((timeSeconds / 60).toFixed(1));
+      const time = Number((timeSeconds / 60).toFixed(2));
 
       return { timestamp, time };
     });
