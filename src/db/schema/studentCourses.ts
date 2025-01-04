@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { numeric, pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { pgTable, primaryKey, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 import courses from "@/db/schema/courses";
 import students from "@/db/schema/students";
@@ -16,7 +16,6 @@ const studentCourses = pgTable(
       .notNull()
       .references(() => courses.id, { onDelete: "cascade" }),
 
-    grade: numeric("grade", { precision: 2 }),
     joinedAt: timestamp("joined_at", { mode: "string" }).notNull().$defaultFn(dbNow),
   },
   (table) => ({

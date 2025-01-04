@@ -1,0 +1,1 @@
+ALTER TABLE "student_courses" DROP COLUMN IF EXISTS "grade";

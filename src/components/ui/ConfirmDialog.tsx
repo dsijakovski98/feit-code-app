@@ -29,6 +29,8 @@ const ConfirmDialog = (props: Props) => {
 
   const handleOpenChange = (isOpen: boolean) => {
     if (!isOpen && !cancelable) return;
+    if (loading) return;
+
     dialog.toggle();
   };
 

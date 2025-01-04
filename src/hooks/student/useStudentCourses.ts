@@ -18,7 +18,6 @@ export const useStudentCourses = (studentId: string) => {
           id: studentCourses.courseId,
           course: courses,
           joinedAt: studentCourses.joinedAt,
-          grade: studentCourses.grade,
         })
         .from(studentCourses)
         .innerJoin(courses, eq(courses.id, studentCourses.courseId))

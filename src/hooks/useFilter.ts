@@ -18,7 +18,10 @@ export const useFilter = <T extends Option[]>({ name, defaultValue, options }: F
 
   const updateFilter = (filter: OptionType) => {
     setFilter(filter);
-    setSearchParams({ [name]: filter });
+    setSearchParams((prev) => {
+      prev.set(name, filter);
+      return prev;
+    });
   };
 
   return { value: filter, updateFilter, options };
