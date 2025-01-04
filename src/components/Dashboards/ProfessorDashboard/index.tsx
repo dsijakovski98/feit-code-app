@@ -1,4 +1,4 @@
-// TODO: Implement professor dashboard
+// TODO: Professor Dashboard
 const ProfessorDashboard = () => {
   return <div>ProfessorDashboard</div>;
 };

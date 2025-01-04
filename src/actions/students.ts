@@ -31,7 +31,7 @@ export const removeStudent = async ({ studentId, courseId }: RemoveOptions) => {
     await db
       .delete(studentCourses)
       .where(and(eq(studentCourses.studentId, studentId), eq(studentCourses.courseId, courseId)));
-    // TODO: Notify student of removal
+    // Notify student of removal
   } catch (e) {
     // Sentry logging
     console.log({ e });

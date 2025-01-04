@@ -92,7 +92,7 @@ const StudentExams = ({ user }: Props) => {
         )}
       </section>
 
-      {/* TODO: Implement stats UI */}
+      {/* TODO: Student Exam stats */}
       {!!data?.pages[0].length && (
         <section className="px-8">
           <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>

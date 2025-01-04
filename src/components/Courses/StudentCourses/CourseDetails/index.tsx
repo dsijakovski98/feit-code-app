@@ -14,7 +14,7 @@ const StudentCourseDetails = () => {
         <StudentCourseInfo />
       </div>
 
-      {/* TODO: Implement stats UI */}
+      {/* TODO: Student Course Details stats */}
       <div className="[grid-area:stats]">Stats here</div>
     </section>
   );

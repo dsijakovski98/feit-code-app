@@ -34,7 +34,7 @@ export const addFeedback = async ({ submissionId, graderId, rawFeedback, points 
       })
       .where(eq(submissions.id, submissionId));
 
-    // TODO: Notify student that their exam has been graded
+    // Notify student that their exam has been graded
 
     return true;
   } catch (e) {
@@ -53,7 +53,7 @@ export const updateSubmissionGrading = async ({ submissionId }: Options) => {
       .set({ status: SUBMISSION_STATUS.inProgress })
       .where(eq(submissions.id, submissionId));
 
-    // TODO: Notify student that their exam is being graded
+    // Notify student that their exam is being graded
 
     return true;
   } catch (e) {

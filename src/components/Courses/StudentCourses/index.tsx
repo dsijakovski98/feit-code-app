@@ -46,7 +46,7 @@ const StudentCourses = ({ user }: Props) => {
         </CourseSearchProvider>
       </section>
 
-      {/* TODO: Some charts and stats here */}
+      {/* TODO: Student Courses stats */}
     </div>
   );
 };

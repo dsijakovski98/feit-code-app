@@ -1,6 +1,6 @@
 import { DashboardWindow } from "@/components/ui/DashboardWindow";
 
-// TODO: Implement student dashboard
+// TODO: Student Dashboard
 const StudentDashboard = () => {
   return (
     <div className="grid h-full grid-cols-3 grid-rows-[auto_1fr_1fr_1fr] gap-6">

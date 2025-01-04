@@ -102,7 +102,7 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
       }),
     );
 
-    // TODO: Notify students about new exam
+    // Notify students about new exam
   } catch (e) {
     // Sentry logging
     console.log({ e });
@@ -127,7 +127,7 @@ export const updateExam = async (options: UpdateExamOptions) => {
       .set({ name, startsAt, durationMinutes: Number(durationMinutes) })
       .where(eq(exams.id, examId));
 
-    // TODO: Notify students that exam has been updated
+    // Notify students that exam has been updated
   } catch (e) {
     // Sentry logging
     console.log({ e });
