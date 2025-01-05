@@ -21,9 +21,9 @@ const CourseGrade = () => {
       </div>
 
       <Tooltip
-        placement="bottom"
+        placement="right-end"
         content={
-          <ol className="space-y-0.5">
+          <ol>
             <p className="text-base font-semibold">Grade Rules</p>
 
             {GRADE_RULES.map(([rule, grade]) => (

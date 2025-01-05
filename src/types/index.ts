@@ -34,6 +34,7 @@ export type LanguageConfig = {
   funcPrefix: string;
   emptyValue?: string;
   extension: Extension;
+  fileType: string;
   commandExec: (taskName: string) => string;
 } & (
   | {

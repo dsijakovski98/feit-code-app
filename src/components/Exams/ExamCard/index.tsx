@@ -5,7 +5,9 @@ import clsx from "clsx";
 
 import { Avatar } from "@nextui-org/avatar";
 import { Chip } from "@nextui-org/chip";
+import { Tooltip } from "@nextui-org/react";
 
+import ExamCardHeader from "@/components/Exams/ExamCard/ExamCardHeader";
 import ExamFeedback from "@/components/Exams/ExamFeedback";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
@@ -62,12 +64,23 @@ const ExamCard = ({ exam }: Props) => {
       <div className="h-full space-y-16 rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background sm:space-y-20">
         <div className="flex items-start justify-between gap-6">
           <div className="w-[36ch] space-y-2 overflow-hidden sm:w-[34ch]">
-            <div>
-              <span className="text-sm font-semibold">{course.name}</span>
-              <h3 className="truncate text-lg font-semibold leading-[1.2]">
-                {name}・{language}
-              </h3>
-            </div>
+            {submissionGraded ? (
+              <Tooltip
+                placement="top"
+                content={
+                  <p>
+                    Open <span className="font-semibold">{course.name}</span> Course
+                  </p>
+                }
+                classNames={{ content: "font-serif" }}
+              >
+                <Link className="group outline-none" to={`${ROUTES.dashboard}${ROUTES.courses}/${course.id}`}>
+                  <ExamCardHeader isLink name={name} language={language} course={course} />
+                </Link>
+              </Tooltip>
+            ) : (
+              <ExamCardHeader name={name} language={language} course={course} />
+            )}
 
             <p className="text-foreground-300">{formatTimestamp(startsAt)}</p>
           </div>

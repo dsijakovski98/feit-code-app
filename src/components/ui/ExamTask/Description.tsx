@@ -27,7 +27,7 @@ const ExamTaskDescription = ({ task }: Props) => {
         </Chip>
       </div>
 
-      <p className="text-lg font-medium dark:font-normal">{description}</p>
+      <p className="whitespace-pre-wrap text-lg font-medium dark:font-normal">{description}</p>
     </div>
   );
 };

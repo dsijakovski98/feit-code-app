@@ -5,6 +5,7 @@ import { LanguageConfig } from "@/types";
 export const bashConfig: LanguageConfig = {
   comment: "#",
   funcPrefix: "function",
+  fileType: "sh",
   extension: langs.shell(),
   commandExec: (taskName) => `./${taskName}.sh`,
 };
