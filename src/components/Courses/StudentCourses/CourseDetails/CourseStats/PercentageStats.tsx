@@ -16,7 +16,11 @@ type Props = {
 
 const PercentageStats = ({ stats }: Props) => {
   return (
-    <ChartContainer config={chartConfig} className="max-h-[360px] w-full">
+    <ChartContainer
+      config={chartConfig}
+      className="max-h-[360px] w-full"
+      title="Area chart showing the percentage points for each completed exam."
+    >
       <AreaChart accessibilityLayer data={stats}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
