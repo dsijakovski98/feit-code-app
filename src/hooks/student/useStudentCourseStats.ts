@@ -47,7 +47,7 @@ export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
 
         const percentage = Math.round((points! / totalPoints) * 100);
 
-        return { exam: `${name}・${language}`, totalPoints, points, percentage };
+        return { exam: `${name}・${language}`, totalPoints: totalPoints - points!, points, percentage };
       });
     },
   });

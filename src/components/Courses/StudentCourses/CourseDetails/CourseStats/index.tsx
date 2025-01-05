@@ -1,7 +1,7 @@
 import { Spinner } from "@nextui-org/spinner";
 
 import PercentageStats from "@/components/Courses/StudentCourses/CourseDetails/CourseStats/PercentageStats";
-import SuccessRateStats from "@/components/Courses/StudentCourses/CourseDetails/CourseStats/SuccessRateStats";
+import RateStats from "@/components/Courses/StudentCourses/CourseDetails/CourseStats/RateStats";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
@@ -9,7 +9,6 @@ import { useStudentCourseStats } from "@/hooks/student/useStudentCourseStats";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
-import { simplePlural } from "@/utils";
 
 const StudentCourseStats = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
@@ -18,7 +17,7 @@ const StudentCourseStats = () => {
   const statFilter = useFilter({
     name: "type",
     options: [
-      { value: "rate", label: "Success Rate" },
+      { value: "rate", label: "Rate" },
       { value: "percentage", label: "Percentage" },
     ] as const,
     defaultValue: "percentage",
@@ -36,10 +35,7 @@ const StudentCourseStats = () => {
       <div className="flex items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-semibold">Exams statistics</h2>
-          <p>
-            Latest {stats && stats.length > 1 && stats.length} {simplePlural("exam", stats?.length ?? 0)}{" "}
-            success rate
-          </p>
+          <p>Last 10 exams</p>
         </div>
 
         <SelectFilter size="sm" label="Chart Type" filter={statFilter} className="w-[240px] lg:w-full" />
@@ -51,7 +47,7 @@ const StudentCourseStats = () => {
         </div>
       )}
 
-      {stats && statFilter.value === "rate" && <SuccessRateStats stats={stats} />}
+      {stats && statFilter.value === "rate" && <RateStats stats={stats} />}
       {stats && statFilter.value === "percentage" && <PercentageStats stats={stats} />}
     </div>
   );

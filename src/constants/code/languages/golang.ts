@@ -14,6 +14,7 @@ export const goConfig: LanguageConfig = {
   comment: "//",
   funcPrefix: "func",
   emptyValue: "nil",
+  fileType: "go",
   extension: langs.go(),
   commandExec: (taskName) => `go run ${taskName}.go`,
 

@@ -9,7 +9,7 @@ const tasks = pgTable("tasks", {
   id: primaryId(),
   orderIndex: integer("order_index").notNull(),
   title: varchar("title", { length: 256 }).notNull(),
-  description: varchar("description", { length: 256 }),
+  description: varchar("description", { length: 10_000 }),
   points: integer("points"),
   functionName: varchar("func_name", { length: 256 }).notNull(),
   templateUrl: varchar("template_url", { length: 1024 }).notNull(),

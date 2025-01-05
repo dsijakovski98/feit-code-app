@@ -114,7 +114,7 @@ const SubmitFeedback = ({ dialog, feedback }: Props) => {
         <div className="relative space-y-6">
           <p>Assign points for each task before submitting your feedback:</p>
           <form id={formId} onSubmit={handleSubmit(submitFeedback)} onChange={onChange}>
-            {exam.tasks.map((task) => (
+            {exam.tasks.map((task, idx) => (
               <div key={task.title} className="flex items-center gap-2">
                 <Controller
                   control={control}
@@ -127,6 +127,7 @@ const SubmitFeedback = ({ dialog, feedback }: Props) => {
                       color="default"
                       variant="underlined"
                       inputMode="numeric"
+                      autoFocus={idx === 0}
                       max={task.points ?? 0}
                       label={task.title}
                       isDisabled={isSubmitting}

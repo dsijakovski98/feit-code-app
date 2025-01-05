@@ -33,7 +33,6 @@ const PercentageStats = ({ stats }: Props) => {
           domain={[0, 100]}
           tickLine={false}
           axisLine={false}
-          allowDataOverflow
           tickFormatter={(value) => Math.round(Number(value)).toString() + "%"}
         />
 

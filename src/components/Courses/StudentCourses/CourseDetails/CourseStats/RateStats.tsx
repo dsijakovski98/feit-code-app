@@ -1,6 +1,4 @@
-import { useMemo } from "react";
-
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
 
 import { colors } from "@nextui-org/react";
 
@@ -19,10 +17,8 @@ type Props = {
   stats: StudentCourseStats;
 };
 
-const SuccessRateStats = ({ stats }: Props) => {
+const RateStats = ({ stats }: Props) => {
   const { courseDetails } = useCtx(CourseDetailsContext);
-
-  const maxStats = useMemo(() => Math.max(...(stats?.map((stat) => stat.totalPoints) ?? [])), [stats]);
 
   return (
     <ChartContainer
@@ -41,18 +37,16 @@ const SuccessRateStats = ({ stats }: Props) => {
 
         <YAxis
           type="number"
-          allowDataOverflow
-          domain={[0, maxStats]}
           padding={{ bottom: 3 }}
           tickFormatter={(value) => Math.round(Number(value)).toString()}
         />
 
-        <Bar
-          dataKey="points"
-          stackId={courseDetails.id}
-          radius={[0, 0, 8, 8]}
-          fill={chartConfig.points.color}
-        />
+        <Bar dataKey="points" stackId={courseDetails.id} fill={chartConfig.points.color}>
+          {stats.map(({ percentage }, idx) => (
+            // @ts-expect-error Recharts typing error
+            <Cell key={`cell-${idx}`} radius={percentage === 100 ? 8 : [0, 0, 8, 8]} />
+          ))}
+        </Bar>
 
         <Bar
           dataKey="totalPoints"
@@ -64,11 +58,30 @@ const SuccessRateStats = ({ stats }: Props) => {
         <ChartTooltip
           cursor={false}
           defaultIndex={1}
-          content={<ChartTooltipContent className="[&_div:last-child]:gap-x-2" />}
+          content={
+            <ChartTooltipContent
+              className="[&_div:last-child]:gap-x-2"
+              formatter={(value, name, item) => {
+                const dataItem = item.payload as StudentCourseStats[number];
+
+                return (
+                  <div className="flex w-full items-center justify-between">
+                    <p className="flex items-center gap-1.5">
+                      <span className="block h-3 w-3 rounded-sm" style={{ backgroundColor: item.color }} />{" "}
+                      {chartConfig[name as keyof typeof chartConfig].label}
+                    </p>
+                    <p className="font-semibold">
+                      {name === "totalPoints" ? Number(value) + dataItem.points! : value}
+                    </p>
+                  </div>
+                );
+              }}
+            />
+          }
         />
       </BarChart>
     </ChartContainer>
   );
 };
 
-export default SuccessRateStats;
+export default RateStats;

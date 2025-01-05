@@ -5,6 +5,7 @@ import { LanguageConfig } from "@/types";
 export const cConfig: LanguageConfig = {
   comment: "//",
   funcPrefix: ".", // Can be any return type void | int | char etc
+  fileType: "c",
   extension: langs.c(),
   commandExec: (taskName) => `gcc ${taskName}.c -o ${taskName} && ./${taskName}`,
 };

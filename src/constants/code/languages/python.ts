@@ -6,6 +6,7 @@ export const pyConfig: LanguageConfig = {
   comment: "#",
   funcPrefix: "def",
   emptyValue: "None",
+  fileType: "py",
   extension: langs.python(),
   commandExec: (taskName) => `python3 ${taskName}.py`,
 };

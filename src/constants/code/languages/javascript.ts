@@ -4,8 +4,9 @@ import { LanguageConfig } from "@/types";
 
 export const jsConfig: LanguageConfig = {
   comment: "//",
-  funcPrefix: "function",
   emptyValue: "null",
+  funcPrefix: "function",
+  fileType: "js",
   extension: langs.javascript(),
   commandExec: (taskName) => `node ${taskName}.js`,
 

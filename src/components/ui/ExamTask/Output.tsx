@@ -20,9 +20,10 @@ type Props = {
 
 const ExamTaskOutput = ({ title, output, studentEmail, language, loading = false, children }: Props) => {
   const emailSlug = useMemo(() => studentEmail.split("@")[0], [studentEmail]);
-  const titleSlug = useMemo(() => title.replace(/ /g, "_"), [title]);
+  const titleSlug = useMemo(() => title.replace(/ /g, "_").toLowerCase(), [title]);
 
-  const runCommand = useMemo(() => LANGUAGES_CONFIG[language].commandExec(titleSlug), [language, titleSlug]);
+  const langConfig = LANGUAGES_CONFIG[language];
+  const runCommand = useMemo(() => langConfig.commandExec(titleSlug), [langConfig, titleSlug]);
 
   return (
     <div className="relative flex h-full flex-col justify-between pt-5 font-mono text-white">
@@ -33,10 +34,13 @@ const ExamTaskOutput = ({ title, output, studentEmail, language, loading = false
           })}
         >
           <span>
-            {emailSlug}@{titleSlug}
+            {emailSlug}@{titleSlug}.{langConfig.fileType}
           </span>
 
-          <Icon name="right" className={clsx("inline h-4 w-4", { "animate-blink": loading })} />
+          <Icon
+            name="right"
+            className={clsx("inline h-4 w-4 -translate-y-px", { "animate-blink": loading })}
+          />
 
           {(loading || !!output) && (
             <span className={clsx("text-foreground", { "animate-blink": loading })}>{runCommand}</span>

@@ -14,6 +14,7 @@ export const tsConfig: LanguageConfig = {
   comment: "//",
   funcPrefix: "function",
   emptyValue: "null",
+  fileType: "ts",
   extension: langs.typescript(),
   commandExec: (taskName) => `bun run ${taskName}.ts`,
 
