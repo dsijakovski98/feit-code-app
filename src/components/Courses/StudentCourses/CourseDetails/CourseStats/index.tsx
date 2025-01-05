@@ -42,8 +42,14 @@ const StudentCourseStats = () => {
       </div>
 
       {isPending && (
-        <div className="grid h-[200px] place-items-center">
+        <div className="grid flex-1 place-items-center">
           <Spinner size="lg" className="scale-[1.5]" />
+        </div>
+      )}
+
+      {stats === null && (
+        <div className="grid flex-1 place-items-center p-8 text-center text-foreground-300">
+          No information available yet.
         </div>
       )}
 

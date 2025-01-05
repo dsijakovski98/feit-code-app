@@ -12,6 +12,14 @@ export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
   return useQuery({
     queryKey: [{ name: "student-course-stats", courseId, studentId }],
     queryFn: async () => {
+      const studentJoined = await db.query.studentCourses.findFirst({
+        where: (studentCourses, { and, eq }) => {
+          return and(eq(studentCourses.courseId, courseId), eq(studentCourses.studentId, studentId));
+        },
+      });
+
+      if (!studentJoined) return null;
+
       const examsData = await db.query.exams.findMany({
         where: (exams, { eq, and }) => {
           const courseFilter = eq(exams.courseId, courseId);
@@ -37,7 +45,7 @@ export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
         columns: { points: true },
         with: { exam: { columns: { points: true, name: true, language: true } } },
 
-        orderBy: (submissions, { desc }) => desc(submissions.submittedAt),
+        orderBy: (submissions, { asc }) => asc(submissions.submittedAt),
         limit: 10,
       });
 

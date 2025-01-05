@@ -70,6 +70,8 @@ const ExamHistory = () => {
                   variant="flat"
                   items={examHistory}
                   aria-label={`History of exams for ${courseDetails.name}.`}
+                  emptyContent={"You have not taken any exams yet..."}
+                  classNames={{ emptyContent: "text-foreground-300 p-0" }}
                 >
                   {(historyItem) => (
                     <ListboxItem

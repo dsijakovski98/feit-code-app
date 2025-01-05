@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { Chip } from "@nextui-org/chip";
 
 import CategoryChip from "@/components/ui/CategoryChip";
@@ -48,13 +50,19 @@ const CourseDetails = () => {
           ))}
         </ul>
 
-        <div className="flex w-fit flex-wrap items-end gap-8 lg:w-full lg:justify-between">
+        <div
+          className={clsx("flex w-fit flex-wrap items-end gap-8 lg:w-full lg:justify-between", {
+            "items-center": !assistant,
+          })}
+        >
           <Teacher teacher={professor} type={TEACHER_TYPE.professor} />
 
           {assistant ? (
             <Teacher teacher={assistant} type={TEACHER_TYPE.assistant} />
           ) : (
-            <p className="shrink font-semibold text-foreground-300">This course doesn't have an assistant.</p>
+            <p className="max-w-[20ch] shrink text-sm text-foreground-300">
+              This course doesn't have an assistant.
+            </p>
           )}
         </div>
       </div>

@@ -74,11 +74,7 @@ const ExamCard = ({ exam }: Props) => {
                 }
                 classNames={{ content: "font-serif" }}
               >
-                <Link
-                  target="_blank"
-                  className="group"
-                  to={`${ROUTES.dashboard}${ROUTES.courses}/${course.id}`}
-                >
+                <Link className="group outline-none" to={`${ROUTES.dashboard}${ROUTES.courses}/${course.id}`}>
                   <ExamCardHeader isLink name={name} language={language} course={course} />
                 </Link>
               </Tooltip>
