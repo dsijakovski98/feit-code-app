@@ -1,9 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { colors } from "@nextui-org/react";
-
-import { ChartConfig } from "@/components/ui/shadcn/chart";
-
 import { EXAM_STATUS, SUBMISSION_STATUS } from "@/constants/enums";
 import { db } from "@/db";
 
@@ -13,12 +9,7 @@ type Options = {
 };
 
 export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
-  const chartConfig = {
-    totalPoints: { label: "Total Points", color: colors.dark.primary[400] },
-    points: { label: "Points", color: colors.dark.primary[600] },
-  } satisfies ChartConfig;
-
-  const query = useQuery({
+  return useQuery({
     queryKey: [{ name: "student-course-stats", courseId, studentId }],
     queryFn: async () => {
       const examsData = await db.query.exams.findMany({
@@ -54,10 +45,12 @@ export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
         const { exam, points } = submission;
         const { name, language, points: totalPoints } = exam;
 
-        return { exam: `${name}・${language}`, totalPoints, points };
+        const percentage = Math.round((points! / totalPoints) * 100);
+
+        return { exam: `${name}・${language}`, totalPoints, points, percentage };
       });
     },
   });
-
-  return { chartConfig, ...query };
 };
+
+export type StudentCourseStats = NonNullable<ReturnType<typeof useStudentCourseStats>["data"]>;

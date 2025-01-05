@@ -1,6 +1,6 @@
 import CourseDetails from "@/components/Courses/Misc/CourseDetails";
+import StudentCourseStats from "@/components/Courses/StudentCourses/CourseDetails/CourseStats";
 import StudentCourseInfo from "@/components/Courses/StudentCourses/CourseDetails/StudentCourseInfo";
-import StudentCourseStats from "@/components/Courses/StudentCourses/CourseDetails/StudentCourseStats";
 
 import "./styles.css";
 
