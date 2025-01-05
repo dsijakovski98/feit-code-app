@@ -24,7 +24,7 @@ const RateStats = ({ stats }: Props) => {
     <ChartContainer
       config={chartConfig}
       className="max-h-[360px] w-full"
-      title="Vertical stacked bar chart showing the success rate of each completed exam."
+      title="Vertical stacked bar chart showing the points to total points ratio for each completed exam."
     >
       <BarChart accessibilityLayer data={stats} maxBarSize={160}>
         <CartesianGrid vertical={false} opacity={0.15} />
