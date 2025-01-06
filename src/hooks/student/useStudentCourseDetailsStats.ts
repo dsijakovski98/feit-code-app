@@ -8,9 +8,9 @@ type Options = {
   courseId: string;
 };
 
-export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
+export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) => {
   return useQuery({
-    queryKey: [{ name: "student-course-stats", courseId, studentId }],
+    queryKey: [{ name: "student-course-details-stats", courseId, studentId }],
     queryFn: async () => {
       const studentJoined = await db.query.studentCourses.findFirst({
         where: (studentCourses, { and, eq }) => {
@@ -49,6 +49,8 @@ export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
         limit: 10,
       });
 
+      if (submissionsData.length === 0) return null;
+
       return submissionsData.map((submission) => {
         const { exam, points } = submission;
         const { name, language, points: totalPoints } = exam;
@@ -61,4 +63,4 @@ export const useStudentCourseStats = ({ studentId, courseId }: Options) => {
   });
 };
 
-export type StudentCourseStats = NonNullable<ReturnType<typeof useStudentCourseStats>["data"]>;
+export type StudentCourseStats = NonNullable<ReturnType<typeof useStudentCourseDetailsStats>["data"]>;

@@ -6,6 +6,7 @@ import ExamCard from "@/components/Exams/ExamCard";
 import ExamsList from "@/components/Exams/ExamsList";
 import EmptyExamsList from "@/components/Exams/Misc/EmptyExamsList";
 import ExamHeader from "@/components/Exams/Misc/ExamHeader";
+import StudentExamsStats from "@/components/Exams/StudentExams/StudentExamsStats";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { ALL_OPTION } from "@/constants";
@@ -24,10 +25,13 @@ const StudentExams = ({ user }: Props) => {
   const { id } = user;
 
   const { data: courses, isLoading: coursesLoading } = useStudentCoursesList(id);
+
   const courseOptions = useMemo<Option[]>(
     () => courses?.map(({ name }) => ({ value: name, label: name })) ?? [],
     [courses],
   );
+
+  const courseIds = useMemo(() => courses?.map((course) => course.id) ?? [], [courses]);
 
   const courseFilter = useFilter({
     name: "course",
@@ -94,8 +98,13 @@ const StudentExams = ({ user }: Props) => {
 
       {/* TODO: Student Exam stats */}
       {!!data?.pages[0].length && (
-        <section className="px-8">
-          <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>
+        <section className="flex flex-col gap-3 px-8">
+          <div>
+            <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>
+            <p className="text-foreground-300">Last 10 exams (per course)</p>
+          </div>
+
+          <StudentExamsStats studentId={id} selectedCourseId={selectedCourseId} courseIds={courseIds} />
         </section>
       )}
     </div>

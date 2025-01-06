@@ -5,7 +5,7 @@ import { colors } from "@nextui-org/react";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { StudentCourseStats } from "@/hooks/student/useStudentCourseStats";
+import { StudentCourseStats } from "@/hooks/student/useStudentCourseDetailsStats";
 import { useCtx } from "@/hooks/useCtx";
 
 const chartConfig = {
@@ -44,14 +44,14 @@ const RateStats = ({ stats }: Props) => {
         <Bar dataKey="points" stackId={courseDetails.id} fill={chartConfig.points.color}>
           {stats.map(({ percentage }, idx) => (
             // @ts-expect-error Recharts typing error
-            <Cell key={`cell-${idx}`} radius={percentage === 100 ? 8 : [0, 0, 8, 8]} />
+            <Cell key={`cell-${idx}`} radius={percentage === 100 ? 6 : [0, 0, 6, 6]} />
           ))}
         </Bar>
 
         <Bar
           dataKey="totalPoints"
           stackId={courseDetails.id}
-          radius={[8, 8, 0, 0]}
+          radius={[6, 6, 0, 0]}
           fill={chartConfig.totalPoints.color}
         />
 

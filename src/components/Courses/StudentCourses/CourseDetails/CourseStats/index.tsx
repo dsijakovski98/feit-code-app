@@ -5,7 +5,7 @@ import RateStats from "@/components/Courses/StudentCourses/CourseDetails/CourseS
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { useStudentCourseStats } from "@/hooks/student/useStudentCourseStats";
+import { useStudentCourseDetailsStats } from "@/hooks/student/useStudentCourseDetailsStats";
 import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
@@ -17,13 +17,13 @@ const StudentCourseStats = () => {
   const statFilter = useFilter({
     name: "type",
     options: [
-      { value: "rate", label: "Rate" },
       { value: "percentage", label: "Percentage" },
+      { value: "rate", label: "Rate" },
     ] as const,
     defaultValue: "percentage",
   });
 
-  const { data: stats, isPending } = useStudentCourseStats({
+  const { data: stats, isPending } = useStudentCourseDetailsStats({
     courseId: courseDetails.id,
     studentId: userData?.user.id ?? "",
   });
