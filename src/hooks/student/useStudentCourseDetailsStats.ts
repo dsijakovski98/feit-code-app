@@ -27,33 +27,29 @@ export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) =
 
           return and(courseFilter, statusFilter);
         },
-        columns: { id: true },
-      });
+        columns: { id: true, points: true, name: true, language: true },
+        with: {
+          submissions: {
+            columns: { points: true },
+            where: (submissions, { eq, and }) => {
+              const studentFilter = eq(submissions.studentId, studentId);
+              const statusFilter = eq(submissions.status, SUBMISSION_STATUS.graded);
 
-      if (!examsData) return null;
-
-      const examIds = examsData.map((exam) => exam.id);
-
-      const submissionsData = await db.query.submissions.findMany({
-        where: (submissions, { eq, inArray, and }) => {
-          const examFilter = inArray(submissions.examId, examIds);
-          const studentFilter = eq(submissions.studentId, studentId);
-          const statusFilter = eq(submissions.status, SUBMISSION_STATUS.graded);
-
-          return and(examFilter, studentFilter, statusFilter);
+              return and(studentFilter, statusFilter);
+            },
+          },
         },
-        columns: { points: true },
-        with: { exam: { columns: { points: true, name: true, language: true } } },
 
-        orderBy: (submissions, { asc }) => asc(submissions.submittedAt),
         limit: 10,
+        orderBy: (exams, { asc }) => asc(exams.createdAt),
       });
 
-      if (submissionsData.length === 0) return null;
+      if (examsData?.length === 0) return null;
 
-      return submissionsData.map((submission) => {
-        const { exam, points } = submission;
-        const { name, language, points: totalPoints } = exam;
+      return examsData.map((exam) => {
+        const { name, language, points: totalPoints, submissions } = exam;
+        const submission = submissions[0];
+        const { points } = submission;
 
         const percentage = Math.round((points! / totalPoints) * 100);
 
