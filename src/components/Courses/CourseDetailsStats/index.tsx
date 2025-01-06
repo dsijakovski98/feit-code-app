@@ -25,8 +25,6 @@ const CourseDetailsStats = ({ stats, isLoading = false, ...rest }: Props) => {
     defaultValue: "percentage",
   });
 
-  console.log(stats);
-
   return (
     <div className="flex h-full w-full flex-col justify-between gap-4">
       <div className="flex items-center justify-between gap-4">

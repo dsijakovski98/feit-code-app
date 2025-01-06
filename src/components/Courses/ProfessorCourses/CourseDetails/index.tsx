@@ -52,7 +52,7 @@ const ProfessorCourseDetails = () => {
 
   return (
     <section className="bg-main h-auto pt-0 lg:h-full">
-      <div className="mx-auto max-w-[145ch] lg:mx-0 lg:max-w-full">
+      <div className="mx-auto max-w-[150ch] lg:mx-0 lg:max-w-full">
         <Tabs
           size="lg"
           fullWidth
