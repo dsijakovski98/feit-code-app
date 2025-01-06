@@ -15,12 +15,12 @@ import { parseExamStatus } from "@/utils";
 export const PROGRAMMING_LANGUAGES: Array<{ name: string; img: typeof js }> = [
   { name: PROGRAMMING_LANGUAGE.javascript, img: js },
   { name: PROGRAMMING_LANGUAGE.typescript, img: ts },
-  { name: PROGRAMMING_LANGUAGE.c, img: c },
-  { name: PROGRAMMING_LANGUAGE.cpp, img: cpp },
   { name: PROGRAMMING_LANGUAGE.go, img: go },
   { name: PROGRAMMING_LANGUAGE.python, img: py },
-  { name: PROGRAMMING_LANGUAGE.php, img: php },
   { name: PROGRAMMING_LANGUAGE.rust, img: rust },
+  { name: PROGRAMMING_LANGUAGE.c, img: c },
+  { name: PROGRAMMING_LANGUAGE.cpp, img: cpp },
+  { name: PROGRAMMING_LANGUAGE.php, img: php },
   { name: PROGRAMMING_LANGUAGE.bash, img: sh },
 ];
 

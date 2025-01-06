@@ -40,9 +40,7 @@ const GradeStudentPage = () => {
   if (error) {
     const submissionNotFound = !!error.message.match(/submission not found/i);
 
-    const errorHref = submissionNotFound
-      ? `${ROUTES.dashboard}${ROUTES.exams}/${examId}#results`
-      : ROUTES.exams;
+    const errorHref = submissionNotFound ? `${ROUTES.exams}/${examId}#results` : ROUTES.exams;
 
     const errorLabel = submissionNotFound ? "Back to Results" : "Back to Exams";
 
@@ -77,7 +75,7 @@ const GradeStudentPage = () => {
   }
 
   if (submission.status === SUBMISSION_STATUS.graded) {
-    return <Navigate to={`${ROUTES.dashboard}${ROUTES.exams}/${examId}#results`} replace />;
+    return <Navigate to={`${ROUTES.exams}/${examId}#results`} replace />;
   }
 
   return (

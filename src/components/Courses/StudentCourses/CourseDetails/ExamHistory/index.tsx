@@ -83,7 +83,7 @@ const ExamHistory = () => {
                         <Link
                           target="_blank"
                           aria-label={`${historyItem.exam.name} feedback`}
-                          to={`${ROUTES.dashboard}${ROUTES.exams}?fb=${historyItem.exam.id}`}
+                          to={`${ROUTES.exams}?fb=${historyItem.exam.id}`}
                         >
                           <ExamHistoryItem isLink historyItem={historyItem} />
                         </Link>

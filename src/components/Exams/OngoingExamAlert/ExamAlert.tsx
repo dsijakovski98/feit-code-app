@@ -19,11 +19,11 @@ const ExamAlert = ({ exam, userType }: Props) => {
   const show = useToggle(true);
 
   const onExamPath = useMemo(() => {
-    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.exams}/${exam.id}`);
+    return pathname.startsWith(`${ROUTES.exams}/${exam.id}`);
   }, [pathname, exam.id]);
 
   const onExamCoursePath = useMemo(() => {
-    return pathname.startsWith(`${ROUTES.dashboard}${ROUTES.courses}/${exam.courseId}`);
+    return pathname.startsWith(`${ROUTES.courses}/${exam.courseId}`);
   }, [pathname, exam.courseId]);
 
   const label = useMemo(() => (userType === USER_TYPE.student ? "Join Now" : "Monitor"), [userType]);
@@ -33,7 +33,7 @@ const ExamAlert = ({ exam, userType }: Props) => {
       return `${ROUTES.examSession}/${exam.id}`;
     }
 
-    return `${ROUTES.dashboard}${ROUTES.exams}/${exam.id}#monitor`;
+    return `${ROUTES.exams}/${exam.id}#monitor`;
   }, [userType, exam.id]);
 
   if (onExamPath || onExamCoursePath || !show.open) {

@@ -19,15 +19,15 @@ export const ROUTES = {
 
 export const PAGE_TITLES = {
   "/dashboard": "Dashboard",
-  "/welcome": "Onboarding",
+  "/welcome": "Welcome",
+  "/courses": "Courses",
+  "/exams": "Exams",
 
   "/sign-in": "Sign in",
   "/sign-up": "Sign up",
   "/forgot-password": "Forgot password",
 
   "/profile": "Profile",
-  "/dashboard/courses": "Courses",
-  "/dashboard/exams": "Exams",
 } as const;
 
 const websiteBaseUrl = import.meta.env.VITE_WEBSITE_URL;

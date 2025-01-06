@@ -41,7 +41,7 @@ const UserAvatar = () => {
         >
           <AuthStrategyIcon />
 
-          <p className="font-sans">
+          <p className="font-sans text-primary-foreground">
             Signed in as <b className="block font-semibold">{email}</b>
           </p>
         </DropdownItem>

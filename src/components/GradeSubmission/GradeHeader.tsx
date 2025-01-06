@@ -29,7 +29,7 @@ const GradeHeader = ({ feedbackView, setFeedbackView, onSubmit }: Props) => {
     <div className="space-y-8 px-8 py-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Link
-          to={`${ROUTES.dashboard}${ROUTES.exams}/${exam.id}#results`}
+          to={`${ROUTES.exams}/${exam.id}#results`}
           className="flex -translate-x-2 items-center gap-1 text-lg font-medium text-foreground-400 transition-colors hover:text-primary focus:text-primary"
         >
           <Icon name="left" className="h-5 w-5" />

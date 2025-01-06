@@ -31,5 +31,5 @@ export const sessionTimeOffDuration = (totalTimeOff: number) => {
 };
 
 export const gradeExamHref = (examId: string, studentId: string) => {
-  return `${ROUTES.dashboard}${ROUTES.exams}/${examId}${ROUTES.gradeExam}/${studentId}`;
+  return `${ROUTES.exams}/${examId}${ROUTES.gradeExam}/${studentId}`;
 };

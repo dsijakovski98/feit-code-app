@@ -48,7 +48,7 @@ const ConfirmExam = () => {
       ]);
 
       toast.success(`${language} exam "${name}" created!`);
-      navigate(`${ROUTES.dashboard}${ROUTES.courses}/${courseId}`);
+      navigate(`${ROUTES.courses}/${courseId}`);
     },
     onError: (error) => toast.error(error.message),
   });

@@ -74,7 +74,7 @@ const ExamCard = ({ exam }: Props) => {
                 }
                 classNames={{ content: "font-serif" }}
               >
-                <Link className="group outline-none" to={`${ROUTES.dashboard}${ROUTES.courses}/${course.id}`}>
+                <Link className="group outline-none" to={`${ROUTES.courses}/${course.id}`}>
                   <ExamCardHeader isLink name={name} language={language} course={course} />
                 </Link>
               </Tooltip>
@@ -121,7 +121,7 @@ const ExamCard = ({ exam }: Props) => {
             <Button
               as={Link}
               // @ts-expect-error NextUI not passing through 'as' props
-              to={type === USER_TYPE.professor ? id : `${ROUTES.dashboard}${ROUTES.courses}/${course.id}`}
+              to={type === USER_TYPE.professor ? id : `${ROUTES.courses}/${course.id}`}
               variant="light"
               color="default"
               className="px-5 text-sm lg:px-0"
