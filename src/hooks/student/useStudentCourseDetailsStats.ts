@@ -47,15 +47,20 @@ export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) =
 
       if (examsData?.length === 0) return null;
 
-      return examsData.map<CourseDetailsStats[number]>((exam) => {
+      const stats = examsData.map<CourseDetailsStats[number] | null>((exam) => {
         const { name, language, points: totalPoints, submissions } = exam;
         const submission = submissions[0];
+
+        if (!submission) return null;
+
         const { points } = submission;
 
         const percentage = Math.round((points! / totalPoints) * 100);
 
         return { exam: `${name}・${language}`, totalPoints: totalPoints - points!, points, percentage };
       });
+
+      return stats.filter(Boolean) as CourseDetailsStats;
     },
   });
 };

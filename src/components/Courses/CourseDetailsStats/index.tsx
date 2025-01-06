@@ -25,6 +25,8 @@ const CourseDetailsStats = ({ stats, isLoading = false, ...rest }: Props) => {
     defaultValue: "percentage",
   });
 
+  console.log(stats);
+
   return (
     <div className="flex h-full w-full flex-col justify-between gap-4">
       <div className="flex items-center justify-between gap-4">
@@ -36,20 +38,20 @@ const CourseDetailsStats = ({ stats, isLoading = false, ...rest }: Props) => {
         <SelectFilter size="sm" label="Chart Type" filter={statFilter} className="w-[240px] lg:w-full" />
       </div>
 
-      {isLoading && (
+      {isLoading ? (
         <div className="grid flex-1 place-items-center">
           <Spinner size="lg" className="scale-[1.5]" />
         </div>
+      ) : (
+        (!stats || stats?.length === 0) && (
+          <div className="grid flex-1 place-items-center p-8 text-center text-foreground-300">
+            No information available yet.
+          </div>
+        )
       )}
 
-      {stats === null && (
-        <div className="grid flex-1 place-items-center p-8 text-center text-foreground-300">
-          No information available yet.
-        </div>
-      )}
-
-      {stats && statFilter.value === "rate" && <RateStats stats={stats} {...rest} />}
-      {stats && statFilter.value === "percentage" && <PercentageStats stats={stats} {...rest} />}
+      {!!stats?.length && statFilter.value === "rate" && <RateStats stats={stats} {...rest} />}
+      {!!stats?.length && statFilter.value === "percentage" && <PercentageStats stats={stats} {...rest} />}
     </div>
   );
 };

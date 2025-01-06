@@ -1,8 +1,8 @@
-import { and, eq, inArray, sum } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
-import { courses, studentCourses, submissions } from "@/db/schema";
+import { courses, studentCourses } from "@/db/schema";
 
-import { EXAM_STATUS } from "@/constants/enums";
+import { EXAM_STATUS, SUBMISSION_STATUS } from "@/constants/enums";
 import { db } from "@/db";
 import { calculateGrade } from "@/utils/courses/grade";
 import { deleteCourseFolder } from "@/utils/courses/storage";
@@ -85,19 +85,32 @@ export const getCourseGrade = async ({ studentId, courseId }: CourseGradeOptions
       return and(statusFilter, courseFilter);
     },
     columns: { id: true, points: true },
+    with: {
+      submissions: {
+        where: (submissions, { eq, and }) => {
+          const studentFilter = eq(submissions.studentId, studentId);
+          const statusFilter = eq(submissions.status, SUBMISSION_STATUS.graded);
+
+          return and(studentFilter, statusFilter);
+        },
+        columns: { id: true, points: true },
+      },
+    },
   });
 
-  if (!examsData) return null;
+  if (examsData?.length === 0) return null;
 
-  const totalPoints = examsData.reduce((acc, exam) => acc + exam.points, 0);
-  const examIds = examsData.map((exam) => exam.id);
+  const takenExams = examsData.filter((exam) => !!exam.submissions.length);
+  const totalPoints = takenExams.reduce((acc, exam) => acc + exam.points, 0);
 
-  const [{ points }] = await db
-    .select({ points: sum(submissions.points).mapWith(Number) })
-    .from(submissions)
-    .where(and(eq(submissions.studentId, studentId), inArray(submissions.examId, examIds)));
+  const points = takenExams.reduce((acc, exam) => {
+    const { submissions } = exam;
+    const submission = submissions[0];
 
-  if (points === null) return null;
+    if (!submission) return acc;
+
+    return acc + submission.points!;
+  }, 0);
 
   return calculateGrade({ totalPoints, points });
 };

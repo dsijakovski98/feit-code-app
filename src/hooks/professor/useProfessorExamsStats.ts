@@ -58,7 +58,7 @@ export const useProfessorExamsStats = (professorId: string) => {
           stat.exams[examKey] = exam.name;
         });
 
-        if (Object.keys(stat).length > 1) {
+        if (Object.keys(stat.exams).length > 0) {
           stats.push(stat);
         }
       });

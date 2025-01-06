@@ -77,7 +77,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
         className="max-h-[420px] w-full"
         title="Bar chart showing the course grades for each course."
       >
-        <BarChart accessibilityLayer data={stats} maxBarSize={160}>
+        <BarChart accessibilityLayer data={stats} barGap={10} maxBarSize={160}>
           <CartesianGrid vertical={false} opacity={0.15} />
 
           <XAxis dataKey="course" axisLine={false} tickMargin={10} />

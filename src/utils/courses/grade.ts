@@ -20,6 +20,10 @@ type GradeOptions = {
   points: number;
 };
 export const calculateGrade = ({ totalPoints, points }: GradeOptions) => {
+  if (points === 0 && totalPoints === 0) {
+    return null;
+  }
+
   const percentage = Math.round((points / totalPoints) * 100);
 
   if (percentage <= 50) return 5;

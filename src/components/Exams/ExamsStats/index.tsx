@@ -55,7 +55,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
       className="max-h-[420px] w-full"
       title="Bar chart showing the percentage points for each completed exam, grouped by course."
     >
-      <BarChart accessibilityLayer data={targetStats} barGap={10}>
+      <BarChart accessibilityLayer data={targetStats} barGap={10} maxBarSize={160}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
         <XAxis dataKey="course" axisLine={false} tickMargin={10} />
