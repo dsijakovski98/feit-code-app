@@ -1,4 +1,4 @@
-import { ElementRef, Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { ComponentRef, Fragment, useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Split from "react-split";
 
@@ -32,7 +32,7 @@ const GradeSubmission = () => {
 
   const submitDialog = useToggle();
 
-  const mainSplitRef = useRef<ElementRef<typeof Split>>(null);
+  const mainSplitRef = useRef<ComponentRef<typeof Split>>(null);
   const [markdownWidth, setMarkdownWidth] = useState<number | null>(null);
 
   const updateMarkdownWidth = () => {

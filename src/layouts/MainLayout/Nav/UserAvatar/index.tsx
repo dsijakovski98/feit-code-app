@@ -24,7 +24,7 @@ const UserAvatar = () => {
   const { email, avatarUrl } = userData.user;
 
   return (
-    <Dropdown placement="bottom-end">
+    <Dropdown placement="bottom-end" className="overflow-hidden p-0">
       <DropdownTrigger className="cursor-pointer focus:ring-primary" tabIndex={0}>
         <Avatar
           isBordered
@@ -33,11 +33,11 @@ const UserAvatar = () => {
         />
       </DropdownTrigger>
 
-      <DropdownMenu disabledKeys={["title"]} closeOnSelect>
+      <DropdownMenu disabledKeys={["title"]} closeOnSelect className="p-0">
         <DropdownItem
           key="title"
           textValue="Title"
-          className="mb-1f opacity-100 *:text-sm [&_span]:flex [&_span]:items-center [&_span]:gap-2"
+          className="mb-1 rounded-none bg-primary-400 p-2.5 opacity-100 *:text-sm dark:bg-primary-50 [&_span]:flex [&_span]:items-center [&_span]:gap-2"
         >
           <AuthStrategyIcon />
 
@@ -48,9 +48,9 @@ const UserAvatar = () => {
 
         <DropdownItem
           key="profile"
-          onClick={() => navigate(ROUTES.profile)}
           textValue="Profile"
           className="font-serif"
+          onPress={() => navigate(ROUTES.profile)}
         >
           <p className="text-sm font-semibold">Profile</p>
           <p className="text-xs text-content4-foreground">Edit your profile settings</p>
@@ -64,7 +64,7 @@ const UserAvatar = () => {
             </Link>
           </DropdownItem>
 
-          <DropdownItem key="sign-out" textValue="Sign out" onClick={() => logOut()} className="font-serif">
+          <DropdownItem key="sign-out" textValue="Sign out" onPress={() => logOut()} className="font-serif">
             <p className="text-sm font-semibold">Sign out</p>
             <p className="text-xs text-content4-foreground">Take a break</p>
           </DropdownItem>

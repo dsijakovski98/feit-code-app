@@ -1,4 +1,4 @@
-import { ElementRef, ReactNode, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { ComponentRef, ReactNode, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
 import { InferSelectModel } from "drizzle-orm";
@@ -28,7 +28,7 @@ const CoursesList = <T extends { id: string }>({ coursesQuery, renderCourse }: P
 
   const { ref } = useLoadMore(fetchNextPage);
 
-  const swiperRef = useRef<ElementRef<typeof Swiper>>(null);
+  const swiperRef = useRef<ComponentRef<typeof Swiper>>(null);
   const [listHeight, setListHeight] = useState(0);
 
   useLayoutEffect(() => {

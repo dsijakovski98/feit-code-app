@@ -1,17 +1,16 @@
 import { Pagination } from "@nextui-org/pagination";
 
-import { ROWS_PER_PAGE, UsePaginate } from "@/hooks/usePaginate";
+import { UsePaginate } from "@/hooks/usePaginate";
 
 type Props = UsePaginate<unknown> & {
   disabled?: boolean;
   className?: string;
 };
 
-const TablePagination = ({ page, pages, setPage, items, disabled = false, className = "" }: Props) => {
+const TablePagination = ({ page, pages, setPage, disabled = false, className = "" }: Props) => {
   return (
     <Pagination
       showControls
-      hidden={items.length < ROWS_PER_PAGE}
       size="sm"
       radius="full"
       color="default"

@@ -1,7 +1,7 @@
-import { ElementRef, useCallback, useLayoutEffect, useRef } from "react";
+import { ComponentRef, useCallback, useLayoutEffect, useRef } from "react";
 
 export const useLoadMore = (onLoadMore: () => void) => {
-  const loadMoreRef = useRef<ElementRef<"div">>(null);
+  const loadMoreRef = useRef<ComponentRef<"div">>(null);
   const loadMoreCallback = useCallback<IntersectionObserverCallback>(
     (entries) => {
       const [loadMoreEntry] = entries;

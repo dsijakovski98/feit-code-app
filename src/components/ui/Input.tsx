@@ -1,4 +1,4 @@
-import { ComponentProps, ElementRef, PropsWithChildren, forwardRef } from "react";
+import { ComponentProps, ComponentRef, PropsWithChildren, forwardRef } from "react";
 
 import clsx from "clsx";
 
@@ -29,7 +29,7 @@ const InputComponent = extendVariants(NextUiInput, {
 
 type Props = ComponentProps<typeof InputComponent> & PropsWithChildren;
 
-const Input = forwardRef<ElementRef<typeof InputComponent>, Props>(({ children, ...rest }, ref) => {
+const Input = forwardRef<ComponentRef<typeof InputComponent>, Props>(({ children, ...rest }, ref) => {
   const visible = useToggle();
 
   return (

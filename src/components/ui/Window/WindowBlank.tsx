@@ -1,4 +1,4 @@
-import { ElementRef, useLayoutEffect, useMemo, useRef } from "react";
+import { ComponentRef, useLayoutEffect, useMemo, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 import clsx from "clsx";
@@ -16,7 +16,7 @@ type Props = {
 const WindowBlank = ({ show, minimized }: Props) => {
   const { pathname } = useLocation();
 
-  const actionBtn = useRef<ElementRef<"button">>(null);
+  const actionBtn = useRef<ComponentRef<typeof Button>>(null);
 
   const shouldShow = useMemo(() => !show.open || minimized.open, [show.open, minimized.open]);
   const actionBtnLabel = useMemo(() => {
@@ -36,8 +36,7 @@ const WindowBlank = ({ show, minimized }: Props) => {
     if (!actionBtn.current) return;
 
     if (!shouldShow) return;
-
-    actionBtn.current.focus();
+    (actionBtn.current as unknown as HTMLButtonElement).focus();
   }, [shouldShow]);
 
   return (
