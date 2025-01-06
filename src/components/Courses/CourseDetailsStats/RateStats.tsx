@@ -6,7 +6,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";
-import { CourseDetailsStats } from "@/types/exams";
+import { CourseDetailsStats } from "@/types/stats";
 
 const chartConfig = {
   totalPoints: { label: "Total Points", color: colors.dark.primary[400] },

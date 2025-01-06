@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { EXAM_STATUS, SUBMISSION_STATUS } from "@/constants/enums";
 import { db } from "@/db";
-import { CourseDetailsStats } from "@/types/exams";
+import { CourseDetailsStats } from "@/types/stats";
 
 type Options = {
   professorId: string;

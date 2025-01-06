@@ -4,7 +4,7 @@ import { colors } from "@nextui-org/react";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 
-import { CourseDetailsStats } from "@/types/exams";
+import { CourseDetailsStats } from "@/types/stats";
 
 const chartConfig = {
   percentage: { label: "Percentage", color: colors.dark.primary[400] },

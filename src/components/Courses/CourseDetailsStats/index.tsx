@@ -5,7 +5,7 @@ import RateStats from "@/components/Courses/CourseDetailsStats/RateStats";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { useFilter } from "@/hooks/useFilter";
-import { type CourseDetailsStats } from "@/types/exams";
+import { type CourseDetailsStats } from "@/types/stats";
 
 type Props = {
   stats?: CourseDetailsStats | null;

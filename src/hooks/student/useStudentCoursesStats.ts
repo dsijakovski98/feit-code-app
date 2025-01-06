@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getCourseGrade } from "@/actions/courses";
 import { db } from "@/db";
+import { CourseStats } from "@/types/stats";
 
 export const useStudentCoursesStats = (studentId: string) => {
   return useQuery({
@@ -18,18 +19,16 @@ export const useStudentCoursesStats = (studentId: string) => {
       if (activeCourses?.length === 0) return null;
 
       const stats = await Promise.all(
-        activeCourses.map(async ({ courseId, course }) => {
+        activeCourses.map<Promise<CourseStats[number] | null>>(async ({ courseId, course }) => {
           const grade = await getCourseGrade({ studentId, courseId });
 
           if (!grade) return null;
 
-          return { course: course.name, grade };
+          return { course: course.name, value: grade };
         }),
       );
 
-      return stats.filter(Boolean) as StudentCourseStats;
+      return stats.filter(Boolean) as CourseStats;
     },
   });
 };
-
-export type StudentCourseStats = Array<{ course: string; grade: number }>;
