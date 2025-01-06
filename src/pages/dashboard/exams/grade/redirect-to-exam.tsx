@@ -5,7 +5,7 @@ import { ROUTES } from "@/constants/routes";
 const GradeExamRedirect = () => {
   const { id } = useParams<{ id: string }>();
 
-  return <Navigate to={`${ROUTES.dashboard}${ROUTES.exams}/${id}`} replace />;
+  return <Navigate to={`${ROUTES.exams}/${id}`} replace />;
 };
 
 export default GradeExamRedirect;

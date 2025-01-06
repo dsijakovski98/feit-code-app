@@ -25,7 +25,7 @@ const StudentCell = ({ student, avatar }: Props) => {
       avatarProps={{
         size: isMobile ? "md" : "lg",
         src: avatar.url ?? "",
-        showFallback: avatar.isLoading,
+        showFallback: !!avatar.isLoading,
         className: clsx({
           "scale-[1.2]": isMobile,
           hidden: isMobileSm,

@@ -46,45 +46,33 @@ const AppRouter = () => {
               <Route element={<MainLayout />}>
                 <Route path={ROUTES.home} element={<Navigate to={ROUTES.dashboard} />} />
 
-                <Route
-                  path={ROUTES.courses}
-                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.courses}`} replace />}
-                />
+                <Route path={ROUTES.dashboard} element={<Dashboard />} />
 
-                <Route
-                  path={ROUTES.exams}
-                  element={<Navigate to={`${ROUTES.dashboard}${ROUTES.exams}`} replace />}
-                />
+                <Route path="courses">
+                  <Route index element={<CoursesPage />} />
 
-                <Route path={ROUTES.dashboard}>
-                  <Route index element={<Dashboard />} />
-
-                  <Route path="courses">
-                    <Route index element={<CoursesPage />} />
-
-                    <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                      <Route path="new" element={<NewCoursePage />} />
-                    </Route>
-
-                    <Route path=":id" element={<CourseDetailsLayout />}>
-                      <Route index element={<CourseDetailsPage />} />
-
-                      <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                        <Route path="new-exam" element={<NewExamPage />} />
-                      </Route>
-                    </Route>
+                  <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                    <Route path="new" element={<NewCoursePage />} />
                   </Route>
 
-                  <Route path="exams">
-                    <Route index element={<ExamsPage />} />
+                  <Route path=":id" element={<CourseDetailsLayout />}>
+                    <Route index element={<CourseDetailsPage />} />
 
-                    <Route path=":id" element={<ExamDetailsLayout />}>
-                      <Route index element={<ExamDetailsPage />} />
+                    <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                      <Route path="new-exam" element={<NewExamPage />} />
+                    </Route>
+                  </Route>
+                </Route>
 
-                      <Route path="grade" element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                        <Route index element={<GradeExamRedirect />} />
-                        <Route path=":sid" element={<GradeSubmissionPage />} />
-                      </Route>
+                <Route path="exams">
+                  <Route index element={<ExamsPage />} />
+
+                  <Route path=":id" element={<ExamDetailsLayout />}>
+                    <Route index element={<ExamDetailsPage />} />
+
+                    <Route path="grade" element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                      <Route index element={<GradeExamRedirect />} />
+                      <Route path=":sid" element={<GradeSubmissionPage />} />
                     </Route>
                   </Route>
                 </Route>

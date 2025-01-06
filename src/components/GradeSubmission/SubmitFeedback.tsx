@@ -85,7 +85,7 @@ const SubmitFeedback = ({ dialog, feedback }: Props) => {
 
       localStorage.removeItem(feedbackKey(submission.id));
       toast.success(`Submitted feedback for ${student.firstName}'s task!`);
-      navigate(`${ROUTES.dashboard}${ROUTES.exams}/${exam.id}#results`, { replace: true });
+      navigate(`${ROUTES.exams}/${exam.id}#results`, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });

@@ -25,7 +25,7 @@ export const useEndExam = ({ examId }: Options) => {
       ]);
 
       toast.success("Exam ended!");
-      navigate(`${ROUTES.dashboard}${ROUTES.exams}/${examId}`, { replace: true });
+      navigate(`${ROUTES.exams}/${examId}`, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });

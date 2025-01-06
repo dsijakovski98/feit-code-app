@@ -31,7 +31,7 @@ const ExamInfoLink = ({ exam }: Props) => {
   const statusLabel = useMemo(() => parseExamStatus(status), [status]);
 
   return (
-    <Link to={`${ROUTES.dashboard}${ROUTES.exams}/${id}#general`} className="group space-y-0.5 *:font-sans">
+    <Link to={`${ROUTES.exams}/${id}#general`} className="group space-y-0.5 *:font-sans">
       <div className="flex items-start justify-between gap-6">
         <div className="*:transition-[filter] group-hover:*:brightness-75 group-focus:*:brightness-75">
           <p>Latest Exam</p>
