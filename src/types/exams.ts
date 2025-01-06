@@ -22,3 +22,10 @@ export type ExamStats = {
 };
 
 export type FeedbackView = "code" | "feedback";
+
+export type CourseDetailsStats = Array<{
+  exam: string;
+  totalPoints: number;
+  points: number | null;
+  percentage: number;
+}>;

@@ -5,22 +5,14 @@ import { db } from "@/db";
 import { CourseDetailsStats } from "@/types/exams";
 
 type Options = {
-  studentId: string;
+  professorId: string;
   courseId: string;
 };
 
-export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) => {
+export const useProfessorCourseDetailsStats = ({ professorId, courseId }: Options) => {
   return useQuery({
-    queryKey: [{ name: "student-course-details-stats", courseId, studentId }],
+    queryKey: [{ name: "professor-course-details-stats", courseId, professorId }],
     queryFn: async () => {
-      const studentJoined = await db.query.studentCourses.findFirst({
-        where: (studentCourses, { and, eq }) => {
-          return and(eq(studentCourses.courseId, courseId), eq(studentCourses.studentId, studentId));
-        },
-      });
-
-      if (!studentJoined) return null;
-
       const examsData = await db.query.exams.findMany({
         where: (exams, { eq, and }) => {
           const courseFilter = eq(exams.courseId, courseId);
@@ -32,12 +24,7 @@ export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) =
         with: {
           submissions: {
             columns: { points: true },
-            where: (submissions, { eq, and }) => {
-              const studentFilter = eq(submissions.studentId, studentId);
-              const statusFilter = eq(submissions.status, SUBMISSION_STATUS.graded);
-
-              return and(studentFilter, statusFilter);
-            },
+            where: (submissions, { eq }) => eq(submissions.status, SUBMISSION_STATUS.graded),
           },
         },
 
@@ -49,12 +36,12 @@ export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) =
 
       return examsData.map<CourseDetailsStats[number]>((exam) => {
         const { name, language, points: totalPoints, submissions } = exam;
-        const submission = submissions[0];
-        const { points } = submission;
+        const avgPoints = submissions.reduce((acc, sub) => acc + sub.points!, 0) / submissions.length;
+        const points = Number(avgPoints.toPrecision(2));
 
-        const percentage = Math.round((points! / totalPoints) * 100);
+        const percentage = Math.round((points / totalPoints) * 100);
 
-        return { exam: `${name}・${language}`, totalPoints: totalPoints - points!, points, percentage };
+        return { exam: `${name}・${language}`, totalPoints: totalPoints - points, points, percentage };
       });
     },
   });

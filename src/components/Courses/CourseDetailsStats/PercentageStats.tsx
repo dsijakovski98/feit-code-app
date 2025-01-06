@@ -4,21 +4,25 @@ import { colors } from "@nextui-org/react";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 
-import { StudentCourseStats } from "@/hooks/student/useStudentCourseDetailsStats";
+import { CourseDetailsStats } from "@/types/exams";
 
 const chartConfig = {
   percentage: { label: "Percentage", color: colors.dark.primary[400] },
 } satisfies ChartConfig;
 
 type Props = {
-  stats: StudentCourseStats;
+  stats: CourseDetailsStats;
+  height?: number;
+  avg?: boolean;
 };
 
-const PercentageStats = ({ stats }: Props) => {
+const PercentageStats = ({ stats, height, avg = false }: Props) => {
   return (
     <ChartContainer
       config={chartConfig}
-      className="max-h-[360px] w-full"
+      // @ts-expect-error Custom style property
+      style={{ "--height": `${height || 400}px` }}
+      className="max-h-[var(--height)] w-full"
       title="Area chart showing the percentage points for each completed exam."
     >
       <AreaChart accessibilityLayer data={stats}>
@@ -43,7 +47,7 @@ const PercentageStats = ({ stats }: Props) => {
                 return (
                   <div className="flex w-full items-center justify-between">
                     <p className="flex items-center gap-1.5">
-                      <span className="block h-3 w-3 rounded-sm bg-primary" /> Percentage
+                      <span className="block h-3 w-3 rounded-sm bg-primary" /> {avg && "Average"} Percentage
                     </p>
                     <p className="font-semibold">{value}%</p>
                   </div>

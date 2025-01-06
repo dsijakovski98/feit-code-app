@@ -5,8 +5,8 @@ import { colors } from "@nextui-org/react";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
-import { StudentCourseStats } from "@/hooks/student/useStudentCourseDetailsStats";
 import { useCtx } from "@/hooks/useCtx";
+import { CourseDetailsStats } from "@/types/exams";
 
 const chartConfig = {
   totalPoints: { label: "Total Points", color: colors.dark.primary[400] },
@@ -14,16 +14,20 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 type Props = {
-  stats: StudentCourseStats;
+  stats: CourseDetailsStats;
+  height?: number;
+  avg?: boolean;
 };
 
-const RateStats = ({ stats }: Props) => {
+const RateStats = ({ stats, height, avg = false }: Props) => {
   const { courseDetails } = useCtx(CourseDetailsContext);
 
   return (
     <ChartContainer
       config={chartConfig}
-      className="max-h-[360px] w-full"
+      // @ts-expect-error Custom style property
+      style={{ "--height": `${height || 400}px` }}
+      className="max-h-[var(--height)] w-full"
       title="Vertical stacked bar chart showing the points to total points ratio for each completed exam."
     >
       <BarChart accessibilityLayer data={stats} maxBarSize={160}>
@@ -58,12 +62,13 @@ const RateStats = ({ stats }: Props) => {
             <ChartTooltipContent
               className="[&_div:last-child]:gap-x-2"
               formatter={(value, name, item) => {
-                const dataItem = item.payload as StudentCourseStats[number];
+                const dataItem = item.payload as CourseDetailsStats[number];
 
                 return (
                   <div className="flex w-full items-center justify-between">
                     <p className="flex items-center gap-1.5">
                       <span className="block h-3 w-3 rounded-sm" style={{ backgroundColor: item.color }} />{" "}
+                      {name === "points" && avg && "Average"}{" "}
                       {chartConfig[name as keyof typeof chartConfig].label}
                     </p>
                     <p className="font-semibold">
