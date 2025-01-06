@@ -4,7 +4,7 @@ import { colors } from "@nextui-org/react";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 
-import { StudentCourseStats } from "@/hooks/student/useStudentCourseStats";
+import { StudentCourseStats } from "@/hooks/student/useStudentCourseDetailsStats";
 
 const chartConfig = {
   percentage: { label: "Percentage", color: colors.dark.primary[400] },
@@ -24,13 +24,7 @@ const PercentageStats = ({ stats }: Props) => {
       <AreaChart accessibilityLayer data={stats}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
-        <XAxis
-          dataKey="exam"
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          className="[&_.recharts-cartesian-axis-tick_*]:fill-foreground-300 [&_.recharts-cartesian-axis-tick_*]:text-sm"
-        />
+        <XAxis dataKey="exam" tickLine={false} axisLine={false} tickMargin={8} />
 
         <YAxis
           type="number"

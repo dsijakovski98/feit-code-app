@@ -138,3 +138,7 @@
 .md-editor-toolbar:is(:first-child, :last-child) {
   @apply *:scale-[1.5] *:rounded-full *:p-1;
 }
+
+.recharts-cartesian-axis-tick {
+  @apply *:fill-foreground-300 *:text-sm;
+}
