@@ -1,10 +1,12 @@
+import { useQuery } from "@tanstack/react-query";
+
 import { Spinner } from "@nextui-org/spinner";
 import { Tooltip } from "@nextui-org/tooltip";
 
 import Icon from "@/components/ui/Icon";
 
+import { getCourseGrade } from "@/actions/courses";
 import { JoinedCourseContext } from "@/context/JoinedCourseContext";
-import { useStudentCourseGrade } from "@/hooks/student/useStudentCourseGrade";
 import { useCtx } from "@/hooks/useCtx";
 import { GRADE_RULES } from "@/utils/courses/grade";
 
@@ -12,7 +14,12 @@ const CourseGrade = () => {
   const { joinedData } = useCtx(JoinedCourseContext);
   const { studentId, courseId } = joinedData;
 
-  const { data: grade, isPending } = useStudentCourseGrade({ studentId, courseId });
+  const { data: grade, isPending } = useQuery({
+    queryKey: [{ name: "course-grade", courseId, studentId }],
+    queryFn: async () => {
+      return await getCourseGrade({ studentId, courseId });
+    },
+  });
 
   return (
     <div className="space-y-1">

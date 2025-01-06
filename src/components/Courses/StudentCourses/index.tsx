@@ -1,6 +1,7 @@
 import { Suspense, lazy, useState } from "react";
 
 import CoursesHeader from "@/components/Courses/Misc/CoursesHeader";
+import StudentCoursesStats from "@/components/Courses/StudentCourses/StudentCoursesStats";
 import SwitchFilter from "@/components/ui/Filters/SwitchFilter";
 
 import CourseSearchProvider from "@/context/CourseSearch.Context";
@@ -32,8 +33,8 @@ const StudentCourses = ({ user }: Props) => {
   const [search] = searchFilter;
 
   return (
-    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4">
-      <section className="space-y-2">
+    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4 lg:h-auto lg:pb-20">
+      <section className="min-h-[320px] space-y-3">
         <CoursesHeader title="Courses" searchFilter={searchFilter}>
           <SwitchFilter filter={courseFilter} />
         </CoursesHeader>
@@ -46,7 +47,7 @@ const StudentCourses = ({ user }: Props) => {
         </CourseSearchProvider>
       </section>
 
-      {/* TODO: Student Courses stats */}
+      <StudentCoursesStats studentId={user.id} />
     </div>
   );
 };
