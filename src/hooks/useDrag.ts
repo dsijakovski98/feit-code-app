@@ -1,8 +1,8 @@
-import { ElementRef, useCallback, useLayoutEffect, useRef } from "react";
+import { ComponentRef, useCallback, useLayoutEffect, useRef } from "react";
 
 export const useDrag = () => {
-  const trigger = useRef<ElementRef<"div">>(null);
-  const windowEl = useRef<ElementRef<"section">>(null);
+  const trigger = useRef<ComponentRef<"div">>(null);
+  const windowEl = useRef<ComponentRef<"section">>(null);
 
   const prevTouch = useRef<{ x: number; y: number } | null>(null);
 

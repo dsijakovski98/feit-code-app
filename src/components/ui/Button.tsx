@@ -1,4 +1,4 @@
-import { type ComponentProps, ElementRef, type PropsWithChildren, forwardRef } from "react";
+import { type ComponentProps, ComponentRef, type PropsWithChildren, forwardRef } from "react";
 
 import clsx from "clsx";
 
@@ -24,7 +24,7 @@ const Btn = extendVariants(NextUiButton, {
 
 type Props = ComponentProps<typeof Btn> & PropsWithChildren;
 
-const Button = forwardRef<ElementRef<typeof Btn>, Props>(({ children, ...rest }, ref) => (
+const Button = forwardRef<ComponentRef<typeof Btn>, Props>(({ children, ...rest }, ref) => (
   <Btn
     {...rest}
     ref={ref}

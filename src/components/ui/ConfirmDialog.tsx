@@ -1,4 +1,4 @@
-import { ElementRef, Fragment, ReactNode, useLayoutEffect, useRef } from "react";
+import { ComponentRef, Fragment, ReactNode, useLayoutEffect, useRef } from "react";
 
 import { ButtonProps } from "@nextui-org/button";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
@@ -25,7 +25,7 @@ const ConfirmDialog = (props: Props) => {
   const { dialog, title, description, color, action, formId, cancelable = true, loading } = props;
   const { label, onConfirm } = action;
 
-  const confirmBtn = useRef<ElementRef<typeof Button>>(null);
+  const confirmBtn = useRef<ComponentRef<typeof Button>>(null);
 
   const handleOpenChange = (isOpen: boolean) => {
     if (!isOpen && !cancelable) return;
@@ -36,7 +36,8 @@ const ConfirmDialog = (props: Props) => {
 
   useLayoutEffect(() => {
     if (!dialog.open) return;
-    confirmBtn.current?.focus();
+    const button = confirmBtn.current as unknown as HTMLButtonElement;
+    button.focus();
   }, [dialog.open]);
 
   return (

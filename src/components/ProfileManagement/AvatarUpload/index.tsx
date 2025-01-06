@@ -1,4 +1,4 @@
-import { ChangeEvent, ElementRef, KeyboardEvent, useRef } from "react";
+import { ChangeEvent, ComponentRef, KeyboardEvent, useRef } from "react";
 
 import clsx from "clsx";
 import { ClassValue } from "clsx";
@@ -17,8 +17,8 @@ type Props = {
 
 const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
   const [avatar, setAvatar] = avatarState;
-  const inputRef = useRef<ElementRef<"input">>(null);
-  const imgRef = useRef<ElementRef<"img">>(null);
+  const inputRef = useRef<ComponentRef<"input">>(null);
+  const imgRef = useRef<ComponentRef<"img">>(null);
 
   const clearAvatar = () => {
     setAvatar("");

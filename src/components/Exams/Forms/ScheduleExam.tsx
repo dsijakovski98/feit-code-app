@@ -29,10 +29,9 @@ const ScheduleExam = ({ form, disabled = false }: Props) => {
           <DatePicker
             size="lg"
             variant="underlined"
-            // @ts-expect-error NextUI types mismatch
             minValue={today("UTC")}
             value={nextUIDate(field.value)}
-            onChange={(e) => field.onChange(e.toDate("UTC"))}
+            onChange={(e) => field.onChange(e?.toDate("UTC"))}
             label={<span className="text-base font-semibold text-foreground lg:text-sm">Start Date</span>}
             classNames={{
               selectorIcon: "h-6 w-6",
@@ -55,7 +54,7 @@ const ScheduleExam = ({ form, disabled = false }: Props) => {
             hourCycle={24}
             variant="underlined"
             value={nextUITime(field.value)}
-            onChange={(e) => field.onChange(nextUITimeToDate(e.toString()))}
+            onChange={(e) => field.onChange(nextUITimeToDate(e?.toString() || ""))}
             label={<span className="text-base font-semibold text-foreground lg:text-sm">Start Time</span>}
             classNames={{
               segment: "focus:bg-primary focus:text-primary-foreground",

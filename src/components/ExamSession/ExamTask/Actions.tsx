@@ -100,6 +100,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
               classNames={{ heading: "text-sm font-semibold", divider: "h-[0.5px] opacity-50" }}
             >
               <DropdownItem
+                key="start-over"
                 textValue="Start Over"
                 startContent={<Icon name="restart" className="h-5 w-5" />}
                 onPress={startOverToggle.toggleOn}
@@ -120,6 +121,7 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
             </DropdownSection>
 
             <DropdownItem
+              key="leave"
               textValue="Leave"
               startContent={<Icon name="logout" className="h-5 w-5" />}
               onPress={leaveToggle.toggleOn}
