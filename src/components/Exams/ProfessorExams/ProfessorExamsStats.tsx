@@ -2,16 +2,16 @@ import { useMemo } from "react";
 
 import ExamsStats from "@/components/Exams/ExamsStats";
 
-import { useStudentExamsStats } from "@/hooks/student/useStudentExamsStats";
+import { useProfessorExamsStats } from "@/hooks/professor/useProfessorExamsStats";
 
 type Props = {
-  studentId: string;
+  professorId: string;
   courseIds: string[];
   selectedCourseId: string;
 };
 
-const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) => {
-  const { data: stats, isPending } = useStudentExamsStats({ studentId, courseIds });
+const ProfessorExamsStats = ({ professorId, selectedCourseId, courseIds }: Props) => {
+  const { data: stats, isPending } = useProfessorExamsStats(professorId);
 
   const targetCourseIds = useMemo(
     () => (selectedCourseId === "all" ? courseIds : [selectedCourseId]),
@@ -21,4 +21,4 @@ const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) =>
   return <ExamsStats stats={stats} isLoading={isPending} courseIds={targetCourseIds} />;
 };
 
-export default StudentExamsStats;
+export default ProfessorExamsStats;

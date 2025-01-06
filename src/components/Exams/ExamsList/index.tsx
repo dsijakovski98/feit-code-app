@@ -1,53 +1,47 @@
-import { ReactNode } from "react";
+import { Fragment } from "react";
 
-import { InfiniteData, UseInfiniteQueryResult } from "@tanstack/react-query";
+import { Spinner } from "@nextui-org/react";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { A11y, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import ExamCard from "@/components/Exams/ExamCard";
+import ExamsListSwiper from "@/components/Exams/ExamsList/List";
+import EmptyExamsList from "@/components/Exams/Misc/EmptyExamsList";
 
-import { EXAMS_PER_PAGE } from "@/constants/queries";
-import { useLoadMore } from "@/hooks/useLoadMore";
+import { useExams } from "@/hooks/exam/useExams";
+import { UserType } from "@/types";
 
-type Props<T extends { id: string }> = {
-  examsQuery: UseInfiniteQueryResult<InfiniteData<T[]>>;
-  renderExam: (exam: T) => ReactNode;
+type Props = {
+  userId: string;
+  type: UserType;
+  selectedCourseId: string;
+  status: string;
+  course: string;
 };
 
-const ExamsList = <T extends { id: string }>({ examsQuery, renderExam }: Props<T>) => {
-  const { data, fetchNextPage, hasNextPage, isFetching } = examsQuery;
-
-  const { ref } = useLoadMore(fetchNextPage);
-
-  if (!data) return null;
+const ExamsList = ({ userId, type, selectedCourseId, status, course }: Props) => {
+  const query = useExams({
+    userId,
+    type,
+    status,
+    courseId: selectedCourseId,
+  });
+  const { data: exams, isPending } = query;
 
   return (
-    <Swiper
-      grabCursor={!isFetching}
-      spaceBetween={20}
-      slidesPerView="auto"
-      centerInsufficientSlides={data.pages[0].length > EXAMS_PER_PAGE - 1}
-      navigation={{ hideOnClick: true, enabled: !isFetching }}
-      pagination={{ dynamicBullets: true }}
-      modules={[A11y, Pagination, Navigation]}
-      className="swiper-items !px-8 !pb-10 !pt-1 lg:!px-5 lg:!pt-2"
-    >
-      {data.pages.flatMap((page) =>
-        page.map((exam) => (
-          <SwiperSlide key={exam.id} className="!h-auto !w-fit min-w-[20ch]">
-            {renderExam(exam)}
-          </SwiperSlide>
-        )),
+    <Fragment>
+      {isPending && (
+        <div className="w-full py-8 text-center">
+          <Spinner size="lg" />
+        </div>
       )}
 
-      {hasNextPage && (
-        <SwiperSlide>
-          <div ref={ref} aria-hidden />
-        </SwiperSlide>
+      {exams?.pages[0].length === 0 && <EmptyExamsList status={status} course={course} />}
+
+      {!!exams?.pages[0].length && (
+        <section className="overflow-x-clip">
+          <ExamsListSwiper examsQuery={query} renderExam={(exam) => <ExamCard exam={exam} />} />
+        </section>
       )}
-    </Swiper>
+    </Fragment>
   );
 };
 

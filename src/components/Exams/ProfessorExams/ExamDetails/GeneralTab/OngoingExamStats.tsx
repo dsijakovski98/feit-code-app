@@ -5,9 +5,9 @@ import Stat from "@/components/ui/Stat";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { useDatabaseListen } from "@/hooks/firebase/useDatabaseListen";
 import { useCtx } from "@/hooks/useCtx";
-import type { ExamStats } from "@/types/exams";
+import type { ExamSessionStats } from "@/types/exams";
 
-type StatsKeys = Extract<keyof ExamStats, "activeStudents" | "finishedStudents">;
+type StatsKeys = Extract<keyof ExamSessionStats, "activeStudents" | "finishedStudents">;
 
 const OngoingExamStats = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
@@ -18,14 +18,14 @@ const OngoingExamStats = () => {
     finishedStudents: 0,
   });
 
-  const onData = useCallback((stats: ExamStats | null) => {
+  const onData = useCallback((stats: ExamSessionStats | null) => {
     setExamStats({
       activeStudents: Object.keys(stats?.activeStudents ?? {}).length,
       finishedStudents: Object.keys(stats?.finishedStudents ?? {}).length,
     });
   }, []);
 
-  useDatabaseListen<ExamStats>(`exams/${id}`, onData);
+  useDatabaseListen<ExamSessionStats>(`exams/${id}`, onData);
 
   return (
     <div className="flex items-end justify-start gap-14">

@@ -10,7 +10,7 @@ import { ProgrammingLanguage } from "@/constants/enums";
 import { ExamSessionContext } from "@/context/ExamSessionContext";
 import { db } from "@/db";
 import { FCStudent } from "@/hooks/useFCUser";
-import { ExamStats, StudentSession } from "@/types/exams";
+import { ExamSessionStats, StudentSession } from "@/types/exams";
 import { studentTaskRef, taskTemplateRef } from "@/utils/code";
 
 export type SessionOptions = {
@@ -47,7 +47,7 @@ export const joinExamSession = async ({ examId, student }: JoinSessionOptions) =
     onValue(
       sessionRef,
       async (snapshot) => {
-        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+        const examSession: ExamSessionStats["activeStudents"] | null = snapshot.val();
         const studentData: StudentSession = { student, pasteCount: 0, timeOff: {} };
 
         if (!examSession) {
@@ -82,7 +82,7 @@ export const leaveExamSession = async ({ examId, sessionId }: SessionOptions) =>
     onValue(
       sessionRef,
       (snapshot) => {
-        const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+        const examSession: ExamSessionStats["activeStudents"] | null = snapshot.val();
 
         if (!examSession) {
           return reject(`Exam session doesn't exist!`);
@@ -113,7 +113,7 @@ export const leaveExamSessionLogout = async ({ studentId }: LeaveSessionLogout) 
     onValue(
       activeExamsRef,
       async (snapshot) => {
-        const examSessions = snapshot.val() as Record<string, ExamStats> | null;
+        const examSessions = snapshot.val() as Record<string, ExamSessionStats> | null;
 
         if (!examSessions) {
           return resolve(false);
@@ -272,7 +272,7 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
       onValue(
         activeSessionRef,
         (snapshot) => {
-          const examSession: ExamStats["activeStudents"] | null = snapshot.val();
+          const examSession: ExamSessionStats["activeStudents"] | null = snapshot.val();
 
           if (!examSession) {
             reject(`Exam session for exam ${examId} not available!`);
@@ -307,7 +307,7 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
       onValue(
         finishedSessionRef,
         (snapshot) => {
-          const sessionFinish: ExamStats["finishedStudents"] | null = snapshot.val();
+          const sessionFinish: ExamSessionStats["finishedStudents"] | null = snapshot.val();
 
           if (!sessionFinish) {
             push(finishedSessionRef, finishedSession);

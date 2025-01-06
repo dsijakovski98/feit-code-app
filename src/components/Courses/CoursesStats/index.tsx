@@ -30,10 +30,13 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
     [modeLabel],
   );
 
-  const avgValue = useMemo(
-    () => (stats?.length ? stats.reduce((acc, stat) => acc + stat.value, 0) / stats.length : null),
-    [stats],
-  );
+  const avgValue = useMemo(() => {
+    if (!stats) return null;
+
+    const avg = stats.reduce((acc, stat) => acc + stat.value, 0) / stats.length;
+
+    return Number(avg.toFixed(2));
+  }, [stats]);
 
   const axisDomain = useMemo<AxisDomain>(() => (mode === "grade" ? [5, 10] : [0, 100]), [mode]);
   const ticks = useMemo(() => (mode === "grade" ? [5, 6, 7, 8, 9, 10] : undefined), [mode]);

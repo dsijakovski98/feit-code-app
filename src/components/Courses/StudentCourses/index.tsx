@@ -34,7 +34,7 @@ const StudentCourses = ({ user }: Props) => {
 
   return (
     <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] py-4 lg:h-auto lg:pb-20">
-      <section className="min-h-[320px] space-y-3">
+      <section className="min-h-[320px] space-y-2">
         <CoursesHeader title="Courses" searchFilter={searchFilter}>
           <SwitchFilter filter={courseFilter} />
         </CoursesHeader>

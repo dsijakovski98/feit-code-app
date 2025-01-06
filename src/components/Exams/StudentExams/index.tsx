@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
+import ExamsList from "@/components/Exams/ExamsList";
 import ExamHeader from "@/components/Exams/Misc/ExamHeader";
-import StudentExamsList from "@/components/Exams/StudentExams/StudentExamsList";
 import StudentExamsStats from "@/components/Exams/StudentExams/StudentExamsStats";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
@@ -10,6 +10,7 @@ import { EXAM_STATUS_OPTIONS } from "@/constants/exams";
 import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
 import { FCStudent } from "@/hooks/useFCUser";
 import { Option, useFilter } from "@/hooks/useFilter";
+import { USER_TYPE } from "@/types";
 
 type Props = {
   user: FCStudent;
@@ -50,8 +51,8 @@ const StudentExams = ({ user }: Props) => {
   }, [courseFilter.value, courses]);
 
   return (
-    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4">
-      <section className="min-h-[320px] space-y-3">
+    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4 lg:h-auto lg:gap-12 lg:pb-20">
+      <section className="min-h-[320px] space-y-2">
         <ExamHeader title="Exams">
           <SelectFilter size="sm" label="Exam status" filter={statusFilter} className="w-[240px] lg:w-full" />
 
@@ -64,8 +65,9 @@ const StudentExams = ({ user }: Props) => {
           />
         </ExamHeader>
 
-        <StudentExamsList
-          studentId={id}
+        <ExamsList
+          userId={id}
+          type={USER_TYPE.student}
           status={statusFilter.value}
           course={courseFilter.value}
           selectedCourseId={selectedCourseId}

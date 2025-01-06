@@ -1,16 +1,12 @@
 import { useMemo } from "react";
 
-import { Spinner } from "@nextui-org/spinner";
-
-import ExamCard from "@/components/Exams/ExamCard";
 import ExamsList from "@/components/Exams/ExamsList";
-import EmptyExamsList from "@/components/Exams/Misc/EmptyExamsList";
 import ExamHeader from "@/components/Exams/Misc/ExamHeader";
+import ProfessorExamsStats from "@/components/Exams/ProfessorExams/ProfessorExamsStats";
 import SelectFilter from "@/components/ui/Filters/SelectFilter";
 
 import { ALL_OPTION } from "@/constants";
 import { EXAM_STATUS_OPTIONS } from "@/constants/exams";
-import { useExams } from "@/hooks/exam/useExams";
 import { useProfessorCoursesList } from "@/hooks/professor/useProfessorCoursesList";
 import { FCProfessor } from "@/hooks/useFCUser";
 import { useFilter } from "@/hooks/useFilter";
@@ -24,10 +20,13 @@ const ProfessorExams = ({ user }: Props) => {
   const { id, type } = user;
 
   const { data: courses, isLoading: coursesLoading } = useProfessorCoursesList({ userId: id, type });
+
   const courseOptions = useMemo(
     () => courses?.map(({ name }) => ({ value: name, label: name })) ?? [],
     [courses],
   );
+
+  const courseIds = useMemo(() => courses?.map((course) => course.id) ?? [], [courses]);
 
   const courseFilter = useFilter({
     name: "course",
@@ -48,18 +47,9 @@ const ProfessorExams = ({ user }: Props) => {
     return course?.id || "";
   }, [courseFilter.value, courses]);
 
-  const examsQuery = useExams({
-    userId: id,
-    type: USER_TYPE.professor,
-    courseId: selectedCourseId,
-    status: statusFilter.value,
-  });
-
-  const { data, isLoading } = examsQuery;
-
   return (
-    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4">
-      <section className="space-y-2 lg:space-y-3">
+    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4 lg:h-auto lg:gap-12 lg:pb-20">
+      <section className="min-h-[320px] space-y-2">
         <ExamHeader title="My Exams">
           <SelectFilter size="sm" label="Exam status" filter={statusFilter} className="w-[240px] lg:w-full" />
           <SelectFilter
@@ -71,29 +61,23 @@ const ProfessorExams = ({ user }: Props) => {
           />
         </ExamHeader>
 
-        {isLoading && (
-          <div className="w-full py-8 text-center">
-            <Spinner size="lg" />
-          </div>
-        )}
-
-        {data?.pages[0].length === 0 && (
-          <EmptyExamsList status={statusFilter.value} course={courseFilter.value} />
-        )}
-
-        {!!data?.pages[0].length && (
-          <section className="overflow-x-clip">
-            <ExamsList examsQuery={examsQuery} renderExam={(exam) => <ExamCard exam={exam} />} />
-          </section>
-        )}
+        <ExamsList
+          userId={id}
+          type={USER_TYPE.professor}
+          status={statusFilter.value}
+          course={courseFilter.value}
+          selectedCourseId={selectedCourseId}
+        />
       </section>
 
-      {/* TODO: Professor Exam stats */}
-      {!!data?.pages[0].length && (
-        <section className="px-8">
+      <section className="flex flex-col gap-3 px-8">
+        <div>
           <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>
-        </section>
-      )}
+          <p className="text-foreground-300">Last 10 exams (per course)</p>
+        </div>
+
+        <ProfessorExamsStats professorId={id} selectedCourseId={selectedCourseId} courseIds={courseIds} />
+      </section>
     </div>
   );
 };

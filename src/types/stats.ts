@@ -6,3 +6,8 @@ export type CourseDetailsStats = Array<{
 }>;
 
 export type CourseStats = Array<{ course: string; value: number }>;
+
+export type ExamKey = `exam${number}`;
+export type ExamsStats = Array<
+  { course: string; courseId: string; exams: Record<ExamKey, string> } & { [key in ExamKey]: number }
+>;

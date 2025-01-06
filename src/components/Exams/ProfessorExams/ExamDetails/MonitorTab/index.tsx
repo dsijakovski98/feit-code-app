@@ -9,14 +9,14 @@ import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { MonitorExamProvider, MonitorSession } from "@/context/MonitorExamContext";
 import { useDatabaseListen } from "@/hooks/firebase/useDatabaseListen";
 import { useCtx } from "@/hooks/useCtx";
-import { ExamStats } from "@/types/exams";
+import { ExamSessionStats } from "@/types/exams";
 
 const MonitorTab = () => {
   const { examDetails } = useCtx(ExamDetailsContext);
 
   const [studentSessions, setStudentSessions] = useState<MonitorSession[] | null>(null);
 
-  const onData = useCallback((examStats: ExamStats | null) => {
+  const onData = useCallback((examStats: ExamSessionStats | null) => {
     if (!examStats) {
       setStudentSessions([]);
       return;

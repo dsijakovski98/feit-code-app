@@ -15,7 +15,7 @@ export type StudentSession = SessionStats & {
   };
 };
 
-export type ExamStats = {
+export type ExamSessionStats = {
   activeStudents: Record<string, StudentSession>;
   finishedStudents: Record<string, StudentSession>;
   finished?: boolean;
