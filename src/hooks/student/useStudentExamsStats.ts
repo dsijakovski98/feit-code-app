@@ -60,7 +60,13 @@ export const useStudentExamsStats = ({ studentId, selectedCourseId, courseIds }:
         }
       });
 
-      return stats;
+      const examKeys = [
+        ...new Set(
+          stats.flatMap((stat) => Object.keys(stat).filter((key) => key !== "course" && key !== "exams")),
+        ),
+      ];
+
+      return { stats, examKeys };
     },
   });
 };

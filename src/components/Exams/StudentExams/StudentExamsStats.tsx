@@ -10,7 +10,7 @@ import { type StudentExamsStats, useStudentExamsStats } from "@/hooks/student/us
 type Props = Parameters<typeof useStudentExamsStats>[0];
 
 const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) => {
-  const { data: stats, isPending } = useStudentExamsStats({ studentId, selectedCourseId, courseIds });
+  const { data, isPending } = useStudentExamsStats({ studentId, selectedCourseId, courseIds });
 
   if (isPending) {
     return (
@@ -20,7 +20,7 @@ const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) =>
     );
   }
 
-  if (!stats) {
+  if (!data) {
     return (
       <div className="grid flex-1 place-items-center p-8">
         <p className="text-lg text-foreground-300">No information available.</p>
@@ -28,11 +28,7 @@ const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) =>
     );
   }
 
-  const examKeys = [
-    ...new Set(
-      stats.flatMap((stat) => Object.keys(stat).filter((key) => key !== "course" && key !== "exams")),
-    ),
-  ];
+  const { stats, examKeys } = data;
 
   return (
     <ChartContainer
@@ -63,7 +59,7 @@ const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) =>
           cursor={false}
           content={
             <ChartTooltipContent
-              className="[&_div:last-child]:gap-x-2"
+              className="[&_div:last-child]:gap-x-4"
               formatter={(value, name, item) => {
                 const stat = item.payload as StudentExamsStats[number];
                 const examLabel = stat.exams[name as keyof typeof stat.exams];
