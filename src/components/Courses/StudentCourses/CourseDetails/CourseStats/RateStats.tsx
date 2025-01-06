@@ -29,11 +29,7 @@ const RateStats = ({ stats }: Props) => {
       <BarChart accessibilityLayer data={stats} maxBarSize={160}>
         <CartesianGrid vertical={false} opacity={0.15} />
 
-        <XAxis
-          dataKey="exam"
-          tickMargin={10}
-          className="[&_.recharts-cartesian-axis-tick_*]:fill-foreground-300 [&_.recharts-cartesian-axis-tick_*]:text-sm"
-        />
+        <XAxis dataKey="exam" tickMargin={10} />
 
         <YAxis
           type="number"

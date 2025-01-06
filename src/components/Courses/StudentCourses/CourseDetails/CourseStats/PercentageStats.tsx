@@ -24,13 +24,7 @@ const PercentageStats = ({ stats }: Props) => {
       <AreaChart accessibilityLayer data={stats}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
-        <XAxis
-          dataKey="exam"
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          className="[&_.recharts-cartesian-axis-tick_*]:fill-foreground-300 [&_.recharts-cartesian-axis-tick_*]:text-sm"
-        />
+        <XAxis dataKey="exam" tickLine={false} axisLine={false} tickMargin={8} />
 
         <YAxis
           type="number"

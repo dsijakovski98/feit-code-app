@@ -39,12 +39,7 @@ const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) =>
       <BarChart accessibilityLayer data={stats} barGap={10}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
-        <XAxis
-          dataKey="course"
-          axisLine={false}
-          tickMargin={10}
-          className="[&_.recharts-cartesian-axis-tick_*]:fill-foreground-300 [&_.recharts-cartesian-axis-tick_*]:text-sm"
-        />
+        <XAxis dataKey="course" axisLine={false} tickMargin={10} />
 
         <YAxis
           type="number"
