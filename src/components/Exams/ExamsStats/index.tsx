@@ -73,6 +73,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
           cursor={false}
           content={
             <ChartTooltipContent
+              className="border-foreground-100/80"
               labelFormatter={(label) => <TooltipLabel>{label}</TooltipLabel>}
               formatter={(value, name, item) => {
                 const stat = item.payload as ExamsStats[number];

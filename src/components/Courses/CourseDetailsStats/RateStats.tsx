@@ -61,6 +61,7 @@ const RateStats = ({ stats, height, avg = false }: Props) => {
           defaultIndex={1}
           content={
             <ChartTooltipContent
+              className="border-foreground-100/80"
               labelFormatter={(label) => <TooltipLabel>{label}</TooltipLabel>}
               formatter={(value, name, item) => {
                 const dataItem = item.payload as CourseDetailsStats[number];

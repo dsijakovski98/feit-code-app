@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 
 import clsx, { ClassValue } from "clsx";
-import { useTheme } from "next-themes";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { colors } from "@nextui-org/theme";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
+import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
 
 import { SessionStats } from "@/types/exams";
 
@@ -30,12 +30,6 @@ type Props = {
 };
 
 const TimeOffChart = ({ timeOff, className = "" }: Props) => {
-  const { theme } = useTheme();
-
-  const chartColor = useMemo(() => {
-    return theme === "dark" ? colors.dark.primary[400] : colors.light.primary[400];
-  }, [theme]);
-
   const timeOffData = useMemo<ChartData>(() => {
     if (!timeOff) return [];
 
@@ -50,18 +44,16 @@ const TimeOffChart = ({ timeOff, className = "" }: Props) => {
 
   return (
     <ChartContainer className={clsx("max-h-[420px] w-full px-0", className)} config={timeOffConfig}>
-      <BarChart accessibilityLayer data={timeOffData}>
+      <BarChart accessibilityLayer data={timeOffData} maxBarSize={160} className="pl-2">
         <CartesianGrid strokeDasharray="5" vertical={false} strokeOpacity={0.1} />
 
-        <YAxis dataKey="time" className="translate-y-px" tickFormatter={(val) => `${val} min`} />
+        <YAxis dataKey="time" tickLine={false} axisLine={false} tickFormatter={(val) => `${val} min`} />
+
         <XAxis
           dataKey="timestamp"
-          className="translate-y-px"
-          label={{
-            value: "Exam Duration",
-            position: "insideBottom",
-            className: "font-semibold translate-y-2",
-          }}
+          tickMargin={10}
+          tickLine={false}
+          axisLine={false}
           tickFormatter={(value) => value.split(" ").pop()}
         />
 
@@ -69,13 +61,38 @@ const TimeOffChart = ({ timeOff, className = "" }: Props) => {
           cursor={false}
           content={
             <ChartTooltipContent
-              indicator="line"
-              className="border-foreground-100/80 [&_div:last-child]:gap-x-2"
+              className="border-foreground-100/80"
+              labelFormatter={(label) => <TooltipLabel>{label.split(" ").pop()}</TooltipLabel>}
+              formatter={(value) => {
+                return (
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <div className="flex items-center gap-1.5">
+                      <div className="h-3 w-3 rounded-sm bg-primary" />
+                      <p className="text-sm font-medium">Time</p>
+                    </div>
+                    <p className="font-semibold">{value} min</p>
+                  </div>
+                );
+              }}
             />
           }
         />
 
-        <Bar dataKey="time" radius={8} fill={chartColor} />
+        <defs>
+          <linearGradient id="fillPercentage" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor={colors.dark.primary[400]} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={colors.dark.primary[100]} stopOpacity={0.1} />
+          </linearGradient>
+        </defs>
+
+        <Bar
+          dataKey="time"
+          radius={6}
+          strokeWidth={2}
+          fillOpacity={0.4}
+          fill="url(#fillPercentage)"
+          stroke={colors.dark.primary[300]}
+        />
 
         {noData && (
           <text

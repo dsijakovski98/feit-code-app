@@ -128,6 +128,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
               content={
                 <ChartTooltipContent
                   color={chartConfig.value.color}
+                  className="border-foreground-100/80"
                   labelFormatter={(label) => <TooltipLabel>{label}</TooltipLabel>}
                   formatter={(value) => (
                     <div className="flex w-full items-center justify-between gap-4">
