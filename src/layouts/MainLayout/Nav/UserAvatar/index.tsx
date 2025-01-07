@@ -33,7 +33,7 @@ const UserAvatar = () => {
         />
       </DropdownTrigger>
 
-      <DropdownMenu disabledKeys={["title"]} closeOnSelect className="p-0">
+      <DropdownMenu disabledKeys={["title"]} closeOnSelect className="p-0" classNames={{ list: "*:px-3" }}>
         <DropdownItem
           key="title"
           textValue="Title"
@@ -56,7 +56,7 @@ const UserAvatar = () => {
           <p className="text-xs text-content4-foreground">Edit your profile settings</p>
         </DropdownItem>
 
-        <DropdownSection>
+        <DropdownSection className="!px-1">
           <DropdownItem key="help" textValue="Help & Feedback" className="font-serif">
             <Link to={helpFeedbackUrl} target="_blank">
               <p className="text-sm font-semibold">Help & Feedback</p>

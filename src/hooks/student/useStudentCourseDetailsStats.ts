@@ -42,7 +42,7 @@ export const useStudentCourseDetailsStats = ({ studentId, courseId }: Options) =
         },
 
         limit: 10,
-        orderBy: (exams, { asc }) => asc(exams.createdAt),
+        orderBy: (exams, { asc }) => asc(exams.startsAt),
       });
 
       if (examsData?.length === 0) return null;

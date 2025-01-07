@@ -8,6 +8,7 @@ import { colors } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/spinner";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
+import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
 
 import { CourseStats } from "@/types/stats";
 import { capitalize } from "@/utils";
@@ -127,13 +128,14 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
               content={
                 <ChartTooltipContent
                   color={chartConfig.value.color}
-                  className="[&_div:last-child]:gap-x-2"
+                  labelFormatter={(label) => <TooltipLabel>{label}</TooltipLabel>}
                   formatter={(value) => (
-                    <div className="flex w-full items-center justify-between">
-                      <p className="flex items-center gap-1.5">
-                        <span className="block h-3 w-3 rounded-sm bg-primary" /> {modeLabel}
-                      </p>
-                      <p className="font-semibold">
+                    <div className="flex w-full items-center justify-between gap-4">
+                      <div className="flex items-center gap-1.5">
+                        <div className="h-3 w-3 rounded-sm bg-primary" />
+                        <p className="text-sm font-medium leading-none">{modeLabel}</p>
+                      </div>
+                      <p className="text-sm font-semibold">
                         {value}
                         {mode === "percentage" && "%"}
                       </p>

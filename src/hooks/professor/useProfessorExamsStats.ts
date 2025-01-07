@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { EXAM_STATUS, SUBMISSION_STATUS } from "@/constants/enums";
 import { db } from "@/db";
 import { ExamKey, ExamsStats } from "@/types/stats";
+import { formatTimestamp } from "@/utils/dates";
 
 export const useProfessorExamsStats = (professorId: string) => {
   return useQuery({
@@ -22,8 +23,10 @@ export const useProfessorExamsStats = (professorId: string) => {
         with: {
           exams: {
             limit: 10,
+            orderBy: (exams, { asc }) => asc(exams.startsAt),
+
             where: (exams, { eq }) => eq(exams.status, EXAM_STATUS.completed),
-            columns: { name: true, points: true },
+            columns: { name: true, points: true, startsAt: true },
             with: {
               submissions: {
                 where: (submissions, { eq }) => eq(submissions.status, SUBMISSION_STATUS.graded),
@@ -55,7 +58,7 @@ export const useProfessorExamsStats = (professorId: string) => {
           const percentage = Math.round((avgPoints / totalPoints) * 100);
 
           stat[examKey] = percentage;
-          stat.exams[examKey] = exam.name;
+          stat.exams[examKey] = { name: exam.name, startsAt: formatTimestamp(exam.startsAt) };
         });
 
         if (Object.keys(stat.exams).length > 0) {

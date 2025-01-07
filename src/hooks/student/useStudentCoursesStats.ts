@@ -12,6 +12,7 @@ export const useStudentCoursesStats = (studentId: string) => {
         where: (studentCourses, { eq }) => eq(studentCourses.studentId, studentId),
         columns: { courseId: true },
         with: { course: { columns: { name: true, archived: true } } },
+        orderBy: (courses, { asc }) => asc(courses.joinedAt),
       });
 
       const activeCourses = coursesData.filter((courseData) => !courseData.course.archived);

@@ -65,7 +65,7 @@ const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
 
                 {!!joinedAt && (
                   <p>
-                    Joined at <Timestamp>{joinedAt}</Timestamp>
+                    Joined <Timestamp>{joinedAt}</Timestamp>
                   </p>
                 )}
               </div>

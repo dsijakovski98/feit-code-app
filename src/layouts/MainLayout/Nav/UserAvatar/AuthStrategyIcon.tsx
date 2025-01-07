@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { ClassValue } from "clsx";
 import clsx from "clsx";
 
@@ -12,19 +14,20 @@ type Props = {
 const AuthStrategyIcon = ({ className = "" }: Props) => {
   const { user } = useUser();
 
-  if (!user) return null;
+  const strategy = user?.primaryEmailAddress?.verification.strategy;
 
-  if (!user.primaryEmailAddress) return null;
+  const icon = useMemo(() => {
+    if (!strategy) return null;
 
-  if (user.primaryEmailAddress.verification.strategy?.includes("google")) {
-    return <Icon name="google" className={clsx("h-8 w-8", className)} />;
-  }
+    if (strategy?.includes("google")) return "google";
+    if (strategy?.includes("github")) return "github";
 
-  if (user.primaryEmailAddress.verification.strategy?.includes("github")) {
-    return <Icon name="github" className={clsx("h-8 w-8", className)} />;
-  }
+    return null;
+  }, [strategy]);
 
-  return null;
+  if (!icon) return null;
+
+  return <Icon name={icon} className={clsx("h-7 w-7", className)} />;
 };
 
 export default AuthStrategyIcon;

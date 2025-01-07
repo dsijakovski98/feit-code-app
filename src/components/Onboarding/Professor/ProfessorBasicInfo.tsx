@@ -87,7 +87,7 @@ const ProfessorBasicInfo = () => {
             <Select
               {...field}
               size="lg"
-              label="Major"
+              label="Department"
               color="default"
               variant="underlined"
               defaultSelectedKeys={[form.department]}

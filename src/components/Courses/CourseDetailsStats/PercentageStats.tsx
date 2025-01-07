@@ -3,6 +3,7 @@ import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { colors } from "@nextui-org/react";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
+import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
 
 import { CourseDetailsStats } from "@/types/stats";
 
@@ -42,13 +43,14 @@ const PercentageStats = ({ stats, height, avg = false }: Props) => {
           cursor={false}
           content={
             <ChartTooltipContent
-              className="[&_div:last-child]:gap-x-2"
+              labelFormatter={(label) => <TooltipLabel>{label}</TooltipLabel>}
               formatter={(value) => {
                 return (
-                  <div className="flex w-full items-center justify-between">
-                    <p className="flex items-center gap-1.5">
-                      <span className="block h-3 w-3 rounded-sm bg-primary" /> {avg && "Average"} Percentage
-                    </p>
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <div className="flex items-center gap-1.5">
+                      <div className="h-3 w-3 rounded-sm bg-primary" />
+                      <p className="text-sm font-medium">{avg && "Average"} Percentage</p>
+                    </div>
                     <p className="font-semibold">{value}%</p>
                   </div>
                 );

@@ -6,6 +6,7 @@ import { colors } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/spinner";
 
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
+import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
 
 import { type ExamsStats } from "@/types/stats";
 
@@ -72,17 +73,21 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
           cursor={false}
           content={
             <ChartTooltipContent
-              className="[&_div:last-child]:gap-x-4"
+              labelFormatter={(label) => <TooltipLabel>{label}</TooltipLabel>}
               formatter={(value, name, item) => {
                 const stat = item.payload as ExamsStats[number];
-                const examLabel = stat.exams[name as keyof typeof stat.exams];
+                const exam = stat.exams[name as keyof typeof stat.exams];
 
                 return (
-                  <div className="flex w-full items-center justify-between">
-                    <p className="flex items-center gap-1.5">
-                      <span className="block h-3 w-3 rounded-sm bg-primary-400" /> {examLabel}
-                    </p>
-                    <p className="font-semibold">{value}%</p>
+                  <div className="mb-1.5 flex w-full items-center justify-between gap-4">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-1 self-stretch rounded-sm bg-primary-400" />
+                      <div>
+                        <p className="text-sm font-medium">{exam.name}</p>
+                        <p>{exam.startsAt}</p>
+                      </div>
+                    </div>
+                    <p className="text-sm font-semibold">{value}%</p>
                   </div>
                 );
               }}
