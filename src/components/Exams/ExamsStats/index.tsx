@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import clsx, { ClassValue } from "clsx";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { Spinner } from "@nextui-org/spinner";
@@ -15,9 +16,10 @@ type Props = {
   courseIds: string[];
 
   isLoading?: boolean;
+  className?: ClassValue;
 };
 
-const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
+const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Props) => {
   const targetStats = useMemo(
     () => (stats ? stats.filter((stat) => courseIds.includes(stat.courseId)) : null),
     [stats, courseIds],
@@ -53,7 +55,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
   return (
     <ChartContainer
       config={{}}
-      className="max-h-[420px] w-full"
+      className={clsx("max-h-[420px] w-full", className)}
       title="Bar chart showing the percentage points for each completed exam, grouped by course."
     >
       <BarChart accessibilityLayer data={targetStats} barGap={10} maxBarSize={160}>

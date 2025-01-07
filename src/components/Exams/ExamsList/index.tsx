@@ -13,7 +13,7 @@ type Props = {
   userId: string;
   type: UserType;
 
-  selectedCourseId: string;
+  selectedCourseId: "all" | (string & {});
   courseIds: string[];
 
   status: string;

@@ -25,7 +25,7 @@ const Nav = ({ className = "", hideDivider = false }: Props) => {
   );
 
   return (
-    <header className={clsx("bg-main font-sans", className)}>
+    <header className={clsx("bg-main font-sans lg:pb-3", className)}>
       <nav
         className={clsx(
           "flex h-full items-center justify-between border-b border-b-foreground-50 px-8 py-4 lg:border-b-transparent lg:px-5 lg:pb-0",

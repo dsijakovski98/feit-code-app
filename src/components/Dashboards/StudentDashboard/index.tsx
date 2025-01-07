@@ -1,19 +1,34 @@
+import { useMemo } from "react";
+
+import StudentNumStats from "@/components/Dashboards/StudentDashboard/StudentNumStats";
+import ExamsStats from "@/components/Exams/ExamsStats";
 import { DashboardWindow } from "@/components/ui/DashboardWindow";
 
-// TODO: Student Dashboard
-const StudentDashboard = () => {
+import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
+import { useStudentExamsStats } from "@/hooks/student/useStudentExamsStats";
+import { FCStudent } from "@/hooks/useFCUser";
+
+type Props = {
+  user: FCStudent;
+};
+
+const StudentDashboard = ({ user }: Props) => {
+  const { data: courses } = useStudentCoursesList(user.id);
+  const courseIds = useMemo(() => courses?.map((course) => course.id) ?? [], [courses]);
+
+  const { data: stats, isPending } = useStudentExamsStats({ studentId: user.id, courseIds });
+
   return (
-    <div className="grid h-full grid-cols-3 grid-rows-[auto_1fr_1fr_1fr] gap-6">
-      <DashboardWindow className="col-span-2 row-span-1">
-        <p>Announcements board</p>
-      </DashboardWindow>
+    <div className="flex h-full flex-col gap-6">
+      <StudentNumStats />
 
-      <DashboardWindow className="col-span-1 col-start-3 row-span-4">
-        <p>Courses board</p>
-      </DashboardWindow>
+      <div className="flex flex-1 items-stretch gap-6 *:flex-1 lg:flex-col">
+        <DashboardWindow>Calendar</DashboardWindow>
+        <DashboardWindow>Top 3 Courses</DashboardWindow>
+      </div>
 
-      <DashboardWindow className="col-span-2 row-span-3">
-        <p>Overall stats</p>
+      <DashboardWindow>
+        <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="max-h-[320px]" />
       </DashboardWindow>
     </div>
   );
