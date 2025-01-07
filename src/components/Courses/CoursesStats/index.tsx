@@ -68,7 +68,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
 
       {(!stats || stats.length === 0) && (
         <div className="grid flex-1 place-items-center">
-          <p className="text-lg text-foreground-300">No information available.</p>
+          <p className="text-foreground-300">No information available.</p>
         </div>
       )}
 

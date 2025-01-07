@@ -8,23 +8,23 @@ import { UserType } from "@/types";
 type QueryOptions = {
   userId: string;
   type: UserType;
-  courseId?: string;
   status: string;
+  selectedCourseIds: string[];
 };
 
-export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
+export const useExams = ({ userId, type, selectedCourseIds, status }: QueryOptions) => {
   return useInfiniteQuery({
     initialPageParam: 0,
-    enabled: !!courseId,
 
-    queryKey: [{ name: "exams", type, id: userId, courseId, status }],
+    queryKey: [{ name: "exams", type, id: userId, selectedCourseIds, status }],
     queryFn: async ({ pageParam = 0 }) => {
-      if (!courseId) return [];
-
       const examsData = await db.query.exams.findMany({
-        where: (exams, { eq, and }) => {
-          const courseFilter = courseId !== "all" ? eq(exams.courseId, courseId) : undefined;
-          const statusFilter = status !== "all" ? eq(exams.status, status as ExamStatus) : undefined;
+        where: (exams, { eq, inArray, and }) => {
+          const courseFilter = inArray(exams.courseId, selectedCourseIds);
+
+          if (status === "all") return courseFilter;
+
+          const statusFilter = eq(exams.status, status as ExamStatus);
 
           return and(courseFilter, statusFilter);
         },
