@@ -13,7 +13,7 @@ export const useStudentNumStats = (studentId: string) => {
         where: (studentCourses, { eq }) => eq(studentCourses.studentId, studentId),
         with: {
           course: {
-            columns: { id: true },
+            columns: {},
             with: {
               exams: {
                 with: {

@@ -10,7 +10,7 @@ const GradeCard = () => {
   const { data: stats } = useStudentCoursesStats(userData?.user.id ?? "");
 
   const avgValue = useMemo(() => {
-    if (!stats || stats.length === 0) return null;
+    if (!stats || stats.length === 0) return "-";
 
     const avg = stats.reduce((acc, stat) => acc + stat.value, 0) / stats.length;
 

@@ -19,7 +19,7 @@ const ProfessorDashboard = ({ user }: Props) => {
   const { data: stats, isPending } = useProfessorExamsStats(user.id);
 
   return (
-    <div className="flex h-full flex-col gap-6">
+    <div className="flex h-full flex-col gap-4">
       <ProfessorNumStats />
 
       <div className="flex flex-1 items-stretch gap-6 *:flex-1 lg:flex-col">
@@ -28,7 +28,7 @@ const ProfessorDashboard = ({ user }: Props) => {
       </div>
 
       <DashboardWindow>
-        <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="max-h-[320px]" />
+        <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="h-[320px]" />
       </DashboardWindow>
     </div>
   );

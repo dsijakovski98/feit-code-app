@@ -11,7 +11,7 @@ import { parseStatValue } from "@/utils";
 
 type Props = {
   label: string;
-  value?: number | null;
+  value?: "-" | number | null;
   icon: string;
   description: string;
   variant?: "default" | "highlight";
@@ -28,15 +28,15 @@ const StatCard = ({
   children,
 }: Props) => {
   const isLoaded = useMemo(() => !!value || value === 0, [value]);
-  const statValue = useMemo(() => value && parseStatValue(value), [value]);
+  const statValue = useMemo(() => (value ? parseStatValue(value) : 0), [value]);
 
   return (
     <DashboardWindow
       isLoaded={isLoaded || !!children}
       className={clsx(
-        "min-h-[114px] px-4 py-3",
+        "min-h-[118px] px-4 py-3 text-primary dark:text-foreground",
         {
-          "bg-foreground text-background": variant === "highlight",
+          "bg-primary !text-background dark:bg-foreground": variant === "highlight",
         },
         className,
       )}

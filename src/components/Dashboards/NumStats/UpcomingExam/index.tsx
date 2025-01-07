@@ -5,16 +5,19 @@ import { Spinner, Tooltip } from "@nextui-org/react";
 import Timestamp from "@/components/ui/Timestamp";
 
 import { ROUTES } from "@/constants/routes";
-import { useLatestExam } from "@/hooks/exam/useLatestExam";
+import { type UpcomingExam } from "@/hooks/exam/useUpcomingExam";
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
 
-const UpcomingExam = () => {
-  const { userData } = useFCUser();
-  // TODO: Switch with user-type aware useUpcomingExam query
-  const { data: upcomingExam, isPending } = useLatestExam({ upcoming: true });
+type Props = {
+  upcomingExam?: UpcomingExam | null;
+  isLoading?: boolean;
+};
 
-  if (isPending || !userData) {
+const UpcomingExam = ({ upcomingExam, isLoading = false }: Props) => {
+  const { userData } = useFCUser();
+
+  if (isLoading || !userData) {
     return <Spinner className="w-fit" color="default" size="lg" />;
   }
 
@@ -23,10 +26,10 @@ const UpcomingExam = () => {
   }
 
   const { type } = userData;
-  const { name, language, id, startsAt, courseId, course } = upcomingExam;
+  const { name, language, id, startsAt, course } = upcomingExam;
 
   const fullName = `${name}・${language}`;
-  const href = type === USER_TYPE.student ? `${ROUTES.courses}/${courseId}` : `${ROUTES.exams}/${id}`;
+  const href = type === USER_TYPE.student ? `${ROUTES.courses}/${course.id}` : `${ROUTES.exams}/${id}`;
 
   return (
     <Link to={href} className="w-fit">

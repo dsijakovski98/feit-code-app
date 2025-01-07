@@ -1,14 +1,20 @@
 import StatCard from "@/components/Dashboards/NumStats/StatCard";
 
+import { useProfessorSubmissionsGraded } from "@/hooks/professor/useProfessorSubmissionsGraded";
+import { useFCUser } from "@/hooks/useFCUser";
+
 const SubmissionsCard = () => {
-  // TODO: Professor number of submissions query
+  const { userData } = useFCUser();
+
+  const { data: submissionsGraded } = useProfessorSubmissionsGraded(userData?.user.id ?? "");
+
   return (
     <StatCard
       icon="grade"
       variant="highlight"
-      value={1243}
+      value={submissionsGraded}
       label="Submissions Graded"
-      description="Total number of submissions graded."
+      description="Total number of submissions graded"
     />
   );
 };

@@ -1,10 +1,17 @@
 import NumStats from "@/components/Dashboards/NumStats";
 import SubmissionsCard from "@/components/Dashboards/ProfessorDashboard/ProfessorNumStats/SubmissionsCard";
 
+import { useProfessorNumStats } from "@/hooks/professor/useProfessorNumStats";
+import { useFCUser } from "@/hooks/useFCUser";
+import { USER_TYPE } from "@/types";
+
 const ProfessorNumStats = () => {
-  // TODO: Professor num stats query
+  const { userData } = useFCUser();
+
+  const { data: numStats } = useProfessorNumStats(userData?.user.id ?? "");
+
   return (
-    <NumStats courses={12344} exams={13}>
+    <NumStats {...numStats} type={USER_TYPE.professor} user={userData?.user}>
       <SubmissionsCard />
     </NumStats>
   );

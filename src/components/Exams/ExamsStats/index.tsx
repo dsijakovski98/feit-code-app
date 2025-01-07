@@ -46,8 +46,8 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
 
   if (!targetStats || targetStats.length === 0) {
     return (
-      <div className="grid flex-1 place-items-center p-8">
-        <p className="text-foreground-300">No information available.</p>
+      <div className={clsx("grid flex-1 place-items-center p-8", className)}>
+        <p className="text-foreground-300">No exams information available.</p>
       </div>
     );
   }
