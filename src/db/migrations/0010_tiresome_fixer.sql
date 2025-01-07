@@ -1,0 +1,1 @@
+CREATE INDEX "exam_idx" ON "tasks" USING btree ("exam_id");
