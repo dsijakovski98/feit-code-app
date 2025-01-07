@@ -27,7 +27,7 @@ const AuthStrategyIcon = ({ className = "" }: Props) => {
 
   if (!icon) return null;
 
-  return <Icon name={icon} className={clsx("h-7 w-7", className)} />;
+  return <Icon name={icon} className={clsx("h-7 w-7 drop-shadow-md dark:drop-shadow-none", className)} />;
 };
 
 export default AuthStrategyIcon;
