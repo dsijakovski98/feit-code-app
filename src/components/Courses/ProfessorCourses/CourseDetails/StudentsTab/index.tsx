@@ -102,7 +102,7 @@ const StudentsTab = () => {
             </Fragment>
           </TableHeading>
         }
-        bottomContent={<TablePagination {...pagination} items={studentsList} disabled={!!searchQuery} />}
+        bottomContent={<TablePagination {...pagination} items={studentsList} />}
         aria-label={`List of students enrolled to ${name}.`}
         classNames={{ td: "py-3" }}
       >

@@ -79,7 +79,7 @@ const ResultsTab = () => {
             <TableSearch search={search} onSearch={setSearch} />
           </TableHeading>
         }
-        bottomContent={<TablePagination {...pagination} items={submissionsList} disabled={!!searchQuery} />}
+        bottomContent={<TablePagination {...pagination} items={submissionsList} />}
         aria-label={`List of students that have submitted solutions for ${examDetails.name} exam.`}
         classNames={{ td: "py-3" }}
       >

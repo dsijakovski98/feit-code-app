@@ -96,12 +96,7 @@ const SessionsTable = () => {
         topContent={<SessionsHeader search={search} onSearch={setSearch} />}
         bottomContent={
           <div className="flex items-center justify-between *:last:ml-auto">
-            <TablePagination
-              {...pagination}
-              items={sessionsList}
-              disabled={!!searchQuery}
-              className="w-fit"
-            />
+            <TablePagination {...pagination} items={sessionsList} className="w-fit" />
 
             <FinishExamEarly />
           </div>
