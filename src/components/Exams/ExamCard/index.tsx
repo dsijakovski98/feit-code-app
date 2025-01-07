@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import { Avatar } from "@nextui-org/avatar";
 import { Chip } from "@nextui-org/chip";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/tooltip";
 
 import ExamCardHeader from "@/components/Exams/ExamCard/ExamCardHeader";
 import ExamFeedback from "@/components/Exams/ExamFeedback";

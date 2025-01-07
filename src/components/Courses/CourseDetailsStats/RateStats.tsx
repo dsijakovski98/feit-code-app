@@ -1,6 +1,6 @@
 import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
 
-import { colors } from "@nextui-org/react";
+import { colors } from "@nextui-org/theme";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
@@ -27,7 +27,7 @@ const RateStats = ({ stats, height, avg = false }: Props) => {
     <ChartContainer
       config={chartConfig}
       // @ts-expect-error Custom style property
-      style={{ "--height": `${height || 400}px` }}
+      style={{ "--height": `${height || 360}px` }}
       className="max-h-[var(--height)] w-full"
       title="Vertical stacked bar chart showing the points to total points ratio for each completed exam."
     >

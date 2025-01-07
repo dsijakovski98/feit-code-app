@@ -1,6 +1,7 @@
 import clsx from "clsx";
 
 import { Chip } from "@nextui-org/chip";
+import { Tooltip } from "@nextui-org/tooltip";
 
 import CategoryChip from "@/components/ui/CategoryChip";
 import Teacher from "@/components/ui/Teacher";
@@ -32,8 +33,14 @@ const CourseDetails = () => {
             )}
           </h2>
 
-          <p className="mb-1 font-medium">{description}</p>
-          <p className="text-foreground-300">
+          <Tooltip
+            content={description}
+            className="max-w-[60ch] p-2"
+            classNames={{ content: "font-sans font-medium text-base" }}
+          >
+            <p className="mb-1 line-clamp-3 font-medium text-foreground-400">{description}</p>
+          </Tooltip>
+          <p>
             Updated <Timestamp>{updatedAt}</Timestamp>
           </p>
         </div>
