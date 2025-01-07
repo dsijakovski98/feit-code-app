@@ -35,13 +35,6 @@ export const uploadAvatar = async (userId: string, avatarUrl: string) => {
   return url;
 };
 
-export const getAvatar = async (userId: string) => {
-  const avatarRef = ref(fbStorage, `avatars/${userId}`);
-  const url = await getDownloadURL(avatarRef).catch(() => null);
-
-  return url;
-};
-
 export const updateAvatar = async (userId: string, avatarUrl: string) => {
   const avatarRef = ref(fbStorage, `avatars/${userId}`);
 

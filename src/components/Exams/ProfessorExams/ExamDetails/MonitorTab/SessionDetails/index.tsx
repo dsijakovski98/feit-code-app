@@ -36,7 +36,7 @@ const SessionDetails = ({ dialog, session, onClose }: Props) => {
         <Fragment>
           <ModalHeader className="text-2xl">
             <div className="flex items-center gap-4">
-              <Avatar src={session?.student.avatarUrl} showFallback={!!session} size="sm" />
+              <Avatar src={session?.student.avatarUrl ?? ""} showFallback={!!session} size="sm" />
               <p>
                 {session?.student.firstName} {session?.student.lastName}
               </p>

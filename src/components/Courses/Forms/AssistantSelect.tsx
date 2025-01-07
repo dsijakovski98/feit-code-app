@@ -24,6 +24,7 @@ const AssistantSelect = ({ form, defaultValue }: Props) => {
     email: true,
     lastName: true,
     firstName: true,
+    avatarUrl: true,
   });
 
   useEffect(() => {

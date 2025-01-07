@@ -3,8 +3,6 @@ import { InferSelectModel } from "drizzle-orm";
 
 import { professors } from "@/db/schema";
 
-import { getAvatar } from "@/services/avatars";
-
 import { db } from "@/db";
 import { QueryColumns, TEACHER_TYPE } from "@/types";
 
@@ -18,13 +16,7 @@ export const useAssistants = (columns?: QueryColumns<InferSelectModel<typeof pro
           columns,
         });
 
-        const assistantsWithAvatars = await Promise.all(
-          assistants.map((assistant) =>
-            getAvatar(assistant.id).then((avatarUrl) => ({ ...assistant, avatarUrl })),
-          ),
-        );
-
-        return assistantsWithAvatars;
+        return assistants;
       } catch (e) {
         // Sentry logging
         console.log({ e });
