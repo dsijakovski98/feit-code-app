@@ -1,0 +1,1 @@
+CREATE INDEX "task_idx" ON "tests" USING btree ("task_id");

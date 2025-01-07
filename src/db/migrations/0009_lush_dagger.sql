@@ -1,0 +1,1 @@
+CREATE INDEX "student_idx" ON "submissions" USING btree ("student_id");
