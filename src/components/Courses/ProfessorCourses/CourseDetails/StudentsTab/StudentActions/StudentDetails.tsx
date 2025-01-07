@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import { InferSelectModel } from "drizzle-orm";
 
@@ -25,6 +26,7 @@ const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
       onOpenChange={dialog.toggle}
       onClose={onClose}
       hideCloseButton
+      size="2xl"
       placement="center"
       backdrop="opaque"
       classNames={{
@@ -40,34 +42,44 @@ const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
 
           <ModalBody className="relative font-sans">
             {student && (
-              <div className="space-y-6">
-                <User
-                  name={`${student.firstName} ${student.lastName}`}
-                  description={student.email}
-                  avatarProps={{
-                    size: "lg",
-                    src: student.avatarUrl ?? "",
-                  }}
-                  classNames={{
-                    name: "font-semibold text-lg",
-                    description: "text-base",
-                  }}
-                />
+              <div className="space-y-4">
+                <Link to={`mailto:${student.email}`} className="group">
+                  <User
+                    name={`${student.firstName} ${student.lastName}`}
+                    description={student.email}
+                    avatarProps={{
+                      size: "lg",
+                      src: student.avatarUrl ?? "",
+                    }}
+                    classNames={{
+                      base: "group-focus:outline-foreground outline-1 outline-offset-4",
+                      name: "font-semibold !leading-tight transition-colors text-lg group-hover:text-primary group-focus:text-primary",
+                      description:
+                        "text-base transition-colors group-hover:text-primary group-focus:text-primary",
+                    }}
+                  />
+                </Link>
 
                 <div>
-                  <p className="font-semibold">
-                    {student.indexNumber}/{student.indexYear}
-                  </p>
-                  <p>
-                    Student @ <span className="font-semibold">{student.major}</span>
-                  </p>
+                  <p className="font-semibold">Bio</p>
+                  <p>{student.bio}</p>
                 </div>
 
-                {!!joinedAt && (
-                  <p>
-                    Joined <Timestamp>{joinedAt}</Timestamp>
-                  </p>
-                )}
+                <div className="flex items-end justify-between gap-6">
+                  <div>
+                    <p className="font-semibold">
+                      {student.indexNumber}/{student.indexYear}
+                    </p>
+                    <p>
+                      Student @ <span className="font-semibold">{student.major}</span>
+                    </p>
+                  </div>
+                  {!!joinedAt && (
+                    <p>
+                      Joined <Timestamp>{joinedAt}</Timestamp>
+                    </p>
+                  )}
+                </div>
               </div>
             )}
           </ModalBody>
