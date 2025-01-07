@@ -8,7 +8,6 @@ import { User } from "@nextui-org/user";
 import { professors } from "@/db/schema";
 
 import { ROUTES } from "@/constants/routes";
-import { useAvatar } from "@/hooks/useAvatar";
 import { useFCUser } from "@/hooks/useFCUser";
 
 const userAvatarProps = {
@@ -34,8 +33,6 @@ const Teacher = ({ teacher, type }: Props) => {
     [teacher.firstName, teacher.lastName],
   );
 
-  const [avatarUrl] = useAvatar(teacher.id);
-
   const isMe = userFullName === teacherFullName;
 
   return (
@@ -47,7 +44,7 @@ const Teacher = ({ teacher, type }: Props) => {
       avatarProps={{
         size: "lg",
         showFallback: true,
-        src: avatarUrl ?? "",
+        src: teacher.avatarUrl ?? "",
         ...(isMe ? userAvatarProps : {}),
       }}
       className="shrink-0"

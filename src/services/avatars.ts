@@ -30,6 +30,9 @@ export const uploadAvatar = async (userId: string, avatarUrl: string) => {
 
   const avatarBlob = await getAvatarBlob(avatarUrl);
   await uploadBytes(avatarRef, avatarBlob);
+
+  const url = await getDownloadURL(avatarRef);
+  return url;
 };
 
 export const getAvatar = async (userId: string) => {
@@ -57,9 +60,10 @@ export const updateAvatar = async (userId: string, avatarUrl: string) => {
 
   const newAvatar = await getAvatarBlob(avatarUrl);
 
-  await deleteObject(avatarRef)
-    .catch(() => {})
-    .finally(async () => {
-      await uploadBytes(avatarRef, newAvatar);
-    });
+  await deleteObject(avatarRef).catch(() => {});
+  await uploadBytes(avatarRef, newAvatar);
+
+  const newUrl = await getDownloadURL(avatarRef);
+
+  return newUrl;
 };

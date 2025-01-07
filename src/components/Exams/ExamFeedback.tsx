@@ -11,7 +11,6 @@ import Timestamp from "@/components/ui/Timestamp";
 
 import { seenFeedback } from "@/actions/grades";
 import { ExamCard } from "@/hooks/exam/useExams";
-import { useAvatar } from "@/hooks/useAvatar";
 import { Toggle } from "@/hooks/useToggle";
 
 type Props = {
@@ -26,8 +25,6 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
 
   const queryClient = useQueryClient();
   const [, setSearchParams] = useSearchParams();
-
-  const [avatarUrl, isLoading] = useAvatar(submission.graderId ?? "");
 
   const closeFeedback = () => {
     setSearchParams((prev) => {
@@ -90,7 +87,7 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
               <User
                 name={`${grader.firstName} ${grader.lastName}`}
                 description={grader.email}
-                avatarProps={{ size: "lg", src: avatarUrl ?? "", showFallback: isLoading }}
+                avatarProps={{ size: "lg", src: grader.avatarUrl ?? "" }}
                 classNames={{
                   name: "text-base font-semibold group-hover:text-primary-600 transition-colors",
                   description: "text-base font-medium group-hover:text-primary-600 transition-colors",

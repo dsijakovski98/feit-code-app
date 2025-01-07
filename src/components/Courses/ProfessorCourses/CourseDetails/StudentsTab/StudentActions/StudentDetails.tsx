@@ -9,7 +9,6 @@ import { students } from "@/db/schema";
 
 import Timestamp from "@/components/ui/Timestamp";
 
-import { useAvatar } from "@/hooks/useAvatar";
 import { Toggle } from "@/hooks/useToggle";
 
 type Props = {
@@ -20,8 +19,6 @@ type Props = {
 };
 
 const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
-  const [avatarUrl, isLoading] = useAvatar(student?.id);
-
   return (
     <Modal
       isOpen={dialog.open && !!student}
@@ -49,8 +46,7 @@ const StudentDetails = ({ dialog, student, joinedAt, onClose }: Props) => {
                   description={student.email}
                   avatarProps={{
                     size: "lg",
-                    src: avatarUrl ?? "",
-                    showFallback: isLoading,
+                    src: student.avatarUrl ?? "",
                   }}
                   classNames={{
                     name: "font-semibold text-lg",

@@ -5,8 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
 
-import { getAvatarUrl } from "@/services/avatars";
-
 import { db } from "@/db";
 import { TeacherType, USER_TYPE } from "@/types";
 
@@ -15,6 +13,7 @@ const userColumns = {
   email: true,
   firstName: true,
   lastName: true,
+  avatarUrl: true,
 } as const;
 
 export const useFCUser = () => {
@@ -26,24 +25,22 @@ export const useFCUser = () => {
     queryFn: async () => {
       if (!userId) return null;
 
-      const avatarUrl = await getAvatarUrl(userId);
-
-      const studentAttempt = await db.query.students.findFirst({
+      const student = await db.query.students.findFirst({
         where: (users, { eq }) => eq(users.id, userId),
         columns: userColumns,
       });
 
-      if (studentAttempt) {
-        return { user: { ...studentAttempt, avatarUrl }, type: USER_TYPE.student };
+      if (student) {
+        return { user: student, type: USER_TYPE.student };
       }
 
-      const professorAttempt = await db.query.professors.findFirst({
+      const professor = await db.query.professors.findFirst({
         where: (professors, { eq }) => eq(professors.id, userId),
         columns: { ...userColumns, type: true },
       });
 
-      if (professorAttempt) {
-        return { user: { ...professorAttempt, avatarUrl }, type: USER_TYPE.professor };
+      if (professor) {
+        return { user: professor, type: USER_TYPE.professor };
       }
 
       throw new Error("User not found!");

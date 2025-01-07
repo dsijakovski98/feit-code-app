@@ -5,7 +5,6 @@ import Timestamp from "@/components/ui/Timestamp";
 
 import { EXAM_RESULTS_COLUMNS } from "@/constants/exams";
 import { ExamSubmissionContext } from "@/context/ExamSubmissionContext";
-import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { ColumnKey } from "@/types";
 
@@ -16,14 +15,10 @@ type Props = {
 const SubmissionCellsMux = ({ columnKey }: Props) => {
   const { submission } = useCtx(ExamSubmissionContext);
   const { student, submittedAt, status } = submission;
-  const { firstName, lastName, email } = student;
-
-  const [studentAvatar, isLoading] = useAvatar(student.id);
+  const { firstName, lastName, email, avatarUrl } = student;
 
   if (columnKey === "student") {
-    return (
-      <StudentCell student={{ firstName, lastName, email }} avatar={{ url: studentAvatar, isLoading }} />
-    );
+    return <StudentCell student={{ firstName, lastName, email }} avatar={{ url: avatarUrl }} />;
   }
 
   if (columnKey === "timestamp") {

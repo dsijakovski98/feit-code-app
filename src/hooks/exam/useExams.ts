@@ -36,7 +36,7 @@ export const useExams = ({ userId, type, courseId, status }: QueryOptions) => {
           submissions: {
             limit: 1,
             where: (submissions, { eq }) => eq(submissions.studentId, userId),
-            with: { grader: { columns: { firstName: true, lastName: true, email: true } } },
+            with: { grader: { columns: { firstName: true, lastName: true, email: true, avatarUrl: true } } },
             columns: {
               id: true,
               status: true,
