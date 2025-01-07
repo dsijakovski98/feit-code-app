@@ -30,6 +30,8 @@ export const createNewStudent = async ({
   const { firstName, lastName } = splitFullName(fullName);
 
   try {
+    const url = await uploadAvatar(user.id, avatarUrl);
+
     await Promise.all([
       db.insert(students).values({
         id: user.id,
@@ -37,11 +39,11 @@ export const createNewStudent = async ({
         firstName,
         lastName,
         bio,
+        avatarUrl: url,
         indexNumber: Number(indexNumber),
         indexYear: Number(indexYear),
         major,
       }),
-      uploadAvatar(user.id, avatarUrl),
       user.update({ unsafeMetadata: { onboardingComplete: true } }),
     ]);
   } catch (e) {
@@ -66,6 +68,8 @@ export const updateStudent = async ({
   const { firstName, lastName } = splitFullName(fullName);
 
   try {
+    const url = await updateAvatar(userId, avatarUrl);
+
     await Promise.all([
       db
         .update(students)
@@ -73,12 +77,12 @@ export const updateStudent = async ({
           firstName,
           lastName,
           bio,
+          avatarUrl: url,
           indexNumber: Number(indexNumber),
           indexYear: Number(indexYear),
           major,
         })
         .where(eq(students.id, userId)),
-      updateAvatar(userId, avatarUrl),
     ]);
   } catch (e) {
     // Sentry logging
@@ -92,16 +96,18 @@ export const createNewProfessor = async ({ user, fullName, department, type, ava
   const { firstName, lastName } = splitFullName(fullName);
 
   try {
+    const url = await uploadAvatar(user.id, avatarUrl);
+
     await Promise.all([
       db.insert(professors).values({
         id: user.id,
+        avatarUrl: url,
         email: user.primaryEmailAddress!.emailAddress,
         firstName,
         lastName,
         department,
         type,
       }),
-      uploadAvatar(user.id, avatarUrl),
       user.update({ unsafeMetadata: { onboardingComplete: true } }),
     ]);
   } catch (e) {

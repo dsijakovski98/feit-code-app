@@ -57,6 +57,13 @@
       "when": 1736080750760,
       "tag": "0007_spicy_retro_girl",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1736206438389,
+      "tag": "0008_flowery_nightcrawler",
+      "breakpoints": true
     }
   ]
 }

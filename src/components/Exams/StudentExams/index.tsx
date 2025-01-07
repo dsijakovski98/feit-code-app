@@ -71,6 +71,7 @@ const StudentExams = ({ user }: Props) => {
           status={statusFilter.value}
           course={courseFilter.value}
           selectedCourseId={selectedCourseId}
+          courseIds={courseIds}
         />
       </section>
 

@@ -8,11 +8,15 @@ import { userId } from "@/db/schema/utils";
 
 const professors = pgTable("professors", {
   id: userId(),
+
+  avatarUrl: varchar("avatar_url", { length: 10_000 }),
+
+  type: teacherType("type").notNull(),
+  department: moduleType("department").notNull(),
+
   firstName: varchar("first_name", { length: 100 }).notNull(),
   lastName: varchar("last_name", { length: 100 }).notNull(),
   email: varchar("email", { length: 256 }).notNull().unique(),
-  department: moduleType("department").notNull(),
-  type: teacherType("type").notNull(),
 });
 
 export const professorRelations = relations(professors, ({ many }) => ({

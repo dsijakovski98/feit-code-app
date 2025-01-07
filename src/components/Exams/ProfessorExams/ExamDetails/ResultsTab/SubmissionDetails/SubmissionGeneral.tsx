@@ -10,7 +10,6 @@ import Icon from "@/components/ui/Icon";
 import { SUBMISSION_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
-import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { formatTimestamp, parseDuration } from "@/utils/dates";
 import { submissionStatusDescription } from "@/utils/exams/results";
@@ -25,8 +24,6 @@ const SubmissionGeneral = ({ submission, onClose }: Props) => {
   const { student, examId, studentId, status } = submission;
 
   const { examDetails } = useCtx(ExamDetailsContext);
-
-  const [avatarUrl, isLoading] = useAvatar(student.id);
 
   const gradeHref = useMemo(() => gradeExamHref(examId, studentId), [examId, studentId]);
 
@@ -49,8 +46,7 @@ const SubmissionGeneral = ({ submission, onClose }: Props) => {
               description={student.email}
               avatarProps={{
                 size: "lg",
-                src: avatarUrl ?? "",
-                showFallback: isLoading,
+                src: student.avatarUrl ?? "",
               }}
               classNames={{
                 name: "text-base font-semibold",

@@ -7,7 +7,6 @@ import StudentCell from "@/components/ui/Table/Cells/StudentCell";
 import { STUDENT_COLUMNS } from "@/constants/students";
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { StudentContext } from "@/context/StudentContext";
-import { useAvatar } from "@/hooks/useAvatar";
 import { useCtx } from "@/hooks/useCtx";
 import { ColumnKey } from "@/types";
 import { getDaytime } from "@/utils";
@@ -23,14 +22,10 @@ const StudentCellsMux = ({ columnKey }: Props) => {
   const { professorId } = courseDetails;
 
   const { student, joinedAt } = useCtx(StudentContext);
-  const { firstName, lastName, email, indexNumber, indexYear, id, major } = student;
-
-  const [studentAvatar, isLoading] = useAvatar(id);
+  const { firstName, lastName, email, indexNumber, indexYear, major, avatarUrl } = student;
 
   if (columnKey === "student") {
-    return (
-      <StudentCell student={{ firstName, lastName, email }} avatar={{ url: studentAvatar, isLoading }} />
-    );
+    return <StudentCell student={{ firstName, lastName, email }} avatar={{ url: avatarUrl }} />;
   }
 
   if (columnKey === "index") {

@@ -128,7 +128,7 @@ const SignUpForm = () => {
               "w-[70%] !gap-4 pt-10": fullScreen,
             })}
           >
-            <div className={clsx("mb-10 lg:mb-2", { "mb-36": fullScreen })}>
+            <div className={clsx("mb-16 lg:mb-2", { "mb-36": fullScreen })}>
               <Controller
                 control={control}
                 name="email"

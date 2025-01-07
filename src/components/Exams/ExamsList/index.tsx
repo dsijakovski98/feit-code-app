@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 
 import { Spinner } from "@nextui-org/react";
 
@@ -12,18 +12,21 @@ import { UserType } from "@/types";
 type Props = {
   userId: string;
   type: UserType;
+
   selectedCourseId: string;
+  courseIds: string[];
+
   status: string;
   course: string;
 };
 
-const ExamsList = ({ userId, type, selectedCourseId, status, course }: Props) => {
-  const query = useExams({
-    userId,
-    type,
-    status,
-    courseId: selectedCourseId,
-  });
+const ExamsList = ({ userId, type, selectedCourseId, courseIds, status, course }: Props) => {
+  const selectedCourseIds = useMemo(
+    () => (selectedCourseId === "all" ? courseIds : [selectedCourseId]),
+    [courseIds, selectedCourseId],
+  );
+
+  const query = useExams({ userId, type, status, selectedCourseIds });
   const { data: exams, isPending } = query;
 
   return (
