@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import Teacher from "@/components/ui/Teacher";
 import Timestamp from "@/components/ui/Timestamp";
 
@@ -20,7 +22,15 @@ const ExamGeneral = () => {
         </p>
       </div>
 
-      <Teacher teacher={course.professor} type="Exam facilitator" />
+      <div
+        className={clsx("flex w-fit flex-wrap items-end gap-8 lg:w-full lg:justify-between", {
+          "items-center": !course.assistant,
+        })}
+      >
+        <Teacher teacher={course.professor} type="Exam facilitator" />
+
+        {course.assistant && <Teacher teacher={course.assistant} type="Exam assistant" />}
+      </div>
     </div>
   );
 };

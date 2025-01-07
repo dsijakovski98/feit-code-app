@@ -14,7 +14,7 @@ export const useExamDetails = (examId?: string) => {
           with: {
             tasks: { orderBy: (tasks, { asc }) => asc(tasks.orderIndex) },
             course: {
-              with: { professor: true },
+              with: { professor: true, assistant: true },
             },
             submissions: {
               with: {
