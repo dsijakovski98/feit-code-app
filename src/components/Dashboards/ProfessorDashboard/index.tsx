@@ -27,8 +27,13 @@ const ProfessorDashboard = ({ user }: Props) => {
 
         <LatestStats />
 
-        <DashboardWindow>
-          <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="h-[300px]" />
+        <DashboardWindow className="md:hidden">
+          <ExamsStats
+            stats={stats}
+            isLoading={isPending}
+            courseIds={courseIds}
+            className="h-[300px] lg:h-[200px]"
+          />
         </DashboardWindow>
       </div>
     </UserCoursesProvider>

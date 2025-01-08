@@ -88,7 +88,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
       {bestStats && (
         <ChartContainer
           config={chartConfig}
-          className="h-full max-h-[200px] w-full flex-1"
+          className="h-full max-h-[200px] w-full flex-1 md:max-h-[180px] sm:max-h-[140px]"
           title="Horizontal stacked bar chart showing the best performing courses' points breakdown."
         >
           <BarChart layout="vertical" accessibilityLayer data={bestStats} maxBarSize={20}>
@@ -122,7 +122,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
                 fontSize={14}
                 fontWeight={500}
                 position="insideLeft"
-                className="translate-y-[-2.75ch] *:line-clamp-1 *:!fill-foreground"
+                className="translate-y-[-2.75ch] *:line-clamp-1 *:!fill-foreground sm:hidden"
               />
             </Bar>
 

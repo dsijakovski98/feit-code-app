@@ -65,7 +65,7 @@ const ProfessorCourseDetails = () => {
             tabContent: "text-foreground group-data-[selected]:font-semibold",
             tabList: "!mx-0 py-5 bg-main",
             panel:
-              "pt-3 px-10 lg:px-5 overflow-y-scroll h-[calc(100dvh-85px-80px)] lg:max-h-[calc(100dvh-85px-80px)]",
+              "pt-3 px-10 lg:px-5 overflow-y-scroll h-[calc(100dvh-85px-80px)] lg:max-h-[calc(100dvh-85px-80px)] lg:pb-5",
           }}
         >
           <Tab key={TABS.general} title="General" href={TABS.general}>
