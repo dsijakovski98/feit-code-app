@@ -61,7 +61,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
       <BarChart accessibilityLayer data={targetStats} barGap={10} maxBarSize={160}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
-        <XAxis dataKey="course" axisLine={false} tickMargin={10} />
+        <XAxis dataKey="course" axisLine={false} tickMargin={10} fontWeight={500} />
 
         <YAxis
           type="number"
@@ -69,6 +69,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
           tickLine={false}
           axisLine={false}
           width={50}
+          fontWeight={500}
           tickFormatter={(value) => Math.round(Number(value)).toString() + "%"}
         />
 

@@ -22,7 +22,7 @@ const GradeCard = () => {
       value={avgValue}
       icon="cap"
       variant="highlight"
-      label="Average Grade"
+      label="Grade"
       description="Average grade calculated from all your courses."
     />
   );

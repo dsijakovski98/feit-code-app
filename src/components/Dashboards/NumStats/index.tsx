@@ -19,7 +19,7 @@ const NumStats = ({ courses, exams, type, children }: Props) => {
       <StatCard
         icon="exam"
         value={exams}
-        label="Total Exams"
+        label="Exams"
         description={`Total number of exams ${entityAction} ${academicYear}`}
       />
 
@@ -28,7 +28,7 @@ const NumStats = ({ courses, exams, type, children }: Props) => {
       <StatCard
         icon="course"
         value={courses}
-        label="Total Courses"
+        label="Courses"
         description={`Total number of courses ${entityAction} ${academicYear}`}
       />
 
