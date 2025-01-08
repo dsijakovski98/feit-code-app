@@ -16,7 +16,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="bg-main h-full px-8 py-6 lg:p-5 lg:pb-20">
+    <div className="bg-main h-full px-8 py-6 lg:h-auto lg:p-5 lg:pb-20">
       <Suspense fallback={null}>
         {userData.type === USER_TYPE.student ? (
           <StudentDashboard user={userData.user} />

@@ -17,7 +17,7 @@ const LatestStats = () => {
   const { userData } = useFCUser();
 
   return (
-    <div className="flex flex-1 items-stretch gap-6 *:flex-1 lg:flex-col">
+    <div className="flex flex-1 items-stretch gap-6 *:flex-1 lg:flex-col-reverse">
       <DashboardWindow isLoaded={!!useFCUser}>
         <LatestExams userData={userData!} />
       </DashboardWindow>

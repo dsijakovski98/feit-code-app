@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { Spinner, Tooltip } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 
-import Timestamp from "@/components/ui/Timestamp";
+import ExamStat from "@/components/Dashboards/Misc/ExamStat";
 
 import { ROUTES } from "@/constants/routes";
 import { UserCoursesContext } from "@/context/UserCoursesContext";
@@ -26,22 +26,13 @@ const UpcomingExam = () => {
   }
 
   const { type } = userData;
-  const { name, language, id, startsAt, course } = upcomingExam;
+  const { id, course } = upcomingExam;
 
-  const fullName = `${name}・${language}`;
   const href = type === USER_TYPE.student ? `${ROUTES.courses}/${course.id}` : `${ROUTES.exams}/${id}`;
 
   return (
     <Link to={href} className="w-fit">
-      <Tooltip content={fullName} placement="top-start" classNames={{ content: "font-serif p-2" }}>
-        <div>
-          <p className="text-sm font-semibold text-content4">{course.name}</p>
-
-          <p className="line-clamp-1 font-semibold">
-            {fullName} (<Timestamp>{startsAt}</Timestamp>)
-          </p>
-        </div>
-      </Tooltip>
+      <ExamStat exam={upcomingExam} />
     </Link>
   );
 };

@@ -43,6 +43,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
   const rightPadding = useMemo(() => (type === USER_TYPE.student ? -90 : 50), [type]);
 
   const bestStats = useMemo(() => {
+    if (stats === undefined) return undefined;
     if (!stats?.length) return null;
 
     const topStats = stats.sort((statA, statB) => statB.value - statA.value).slice(0, TOP_COURSES);
@@ -73,12 +74,12 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
       {isLoading && (
         <div className="flex h-full max-h-[200px] w-full flex-1 flex-col justify-evenly">
           {dummyStats.map((_, idx) => (
-            <Skeleton key={`dummy-stat-${idx}`} className="h-5 w-full rounded-lg" />
+            <Skeleton key={`dummy-stat-${idx}`} className="h-6 w-full rounded-lg" />
           ))}
         </div>
       )}
 
-      {!bestStats && (
+      {bestStats === null && (
         <div className="grid h-full max-h-[200px] w-full flex-1 place-items-center">
           <p className="text-foreground-300">No courses information available.</p>
         </div>
@@ -95,7 +96,21 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
 
             <YAxis dataKey="course" width={0} type="category" tick={false} axisLine={false} />
 
-            <Bar dataKey="value" stackId="best-courses" fill={chartConfig.value.color}>
+            <defs>
+              <linearGradient id="fillBestCourses" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="5%" stopColor={colors.dark.primary[400]} stopOpacity={0.8} />
+                <stop offset="95%" stopColor={colors.dark.primary[200]} stopOpacity={0.5} />
+              </linearGradient>
+            </defs>
+
+            <Bar
+              dataKey="value"
+              stackId="best-courses"
+              fillOpacity={0.4}
+              fill="url(#fillBestCourses)"
+              stroke={colors.dark.primary[200]}
+              strokeWidth={1.5}
+            >
               {bestStats.map(({ value }, idx) => (
                 // @ts-expect-error Recharts typing error
                 <Cell key={`cell-${idx}`} radius={value === offset ? 8 : [8, 0, 0, 8]} />
@@ -115,8 +130,10 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
               dataKey="remaining"
               stackId="best-courses"
               radius={[0, 8, 8, 0]}
-              fill={chartConfig.remaining.color}
-              className="opacity-50"
+              fill={chartConfig.remaining.color + "55"}
+              stroke={colors.dark.primary[200]}
+              strokeOpacity={1}
+              strokeWidth={1.5}
             >
               <LabelList
                 dataKey="remaining"
@@ -151,7 +168,13 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
                     return (
                       <div className="flex w-full items-center justify-between gap-4">
                         <div className="flex items-center gap-1.5">
-                          <div className="h-3 w-3 rounded-sm" style={{ backgroundColor: item.color }} />
+                          <div
+                            className="h-3 w-3 rounded-sm"
+                            style={{
+                              backgroundColor:
+                                name === "value" ? colors.dark.primary[400] : colors.dark.foreground[400],
+                            }}
+                          />
                           <p className="text-sm font-medium">
                             {chartConfig[name as keyof typeof chartConfig].label}
                           </p>

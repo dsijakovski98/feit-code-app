@@ -22,13 +22,13 @@ const ProfessorDashboard = ({ user }: Props) => {
 
   return (
     <UserCoursesProvider courseIds={courseIds}>
-      <div className="flex h-full flex-col gap-4">
+      <div className="flex h-full flex-col gap-6">
         <ProfessorNumStats />
 
         <LatestStats />
 
         <DashboardWindow>
-          <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="h-[320px]" />
+          <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="h-[300px]" />
         </DashboardWindow>
       </div>
     </UserCoursesProvider>
