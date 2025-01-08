@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import clsx, { ClassValue } from "clsx";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { Spinner } from "@nextui-org/spinner";
@@ -15,9 +16,10 @@ type Props = {
   courseIds: string[];
 
   isLoading?: boolean;
+  className?: ClassValue;
 };
 
-const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
+const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Props) => {
   const targetStats = useMemo(
     () => (stats ? stats.filter((stat) => courseIds.includes(stat.courseId)) : null),
     [stats, courseIds],
@@ -36,7 +38,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
 
   if (isLoading) {
     return (
-      <div className="grid flex-1 place-items-center p-8">
+      <div className={clsx("grid flex-1 place-items-center p-8", className)}>
         <Spinner size="lg" className="scale-[1.5]" />
       </div>
     );
@@ -44,8 +46,8 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
 
   if (!targetStats || targetStats.length === 0) {
     return (
-      <div className="grid flex-1 place-items-center p-8">
-        <p className="text-foreground-300">No information available.</p>
+      <div className={clsx("grid flex-1 place-items-center p-8", className)}>
+        <p className="text-foreground-300">No exams information available.</p>
       </div>
     );
   }
@@ -53,7 +55,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
   return (
     <ChartContainer
       config={{}}
-      className="max-h-[420px] w-full"
+      className={clsx("max-h-[420px] w-full", className)}
       title="Bar chart showing the percentage points for each completed exam, grouped by course."
     >
       <BarChart accessibilityLayer data={targetStats} barGap={10} maxBarSize={160}>
@@ -97,7 +99,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
         />
 
         <defs>
-          <linearGradient id="fillPercentage" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="fillExams" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={colors.dark.primary[400]} stopOpacity={0.8} />
             <stop offset="95%" stopColor={colors.dark.primary[100]} stopOpacity={0.1} />
           </linearGradient>
@@ -110,7 +112,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false }: Props) => {
             radius={6}
             strokeWidth={2}
             fillOpacity={0.4}
-            fill="url(#fillPercentage)"
+            fill="url(#fillExams)"
             stroke={colors.dark.primary[300]}
           />
         ))}

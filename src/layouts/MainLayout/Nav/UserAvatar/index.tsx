@@ -37,7 +37,7 @@ const UserAvatar = () => {
         <DropdownItem
           key="title"
           textValue="Title"
-          className="mb-1 rounded-none bg-primary-400 p-2.5 opacity-100 *:text-sm dark:bg-primary-50 [&_span]:flex [&_span]:items-center [&_span]:gap-2"
+          className="mb-1 rounded-none bg-primary-400 p-2.5 opacity-100 *:text-sm dark:bg-transparent [&_span]:flex [&_span]:items-center [&_span]:gap-2"
         >
           <AuthStrategyIcon />
 

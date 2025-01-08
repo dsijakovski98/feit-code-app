@@ -13,3 +13,8 @@ export type ExamsStats = Array<
     [key in ExamKey]: number;
   }
 >;
+
+export type NumStats = {
+  courses?: number | null;
+  exams?: number | null;
+};

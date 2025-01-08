@@ -98,7 +98,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
             />
 
             <defs>
-              <linearGradient id="fillPercentage" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="fillCourses" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={colors.dark.primary[400]} stopOpacity={0.8} />
                 <stop offset="95%" stopColor={colors.dark.primary[100]} stopOpacity={0.1} />
               </linearGradient>
@@ -109,7 +109,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
               radius={6}
               strokeWidth={2}
               fillOpacity={0.4}
-              fill="url(#fillPercentage)"
+              fill="url(#fillCourses)"
               stroke={colors.dark.primary[300]}
             >
               <LabelList

@@ -7,7 +7,7 @@ import { useStudentExamsStats } from "@/hooks/student/useStudentExamsStats";
 type Props = {
   studentId: string;
   courseIds: string[];
-  selectedCourseId: string;
+  selectedCourseId: "all" | (string & {});
 };
 
 const StudentExamsStats = ({ studentId, selectedCourseId, courseIds }: Props) => {

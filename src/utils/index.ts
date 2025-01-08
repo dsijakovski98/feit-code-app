@@ -206,3 +206,20 @@ export const parseExamStatus = (status: ExamStatus): string => {
       return status;
   }
 };
+
+const MIL = 1_000_000_000;
+const GRAND = 1_000;
+
+export const parseStatValue = (value: number | "-") => {
+  if (value === "-") return value;
+
+  if (value >= MIL) {
+    return (value / MIL).toFixed(1) + "M";
+  }
+
+  if (value >= GRAND) {
+    return (value / GRAND).toFixed(1) + "K";
+  }
+
+  return Number.isInteger(value) ? value : value.toFixed(2);
+};
