@@ -1,22 +1,15 @@
-import { PropsWithChildren, Suspense, lazy, useMemo } from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 import StatCard from "@/components/Dashboards/NumStats/StatCard";
+import UpcomingExam from "@/components/Dashboards/NumStats/UpcomingExam";
 
-import { FCProfessor, FCStudent, FCUser } from "@/hooks/useFCUser";
 import { USER_TYPE, UserType } from "@/types";
 import { type NumStats } from "@/types/stats";
 import { getAcademicYear } from "@/utils";
 
-const ProfessorUpcomingExam = lazy(
-  () => import("@/components/Dashboards/NumStats/UpcomingExam/ProfessorUpcomingExam"),
-);
-const StudentUpcomingExam = lazy(
-  () => import("@/components/Dashboards/NumStats/UpcomingExam/StudentUpcomingExam"),
-);
+type Props = { type: UserType } & NumStats & PropsWithChildren;
 
-type Props = { user?: NonNullable<FCUser>["user"]; type: UserType } & NumStats & PropsWithChildren;
-
-const NumStats = ({ courses, exams, user, type, children }: Props) => {
+const NumStats = ({ courses, exams, type, children }: Props) => {
   const academicYear = useMemo(() => getAcademicYear(), []);
 
   const entityAction = useMemo(() => (type === USER_TYPE.student ? "taken during" : "created for"), [type]);
@@ -40,10 +33,7 @@ const NumStats = ({ courses, exams, user, type, children }: Props) => {
       />
 
       <StatCard icon="exam" variant="highlight" label="Upcoming Exam" description={`Latest upcoming exam`}>
-        <Suspense fallback={null}>
-          {type === USER_TYPE.student && <StudentUpcomingExam user={user as FCStudent} />}
-          {type === USER_TYPE.professor && <ProfessorUpcomingExam user={user as FCProfessor} />}
-        </Suspense>
+        <UpcomingExam />
       </StatCard>
     </div>
   );

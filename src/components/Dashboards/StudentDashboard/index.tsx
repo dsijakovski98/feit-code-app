@@ -1,9 +1,11 @@
 import { useMemo } from "react";
 
+import LatestStats from "@/components/Dashboards/LatestStats";
 import StudentNumStats from "@/components/Dashboards/StudentDashboard/StudentNumStats";
 import ExamsStats from "@/components/Exams/ExamsStats";
 import { DashboardWindow } from "@/components/ui/DashboardWindow";
 
+import UserCoursesProvider from "@/context/UserCoursesContext";
 import { useStudentCoursesList } from "@/hooks/student/useStudentCoursesList";
 import { useStudentExamsStats } from "@/hooks/student/useStudentExamsStats";
 import { FCStudent } from "@/hooks/useFCUser";
@@ -19,18 +21,17 @@ const StudentDashboard = ({ user }: Props) => {
   const { data: stats, isPending } = useStudentExamsStats({ studentId: user.id, courseIds });
 
   return (
-    <div className="flex h-full flex-col gap-4">
-      <StudentNumStats />
+    <UserCoursesProvider courseIds={courseIds}>
+      <div className="flex h-full flex-col gap-4">
+        <StudentNumStats />
 
-      <div className="flex flex-1 items-stretch gap-6 *:flex-1 lg:flex-col">
-        <DashboardWindow>Calendar</DashboardWindow>
-        <DashboardWindow>Top 3 Courses</DashboardWindow>
+        <LatestStats />
+
+        <DashboardWindow>
+          <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="h-[320px]" />
+        </DashboardWindow>
       </div>
-
-      <DashboardWindow>
-        <ExamsStats stats={stats} isLoading={isPending} courseIds={courseIds} className="h-[320px]" />
-      </DashboardWindow>
-    </div>
+    </UserCoursesProvider>
   );
 };
 

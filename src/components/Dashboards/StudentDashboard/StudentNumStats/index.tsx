@@ -11,7 +11,7 @@ const StudentNumStats = () => {
   const { data: numStats } = useStudentNumStats(userData?.user.id ?? "");
 
   return (
-    <NumStats {...numStats} type={USER_TYPE.student} user={userData?.user}>
+    <NumStats {...numStats} type={USER_TYPE.student}>
       <GradeCard />
     </NumStats>
   );

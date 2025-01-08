@@ -5,19 +5,19 @@ import { Spinner, Tooltip } from "@nextui-org/react";
 import Timestamp from "@/components/ui/Timestamp";
 
 import { ROUTES } from "@/constants/routes";
-import { type UpcomingExam } from "@/hooks/exam/useUpcomingExam";
+import { UserCoursesContext } from "@/context/UserCoursesContext";
+import { type UpcomingExam, useUpcomingExam } from "@/hooks/exam/useUpcomingExam";
+import { useCtx } from "@/hooks/useCtx";
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
 
-type Props = {
-  upcomingExam?: UpcomingExam | null;
-  isLoading?: boolean;
-};
-
-const UpcomingExam = ({ upcomingExam, isLoading = false }: Props) => {
+const UpcomingExam = () => {
   const { userData } = useFCUser();
 
-  if (isLoading || !userData) {
+  const { courseIds } = useCtx(UserCoursesContext);
+  const { data: upcomingExam, isPending } = useUpcomingExam({ courseIds });
+
+  if (isPending || !userData) {
     return <Spinner className="w-fit" color="default" size="lg" />;
   }
 

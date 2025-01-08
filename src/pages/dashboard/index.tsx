@@ -11,7 +11,9 @@ const StudentDashboard = lazy(() => import("@/components/Dashboards/StudentDashb
 const Dashboard = () => {
   const { userData } = useFCUser();
 
-  if (!userData) return <DashboardSkeleton />;
+  if (!userData) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <div className="bg-main h-full px-8 py-6 lg:p-5 lg:pb-20">

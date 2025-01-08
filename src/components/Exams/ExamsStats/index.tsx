@@ -38,7 +38,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
 
   if (isLoading) {
     return (
-      <div className="grid flex-1 place-items-center p-8">
+      <div className={clsx("grid flex-1 place-items-center p-8", className)}>
         <Spinner size="lg" className="scale-[1.5]" />
       </div>
     );

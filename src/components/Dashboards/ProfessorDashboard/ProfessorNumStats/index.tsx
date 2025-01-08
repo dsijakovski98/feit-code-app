@@ -11,7 +11,7 @@ const ProfessorNumStats = () => {
   const { data: numStats } = useProfessorNumStats(userData?.user.id ?? "");
 
   return (
-    <NumStats {...numStats} type={USER_TYPE.professor} user={userData?.user}>
+    <NumStats {...numStats} type={USER_TYPE.professor}>
       <SubmissionsCard />
     </NumStats>
   );
