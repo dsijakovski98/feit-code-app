@@ -4,14 +4,14 @@ import { getStorage } from "firebase/storage";
 
 const app = initializeApp({
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "feit-code.firebaseapp.com",
-  projectId: "feit-code",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
 
-  storageBucket: "feit-code.appspot.com",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
   databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
 });
 
-export const fbStorage = getStorage(app);
-export const fbDatabase = getDatabase(app);
+export const fireStorage = getStorage(app);
+export const fireDb = getDatabase(app);

@@ -9,7 +9,7 @@ import { ProfessorForm } from "@/components/Onboarding/Professor";
 import { StudentForm } from "@/components/Onboarding/Student";
 
 import { updateAvatar, uploadAvatar } from "@/services/avatars";
-import { fbStorage } from "@/services/firebase";
+import { fireStorage } from "@/services/firebase";
 
 import { db } from "@/db";
 import { USER_TYPE, UserType } from "@/types";
@@ -158,7 +158,7 @@ type DeleteProfileConfig = { user: UserResource; type: UserType };
 export const deleteProfile = async ({ user, type }: DeleteProfileConfig) => {
   const userId = user.id;
   const table = type === USER_TYPE.student ? students : professors;
-  const avatarRef = ref(fbStorage, `avatars/${userId}`);
+  const avatarRef = ref(fireStorage, `avatars/${userId}`);
 
   try {
     await Promise.all([

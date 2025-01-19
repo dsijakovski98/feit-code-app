@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 import { exams, inputs as inputsTable, tasks as tasksTable, tests as testsTable } from "@/db/schema";
 
-import { fbStorage } from "@/services/firebase";
+import { fireStorage } from "@/services/firebase";
 
 import { removeExamSession } from "@/actions/exam-session";
 import { EXAM_STATUS } from "@/constants/enums";
@@ -41,7 +41,7 @@ export const createExam = async ({ courseId, exam, tasks }: CreateExamOptions) =
     const newTasks = await Promise.all(
       tasks.map(async ({ title, description, points, template, tests }, idx) => {
         const taskPath = taskTemplateRef({ courseId, examId, taskTitle: title });
-        const templateRef = ref(fbStorage, `${taskPath}/template`);
+        const templateRef = ref(fireStorage, `${taskPath}/template`);
 
         const snapshot = await uploadString(templateRef, template, "raw");
         const templateUrl = await getDownloadURL(snapshot.ref);

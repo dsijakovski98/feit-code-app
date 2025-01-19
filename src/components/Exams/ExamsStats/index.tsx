@@ -65,10 +65,10 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
 
         <YAxis
           type="number"
+          width={50}
           domain={[0, 100]}
           tickLine={false}
           axisLine={false}
-          width={50}
           fontWeight={500}
           tickFormatter={(value) => Math.round(Number(value)).toString() + "%"}
         />

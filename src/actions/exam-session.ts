@@ -4,7 +4,7 @@ import { ref as storageRef, uploadString } from "firebase/storage";
 
 import { submissions } from "@/db/schema";
 
-import { fbDatabase, fbStorage } from "@/services/firebase";
+import { fireDb, fireStorage } from "@/services/firebase";
 
 import { ProgrammingLanguage } from "@/constants/enums";
 import { ExamSessionContext } from "@/context/ExamSessionContext";
@@ -18,11 +18,11 @@ export type SessionOptions = {
   sessionId?: string;
 };
 
-const activeStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/activeStudents`);
-const finishedStudentsRef = (examId: string) => ref(fbDatabase, `exams/${examId}/finishedStudents`);
+const activeStudentsRef = (examId: string) => ref(fireDb, `exams/${examId}/activeStudents`);
+const finishedStudentsRef = (examId: string) => ref(fireDb, `exams/${examId}/finishedStudents`);
 
 const activeSessionRef = ({ examId, sessionId }: SessionOptions) => {
-  return ref(fbDatabase, `exams/${examId}/activeStudents/${sessionId}`);
+  return ref(fireDb, `exams/${examId}/activeStudents/${sessionId}`);
 };
 
 const cleanUpExamSessionStorage = (examSessionKey: string) => {
@@ -107,7 +107,7 @@ type LeaveSessionLogout = {
   studentId: string;
 };
 export const leaveExamSessionLogout = async ({ studentId }: LeaveSessionLogout) => {
-  const activeExamsRef = ref(fbDatabase, "exams");
+  const activeExamsRef = ref(fireDb, "exams");
 
   await new Promise((resolve) => {
     onValue(
@@ -240,7 +240,7 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
       exam.tasks.map(async (task) => {
         const taskPath = taskTemplateRef({ courseId, examId, taskTitle: task.title });
         const studentPath = studentTaskRef(student);
-        const templateRef = storageRef(fbStorage, `${taskPath}/${studentPath}`);
+        const templateRef = storageRef(fireStorage, `${taskPath}/${studentPath}`);
 
         await uploadString(templateRef, tasks[task.id].code, "raw");
       }),
@@ -254,7 +254,7 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
     });
 
     // Check if exam session was already finished
-    const examSessionRef = ref(fbDatabase, `exams/${exam.id}`);
+    const examSessionRef = ref(fireDb, `exams/${exam.id}`);
     const examFinished = await new Promise((resolve) => {
       onValue(examSessionRef, (snapshot) => resolve(snapshot.val() === null), { onlyOnce: true });
     });
@@ -343,7 +343,7 @@ export const finishExam = async ({ exam, tasksState, student, stats }: FinishExa
 };
 
 export const removeExamSession = async (examId: string) => {
-  const examSessionRef = ref(fbDatabase, `exams/${examId}`);
+  const examSessionRef = ref(fireDb, `exams/${examId}`);
   await remove(examSessionRef);
 };
 

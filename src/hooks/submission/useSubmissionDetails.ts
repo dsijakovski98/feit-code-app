@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getDownloadURL, ref as storageRef } from "firebase/storage";
 
-import { fbStorage } from "@/services/firebase";
+import { fireStorage } from "@/services/firebase";
 
 import { db } from "@/db";
 import { studentTaskRef, taskTemplateRef } from "@/utils/code";
@@ -41,7 +41,7 @@ export const useSubmissionDetails = ({ examId, studentId }: Options) => {
             courseId: exam.courseId,
           });
           const studentPath = studentTaskRef({ id, firstName, lastName });
-          const templateRef = storageRef(fbStorage, `${taskPath}/${studentPath}`);
+          const templateRef = storageRef(fireStorage, `${taskPath}/${studentPath}`);
 
           const url = await getDownloadURL(templateRef);
           const response = await fetch(url);

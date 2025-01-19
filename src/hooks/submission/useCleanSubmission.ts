@@ -19,23 +19,27 @@ export const useCleanSubmission = ({ code, language, name: taskName, enabled }: 
         throw new Error("Token not found!");
       }
 
-      const response = await fetch(`${import.meta.env.VITE_CODE_RUNNER_URL}/cleanup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ taskName, code, language }),
-      });
+      try {
+        const response = await fetch(`${import.meta.env.VITE_CODE_RUNNER_URL}/cleanup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ taskName, code, language }),
+        });
 
-      if (!response.ok) {
-        const { error } = (await response.json()) as { error: string };
-        throw new Error(error);
+        if (!response.ok) {
+          const { error } = (await response.json()) as { error: string };
+          throw new Error(error);
+        }
+
+        const { cleanCode } = (await response.json()) as { cleanCode: string };
+
+        return cleanCode;
+      } catch {
+        return null;
       }
-
-      const { cleanCode } = (await response.json()) as { cleanCode: string };
-
-      return cleanCode;
     },
   });
 };

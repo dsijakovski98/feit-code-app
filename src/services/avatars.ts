@@ -1,6 +1,6 @@
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-import { fbStorage } from "@/services/firebase";
+import { fireStorage } from "@/services/firebase";
 
 export const getAvatarBlob = async (avatarUrl: string) => {
   const response = await fetch(avatarUrl);
@@ -15,7 +15,7 @@ export const getAvatarBlob = async (avatarUrl: string) => {
 };
 
 export const getAvatarUrl = async (userId: string) => {
-  const avatarRef = ref(fbStorage, `avatars/${userId}`);
+  const avatarRef = ref(fireStorage, `avatars/${userId}`);
 
   try {
     const avatarUrl = await getDownloadURL(avatarRef);
@@ -26,7 +26,7 @@ export const getAvatarUrl = async (userId: string) => {
 };
 
 export const uploadAvatar = async (userId: string, avatarUrl: string) => {
-  const avatarRef = ref(fbStorage, `avatars/${userId}`);
+  const avatarRef = ref(fireStorage, `avatars/${userId}`);
 
   const avatarBlob = await getAvatarBlob(avatarUrl);
   await uploadBytes(avatarRef, avatarBlob);
@@ -36,7 +36,7 @@ export const uploadAvatar = async (userId: string, avatarUrl: string) => {
 };
 
 export const updateAvatar = async (userId: string, avatarUrl: string) => {
-  const avatarRef = ref(fbStorage, `avatars/${userId}`);
+  const avatarRef = ref(fireStorage, `avatars/${userId}`);
 
   if (avatarUrl.trim() === "") {
     await deleteObject(avatarRef);

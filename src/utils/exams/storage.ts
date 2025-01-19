@@ -1,15 +1,15 @@
 import { deleteObject, listAll, ref } from "firebase/storage";
 
-import { fbStorage } from "@/services/firebase";
+import { fireStorage } from "@/services/firebase";
 
 export const deleteExamFolder = async (fullPath: string) => {
-  const examStorageRef = ref(fbStorage, fullPath);
+  const examStorageRef = ref(fireStorage, fullPath);
 
   const examEntries = await listAll(examStorageRef);
 
   const taskEntries = await Promise.all(
     examEntries.prefixes.flatMap((examPrefix) => {
-      const examRef = ref(fbStorage, examPrefix.fullPath);
+      const examRef = ref(fireStorage, examPrefix.fullPath);
 
       return listAll(examRef);
     }),
@@ -18,7 +18,7 @@ export const deleteExamFolder = async (fullPath: string) => {
   await Promise.all(
     taskEntries.flatMap((taskEntry) => {
       return taskEntry.items.map((item) => {
-        const itemRef = ref(fbStorage, item.fullPath);
+        const itemRef = ref(fireStorage, item.fullPath);
         return deleteObject(itemRef);
       });
     }),
