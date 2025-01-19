@@ -3,23 +3,22 @@
 FROM node:lts-alpine AS build
 
 # Set config
-ENV NPM_CONFIG_UPDATE_NOTIFIER=false
-ENV NPM_CONFIG_FUND=false
+ENV YARN_CACHE_FOLDER=/usr/local/share/.cache/yarn/v6
 
 # Create and change to the app directory.
 WORKDIR /app
 
 # Copy the files to the container image
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
 # Install packages
-RUN npm ci
+RUN yarn install --frozen-lockfile
 
 # Copy local code to the container image.
 COPY . ./
 
 # Build the app.
-RUN npm run build
+RUN yarn build
 
 # Use the Caddy image
 FROM caddy
