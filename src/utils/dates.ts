@@ -4,7 +4,6 @@ import duration from "dayjs/plugin/duration";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 
-import { DateValue } from "@nextui-org/calendar";
 import { TimeInputValue } from "@nextui-org/date-input";
 
 import { ExamSchema } from "@/utils/schemas/exams/examSchema";
@@ -35,7 +34,8 @@ export const getSecondsRemaining = (targetDate: Dayjs) => {
 export const nextUIDate = (date: Date) => {
   const isoDateString = date.toISOString().split("T")[0];
 
-  return parseDate(isoDateString) as unknown as DateValue;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return parseDate(isoDateString) as any;
 };
 
 export const nextUITime = (date: Date) => {
