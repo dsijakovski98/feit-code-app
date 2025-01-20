@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "vite --open --port 3001 --host 0.0.0.0",
     "build": "tsc -b && vite build",
-    "start": "vite preview",
+    "start": "serve --single --listen 3001 build",
+    "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write src/",
@@ -53,6 +54,7 @@
     "react-router-dom": "^7.1.1",
     "react-split": "^2.0.14",
     "recharts": "^2.15.0",
+    "serve": "^14.2.4",
     "swiper": "^11.2.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
