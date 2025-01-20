@@ -10,8 +10,8 @@
   },
   "scripts": {
     "dev": "vite --open --port 3001 --host 0.0.0.0",
-    "build": "tsc -b && vite dist",
-    "start": "serve --single --listen 3001 build",
+    "build": "tsc -b && vite build",
+    "start": "serve --single --listen 3001 dist",
     "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
