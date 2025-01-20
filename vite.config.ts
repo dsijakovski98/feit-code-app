@@ -3,7 +3,6 @@ import path from "path";
 import { defineConfig } from "vite";
 import { imagetools } from "vite-imagetools";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-import vsharp from "vite-plugin-vsharp";
 import webFontDownload from "vite-plugin-webfont-dl";
 
 export default defineConfig({
@@ -22,7 +21,6 @@ export default defineConfig({
       inject: "body-last",
       customDomId: "__svg__icons__dom__",
     }),
-    vsharp(),
   ],
   resolve: {
     alias: {
