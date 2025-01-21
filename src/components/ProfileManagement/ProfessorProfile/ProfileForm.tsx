@@ -109,7 +109,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 errorMessage={fieldState.error?.message}
                 classNames={{
                   label: "text-lg font-semibold !text-foreground",
-                  value: "font-medium",
+                  value: "font-medium md:text-sm",
                 }}
               >
                 {MAJORS.map(({ label, description }) => (
@@ -139,7 +139,7 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 errorMessage={fieldState.error?.message}
                 classNames={{
                   label: "text-lg font-semibold !text-foreground",
-                  value: "font-medium",
+                  value: "font-medium md:text-sm",
                 }}
               >
                 {Object.values(TEACHER_TYPE).map((label) => (

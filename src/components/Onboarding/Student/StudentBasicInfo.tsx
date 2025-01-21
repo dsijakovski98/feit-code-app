@@ -9,10 +9,12 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
 import { OnboardingContext } from "@/context/OnboardingContext";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { StudentOnboardingBasicInfoSchema } from "@/utils/schemas/onboarding/studentOnboarding";
 
 const StudentBasicInfo = () => {
+  const { isMobile } = useCtx(ResponsiveContext);
   const { nextStep } = useCtx(OnboardingContext);
   const [form, setForm] = useCtx(StudentOnboardingContext);
 
@@ -30,7 +32,7 @@ const StudentBasicInfo = () => {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8">
+    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8 lg:px-0 lg:py-4">
       <h3 className="text-xl font-semibold">Let's get to know you better</h3>
 
       <div className="pb-10">
@@ -74,7 +76,7 @@ const StudentBasicInfo = () => {
         />
       </div>
 
-      <Button fullWidth type="submit" size="lg">
+      <Button fullWidth type="submit" size={isMobile ? "md" : "lg"}>
         Continue
       </Button>
     </form>

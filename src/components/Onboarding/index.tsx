@@ -53,14 +53,16 @@ const Onboarding = () => {
         placement="center"
         hideCloseButton
         classNames={{
-          base: "min-w-[720px] lg:min-w-[90%] bg-transparent",
+          base: "min-w-[720px] lg:min-w-[80%] bg-transparent",
           header: "bg-background p-5",
-          backdrop: "bg-primary-50/20",
+          backdrop: "bg-dots",
         }}
       >
         <ModalContent>
           <ModalHeader className="items-center justify-between">
-            <h2>Welcome aboard!</h2>
+            <h2>
+              Welcome<span className="lg:hidden"> aboard</span>!
+            </h2>
             <ThemeSwitcher />
           </ModalHeader>
 

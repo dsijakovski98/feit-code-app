@@ -10,10 +10,12 @@ import Input from "@/components/ui/Input";
 
 import { MAJORS } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { StudentOnboardingMajorSchema } from "@/utils/schemas/onboarding/studentOnboarding";
 
 const StudentMajor = () => {
+  const { isMobile } = useCtx(ResponsiveContext);
   const { prevStep, nextStep } = useCtx(OnboardingContext);
   const [form, setForm] = useCtx(StudentOnboardingContext);
 
@@ -32,7 +34,11 @@ const StudentMajor = () => {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8">
+    <form
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4 px-14 py-8 lg:px-0 lg:py-4 md:space-y-10"
+    >
       <h3 className="text-xl font-semibold">What do you study?</h3>
 
       <div className="!mb-10">
@@ -103,11 +109,11 @@ const StudentMajor = () => {
       </div>
 
       <div className="flex gap-4">
-        <Button fullWidth color="default" variant="bordered" size="lg" onPress={prevStep}>
+        <Button fullWidth color="default" variant="bordered" size={isMobile ? "md" : "lg"} onPress={prevStep}>
           Go back
         </Button>
 
-        <Button fullWidth type="submit" size="lg">
+        <Button fullWidth type="submit" size={isMobile ? "md" : "lg"}>
           Continue
         </Button>
       </div>

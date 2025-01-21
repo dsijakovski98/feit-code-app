@@ -41,21 +41,21 @@ const ProfessorCoursesList = ({ user, search, courseYear }: Props) => {
         </div>
       )}
 
-      {emptyCourses ? (
+      {emptyCourses && (
         <Suspense fallback={null}>
           {type === TEACHER_TYPE.professor ? <EmptyProfessorCourses /> : <EmptyAssistantCourses />}
         </Suspense>
-      ) : (
-        <FloatButton
-          as={Link}
-          icon="add"
-          // @ts-expect-error NextUI not passing through 'as' props
-          to="new"
-          containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
-        >
-          New Course
-        </FloatButton>
       )}
+
+      <FloatButton
+        as={Link}
+        icon="add"
+        // @ts-expect-error NextUI not passing through 'as' props
+        to="new"
+        containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
+      >
+        New Course
+      </FloatButton>
 
       {!!courses?.pages.length && (
         <div className="overflow-x-clip">

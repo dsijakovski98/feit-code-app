@@ -29,7 +29,7 @@ const ProfessorBasicInfo = () => {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8">
+    <form noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-14 py-8 lg:px-0 lg:py-4">
       <h3 className="text-xl font-semibold">Tell us more about yourself</h3>
 
       <div className="pb-10">
@@ -67,7 +67,7 @@ const ProfessorBasicInfo = () => {
                 errorMessage={fieldState.error?.message}
                 classNames={{
                   label: "font-semibold !text-foreground text-lg",
-                  value: "font-medium",
+                  value: "font-medium md:text-sm",
                 }}
               >
                 {Object.values(TEACHER_TYPE).map((label) => (
@@ -95,7 +95,7 @@ const ProfessorBasicInfo = () => {
               errorMessage={fieldState.error?.message}
               classNames={{
                 label: "font-semibold !text-foreground text-lg",
-                value: "font-medium",
+                value: "font-medium md:text-sm",
               }}
             >
               {MAJORS.map(({ label, description }) => (

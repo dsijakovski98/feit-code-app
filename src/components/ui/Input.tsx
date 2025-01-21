@@ -45,7 +45,7 @@ const Input = forwardRef<ComponentRef<typeof InputComponent>, Props>(({ children
         ),
         errorMessage: clsx("text-sm text-danger-500", rest.classNames?.errorMessage || ""),
         input: clsx(
-          "placeholder:font-light placeholder:text-foreground-300 placeholder:font-sans font-medium",
+          "placeholder:font-light placeholder:text-foreground-300 placeholder:font-sans md:placeholder:text-sm font-medium",
           rest.classNames?.input || "",
           {
             "!font-sans": rest.inputMode === "numeric",

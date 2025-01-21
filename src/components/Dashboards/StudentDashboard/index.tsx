@@ -22,7 +22,7 @@ const StudentDashboard = ({ user }: Props) => {
 
   return (
     <UserCoursesProvider courseIds={courseIds}>
-      <div className="flex h-full flex-col gap-6">
+      <div className="flex h-full min-h-full flex-col gap-6 lg:h-auto">
         <StudentNumStats />
 
         <LatestStats />

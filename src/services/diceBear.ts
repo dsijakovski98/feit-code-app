@@ -18,10 +18,8 @@ const studentIconStyles = [
   "lorelei",
   "lorelei-neutral",
   "micah",
-  "icons",
   "identicon",
   "fun-emoji",
-  "bottts",
   "bottts-neutral",
   "big-smile",
 ];

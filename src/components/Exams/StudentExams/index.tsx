@@ -51,7 +51,7 @@ const StudentExams = ({ user }: Props) => {
   }, [courseFilter.value, courses]);
 
   return (
-    <div className="bg-main grid h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4 lg:h-auto lg:gap-12 lg:pb-20">
+    <div className="bg-main grid h-full min-h-full grid-cols-1 grid-rows-[auto_1fr] gap-4 py-4 lg:h-auto lg:gap-12 lg:pb-20">
       <section className="min-h-[320px] space-y-2">
         <ExamHeader title="Exams">
           <SelectFilter size="sm" label="Exam status" filter={statusFilter} className="w-[240px] lg:w-full" />

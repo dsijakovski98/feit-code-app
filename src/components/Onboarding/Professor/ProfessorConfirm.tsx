@@ -15,17 +15,20 @@ import { diceBear } from "@/services/diceBear";
 import { createNewProfessor } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
 import { OnboardingContext } from "@/context/OnboardingContext";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 
 const ProfessorConfirm = () => {
-  const { user } = useUser();
-
-  const navigate = useNavigate();
+  const { isMobile } = useCtx(ResponsiveContext);
 
   const { prevStep } = useCtx(OnboardingContext);
-  const [form] = useCtx(ProfessorOnboardingContext);
 
+  const { user } = useUser();
+  const navigate = useNavigate();
+
+  const [form] = useCtx(ProfessorOnboardingContext);
   const { fullName, type, department } = form;
+
   const lastName = useMemo(() => fullName.split(" ").slice(1).join(" "), [fullName]);
   const avatarUrl = useMemo(() => diceBear.getInitialsAvatar(fullName), [fullName]);
 
@@ -51,11 +54,11 @@ const ProfessorConfirm = () => {
   if (!user) return null;
 
   return (
-    <div className="space-y-10 py-8">
+    <div className="space-y-10 py-8 lg:py-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-semibold">Good to see you, Professor {lastName}</h3>
-          <p className="text-foreground-300">
+          <h3 className="text-xl font-semibold md:text-lg">Good to see you, Professor {lastName}</h3>
+          <p className="text-foreground-300 md:text-sm">
             Please confirm your details. You can always change them later.
           </p>
         </div>
@@ -73,7 +76,7 @@ const ProfessorConfirm = () => {
         />
 
         <div>
-          <p className="text-xl font-semibold">{fullName}</p>
+          <p className="text-xl font-semibold md:text-lg">{fullName}</p>
           <p className="text-foreground-300">
             {type} @ {department}
           </p>
@@ -85,14 +88,20 @@ const ProfessorConfirm = () => {
           fullWidth
           color="default"
           variant="bordered"
-          size="lg"
           onPress={prevStep}
           disabled={isPending}
+          size={isMobile ? "md" : "lg"}
         >
           Go back
         </Button>
 
-        <Button fullWidth type="submit" size="lg" onPress={handleCreateUser} disabled={isPending}>
+        <Button
+          fullWidth
+          type="submit"
+          size={isMobile ? "md" : "lg"}
+          onPress={handleCreateUser}
+          disabled={isPending}
+        >
           Confirm
         </Button>
       </div>
