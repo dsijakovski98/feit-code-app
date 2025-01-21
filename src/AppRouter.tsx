@@ -120,7 +120,7 @@ const AppRouter = () => {
               <Route path={ROUTES.signUp} element={<SignUpPage />} />
               <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
 
-              <Route element={<PageFallback bg="dots" />}>
+              <Route element={<PageFallback outlet bg="dots" />}>
                 <Route path={ROUTES.ssoCallback} element={<CallbackSSO />} />
               </Route>
             </Route>
