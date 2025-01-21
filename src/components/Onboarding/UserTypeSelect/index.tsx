@@ -9,11 +9,14 @@ import RadioSelect from "@/components/Onboarding/UserTypeSelect/RadioSelect";
 import Button from "@/components/ui/Button";
 
 import { OnboardingContext } from "@/context/OnboardingContext";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPE, UserType } from "@/types";
 
 const UserTypeSelector = () => {
+  const { isMobile } = useCtx(ResponsiveContext);
+
   const {
     nextStep,
     userState: [userType, setUserType],
@@ -42,16 +45,21 @@ const UserTypeSelector = () => {
               className="space-y-8"
             >
               <div className="space-y-6">
-                <p className="text-xl">
+                <p className="text-xl md:text-lg">
                   Are you sure you are a {userType}?{" "}
                   <b className="font-semibold">You cannot change this later.</b>
                 </p>
 
                 <div className="flex justify-between gap-4 *:basis-full">
-                  <Button size="lg" color="default" variant="bordered" onPress={confirmDialog.toggleOff}>
+                  <Button
+                    size={isMobile ? "md" : "lg"}
+                    color="default"
+                    variant="bordered"
+                    onPress={confirmDialog.toggleOff}
+                  >
                     Go back
                   </Button>
-                  <Button size="lg" onPress={confirmChoice}>
+                  <Button size={isMobile ? "md" : "lg"} onPress={confirmChoice}>
                     Continue
                   </Button>
                 </div>
@@ -66,10 +74,10 @@ const UserTypeSelector = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="space-y-10"
+              className="space-y-10 md:space-y-8"
             >
-              <div className="flex items-start justify-between gap-8 md:items-start">
-                <p className="text-pretty text-[22px] font-semibold">
+              <div className="flex items-start justify-between gap-8 lg:gap-4">
+                <p className="text-pretty text-[22px] font-semibold lg:text-lg">
                   First thing's first, what type of FEIT Coder are you?
                 </p>
 
