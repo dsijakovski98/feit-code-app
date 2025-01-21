@@ -60,7 +60,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
           <div className="text-end">
             <p className="font-sans text-4xl font-semibold">
               {avgValue}
-              {mode === "percentage" && "%"}
+              {mode === "percentage" && avgValue !== "-" && "%"}
             </p>
             <p className="text-foreground-300">Average Total {modeLabel}</p>
           </div>

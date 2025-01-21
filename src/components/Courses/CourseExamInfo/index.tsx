@@ -61,15 +61,17 @@ const CourseExamInfo = () => {
       <ExamStats />
 
       {isCourseProfessor && (
-        <FloatButton
-          as={Link}
-          icon="add"
-          // @ts-expect-error NextUI not passing through 'as' props
-          to="new-exam"
-          containerClass="bottom-10 right-10 lg:bottom-20 lg:right-5"
-        >
-          New Exam
-        </FloatButton>
+        <div className="absolute z-10">
+          <FloatButton
+            as={Link}
+            icon="add"
+            // @ts-expect-error NextUI not passing through 'as' props
+            to="new-exam"
+            containerClass="bottom-10 right-10 lg:bottom-20 lg:right-5"
+          >
+            New Exam
+          </FloatButton>
+        </div>
       )}
     </div>
   );
