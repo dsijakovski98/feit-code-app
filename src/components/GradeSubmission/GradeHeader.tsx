@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import clsx from "clsx";
 
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Tab, Tabs } from "@heroui/tabs";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

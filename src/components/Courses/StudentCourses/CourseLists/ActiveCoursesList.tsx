@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import CourseCard from "@/components/Courses/CourseCard";
 import CoursesList from "@/components/Courses/CoursesList";

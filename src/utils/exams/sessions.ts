@@ -1,4 +1,4 @@
-import { ChipProps } from "@nextui-org/chip";
+import { ChipProps } from "@heroui/chip";
 
 import { ROUTES } from "@/constants/routes";
 import { MonitorSession } from "@/context/MonitorExamContext";

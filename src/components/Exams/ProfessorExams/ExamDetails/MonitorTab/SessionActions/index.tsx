@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/dropdown";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@heroui/dropdown";
 
 import RemoveSession from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions/RemoveSession";
 import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";

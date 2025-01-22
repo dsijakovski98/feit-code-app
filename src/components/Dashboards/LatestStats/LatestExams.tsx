@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Chip, Listbox, ListboxItem, Skeleton } from "@nextui-org/react";
+import { Chip, Listbox, ListboxItem, Skeleton } from "@heroui/react";
 
 import ExamStat from "@/components/Dashboards/Misc/ExamStat";
 

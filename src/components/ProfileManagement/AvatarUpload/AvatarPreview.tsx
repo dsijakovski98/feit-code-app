@@ -1,7 +1,7 @@
 import { Fragment, forwardRef } from "react";
 
-import { Avatar } from "@nextui-org/avatar";
-import { Modal, ModalContent } from "@nextui-org/modal";
+import { Avatar } from "@heroui/avatar";
+import { Modal, ModalContent } from "@heroui/modal";
 
 import Button from "@/components/ui/Button";
 

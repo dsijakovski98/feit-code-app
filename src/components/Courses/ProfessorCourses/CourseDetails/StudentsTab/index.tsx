@@ -9,7 +9,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/table";
+} from "@heroui/table";
 
 import AddStudent from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/AddStudent";
 import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/StudentDetails";

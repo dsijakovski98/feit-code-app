@@ -6,8 +6,8 @@ import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 
 import { useUser } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/spinner";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Spinner } from "@heroui/spinner";
+import { Tooltip } from "@heroui/tooltip";
 
 import { StudentOnboardingContext } from "@/components/Onboarding/Student";
 import Button from "@/components/ui/Button";

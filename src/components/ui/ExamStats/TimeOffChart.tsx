@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import clsx, { ClassValue } from "clsx";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import { colors } from "@nextui-org/theme";
+import { colors } from "@heroui/theme";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";

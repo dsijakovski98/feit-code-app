@@ -1,8 +1,8 @@
 import { Suspense, lazy, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { Badge } from "@nextui-org/badge";
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Badge } from "@heroui/badge";
+import { Tab, Tabs } from "@heroui/tabs";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";

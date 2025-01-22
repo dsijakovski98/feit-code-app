@@ -2,8 +2,8 @@ import { useMemo } from "react";
 
 import { InferSelectModel } from "drizzle-orm";
 
-import { Chip } from "@nextui-org/chip";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Chip } from "@heroui/chip";
+import { Tooltip } from "@heroui/tooltip";
 
 import { categories } from "@/db/schema";
 

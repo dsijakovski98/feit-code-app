@@ -3,9 +3,9 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import clsx from "clsx";
 
-import { Avatar } from "@nextui-org/avatar";
-import { Chip } from "@nextui-org/chip";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Avatar } from "@heroui/avatar";
+import { Chip } from "@heroui/chip";
+import { Tooltip } from "@heroui/tooltip";
 
 import ExamCardHeader from "@/components/Exams/ExamCard/ExamCardHeader";
 import ExamFeedback from "@/components/Exams/ExamFeedback";

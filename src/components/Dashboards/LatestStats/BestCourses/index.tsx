@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from "recharts";
 
-import { Skeleton, colors } from "@nextui-org/react";
+import { Skeleton, colors } from "@heroui/react";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
@@ -59,7 +59,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
   }, [type]);
 
   return (
-    <div className="mb-[-12px] flex h-full flex-col items-start gap-6">
+    (<div className="mb-[-12px] flex h-full flex-col items-start gap-6">
       <div className="flex w-full items-center justify-between gap-4">
         <h2 className="text-xl font-semibold">{title}</h2>
 
@@ -70,7 +70,6 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
           View All
         </Link>
       </div>
-
       {isLoading && (
         <div className="flex h-full max-h-[200px] w-full flex-1 flex-col justify-evenly">
           {dummyStats.map((_, idx) => (
@@ -78,13 +77,11 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
           ))}
         </div>
       )}
-
       {bestStats === null && (
         <div className="grid h-full max-h-[200px] w-full flex-1 place-items-center">
           <p className="text-foreground-300">No courses information available.</p>
         </div>
       )}
-
       {bestStats && (
         <ChartContainer
           config={chartConfig}
@@ -113,7 +110,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
             >
               {bestStats.map(({ value }, idx) => (
                 // @ts-expect-error Recharts typing error
-                <Cell key={`cell-${idx}`} radius={value === offset ? 8 : [8, 0, 0, 8]} />
+                (<Cell key={`cell-${idx}`} radius={value === offset ? 8 : [8, 0, 0, 8]} />)
               ))}
 
               <LabelList
@@ -191,7 +188,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
           </BarChart>
         </ChartContainer>
       )}
-    </div>
+    </div>)
   );
 };
 

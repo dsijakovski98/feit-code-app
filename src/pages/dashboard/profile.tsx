@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 
-import { Spinner } from "@nextui-org/spinner";
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Spinner } from "@heroui/spinner";
+import { Tab, Tabs } from "@heroui/tabs";
 
 import ProfileSettings from "@/components/ProfileManagement/Settings";
 

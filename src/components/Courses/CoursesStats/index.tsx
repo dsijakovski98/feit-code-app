@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
 import { AxisDomain } from "recharts/types/util/types";
 
-import { Spinner } from "@nextui-org/spinner";
-import { colors } from "@nextui-org/theme";
+import { Spinner } from "@heroui/spinner";
+import { colors } from "@heroui/theme";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";

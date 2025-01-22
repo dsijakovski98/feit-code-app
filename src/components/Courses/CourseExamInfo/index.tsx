@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import ExamInfoLink from "@/components/Courses/CourseExamInfo/ExamInfoLink";
 import ExamStats from "@/components/Courses/CourseExamInfo/ExamStats";

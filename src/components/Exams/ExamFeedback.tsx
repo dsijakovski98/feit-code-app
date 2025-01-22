@@ -4,8 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { User } from "@nextui-org/user";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
+import { User } from "@heroui/user";
 
 import Timestamp from "@/components/ui/Timestamp";
 

@@ -2,7 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@heroui/select";
 
 import { StudentOnboardingContext } from "@/components/Onboarding/Student";
 import Button from "@/components/ui/Button";

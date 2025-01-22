@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { Listbox, ListboxItem } from "@heroui/listbox";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 
 import TaskItem from "@/components/Exams/ProfessorExams/ExamDetails/GeneralTab/TaskList/TaskItem";
 import TaskTemplatePreview from "@/components/Exams/ProfessorExams/ExamDetails/GeneralTab/TaskList/TaskTemplatePreview";

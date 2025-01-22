@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import GradeSubmission from "@/components/GradeSubmission";
 import Button from "@/components/ui/Button";

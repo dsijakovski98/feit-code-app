@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Control, Controller } from "react-hook-form";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@heroui/select";
 
 import Input from "@/components/ui/Input";
 

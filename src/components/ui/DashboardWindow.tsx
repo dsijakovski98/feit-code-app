@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import clsx from "clsx";
 import { ClassValue } from "clsx";
 
-import { Skeleton } from "@nextui-org/react";
+import { Skeleton } from "@heroui/react";
 
 type Props = {
   isLoaded?: boolean;

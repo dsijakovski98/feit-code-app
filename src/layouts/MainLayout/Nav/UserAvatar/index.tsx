@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Avatar } from "@nextui-org/avatar";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
-import { Skeleton } from "@nextui-org/skeleton";
+import { Avatar } from "@heroui/avatar";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@heroui/dropdown";
+import { Skeleton } from "@heroui/skeleton";
 
 import AuthStrategyIcon from "@/layouts/MainLayout/Nav/UserAvatar/AuthStrategyIcon";
 import UserAvatarSkeleton from "@/layouts/MainLayout/Nav/UserAvatar/Skeleton";

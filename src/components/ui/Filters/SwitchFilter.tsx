@@ -1,4 +1,4 @@
-import { ButtonGroup } from "@nextui-org/button";
+import { ButtonGroup } from "@heroui/button";
 
 import Button from "@/components/ui/Button";
 

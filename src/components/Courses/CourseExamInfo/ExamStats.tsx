@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

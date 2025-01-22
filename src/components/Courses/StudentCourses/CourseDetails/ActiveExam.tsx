@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import { Chip } from "@nextui-org/chip";
-import { Spinner } from "@nextui-org/spinner";
+import { Chip } from "@heroui/chip";
+import { Spinner } from "@heroui/spinner";
 
 import Button from "@/components/ui/Button";
 

@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { Listbox, ListboxItem } from "@heroui/listbox";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 
 import ExamHistoryItem from "@/components/Courses/StudentCourses/CourseDetails/ExamHistory/ExamHistoryItem";
 import Button from "@/components/ui/Button";

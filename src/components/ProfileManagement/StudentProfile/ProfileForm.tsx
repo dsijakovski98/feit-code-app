@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { Textarea } from "@nextui-org/input";
-import { Select, SelectItem } from "@nextui-org/select";
+import { Textarea } from "@heroui/input";
+import { Select, SelectItem } from "@heroui/select";
 
 import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
 import Button from "@/components/ui/Button";

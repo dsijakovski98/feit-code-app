@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
 
 import SubmissionGeneral from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionDetails/SubmissionGeneral";
 import PasteCountChart from "@/components/ui/ExamStats/PasteCountChart";

@@ -8,7 +8,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/table";
+} from "@heroui/table";
 
 import SubmissionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionCellsMux";
 import SubmissionDetails from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionDetails";

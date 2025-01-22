@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from "react";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import ExamCard from "@/components/Exams/ExamCard";
 import ExamsListSwiper from "@/components/Exams/ExamsList/List";

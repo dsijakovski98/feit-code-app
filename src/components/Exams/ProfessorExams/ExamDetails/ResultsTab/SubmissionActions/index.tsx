@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@heroui/dropdown";
 
 import SubmissionDetails from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionDetails";
 import Button from "@/components/ui/Button";

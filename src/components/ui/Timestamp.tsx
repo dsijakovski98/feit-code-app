@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 
 import { getDaytime, getRelativeTimeString } from "@/utils";
 

@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
 import { OAuthStrategy } from "@clerk/types";
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import OAuthJoin from "@/components/OAuthJoin";
 import Button from "@/components/ui/Button";

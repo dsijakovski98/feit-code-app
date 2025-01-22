@@ -2,7 +2,7 @@ import { Controller, UseFormReturn } from "react-hook-form";
 
 import clsx from "clsx";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@heroui/select";
 
 import Icon from "@/components/ui/Icon";
 

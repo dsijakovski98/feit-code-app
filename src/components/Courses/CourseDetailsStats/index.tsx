@@ -1,4 +1,4 @@
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import PercentageStats from "@/components/Courses/CourseDetailsStats/PercentageStats";
 import RateStats from "@/components/Courses/CourseDetailsStats/RateStats";

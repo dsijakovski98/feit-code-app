@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import { User } from "@nextui-org/user";
+import { User } from "@heroui/user";
 
 import SubmissionStatus from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/Misc/SubmissionStatus";
 import Button from "@/components/ui/Button";

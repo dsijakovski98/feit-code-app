@@ -2,7 +2,7 @@ import { PropsWithChildren, useMemo } from "react";
 
 import clsx, { ClassValue } from "clsx";
 
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 
 import { DashboardWindow } from "@/components/ui/DashboardWindow";
 import Icon from "@/components/ui/Icon";

@@ -5,7 +5,7 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import { InferInput, object, string } from "valibot";
 
-import { Textarea } from "@nextui-org/input";
+import { Textarea } from "@heroui/input";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 

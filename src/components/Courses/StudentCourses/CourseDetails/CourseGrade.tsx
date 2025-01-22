@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { Spinner } from "@nextui-org/spinner";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Spinner } from "@heroui/spinner";
+import { Tooltip } from "@heroui/tooltip";
 
 import Icon from "@/components/ui/Icon";
 

@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ClassValue } from "clsx";
 import clsx from "clsx";
 
-import { Skeleton } from "@nextui-org/skeleton";
+import { Skeleton } from "@heroui/skeleton";
 
 type Props =
   | {

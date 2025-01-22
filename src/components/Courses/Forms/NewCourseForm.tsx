@@ -7,7 +7,7 @@ import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
-import { Textarea } from "@nextui-org/input";
+import { Textarea } from "@heroui/input";
 
 import { courseCategories, courses } from "@/db/schema";
 

@@ -10,8 +10,8 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from "@nextui-org/table";
-import { Tooltip } from "@nextui-org/tooltip";
+} from "@heroui/table";
+import { Tooltip } from "@heroui/tooltip";
 
 import SessionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionCellsMux";
 import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";
