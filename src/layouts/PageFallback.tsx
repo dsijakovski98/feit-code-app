@@ -17,7 +17,7 @@ const PageFallback = ({ bg = "main", outlet = false }: Props) => {
         "bg-dots brightness-75": bg === "dots",
       })}
     >
-      <Spinner size="lg" className="scale-[2]" />
+      <Spinner size="lg" className="scale-[2.2]" />
 
       {outlet && <Outlet />}
     </div>
