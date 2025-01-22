@@ -34,35 +34,23 @@ const StudentConfirm = () => {
 
   const firstName = useMemo(() => fullName.split(" ")[0], [fullName]);
 
-  const [baseAvatarUrl, setBaseAvatarUrl] = useState(diceBear.getRandomAvatar());
   const [avatarSeed, setAvatarSeed] = useState(diceBear.getRandomSeed());
+  const [avatarUrl, setAvatarUrl] = useState(diceBear.getRandomAvatar(avatarSeed));
   const [transitionPending, startTransition] = useTransition();
-
-  const avatarUrl = useMemo(() => `${baseAvatarUrl}?seed=${avatarSeed}`, [baseAvatarUrl, avatarSeed]);
 
   const getNewStyle = () => {
     startTransition(async () => {
       let newAvatar = "";
-      let newSeed = 0;
+      let newSeed = "";
 
       while (true) {
-        newAvatar = diceBear.getRandomAvatar();
-
-        if (newAvatar === baseAvatarUrl) continue;
-
         newSeed = diceBear.getRandomSeed();
-        const url = `${newAvatar}?seed=${newSeed}`;
+        newAvatar = diceBear.getRandomAvatar(newSeed);
 
-        try {
-          const response = await fetch(url, { signal: AbortSignal.timeout(3000) });
-
-          if (response.ok) break;
-        } catch {
-          continue;
-        }
+        if (newAvatar !== avatarUrl) break;
       }
 
-      setBaseAvatarUrl(newAvatar);
+      setAvatarUrl(newAvatar);
       setAvatarSeed(newSeed);
     });
   };

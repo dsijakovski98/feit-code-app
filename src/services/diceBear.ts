@@ -1,42 +1,71 @@
+import {
+  adventurer,
+  adventurerNeutral,
+  avataaars,
+  avataaarsNeutral,
+  bigEarsNeutral,
+  bigSmile,
+  botttsNeutral,
+  funEmoji,
+  glass,
+  identicon,
+  initials,
+  lorelei,
+  loreleiNeutral,
+  micah,
+  miniavs,
+  notionists,
+  notionistsNeutral,
+  personas,
+  pixelArt,
+  pixelArtNeutral,
+  rings,
+  shapes,
+  thumbs,
+} from "@dicebear/collection";
+import { Style, createAvatar } from "@dicebear/core";
+
 const studentIconStyles = [
-  "glass",
-  "personas",
-  "pixel-art",
-  "pixel-art-neutral",
-  "big-ears-neutral",
-  "adventurer-neutral",
-  "avataaars",
-  "avataaars-neutral",
-  "adventurer",
-  "adventurer-neutral",
-  "thumbs",
-  "shapes",
-  "rings",
-  "miniavs",
-  "notionists",
-  "notionists-neutral",
-  "lorelei",
-  "lorelei-neutral",
-  "micah",
-  "identicon",
-  "fun-emoji",
-  "bottts-neutral",
-  "big-smile",
+  adventurer,
+  adventurerNeutral,
+  avataaars,
+  avataaarsNeutral,
+  bigEarsNeutral,
+  bigSmile,
+  botttsNeutral,
+  funEmoji,
+  glass,
+  identicon,
+  lorelei,
+  loreleiNeutral,
+  micah,
+  miniavs,
+  notionists,
+  notionistsNeutral,
+  personas,
+  pixelArt,
+  pixelArtNeutral,
+  rings,
+  shapes,
+  thumbs,
 ];
 
-const DICE_BEAR_URL = "https://api.dicebear.com/9.x";
+export const AVATAR_SIZE = 90;
 
-const getRandomAvatar = () => {
-  const style = studentIconStyles[Math.floor(Math.random() * studentIconStyles.length)];
-  return `${DICE_BEAR_URL}/${style}/svg`;
+const getRandomAvatar = (seed: string) => {
+  const style = studentIconStyles[Math.floor(Math.random() * studentIconStyles.length)] as Style<
+    typeof studentIconStyles
+  >;
+
+  return createAvatar(style, { size: AVATAR_SIZE, seed }).toDataUri();
 };
 
 const getInitialsAvatar = (fullName: string) => {
-  return `${DICE_BEAR_URL}/initials/svg?seed=${encodeURI(fullName)}`;
+  return createAvatar(initials, { seed: fullName, size: AVATAR_SIZE }).toDataUri();
 };
 
 const RANDOM_SEED = 120;
-const getRandomSeed = () => Math.floor(Math.random() * RANDOM_SEED);
+const getRandomSeed = () => Math.floor(Math.random() * RANDOM_SEED).toString();
 
 export const diceBear = {
   getRandomAvatar,

@@ -1,7 +1,9 @@
-import { useMemo } from "react";
+import { ComponentRef, useMemo, useRef } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+import { initials } from "@dicebear/collection";
+import { createAvatar } from "@dicebear/core";
 import { useMutation } from "@tanstack/react-query";
 
 import { useUser } from "@clerk/clerk-react";
@@ -9,8 +11,6 @@ import { Spinner } from "@nextui-org/spinner";
 
 import { ProfessorOnboardingContext } from "@/components/Onboarding/Professor";
 import Button from "@/components/ui/Button";
-
-import { diceBear } from "@/services/diceBear";
 
 import { createNewProfessor } from "@/actions/users";
 import { ROUTES } from "@/constants/routes";
@@ -29,8 +29,13 @@ const ProfessorConfirm = () => {
   const [form] = useCtx(ProfessorOnboardingContext);
   const { fullName, type, department } = form;
 
+  const avatarRef = useRef<ComponentRef<"img">>(null);
+
   const lastName = useMemo(() => fullName.split(" ").slice(1).join(" "), [fullName]);
-  const avatarUrl = useMemo(() => diceBear.getInitialsAvatar(fullName), [fullName]);
+  const avatarUrl = useMemo(
+    () => createAvatar(initials, { seed: fullName, size: 90 }).toDataUri(),
+    [fullName],
+  );
 
   const { mutate, isPending } = useMutation({
     mutationFn: createNewProfessor,
@@ -45,7 +50,7 @@ const ProfessorConfirm = () => {
     },
   });
 
-  const handleCreateUser = () => {
+  const handleCreateUser = async () => {
     if (!user) return;
 
     mutate({ user, avatarUrl, ...form });
@@ -72,6 +77,7 @@ const ProfessorConfirm = () => {
           height={90}
           alt="Avatar"
           src={avatarUrl}
+          ref={avatarRef}
           className="overflow-hidden rounded-full bg-primary"
         />
 

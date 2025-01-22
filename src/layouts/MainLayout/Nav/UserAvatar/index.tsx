@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Avatar } from "@nextui-org/avatar";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
+import { Skeleton } from "@nextui-org/skeleton";
 
 import AuthStrategyIcon from "@/layouts/MainLayout/Nav/UserAvatar/AuthStrategyIcon";
 import UserAvatarSkeleton from "@/layouts/MainLayout/Nav/UserAvatar/Skeleton";
@@ -13,7 +14,7 @@ import { useLogout } from "@/hooks/useLogout";
 import { getHelpFeedbackUrl } from "@/utils";
 
 const UserAvatar = () => {
-  const { userData } = useFCUser();
+  const { userData, isFetching } = useFCUser();
   const { logOut } = useLogout();
   const navigate = useNavigate();
 
@@ -22,13 +23,16 @@ const UserAvatar = () => {
   if (!userData) return <UserAvatarSkeleton />;
 
   const { email, avatarUrl } = userData.user;
+  const url = avatarUrl || "";
 
   return (
     <Dropdown placement="bottom-end" className="overflow-hidden p-0">
       <DropdownTrigger className="cursor-pointer focus:ring-primary" tabIndex={0}>
         <Avatar
           isBordered
-          src={avatarUrl || ""}
+          showFallback={isFetching}
+          src={!isFetching ? url : ""}
+          fallback={<Skeleton className="h-9 w-9 rounded-full" />}
           className="-ring-offset-1 ring-foreground lg:h-9 lg:w-9 lg:ring-foreground"
         />
       </DropdownTrigger>

@@ -19,8 +19,7 @@ const userColumns = {
 export const useFCUser = () => {
   const { userId } = useAuth();
 
-  const { data, isLoading, error } = useQuery({
-    enabled: !!userId,
+  const query = useQuery({
     queryKey: [{ name: "user", userId }],
     queryFn: async () => {
       if (!userId) return null;
@@ -47,13 +46,15 @@ export const useFCUser = () => {
     },
   });
 
+  const { data, error } = query;
+
   useEffect(() => {
     if (error) {
       toast.error(error.message);
     }
   }, [error]);
 
-  return { userData: data, isLoading, error };
+  return { userData: data, ...query };
 };
 
 export type UseFCUser = ReturnType<typeof useFCUser>;

@@ -52,7 +52,7 @@ const WindowBlank = ({ show, minimized }: Props) => {
           </h2>
           <p className="mb-8 font-sans text-lg">Let's get you back on track</p>
 
-          <Button ref={actionBtn} size="lg" color="default" variant="flat" onPress={bringBack}>
+          <Button ref={actionBtn} size="lg" color="default" variant="bordered" onPress={bringBack}>
             {actionBtnLabel}
           </Button>
         </div>
