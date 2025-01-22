@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 
 import TaskPreviewModal from "@/components/Tasks/TaskPreview/TaskPreviewModal";
 import Button from "@/components/ui/Button";

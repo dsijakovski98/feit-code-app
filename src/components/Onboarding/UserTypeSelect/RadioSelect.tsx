@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { Radio, RadioProps } from "@nextui-org/radio";
+import { Radio, RadioProps } from "@heroui/radio";
 
 type Props = RadioProps;
 

@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/modal";
 
 import CodeEditor from "@/components/CodeEditor";
 import TaskPreviewActions from "@/components/Tasks/TaskPreview/TaskPreviewActions";

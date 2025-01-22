@@ -1,7 +1,7 @@
 import { ComponentRef, Fragment, ReactNode, useLayoutEffect, useRef } from "react";
 
-import { ButtonProps } from "@nextui-org/button";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
+import { ButtonProps } from "@heroui/button";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/modal";
 
 import Button from "@/components/ui/Button";
 

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Divider } from "@nextui-org/divider";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { Divider } from "@heroui/divider";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

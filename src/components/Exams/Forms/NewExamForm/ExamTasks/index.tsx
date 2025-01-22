@@ -1,7 +1,7 @@
 import { Fragment, useMemo, useState } from "react";
 
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { Listbox, ListboxItem } from "@heroui/listbox";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 
 import AddTaskForm from "@/components/Tasks/Forms/AddTaskForm";
 import TaskPreview from "@/components/Tasks/TaskPreview";

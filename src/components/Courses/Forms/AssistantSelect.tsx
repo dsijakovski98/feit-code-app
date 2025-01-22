@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 
-import { Avatar } from "@nextui-org/avatar";
-import { Select, SelectItem } from "@nextui-org/select";
+import { Avatar } from "@heroui/avatar";
+import { Select, SelectItem } from "@heroui/select";
 
 import { useAssistants } from "@/hooks/useAssistants";
 import { CourseSchema } from "@/utils/schemas/courses/courseSchema";

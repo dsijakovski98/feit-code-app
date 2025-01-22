@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";

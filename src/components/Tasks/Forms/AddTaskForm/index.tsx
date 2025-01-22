@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
-import { Progress } from "@nextui-org/progress";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/modal";
+import { Progress } from "@heroui/progress";
 
 import AskTests from "@/components/Tasks/Forms/AddTaskForm/AskTests";
 import NewTaskForm from "@/components/Tasks/Forms/AddTaskForm/NewTaskForm";

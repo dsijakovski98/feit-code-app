@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import { InferSelectModel } from "drizzle-orm";
 
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
-import { User } from "@nextui-org/user";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
+import { User } from "@heroui/user";
 
 import { students } from "@/db/schema";
 

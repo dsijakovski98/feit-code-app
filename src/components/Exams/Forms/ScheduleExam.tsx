@@ -2,8 +2,8 @@ import { Controller, UseFormReturn } from "react-hook-form";
 
 import { today } from "@internationalized/date";
 
-import { TimeInput } from "@nextui-org/date-input";
-import { DatePicker } from "@nextui-org/date-picker";
+import { TimeInput } from "@heroui/date-input";
+import { DatePicker } from "@heroui/date-picker";
 
 import { nextUIDate, nextUITime, nextUITimeToDate } from "@/utils/dates";
 import { ExamSchema } from "@/utils/schemas/exams/examSchema";

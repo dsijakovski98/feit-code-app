@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
 import { ClerkProvider } from "@clerk/clerk-react";
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 
 import Icon from "@/components/ui/Icon";
 
@@ -28,7 +28,7 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
-    <NextUIProvider>
+    <HeroUIProvider>
       <ThemeProvider attribute="class" defaultTheme="dark" themes={["dark", "light"]}>
         <ClerkProvider publishableKey={CLERK_KEY} afterSignOutUrl="/">
           <ResponsiveProvider>
@@ -45,6 +45,6 @@ createRoot(document.getElementById("root")!).render(
           </ResponsiveProvider>
         </ClerkProvider>
       </ThemeProvider>
-    </NextUIProvider>
+    </HeroUIProvider>
   </QueryClientProvider>,
 );

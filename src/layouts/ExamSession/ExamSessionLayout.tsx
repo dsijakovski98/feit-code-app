@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useParams } from "react-router-dom";
 
-import { CircularProgress } from "@nextui-org/progress";
+import { CircularProgress } from "@heroui/progress";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { ROUTES } from "@/constants/routes";

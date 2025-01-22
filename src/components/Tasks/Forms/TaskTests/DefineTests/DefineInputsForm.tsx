@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 import { valibotResolver } from "@hookform/resolvers/valibot";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@heroui/select";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

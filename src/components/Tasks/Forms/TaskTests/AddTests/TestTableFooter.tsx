@@ -1,4 +1,4 @@
-import { ModalFooter } from "@nextui-org/modal";
+import { ModalFooter } from "@heroui/modal";
 
 import Button from "@/components/ui/Button";
 

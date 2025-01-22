@@ -1,4 +1,4 @@
-import { Divider } from "@nextui-org/divider";
+import { Divider } from "@heroui/divider";
 
 import UserAvatar from "@/layouts/MainLayout/Nav/UserAvatar";
 

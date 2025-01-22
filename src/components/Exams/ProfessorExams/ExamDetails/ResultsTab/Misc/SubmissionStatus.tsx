@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Chip } from "@nextui-org/chip";
+import { Chip } from "@heroui/chip";
 
 import type { SubmissionStatus } from "@/constants/enums";
 import { submissionStatusColor, submissionStatusLabel } from "@/utils/exams/results";

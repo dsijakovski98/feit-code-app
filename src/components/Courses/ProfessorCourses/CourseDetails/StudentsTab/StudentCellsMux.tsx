@@ -1,5 +1,5 @@
 import { useAuth } from "@clerk/clerk-react";
-import { User } from "@nextui-org/user";
+import { User } from "@heroui/user";
 
 import StudentActions from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions";
 import StudentCell from "@/components/ui/Table/Cells/StudentCell";

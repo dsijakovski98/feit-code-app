@@ -2,8 +2,8 @@ import { ComponentProps, ComponentRef, PropsWithChildren, forwardRef } from "rea
 
 import clsx from "clsx";
 
-import { Input as NextUiInput } from "@nextui-org/input";
-import { extendVariants } from "@nextui-org/system";
+import { Input as NextUiInput } from "@heroui/input";
+import { extendVariants } from "@heroui/system";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

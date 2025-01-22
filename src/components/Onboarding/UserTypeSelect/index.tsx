@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { RadioGroup } from "@nextui-org/radio";
+import { RadioGroup } from "@heroui/radio";
 
 import RadioSelect from "@/components/Onboarding/UserTypeSelect/RadioSelect";
 import Button from "@/components/ui/Button";

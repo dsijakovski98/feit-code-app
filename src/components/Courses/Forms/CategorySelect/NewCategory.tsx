@@ -7,9 +7,9 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
 import { InferInput, nonEmpty, object, pipe, string, trim } from "valibot";
 
-import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/popover";
-import { Spinner } from "@nextui-org/spinner";
-import { Tooltip } from "@nextui-org/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { Spinner } from "@heroui/spinner";
+import { Tooltip } from "@heroui/tooltip";
 
 import { categories } from "@/db/schema";
 

@@ -1,4 +1,4 @@
-import { Pagination } from "@nextui-org/pagination";
+import { Pagination } from "@heroui/pagination";
 
 import { UsePaginate } from "@/hooks/usePaginate";
 

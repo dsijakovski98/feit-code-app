@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { CircularProgress } from "@nextui-org/progress";
+import { CircularProgress } from "@heroui/progress";
 
 import EndExamHandler from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/EndExamHandler";
 import SessionsTable from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionsTable";

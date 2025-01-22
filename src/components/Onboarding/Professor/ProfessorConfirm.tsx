@@ -7,7 +7,7 @@ import { createAvatar } from "@dicebear/core";
 import { useMutation } from "@tanstack/react-query";
 
 import { useUser } from "@clerk/clerk-react";
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import { ProfessorOnboardingContext } from "@/components/Onboarding/Professor";
 import Button from "@/components/ui/Button";

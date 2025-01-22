@@ -1,7 +1,7 @@
 import { Suspense, lazy, useMemo } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { Tab, Tabs } from "@nextui-org/tabs";
+import { Tab, Tabs } from "@heroui/tabs";
 
 import { CourseDetailsContext } from "@/context/CourseDetailsContext";
 import { useCtx } from "@/hooks/useCtx";

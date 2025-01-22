@@ -3,7 +3,7 @@ import { Controller, UseFormReturn } from "react-hook-form";
 
 import clsx from "clsx";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@heroui/select";
 
 import NewCategory from "@/components/Courses/Forms/CategorySelect/NewCategory";
 import CategoryChip from "@/components/ui/CategoryChip";

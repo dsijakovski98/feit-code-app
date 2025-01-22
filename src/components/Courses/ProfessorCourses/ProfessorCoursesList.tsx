@@ -1,7 +1,7 @@
 import { Fragment, Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import CourseCard from "@/components/Courses/CourseCard";
 import CoursesList from "@/components/Courses/CoursesList";

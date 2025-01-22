@@ -1,5 +1,5 @@
-import { Select, SelectItem, SelectProps } from "@nextui-org/select";
-import { SharedSelection } from "@nextui-org/system-rsc";
+import { Select, SelectItem, SelectProps } from "@heroui/select";
+import { SharedSelection } from "@heroui/system-rsc";
 
 import { Filter, Option } from "@/hooks/useFilter";
 

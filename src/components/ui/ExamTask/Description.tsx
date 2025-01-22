@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { InferSelectModel } from "drizzle-orm";
 
-import { Chip } from "@nextui-org/chip";
+import { Chip } from "@heroui/chip";
 
 import { tasks } from "@/db/schema";
 

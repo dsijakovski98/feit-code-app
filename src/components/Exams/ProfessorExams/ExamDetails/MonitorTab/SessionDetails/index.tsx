@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 
-import { Avatar } from "@nextui-org/avatar";
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/modal";
+import { Avatar } from "@heroui/avatar";
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
 
 import PasteCountChart from "@/components/ui/ExamStats/PasteCountChart";
 import TimeOffChart from "@/components/ui/ExamStats/TimeOffChart";

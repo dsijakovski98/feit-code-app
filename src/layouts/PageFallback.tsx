@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import clsx from "clsx";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 type Props = {
   bg?: "main" | "dots";

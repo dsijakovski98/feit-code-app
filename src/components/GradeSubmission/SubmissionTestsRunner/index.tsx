@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
-import { Listbox, ListboxItem } from "@nextui-org/listbox";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/modal";
+import { Listbox, ListboxItem } from "@heroui/listbox";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/modal";
 
 import SubmissionTest from "@/components/GradeSubmission/SubmissionTestsRunner/SubmissionTest";
 import Button from "@/components/ui/Button";

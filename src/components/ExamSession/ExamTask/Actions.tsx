@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@nextui-org/dropdown";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@heroui/dropdown";
 
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";

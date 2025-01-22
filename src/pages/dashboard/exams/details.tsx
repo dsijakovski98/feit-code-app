@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import ProfessorExamDetails from "@/components/Exams/ProfessorExams/ExamDetails";
 import Button from "@/components/ui/Button";

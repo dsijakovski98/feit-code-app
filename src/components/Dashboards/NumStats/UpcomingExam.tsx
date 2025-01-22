@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 
 import ExamStat from "@/components/Dashboards/Misc/ExamStat";
 

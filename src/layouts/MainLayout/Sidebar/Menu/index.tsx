@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Badge } from "@nextui-org/badge";
+import { Badge } from "@heroui/badge";
 
 import SidebarMenuSkeleton from "@/layouts/MainLayout/Sidebar/Menu/Skeleton";
 import SidebarItem from "@/layouts/MainLayout/Sidebar/SidebarItem";

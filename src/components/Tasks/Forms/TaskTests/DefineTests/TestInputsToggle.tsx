@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { Switch } from "@nextui-org/switch";
+import { Switch } from "@heroui/switch";
 
 import { TestFormContext } from "@/context/TestFormContext";
 import { useCtx } from "@/hooks/useCtx";

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Tooltip } from "@nextui-org/tooltip";
+import { Tooltip } from "@heroui/tooltip";
 
 import SubmissionTests from "@/components/GradeSubmission/SubmissionTestsRunner";
 import Button from "@/components/ui/Button";

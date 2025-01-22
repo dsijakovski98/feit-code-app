@@ -1,4 +1,4 @@
-import { Spinner } from "@nextui-org/spinner";
+import { Spinner } from "@heroui/spinner";
 
 import JoinCourse from "@/components/Courses/Forms/JoinCourse";
 import ActiveExam from "@/components/Courses/StudentCourses/CourseDetails/ActiveExam";
