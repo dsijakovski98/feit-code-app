@@ -3,11 +3,11 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+import { Textarea } from "@heroui/input";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
-import { Textarea } from "@heroui/input";
 
 import { courseCategories, courses } from "@/db/schema";
 

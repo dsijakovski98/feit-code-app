@@ -3,11 +3,11 @@ import { Toaster } from "react-hot-toast";
 
 import "virtual:svg-icons-register";
 
+import { HeroUIProvider } from "@heroui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
 import { ClerkProvider } from "@clerk/clerk-react";
-import { HeroUIProvider } from "@heroui/react";
 
 import Icon from "@/components/ui/Icon";
 
@@ -36,7 +36,7 @@ createRoot(document.getElementById("root")!).render(
             <Toaster
               toastOptions={{
                 position: "bottom-right",
-                className: "bg-background text-foreground [&>[role=status]:empty]:hidden",
+                className: "!bg-background !text-foreground [&>[role=status]:empty]:!hidden",
                 blank: {
                   icon: <Icon name="info" className="h-5 w-5" />,
                 },

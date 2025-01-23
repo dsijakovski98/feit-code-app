@@ -1,10 +1,9 @@
 import { ComponentProps, ReactNode, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { Skeleton } from "@heroui/skeleton";
 import { ClassValue } from "clsx";
 import clsx from "clsx";
-
-import { Skeleton } from "@heroui/skeleton";
 
 type Props =
   | {

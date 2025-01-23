@@ -1,9 +1,8 @@
 import { type ComponentProps, ComponentRef, type PropsWithChildren, forwardRef } from "react";
 
-import clsx from "clsx";
-
 import { Button as NextUiButton } from "@heroui/button";
 import { extendVariants } from "@heroui/system";
+import clsx from "clsx";
 
 const Btn = extendVariants(NextUiButton, {
   defaultVariants: {

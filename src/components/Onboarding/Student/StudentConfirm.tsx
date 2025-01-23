@@ -2,12 +2,12 @@ import { useMemo, useState, useTransition } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+import { Spinner } from "@heroui/spinner";
+import { Tooltip } from "@heroui/tooltip";
 import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
 
 import { useUser } from "@clerk/clerk-react";
-import { Spinner } from "@heroui/spinner";
-import { Tooltip } from "@heroui/tooltip";
 
 import { StudentOnboardingContext } from "@/components/Onboarding/Student";
 import Button from "@/components/ui/Button";

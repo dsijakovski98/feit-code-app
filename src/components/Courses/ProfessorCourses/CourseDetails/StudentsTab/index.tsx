@@ -1,15 +1,8 @@
 import { ComponentProps, Fragment, useDeferredValue, useMemo, useState } from "react";
 
+import { Selection, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/table";
+
 import { useAuth } from "@clerk/clerk-react";
-import {
-  Selection,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
 
 import AddStudent from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/AddStudent";
 import StudentDetails from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions/StudentDetails";

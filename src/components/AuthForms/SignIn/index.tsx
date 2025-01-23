@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
+import { Spinner } from "@heroui/spinner";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useMutation } from "@tanstack/react-query";
 import clsx from "clsx";
@@ -9,7 +10,6 @@ import clsx from "clsx";
 import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
 import { OAuthStrategy } from "@clerk/types";
-import { Spinner } from "@heroui/spinner";
 
 import OAuthJoin from "@/components/OAuthJoin";
 import Button from "@/components/ui/Button";

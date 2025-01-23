@@ -1,9 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 
-import clsx from "clsx";
-
 import { Select, SelectItem } from "@heroui/select";
+import clsx from "clsx";
 
 import NewCategory from "@/components/Courses/Forms/CategorySelect/NewCategory";
 import CategoryChip from "@/components/ui/CategoryChip";

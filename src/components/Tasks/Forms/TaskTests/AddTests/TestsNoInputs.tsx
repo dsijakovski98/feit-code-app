@@ -1,11 +1,10 @@
 import { Fragment } from "react";
 
-import clsx from "clsx";
-
 import { ModalBody } from "@heroui/modal";
 import { Pagination } from "@heroui/pagination";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/table";
 import { Tooltip } from "@heroui/tooltip";
+import clsx from "clsx";
 
 import TestParameterCell from "@/components/Tasks/Forms/TaskTests/AddTests/TestParameterCell";
 import TestsTableFooter from "@/components/Tasks/Forms/TaskTests/AddTests/TestTableFooter";

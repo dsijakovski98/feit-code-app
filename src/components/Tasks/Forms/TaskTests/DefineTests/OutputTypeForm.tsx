@@ -1,9 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
 
-import { valibotResolver } from "@hookform/resolvers/valibot";
-
 import { Select, SelectItem } from "@heroui/select";
 import { SharedSelection } from "@heroui/system-rsc";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import ParameterTypeIcon from "@/components/ui/ParameterTypeIcon";
 

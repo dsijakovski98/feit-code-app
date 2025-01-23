@@ -1,14 +1,6 @@
 import { Fragment, useDeferredValue, useMemo, useState } from "react";
 
-import {
-  Selection,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { Selection, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/table";
 
 import SubmissionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionCellsMux";
 import SubmissionDetails from "@/components/Exams/ProfessorExams/ExamDetails/ResultsTab/SubmissionDetails";

@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import clsx from "clsx";
-
 import { Spinner } from "@heroui/spinner";
+import clsx from "clsx";
 
 type Props = {
   bg?: "main" | "dots";

@@ -1,7 +1,6 @@
+import { User } from "@heroui/user";
 import clsx from "clsx";
 import { InferSelectModel } from "drizzle-orm";
-
-import { User } from "@heroui/user";
 
 import { students } from "@/db/schema";
 

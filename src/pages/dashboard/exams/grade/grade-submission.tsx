@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { Spinner } from "@heroui/spinner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import GradeSubmission from "@/components/GradeSubmission";
 import Button from "@/components/ui/Button";

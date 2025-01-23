@@ -1,9 +1,8 @@
 import { Fragment } from "react";
 
+import { RadioGroup } from "@heroui/radio";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-
-import { RadioGroup } from "@heroui/radio";
 
 import RadioSelect from "@/components/Onboarding/UserTypeSelect/RadioSelect";
 import Button from "@/components/ui/Button";

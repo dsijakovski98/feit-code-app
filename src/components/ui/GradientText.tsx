@@ -1,8 +1,7 @@
 import type { PropsWithChildren } from "react";
 
-import clsx from "clsx";
-
 import type { As } from "@heroui/system";
+import clsx from "clsx";
 
 type Props = {
   as?: As;

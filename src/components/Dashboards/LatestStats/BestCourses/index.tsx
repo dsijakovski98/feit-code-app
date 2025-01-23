@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from "recharts";
-
 import { Skeleton, colors } from "@heroui/react";
+import { Bar, BarChart, Cell, LabelList, XAxis, YAxis } from "recharts";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
@@ -59,7 +58,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
   }, [type]);
 
   return (
-    (<div className="mb-[-12px] flex h-full flex-col items-start gap-6">
+    <div className="mb-[-12px] flex h-full flex-col items-start gap-6">
       <div className="flex w-full items-center justify-between gap-4">
         <h2 className="text-xl font-semibold">{title}</h2>
 
@@ -110,7 +109,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
             >
               {bestStats.map(({ value }, idx) => (
                 // @ts-expect-error Recharts typing error
-                (<Cell key={`cell-${idx}`} radius={value === offset ? 8 : [8, 0, 0, 8]} />)
+                <Cell key={`cell-${idx}`} radius={value === offset ? 8 : [8, 0, 0, 8]} />
               ))}
 
               <LabelList
@@ -188,7 +187,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
           </BarChart>
         </ChartContainer>
       )}
-    </div>)
+    </div>
   );
 };
 
