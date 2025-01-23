@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 
-import { InferSelectModel } from "drizzle-orm";
-
 import { Chip } from "@heroui/chip";
+import { InferSelectModel } from "drizzle-orm";
 
 import { tasks } from "@/db/schema";
 

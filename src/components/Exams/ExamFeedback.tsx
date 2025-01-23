@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import MarkdownPreview from "@uiw/react-markdown-preview";
-
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
 import { User } from "@heroui/user";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 import Timestamp from "@/components/ui/Timestamp";
 

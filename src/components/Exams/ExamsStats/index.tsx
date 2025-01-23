@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 
-import clsx, { ClassValue } from "clsx";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
-
 import { Spinner } from "@heroui/spinner";
 import { colors } from "@heroui/theme";
+import clsx, { ClassValue } from "clsx";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";

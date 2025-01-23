@@ -1,17 +1,8 @@
 import { ComponentProps, Fragment, useDeferredValue, useMemo, useState } from "react";
 
-import clsx from "clsx";
-
-import {
-  Selection,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
+import { Selection, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@heroui/table";
 import { Tooltip } from "@heroui/tooltip";
+import clsx from "clsx";
 
 import SessionCellsMux from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionCellsMux";
 import SessionDetails from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionDetails";

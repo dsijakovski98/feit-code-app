@@ -1,6 +1,5 @@
-import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
-
 import { colors } from "@heroui/theme";
+import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from "recharts";
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
@@ -24,7 +23,7 @@ const RateStats = ({ stats, height, avg = false }: Props) => {
   const { courseDetails } = useCtx(CourseDetailsContext);
 
   return (
-    (<ChartContainer
+    <ChartContainer
       config={chartConfig}
       // @ts-expect-error Custom style property
       style={{ "--height": `${height || 360}px` }}
@@ -45,7 +44,7 @@ const RateStats = ({ stats, height, avg = false }: Props) => {
         <Bar dataKey="points" stackId={courseDetails.id} fill={chartConfig.points.color}>
           {stats.map(({ percentage }, idx) => (
             // @ts-expect-error Recharts typing error
-            (<Cell key={`cell-${idx}`} radius={percentage === 100 ? 6 : [0, 0, 6, 6]} />)
+            <Cell key={`cell-${idx}`} radius={percentage === 100 ? 6 : [0, 0, 6, 6]} />
           ))}
         </Bar>
 
@@ -85,7 +84,7 @@ const RateStats = ({ stats, height, avg = false }: Props) => {
           }
         />
       </BarChart>
-    </ChartContainer>)
+    </ChartContainer>
   );
 };
 

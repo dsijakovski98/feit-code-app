@@ -1,6 +1,5 @@
-import { InferSelectModel } from "drizzle-orm";
-
 import { Chip } from "@heroui/chip";
+import { InferSelectModel } from "drizzle-orm";
 
 import { categories } from "@/db/schema";
 

@@ -1,7 +1,6 @@
-import clsx from "clsx";
-
 import { Chip } from "@heroui/chip";
 import { Tooltip } from "@heroui/tooltip";
+import clsx from "clsx";
 
 import CategoryChip from "@/components/ui/CategoryChip";
 import Teacher from "@/components/ui/Teacher";

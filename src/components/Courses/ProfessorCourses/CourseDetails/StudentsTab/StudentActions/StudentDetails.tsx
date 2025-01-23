@@ -1,10 +1,9 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-import { InferSelectModel } from "drizzle-orm";
-
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
 import { User } from "@heroui/user";
+import { InferSelectModel } from "drizzle-orm";
 
 import { students } from "@/db/schema";
 

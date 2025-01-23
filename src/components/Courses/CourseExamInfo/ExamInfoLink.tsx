@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
+import { Chip } from "@heroui/chip";
 import clsx from "clsx";
 import { InferSelectModel } from "drizzle-orm";
-
-import { Chip } from "@heroui/chip";
 
 import { exams } from "@/db/schema";
 

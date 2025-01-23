@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 
-import { motion } from "framer-motion";
-
 import { Chip } from "@heroui/chip";
+import { motion } from "framer-motion";
 
 import SessionActions from "@/components/Exams/ProfessorExams/ExamDetails/MonitorTab/SessionActions";
 import StudentCell from "@/components/ui/Table/Cells/StudentCell";

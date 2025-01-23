@@ -1,7 +1,6 @@
-import { InferSelectModel } from "drizzle-orm";
-
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
 import { Spinner } from "@heroui/spinner";
+import { InferSelectModel } from "drizzle-orm";
 
 import { tasks } from "@/db/schema";
 

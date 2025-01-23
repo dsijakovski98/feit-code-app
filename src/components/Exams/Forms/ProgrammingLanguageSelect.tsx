@@ -1,8 +1,7 @@
 import { Controller, UseFormReturn } from "react-hook-form";
 
-import clsx from "clsx";
-
 import { Select, SelectItem } from "@heroui/select";
+import clsx from "clsx";
 
 import Icon from "@/components/ui/Icon";
 

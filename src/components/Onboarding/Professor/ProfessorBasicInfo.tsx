@@ -1,8 +1,7 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-import { valibotResolver } from "@hookform/resolvers/valibot";
-
 import { Select, SelectItem } from "@heroui/select";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import { ProfessorForm, ProfessorOnboardingContext } from "@/components/Onboarding/Professor";
 import Button from "@/components/ui/Button";

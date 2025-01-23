@@ -2,10 +2,9 @@ import { useMemo, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
+import { Select, SelectItem } from "@heroui/select";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
-
-import { Select, SelectItem } from "@heroui/select";
 
 import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
 import Button from "@/components/ui/Button";

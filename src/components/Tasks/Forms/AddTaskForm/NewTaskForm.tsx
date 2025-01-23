@@ -1,8 +1,7 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-import { valibotResolver } from "@hookform/resolvers/valibot";
-
 import { Textarea } from "@heroui/input";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import Input from "@/components/ui/Input";
 

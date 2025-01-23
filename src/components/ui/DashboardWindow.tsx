@@ -1,9 +1,8 @@
 import { PropsWithChildren } from "react";
 
+import { Skeleton } from "@heroui/react";
 import clsx from "clsx";
 import { ClassValue } from "clsx";
-
-import { Skeleton } from "@heroui/react";
 
 type Props = {
   isLoaded?: boolean;

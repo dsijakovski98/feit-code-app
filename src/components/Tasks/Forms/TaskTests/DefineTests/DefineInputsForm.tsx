@@ -2,9 +2,8 @@ import { useMemo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import { valibotResolver } from "@hookform/resolvers/valibot";
-
 import { Select, SelectItem } from "@heroui/select";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

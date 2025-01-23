@@ -2,13 +2,13 @@ import { Fragment, useMemo } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
+import { Checkbox } from "@heroui/checkbox";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/modal";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
-import { Checkbox } from "@heroui/checkbox";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/modal";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";

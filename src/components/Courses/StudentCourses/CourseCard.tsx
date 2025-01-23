@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
+import { Avatar } from "@heroui/avatar";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "@clerk/clerk-react";
-import { Avatar } from "@heroui/avatar";
 
 import CourseActivity from "@/components/Courses/CourseCard/CourseActivity";
 import Button from "@/components/ui/Button";

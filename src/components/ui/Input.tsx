@@ -1,9 +1,8 @@
 import { ComponentProps, ComponentRef, PropsWithChildren, forwardRef } from "react";
 
-import clsx from "clsx";
-
 import { Input as NextUiInput } from "@heroui/input";
 import { extendVariants } from "@heroui/system";
+import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";

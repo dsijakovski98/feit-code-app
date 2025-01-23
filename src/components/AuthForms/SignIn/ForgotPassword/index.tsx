@@ -1,13 +1,13 @@
 import { Fragment, useLayoutEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
+import { Spinner } from "@heroui/spinner";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useSignIn } from "@clerk/clerk-react";
 import { isClerkAPIResponseError } from "@clerk/clerk-react/errors";
-import { Spinner } from "@heroui/spinner";
 
 import VerifyPassword from "@/components/AuthForms/SignIn/ForgotPassword/Verify";
 import Button from "@/components/ui/Button";

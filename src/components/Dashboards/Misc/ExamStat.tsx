@@ -1,7 +1,6 @@
+import { Tooltip } from "@heroui/react";
 import clsx from "clsx";
 import { InferSelectModel } from "drizzle-orm";
-
-import { Tooltip } from "@heroui/react";
 
 import { exams } from "@/db/schema";
 

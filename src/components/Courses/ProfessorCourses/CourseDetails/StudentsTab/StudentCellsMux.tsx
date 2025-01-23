@@ -1,5 +1,6 @@
-import { useAuth } from "@clerk/clerk-react";
 import { User } from "@heroui/user";
+
+import { useAuth } from "@clerk/clerk-react";
 
 import StudentActions from "@/components/Courses/ProfessorCourses/CourseDetails/StudentsTab/StudentActions";
 import StudentCell from "@/components/ui/Table/Cells/StudentCell";
