@@ -60,7 +60,7 @@ const LatestExams = ({ userData }: Props) => {
           aria-label={`List of the ${LATEST_EXAMS} exams.`}
           classNames={{
             base: "p-0 h-full max-h-[200px] w-full flex-1 lg:max-h-full",
-            list: "flex flex-col h-full justify-around lg:gap-6",
+            list: "flex flex-col h-full gap-3 justify-start lg:gap-6",
           }}
         >
           {latestExams.map((exam) => {
@@ -68,7 +68,7 @@ const LatestExams = ({ userData }: Props) => {
             const { id, course } = exam;
 
             return (
-              <ListboxItem key={exam.id} className="rounded-lg" textValue={exam.name}>
+              <ListboxItem key={exam.id} className="h-fit rounded-lg" textValue={exam.name}>
                 <Link
                   className="flex cursor-pointer items-center justify-between gap-4"
                   to={type === USER_TYPE.student ? `${ROUTES.courses}/${course.id}` : `${ROUTES.exams}/${id}`}

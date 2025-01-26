@@ -1,9 +1,10 @@
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 import { Avatar } from "@heroui/avatar";
 import { Chip } from "@heroui/chip";
 import { Tooltip } from "@heroui/tooltip";
+import { QueryKey, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 
 import ExamCardHeader from "@/components/Exams/ExamCard/ExamCardHeader";
@@ -13,7 +14,7 @@ import Icon from "@/components/ui/Icon";
 
 import { SUBMISSION_STATUS } from "@/constants/enums";
 import { ROUTES } from "@/constants/routes";
-import { type ExamCard } from "@/hooks/exam/useExams";
+import { type ExamCard, ExamsList } from "@/hooks/exam/useExams";
 import { useFCUser } from "@/hooks/useFCUser";
 import { useToggle } from "@/hooks/useToggle";
 import { USER_TYPE } from "@/types";
@@ -24,12 +25,14 @@ import { submissionStatusLabel } from "@/utils/exams/results";
 
 type Props = {
   exam: ExamCard;
+  examsQueryKey: QueryKey;
 };
 
-const ExamCard = ({ exam }: Props) => {
+const ExamCard = ({ exam, examsQueryKey }: Props) => {
   const { id, course, name, language, startsAt, status, submissions } = exam;
 
   const { userData } = useFCUser();
+  const queryClient = useQueryClient();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -39,10 +42,33 @@ const ExamCard = ({ exam }: Props) => {
   const submission = submissions[0];
   const submissionGraded = submission?.status === SUBMISSION_STATUS.graded;
 
-  const [feedbackSeen, setFeedbackSeen] = useState(!!submission?.seen);
-
   const onSeen = () => {
-    setFeedbackSeen(true);
+    queryClient.setQueryData(examsQueryKey, (prevExams: ExamsList) => {
+      let pageIndex = -1;
+      let examIndex = -1;
+      let found = false;
+
+      prevExams.pages.forEach((page, pageIdx) => {
+        if (found) return;
+
+        page.forEach((exam, examIdx) => {
+          if (found) return;
+
+          if (exam.id === id) {
+            pageIndex = pageIdx;
+            examIndex = examIdx;
+            found = true;
+          }
+        });
+      });
+
+      if (pageIndex === -1) return;
+      if (examIndex === -1) return;
+
+      prevExams.pages[pageIndex][examIndex].submissions[0].seen = true;
+
+      return prevExams;
+    });
   };
 
   const openExamFeedback = () => {
@@ -87,7 +113,7 @@ const ExamCard = ({ exam }: Props) => {
           <Avatar
             size="sm"
             color={examStatusColor(status)}
-            isBordered={submissionGraded && !feedbackSeen}
+            isBordered={submissionGraded && !submission.seen}
             fallback={<Icon name="exam" className="scale-[1.3]" />}
           />
         </div>
@@ -113,7 +139,11 @@ const ExamCard = ({ exam }: Props) => {
           )}
 
           {submissionGraded ? (
-            <Button color="success" onPress={openExamFeedback} className={!feedbackSeen ? "!font-bold" : ""}>
+            <Button
+              color="success"
+              onPress={openExamFeedback}
+              className={!submission.seen ? "!font-bold" : ""}
+            >
               Feedback
             </Button>
           ) : (

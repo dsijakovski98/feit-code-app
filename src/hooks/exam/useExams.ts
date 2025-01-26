@@ -64,4 +64,5 @@ export const useExams = ({ userId, type, selectedCourseIds, status }: QueryOptio
   });
 };
 
-export type ExamCard = NonNullable<ReturnType<typeof useExams>["data"]>["pages"][number][number];
+export type ExamsList = NonNullable<ReturnType<typeof useExams>["data"]>;
+export type ExamCard = ExamsList["pages"][number][number];

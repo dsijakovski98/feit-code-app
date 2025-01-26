@@ -29,6 +29,8 @@ const ExamsList = ({ userId, type, selectedCourseId, courseIds, status, course }
   const query = useExams({ userId, type, status, selectedCourseIds });
   const { data: exams, isPending } = query;
 
+  const examsQueryKey = [{ name: "exams", type, id: userId, selectedCourseIds, status }];
+
   return (
     <Fragment>
       {isPending && (
@@ -41,7 +43,10 @@ const ExamsList = ({ userId, type, selectedCourseId, courseIds, status, course }
 
       {!!exams?.pages[0].length && (
         <section className="overflow-x-clip">
-          <ExamsListSwiper examsQuery={query} renderExam={(exam) => <ExamCard exam={exam} />} />
+          <ExamsListSwiper
+            examsQuery={query}
+            renderExam={(exam) => <ExamCard exam={exam} examsQueryKey={examsQueryKey} />}
+          />
         </section>
       )}
     </Fragment>

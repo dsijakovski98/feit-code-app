@@ -6,6 +6,8 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import webFontDownload from "vite-plugin-webfont-dl";
 
 export default defineConfig({
+  base: "/",
+
   plugins: [
     react(),
     imagetools(),
