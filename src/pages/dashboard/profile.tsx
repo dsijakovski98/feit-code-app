@@ -27,8 +27,8 @@ const ProfilePage = () => {
             classNames={{
               base: "!px-0 sticky top-20 lg:top-0 transparent z-20",
               tabContent: "text-foreground group-data-[selected]:font-semibold",
-              tabList: "bg-main py-5",
-              panel: "pt-3 px-10 md:px-6",
+              tabList: "bg-main py-4",
+              panel: "pt-3 px-10 lg:px-2",
             }}
           >
             <Tab key="profile" title="Profile">

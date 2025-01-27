@@ -14,7 +14,7 @@ const CourseActions = () => {
   const { id } = course;
 
   return (
-    <div className={clsx("mt-auto flex items-stretch justify-between gap-4 lg:w-full lg:pb-1")}>
+    <div className={clsx("mt-auto flex items-stretch justify-between gap-4 lg:pb-1")}>
       <Button
         as={Link}
         // @ts-expect-error NextUI not passing through 'as' props

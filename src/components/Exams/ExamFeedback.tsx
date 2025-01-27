@@ -95,7 +95,7 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
             </a>
           )}
 
-          <MarkdownPreview source={feedback!} className="rounded-lg bg-background p-4" />
+          <MarkdownPreview source={feedback!} className="rounded-lg !bg-background p-4 !text-foreground" />
 
           <p className="text-end font-sans text-2xl font-semibold">
             {submission.points}/{exam.points} pts

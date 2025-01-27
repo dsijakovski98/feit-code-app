@@ -112,7 +112,7 @@ const StudentsTab = () => {
         </TableHeader>
         <TableBody items={studentsList} emptyContent="No students to display.">
           {(item) => (
-            <TableRow key={item.studentId} className="cursor-pointer lg:cursor-default">
+            <TableRow key={item.studentId} className="cursor-pointer">
               {(columnKey) => (
                 <TableCell align={columnKey === "actions" ? "center" : "left"}>
                   <StudentProvider student={item.student} joinedAt={item.joinedAt}>

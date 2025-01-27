@@ -88,7 +88,7 @@ const ExamCard = ({ exam, examsQueryKey }: Props) => {
     <Fragment>
       <div className="h-full space-y-16 rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background sm:space-y-20">
         <div className="flex items-start justify-between gap-6">
-          <div className="w-[36ch] space-y-2 overflow-hidden sm:w-[34ch]">
+          <div className="w-[36ch] space-y-2 overflow-hidden md:w-[26ch]">
             {submissionGraded ? (
               <Tooltip
                 placement="top"

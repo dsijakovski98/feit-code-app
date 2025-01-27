@@ -96,7 +96,7 @@ const ResultsTab = () => {
         </TableHeader>
         <TableBody items={submissionsList} emptyContent="No one has submitted a solution.">
           {(submission) => (
-            <TableRow key={submission.id}>
+            <TableRow key={submission.id} className="cursor-pointer">
               {(columnKey) => (
                 <TableCell>
                   <ExamSubmissionProvider submission={submission}>

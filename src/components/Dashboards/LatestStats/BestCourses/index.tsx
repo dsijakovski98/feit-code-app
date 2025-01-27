@@ -8,6 +8,8 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
 
 import { ROUTES } from "@/constants/routes";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
+import { useCtx } from "@/hooks/useCtx";
 import { USER_TYPE, UserType } from "@/types";
 import { CourseStats } from "@/types/stats";
 
@@ -23,6 +25,8 @@ type Props = {
 };
 
 const BestCourses = ({ type, stats, isLoading }: Props) => {
+  const { isMobile, isMobileSm } = useCtx(ResponsiveContext);
+
   const chartConfig = useMemo(
     () =>
       ({
@@ -39,7 +43,20 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
   );
 
   const offset = useMemo(() => (type === USER_TYPE.student ? 10 : 100), [type]);
-  const rightPadding = useMemo(() => (type === USER_TYPE.student ? -90 : 50), [type]);
+
+  const rightPadding = useMemo(() => {
+    if (type === USER_TYPE.professor) return 50;
+
+    if (isMobileSm) {
+      return -10;
+    }
+
+    if (isMobile) {
+      return -90;
+    }
+
+    return -40;
+  }, [isMobileSm, isMobile, type]);
 
   const bestStats = useMemo(() => {
     if (stats === undefined) return undefined;
@@ -60,15 +77,16 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
   return (
     <div className="mb-[-12px] flex h-full flex-col items-start gap-6">
       <div className="flex w-full items-center justify-between gap-4">
-        <h2 className="text-xl font-semibold">{title}</h2>
+        <h2 className="text-xl font-semibold lg:text-lg">{title}</h2>
 
         <Link
           to={ROUTES.courses}
-          className="border-b border-b-transparent font-medium leading-tight text-foreground-300 transition-colors hover:border-b-foreground-300"
+          className="border-b border-b-transparent font-medium leading-tight text-foreground-300 transition-colors hover:border-b-foreground-300 lg:text-sm"
         >
           View All
         </Link>
       </div>
+
       {isLoading && (
         <div className="flex h-full max-h-[200px] w-full flex-1 flex-col justify-evenly">
           {dummyStats.map((_, idx) => (
@@ -76,15 +94,17 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
           ))}
         </div>
       )}
+
       {bestStats === null && (
         <div className="grid h-full max-h-[200px] w-full flex-1 place-items-center">
           <p className="text-foreground-300">No courses information available.</p>
         </div>
       )}
+
       {bestStats && (
         <ChartContainer
           config={chartConfig}
-          className="h-full max-h-[200px] w-full flex-1 md:max-h-[180px] sm:max-h-[140px]"
+          className="h-full max-h-[200px] w-full flex-1 md:!h-fit"
           title="Horizontal stacked bar chart showing the best performing courses' points breakdown."
         >
           <BarChart layout="vertical" accessibilityLayer data={bestStats} maxBarSize={20}>
@@ -115,10 +135,10 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
               <LabelList
                 dataKey="course"
                 offset={8}
-                fontSize={14}
+                fontSize={isMobileSm ? 13 : 14}
                 fontWeight={500}
                 position="insideLeft"
-                className="translate-y-[-2.75ch] *:line-clamp-1 *:!fill-foreground sm:hidden"
+                className="translate-y-[-2.75ch] *:line-clamp-1 *:!fill-foreground"
               />
             </Bar>
 

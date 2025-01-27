@@ -1,6 +1,7 @@
 import CoursesStats from "@/components/Courses/CoursesStats";
 
 import { useStudentCoursesStats } from "@/hooks/student/useStudentCoursesStats";
+import { USER_TYPE } from "@/types";
 
 type Props = {
   studentId: string;
@@ -9,7 +10,7 @@ type Props = {
 const StudentCoursesStats = ({ studentId }: Props) => {
   const { data: stats, isPending } = useStudentCoursesStats(studentId);
 
-  return <CoursesStats stats={stats} isLoading={isPending} mode="grade" />;
+  return <CoursesStats type={USER_TYPE.student} stats={stats} isLoading={isPending} mode="grade" />;
 };
 
 export default StudentCoursesStats;

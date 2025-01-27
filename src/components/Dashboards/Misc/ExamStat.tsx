@@ -29,7 +29,7 @@ const ExamStat = ({ exam, color = "default" }: Props) => {
           {course.name}
         </p>
 
-        <p className="line-clamp-1 text-base font-semibold">
+        <p className="line-clamp-1 text-base font-semibold md:line-clamp-none">
           {fullName} (<Timestamp>{startsAt}</Timestamp>)
         </p>
       </div>

@@ -17,7 +17,7 @@ export const DashboardWindow = ({ isLoaded = true, className = "", children }: P
     >
       <section
         className={clsx(
-          "h-full rounded-xl border border-background/50 bg-background p-6 shadow-md",
+          "h-full rounded-xl border border-background/50 bg-background p-6 shadow-md md:p-4",
           className,
         )}
       >

@@ -38,7 +38,7 @@ const EmptyExamsList = ({ status, course }: Props) => {
   }, [statusValue, courseValue]);
 
   return (
-    <div className="grid h-full place-items-center p-8 text-center">
+    <div className="grid h-fit place-items-center px-8 py-10 text-center">
       <p className="text-lg text-foreground-300">{emptyExamsMessage}</p>
     </div>
   );
