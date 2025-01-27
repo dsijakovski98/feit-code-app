@@ -30,21 +30,31 @@ const StudentMajor = () => {
     },
   });
 
+  const successSubmit = (majorData: StudentOnboardingMajorSchema) => {
+    setForm((prev) => ({ ...prev, ...majorData }));
+    nextStep();
+  };
+
   const { mutate, isPending } = useMutation({
     mutationFn: checkStudentIndex,
 
-    onSuccess: (success, majorData) => {
-      if (!success) return;
-
-      setForm((prev) => ({ ...prev, ...majorData }));
-      nextStep();
+    onSuccess: (_, majorData) => {
+      successSubmit(majorData);
     },
 
     onError: (error) => toast.error(error.message),
   });
 
   const onSubmit: SubmitHandler<StudentOnboardingMajorSchema> = (majorData) => {
-    mutate(majorData);
+    const newIndexNumber = form.indexNumber !== majorData.indexNumber;
+    const newIndexYear = form.indexYear !== majorData.indexYear;
+    const newIndex = newIndexNumber || newIndexYear;
+
+    if (newIndex) {
+      mutate(majorData);
+    } else {
+      successSubmit(majorData);
+    }
   };
 
   return (

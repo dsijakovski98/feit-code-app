@@ -19,8 +19,6 @@ export const checkStudentIndex = async ({ indexNumber, indexYear }: StudentOnboa
   if (existingStudent) {
     throw new Error(`A student with the index ${number}/${year} already exists!`);
   }
-
-  return true;
 };
 
 type AddOptions = {
