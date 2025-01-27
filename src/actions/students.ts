@@ -5,13 +5,24 @@ import { studentCourses } from "@/db/schema";
 import { db } from "@/db";
 import { StudentOnboardingMajorSchema } from "@/utils/schemas/onboarding/studentOnboarding";
 
-export const checkStudentIndex = async ({ indexNumber, indexYear }: StudentOnboardingMajorSchema) => {
+type IndexOptions = {
+  studentData: StudentOnboardingMajorSchema;
+  studentId?: string;
+};
+
+export const checkStudentIndex = async ({ studentData, studentId }: IndexOptions) => {
+  const { indexNumber, indexYear } = studentData;
+
   const number = Number(indexNumber);
   const year = Number(indexYear);
 
   const existingStudent = await db.query.students.findFirst({
-    where: (students, { and, eq }) => {
-      return and(eq(students.indexNumber, number), eq(students.indexYear, year));
+    where: (students, { and, eq, ne }) => {
+      const indexFilter = and(eq(students.indexNumber, number), eq(students.indexYear, year));
+
+      if (!studentId) return indexFilter;
+
+      return and(indexFilter, ne(students.id, studentId));
     },
     columns: { indexNumber: true, indexYear: true },
   });

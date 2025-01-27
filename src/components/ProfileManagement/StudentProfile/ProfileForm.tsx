@@ -11,6 +11,7 @@ import AvatarUpload from "@/components/ProfileManagement/AvatarUpload";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
+import { checkStudentIndex } from "@/actions/students";
 import { updateStudent } from "@/actions/users";
 import { MAJORS } from "@/constants/students";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
@@ -52,6 +53,8 @@ const StudentProfileForm = ({ student }: Props) => {
 
   const onSubmit: SubmitHandler<StudentProfileSchema> = async (formData) => {
     try {
+      await checkStudentIndex({ studentData: formData, studentId: userId });
+
       await updateStudent({ ...formData, avatarUrl, userId });
 
       await Promise.all([

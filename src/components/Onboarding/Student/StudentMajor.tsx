@@ -38,8 +38,8 @@ const StudentMajor = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: checkStudentIndex,
 
-    onSuccess: (_, majorData) => {
-      successSubmit(majorData);
+    onSuccess: (_, { studentData }) => {
+      successSubmit(studentData);
     },
 
     onError: (error) => toast.error(error.message),
@@ -51,7 +51,7 @@ const StudentMajor = () => {
     const newIndex = newIndexNumber || newIndexYear;
 
     if (newIndex) {
-      mutate(majorData);
+      mutate({ studentData: majorData });
     } else {
       successSubmit(majorData);
     }
