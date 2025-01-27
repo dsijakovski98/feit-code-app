@@ -83,7 +83,7 @@ const AddStudent = () => {
       description={student.email}
       avatarProps={{ className: "hidden" }}
       classNames={{
-        name: "font-semibold text-base",
+        name: "font-semibold text-base lg:text-sm",
         description: "text-xs",
       }}
     />
@@ -113,14 +113,14 @@ const AddStudent = () => {
         classNames={{
           base: "font-serif",
           backdrop: "bg-background/50",
-          header: "border-b border-b-content3 dark:border-b-content3/50 py-3",
-          body: "pb-0 pt-6",
+          header: "border-b border-b-content3 dark:border-b-content3/50 py-3 lg:px-4",
+          body: "pb-0 pt-6 lg:px-4",
         }}
       >
         <ModalContent>
           {(onClose) => (
             <Fragment>
-              <ModalHeader className="text-2xl">New Students</ModalHeader>
+              <ModalHeader className="text-2xl lg:text-xl">New Students</ModalHeader>
 
               <ModalBody className="relative mb-8">
                 <div className="space-y-8">

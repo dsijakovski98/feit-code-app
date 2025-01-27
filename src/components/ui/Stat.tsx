@@ -11,8 +11,8 @@ const Stat = ({ value, label, size = "md" }: Props) => {
     <div>
       <p
         className={clsx("font-bold", {
-          "text-6xl font-bold": size === "md",
-          "text-4xl font-semibold": size === "sm",
+          "text-6xl font-bold md:text-5xl": size === "md",
+          "text-4xl font-semibold md:text-3xl": size === "sm",
         })}
       >
         {value > 9 ? "9+" : value}

@@ -44,12 +44,12 @@ const NewExamPage = () => {
   }
 
   return (
-    <section className="bg-main flex h-full items-start gap-4 px-8 py-6 lg:flex-col lg:justify-start lg:gap-6 lg:px-5">
+    <section className="bg-main flex h-full items-start gap-4 px-8 py-6 lg:flex-col lg:justify-start lg:gap-2 lg:px-5">
       <Link
         to={`${ROUTES.courses}/${id}`}
-        className="flex w-fit items-center font-semibold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:-translate-x-1 lg:gap-0.5 lg:text-lg"
+        className="flex w-fit items-center font-semibold uppercase transition-colors hover:text-primary-500 focus:text-primary-500 lg:-translate-x-1 lg:gap-0.5 lg:text-base"
       >
-        <Icon name="left" className="h-6 w-6" />
+        <Icon name="left" className="h-6 w-6 lg:h-5 lg:w-5" />
         Back to Course
       </Link>
 

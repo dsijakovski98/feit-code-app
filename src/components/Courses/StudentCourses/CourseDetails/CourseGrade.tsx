@@ -21,8 +21,8 @@ const CourseGrade = () => {
   });
 
   return (
-    <div className="space-y-1">
-      <div className="grid aspect-square max-h-[70px] max-w-[70px] place-items-center rounded-md bg-default dark:bg-default-100">
+    <div className="flex flex-col gap-1 space-y-1 md:items-center">
+      <div className="grid aspect-square h-[70px] w-[70px] shrink-0 place-items-center rounded-md bg-default dark:bg-default-100">
         {isPending ? <Spinner /> : <p className="text-5xl font-semibold">{grade ?? "-"}</p>}
       </div>
 

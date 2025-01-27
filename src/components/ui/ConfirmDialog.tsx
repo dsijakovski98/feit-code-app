@@ -51,8 +51,8 @@ const ConfirmDialog = (props: Props) => {
       classNames={{
         base: "font-serif",
         backdrop: "bg-background/50",
-        header: "border-b border-b-content3 dark:border-b-content3/50 py-3",
-        body: "pb-0 pt-4",
+        header: "border-b border-b-content3 dark:border-b-content3/50 py-3 lg:px-4",
+        body: "pb-0 pt-4 lg:px-4",
       }}
     >
       <ModalContent>

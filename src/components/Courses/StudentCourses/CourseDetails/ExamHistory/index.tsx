@@ -35,7 +35,7 @@ const ExamHistory = () => {
         variant="ghost"
         isLoading={isPending}
         isDisabled={!examHistory}
-        startContent={!isPending && <Icon name="history" className="h-5 w-5" />}
+        startContent={!isPending && <Icon name="history" className="h-5 min-h-5 w-5 min-w-5" />}
         onPress={dialog.toggleOn}
         className="text-sm"
       >
@@ -53,13 +53,13 @@ const ExamHistory = () => {
           classNames={{
             base: "font-serif",
             backdrop: "bg-background/50",
-            header: "border-b border-b-content3 dark:border-b-content3/50 py-3 text-2xl",
+            header: "border-b border-b-content3 dark:border-b-content3/50 py-3 lg:px-4 text-2xl",
             body: "py-4",
           }}
         >
           <ModalContent>
             <ModalHeader className="block">
-              <p className="text-2xl">{name}</p>
+              <p className="text-2xl lg:text-xl">{name}</p>
 
               <p className="text-base font-normal">Exam History</p>
             </ModalHeader>
@@ -77,7 +77,7 @@ const ExamHistory = () => {
                     <ListboxItem
                       key={historyItem.id}
                       textValue={historyItem.exam.name}
-                      className="rounded-lg p-3"
+                      className="rounded-lg p-3 lg:p-0"
                     >
                       {historyItem.status === SUBMISSION_STATUS.graded ? (
                         <Link

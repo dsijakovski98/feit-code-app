@@ -25,7 +25,7 @@ const PercentageStats = ({ stats, height, avg = false }: Props) => {
       className="max-h-[var(--height)] w-full"
       title="Area chart showing the percentage points for each completed exam."
     >
-      <AreaChart accessibilityLayer data={stats}>
+      <AreaChart accessibilityLayer data={stats} margin={{ left: -16 }}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
         <XAxis dataKey="exam" tickLine={false} axisLine={false} tickMargin={8} />

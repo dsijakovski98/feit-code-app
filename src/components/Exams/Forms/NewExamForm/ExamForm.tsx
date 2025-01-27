@@ -51,8 +51,8 @@ const ExamForm = () => {
   const namePlaceholder = useExamNamePlaceholder(name);
 
   return (
-    <form id="new-exam-form" onSubmit={handleSubmit(onSubmit)} className="space-y-14 lg:pb-4">
-      <div className="space-y-4">
+    <form id="new-exam-form" onSubmit={handleSubmit(onSubmit)} className="space-y-14 lg:space-y-6 lg:pb-20">
+      <div className="space-y-4 lg:flex lg:flex-col lg:gap-2">
         <Controller
           control={control}
           name="name"
@@ -104,7 +104,7 @@ const ExamForm = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-4 *:basis-full lg:contents">
+      <div className="flex items-center justify-between gap-4 *:basis-full">
         <Button size="lg" fullWidth type="submit" className="transition-size">
           Continue
         </Button>

@@ -38,7 +38,7 @@ const UpcomingDetails = () => {
   if (canStart) {
     return (
       <div className="grid h-full place-items-center content-center gap-4">
-        <p className="text-2xl font-semibold">Ready to Start!</p>
+        <p className="text-2xl font-semibold">Exam is ready to start!</p>
         <Button color="secondary" onPress={handleStartExam} isLoading={isPending}>
           Start Exam
         </Button>

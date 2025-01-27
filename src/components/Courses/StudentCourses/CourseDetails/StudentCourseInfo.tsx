@@ -31,10 +31,10 @@ const StudentCourseInfo = () => {
 
   if (joinedData === null) {
     return (
-      <div className="flex h-full flex-col">
-        <h4 className="text-pretty text-xl font-semibold">You & This Course</h4>
+      <div className="flex h-full flex-col lg:gap-6">
+        <h4 className="text-pretty text-xl font-semibold lg:text-lg">You & This Course</h4>
 
-        <div className="grid h-full place-items-center content-center gap-4">
+        <div className="grid h-full place-items-center content-center gap-4 md:*:w-full">
           <p className="font-semibold text-foreground-300">You are not a member of {name} yet.</p>
 
           <CourseCardProvider course={courseDetails} mode={USER_TYPE.student}>
@@ -49,10 +49,10 @@ const StudentCourseInfo = () => {
 
   return (
     <JoinedCourseProvider joinedData={joinedData}>
-      <div className="flex h-full flex-col justify-between gap-20">
-        <div className="flex items-start justify-between gap-6">
+      <div className="flex h-full flex-col justify-between gap-20 md:gap-10">
+        <div className="flex items-start justify-between gap-6 sm:flex-col sm:*:w-full">
           <div>
-            <h2 className="text-xl font-semibold">You & This Course</h2>
+            <h2 className="text-xl font-semibold lg:text-lg">You & This Course</h2>
             <p>
               You joined <Timestamp>{joinedData.joinedAt}</Timestamp>
             </p>
@@ -61,7 +61,7 @@ const StudentCourseInfo = () => {
           <ExamHistory />
         </div>
 
-        <div className="flex items-end justify-between gap-6">
+        <div className="flex flex-wrap items-end justify-between gap-6 md:flex-col md:items-center">
           <CourseGrade />
 
           <ActiveExam />

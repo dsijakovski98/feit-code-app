@@ -96,7 +96,7 @@ const BestCourses = ({ type, stats, isLoading }: Props) => {
       )}
 
       {bestStats === null && (
-        <div className="grid h-full max-h-[200px] w-full flex-1 place-items-center">
+        <div className="grid h-full min-h-[200px] w-full flex-1 place-items-center pb-5">
           <p className="text-foreground-300">No courses information available.</p>
         </div>
       )}

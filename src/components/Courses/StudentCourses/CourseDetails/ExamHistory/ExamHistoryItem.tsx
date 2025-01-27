@@ -20,7 +20,7 @@ const ExamHistoryItem = ({ historyItem, isLink = false }: Props) => {
   );
 
   return (
-    <div className="flex flex-1 items-center justify-between gap-4 text-lg md:flex-wrap">
+    <div className="flex flex-1 items-center justify-between gap-4 text-lg lg:text-base md:flex-wrap">
       <div className="*:leading-tight">
         <p className="flex items-start gap-1.5 font-semibold">
           <span>
@@ -32,7 +32,7 @@ const ExamHistoryItem = ({ historyItem, isLink = false }: Props) => {
       </div>
 
       {examGrade ? (
-        <p className="font-sans text-xl font-semibold">
+        <p className="font-sans text-xl font-semibold lg:text-lg">
           {points}/{exam.points}
         </p>
       ) : (

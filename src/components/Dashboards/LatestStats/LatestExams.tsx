@@ -56,6 +56,7 @@ const LatestExams = ({ userData }: Props) => {
       {latestExams && (
         <Listbox
           as="ol"
+          items={latestExams}
           variant="flat"
           aria-label={`List of the ${LATEST_EXAMS} exams.`}
           classNames={{
@@ -63,16 +64,19 @@ const LatestExams = ({ userData }: Props) => {
             list: "flex flex-col h-full gap-3 justify-start lg:gap-6",
           }}
         >
-          {latestExams.map((exam) => {
+          {(exam) => {
             const { type } = userData;
             const { id, course } = exam;
 
             return (
-              <ListboxItem key={exam.id} className="h-fit rounded-lg" textValue={exam.name}>
-                <Link
-                  className="flex cursor-pointer items-center justify-between gap-4 md:flex-col md:items-start md:gap-2"
-                  to={type === USER_TYPE.student ? `${ROUTES.courses}/${course.id}` : `${ROUTES.exams}/${id}`}
-                >
+              <ListboxItem
+                key={exam.id}
+                as={Link}
+                // @ts-expect-error NextUI not passing through 'as' props
+                to={type === USER_TYPE.student ? `${ROUTES.courses}/${course.id}` : `${ROUTES.exams}/${id}`}
+                className="h-fit rounded-lg"
+              >
+                <div className="flex cursor-pointer items-center justify-between gap-4 md:flex-col md:items-start md:gap-2">
                   <ExamStat exam={exam} color="light" />
 
                   <Chip
@@ -84,10 +88,10 @@ const LatestExams = ({ userData }: Props) => {
                   >
                     {parseExamStatus(exam.status)}
                   </Chip>
-                </Link>
+                </div>
               </ListboxItem>
             );
-          })}
+          }}
         </Listbox>
       )}
     </div>

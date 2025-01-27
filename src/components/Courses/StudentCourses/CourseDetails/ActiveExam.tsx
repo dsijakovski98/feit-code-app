@@ -23,7 +23,7 @@ const ActiveExam = () => {
   const { courseDetails } = useCtx(CourseDetailsContext);
   const { id: courseId } = courseDetails;
 
-  const { data: exam, isLoading: examLoading } = useLatestExam({ courseId });
+  const { data: exam, isPending: examLoading } = useLatestExam({ courseId });
 
   const { data: submission, isLoading: submissionLoading } = useSubmissionDetails({
     examId: exam?.id ?? "",

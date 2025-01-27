@@ -66,13 +66,13 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
       classNames={{
         base: "font-serif",
         backdrop: "bg-background/50",
-        header: "border-b border-b-content3 dark:border-b-content3/50 py-3",
-        body: "py-6",
+        header: "border-b border-b-content3 dark:border-b-content3/50 py-3 lg:px-4",
+        body: "py-6 lg:px-4",
       }}
     >
       <ModalContent>
         <ModalHeader className="flex-col">
-          <p className="text-2xl">
+          <p className="text-pretty text-2xl lg:text-xl">
             {exam.name}・{exam.language}
           </p>
           <p className="font-sans text-base font-medium *:font-medium">
@@ -97,7 +97,7 @@ const ExamFeedback = ({ exam, dialog, onSeen }: Props) => {
 
           <MarkdownPreview source={feedback!} className="rounded-lg !bg-background p-4 !text-foreground" />
 
-          <p className="text-end font-sans text-2xl font-semibold">
+          <p className="text-end font-sans text-2xl font-semibold lg:text-xl">
             {submission.points}/{exam.points} pts
           </p>
         </ModalBody>

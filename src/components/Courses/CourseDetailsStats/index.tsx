@@ -26,10 +26,10 @@ const CourseDetailsStats = ({ stats, isLoading = false, ...rest }: Props) => {
   });
 
   return (
-    <div className="flex h-full w-full flex-col justify-between gap-4">
+    <div className="flex h-full w-full flex-col justify-between gap-4 md:gap-8">
       <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-start">
         <div>
-          <h2 className="text-2xl font-semibold">Exams statistics</h2>
+          <h2 className="text-2xl font-semibold lg:text-xl">Exams statistics</h2>
           <p>Last 10 exams</p>
         </div>
 
