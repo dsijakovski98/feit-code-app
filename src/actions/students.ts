@@ -3,6 +3,25 @@ import { and, eq } from "drizzle-orm";
 import { studentCourses } from "@/db/schema";
 
 import { db } from "@/db";
+import { StudentOnboardingMajorSchema } from "@/utils/schemas/onboarding/studentOnboarding";
+
+export const checkStudentIndex = async ({ indexNumber, indexYear }: StudentOnboardingMajorSchema) => {
+  const number = Number(indexNumber);
+  const year = Number(indexYear);
+
+  const existingStudent = await db.query.students.findFirst({
+    where: (students, { and, eq }) => {
+      return and(eq(students.indexNumber, number), eq(students.indexYear, year));
+    },
+    columns: { indexNumber: true, indexYear: true },
+  });
+
+  if (existingStudent) {
+    throw new Error(`A student with the index ${number}/${year} already exists!`);
+  }
+
+  return true;
+};
 
 type AddOptions = {
   studentIds: string[];

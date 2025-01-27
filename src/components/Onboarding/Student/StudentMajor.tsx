@@ -1,12 +1,15 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 import { Select, SelectItem } from "@heroui/select";
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useMutation } from "@tanstack/react-query";
 
 import { StudentOnboardingContext } from "@/components/Onboarding/Student";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 
+import { checkStudentIndex } from "@/actions/students";
 import { MAJORS } from "@/constants/students";
 import { OnboardingContext } from "@/context/OnboardingContext";
 import { ResponsiveContext } from "@/context/ResponsiveContext";
@@ -27,9 +30,21 @@ const StudentMajor = () => {
     },
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: checkStudentIndex,
+
+    onSuccess: (success, majorData) => {
+      if (!success) return;
+
+      setForm((prev) => ({ ...prev, ...majorData }));
+      nextStep();
+    },
+
+    onError: (error) => toast.error(error.message),
+  });
+
   const onSubmit: SubmitHandler<StudentOnboardingMajorSchema> = (majorData) => {
-    setForm((prev) => ({ ...prev, ...majorData }));
-    nextStep();
+    mutate(majorData);
   };
 
   return (
@@ -45,6 +60,7 @@ const StudentMajor = () => {
           <Controller
             control={control}
             name="indexNumber"
+            disabled={isPending}
             render={({ field, fieldState }) => (
               <Input
                 {...field}
@@ -56,6 +72,7 @@ const StudentMajor = () => {
                 label="Index number"
                 placeholder="ex. 203"
                 pattern="[0-9]+"
+                isDisabled={isPending}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
               />
@@ -65,6 +82,7 @@ const StudentMajor = () => {
           <Controller
             control={control}
             name="indexYear"
+            disabled={isPending}
             render={({ field, fieldState }) => (
               <Input
                 {...field}
@@ -74,6 +92,7 @@ const StudentMajor = () => {
                 inputMode="numeric"
                 label="Index year"
                 placeholder="ex. 2017"
+                isDisabled={isPending}
                 isInvalid={fieldState.invalid}
                 errorMessage={fieldState.error?.message}
               />
@@ -84,6 +103,7 @@ const StudentMajor = () => {
         <Controller
           control={control}
           name="major"
+          disabled={isPending}
           render={({ field, fieldState }) => (
             <Select
               {...field}
@@ -93,6 +113,7 @@ const StudentMajor = () => {
               variant="underlined"
               defaultSelectedKeys={[form.major]}
               isInvalid={fieldState.invalid}
+              isDisabled={isPending}
               errorMessage={fieldState.error?.message}
               classNames={{ label: "font-semibold !text-foreground text-lg" }}
             >
@@ -108,11 +129,18 @@ const StudentMajor = () => {
       </div>
 
       <div className="flex gap-4">
-        <Button fullWidth color="default" variant="bordered" size={isMobile ? "md" : "lg"} onPress={prevStep}>
+        <Button
+          fullWidth
+          color="default"
+          variant="bordered"
+          size={isMobile ? "md" : "lg"}
+          isDisabled={isPending}
+          onPress={prevStep}
+        >
           Go back
         </Button>
 
-        <Button fullWidth type="submit" size={isMobile ? "md" : "lg"}>
+        <Button fullWidth type="submit" size={isMobile ? "md" : "lg"} isLoading={isPending}>
           Continue
         </Button>
       </div>
