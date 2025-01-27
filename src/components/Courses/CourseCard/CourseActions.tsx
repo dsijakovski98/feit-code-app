@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import clsx from "clsx";
-
 import JoinCourse from "@/components/Courses/Forms/JoinCourse";
 import Button from "@/components/ui/Button";
 
@@ -14,7 +12,7 @@ const CourseActions = () => {
   const { id } = course;
 
   return (
-    <div className={clsx("mt-auto flex items-stretch justify-between gap-4 lg:pb-1")}>
+    <div className="mt-auto flex items-stretch justify-between gap-4 lg:ml-auto lg:pb-1">
       <Button
         as={Link}
         // @ts-expect-error NextUI not passing through 'as' props

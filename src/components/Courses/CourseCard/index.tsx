@@ -9,10 +9,14 @@ import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import Icon from "@/components/ui/Icon";
 
 import CourseCardProvider, { CourseCardContext } from "@/context/CourseCardContext";
+import { ResponsiveContext } from "@/context/ResponsiveContext";
 import { useDeleteCourse } from "@/hooks/course/useDeleteCourse";
+import { useCtx } from "@/hooks/useCtx";
 import { useToggle } from "@/hooks/useToggle";
 
 const CourseCard = (props: CourseCardContext) => {
+  const { isMobile } = useCtx(ResponsiveContext);
+
   const { course } = props;
   const { id, name, academicYear, archived, description, professorId } = course;
 
@@ -27,7 +31,7 @@ const CourseCard = (props: CourseCardContext) => {
   return (
     <CourseCardProvider {...props}>
       <div className="relative flex h-full min-h-[210px] flex-col justify-between gap-2 overflow-hidden rounded-lg border border-content3 bg-content1 p-4 font-sans shadow-md dark:border-content1 dark:bg-background">
-        <div className="flex h-full w-[40ch] flex-col justify-start space-y-5 overflow-hidden lg:w-[30ch] lg:space-y-8">
+        <div className="flex h-full w-[40ch] flex-col justify-start space-y-5 overflow-hidden lg:w-[32ch] lg:space-y-8">
           <div className="flex items-start justify-between gap-6">
             <div>
               <span className="text-sm font-semibold text-primary dark:text-primary-700">{academicYear}</span>
@@ -39,14 +43,15 @@ const CourseCard = (props: CourseCardContext) => {
             <Avatar size="sm" color="primary" fallback={<Icon name="course" />} />
           </div>
 
-          <p className="line-clamp-2 h-[5.5ch] pb-2 text-base font-medium text-foreground-400">
+          <p className="line-clamp-2 h-[5.5ch] pb-1 text-base font-medium text-foreground-400">
             {description}
           </p>
 
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex max-h-10 items-center justify-between gap-4 empty:py-4">
             {!archived && (
               <Fragment>
-                <CourseCategories />
+                {!isMobile && <CourseCategories />}
+
                 <CourseActions />
               </Fragment>
             )}
