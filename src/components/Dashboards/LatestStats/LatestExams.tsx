@@ -29,11 +29,11 @@ const LatestExams = ({ userData }: Props) => {
   return (
     <div className="flex h-full flex-col items-start gap-6">
       <div className="flex w-full items-center justify-between gap-4">
-        <h2 className="text-xl font-semibold">Latest Exams</h2>
+        <h2 className="text-xl font-semibold lg:text-lg">Latest Exams</h2>
 
         <Link
           to={ROUTES.exams}
-          className="border-b border-b-transparent font-medium leading-tight text-foreground-300 transition-colors hover:border-b-foreground-300"
+          className="border-b border-b-transparent font-medium leading-tight text-foreground-300 transition-colors hover:border-b-foreground-300 lg:text-sm"
         >
           View All
         </Link>
@@ -70,7 +70,7 @@ const LatestExams = ({ userData }: Props) => {
             return (
               <ListboxItem key={exam.id} className="h-fit rounded-lg" textValue={exam.name}>
                 <Link
-                  className="flex cursor-pointer items-center justify-between gap-4"
+                  className="flex cursor-pointer items-center justify-between gap-4 md:flex-col md:items-start md:gap-2"
                   to={type === USER_TYPE.student ? `${ROUTES.courses}/${course.id}` : `${ROUTES.exams}/${id}`}
                 >
                   <ExamStat exam={exam} color="light" />
@@ -79,6 +79,7 @@ const LatestExams = ({ userData }: Props) => {
                     size="sm"
                     variant="light"
                     color={examStatusColor(exam.status)}
+                    className="p-0"
                     classNames={{ content: "font-semibold text-sm p-0" }}
                   >
                     {parseExamStatus(exam.status)}

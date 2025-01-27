@@ -68,8 +68,8 @@ const ProfessorExamDetails = () => {
           classNames={{
             base: "!px-0 sticky top-20 lg:top-0 bg-transparent z-20",
             tabContent: "text-foreground group-data-[selected]:font-semibold",
-            tabList: "!mx-0 py-5 bg-main",
-            panel: "pt-3 px-10 lg:px-5 overflow-y-scroll max-h-[calc(100dvh-85px-80px)] lg:pb-5",
+            tabList: "!mx-0 py-4 lg:py-3 bg-main",
+            panel: "pt-3 px-10 lg:px-2 overflow-y-scroll max-h-[calc(100dvh-85px-80px)] lg:pb-5",
           }}
         >
           <Tab key={TABS.general} title="General" href={TABS.general}>

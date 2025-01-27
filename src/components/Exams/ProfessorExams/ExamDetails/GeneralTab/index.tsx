@@ -24,7 +24,7 @@ const GeneralTab = () => {
   const { status } = examDetails;
 
   return (
-    <section className="exam-general lg:block lg:space-y-4 lg:pb-12">
+    <section className="exam-general lg:block lg:space-y-6 lg:pb-12">
       <div className="[grid-area:general]">
         <ExamGeneral />
       </div>

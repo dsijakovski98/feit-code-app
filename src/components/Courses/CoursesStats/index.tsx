@@ -9,17 +9,19 @@ import { AxisDomain } from "recharts/types/util/types";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/shadcn/chart";
 import TooltipLabel from "@/components/ui/shadcn/tooltip-label";
 
+import { USER_TYPE, UserType } from "@/types";
 import { CourseStats } from "@/types/stats";
 import { capitalize } from "@/utils";
 
 type Props = {
   stats?: CourseStats | null;
 
+  type: UserType;
   mode: "grade" | "percentage";
   isLoading?: boolean;
 };
 
-const CoursesStats = ({ stats, mode, isLoading }: Props) => {
+const CoursesStats = ({ type, stats, mode, isLoading }: Props) => {
   const modeLabel = useMemo(() => capitalize(mode), [mode]);
 
   const chartConfig = useMemo(
@@ -29,6 +31,8 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
       }) satisfies ChartConfig,
     [modeLabel],
   );
+
+  const leftMargin = useMemo(() => (type === USER_TYPE.student ? -32 : -16), [type]);
 
   const avgValue = useMemo(() => {
     if (!stats || stats.length === 0) return "-";
@@ -48,8 +52,8 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
   }
 
   return (
-    <section className="flex flex-col gap-3 px-8">
-      <div className="flex items-center justify-between">
+    <section className="flex flex-col gap-4 px-8 lg:gap-6">
+      <div className="flex items-center justify-between lg:items-end">
         <div>
           <h2 className="text-lg font-bold uppercase text-foreground/90">Stats</h2>
           <p className="text-foreground-300">Average {modeLabel}s</p>
@@ -57,11 +61,11 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
 
         {avgValue && (
           <div className="text-end">
-            <p className="font-sans text-4xl font-semibold">
+            <p className="font-sans text-4xl font-semibold lg:text-3xl md:text-2xl">
               {avgValue}
               {mode === "percentage" && avgValue !== "-" && "%"}
             </p>
-            <p className="text-foreground-300">Average Total {modeLabel}</p>
+            <p className="text-foreground-300 lg:hidden">Average Total {modeLabel}</p>
           </div>
         )}
       </div>
@@ -78,7 +82,13 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
           className="max-h-[420px] w-full"
           title="Bar chart showing the course grades for each course."
         >
-          <BarChart accessibilityLayer data={stats} barGap={10} maxBarSize={160}>
+          <BarChart
+            accessibilityLayer
+            data={stats}
+            barGap={10}
+            maxBarSize={160}
+            margin={{ left: leftMargin }}
+          >
             <CartesianGrid vertical={false} opacity={0.15} />
 
             <XAxis dataKey="course" axisLine={false} tickMargin={10} />
@@ -89,6 +99,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
               axisLine={false}
               ticks={ticks}
               domain={axisDomain}
+              padding={{ top: 1 }}
               tickFormatter={(value) => {
                 const parsedVal = Math.round(Number(value)).toString();
 
@@ -114,7 +125,7 @@ const CoursesStats = ({ stats, mode, isLoading }: Props) => {
               <LabelList
                 position="center"
                 formatter={(value: number) => (mode === "grade" ? value : value + "%")}
-                className={clsx("fill-foreground font-mono text-lg", {
+                className={clsx("fill-foreground font-mono text-lg lg:hidden", {
                   "!text-base": stats.length > 10,
                   "!text-sm": stats.length > 20,
                 })}

@@ -5,7 +5,6 @@ import Split from "react-split";
 import { useMutation } from "@tanstack/react-query";
 import MarkdownEditor from "@uiw/react-markdown-editor";
 import clsx from "clsx";
-import { useTheme } from "next-themes";
 
 import { useAuth } from "@clerk/clerk-react";
 
@@ -28,7 +27,6 @@ import { prefillFeedback } from "@/utils/exams/results";
 
 const GradeSubmission = () => {
   const { getToken } = useAuth();
-  const { theme } = useTheme();
 
   const submitDialog = useToggle();
 
@@ -146,9 +144,8 @@ const GradeSubmission = () => {
                   onChange={onFeedbackChange}
                   toolbars={FEEDBACK_TOOLBAR_LEFT}
                   toolbarsMode={FEEDBACK_TOOLBAR_RIGHT}
-                  theme={theme as "light" | "dark"}
-                  style={markdownWidth ? { width: `${markdownWidth}px` } : {}}
-                  className="h-full !bg-transparent text-base *:!bg-transparent [&_.cm-editor]:!bg-transparent [&_.md-editor-toolbar]:!px-8"
+                  style={{ width: markdownWidth ? `${markdownWidth}px` : undefined }}
+                  className="h-full !bg-transparent text-base *:!bg-transparent [&_.cm-editor]:!bg-transparent [&_.md-editor-preview]:bg-background [&_.md-editor-preview_*]:bg-background [&_.md-editor-preview_*]:text-foreground [&_.md-editor-toolbar]:!px-8"
                 />
               </div>
             </div>

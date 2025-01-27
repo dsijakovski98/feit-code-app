@@ -43,7 +43,7 @@ const CourseCard = (props: CourseCardContext) => {
             {description}
           </p>
 
-          <div className="flex items-center justify-between gap-4 lg:flex-col lg:items-start">
+          <div className="flex items-center justify-between gap-4">
             {!archived && (
               <Fragment>
                 <CourseCategories />

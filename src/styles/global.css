@@ -131,8 +131,12 @@
   @apply min-w-[39px];
 }
 
+.cm-line {
+  @apply text-foreground-400;
+}
+
 .md-editor-toolbar {
-  @apply !gap-3.5 !p-3;
+  @apply !gap-3.5 !p-3 *:!text-foreground-400;
 }
 
 .md-editor-toolbar:is(:first-child, :last-child) {

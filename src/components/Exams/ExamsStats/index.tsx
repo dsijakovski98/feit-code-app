@@ -57,7 +57,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
       className={clsx("max-h-[420px] w-full", className)}
       title="Bar chart showing the percentage points for each completed exam, grouped by course."
     >
-      <BarChart accessibilityLayer data={targetStats} barGap={10} maxBarSize={160}>
+      <BarChart accessibilityLayer data={targetStats} barGap={10} maxBarSize={160} margin={{ left: -8 }}>
         <CartesianGrid vertical={false} opacity={0.1} />
 
         <XAxis dataKey="course" axisLine={false} tickMargin={10} fontWeight={500} />
@@ -69,6 +69,7 @@ const ExamsStats = ({ stats, courseIds, isLoading = false, className = "" }: Pro
           tickLine={false}
           axisLine={false}
           fontWeight={500}
+          padding={{ top: 1 }}
           tickFormatter={(value) => Math.round(Number(value)).toString() + "%"}
         />
 
