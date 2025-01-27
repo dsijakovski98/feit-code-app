@@ -61,11 +61,17 @@ const UserAvatar = () => {
         </DropdownItem>
 
         <DropdownSection className="!px-1">
-          <DropdownItem key="help" textValue="Help & Feedback" className="font-serif">
-            <Link to={helpFeedbackUrl} target="_blank">
+          <DropdownItem
+            as={Link}
+            // @ts-expect-error NextUI not passing through 'as' props
+            to={helpFeedbackUrl}
+            key="help"
+            className="font-serif"
+          >
+            <div>
               <p className="text-sm font-semibold">Help & Feedback</p>
               <p className="text-xs text-content4-foreground">Report an issue</p>
-            </Link>
+            </div>
           </DropdownItem>
 
           <DropdownItem key="sign-out" textValue="Sign out" onPress={() => logOut()} className="font-serif">
