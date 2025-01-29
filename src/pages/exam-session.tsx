@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import { Helmet } from "react-helmet";
 
 import LogoFC from "@/layouts/MainLayout/LogoFC";
+import PageMeta from "@/layouts/PageMeta";
 
 import ExamSession from "@/components/ExamSession";
 import RemoveSessionHandler from "@/components/ExamSession/Handlers/RemoveSessionHandler";
@@ -28,9 +28,7 @@ const ExamSessionPage = () => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | Exam Session: {exam.name}</title>
-      </Helmet>
+      <PageMeta title={`FEIT Code | Exam Session: ${exam.name}`} />
 
       <div className="relative h-dvh">
         <div className="bg-dots absolute inset-0 z-[-1] brightness-75" />

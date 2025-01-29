@@ -1,9 +1,10 @@
-import { Helmet } from "react-helmet";
 import { Outlet } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 
 import { Spinner } from "@heroui/spinner";
 import clsx from "clsx";
+
+import PageMeta from "@/layouts/PageMeta";
 
 type Props = {
   bg?: "main" | "dots";
@@ -13,9 +14,7 @@ type Props = {
 const PageFallback = ({ bg = "main", outlet = false }: Props) => {
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code Loading...</title>
-      </Helmet>
+      <PageMeta title="FEIT Code Loading..." />
 
       <div
         className={clsx("grid h-dvh place-items-center", {

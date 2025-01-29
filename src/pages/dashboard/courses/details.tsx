@@ -1,8 +1,9 @@
 import { Suspense, lazy } from "react";
-import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "@heroui/spinner";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
@@ -55,10 +56,7 @@ const CourseDetailsPage = () => {
 
   return (
     <CourseDetailsProvider courseDetails={course}>
-      <Helmet>
-        <title>FEIT Code Course | {course.name}</title>
-        <meta name="description" content={course.description ?? course.name} />
-      </Helmet>
+      <PageMeta title={`FEIT Code Course | ${course.name}`} description={course.description || course.name} />
 
       <Suspense fallback={null}>
         {userData.type === USER_TYPE.student ? <StudentCourseDetails /> : <ProfessorCourseDetails />}

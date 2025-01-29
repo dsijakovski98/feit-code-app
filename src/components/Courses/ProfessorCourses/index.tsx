@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
-import { Helmet } from "react-helmet";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import CoursesHeader from "@/components/Courses/Misc/CoursesHeader";
 import ProfessorCoursesList from "@/components/Courses/ProfessorCourses/ProfessorCoursesList";
@@ -28,10 +29,10 @@ const ProfessorCourses = ({ user }: Props) => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | My Courses</title>
-        <meta name="description" content="Check out your courses for this semester and all time." />
-      </Helmet>
+      <PageMeta
+        title="FEIT Code | My Courses"
+        description="Check out your courses for this semester and all time."
+      />
 
       <div className="bg-main grid h-full min-h-full grid-cols-1 grid-rows-[auto_1fr] py-4 lg:h-auto lg:gap-12 lg:pb-20">
         <section className="z-10 min-h-[320px] space-y-2">

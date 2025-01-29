@@ -1,7 +1,8 @@
-import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "@heroui/spinner";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import NewExamForm from "@/components/Exams/Forms/NewExamForm";
 import Button from "@/components/ui/Button";
@@ -57,10 +58,10 @@ const NewExamPage = () => {
       <div className="mx-auto h-full w-[80ch] -translate-x-[80px] -translate-y-1 xl:translate-x-0 lg:w-full lg:translate-y-0">
         {courseDetails && (
           <CourseDetailsProvider courseDetails={courseDetails}>
-            <Helmet>
-              <title>FEIT Code Course | {courseDetails.name}: New Exam</title>
-              <meta name="description" content={`Create a new Exam for the ${courseDetails.name} course.`} />
-            </Helmet>
+            <PageMeta
+              title={`FEIT Code Course | ${courseDetails.name}: New Exam`}
+              description={`Create a new Exam for the ${courseDetails.name} course.`}
+            />
 
             <ExamFormProvider>
               <NewExamForm />

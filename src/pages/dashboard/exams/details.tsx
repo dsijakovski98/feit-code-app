@@ -1,7 +1,8 @@
-import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "@heroui/spinner";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import ProfessorExamDetails from "@/components/Exams/ProfessorExams/ExamDetails";
 import Button from "@/components/ui/Button";
@@ -52,13 +53,10 @@ const ExamDetailsPage = () => {
 
   return (
     <ExamDetailsProvider examDetails={exam}>
-      <Helmet>
-        <title>FEIT Code Exam | {exam.name}</title>
-        <meta
-          name="description"
-          content={`${exam.name} - an exam for the ${exam.course.name} course, taking place on ${formatTimestamp(exam.startsAt)}`}
-        />
-      </Helmet>
+      <PageMeta
+        title={`FEIT Code Exam | ${exam.name}`}
+        description={`${exam.name} - an exam for the ${exam.course.name} course, taking place on ${formatTimestamp(exam.startsAt)}`}
+      />
 
       <ProfessorExamDetails />
     </ExamDetailsProvider>

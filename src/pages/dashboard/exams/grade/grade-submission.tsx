@@ -1,9 +1,10 @@
 import { Fragment, useEffect } from "react";
-import { Helmet } from "react-helmet";
 import { Link, Navigate, useParams } from "react-router-dom";
 
 import { Spinner } from "@heroui/spinner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import GradeSubmission from "@/components/GradeSubmission";
 import Button from "@/components/ui/Button";
@@ -45,9 +46,7 @@ const GradeStudentPage = () => {
 
     return (
       <Fragment>
-        <Helmet>
-          <title>FEIT Code | Grade Student</title>
-        </Helmet>
+        <PageMeta title="FEIT Code | Grade Student" />
 
         {isLoading && (
           <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
@@ -83,17 +82,14 @@ const GradeStudentPage = () => {
     return <Navigate to={`${ROUTES.exams}/${examId}#results`} replace />;
   }
 
+  const { student } = submission;
+
   return (
     <GradeSubmissionProvider submission={submission}>
-      <Helmet>
-        <title>
-          FEIT Code | Grade Student: {submission.student.firstName} {submission.student.lastName}
-        </title>
-        <meta
-          name="description"
-          content="Grade the submission provided by each student and give comprehensive feedback."
-        />
-      </Helmet>
+      <PageMeta
+        title={`FEIT Code | Grade Student: ${student.firstName} ${student.lastName}`}
+        description="Grade the submission provided by each student and give comprehensive feedback."
+      />
 
       <GradeSubmission />
     </GradeSubmissionProvider>
