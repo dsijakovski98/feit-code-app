@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Helmet } from "react-helmet";
 
 import LogoFC from "@/layouts/MainLayout/LogoFC";
 
@@ -27,6 +28,10 @@ const ExamSessionPage = () => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>FEIT Code | Exam Session: {exam.name}</title>
+      </Helmet>
+
       <div className="relative h-dvh">
         <div className="bg-dots absolute inset-0 z-[-1] brightness-75" />
 
@@ -50,17 +55,17 @@ const ExamSessionPage = () => {
             </nav>
           </header>
 
-          <div className="lg:hidden lg:*:!pointer-events-none">
+          <main className="lg:hidden lg:*:!pointer-events-none">
             <ExamSessionTaskProvider task={currentTask}>
               <ExamSession />
             </ExamSessionTaskProvider>
-          </div>
+          </main>
 
-          <div className="absolute inset-0 hidden place-items-center p-5 pt-0 lg:grid">
+          <main className="absolute inset-0 hidden place-items-center p-5 pt-0 lg:grid">
             <h1 className="text-center font-sans text-lg font-semibold">
               For the best experience, please use the Desktop version. Sorry for the inconvenience.
             </h1>
-          </div>
+          </main>
         </div>
       </div>
 

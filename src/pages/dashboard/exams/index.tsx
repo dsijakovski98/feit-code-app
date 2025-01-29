@@ -1,4 +1,5 @@
-import { Suspense, lazy } from "react";
+import { Fragment, Suspense, lazy } from "react";
+import { Helmet } from "react-helmet";
 
 import { Spinner } from "@heroui/spinner";
 
@@ -11,22 +12,29 @@ const StudentExams = lazy(() => import("@/components/Exams/StudentExams"));
 const ExamsPage = () => {
   const { userData } = useFCUser();
 
-  if (!userData) {
-    return (
-      <div className="bg-main grid h-full place-items-center">
-        <Spinner size="lg" className="scale-150" />
-      </div>
-    );
-  }
-
   return (
-    <Suspense fallback={null}>
-      {userData.type === USER_TYPE.student ? (
-        <StudentExams user={userData.user} />
-      ) : (
-        <ProfessorExams user={userData.user} />
+    <Fragment>
+      <Helmet>
+        <title>FEIT Code | Exams</title>
+        <meta name="description" content="Check out all of the exams that FEIT Code has to offer." />
+      </Helmet>
+
+      {!userData && (
+        <div className="bg-main grid h-full place-items-center">
+          <Spinner size="lg" className="scale-150" />
+        </div>
       )}
-    </Suspense>
+
+      {userData && (
+        <Suspense fallback={null}>
+          {userData.type === USER_TYPE.student ? (
+            <StudentExams user={userData.user} />
+          ) : (
+            <ProfessorExams user={userData.user} />
+          )}
+        </Suspense>
+      )}
+    </Fragment>
   );
 };
 

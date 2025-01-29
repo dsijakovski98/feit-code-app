@@ -13,8 +13,6 @@ import UserTypeOnlyLayout from "@/layouts/UserTypeOnly";
 
 import CallbackSSO from "@/pages/auth/sso-callback";
 
-import PageWrapper from "@/components/PageWrapper";
-
 import { ROUTES } from "@/constants/routes";
 import { USER_TYPE } from "@/types";
 
@@ -42,92 +40,90 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PageWrapper />}>
-          <Route element={<AuthLayout mode="protect" />}>
-            <Route element={<OnboardingLayout mode="onboard" />}>
-              <Route element={<MainLayout />}>
-                <Route path={ROUTES.home} element={<Navigate to={ROUTES.dashboard} />} />
+        <Route element={<AuthLayout mode="protect" />}>
+          <Route element={<OnboardingLayout mode="onboard" />}>
+            <Route element={<MainLayout />}>
+              <Route path={ROUTES.home} element={<Navigate to={ROUTES.dashboard} />} />
 
-                <Route path={ROUTES.dashboard} element={<Dashboard />} />
+              <Route path={ROUTES.dashboard} element={<Dashboard />} />
 
-                <Route path="courses">
-                  <Route index element={<CoursesPage />} />
+              <Route path="courses">
+                <Route index element={<CoursesPage />} />
+
+                <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                  <Route path="new" element={<NewCoursePage />} />
+                </Route>
+
+                <Route path=":id" element={<CourseDetailsLayout />}>
+                  <Route index element={<CourseDetailsPage />} />
 
                   <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                    <Route path="new" element={<NewCoursePage />} />
-                  </Route>
-
-                  <Route path=":id" element={<CourseDetailsLayout />}>
-                    <Route index element={<CourseDetailsPage />} />
-
-                    <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                      <Route path="new-exam" element={<NewExamPage />} />
-                    </Route>
-                  </Route>
-                </Route>
-
-                <Route path="exams">
-                  <Route index element={<ExamsPage />} />
-
-                  <Route path=":id" element={<ExamDetailsLayout />}>
-                    <Route index element={<ExamDetailsPage />} />
-
-                    <Route path="grade" element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                      <Route index element={<GradeExamRedirect />} />
-                      <Route path=":sid" element={<GradeSubmissionPage />} />
-                    </Route>
-                  </Route>
-                </Route>
-
-                <Route path={ROUTES.profile} element={<ProfilePage />} />
-              </Route>
-
-              <Route element={<UserTypeOnlyLayout type={USER_TYPE.student} />}>
-                <Route
-                  element={
-                    <Suspense fallback={<PageFallback bg="dots" />}>
-                      <Outlet />
-                    </Suspense>
-                  }
-                >
-                  <Route element={<ExamSessionLayout />}>
-                    <Route element={<StudentExamLayout />}>
-                      <Route path={ROUTES.examSession}>
-                        <Route index element={<Navigate to={ROUTES.dashboard} />} />
-
-                        <Route path=":id" element={<ExamSessionPage />} />
-                      </Route>
-                    </Route>
+                    <Route path="new-exam" element={<NewExamPage />} />
                   </Route>
                 </Route>
               </Route>
+
+              <Route path="exams">
+                <Route index element={<ExamsPage />} />
+
+                <Route path=":id" element={<ExamDetailsLayout />}>
+                  <Route index element={<ExamDetailsPage />} />
+
+                  <Route path="grade" element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                    <Route index element={<GradeExamRedirect />} />
+                    <Route path=":sid" element={<GradeSubmissionPage />} />
+                  </Route>
+                </Route>
+              </Route>
+
+              <Route path={ROUTES.profile} element={<ProfilePage />} />
             </Route>
 
-            <Route element={<OnboardingLayout mode="welcome" />}>
-              <Route path={ROUTES.welcome} element={<WelcomePage />} />
-            </Route>
-          </Route>
+            <Route element={<UserTypeOnlyLayout type={USER_TYPE.student} />}>
+              <Route
+                element={
+                  <Suspense fallback={<PageFallback bg="dots" />}>
+                    <Outlet />
+                  </Suspense>
+                }
+              >
+                <Route element={<ExamSessionLayout />}>
+                  <Route element={<StudentExamLayout />}>
+                    <Route path={ROUTES.examSession}>
+                      <Route index element={<Navigate to={ROUTES.dashboard} />} />
 
-          <Route element={<AuthLayout mode="auth-pages" />}>
-            <Route
-              element={
-                <Suspense fallback={<PageFallback />}>
-                  <Outlet />
-                </Suspense>
-              }
-            >
-              <Route path={ROUTES.signIn} element={<SignInPage />} />
-              <Route path={ROUTES.signUp} element={<SignUpPage />} />
-              <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
-
-              <Route element={<PageFallback outlet bg="dots" />}>
-                <Route path={ROUTES.ssoCallback} element={<CallbackSSO />} />
+                      <Route path=":id" element={<ExamSessionPage />} />
+                    </Route>
+                  </Route>
+                </Route>
               </Route>
             </Route>
           </Route>
 
-          <Route path="*" element={<UnknownPage />} />
+          <Route element={<OnboardingLayout mode="welcome" />}>
+            <Route path={ROUTES.welcome} element={<WelcomePage />} />
+          </Route>
         </Route>
+
+        <Route element={<AuthLayout mode="auth-pages" />}>
+          <Route
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <Outlet />
+              </Suspense>
+            }
+          >
+            <Route path={ROUTES.signIn} element={<SignInPage />} />
+            <Route path={ROUTES.signUp} element={<SignUpPage />} />
+            <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
+
+            <Route element={<PageFallback outlet bg="dots" />}>
+              <Route path={ROUTES.ssoCallback} element={<CallbackSSO />} />
+            </Route>
+          </Route>
+        </Route>
+
+        <Route path="*" element={<UnknownPage />} />
       </Routes>
     </BrowserRouter>
   );

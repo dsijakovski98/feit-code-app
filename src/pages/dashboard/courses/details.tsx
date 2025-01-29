@@ -1,4 +1,5 @@
 import { Suspense, lazy } from "react";
+import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "@heroui/spinner";
@@ -19,7 +20,7 @@ const CourseDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
 
   const { userData, isLoading: userIsLoading } = useFCUser();
-  const { data, error, isLoading } = useCourseDetails(id);
+  const { data: course, error, isLoading } = useCourseDetails(id);
 
   if (error) {
     return (
@@ -48,12 +49,17 @@ const CourseDetailsPage = () => {
     );
   }
 
-  if (!data || !userData) {
+  if (!course || !userData) {
     return null;
   }
 
   return (
-    <CourseDetailsProvider courseDetails={data}>
+    <CourseDetailsProvider courseDetails={course}>
+      <Helmet>
+        <title>FEIT Code Course | {course.name}</title>
+        <meta name="description" content={course.description ?? course.name} />
+      </Helmet>
+
       <Suspense fallback={null}>
         {userData.type === USER_TYPE.student ? <StudentCourseDetails /> : <ProfessorCourseDetails />}
       </Suspense>
