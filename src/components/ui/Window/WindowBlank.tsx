@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
 
-import { PAGE_TITLES, ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/constants/routes";
 import { Toggle } from "@/hooks/useToggle";
 
 type Props = {
@@ -20,7 +20,9 @@ const WindowBlank = ({ show, minimized }: Props) => {
 
   const shouldShow = useMemo(() => !show.open || minimized.open, [show.open, minimized.open]);
   const actionBtnLabel = useMemo(() => {
-    if (pathname === ROUTES.signIn || pathname === ROUTES.signUp) return PAGE_TITLES[pathname];
+    if (pathname === ROUTES.signIn) return "Sign In";
+
+    if (pathname === ROUTES.signUp) return "Sign Up";
 
     if (pathname === ROUTES.forgotPassword) return "Reset password";
 

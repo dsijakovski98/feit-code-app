@@ -17,19 +17,6 @@ export const ROUTES = {
   gradeExam: "/grade",
 } as const;
 
-export const PAGE_TITLES = {
-  "/dashboard": "Dashboard",
-  "/welcome": "Welcome",
-  "/courses": "Courses",
-  "/exams": "Exams",
-
-  "/sign-in": "Sign in",
-  "/sign-up": "Sign up",
-  "/forgot-password": "Forgot password",
-
-  "/profile": "Profile",
-} as const;
-
 const websiteBaseUrl = import.meta.env.VITE_WEBSITE_URL;
 
 export const HREF = {

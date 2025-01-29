@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Link, useParams } from "react-router-dom";
 
 import { Spinner } from "@heroui/spinner";
@@ -10,12 +11,13 @@ import { ROUTES } from "@/constants/routes";
 import ExamDetailsProvider from "@/context/ExamDetailsContext";
 import { useExamDetails } from "@/hooks/exam/useExamDetails";
 import { useFCUser } from "@/hooks/useFCUser";
+import { formatTimestamp } from "@/utils/dates";
 
 const ExamDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
 
   const { userData, isLoading: userIsLoading } = useFCUser();
-  const { data, error, isLoading } = useExamDetails(id);
+  const { data: exam, error, isLoading } = useExamDetails(id);
 
   if (error) {
     return (
@@ -44,12 +46,20 @@ const ExamDetailsPage = () => {
     );
   }
 
-  if (!data || !userData) {
+  if (!exam || !userData) {
     return null;
   }
 
   return (
-    <ExamDetailsProvider examDetails={data}>
+    <ExamDetailsProvider examDetails={exam}>
+      <Helmet>
+        <title>FEIT Code Exam | {exam.name}</title>
+        <meta
+          name="description"
+          content={`${exam.name} - an exam for the ${exam.course.name} course, taking place on ${formatTimestamp(exam.startsAt)}`}
+        />
+      </Helmet>
+
       <ProfessorExamDetails />
     </ExamDetailsProvider>
   );
