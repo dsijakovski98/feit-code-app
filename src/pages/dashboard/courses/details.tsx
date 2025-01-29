@@ -56,7 +56,7 @@ const CourseDetailsPage = () => {
 
   return (
     <CourseDetailsProvider courseDetails={course}>
-      <PageMeta title={`FEIT Code Course | ${course.name}`} description={course.description ?? course.name} />
+      <PageMeta title={`FEIT Code Course | ${course.name}`} description={course.description || course.name} />
 
       <Suspense fallback={null}>
         {userData.type === USER_TYPE.student ? <StudentCourseDetails /> : <ProfessorCourseDetails />}
