@@ -1,4 +1,6 @@
+import { Helmet } from "react-helmet";
 import { Outlet } from "react-router-dom";
+import { Fragment } from "react/jsx-runtime";
 
 import { Spinner } from "@heroui/spinner";
 import clsx from "clsx";
@@ -10,16 +12,22 @@ type Props = {
 
 const PageFallback = ({ bg = "main", outlet = false }: Props) => {
   return (
-    <div
-      className={clsx("grid h-dvh place-items-center", {
-        "bg-main": bg === "main",
-        "bg-dots brightness-75": bg === "dots",
-      })}
-    >
-      <Spinner size="lg" className="scale-[2.2]" />
+    <Fragment>
+      <Helmet>
+        <title>FEIT Code Loading...</title>
+      </Helmet>
 
-      {outlet && <Outlet />}
-    </div>
+      <div
+        className={clsx("grid h-dvh place-items-center", {
+          "bg-main": bg === "main",
+          "bg-dots brightness-75": bg === "dots",
+        })}
+      >
+        <Spinner size="lg" className="scale-[2.2]" />
+
+        {outlet && <Outlet />}
+      </div>
+    </Fragment>
   );
 };
 

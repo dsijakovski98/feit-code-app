@@ -37,25 +37,10 @@ const GradeStudentPage = () => {
     }
   }, [submission?.status, mutate, submission?.id]);
 
-  if (isLoading) {
-    return (
-      <Fragment>
-        <Helmet>
-          <title>FEIT Code | Grade Student</title>
-        </Helmet>
-
-        <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
-          <Spinner size="lg" className="scale-150" />
-        </section>
-      </Fragment>
-    );
-  }
-
-  if (error) {
-    const submissionNotFound = !!error.message.match(/submission not found/i);
+  if (isLoading || error) {
+    const submissionNotFound = !!error?.message.match(/submission not found/i);
 
     const errorHref = submissionNotFound ? `${ROUTES.exams}/${examId}#results` : ROUTES.exams;
-
     const errorLabel = submissionNotFound ? "Back to Results" : "Back to Exams";
 
     return (
@@ -64,20 +49,28 @@ const GradeStudentPage = () => {
           <title>FEIT Code | Grade Student</title>
         </Helmet>
 
-        <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
-          <h2 className="text-2xl font-medium text-danger">{error.message}</h2>
-          <Button
-            variant="light"
-            color="default"
-            as={Link}
-            // @ts-expect-error NextUI not passing through 'as' props
-            to={errorHref}
-            className="text-base"
-            startContent={<Icon name="left" className="h-5 w-5" />}
-          >
-            {errorLabel}
-          </Button>
-        </section>
+        {isLoading && (
+          <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
+            <Spinner size="lg" className="scale-150" />
+          </section>
+        )}
+
+        {error && (
+          <section className="bg-main grid h-full place-items-center content-center gap-4 pt-4 lg:pt-2">
+            <h2 className="text-2xl font-medium text-danger">{error.message}</h2>
+            <Button
+              variant="light"
+              color="default"
+              as={Link}
+              // @ts-expect-error NextUI not passing through 'as' props
+              to={errorHref}
+              className="text-base"
+              startContent={<Icon name="left" className="h-5 w-5" />}
+            >
+              {errorLabel}
+            </Button>
+          </section>
+        )}
       </Fragment>
     );
   }
