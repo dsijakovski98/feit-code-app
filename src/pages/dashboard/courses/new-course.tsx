@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import NewCourseForm from "@/components/Courses/Forms/NewCourseForm";
 import Icon from "@/components/ui/Icon";
@@ -14,13 +15,10 @@ const NewCoursePage = () => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | New Course</title>
-        <meta
-          name="description"
-          content={`Create a new Course which you will be teaching for the ${academicYear} semester.`}
-        />
-      </Helmet>
+      <PageMeta
+        title="FEIT Code | New Course"
+        description={`Create a new Course which you will be teaching for the ${academicYear} semester.`}
+      />
 
       <section className="bg-main flex h-auto items-start gap-4 px-8 py-6 lg:flex-col lg:justify-start lg:gap-6 lg:px-5">
         <Link

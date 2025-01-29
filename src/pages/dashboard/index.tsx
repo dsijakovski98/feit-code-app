@@ -1,5 +1,6 @@
 import { Fragment, Suspense, lazy } from "react";
-import { Helmet } from "react-helmet";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import DashboardSkeleton from "@/components/Dashboards/Skeleton";
 
@@ -14,13 +15,10 @@ const Dashboard = () => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | Dashboard</title>
-        <meta
-          name="description"
-          content="Check out your latest stats and news regarding the Courses and Exams taking place this semester."
-        />
-      </Helmet>
+      <PageMeta
+        title="FEIT Code | Dashboard"
+        description="Check out your latest stats and news regarding the Courses and Exams taking place this semester."
+      />
 
       {!userData && <DashboardSkeleton />}
 

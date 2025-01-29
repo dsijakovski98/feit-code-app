@@ -1,8 +1,9 @@
 import { Fragment, Suspense, lazy } from "react";
-import { Helmet } from "react-helmet";
 
 import { Spinner } from "@heroui/spinner";
 import { Tab, Tabs } from "@heroui/tabs";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import ProfileSettings from "@/components/ProfileManagement/Settings";
 
@@ -17,10 +18,10 @@ const ProfilePage = () => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | Profile</title>
-        <meta name="description" content="See your profile details and update them as you need." />
-      </Helmet>
+      <PageMeta
+        title="FEIT Code | Profile"
+        description="See your profile details and update them as you need."
+      />
 
       <section className="bg-main min-h-full p-4 pt-0">
         <div className="mx-auto h-full max-w-[90ch] md:max-w-full">

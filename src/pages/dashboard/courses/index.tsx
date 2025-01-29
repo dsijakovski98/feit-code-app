@@ -1,7 +1,8 @@
 import { Fragment, Suspense, lazy } from "react";
-import { Helmet } from "react-helmet";
 
 import { Spinner } from "@heroui/spinner";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import { useFCUser } from "@/hooks/useFCUser";
 import { USER_TYPE } from "@/types";
@@ -14,10 +15,10 @@ const CoursesPage = () => {
 
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | Courses</title>
-        <meta name="description" content="Check out all of the courses that FEIT Code has to offer." />
-      </Helmet>
+      <PageMeta
+        title="FEIT Code | Courses"
+        description="Check out all of the courses that FEIT Code has to offer."
+      />
 
       {!userData && (
         <div className="bg-main grid h-full place-items-center">

@@ -1,6 +1,7 @@
 import { Fragment } from "react";
-import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+
+import PageMeta from "@/layouts/PageMeta";
 
 import Button from "@/components/ui/Button";
 
@@ -11,10 +12,7 @@ const heading = "Oops! Looks like you hit a dead end!";
 const UnknownPage = () => {
   return (
     <Fragment>
-      <Helmet>
-        <title>FEIT Code | 404</title>
-        <meta name="description" content={heading} />
-      </Helmet>
+      <PageMeta title="FEIT Code | 404" description={heading} />
 
       <main className="bg-dots grid min-h-dvh place-items-center brightness-50 dark:brightness-100">
         <h1 className="bg-dots fixed left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] scale-[5] bg-clip-text font-mono text-9xl font-extrabold text-transparent opacity-60 lg:scale-[4] md:scale-[2]">
