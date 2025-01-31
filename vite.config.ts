@@ -2,6 +2,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { defineConfig } from "vite";
 import { imagetools } from "vite-imagetools";
+import sitemap from "vite-plugin-sitemap";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import webFontDownload from "vite-plugin-webfont-dl";
 
@@ -10,12 +11,17 @@ export default defineConfig({
 
   plugins: [
     react(),
+
     imagetools(),
+
+    sitemap({ hostname: "https://app.feitcode.com" }),
+
     webFontDownload([
       "https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap",
       "https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap",
       "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap",
     ]),
+
     createSvgIconsPlugin({
       // Specify the icon folder to be cached
       iconDirs: [path.resolve(process.cwd(), "src/icons")],
