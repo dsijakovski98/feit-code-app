@@ -6,7 +6,7 @@ import "./styles.css";
 
 const GeneralTab = () => {
   return (
-    <section className="course-general min-h-full lg:block lg:space-y-6 lg:pb-12">
+    <section className="course-general min-h-full lg:block lg:space-y-5 lg:pb-12">
       <div className="[grid-area:details]">
         <CourseDetails />
       </div>

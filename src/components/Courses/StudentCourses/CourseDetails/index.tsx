@@ -6,7 +6,7 @@ import "./styles.css";
 
 const StudentCourseDetails = () => {
   return (
-    <section className="details bg-main h-full p-8 lg:block lg:h-auto lg:space-y-6 lg:p-5 lg:pb-20">
+    <section className="details bg-main h-full p-8 lg:block lg:h-auto lg:space-y-5 lg:p-5 lg:pb-20">
       <div className="[grid-area:details]">
         <CourseDetails />
       </div>
