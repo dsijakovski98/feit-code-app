@@ -36,7 +36,7 @@ const CancelExam = ({ label }: Props) => {
       });
 
       toast(`${name} exam canceled!`);
-      navigate(ROUTES.exams);
+      navigate(ROUTES.exams, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });

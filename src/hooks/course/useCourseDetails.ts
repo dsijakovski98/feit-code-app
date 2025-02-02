@@ -17,7 +17,12 @@ export const useCourseDetails = (courseId?: string) => {
             assistant: true,
             categories: { with: { category: true } },
           },
-          where: (courses, { eq }) => eq(courses.id, courseId),
+          where: (courses, { eq, and }) => {
+            const courseFilter = eq(courses.id, courseId);
+            const activeFilter = eq(courses.archived, false);
+
+            return and(courseFilter, activeFilter);
+          },
         });
 
         if (!course) {

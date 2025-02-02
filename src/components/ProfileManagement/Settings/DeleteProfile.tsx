@@ -27,8 +27,8 @@ const DeleteProfile = () => {
     onSuccess: (success) => {
       if (!success) return;
 
-      navigate(ROUTES.signIn);
       toast(`Goodbye ${userData?.user.firstName}!`);
+      navigate(ROUTES.signIn, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });

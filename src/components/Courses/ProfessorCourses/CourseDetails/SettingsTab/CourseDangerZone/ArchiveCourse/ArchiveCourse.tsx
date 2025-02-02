@@ -36,7 +36,7 @@ const ArchiveCourse = () => {
       ]);
 
       toast(`${name} course archived!`);
-      navigate(ROUTES.courses);
+      navigate(ROUTES.courses, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });

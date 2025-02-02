@@ -26,7 +26,7 @@ export const useDeleteCourse = ({ name, professorId }: CourseOptions) => {
       });
 
       toast(`${name} course deleted!`);
-      navigate(ROUTES.courses);
+      navigate(ROUTES.courses, { replace: true });
     },
     onError: (error) => toast.error(error.message),
   });
