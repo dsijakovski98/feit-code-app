@@ -9,12 +9,13 @@ import StudentExamLayout from "@/layouts/ExamSession/StudentExamLayout";
 import MainLayout from "@/layouts/MainLayout";
 import OnboardingLayout from "@/layouts/OnboardingLayout";
 import PageFallback from "@/layouts/PageFallback";
+import TeacherTypeOnlyLayout from "@/layouts/TeacherTypeOnly";
 import UserTypeOnlyLayout from "@/layouts/UserTypeOnly";
 
 import CallbackSSO from "@/pages/auth/sso-callback";
 
 import { ROUTES } from "@/constants/routes";
-import { USER_TYPE } from "@/types";
+import { TEACHER_TYPE, USER_TYPE } from "@/types";
 
 const GradeSubmissionPage = lazy(() => import("@/pages/dashboard/exams/grade/grade-submission"));
 const GradeExamRedirect = lazy(() => import("@/pages/dashboard/exams/grade/redirect-to-exam"));
@@ -50,14 +51,14 @@ const AppRouter = () => {
               <Route path="courses">
                 <Route index element={<CoursesPage />} />
 
-                <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
-                  <Route path="new" element={<NewCoursePage />} />
+                <Route element={<TeacherTypeOnlyLayout type={TEACHER_TYPE.professor} />}>
+                  <Route path="new-course" element={<NewCoursePage />} />
                 </Route>
 
                 <Route path=":id" element={<CourseDetailsLayout />}>
                   <Route index element={<CourseDetailsPage />} />
 
-                  <Route element={<UserTypeOnlyLayout type={USER_TYPE.professor} />}>
+                  <Route element={<TeacherTypeOnlyLayout type={TEACHER_TYPE.professor} />}>
                     <Route path="new-exam" element={<NewExamPage />} />
                   </Route>
                 </Route>

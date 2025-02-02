@@ -24,6 +24,9 @@ export const simplePlural = (word: string, value: number) => `${word}${value !==
 
 export const capitalize = (word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase();
 
+// https://www.paulirish.com/2009/random-hex-color-code-snippets/
+export const randomHexColor = () => "#" + Math.floor(Math.random() * 16777215).toString(16);
+
 const timeZone = dayjs.tz.guess();
 
 /**

@@ -19,13 +19,7 @@ const AssistantSelect = ({ form, defaultValue }: Props) => {
     formState: { isSubmitting, errors },
   } = form;
 
-  const { assistants, isLoading, error } = useAssistants({
-    id: true,
-    email: true,
-    lastName: true,
-    firstName: true,
-    avatarUrl: true,
-  });
+  const { assistants, isLoading, error } = useAssistants();
 
   useEffect(() => {
     if (!error) return;

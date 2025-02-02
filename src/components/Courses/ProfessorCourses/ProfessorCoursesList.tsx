@@ -47,15 +47,17 @@ const ProfessorCoursesList = ({ user, search, courseYear }: Props) => {
         </Suspense>
       )}
 
-      <FloatButton
-        as={Link}
-        icon="add"
-        // @ts-expect-error NextUI not passing through 'as' props
-        to="new"
-        containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
-      >
-        New Course
-      </FloatButton>
+      {type === TEACHER_TYPE.professor && (
+        <FloatButton
+          as={Link}
+          icon="add"
+          // @ts-expect-error NextUI not passing through 'as' props
+          to="new-course"
+          containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
+        >
+          New Course
+        </FloatButton>
+      )}
 
       {!!courses?.pages.length && (
         <div className="overflow-x-clip">

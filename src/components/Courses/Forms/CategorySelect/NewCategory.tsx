@@ -7,7 +7,6 @@ import { Spinner } from "@heroui/spinner";
 import { Tooltip } from "@heroui/tooltip";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useQueryClient } from "@tanstack/react-query";
-import { useTheme } from "next-themes";
 import { InferInput, nonEmpty, object, pipe, string, trim } from "valibot";
 
 import { categories } from "@/db/schema";
@@ -18,6 +17,7 @@ import Input from "@/components/ui/Input";
 
 import { db } from "@/db";
 import { Toggle } from "@/hooks/useToggle";
+import { randomHexColor } from "@/utils";
 
 const NewCategorySchema = object({
   label: pipe(string(), trim(), nonEmpty("Field is required!")),
@@ -31,8 +31,6 @@ type Props = {
 };
 
 const NewCategory = ({ formToggle, loading = false }: Props) => {
-  const { theme } = useTheme();
-
   const queryClient = useQueryClient();
 
   const {
@@ -46,7 +44,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
     resolver: valibotResolver(NewCategorySchema),
     defaultValues: {
       label: "",
-      color: theme === "light" ? "#000000" : "#FFFFFF",
+      color: randomHexColor(),
     },
   });
 
@@ -72,7 +70,7 @@ const NewCategory = ({ formToggle, loading = false }: Props) => {
 
       toast.success(`${label} category created!`);
 
-      reset();
+      reset({ color: randomHexColor() });
     } catch (e) {
       // Sentry logging
       console.log({ e });

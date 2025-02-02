@@ -1,19 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { InferSelectModel } from "drizzle-orm";
-
-import { professors } from "@/db/schema";
 
 import { db } from "@/db";
-import { QueryColumns, TEACHER_TYPE } from "@/types";
+import { TEACHER_TYPE } from "@/types";
 
-export const useAssistants = (columns?: QueryColumns<InferSelectModel<typeof professors>>) => {
+export const useAssistants = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: [{ name: "assistants" }],
     queryFn: async () => {
       try {
         const assistants = await db.query.professors.findMany({
           where: (professors, { eq }) => eq(professors.type, TEACHER_TYPE.assistant),
-          columns,
+          columns: {
+            id: true,
+            email: true,
+            lastName: true,
+            firstName: true,
+            avatarUrl: true,
+          },
         });
 
         return assistants;
