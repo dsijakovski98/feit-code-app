@@ -43,8 +43,8 @@ const TimeOffChart = ({ timeOff, className = "" }: Props) => {
 
   return (
     <ChartContainer className={clsx("max-h-[420px] w-full px-0", className)} config={timeOffConfig}>
-      <BarChart accessibilityLayer data={timeOffData} maxBarSize={160} className="pl-2">
-        <CartesianGrid strokeDasharray="5" vertical={false} strokeOpacity={0.1} />
+      <BarChart accessibilityLayer data={timeOffData} maxBarSize={120} className="pl-2">
+        <CartesianGrid strokeDasharray="5" vertical={false} strokeOpacity={0.1} syncWithTicks />
 
         <YAxis dataKey="time" tickLine={false} axisLine={false} tickFormatter={(val) => `${val} min`} />
 

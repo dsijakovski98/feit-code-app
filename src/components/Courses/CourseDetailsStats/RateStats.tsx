@@ -30,8 +30,8 @@ const RateStats = ({ stats, height, avg = false }: Props) => {
       className="max-h-[var(--height)] w-full"
       title="Vertical stacked bar chart showing the points to total points ratio for each completed exam."
     >
-      <BarChart accessibilityLayer data={stats} maxBarSize={160} margin={{ left: -30 }}>
-        <CartesianGrid vertical={false} opacity={0.15} />
+      <BarChart accessibilityLayer data={stats} maxBarSize={120} margin={{ left: -30 }}>
+        <CartesianGrid vertical={false} opacity={0.1} strokeWidth={1.5} syncWithTicks />
 
         <XAxis dataKey="exam" tickMargin={10} />
 

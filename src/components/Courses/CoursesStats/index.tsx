@@ -84,12 +84,12 @@ const CoursesStats = ({ type, stats, mode, isLoading }: Props) => {
         >
           <BarChart
             accessibilityLayer
-            data={stats}
             barGap={10}
-            maxBarSize={160}
+            maxBarSize={120}
+            data={stats}
             margin={{ left: leftMargin }}
           >
-            <CartesianGrid vertical={false} opacity={0.15} />
+            <CartesianGrid vertical={false} opacity={0.1} strokeWidth={1.5} syncWithTicks />
 
             <XAxis dataKey="course" axisLine={false} tickMargin={10} />
 

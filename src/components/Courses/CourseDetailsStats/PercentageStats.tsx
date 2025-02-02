@@ -26,15 +26,16 @@ const PercentageStats = ({ stats, height, avg = false }: Props) => {
       title="Area chart showing the percentage points for each completed exam."
     >
       <AreaChart accessibilityLayer data={stats} margin={{ left: -16 }}>
-        <CartesianGrid vertical={false} opacity={0.1} />
+        <CartesianGrid vertical={false} opacity={0.1} strokeWidth={1.5} syncWithTicks />
 
-        <XAxis dataKey="exam" tickLine={false} axisLine={false} tickMargin={8} />
+        <XAxis dataKey="exam" tickLine={false} axisLine={false} tickMargin={8} padding={{ right: 4 }} />
 
         <YAxis
           type="number"
           domain={[0, 100]}
           tickLine={false}
           axisLine={false}
+          padding={{ top: 4 }}
           tickFormatter={(value) => Math.round(Number(value)).toString() + "%"}
         />
 
