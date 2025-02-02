@@ -27,13 +27,22 @@ const ScheduleExam = ({ form, disabled = false }: Props) => {
         render={({ field }) => (
           <DatePicker
             size="lg"
+            color="default"
             variant="underlined"
             minValue={today("UTC")}
             value={nextUIDate(field.value)}
             onChange={(e) => field.onChange(e?.toDate("UTC"))}
             label={<span className="text-base font-semibold text-foreground lg:text-sm">Start Date</span>}
+            calendarProps={{
+              classNames: {
+                title: "text-foreground",
+                nextButton: "text-foreground",
+                prevButton: "text-foreground",
+                gridHeaderRow: "text-foreground",
+              },
+            }}
             classNames={{
-              selectorIcon: "h-6 w-6",
+              selectorIcon: "h-6 w-6 text-foreground-400",
             }}
             dateInputClassNames={{
               segment: "focus:bg-primary focus:text-primary-foreground",
