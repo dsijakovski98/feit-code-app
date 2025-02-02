@@ -3,6 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 import { Badge } from "@heroui/badge";
 import { Tab, Tabs } from "@heroui/tabs";
+import clsx from "clsx";
 
 import { EXAM_STATUS } from "@/constants/enums";
 import { ExamDetailsContext } from "@/context/ExamDetailsContext";
@@ -36,11 +37,16 @@ const ProfessorExamDetails = () => {
       keys.push(TABS.monitor);
     }
 
+    const isProfessor = userData?.user.id === course.professorId;
+
     if (status === EXAM_STATUS.completed) {
-      keys.push(TABS.results, TABS.settings);
+      keys.push(TABS.results);
+
+      if (isProfessor) {
+        keys.push(TABS.settings);
+      }
     }
 
-    const isProfessor = userData?.user.id === course.professorId;
     if (status === EXAM_STATUS.new && isProfessor) {
       keys.push(TABS.settings);
     }
@@ -66,7 +72,9 @@ const ProfessorExamDetails = () => {
           selectedKey={hash}
           defaultSelectedKey="#general"
           classNames={{
-            base: "!px-0 sticky top-20 lg:top-0 bg-transparent z-20",
+            base: clsx("!px-0 sticky top-20 lg:top-0 bg-transparent z-20", {
+              "invisible pointer-events-none": tabKeys.length === 1,
+            }),
             tabContent: "text-foreground group-data-[selected]:font-semibold",
             tabList: "!mx-0 py-4 lg:py-3 bg-main",
             panel: "pt-3 px-10 lg:px-0 overflow-y-scroll max-h-[calc(100dvh-85px-80px)] lg:pb-5",
