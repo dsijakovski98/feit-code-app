@@ -50,9 +50,9 @@ const SidebarItem = (props: Props) => {
         <div className="grid place-items-center">
           <div
             className={clsx(
-              "h-7 w-7 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:!text-black group-focus:!text-black dark:group-hover:!text-primary-500 dark:group-focus:!text-primary-500 lg:h-6 lg:w-6",
+              "h-7 w-7 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:!text-foreground dark:group-hover:!text-primary-500 lg:h-6 lg:w-6",
               {
-                "!text-black dark:!text-primary-500": active,
+                "dark:!text-foreground": active,
               },
             )}
           >
@@ -60,9 +60,10 @@ const SidebarItem = (props: Props) => {
           </div>
           <p
             className={clsx(
-              "w-full text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500",
+              "w-full border-b-2 !border-transparent text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-foreground dark:group-hover:text-primary-500",
               {
-                "!text-black dark:!text-primary-500": active,
+                "border-b-2 !border-primary-foreground group-hover:!border-foreground dark:group-hover:!border-primary-500":
+                  active,
               },
             )}
           >
