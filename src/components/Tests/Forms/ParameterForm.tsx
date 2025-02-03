@@ -95,7 +95,12 @@ const ParameterForm = ({ type, control, name }: Props) => {
               }}
             >
               {Object.values(BOOLEANS).map((bool) => (
-                <SelectItem key={bool} title={bool} classNames={{ title: "font-mono" }} />
+                <SelectItem
+                  key={bool}
+                  title={bool}
+                  classNames={{ title: "font-mono", selectedIcon: "scale-[1.1]" }}
+                  className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
+                />
               ))}
             </Select>
           )}

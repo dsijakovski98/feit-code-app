@@ -64,7 +64,13 @@ const AssistantSelect = ({ form, defaultValue }: Props) => {
             const fullName = `${firstName} ${lastName}`;
 
             return (
-              <SelectItem key={id} textValue={id} aria-label={fullName}>
+              <SelectItem
+                key={id}
+                textValue={id}
+                aria-label={fullName}
+                classNames={{ selectedIcon: "scale-[1.1]" }}
+                className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
+              >
                 <div className="flex items-center gap-2">
                   <Avatar src={avatarUrl ?? ""} />
                   <div>

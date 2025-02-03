@@ -65,7 +65,12 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
           }}
         >
           {PROGRAMMING_LANGUAGES.map(({ name, img }) => (
-            <SelectItem key={name} textValue={img}>
+            <SelectItem
+              key={name}
+              textValue={img}
+              classNames={{ selectedIcon: "scale-[1.1]" }}
+              className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
+            >
               {renderItem({ name, img, size: "md" })}
             </SelectItem>
           ))}

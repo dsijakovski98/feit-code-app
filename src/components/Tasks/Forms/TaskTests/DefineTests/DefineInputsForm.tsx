@@ -112,7 +112,8 @@ const DefineInputsForm = () => {
                   <SelectItem
                     key={type}
                     textValue={type}
-                    classNames={{ title: "flex text-sm items-center gap-2" }}
+                    classNames={{ title: "flex text-sm items-center gap-2", selectedIcon: "scale-[1.1]" }}
+                    className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
                   >
                     <ParameterTypeIcon type={type} className="h-4 w-4" />
                     {type}

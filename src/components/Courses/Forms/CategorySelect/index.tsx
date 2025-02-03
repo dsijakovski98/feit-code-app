@@ -93,7 +93,8 @@ const CategorySelect = ({ form, defaultValue }: Props) => {
                 key={id}
                 textValue={id}
                 aria-label={label}
-                classNames={{ title: "flex items-center gap-2" }}
+                classNames={{ title: "flex items-center gap-2", selectedIcon: "scale-[1.1]" }}
+                className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
               >
                 <div
                   className={clsx("h-4 w-4 rounded-full", {

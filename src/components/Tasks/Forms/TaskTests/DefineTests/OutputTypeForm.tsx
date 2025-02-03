@@ -73,7 +73,8 @@ const OutputTypeForm = () => {
                 <SelectItem
                   key={type}
                   textValue={type}
-                  classNames={{ title: "flex text-base items-center gap-2" }}
+                  classNames={{ title: "flex text-base items-center gap-2", selectedIcon: "scale-[1.1]" }}
+                  className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
                 >
                   <ParameterTypeIcon type={type} className="h-5 w-5" />
                   {type}

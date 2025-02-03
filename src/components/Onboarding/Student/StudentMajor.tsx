@@ -128,7 +128,12 @@ const StudentMajor = () => {
               classNames={{ label: "font-semibold !text-foreground text-lg" }}
             >
               {MAJORS.map(({ label, description }) => (
-                <SelectItem key={label} textValue={label}>
+                <SelectItem
+                  key={label}
+                  textValue={label}
+                  classNames={{ selectedIcon: "scale-[1.1]" }}
+                  className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
+                >
                   <p className="text-base font-semibold">{label}</p>
                   <p className="text-sm text-foreground-400">{description}</p>
                 </SelectItem>

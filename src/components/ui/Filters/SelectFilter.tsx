@@ -30,7 +30,15 @@ const SelectFilter = <T extends Option[]>({ filter, ...rest }: Props<T>) => {
         label: "text-base font-semibold !text-foreground",
       }}
     >
-      {({ value, label }) => <SelectItem key={value}>{label}</SelectItem>}
+      {({ value, label }) => (
+        <SelectItem
+          key={value}
+          classNames={{ selectedIcon: "scale-[1.1]" }}
+          className="data-[selected]:bg-content3 dark:data-[selected]:bg-content2"
+        >
+          {label}
+        </SelectItem>
+      )}
     </Select>
   );
 };
