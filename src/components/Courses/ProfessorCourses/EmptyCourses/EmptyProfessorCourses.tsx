@@ -13,7 +13,7 @@ const EmptyProfessorCourses = () => {
       <Button
         as={Link}
         // @ts-expect-error NextUI not passing through 'as' props
-        to="new"
+        to="new-course"
         color="primary"
         startContent={<Icon name="add" className="h-5 w-5" />}
       >
