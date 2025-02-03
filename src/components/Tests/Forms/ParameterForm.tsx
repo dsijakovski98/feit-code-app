@@ -86,6 +86,8 @@ const ParameterForm = ({ type, control, name }: Props) => {
               label={name}
               color="default"
               variant="underlined"
+              selectionMode="single"
+              disallowEmptySelection
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               defaultSelectedKeys={[BOOLEANS.true]}

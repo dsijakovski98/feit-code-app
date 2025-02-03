@@ -61,8 +61,10 @@ const ProfessorBasicInfo = () => {
                 label="Type"
                 color="default"
                 variant="underlined"
-                defaultSelectedKeys={[form.type]}
+                selectionMode="single"
+                disallowEmptySelection
                 isInvalid={fieldState.invalid}
+                defaultSelectedKeys={[form.type]}
                 errorMessage={fieldState.error?.message}
                 classNames={{
                   label: "font-semibold !text-foreground text-lg",
@@ -91,11 +93,13 @@ const ProfessorBasicInfo = () => {
             <Select
               {...field}
               size="lg"
-              label="Department"
               color="default"
+              label="Department"
               variant="underlined"
-              defaultSelectedKeys={[form.department]}
+              selectionMode="single"
+              disallowEmptySelection
               isInvalid={fieldState.invalid}
+              defaultSelectedKeys={[form.department]}
               errorMessage={fieldState.error?.message}
               classNames={{
                 label: "font-semibold !text-foreground text-lg",

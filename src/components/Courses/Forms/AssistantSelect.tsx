@@ -46,9 +46,9 @@ const AssistantSelect = ({ form, defaultValue }: Props) => {
           size="lg"
           color="default"
           variant="underlined"
+          selectionMode="single"
           label="Teaching Assistant (optional)"
           placeholder="Select a Teaching Assistant"
-          selectionMode="single"
           description={description}
           isLoading={isLoading}
           isInvalid={fieldState.invalid}

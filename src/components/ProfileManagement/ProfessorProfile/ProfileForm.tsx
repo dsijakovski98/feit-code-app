@@ -102,6 +102,8 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 label="Major"
                 color="default"
                 variant="underlined"
+                selectionMode="single"
+                disallowEmptySelection
                 defaultSelectedKeys={[professor.department]}
                 isDisabled={isSubmitting}
                 isInvalid={fieldState.invalid}
@@ -137,6 +139,8 @@ const ProfessorProfileForm = ({ professor }: Props) => {
                 label="Type"
                 color="default"
                 variant="underlined"
+                selectionMode="single"
+                disallowEmptySelection
                 defaultSelectedKeys={[professor.type]}
                 isDisabled={isSubmitting}
                 isInvalid={fieldState.invalid}

@@ -46,14 +46,15 @@ const ProgrammingLanguageSelect = ({ form }: Props) => {
           {...field}
           size="lg"
           color="default"
+          label="Language"
           variant="underlined"
           selectionMode="single"
-          label="Language"
           description={
             <div className="flex translate-y-0.5 items-center text-foreground">
               <Icon name="test" className="mr-px h-4 w-4" /> - Supports Tests
             </div>
           }
+          disallowEmptySelection
           isDisabled={isSubmitting}
           isInvalid={fieldState.invalid}
           defaultSelectedKeys={[field.value]}

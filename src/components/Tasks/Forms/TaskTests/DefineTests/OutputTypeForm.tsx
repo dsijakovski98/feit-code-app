@@ -45,6 +45,7 @@ const OutputTypeForm = () => {
             color="default"
             variant="bordered"
             selectionMode="single"
+            disallowEmptySelection
             onSelectionChange={handleSelectionChange}
             isLoading={isSubmitting}
             isDisabled={isSubmitting}

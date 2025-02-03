@@ -121,6 +121,8 @@ const StudentMajor = () => {
               label="Major"
               color="default"
               variant="underlined"
+              selectionMode="single"
+              disallowEmptySelection
               defaultSelectedKeys={[form.major]}
               isInvalid={fieldState.invalid}
               isDisabled={isPending}

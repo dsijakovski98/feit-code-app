@@ -176,6 +176,8 @@ const StudentProfileForm = ({ student }: Props) => {
               label="Major"
               color="default"
               variant="underlined"
+              selectionMode="single"
+              disallowEmptySelection
               isDisabled={isSubmitting}
               defaultSelectedKeys={[student.major]}
               isInvalid={fieldState.invalid}

@@ -23,6 +23,7 @@ const SelectFilter = <T extends Option[]>({ filter, ...rest }: Props<T>) => {
       items={options}
       variant="bordered"
       selectionMode="single"
+      disallowEmptySelection
       selectedKeys={new Set([filterValue])}
       onSelectionChange={handleChange}
       radius="lg"
