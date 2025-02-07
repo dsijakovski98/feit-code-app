@@ -38,8 +38,6 @@ const StudentConfirm = () => {
   const [avatarUrl, setAvatarUrl] = useState(diceBear.getRandomAvatar(avatarSeed));
   const [transitionPending, startTransition] = useTransition();
 
-  console.log(form);
-
   const getNewStyle = () => {
     startTransition(async () => {
       let newAvatar = "";

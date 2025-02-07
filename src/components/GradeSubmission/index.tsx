@@ -108,9 +108,9 @@ const GradeSubmission = () => {
           gutterAlign="center"
           direction="horizontal"
           cursor="col-resize"
-          className="flex border-t-[1.5px] border-t-content3"
+          className="flex h-full border-t-[1.5px] border-t-content3"
         >
-          <div className="flex h-[calc(90.5dvh)] flex-col gap-2 bg-gradient-to-b from-background/70 to-background/20 [&_.cm-gutters]:bg-transparent">
+          <div className="flex h-full flex-col gap-2 bg-gradient-to-b from-background/70 to-background/20 [&_.cm-gutters]:bg-transparent">
             <GradeHeader
               feedbackView={feedbackView}
               setFeedbackView={setFeedbackView}
@@ -165,7 +165,7 @@ const GradeSubmission = () => {
                 <ExamTaskDescription task={activeTask} />
               </div>
 
-              <div className="max-h-full overflow-y-auto bg-slate-950 px-8 *:h-full">
+              <div className="h-full overflow-y-auto bg-slate-900 px-8 *:h-full dark:bg-slate-950">
                 <CleanSubmissionCodeProvider>
                   <ExamTaskOutput
                     output={activeOutput}

@@ -45,7 +45,7 @@ const ScheduleExam = ({ form, disabled = false }: Props) => {
               selectorIcon: "h-6 w-6 text-foreground-400",
             }}
             dateInputClassNames={{
-              segment: "focus:bg-primary focus:text-primary-foreground",
+              segment: "focus:bg-primary p-0.5 mx-px focus:!text-primary-foreground",
             }}
           />
         )}
@@ -65,7 +65,7 @@ const ScheduleExam = ({ form, disabled = false }: Props) => {
             onChange={(e) => field.onChange(nextUITimeToDate(e?.toString() || ""))}
             label={<span className="text-base font-semibold text-foreground lg:text-sm">Start Time</span>}
             classNames={{
-              segment: "focus:bg-primary focus:text-primary-foreground",
+              segment: "focus:bg-primary p-0.5 mx-px focus:!text-primary-foreground",
             }}
           />
         )}

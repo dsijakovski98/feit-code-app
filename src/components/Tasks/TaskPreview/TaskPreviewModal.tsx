@@ -47,7 +47,7 @@ const TaskPreviewModal = () => {
 
         <PresenceBlock show={!templateToggle.open}>
           <ModalBody className="text-lg">
-            <p className="font-normal">{description}</p>
+            <p className="whitespace-pre font-normal">{description}</p>
           </ModalBody>
         </PresenceBlock>
 
@@ -58,9 +58,9 @@ const TaskPreviewModal = () => {
               off with this code when solving the task.
             </p>
 
-            <div className="h-[25dvh]">
+            <div className="h-[30dvh]">
               <CodeEditor
-                height="25dvh"
+                height="30dvh"
                 readOnly
                 editable={false}
                 value={template}

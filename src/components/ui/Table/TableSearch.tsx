@@ -16,6 +16,7 @@ const TableSearch = ({ search, onSearch, className, ...inputProps }: Props) => {
     <div className={className}>
       <Input
         fullWidth
+        color="default"
         variant="bordered"
         placeholder="Search by name..."
         startContent={<Icon name="search" className="h-5 w-5" />}

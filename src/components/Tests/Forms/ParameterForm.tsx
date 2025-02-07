@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Control, Controller } from "react-hook-form";
 
+import { Textarea } from "@heroui/react";
 import { Select, SelectItem } from "@heroui/select";
 
 import Input from "@/components/ui/Input";
@@ -28,7 +29,7 @@ const ParameterForm = ({ type, control, name }: Props) => {
       render={({ field, fieldState }) => (
         <Fragment>
           {type === VALUE_TYPE.string && (
-            <Input
+            <Textarea
               {...field}
               label={name}
               color="default"
@@ -36,7 +37,9 @@ const ParameterForm = ({ type, control, name }: Props) => {
               placeholder="Any string..."
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
+              minRows={1}
               classNames={{
+                inputWrapper: "min-h-[56px]",
                 label: "!text-foreground !text-lg font-semibold",
                 input: "text-base",
               }}
@@ -56,6 +59,7 @@ const ParameterForm = ({ type, control, name }: Props) => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
+                inputWrapper: "min-h-[70px]",
                 label: "!text-foreground !text-lg font-semibold",
                 input: "text-base",
               }}
@@ -74,6 +78,7 @@ const ParameterForm = ({ type, control, name }: Props) => {
               isInvalid={fieldState.invalid}
               errorMessage={fieldState.error?.message}
               classNames={{
+                inputWrapper: "min-h-[70px]",
                 input: "text-base font-mono !text-foreground-300",
                 label: "!text-foreground !text-lg font-semibold",
               }}
@@ -92,6 +97,7 @@ const ParameterForm = ({ type, control, name }: Props) => {
               errorMessage={fieldState.error?.message}
               defaultSelectedKeys={[BOOLEANS.true]}
               classNames={{
+                trigger: "min-h-[70px]",
                 label: "!text-foreground !text-lg font-semibold",
                 value: "text-base font-mono",
               }}

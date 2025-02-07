@@ -33,8 +33,8 @@ const ExamSessionPage = () => {
       <div className="relative h-dvh">
         <div className="bg-dots absolute inset-0 z-[-1] brightness-75" />
 
-        <div className="z-10 grid grid-rows-[auto_1fr]">
-          <header className="px-8 py-6 lg:hidden">
+        <div className="z-10 grid h-full grid-rows-[auto_1fr]">
+          <header className="px-8 py-3 lg:hidden">
             <nav className="flex items-center gap-6 lg:*:!pointer-events-none">
               <div>
                 <LogoFC />

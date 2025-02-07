@@ -1,4 +1,7 @@
-import { ClipboardEvent, useEffect } from "react";
+import { ClipboardEvent, Fragment, startTransition, useDeferredValue, useEffect } from "react";
+
+import { CircularProgress } from "@heroui/react";
+import clsx from "clsx";
 
 import CodeEditor from "@/components/CodeEditor";
 
@@ -15,12 +18,16 @@ const ExamCodeEditor = () => {
   const { task, template } = useCtx(ExamSessionTaskContext);
   const taskState = tasks[task.id];
 
+  const taskCode = useDeferredValue(taskState.code);
+
   const { id: examId } = exam;
 
   const handleChange = (value: string) => {
-    setTasks((prev) => {
-      prev[task.id].code = value;
-      return { ...prev };
+    startTransition(() => {
+      setTasks((prev) => {
+        prev[task.id].code = value;
+        return { ...prev };
+      });
     });
 
     const taskKey = `${sessionId}_${task.id}`;
@@ -47,15 +54,30 @@ const ExamCodeEditor = () => {
   }, [template, setTasks, task.id]);
 
   return (
-    <CodeEditor
-      width="100%"
-      height="100%"
-      value={taskState.code}
-      onChange={handleChange}
-      onPaste={handlePaste}
-      language={exam.language}
-      className="bg-gradient-to-b from-background/70 to-background/20 text-base *:bg-transparent [&_.cm-content]:py-[1ch]"
-    />
+    <Fragment>
+      <CodeEditor
+        width="100%"
+        height="100%"
+        value={taskCode}
+        readOnly={!taskCode}
+        onChange={handleChange}
+        onPaste={handlePaste}
+        language={exam.language}
+        className={clsx(
+          "bg-gradient-to-b from-background/70 to-background/20 text-base transition-colors *:bg-transparent [&_.cm-content]:py-[1ch]",
+          {
+            "bg-slate-300 dark:!bg-slate-800": !taskCode,
+          },
+        )}
+      />
+
+      {!taskCode && (
+        <CircularProgress
+          size="lg"
+          className="absolute left-1/2 top-1/2 h-fit -translate-x-1/2 -translate-y-1/2"
+        />
+      )}
+    </Fragment>
   );
 };
 

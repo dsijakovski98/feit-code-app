@@ -11,7 +11,7 @@ const ExamGeneral = () => {
   const { name, language, createdAt, course } = examDetails;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       <div>
         <p className="font-semibold text-primary-600">{course.name}</p>
         <h2 className="text-xl font-semibold">

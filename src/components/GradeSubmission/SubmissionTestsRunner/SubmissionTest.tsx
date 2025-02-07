@@ -123,7 +123,7 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
           {result && (
             <p
               className={clsx("font-sans text-base font-semibold", {
-                "text-success": result.success,
+                "text-success-600 dark:text-success": result.success,
                 "text-danger": !result.success,
               })}
             >

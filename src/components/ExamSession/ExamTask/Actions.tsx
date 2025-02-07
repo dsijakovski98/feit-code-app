@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from "@heroui/dropdown";
 import { useMutation } from "@tanstack/react-query";
+import clsx from "clsx";
 
 import Button from "@/components/ui/Button";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
@@ -70,7 +71,14 @@ const ExamTaskActions = ({ runCode, loading }: Props) => {
 
   return (
     <Fragment>
-      <div className="sticky bottom-0 flex w-[calc(100%+(2*32px))] -translate-x-8 items-center justify-between gap-4 bg-slate-950 px-8 pb-5">
+      <div
+        className={clsx(
+          "sticky bottom-0 flex w-[calc(100%+(2*32px))] -translate-x-8 items-center justify-between gap-4 bg-slate-900 px-8 pb-5 dark:bg-slate-950",
+          {
+            "!absolute": loading,
+          },
+        )}
+      >
         <Button
           fullWidth
           color="success"

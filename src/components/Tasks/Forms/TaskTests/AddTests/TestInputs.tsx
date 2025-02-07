@@ -101,8 +101,8 @@ const TestInputsTable = () => {
                   {(columnKey) => (
                     <TableCell>
                       <div
-                        className={clsx("w-[100px] text-start text-base", {
-                          "!text-center": columnKey === "Output",
+                        className={clsx("w-[120px] text-start text-base", {
+                          "w-[20ch] whitespace-pre": columnKey === "Output",
                           "!w-[20px] -translate-x-2": columnKey === "Actions",
                         })}
                       >

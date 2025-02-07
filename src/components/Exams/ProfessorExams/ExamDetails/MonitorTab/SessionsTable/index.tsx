@@ -108,7 +108,7 @@ const SessionsTable = () => {
                     ? "center"
                     : "start"
               }
-              className="text-xs font-bold uppercase text-foreground-300"
+              className="text-xs font-bold uppercase text-foreground dark:text-foreground-300"
             >
               <div
                 className={clsx("flex w-full items-center gap-2", {

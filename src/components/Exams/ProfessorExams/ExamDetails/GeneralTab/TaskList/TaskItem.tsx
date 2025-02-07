@@ -1,3 +1,4 @@
+import { Tooltip } from "@heroui/tooltip";
 import { InferSelectModel } from "drizzle-orm";
 
 import { tasks } from "@/db/schema";
@@ -18,7 +19,12 @@ const TaskItem = ({ task }: Props) => {
           <p className="text-lg font-semibold">
             <span className="font-sans">{orderIndex + 1}.</span> {title}
           </p>
-          <p className="whitespace-normal text-base text-foreground-300">{description}</p>
+
+          <Tooltip content={description} classNames={{ content: "font-serif whitespace-pre" }}>
+            <p className="line-clamp-3 text-ellipsis whitespace-pre text-base text-foreground-300">
+              {description}
+            </p>
+          </Tooltip>
         </div>
 
         <p className="text-base">

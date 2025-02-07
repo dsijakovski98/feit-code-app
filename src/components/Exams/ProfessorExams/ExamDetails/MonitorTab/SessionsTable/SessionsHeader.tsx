@@ -35,7 +35,7 @@ const SessionsHeader = ({ ...searchProps }: Props) => {
 
   return (
     <TableHeading itemName="Student" totalItems={totalSessions} className="!gap-0">
-      <div className="mr-auto text-foreground-300 lg:hidden">
+      <div className="mr-auto text-foreground dark:text-foreground-300 lg:hidden">
         <p className="pl-1 leading-none">
           ・ Active: {activeSessionsCount} ・ Finished: {finishedSessionsCount}
         </p>
@@ -43,7 +43,7 @@ const SessionsHeader = ({ ...searchProps }: Props) => {
 
       <Countdown
         targetDate={targetDate}
-        className="mr-5 text-2xl leading-none text-foreground-300 lg:hidden"
+        className="mr-5 text-2xl leading-none text-foreground dark:text-foreground-300 lg:hidden"
       />
 
       <TableSearch {...searchProps} className="w-[280px]" />

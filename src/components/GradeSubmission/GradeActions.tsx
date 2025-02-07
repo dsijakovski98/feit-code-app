@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import { Tooltip } from "@heroui/tooltip";
+import clsx from "clsx";
 
 import SubmissionTests from "@/components/GradeSubmission/SubmissionTestsRunner";
 import Button from "@/components/ui/Button";
@@ -13,6 +14,7 @@ import { useToggle } from "@/hooks/useToggle";
 
 type Props = {
   runCode: () => void;
+
   loading?: boolean;
 };
 
@@ -29,7 +31,14 @@ const GradeActions = ({ runCode, loading = false }: Props) => {
 
   return (
     <Fragment>
-      <div className="sticky bottom-0 flex w-[calc(100%+(2*32px))] -translate-x-8 items-center justify-between gap-4 bg-slate-950 px-8 pb-5">
+      <div
+        className={clsx(
+          "sticky bottom-0 flex w-[calc(100%+(2*32px))] -translate-x-8 items-center justify-between gap-4 bg-slate-900 px-8 pb-5 dark:bg-slate-950",
+          {
+            absolute: loading,
+          },
+        )}
+      >
         <Button
           fullWidth
           color="success"

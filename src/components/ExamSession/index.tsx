@@ -24,7 +24,7 @@ const ExamSession = () => {
   const { task: activeTask } = useCtx(ExamSessionTaskContext);
   const taskState = tasks[activeTask.id];
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: runTaskCode,
     onSuccess: (output) => {
       if (!output) return;
@@ -54,7 +54,7 @@ const ExamSession = () => {
   };
 
   return (
-    <main className="h-[calc(100dvh-105px)] overflow-hidden border-t-8 border-t-content4 bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full dark:border-t-content2">
+    <main className="h-[calc(100dvh-80px)] overflow-hidden border-t-8 border-t-content4 bg-gradient-to-b from-transparent via-background/30 to-background/80 *:h-full dark:border-t-content2">
       <Split
         sizes={[65, 35]}
         minSize={[400, 400]}
@@ -66,7 +66,7 @@ const ExamSession = () => {
         cursor="col-resize"
         className="flex"
       >
-        <div className="h-[calc(90dvh-5.5px)] *:h-full">
+        <div className="relative *:h-full">
           <ExamCodeEditor />
         </div>
 
@@ -84,13 +84,14 @@ const ExamSession = () => {
               <ExamTaskDescription task={activeTask} />
             </div>
 
-            <div className="max-h-full overflow-y-auto bg-slate-950 px-8">
+            <div className="h-full overflow-y-auto bg-slate-900 px-8 dark:bg-slate-950">
               <ExamTaskOutput
                 title={activeTask.title}
                 output={taskState.output}
                 studentEmail={student.email}
                 language={exam.language}
                 loading={isPending}
+                success={isSuccess}
               >
                 <ExamTaskActions runCode={runCode} loading={isPending} />
               </ExamTaskOutput>

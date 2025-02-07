@@ -132,7 +132,7 @@ const NewInputsForm = ({ columns }: Props) => {
         </TableHeader>
 
         <TableBody>
-          <TableRow key="Form" className="flex items-baseline gap-1 *:basis-full">
+          <TableRow key="Form" className="flex items-start gap-1 *:basis-full">
             {columns.map(({ name, type }) => (
               <TableCell key={name} hidden={name === "Actions"}>
                 {name !== "Actions" && (

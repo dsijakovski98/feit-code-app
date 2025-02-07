@@ -13,7 +13,7 @@ type Props = {
 const TableHeading = ({ itemName, totalItems, children, className = "" }: Props) => {
   return (
     <div className={clsx("flex items-end justify-between gap-6 md:items-center", className)}>
-      <p className="leading-none text-foreground-300">
+      <p className="leading-none text-foreground dark:text-foreground-300">
         Total: {totalItems} {simplePlural(itemName, totalItems)}
       </p>
 

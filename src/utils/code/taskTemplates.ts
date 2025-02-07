@@ -41,7 +41,7 @@ export const parseTaskTemplate = ({ title, description, tests, language }: Templ
 
   const baseDescription = description || "No description available.";
   const descriptionChunks = baseDescription
-    .split(".")
+    .split(/[\n.]/)
     .filter((chunk) => !!chunk.length)
     .map((chunk) => {
       const { comment } = LANGUAGES_CONFIG[language];

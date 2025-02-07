@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useCallback, useState } from "react";
+import { PropsWithChildren, createContext, useCallback, useEffect, useState } from "react";
 
 import { ExamDetails } from "@/hooks/exam/useExamDetails";
 import { useDatabaseListen } from "@/hooks/firebase/useDatabaseListen";
@@ -43,16 +43,29 @@ const ExamSessionProvider = ({ children, ...ctx }: Props) => {
   const tasksState = useState(() => {
     return ctx.exam.tasks.reduce(
       (acc, task) => {
-        const taskKey = `${sessionId}_${task.id}`;
-        acc[task.id] = {
-          code: sessionStorage.getItem(taskKey) || "",
-          output: "",
-        };
+        acc[task.id] = { code: "", output: "" };
         return acc;
       },
       {} as Record<string, TaskState>,
     );
   });
+  const [, setTasksState] = tasksState;
+
+  useEffect(() => {
+    setTasksState((prevTasks) => {
+      return ctx.exam.tasks.reduce(
+        (acc, task) => {
+          const taskKey = `${sessionId}_${task.id}`;
+          acc[task.id] = {
+            code: sessionStorage.getItem(taskKey) || prevTasks[task.id].code || "",
+            output: "",
+          };
+          return acc;
+        },
+        {} as Record<string, TaskState>,
+      );
+    });
+  }, [ctx.exam.tasks, setTasksState, sessionId]);
 
   return (
     <ExamSessionContext.Provider

@@ -60,9 +60,9 @@ const SidebarItem = (props: Props) => {
           </div>
           <p
             className={clsx(
-              "w-full border-b-2 !border-transparent text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-foreground dark:group-hover:text-primary-500",
+              "w-full border-b-2 border-transparent text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-foreground dark:group-hover:text-primary-500",
               {
-                "border-b-2 !border-primary-foreground group-hover:!border-foreground dark:group-hover:!border-primary-500":
+                "!border-b-2 !border-primary-foreground group-hover:!border-foreground dark:group-hover:!border-primary-500":
                   active,
               },
             )}

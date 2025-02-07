@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 import { TimeInputValue } from "@heroui/date-input";
 import { parseAbsoluteToLocal, parseDate } from "@internationalized/date";
 import dayjs, { Dayjs } from "dayjs";
@@ -38,9 +40,16 @@ export const nextUIDate = (date: Date) => {
 };
 
 export const nextUITime = (date: Date) => {
-  const isoDateString = date.toISOString();
+  try {
+    const isoDateString = date.toISOString();
 
-  return parseAbsoluteToLocal(isoDateString) as unknown as TimeInputValue;
+    return parseAbsoluteToLocal(isoDateString) as unknown as TimeInputValue;
+  } catch (e) {
+    // Sentry logging
+    console.log({ e });
+
+    toast.error("Invalid Date!");
+  }
 };
 
 export const nextUITimeToDate = (time: string) => {

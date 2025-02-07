@@ -16,9 +16,18 @@ type Props = {
   language: ProgrammingLanguage;
 
   loading?: boolean;
+  success?: boolean;
 } & PropsWithChildren;
 
-const ExamTaskOutput = ({ title, output, studentEmail, language, loading = false, children }: Props) => {
+const ExamTaskOutput = ({
+  title,
+  output,
+  studentEmail,
+  language,
+  loading = false,
+  success = false,
+  children,
+}: Props) => {
   const emailSlug = useMemo(() => studentEmail.split("@")[0], [studentEmail]);
   const titleSlug = useMemo(() => title.replace(/ /g, "_").toLowerCase(), [title]);
 
@@ -42,8 +51,8 @@ const ExamTaskOutput = ({ title, output, studentEmail, language, loading = false
             className={clsx("inline h-4 w-4 -translate-y-px", { "animate-blink": loading })}
           />
 
-          {(loading || !!output) && (
-            <span className={clsx("text-foreground", { "animate-blink": loading })}>{runCommand}</span>
+          {(loading || success) && (
+            <span className={clsx("text-white", { "animate-blink": loading })}>{runCommand}</span>
           )}
         </div>
 
