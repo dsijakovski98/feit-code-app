@@ -97,7 +97,7 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
           classNames={{ trigger: "py-1 cursor-default" }}
           title={
             <div className="flex">
-              <div>
+              <div className="space-y-2">
                 <p className="text-sm font-medium">{simplePlural("Input", test.inputs.length)}</p>
 
                 <ol className="flex items-center gap-3">
@@ -113,7 +113,7 @@ const SubmissionTest = ({ test, index, result, setTestResults, resultsLoading = 
                 </ol>
               </div>
 
-              <div className="ml-auto flex flex-col items-end">
+              <div className="ml-auto flex flex-col items-end gap-2">
                 <p className="text-sm font-medium">Output</p>
                 <TestParameterValue type={test.outputType} value={test.outputValue} className="text-base" />
               </div>
