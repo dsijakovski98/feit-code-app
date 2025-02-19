@@ -3,17 +3,25 @@ import EditCourseForm from "@/components/Courses/ProfessorCourses/CourseDetails/
 
 const SettingsTab = () => {
   return (
-    <section className="mx-auto max-w-[85ch] space-y-14 lg:pb-16 md:max-w-full">
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold">Edit Course</h2>
+    <section className="mx-auto max-w-[85ch] space-y-12 lg:pb-16 md:max-w-full">
+      <div className="space-y-4">
+        <h2 className="w-fit rounded-lg bg-default px-2 py-0.5 text-lg font-semibold text-default-foreground">
+          Edit Course
+        </h2>
 
-        <EditCourseForm />
+        <div className="px-4">
+          <EditCourseForm />
+        </div>
       </div>
 
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold text-danger">Danger Zone</h2>
+      <div className="space-y-4">
+        <h2 className="w-fit rounded-lg bg-danger px-2 py-0.5 text-lg font-semibold text-danger-foreground">
+          Danger Zone
+        </h2>
 
-        <CourseDangerZone />
+        <div className="px-4">
+          <CourseDangerZone />
+        </div>
       </div>
     </section>
   );

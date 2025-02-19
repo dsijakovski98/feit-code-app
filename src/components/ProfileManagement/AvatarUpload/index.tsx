@@ -86,7 +86,7 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
               color="danger"
               variant="light"
               aria-label="Remove avatar"
-              className="p-1 text-xs"
+              className="p-1 text-xs text-danger-500"
               onPress={clearAvatar}
             >
               <Icon name="trash" />

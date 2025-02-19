@@ -19,7 +19,7 @@ const ExamTaskList = () => {
     <div className="space-y-4">
       <h2 className="text-xl font-semibold">Tasks</h2>
 
-      <ScrollShadow className="h-[420px]">
+      <ScrollShadow className="max-h-[335px]">
         <Listbox
           items={tasks}
           variant="bordered"

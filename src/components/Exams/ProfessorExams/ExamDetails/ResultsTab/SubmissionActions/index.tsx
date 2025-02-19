@@ -30,7 +30,14 @@ const SubmissionActions = () => {
       <Fragment>
         <Dropdown placement="bottom-end" closeOnSelect>
           <DropdownTrigger>
-            <Button isIconOnly color="default" variant="light" radius="full" className="p-1.5">
+            <Button
+              isIconOnly
+              color="default"
+              variant="light"
+              radius="full"
+              className="p-1.5"
+              aria-label="More Actions"
+            >
               <Icon name="more" />
             </Button>
           </DropdownTrigger>
@@ -43,8 +50,8 @@ const SubmissionActions = () => {
             >
               <DropdownItem
                 key="details"
+                textValue="Submission Details"
                 className="hidden gap-4 md:flex"
-                textValue="Details"
                 startContent={<Icon name="details" className="h-6 w-6" />}
                 onPress={submissionDialog.toggleOn}
               >
@@ -80,6 +87,7 @@ const SubmissionActions = () => {
       variant="light"
       color="default"
       className="p-1.5"
+      aria-label="Grade Submission"
       isDisabled={status === SUBMISSION_STATUS.graded}
     >
       <Icon name="grade" />

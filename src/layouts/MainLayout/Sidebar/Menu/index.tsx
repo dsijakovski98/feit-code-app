@@ -38,21 +38,24 @@ const SidebarMenu = () => {
         icon={<Icon name="course" />}
       />
 
-      <Badge
-        size="sm"
-        color="success"
-        isInvisible={!feedbacks}
-        hidden={!feedbacks}
-        content={feedbacks}
-        classNames={{ base: "w-full lg:w-fit [&_li]:!w-full" }}
-        className="aspect-square -translate-x-2 border-none font-sans font-semibold"
-      >
-        <SidebarItem
-          href={ROUTES.exams}
-          label={menuLabel(userData.type, "Exams")}
-          icon={<Icon name="exam" />}
-        />
-      </Badge>
+      <li>
+        <Badge
+          size="sm"
+          color="success"
+          isInvisible={!feedbacks}
+          hidden={!feedbacks}
+          content={feedbacks}
+          classNames={{ base: "w-full lg:w-fit [&_li]:!w-full" }}
+          className="aspect-square -translate-x-2 border-none font-sans font-semibold"
+        >
+          <SidebarItem
+            as="div"
+            href={ROUTES.exams}
+            label={menuLabel(userData.type, "Exams")}
+            icon={<Icon name="exam" />}
+          />
+        </Badge>
+      </li>
     </ul>
   );
 };

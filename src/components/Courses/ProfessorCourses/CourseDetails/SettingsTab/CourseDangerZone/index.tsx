@@ -9,7 +9,7 @@ const CourseDangerZone = () => {
   const { archived } = courseDetails;
 
   return (
-    <section className="space-y-10">
+    <section className="space-y-8">
       <div className="flex items-start justify-between gap-52 xl:gap-20 lg:flex-col lg:gap-6 md:gap-4">
         <div className="lg:space-y-1">
           <h3 className="text-lg font-semibold">{archived ? "Activate" : "Archive"}</h3>
