@@ -67,6 +67,7 @@ const CourseExamInfo = () => {
             icon="add"
             // @ts-expect-error NextUI not passing through 'as' props
             to="new-exam"
+            aria-label="New Exam"
             containerClass="bottom-10 right-10 lg:bottom-20 lg:right-5"
           >
             New Exam

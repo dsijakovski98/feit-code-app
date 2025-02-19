@@ -29,6 +29,7 @@ const UserAvatar = () => {
     <Dropdown placement="bottom-end" className="overflow-hidden p-0">
       <DropdownTrigger className="cursor-pointer focus:ring-primary" tabIndex={0}>
         <Avatar
+          as="button"
           isBordered
           showFallback={isFetching}
           src={!isFetching ? url : ""}

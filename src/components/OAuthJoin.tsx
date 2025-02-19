@@ -35,7 +35,7 @@ const OAuthJoin = ({ oAuthJoin, joinType, formLoading }: Props) => {
         className="font-semibold lg:px-3"
       >
         {!isLoadingGoogle && <Icon name="google" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />}
-        <span className="lg:text-sm sm:hidden">{joinType} with Google</span>
+        <span className="lg:text-sm sm:sr-only">{joinType} with Google</span>
       </Button>
       <Button
         fullWidth
@@ -48,7 +48,7 @@ const OAuthJoin = ({ oAuthJoin, joinType, formLoading }: Props) => {
         className="font-semibold lg:px-3"
       >
         {!isLoadingGithub && <Icon name="github" className="min-h-6 min-w-6 lg:min-h-5 lg:min-w-5" />}
-        <span className="lg:text-sm sm:hidden">{joinType} with GitHub</span>
+        <span className="lg:text-sm sm:sr-only">{joinType} with GitHub</span>
       </Button>
     </div>
   );

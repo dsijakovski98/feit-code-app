@@ -29,20 +29,26 @@ const SettingsTab = () => {
 
   return (
     <section className="mx-auto !h-auto max-w-[85ch] space-y-14 pb-8 md:max-w-full">
-      <div className="space-y-3">
-        <h2 className="text-xl font-semibold">Edit Exam</h2>
+      <div className="space-y-4">
+        <h2 className="w-fit rounded-lg bg-default px-2 py-0.5 text-lg font-semibold text-default-foreground">
+          Edit Exam
+        </h2>
 
-        {editDisabledMessage ? (
-          <p className="text-lg text-foreground-300">{editDisabledMessage}</p>
-        ) : (
-          <EditExamForm />
-        )}
+        <div className="px-4">
+          {editDisabledMessage ? (
+            <p className="text-lg text-foreground-300">{editDisabledMessage}</p>
+          ) : (
+            <EditExamForm />
+          )}
+        </div>
       </div>
 
-      <div className="space-y-3">
-        <h2 className="text-xl font-semibold text-danger">Danger Zone</h2>
+      <div className="space-y-4">
+        <h2 className="w-fit rounded-lg bg-danger px-2 py-0.5 text-lg font-semibold text-danger-foreground">
+          Danger Zone
+        </h2>
 
-        <div className="flex items-start justify-between gap-8 lg:flex-col lg:gap-4">
+        <div className="flex items-start justify-between gap-8 px-4 lg:flex-col lg:gap-4">
           <div className="lg:space-y-1">
             <h3 className="text-lg font-semibold">{cancelLabel} Exam</h3>
             <p>You can be sure your students will love this.</p>

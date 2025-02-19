@@ -1,6 +1,5 @@
-import defaultTheme from "tailwindcss/defaultTheme";
-
 import { heroui } from "@heroui/react";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -154,7 +153,7 @@ export default {
               800: "#790921",
               900: "#4d0515",
               foreground: "#fff",
-              DEFAULT: "#ff1245",
+              DEFAULT: "#d20f39",
             },
 
             background: "#0c0c0e",

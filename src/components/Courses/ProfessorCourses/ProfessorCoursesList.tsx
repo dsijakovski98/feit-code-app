@@ -53,6 +53,7 @@ const ProfessorCoursesList = ({ user, search, courseYear }: Props) => {
           icon="add"
           // @ts-expect-error NextUI not passing through 'as' props
           to="new-course"
+          aria-label="New Course"
           containerClass="bottom-8 right-8 lg:bottom-20 lg:right-5"
         >
           New Course

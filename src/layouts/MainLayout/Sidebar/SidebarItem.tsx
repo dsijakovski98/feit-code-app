@@ -1,11 +1,12 @@
 import { ComponentProps, ReactNode, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { As } from "@heroui/react";
 import { Skeleton } from "@heroui/skeleton";
 import { ClassValue } from "clsx";
 import clsx from "clsx";
 
-type Props =
+type BaseProps =
   | {
       isSkeleton?: undefined;
       href: string;
@@ -23,7 +24,11 @@ type Props =
       className?: never;
     };
 
-const SidebarItem = (props: Props) => {
+type Props = {
+  as?: As;
+} & BaseProps;
+
+const SidebarItem = ({ as: As = "li", ...props }: Props) => {
   const { pathname } = useLocation();
 
   const active = useMemo(() => {
@@ -34,14 +39,16 @@ const SidebarItem = (props: Props) => {
     return href === pathname || pathname.endsWith(href ?? "");
   }, [props.href, pathname]);
 
+  const Element = As;
+
   if (props.isSkeleton) {
-    return <Skeleton as="li" className="h-12 w-12 rounded-full lg:h-11 lg:w-11" />;
+    return <Skeleton as={Element} className="h-12 w-12 rounded-full lg:h-11 lg:w-11" />;
   }
 
   const { href, icon, label, target, className = "" } = props;
 
   return (
-    <li className="mx-auto min-w-fit max-w-[8ch] lg:mx-[initial] lg:w-[8ch]">
+    <Element className="mx-auto min-w-fit max-w-[8ch] lg:mx-[initial] lg:w-[8ch]">
       <Link
         to={href!}
         target={target}
@@ -71,7 +78,7 @@ const SidebarItem = (props: Props) => {
           </p>
         </div>
       </Link>
-    </li>
+    </Element>
   );
 };
 

@@ -58,6 +58,7 @@ const ProfessorCourseDetails = () => {
           fullWidth
           variant="underlined"
           aria-label="Course details tabs"
+          destroyInactiveTabPanel={false}
           selectedKey={hash}
           defaultSelectedKey={TABS.general}
           classNames={{
