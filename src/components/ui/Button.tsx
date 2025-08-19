@@ -32,7 +32,6 @@ const Button = forwardRef<ComponentRef<typeof Btn>, Props>(({ children, ...rest 
       rest.className,
     )}
   >
-    <span className="sr-only">{children}</span>
     {children}
   </Btn>
 ));

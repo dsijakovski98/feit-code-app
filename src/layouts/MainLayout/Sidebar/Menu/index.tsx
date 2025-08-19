@@ -29,7 +29,7 @@ const SidebarMenu = () => {
   }
 
   return (
-    <ul className="space-y-9 font-serif lg:flex lg:w-full lg:items-center lg:justify-evenly lg:space-y-0">
+    <ul className="flex flex-col items-center gap-y-9 font-serif lg:flex lg:w-full lg:flex-row lg:items-center lg:justify-evenly lg:space-y-0 lg:py-1">
       <SidebarItem href={ROUTES.dashboard} label="Dashboard" icon={<Icon name="home" />} />
 
       <SidebarItem
@@ -41,12 +41,11 @@ const SidebarMenu = () => {
       <li>
         <Badge
           size="sm"
-          color="success"
           isInvisible={!feedbacks}
           hidden={!feedbacks}
           content={feedbacks}
           classNames={{ base: "w-full lg:w-fit [&_li]:!w-full" }}
-          className="aspect-square -translate-x-2 border-none font-sans font-semibold"
+          className="aspect-square translate-x-1 border-none bg-success-400 font-sans font-semibold dark:bg-success-300"
         >
           <SidebarItem
             as="div"

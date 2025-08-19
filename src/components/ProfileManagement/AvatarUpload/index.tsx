@@ -55,6 +55,7 @@ const AvatarUpload = ({ avatarState, email, className = "" }: Props) => {
               color="default"
               variant="ghost"
               size="sm"
+              aria-hidden
               tabIndex={-1}
               className="min-w-max px-0 focus-within:outline focus-within:outline-primary"
             >
