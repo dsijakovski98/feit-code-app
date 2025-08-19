@@ -18,13 +18,14 @@ const MiscMenu = () => {
   const helpFeedbackUrl = useMemo(() => getHelpFeedbackUrl(userData), [userData]);
 
   return (
-    <ul className="mt-auto space-y-9 lg:hidden">
+    <ul className="mt-auto flex flex-col items-center gap-y-9 lg:hidden">
       <SidebarItem href={ROUTES.profile} label="Profile" icon={<Icon name="profile" />} />
 
       <SidebarItem
         href={helpFeedbackUrl}
         target="_blank"
         label="Help & Feedback"
+        className="w-min"
         icon={<Icon name="help" />}
       />
 
@@ -37,10 +38,10 @@ const MiscMenu = () => {
           onPress={() => logOut()}
           className="group flex h-14 w-14 flex-col items-center gap-1 !bg-transparent data-[focus-visible]:!outline-background data-[focus]:outline-transparent dark:data-[focus-visible]:!outline-foreground"
         >
-          <div className="!h-12 !w-12 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
+          <div className="!h-12 !w-12 overflow-hidden rounded-full text-primary-foreground transition-colors group-hover:text-black dark:group-hover:text-primary-500">
             <Icon name="logout" className="!-scale-x-[1]" />
           </div>
-          <p className="max-w-[7ch] text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black group-focus:text-black dark:group-hover:text-primary-500 dark:group-focus:text-primary-500">
+          <p className="max-w-[7ch] text-center text-sm font-semibold text-primary-foreground transition-colors group-hover:text-black dark:group-hover:text-primary-500">
             Sign out
           </p>
         </Button>
