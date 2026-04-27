@@ -6,7 +6,7 @@ type Props = {
   description?: string;
 };
 
-const BASE_URL = "https://app.feitcode.com";
+const BASE_URL = "https://app.feitcode.dev";
 
 const PageMeta = ({ title = "FEIT Code", description = "" }: Props) => {
   const { pathname } = useLocation();

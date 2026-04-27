@@ -14,7 +14,7 @@ export default defineConfig({
 
     imagetools(),
 
-    sitemap({ hostname: "https://app.feitcode.com" }),
+    sitemap({ hostname: "https://app.feitcode.dev" }),
 
     webFontDownload([
       "https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap",
